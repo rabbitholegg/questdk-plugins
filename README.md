@@ -3,8 +3,8 @@
 <p align="center">
   <a href="https://rabbithole.gg/#">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="/.github/questdk-logo-light.png">
-        <img alt="questdk logo" src="/.github/questdk-logo-dark.png" width="auto" height="60">
+        <source media="(prefers-color-scheme: dark)" srcset="https://github.com/rabbitholegg/questdk/assets/2935356/8bca331c-4c88-4084-98ce-35c547cfcc4d">
+        <img alt="questdk logo" src="https://github.com/rabbitholegg/questdk/assets/2935356/48ca4d95-3e4a-40ae-b3a7-a02f42a14ad4" width="auto" height="80">
       </picture>
   </a>
 </p>
