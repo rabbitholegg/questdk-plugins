@@ -21,9 +21,7 @@
       </picture>
 <br />
 <br />
-<code>Do not follow where the path may lead. 
-  Go instead where there is no path and leave a trail.
-</code>
+<code>Go instead where there is no path and leave a trail.</code>
 </p>
 <br/>
 
