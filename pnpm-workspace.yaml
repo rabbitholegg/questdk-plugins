@@ -1,6 +1,5 @@
 prefer-workspace-packages: true
 packages:
   - "."
-  - "examples/**/*"
-  - "playgrounds/*"
+  - "plugins"
   - "site"
