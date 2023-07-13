@@ -1,11 +1,11 @@
-import { afterAll, afterEach, beforeAll, beforeEach, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest'
 
-beforeAll(() => {});
+beforeAll(() => {})
 
-beforeEach(() => {});
+beforeEach(() => {})
 
 afterAll(async () => {
-  vi.restoreAllMocks();
-});
+  vi.restoreAllMocks()
+})
 
-afterEach(() => {});
+afterEach(() => {})
