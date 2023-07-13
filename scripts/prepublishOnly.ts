@@ -17,7 +17,6 @@ function generatePackageJson() {
   const {
     name,
     version,
-    private: private_,
     description,
     exports: exports_,
     // NOTE: We explicitly don't want to publish the type field. We create a separate package.json for `dist/cjs` and `dist/esm` that has the type field.
@@ -70,7 +69,6 @@ function generatePackageJson() {
     {
       name,
       description,
-      private: private_,
       dependencies,
       peerDependencies,
       peerDependenciesMeta,
