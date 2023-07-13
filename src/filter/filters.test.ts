@@ -6,14 +6,16 @@ import {
   handleRegex,
   handleSome,
 } from './filters.js'
-import { describe, expect, test } from 'vitest'
+import { assertType, describe, expect, test } from 'vitest'
 
 describe('parser', () => {
   describe('$and', () => {
     test('should return true when all conditions are met', () => {
       const filter = [{ value: '0xa' }, { value: '0xb' }]
       const context = { value: '0xa' }
-      expect(handleAnd(context, filter)).to.be.false
+      const result = handleAnd(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.false
     })
   })
 
@@ -21,7 +23,9 @@ describe('parser', () => {
     test('should return true when at least one condition is met', () => {
       const filter = [{ value: '0xa' }, { value: '0xb' }]
       const context = { value: '0xa' }
-      expect(handleOr(context, filter)).to.be.true
+      const result = handleOr(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.true
     })
   })
 
@@ -29,7 +33,9 @@ describe('parser', () => {
     test('should return true when at least one item in the array meets the condition', () => {
       const filter = { value: '0xa' }
       const context = [{ value: '0xa' }, { value: '0xb' }]
-      expect(handleSome(context, filter)).to.be.true
+      const result = handleSome(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.true
     })
   })
 
@@ -37,7 +43,9 @@ describe('parser', () => {
     test('should return true when context is greater than or equal to filter', () => {
       const filter = '0xa'
       const context = '0xb'
-      expect(handleGreaterThanOrEqual(context, filter)).to.be.true
+      const result = handleGreaterThanOrEqual(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.true
     })
   })
 
@@ -45,7 +53,9 @@ describe('parser', () => {
     test('should return true when the regular expression matches the context', () => {
       const filter = '^0x[a-f0-9]*$'
       const context = '0xabcd'
-      expect(handleRegex(context, filter)).to.be.true
+      const result = handleRegex(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.true
     })
   })
 
