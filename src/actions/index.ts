@@ -1,1 +1,4 @@
-export * from './types.js'
+export type {
+  Swap,
+  Bridge,
+} from './types.js'

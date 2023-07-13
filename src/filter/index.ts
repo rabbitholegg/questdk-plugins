@@ -1,1 +1,1 @@
-export { parser } from './parser.js'
+export { apply } from './filters.js'

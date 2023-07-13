@@ -19,20 +19,3 @@ export type Bridge = {
   amount?: bigint
   recipient?: Hex
 }
-
-export type NumericOperator =
-  | bigint
-  | number
-  | string
-  | {
-      $gt?: bigint
-    }
-  | {
-      $gte?: bigint
-    }
-  | {
-      $lt?: bigint
-    }
-  | {
-      $lte?: bigint
-    }
