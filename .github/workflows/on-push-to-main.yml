@@ -50,13 +50,13 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
-      - name: Replace NPM token
-        run: |
-          cat << EOF >> "$HOME/.npmrc"
-            //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
-          EOF
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      # - name: Replace NPM token
+      #   run: |
+      #     cat << EOF >> "$HOME/.npmrc"
+      #       //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN
+      #     EOF
+      #   env:
+      #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Publish to NPM
         uses: changesets/action@v1
@@ -64,3 +64,4 @@ jobs:
           publish: pnpm changeset:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
