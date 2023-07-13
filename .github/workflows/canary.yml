@@ -20,7 +20,7 @@ jobs:
       - name: Setup .npmrc file
         uses: actions/setup-node@v3
         with:
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: Set version
         run: |
@@ -34,4 +34,4 @@ jobs:
       - name: Publish to npm
         run: npm publish --tag $(git branch --show-current | tr -cs '[:alnum:]-' '-' | tr '[:upper:]' '[:lower:]' | sed 's/-$//')
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
