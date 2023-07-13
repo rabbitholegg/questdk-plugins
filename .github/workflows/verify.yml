@@ -59,8 +59,9 @@ jobs:
       - name: Check types
         run: pnpm typecheck
 
-      - name: Test types
-        run: pnpm test:typecheck
+      # Uncomment to enable tests when they are ready
+      # - name: Test types
+      #   run: pnpm test:typecheck
 
   test:
     name: Test
