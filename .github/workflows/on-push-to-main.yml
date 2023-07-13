@@ -55,10 +55,6 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
-      # - name: Setup npmrc
-      #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
-
-
       - name: Publish to NPM
         uses: changesets/action@v1
         with:
