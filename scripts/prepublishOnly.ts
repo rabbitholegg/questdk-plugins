@@ -16,12 +16,8 @@ function generatePackageJson() {
 
   const {
     name,
-    description,
-    dependencies,
-    peerDependencies,
-    peerDependenciesMeta,
     version,
-    files,
+    description,
     exports: exports_,
     // NOTE: We explicitly don't want to publish the type field. We create a separate package.json for `dist/cjs` and `dist/esm` that has the type field.
     // type,
@@ -30,11 +26,15 @@ function generatePackageJson() {
     types,
     typings,
     typesVersions,
+    dependencies,
+    peerDependencies,
+    peerDependenciesMeta,
     sideEffects,
+    keywords,
+    authors,
     license,
     repository,
-    authors,
-    keywords,
+    files,
   } = tmpPackageJson
 
   // Generate proxy packages for each export.
