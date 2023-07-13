@@ -1,0 +1,31 @@
+name: Bench
+
+on: workflow_dispatch
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  bench:
+    name: Benchmark
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        transport-mode: ['http', 'webSocket']
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+
+      # Uncomment to enable benchmarks when they are ready
+      # - name: Run benchmarks
+      #   run: pnpm bench:ci
+
+      # - name: Report benchmarks
+      #   run: pnpm bun ./.github/scripts/bench.ts
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
