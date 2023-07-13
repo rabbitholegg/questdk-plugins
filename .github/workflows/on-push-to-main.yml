@@ -46,17 +46,18 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+          scope: "@rabbitholegg"
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
 
       # - name: Setup npmrc
       #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 18
-          registry-url: https://npm.pkg.github.com/
-          scope: "@rabbitholegg"
+
 
       - name: Publish to NPM
         uses: changesets/action@v1
