@@ -19,3 +19,9 @@ export type Bridge = {
   amount?: bigint
   recipient?: Hex
 }
+
+export type Mint = {
+  address: string
+  tokenId: number
+  quantity: number
+}

@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha.0",
   "description": "",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -32,7 +32,9 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
-  "authors": ["rabbitholegg"],
+  "authors": [
+    "rabbitholegg"
+  ],
   "license": "MIT",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
