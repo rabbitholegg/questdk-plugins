@@ -37,11 +37,12 @@ export type NumericOperator =
       $lte?: bigint
     }
 
-export type FilterOperator = LogicalOperator | NumericOperator | ArrayOperator
-
-type ReplaceWithFilterOperator<T> = {
-  [P in keyof T]: FilterOperator
+export type StringOperator = {
+  $regex?: string
 }
 
-export type SwapFilter = ReplaceWithFilterOperator<Swap> | { chainId: Hex }
-export type BridgeFilter = ReplaceWithFilterOperator<Bridge> | { chainId: Hex }
+export type FilterOperator =
+  | LogicalOperator
+  | NumericOperator
+  | ArrayOperator
+  | StringOperator

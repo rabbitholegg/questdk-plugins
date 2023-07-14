@@ -1,26 +1,30 @@
+import type { FilterOperator } from '../filter/types.js'
 import { type Hex } from 'viem'
 
-export type Swap = {
+export type AmountOperator = 'gt' | 'gte' | 'lt' | 'lte' | 'eq' | 'neq'
+
+export type SwapAction = {
   chainId: number
   contractAddress?: Hex
   tokenIn?: Hex
   tokenOut?: Hex
-  amountIn?: bigint
-  amountOut?: bigint
+  amountIn?: bigint | FilterOperator
+  amountOut?: bigint | FilterOperator
   recipient?: Hex
-  deadline?: bigint
+  deadline?: bigint | FilterOperator
 }
 
-export type Bridge = {
+export type BridgeAction = {
   sourceChainId: number
   destinationChainId?: number
   contractAddress?: Hex
   tokenAddress?: Hex
   amount?: bigint
+  amountOperator: AmountOperator
   recipient?: Hex
 }
 
-export type Mint = {
+export type MintAction = {
   address: string
   tokenId: number
   quantity: number

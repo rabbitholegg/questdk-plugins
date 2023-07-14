@@ -6,7 +6,6 @@ export default defineConfig({
       outputFile: './bench/report.json',
       reporters: process.env.CI ? ['json'] : ['verbose'],
     },
-    exclude: ['node_modules', 'dist', '.idea', '.git', '.cache', 'plugins'],
     coverage: {
       reporter: process.env.CI ? ['lcov'] : ['text', 'json', 'html'],
       exclude: [
@@ -17,8 +16,8 @@ export default defineConfig({
       ],
     },
     environment: 'node',
-    setupFiles: ['./src/_test/setup.ts'],
-    globalSetup: ['./src/_test/globalSetup.ts'],
+    setupFiles: ['../src/_test/setup.ts'],
+    globalSetup: ['../src/_test/globalSetup.ts'],
     testTimeout: 10_000,
   },
 })

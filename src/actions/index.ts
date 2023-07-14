@@ -1,5 +1,5 @@
 export type {
-  Swap,
-  Bridge,
-  Mint,
+  SwapAction,
+  BridgeAction,
+  MintAction,
 } from './types.js'
