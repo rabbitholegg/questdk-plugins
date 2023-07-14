@@ -7,7 +7,7 @@ import {
 import { describe, expect, test } from 'vitest'
 
 describe('UniversalRouter', () => {
-  describe('Swap', () => {
+  describe('swap', () => {
     const EXECUTE_ABI_FRAGMENTS = [
       {
         inputs: [
