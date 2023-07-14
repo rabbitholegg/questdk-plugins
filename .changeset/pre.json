@@ -4,7 +4,5 @@
   "initialVersions": {
     "@rabbitholegg/questdk": "1.0.0"
   },
-  "changesets": [
-    "cool-geckos-sit"
-  ]
+  "changesets": ["cool-geckos-sit"]
 }
