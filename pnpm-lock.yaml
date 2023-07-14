@@ -69,12 +69,6 @@ importers:
         specifier: ^0.33.0
         version: 0.33.0
 
-  plugins:
-    dependencies:
-      typescript:
-        specifier: '>=5.1.6'
-        version: 5.1.6
-
 packages:
 
   /@actions/core@1.10.0:
