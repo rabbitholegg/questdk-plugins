@@ -20,9 +20,13 @@ export const Or = (filters: Filter[]) => ({
   $or: filters,
 })
 
+export const Any = Or
+
 export const And = (filters: Filter[]) => ({
   $and: filters,
 })
+
+export const All = And
 
 export const Some = (filters: Filter[]) => ({
   $some: filters,

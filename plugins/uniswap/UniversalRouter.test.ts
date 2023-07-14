@@ -1,7 +1,8 @@
 import { GreaterThanOrEqual } from '../../src/filter/operators.js'
-import UniversalRouter, {
+import {
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
+  swap,
 } from './UniversalRouter.js'
 import { describe, expect, test } from 'vitest'
 
@@ -32,16 +33,14 @@ describe('UniversalRouter', () => {
     ]
 
     test('should return a valid v3 swap action', () => {
-      const swap = UniversalRouter.Swap({
+      const filter = swap({
         chainId: 10,
         tokenOut: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
-        amountOut: 10n,
-        amountOperator: 'gte',
+        amountOut: GreaterThanOrEqual(100000n),
       })
-      // GreaterThanOrEqual('10000'),
 
-      expect(swap).to.deep.equal({
-        chainId: '0x0a',
+      expect(filter).to.deep.equal({
+        chainId: '0xa',
         to: '0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD',
         input: {
           $interface: EXECUTE_ABI_FRAGMENTS,
@@ -58,7 +57,7 @@ describe('UniversalRouter', () => {
                     ],
                   },
                   amountOut: {
-                    $gte: '10000',
+                    $gte: '100000',
                   },
                 },
                 {
@@ -71,7 +70,7 @@ describe('UniversalRouter', () => {
                     ],
                   },
                   amountOut: {
-                    $gte: '10000',
+                    $gte: '100000',
                   },
                 },
               ],

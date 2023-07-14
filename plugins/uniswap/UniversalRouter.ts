@@ -61,7 +61,7 @@ export const V2_SWAP_EXACT_TYPES = [
   'bool payerIsUser',
 ]
 
-const Swap = (swap: SwapAction) => {
+const swap = (swap: SwapAction) => {
   const {
     chainId,
     contractAddress,
@@ -101,6 +101,4 @@ const Swap = (swap: SwapAction) => {
   })
 }
 
-export default {
-  Swap,
-}
+export { swap }

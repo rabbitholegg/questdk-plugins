@@ -1,6 +1,3 @@
-import type { Bridge, Swap } from '../actions/types.js'
-import type { Hex } from 'viem'
-
 export type ArrayOperator =
   | {
       $some?: FilterOperator[]
