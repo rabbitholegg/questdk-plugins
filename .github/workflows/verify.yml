@@ -88,7 +88,7 @@ jobs:
         with:
           timeout_minutes: 20
           max_attempts: 3
-          command: pnpm test:ci --shard=${{ matrix.shard }}/${{ matrix.total-shards }}
+          command: pnpm test:ci -- --shard=${{ matrix.shard }}/${{ matrix.total-shards }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
