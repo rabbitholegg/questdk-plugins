@@ -13,11 +13,11 @@ runs:
         cache: pnpm
         node-version: 18
 
-    - name: Set up GH npm token
+    # use bash to create npmrc file for @rabbitholegg scope registry with auth token
+    - name: Create npmrc file
+      shell: bash
       run: |
-        echo "@rabbitholegg:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
-
+        echo "@rabbitholegg:registry=//registry.npmjs.org/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
 
     - name: Install dependencies
       shell: bash
