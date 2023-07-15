@@ -18,6 +18,14 @@
       "dependsOn": ["^format"],
       "outputs": []
     },
+    "typecheck": {
+      "dependsOn": ["^typecheck"],
+      "outputs": []
+    },
+    "test:ci": {
+      "dependsOn": ["^test:ci"],
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true
