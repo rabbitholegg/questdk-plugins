@@ -3,6 +3,7 @@
 .eslintcache
 .next
 .pnpm-debug.log*
+.turbo
 bench
 cache
 coverage
