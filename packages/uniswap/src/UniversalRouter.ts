@@ -1,6 +1,6 @@
 import type { SwapAction } from "@rabbitholegg/questdk";
-import type { FilterOperator } from "../../src/filter/types.js";
-import { compressJson } from "../../src/utils/compressJson.js";
+import type { FilterOperator } from "@rabbitholegg/questdk";
+import { compressJson } from "@rabbitholegg/questdk";
 import { UNIVERSAL_ROUTER_ADDRESS } from "@uniswap/universal-router-sdk";
 import { abi } from "@uniswap/universal-router/artifacts/contracts/UniversalRouter.sol/UniversalRouter.json";
 import { toHex } from "viem";
@@ -76,19 +76,19 @@ const swap = (swap: SwapAction) => {
     chainId: toHex(chainId),
     to: contractAddress || UNIVERSAL_ROUTER_ADDRESS(chainId),
     input: {
-      $interface: abi.filter((fragment) => fragment.name === "execute"),
+      $abi: abi.filter((fragment) => fragment.name === "execute"),
       inputs: {
         $some: {
           $or: [
             {
-              $decoder: V3_SWAP_EXACT_TYPES,
+              $abiParams: V3_SWAP_EXACT_TYPES,
               path: buildV3PathQuery(tokenIn, tokenOut),
               amountIn,
               amountOut,
               recipient,
             },
             {
-              $decoder: V2_SWAP_EXACT_TYPES,
+              $abiParams: V2_SWAP_EXACT_TYPES,
               path: buildV2PathQuery(tokenIn, tokenOut),
               amountIn,
               amountOut,
