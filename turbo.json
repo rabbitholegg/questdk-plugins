@@ -6,14 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
-    "test": {
-      "dependsOn": ["^test"],
-      "outputs": []
-    },
-    "lint": {
-      "dependsOn": ["^lint"],
-      "outputs": []
-    },
+    "lint": {},
     "format": {
       "dependsOn": ["^format"],
       "outputs": []
@@ -22,8 +15,12 @@
       "dependsOn": ["^typecheck"],
       "outputs": []
     },
+    "test": {
+      "dependsOn": ["lint", "build"],
+      "outputs": []
+    },
     "test:ci": {
-      "dependsOn": ["^test:ci"],
+      "dependsOn": ["lint", "build"],
       "outputs": []
     },
     "dev": {
