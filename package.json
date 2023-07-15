@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "lint": "turbo format check .",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "turbo run format",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
     "changeset": "changeset",
     "changeset:release": "turbo run build && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
