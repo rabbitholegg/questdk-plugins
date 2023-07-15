@@ -13,3 +13,11 @@ export {
   First,
   Last,
 } from './operators.js'
+
+export type {
+  ArrayOperator,
+  LogicalOperator,
+  NumericOperator,
+  StringOperator,
+  FilterOperator,
+} from './types.js'

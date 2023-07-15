@@ -36,7 +36,13 @@
   "license": "MIT",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
-  "typesVersions": {},
+  "typesVersions": {
+    "*": {
+      "utils": ["./dist/types/utils/index.d.ts"],
+      "actions": ["./dist/types/actions/index.d.ts"],
+      "filter": ["./dist/types/filter/index.d.ts"]
+    }
+  },
   "sideEffects": false,
   "files": [
     "dist",
@@ -57,6 +63,11 @@
       "types": "./dist/types/actions/index.d.ts",
       "import": "./dist/esm/actions/index.js",
       "default": "./dist/cjs/actions/index.js"
+    },
+    "./filter": {
+      "types": "./dist/types/filter/index.d.ts",
+      "import": "./dist/esm/filter/index.js",
+      "default": "./dist/cjs/filter/index.js"
     },
     "./utils": {
       "types": "./dist/types/utils/index.d.ts",

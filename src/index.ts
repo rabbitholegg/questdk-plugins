@@ -7,3 +7,11 @@ export type {
 export { compressJson } from './utils/compressJson.js'
 
 export { apply } from './filter/filters.js'
+
+export type {
+  ArrayOperator,
+  LogicalOperator,
+  NumericOperator,
+  StringOperator,
+  FilterOperator,
+} from './filter/types.js'
