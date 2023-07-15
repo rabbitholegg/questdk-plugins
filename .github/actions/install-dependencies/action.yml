@@ -12,8 +12,12 @@ runs:
       with:
         cache: pnpm
         node-version: 18
-        registry-url: //npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}
-        scope: "@rabbitholegg"
+
+    - name: Set up GH npm token
+      run: |
+        echo "@rabbitholegg:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+
 
     - name: Install dependencies
       shell: bash
