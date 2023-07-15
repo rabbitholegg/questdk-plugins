@@ -1,9 +1,9 @@
-import { GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
 import {
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
   swap,
 } from './UniversalRouter.js'
+import { GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 
 describe('UniversalRouter', () => {
