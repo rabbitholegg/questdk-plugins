@@ -12,7 +12,7 @@ runs:
       with:
         cache: pnpm
         node-version: 18
-        registry-url: https://npm.pkg.github.com/
+        registry-url: //npm.pkg.github.com/:_authToken=${{secrets.GITHUB_TOKEN}}
         scope: "@rabbitholegg"
 
     - name: Install dependencies
