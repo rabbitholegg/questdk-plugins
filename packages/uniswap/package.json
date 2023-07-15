@@ -1,0 +1,29 @@
+{
+  "name": "@rabbitholegg/questdk-plugin-uniswap",
+  "version": "1.0.0-alpha.0",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "packageManager": "pnpm@8.3.1",
+  "description": "",
+  "scripts": {
+    "test": "vitest dev",
+    "test:cov": "vitest dev --coverage",
+    "test:ci": "CI=true vitest --coverage",
+    "test:typecheck": "SKIP_GLOBAL_SETUP=true vitest typecheck",
+    "test:ui": "vitest dev --ui"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^0.33.0",
+    "typescript": "^5.1.6",
+    "vitest": "^0.33.0"
+  },
+  "dependencies": {
+    "@uniswap/universal-router": "^1.4.3",
+    "@uniswap/universal-router-sdk": "^1.5.4",
+    "viem": "^1.2.15"
+  }
+}
