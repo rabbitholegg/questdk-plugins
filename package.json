@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "format": "turbo run format",
     "lint": "turbo run lint",
+    "format": "turbo run format",
     "clean": "turbo run clean",
     "changeset": "changeset",
     "changeset:release": "turbo run build && changeset publish",
