@@ -1,5 +1,5 @@
+import { XCALL_ABI_FRAGMENTS, bridge } from './Connext.js'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
-import { bridge, XCALL_ABI_FRAGMENTS } from './Connext.js'
 import { describe, expect, test } from 'vitest'
 
 describe('Connext', () => {
@@ -23,7 +23,7 @@ describe('Connext', () => {
           _asset: '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
           _amount: {
             $gte: '100000',
-          }
+          },
         },
       })
     })
