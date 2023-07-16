@@ -16,15 +16,14 @@ runs:
     - name: Create npmrc file
       shell: bash
       run: |
-        function create_npmrc {
+        function replace_npmrc_placeholder {
           local dir=$1
-          echo "@rabbitholegg:registry=https://npm.pkg.github.com/" >> ${dir}.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ env.GITHUB_TOKEN }}" >> ${dir}.npmrc
+          sed -i "s/YOUR_TOKEN/${{ env.GITHUB_TOKEN }}/g" ${dir}.npmrc
         }
-        create_npmrc
+        replace_npmrc_placeholder .
         for dir in ./packages/*/
         do
-          create_npmrc ${dir}
+          replace_npmrc_placeholder ${dir}
         done
 
     - name: Install dependencies
