@@ -4,23 +4,15 @@ import { describe, expect, test } from 'vitest'
 
 describe('Connext', () => {
   describe('Bridge', () => {
-    const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607';
+    const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
 
     test('should return a valid bridge action filter', async () => {
-      // sourceChainId: number;
-      // destinationChainId?: number | undefined;
-      // contractAddress?: `0x${string}` | undefined;
-      // tokenAddress?: `0x${string}` | undefined;
-      // amount?: bigint | undefined;
-      // amountOperator: AmountOperator;
-      // recipient?: `0x${string}` | undefined;
-
       const filter = await bridge({
         sourceChainId: 10,
         destinationChainId: 137,
         tokenAddress: USDC,
         amount: GreaterThanOrEqual(100000n),
-      });
+      })
 
       expect(filter).to.deep.equal({
         chainId: "0xa",

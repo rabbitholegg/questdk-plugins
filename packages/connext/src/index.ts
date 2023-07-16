@@ -1,3 +1,1 @@
-export {
-  bridge
-} from './Connext.js'
+export { bridge } from './Connext.js'
