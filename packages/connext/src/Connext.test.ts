@@ -1,5 +1,5 @@
+import { XCALL_ABI_FRAGMENTS, bridge } from './Connext.js'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
-import { bridge, XCALL_ABI_FRAGMENTS } from './Connext.js'
 import { describe, expect, test } from 'vitest'
 
 describe('Connext', () => {
