@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@connext/smart-contracts": "^2.0.0",
-    "@rabbitholegg/questdk": "1.0.1-alpha.3",
+    "@rabbitholegg/questdk": "1.0.1-alpha.4",
     "viem": "^1.2.15"
   }
 }
