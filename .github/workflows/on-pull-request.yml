@@ -46,6 +46,8 @@ jobs:
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Report build size
         uses: preactjs/compressed-size-action@v2

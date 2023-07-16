@@ -27,6 +27,8 @@ jobs:
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Version Pull Request
         uses: changesets/action@v1
@@ -54,6 +56,8 @@ jobs:
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to NPM
         uses: changesets/action@v1
