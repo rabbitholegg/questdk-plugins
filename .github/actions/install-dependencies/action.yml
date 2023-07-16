@@ -13,20 +13,8 @@ runs:
         cache: pnpm
         node-version: 18
 
-    - name: Create npmrc file
-      shell: bash
-      run: |
-        function replace_npmrc_placeholder {
-          local dir=$1
-          sed -i "s/YOUR_TOKEN/${{ env.GITHUB_TOKEN }}/g" ${dir}.npmrc
-        }
-        replace_npmrc_placeholder
-        for dir in ./packages/*/
-        do
-          replace_npmrc_placeholder ${dir}
-        done
-
     - name: Install dependencies
       shell: bash
-      run: pnpm install --ignore-scripts
-
+      run: |
+        export NPM_TOKEN=${{ env.GITHUB_TOKEN }}
+        pnpm install --ignore-scripts
