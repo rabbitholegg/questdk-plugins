@@ -1568,7 +1568,7 @@
       "0x68Db1c8d85C09d546097C65ec7DCBFF4D6497CbF": {
         "symbol": "TEST",
         "decimals": 18
-       },
+      },
       "0xFDd72CB8477d3Ae2D00a6F9516324c529dfC395A": {
         "name": "Next Alchemix USD",
         "symbol": "nextAlUSD",
@@ -2271,7 +2271,7 @@
       "0xB706319D37b945727E71ae0d4353699d19112576": {
         "symbol": "TEST",
         "decimals": 18
-       }
+      }
     }
   },
   {
@@ -2314,11 +2314,11 @@
       "0xeDb95D8037f769B72AAab41deeC92903A98C9E16": {
         "symbol": "TEST",
         "decimals": 18
-       },
-       "0xA24E850BB444586897226b7Bc4A3C338C995252f": {
+      },
+      "0xA24E850BB444586897226b7Bc4A3C338C995252f": {
         "symbol": "IXT",
         "decimals": 18
-       }
+      }
     },
     "rpc": [
       "https://rpc-mumbai.matic.today",
@@ -2361,7 +2361,7 @@
       "0x7C1412e456ad60B8ee458c4eb3A9852C3e389353": {
         "symbol": "TEST",
         "decimals": 18
-       }
+      }
     }
   },
   {

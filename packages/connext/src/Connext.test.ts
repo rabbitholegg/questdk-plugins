@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest'
 
 describe('Connext', () => {
   describe('Bridge', () => {
-    const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607';
+    const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
 
     test('should return a valid bridge action filter', async () => {
       // sourceChainId: number;
@@ -20,9 +20,9 @@ describe('Connext', () => {
         destinationChainId: 137,
         tokenAddress: USDC,
         amount: GreaterThanOrEqual(100000n),
-      });
+      })
 
-      console.log('bridge', JSON.stringify(filter, null, 2));
+      console.log('bridge', JSON.stringify(filter, null, 2))
 
       // expect(swap).to.deep.equal({
       //   chainId: '0x0a',
@@ -63,6 +63,6 @@ describe('Connext', () => {
       //     },
       //   },
       // });
-    });
-  });
-});
+    })
+  })
+})
