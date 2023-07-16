@@ -7,7 +7,7 @@ const _getChainData = async (chainId: number) => {
   return chainData.find(chain => chain.chainId === chainId);
 };
 
-const XCALL_ABI_FRAGMENTS = [
+export const XCALL_ABI_FRAGMENTS = [
   {
     inputs: [
       { internalType: 'uint32', name: '_destination', type: 'uint32' },
@@ -75,7 +75,7 @@ export const bridge = async (bridge: BridgeAction & { destinationChainId: number
     chainId: toHex(sourceChainId),
     to: contractAddress || _getContractAddress(sourceChainId, 'Connext'),
     input: {
-      $interface: XCALL_ABI_FRAGMENTS,
+      $abi: XCALL_ABI_FRAGMENTS,
       _destination: chain.domainId,
       _asset: tokenAddress,
       _amount: amount,
