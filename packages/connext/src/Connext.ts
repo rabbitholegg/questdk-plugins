@@ -1,6 +1,6 @@
 import chainData from './chain-data.json'
 import connextContracts from '@connext/smart-contracts/deployments.json'
-import { type BridgeAction, compressJson  } from '@rabbitholegg/questdk'
+import { type BridgeAction, compressJson } from '@rabbitholegg/questdk'
 import { type Abi, toHex } from 'viem'
 
 const _getChainData = async (chainId: number) => {
