@@ -4,5 +4,10 @@
   "initialVersions": {
     "@rabbitholegg/questdk": "1.0.0"
   },
-  "changesets": ["cool-geckos-sit", "rude-humans-jump", "smart-tips-arrive"]
+  "changesets": [
+    "cool-geckos-sit",
+    "fresh-tables-poke",
+    "rude-humans-jump",
+    "smart-tips-arrive"
+  ]
 }
