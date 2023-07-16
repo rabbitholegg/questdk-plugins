@@ -23,7 +23,7 @@ describe('Connext', () => {
           _asset: '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
           _amount: {
             $gte: '100000',
-          }
+          },
         },
       })
     })
