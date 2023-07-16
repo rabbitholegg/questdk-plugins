@@ -19,7 +19,7 @@ export type BridgeAction = {
   destinationChainId?: number
   contractAddress?: Hex
   tokenAddress?: Hex
-  amount?: bigint
+  amount?: bigint | FilterOperator
   amountOperator: AmountOperator
   recipient?: Hex
 }
