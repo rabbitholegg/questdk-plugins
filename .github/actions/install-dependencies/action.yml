@@ -21,7 +21,7 @@ runs:
           echo "@rabbitholegg:registry=https://npm.pkg.github.com/" >> ${dir}.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ env.GITHUB_TOKEN }}" >> ${dir}.npmrc
         }
-        create_npmrc .
+        create_npmrc
         for dir in ./packages/*/
         do
           create_npmrc ${dir}
