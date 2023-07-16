@@ -13,7 +13,6 @@ runs:
         cache: pnpm
         node-version: 18
 
-    # use bash to create npmrc file for @rabbitholegg scope registry with auth token
     - name: Create npmrc file
       shell: bash
       run: |
