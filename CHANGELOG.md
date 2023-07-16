@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.3
+
+### Patch Changes
+
+- [`0aaeab4`](https://github.com/rabbitholegg/questdk/commit/0aaeab4715736c713d03954f55e3aafeda78fc1f) Thanks [@jimobrien](https://github.com/jimobrien)! - bridge types
+
 ## 1.0.1-alpha.2
 
 ### Patch Changes
