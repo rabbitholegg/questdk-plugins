@@ -1,7 +1,7 @@
-import connextContracts from '@connext/smart-contracts/deployments.json'
-import { type Abi, toHex } from 'viem'
-import { compressJson, type BridgeAction } from '@rabbitholegg/questdk'
 import chainData from './chain-data.json'
+import connextContracts from '@connext/smart-contracts/deployments.json'
+import { type BridgeAction, compressJson  } from '@rabbitholegg/questdk'
+import { type Abi, toHex } from 'viem'
 
 const _getChainData = async (chainId: number) => {
   return chainData.find((chain) => chain.chainId === chainId)
@@ -41,7 +41,7 @@ export const XCALL_ABI_FRAGMENTS = [
   },
 ]
 
-type ContractsJson = {
+type ConnextContractsJson = {
   [chainId: string]: {
     chainId: string
     name: string
@@ -55,7 +55,7 @@ type ContractsJson = {
 }
 
 const _getContractAddress = (chainId: number, name: string) => {
-  const contracts = connextContracts as ContractsJson
+  const contracts = connextContracts as ConnextContractsJson
   const contract = contracts[chainId][0].contracts[name]
   return contract?.address
 }
