@@ -24,6 +24,11 @@ jobs:
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+          scope: "@rabbitholegg"
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
