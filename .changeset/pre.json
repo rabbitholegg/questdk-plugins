@@ -5,7 +5,8 @@
     "dry-bikes-shake",
     "fresh-goats-confess",
     "odd-bags-cry",
-    "ten-clouds-invent"
+    "ten-clouds-invent",
+    "two-dogs-matter"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
