@@ -2,7 +2,8 @@
   "mode": "pre",
   "tag": "alpha",
   "changesets": [
-    "dry-bikes-shake"
+    "dry-bikes-shake",
+    "ten-clouds-invent"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
