@@ -3,7 +3,7 @@ import connextContracts from '@connext/smart-contracts/deployments.json'
 import { type BridgeAction, compressJson } from '@rabbitholegg/questdk'
 import { type Abi, toHex } from 'viem'
 
-const _getChainData = async (chainId: number) => {
+const getChainData = async (chainId: number) => {
   return chainData.find((chain) => chain.chainId === chainId)
 }
 
@@ -23,6 +23,7 @@ export const XCALL_ABI_FRAGMENTS = [
     stateMutability: 'payable',
     type: 'function',
   },
+  // This overloaded function is not found in the Connext ABI json for some reason
   {
     inputs: [
       { internalType: 'uint32', name: '_destination', type: 'uint32' },
@@ -54,10 +55,9 @@ type ConnextContractsJson = {
   }[]
 }
 
-const _getContractAddress = (chainId: number, name: string) => {
+const getContract = (chainId: number, name: string) => {
   const contracts = connextContracts as ConnextContractsJson
-  const contract = contracts[chainId][0].contracts[name]
-  return contract?.address
+  return contracts[chainId][0].contracts[name]
 }
 
 export const bridge = async (
@@ -72,7 +72,7 @@ export const bridge = async (
     recipient,
   } = bridge
 
-  const chain = await _getChainData(destinationChainId)
+  const chain = await getChainData(destinationChainId)
 
   if (!chain?.domainId) {
     throw new Error(
@@ -80,13 +80,15 @@ export const bridge = async (
     )
   }
 
+  const contract = getContract(sourceChainId, 'Connext')
+
   // https://docs.connext.network/developers/reference/contracts/calls#xcall
   return compressJson({
     chainId: toHex(sourceChainId),
-    to: contractAddress || _getContractAddress(sourceChainId, 'Connext'),
+    to: contractAddress || contract.address,
     input: {
       $abi: XCALL_ABI_FRAGMENTS,
-      _destination: chain.domainId,
+      _destination: Number(chain.domainId),
       _asset: tokenAddress,
       _amount: amount,
       _to: recipient,
