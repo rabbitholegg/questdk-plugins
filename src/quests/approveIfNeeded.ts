@@ -1,4 +1,4 @@
-import erc20ABI from '../abi/erc20.json'
+import erc20ABI from '../abi/erc20.js'
 import { getChainById } from '../utils/chains.js'
 import { QUEST_FACTORY_ADDRESS } from './constants.js'
 import {

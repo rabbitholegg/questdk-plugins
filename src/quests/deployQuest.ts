@@ -1,4 +1,4 @@
-import contractFactoryABI from '../abi/quest-factory.json'
+import contractFactoryABI from '../abi/quest-factory.js'
 import { compressJson } from '../index.js'
 import { QUEST_FACTORY_ADDRESS } from './constants.js'
 import type { Quest } from './types.js'
