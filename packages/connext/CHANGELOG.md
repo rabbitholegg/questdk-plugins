@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-connext
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- [`481953c`](https://github.com/rabbitholegg/questdk-plugins/commit/481953cf621ff00ce126a6330656ecabcdbf3a74) Thanks [@jimobrien](https://github.com/jimobrien)! - updates to connext bridge functionality
+
 ## 1.0.0-alpha.3
 
 ### Major Changes
