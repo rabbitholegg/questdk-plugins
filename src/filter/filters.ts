@@ -3,6 +3,7 @@ import {
   decodeAbiParameters,
   decodeFunctionData,
   getAbiItem,
+  isAddress,
   parseAbiParameters,
   slice,
 } from 'viem'
@@ -165,6 +166,10 @@ export function apply(
 
     if (typeof filters[key] === 'object') {
       if (!apply(context[key], filters[key])) return false
+    } else if (isAddress(context[key])) {
+      if (context[key].toLowerCase() !== filters[key].toLowerCase()) {
+        return false
+      }
     } else if (context[key] !== filters[key]) {
       return false
     }
