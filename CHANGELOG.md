@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.5
+
+### Patch Changes
+
+- [`7344432`](https://github.com/rabbitholegg/questdk/commit/73444329affcaec2e60c7baed32eb744cdc4501f) Thanks [@jimobrien](https://github.com/jimobrien)! - add deployQuest
+
 ## 1.0.1-alpha.4
 
 ### Patch Changes
