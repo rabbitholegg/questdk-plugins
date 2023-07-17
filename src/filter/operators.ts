@@ -1,4 +1,4 @@
-import type { Filter } from './filters.js'
+import type { FilterOperator } from './types.js'
 
 export const GreaterThan = (amount: bigint | number | string) => ({
   $gt: BigInt(amount),
@@ -16,24 +16,11 @@ export const GreaterThanOrEqual = (amount: bigint | number | string) => ({
   $gte: BigInt(amount),
 })
 
-export const Or = (filters: Filter[]) => ({
-  $or: filters,
-})
+export const Or = ($or: FilterOperator[]) => ({ $or })
+export const And = ($and: FilterOperator[]) => ({ $and })
+export const Some = ($some: FilterOperator[]) => ({ $some })
+export const First = ($first: FilterOperator) => ({ $first })
+export const Last = ($last: FilterOperator) => ({ $last })
 
 export const Any = Or
-
-export const And = (filters: Filter[]) => ({
-  $and: filters,
-})
-
 export const All = And
-
-export const Some = (filters: Filter[]) => ({
-  $some: filters,
-})
-export const First = (filter: Filter) => ({
-  $first: filter,
-})
-export const Last = (filter: Filter) => ({
-  $last: filter,
-})
