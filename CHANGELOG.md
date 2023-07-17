@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.4
+
+### Patch Changes
+
+- [`bc81e20`](https://github.com/rabbitholegg/questdk/commit/bc81e20584d28e170b4366b5f88f453f9a3d7854) Thanks [@jimobrien](https://github.com/jimobrien)! - Remove deprecated types
+
 ## 1.0.1-alpha.3
 
 ### Patch Changes
