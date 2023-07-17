@@ -4,12 +4,12 @@ import { QUEST_FACTORY_ADDRESS } from './constants.js'
 import type { Quest } from './types.js'
 import { type TransactionRequest, encodeFunctionData } from 'viem'
 
-const assertReward = (reward: Quest['reward']) => {
+export const assertReward = (reward: Quest['reward']) => {
   // TODO: add reward assertions
   return reward || true
 }
 
-const assertParticipants = (participants: Quest['participants']) => {
+export const assertParticipants = (participants: Quest['participants']) => {
   // TODO: add reward assertions
   return participants || true
 }
