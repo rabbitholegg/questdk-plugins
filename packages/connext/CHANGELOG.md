@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-connext
 
+## 1.0.0-alpha.3
+
+### Major Changes
+
+- [`fe63300`](https://github.com/rabbitholegg/questdk-plugins/commit/fe633005067b03287e78a304b8bd8b10a230640b) Thanks [@jimobrien](https://github.com/jimobrien)! - bump qdk
+
+- [`0693900`](https://github.com/rabbitholegg/questdk-plugins/commit/0693900000e3309952d273ad6ae60aad5b98fd25) Thanks [@jimobrien](https://github.com/jimobrien)! - Improve connext bridge
+
 ## 1.0.0-alpha.2
 
 ### Major Changes
