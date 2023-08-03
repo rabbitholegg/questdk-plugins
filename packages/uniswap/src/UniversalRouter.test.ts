@@ -32,8 +32,8 @@ describe('UniversalRouter', () => {
       },
     ]
 
-    test('should return a valid v3 swap action', () => {
-      const filter = swap({
+    test('should return a valid v3 swap action', async () => {
+      const filter = await swap({
         chainId: 10,
         tokenOut: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
         amountOut: GreaterThanOrEqual(100000n),
