@@ -1,5 +1,9 @@
 export type {
-  SwapAction,
-  BridgeAction,
-  MintAction,
+  SwapActionParams,
+  BridgeActionParams,
+  MintActionParams,
+  ActionParams,
+  IActionPlugin,
 } from './types.js'
+
+export { ActionType } from './types.js'

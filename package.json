@@ -32,23 +32,15 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
-  "authors": [
-    "rabbitholegg"
-  ],
+  "authors": ["rabbitholegg"],
   "license": "MIT",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
   "typesVersions": {
     "*": {
-      "utils": [
-        "./dist/types/utils/index.d.ts"
-      ],
-      "actions": [
-        "./dist/types/actions/index.d.ts"
-      ],
-      "filter": [
-        "./dist/types/filter/index.d.ts"
-      ]
+      "utils": ["./dist/types/utils/index.d.ts"],
+      "actions": ["./dist/types/actions/index.d.ts"],
+      "filter": ["./dist/types/filter/index.d.ts"]
     }
   },
   "sideEffects": false,

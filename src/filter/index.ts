@@ -21,3 +21,5 @@ export type {
   StringOperator,
   FilterOperator,
 } from './types.js'
+
+export { executePlugin } from './utils.js'

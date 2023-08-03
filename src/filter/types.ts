@@ -1,3 +1,5 @@
+import type { Transaction } from 'viem'
+
 export type ArrayOperator =
   | {
       $some?: FilterOperator[]
@@ -43,3 +45,7 @@ export type FilterOperator =
   | NumericOperator
   | ArrayOperator
   | StringOperator
+
+export type TransactionFilter = {
+  [K in keyof Transaction]: FilterOperator
+}

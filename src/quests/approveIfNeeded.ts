@@ -9,6 +9,16 @@ import {
   http,
 } from 'viem'
 
+/**
+ * This function checks if the owner has enough allowance to perform a transaction.
+ * If not, it approves the transaction.
+ * @param {Object} params - The parameters for the function.
+ * @param {bigint} params.amount - The amount of tokens to be transacted.
+ * @param {number} params.chainId - The ID of the blockchain chain.
+ * @param {Address} params.tokenAddress - The address of the token to be transacted.
+ * @param {Address} params.ownerAddress - The address of the owner of the tokens.
+ * @returns {Promise<Partial<TransactionRequest> | undefined>} - A promise that resolves to a partial transaction request or undefined.
+ */
 export const approveIfNeeded = async ({
   amount,
   chainId,
