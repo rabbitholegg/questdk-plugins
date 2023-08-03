@@ -3,9 +3,15 @@ import {
   PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk'
 
-import { bridge } from './Connext.js'
+import {
+  bridge,
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+} from './Connext.js'
 
 export const Connext: IActionPlugin = {
+  getSupportedTokenAddresses,
+  getSupportedChainIds,
   bridge,
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
