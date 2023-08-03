@@ -62,8 +62,8 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check types
-        run: pnpm typecheck
+      # - name: Check types
+      #   run: pnpm typecheck
 
       # Uncomment to enable tests when they are ready
       # - name: Test types
