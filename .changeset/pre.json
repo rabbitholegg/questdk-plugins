@@ -5,6 +5,7 @@
     "dry-bikes-shake",
     "fresh-goats-confess",
     "odd-bags-cry",
+    "silver-rabbits-flash",
     "ten-clouds-invent",
     "two-dogs-matter"
   ],
@@ -12,6 +13,7 @@
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
     "eslint-config-custom": "0.0.0",
     "tsconfig": "0.0.0",
-    "@rabbitholegg/questdk-plugin-uniswap": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-uniswap": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-registry": "1.0.0-alpha.0"
   }
 }
