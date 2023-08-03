@@ -61,7 +61,7 @@ export const V2_SWAP_EXACT_TYPES = [
   'bool payerIsUser',
 ]
 
-const swap = (swap: SwapActionParams) => {
+export const swap = async (swap: SwapActionParams) => {
   const {
     chainId,
     contractAddress,
@@ -101,4 +101,11 @@ const swap = (swap: SwapActionParams) => {
   })
 }
 
-export { swap }
+export const getSupportedChainIds = async () => {
+  return []
+}
+
+export const getSupportedTokenAddresses = async (chainId: number) => {
+  ;() => chainId
+  return []
+}
