@@ -34,6 +34,7 @@ export type ActionParams =
   | MintActionParams
 
 export interface IActionPlugin {
+  pluginId: string
   getSupportedChainIds: () => Promise<number[]>
   getSupportedTokenAddresses: (chainId: number) => Promise<Address[]>
   bridge: (
