@@ -1,7 +1,7 @@
-import chainData from './chain-data.json'
-import connextContracts from '@connext/smart-contracts/deployments.json'
-import { type BridgeAction, compressJson } from '@rabbitholegg/questdk'
-import { type Abi, toHex } from 'viem'
+import { chainData } from './chain-data.js'
+import { ConnextContract } from './contract-addresses.js'
+import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
+import { toHex } from 'viem'
 
 const getChainData = async (chainId: number) => {
   return chainData.find((chain) => chain.chainId === chainId)
@@ -42,27 +42,7 @@ export const XCALL_ABI_FRAGMENTS = [
   },
 ]
 
-type ConnextContractsJson = {
-  [chainId: string]: {
-    chainId: string
-    name: string
-    contracts: {
-      [name: string]: {
-        address: string
-        abi: Abi
-      }
-    }
-  }[]
-}
-
-const getContract = (chainId: number, name: string) => {
-  const contracts = connextContracts as ConnextContractsJson
-  return contracts[chainId][0].contracts[name]
-}
-
-export const bridge = async (
-  bridge: BridgeAction & { destinationChainId: number },
-) => {
+export const bridge = async (bridge: BridgeActionParams) => {
   const {
     sourceChainId,
     destinationChainId,
@@ -80,12 +60,12 @@ export const bridge = async (
     )
   }
 
-  const contract = getContract(sourceChainId, 'Connext')
+  const defaultContractAddress = ConnextContract[sourceChainId]
 
   // https://docs.connext.network/developers/reference/contracts/calls#xcall
   return compressJson({
     chainId: toHex(sourceChainId),
-    to: contractAddress || contract.address,
+    to: contractAddress || defaultContractAddress,
     input: {
       $abi: XCALL_ABI_FRAGMENTS,
       _destination: Number(chain.domainId),

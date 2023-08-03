@@ -11,7 +11,7 @@
     "noImplicitOverride": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-
+    "resolveJsonModule": true,
     "allowJs": false,
     "checkJs": false,
 

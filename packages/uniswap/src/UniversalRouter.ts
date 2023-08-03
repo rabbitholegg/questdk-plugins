@@ -1,4 +1,4 @@
-import type { SwapAction } from '@rabbitholegg/questdk'
+import type { SwapActionParams } from '@rabbitholegg/questdk'
 import type { FilterOperator } from '@rabbitholegg/questdk'
 import { compressJson } from '@rabbitholegg/questdk'
 import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
@@ -61,7 +61,7 @@ export const V2_SWAP_EXACT_TYPES = [
   'bool payerIsUser',
 ]
 
-const swap = (swap: SwapAction) => {
+const swap = (swap: SwapActionParams) => {
   const {
     chainId,
     contractAddress,
