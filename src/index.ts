@@ -24,6 +24,7 @@ export type {
   NumericOperator,
   StringOperator,
   FilterOperator,
+  TransactionFilter,
 } from './filter/types.js'
 
 export {
