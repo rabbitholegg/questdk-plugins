@@ -34,6 +34,8 @@ export type ActionParams =
   | MintActionParams
 
 export interface IActionPlugin {
+  getSupportedChainIds: () => Promise<number[]>
+  getSupportedTokenAddresses: (chainId: number) => Promise<Address[]>
   bridge: (
     params: BridgeActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
