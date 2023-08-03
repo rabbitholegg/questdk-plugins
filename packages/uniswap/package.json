@@ -1,6 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-uniswap",
   "version": "1.0.0-alpha.0",
+  "private": true,
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
