@@ -48,5 +48,3 @@ export {
   Any,
   All,
 } from './filter/operators.js'
-
-export { executePlugin } from './filter/utils.js'
