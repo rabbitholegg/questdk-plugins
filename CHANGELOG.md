@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.7
+
+### Patch Changes
+
+- [`d5ccdf8`](https://github.com/rabbitholegg/questdk/commit/d5ccdf8b61bfcfa48b0e8bd326092c0f15d72488) Thanks [@jimobrien](https://github.com/jimobrien)! - add plugin support
+
 ## 1.0.1-alpha.6
 
 ### Patch Changes
