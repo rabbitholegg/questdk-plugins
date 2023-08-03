@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.6
+
+### Patch Changes
+
+- [`7adaed6`](https://github.com/rabbitholegg/questdk/commit/7adaed615145813bdb697484c1d6a4752df65979) Thanks [@jimobrien](https://github.com/jimobrien)! - lower compare addresses
+
 ## 1.0.1-alpha.5
 
 ### Patch Changes
