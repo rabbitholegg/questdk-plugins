@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.8
+
+### Patch Changes
+
+- [`9b5464f`](https://github.com/rabbitholegg/questdk/commit/9b5464f4b8e84944c9084f9930f620b420f3cf9c) Thanks [@jimobrien](https://github.com/jimobrien)! - add TransactionFilter export
+
 ## 1.0.1-alpha.7
 
 ### Patch Changes
