@@ -4,7 +4,9 @@ import {
   type BridgeActionParams,
   type IActionPlugin,
   type MintActionParams,
+  PluginActionNotImplementedError,
   type SwapActionParams,
+  type TransactionFilter,
 } from '@rabbitholegg/questdk'
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
@@ -27,7 +29,7 @@ export const executePlugin = (
   plugin: IActionPlugin,
   actionType: ActionType,
   params: ActionParams,
-) => {
+): Promise<TransactionFilter> | Promise<PluginActionNotImplementedError> => {
   switch (actionType) {
     case ActionType.Bridge:
       return plugin.bridge(params as unknown as BridgeActionParams)
