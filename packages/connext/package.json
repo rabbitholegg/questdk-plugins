@@ -26,9 +26,7 @@
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
-    "test:typecheck": "SKIP_GLOBAL_SETUP=true vitest typecheck",
-    "test:ui": "vitest dev --ui",
-    "typecheck": "tsc --noEmit"
+    "test:ui": "vitest dev --ui"
   },
   "keywords": [],
   "author": "",

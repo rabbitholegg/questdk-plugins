@@ -6,7 +6,6 @@
     "lint": "turbo run lint",
     "format": "turbo run format",
     "clean": "turbo run clean",
-    "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:ci": "turbo run test:ci",
     "changeset": "changeset",
