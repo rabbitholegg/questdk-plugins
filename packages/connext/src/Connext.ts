@@ -1,8 +1,8 @@
 import { ConnextContract } from './contract-addresses.js'
 import {
   type ChainData,
-  chainDataToMap,
   chainIdToDomain,
+  domainToChainId,
   getChainData,
 } from '@connext/nxtp-utils'
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
@@ -10,15 +10,10 @@ import { type Address, toHex } from 'viem'
 
 let _chainDataCache: Map<string, ChainData> | null = null
 
-const _getChainData = async (chainId?: number) => {
+const _getChainData = async () => {
   if (!_chainDataCache) {
     const chainData = await getChainData()
-    const chainDataMap = chainDataToMap(chainData)
-    _chainDataCache = chainDataMap
-  }
-
-  if (chainId) {
-    return _chainDataCache.get(String(chainId))
+    _chainDataCache = chainData
   }
 
   return _chainDataCache
@@ -87,21 +82,30 @@ export const bridge = async (bridge: BridgeActionParams) => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  const _chainData = await _getChainData(_chainId)
-
-  if (!_chainData) {
+  const chains = await _getChainData()
+  const chainData = chains?.get(String(_chainId))
+  console.log(chains, chainData)
+  if (!chainData) {
     return []
   }
 
-  return Object.keys(_chainData) as Address[]
+  return Object.keys(chainData.assetId) as Address[]
 }
 
 export const getSupportedChainIds = async () => {
-  const _chainData = await _getChainData()
-
-  if (!_chainData || !(_chainData instanceof Map)) {
+  const chains = await _getChainData()
+  console.log(chains)
+  if (!chains || !(chains instanceof Map)) {
     return []
   }
 
-  return Array.from(_chainData.keys()).map((chainId) => Number(chainId))
+  return Array.from(chains.keys())
+    .map((domainId) => {
+      try {
+        return domainToChainId(Number(domainId))
+      } catch (_e) {
+        return undefined
+      }
+    })
+    .filter((chain) => chain !== undefined) as number[]
 }
