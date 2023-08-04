@@ -1,6 +1,5 @@
 {
   "name": "questdk-plugins",
-  "private": true,
   "scripts": {
     "build": "turbo run build",
     "lint": "turbo run lint",

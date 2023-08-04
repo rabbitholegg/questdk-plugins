@@ -2,7 +2,6 @@
   "name": "@rabbitholegg/questdk-plugin-connext",
   "version": "1.0.0-alpha.0",
   "type": "module",
-  "private": true,
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
