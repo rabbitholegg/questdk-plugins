@@ -83,18 +83,21 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
   const chains = await _getChainData()
-  const chainData = chains?.get(String(_chainId))
-  console.log(chains, chainData)
-  if (!chainData) {
+  try {
+    const domainId = chainIdToDomain(_chainId)
+    const chainData = chains?.get(String(domainId))
+    if (!chainData) {
+      return []
+    }
+    return Object.keys(chainData.assetId).filter((addr) => !!addr) as Address[]
+  } catch (_e) {
     return []
   }
-
-  return Object.keys(chainData.assetId) as Address[]
 }
 
 export const getSupportedChainIds = async () => {
   const chains = await _getChainData()
-  console.log(chains)
+
   if (!chains || !(chains instanceof Map)) {
     return []
   }
