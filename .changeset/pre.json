@@ -2,12 +2,7 @@
   "mode": "pre",
   "tag": "alpha",
   "changesets": [
-    "dry-bikes-shake",
-    "fresh-goats-confess",
-    "odd-bags-cry",
-    "silver-rabbits-flash",
-    "ten-clouds-invent",
-    "two-dogs-matter"
+    "tasty-bobcats-clean"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
