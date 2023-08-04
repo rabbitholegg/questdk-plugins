@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.2
+
+### Minor Changes
+
+- [`488877e`](https://github.com/rabbitholegg/questdk-plugins/commit/488877e6a19171800ed14149122f49d3fe418886) Thanks [@jimobrien](https://github.com/jimobrien)! - release v1
+
+### Patch Changes
+
+- Updated dependencies [[`488877e`](https://github.com/rabbitholegg/questdk-plugins/commit/488877e6a19171800ed14149122f49d3fe418886)]:
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.2
+
 ## 1.0.0-alpha.1
 
 ### Minor Changes
