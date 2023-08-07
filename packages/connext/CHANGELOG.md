@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-connext
 
+## 1.0.0-alpha.3
+
+### Minor Changes
+
+- [`277988f`](https://github.com/rabbitholegg/questdk-plugins/commit/277988f7703bb09959e4bd396c82a29b0f9d8dc6) Thanks [@jimobrien](https://github.com/jimobrien)! - update supported chains and tokens
+
+- [`54a363b`](https://github.com/rabbitholegg/questdk-plugins/commit/54a363b1794e785771c9ef0cfffba63cf36178b8) Thanks [@jimobrien](https://github.com/jimobrien)! - Update supported chains and tokens
+
 ## 1.0.0-alpha.2
 
 ### Minor Changes
