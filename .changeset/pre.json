@@ -2,7 +2,9 @@
   "mode": "pre",
   "tag": "alpha",
   "changesets": [
+    "brown-points-smile",
     "hungry-squids-drop",
+    "pink-horses-change",
     "tasty-bobcats-clean"
   ],
   "initialVersions": {
