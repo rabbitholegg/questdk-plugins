@@ -48,53 +48,85 @@ export const bridge = async (bridge: BridgeActionParams) => {
     tokenAddress,
     amount,
     recipient,
-  } = bridge
+  } = bridge;
 
-  const defaultContractAddress = ConnextContract[sourceChainId]
-  const destinationDomain = chainIdToDomain(destinationChainId)
+  const defaultContractAddress = ConnextContract[sourceChainId];
+  const destinationDomain = chainIdToDomain(destinationChainId);
+  const requiresWrapperMultisend = tokenAddress === ETH_TOKEN_ADDRESS;
+
+  /* 
+    Connext uses a MultiSend to wrap when briding ETH.
+    https://github.com/connext/monorepo/issues/2905
+    https://github.com/connext/monorepo/issues/4218
+    Contract addresses: https://github.com/search?q=repo%3Aconnext%2Fmonorepo%20MultiSend.json&type=code
+  */
+  if (requiresWrapperMultisend) {
+    const multiSendContract = getDeployedMultisendContract(sourceChainId);
+
+    if (!multiSendContract) {
+      throw new Error(
+        `No multisend contract deployed on chain ${sourceChainId}`,
+      );
+    }
+    const wethAddress = await getWETHAddress(sourceChainId);
+
+    return compressJson({
+      chainId: toHex(sourceChainId),
+      to: multiSendContract.address,
+      value: amount,
+      input: {
+        $abi: MultisendAbi,
+        transactions: {
+          $some: {
+            $regex: `/${wethAddress}/`,
+          },
+        },
+      },
+    });
+  }
 
   // https://docs.connext.network/developers/reference/contracts/calls#xcall
   return compressJson({
     chainId: toHex(sourceChainId),
     to: contractAddress || defaultContractAddress,
     input: {
-      $abi: XCALL_ABI_FRAGMENTS,
+      $abi: ConnextAbi,
       _destination: Number(destinationDomain),
       _asset: tokenAddress,
       _amount: amount,
       _to: recipient,
     },
-  })
-}
+  });
+};
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  const chains = await _getChainData()
+  const chains = await _getChainData();
   try {
-    const domainId = chainIdToDomain(_chainId)
-    const chainData = chains?.get(String(domainId))
+    const domainId = chainIdToDomain(_chainId);
+    const chainData = chains?.get(String(domainId));
     if (!chainData) {
-      return []
+      return [];
     }
-    return Object.keys(chainData.assetId).filter((addr) => !!addr) as Address[]
+    return Object.keys(chainData.assetId).filter((addr) => !!addr) as Address[];
   } catch (_e) {
-    return []
+    return [];
   }
-}
+};
 
 export const getSupportedChainIds = async () => {
-  const chains = await _getChainData()
+  const chains = await _getChainData();
 
   if (!chains || !(chains instanceof Map)) {
-    return []
+    return [];
   }
 
   return Array.from(chains.keys())
     .map((domainId) => {
       try {
-        return domainToChainId(Number(domainId))
+        return domainToChainId(Number(domainId));
       } catch (_e) {
-        return undefined
+        return undefined;
       }
     })
-    .filter((chain) => chain !== undefined) as number[]
-}
+    .filter((chain) => chain !== undefined) as number[];
+};
