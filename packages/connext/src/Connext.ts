@@ -1,3 +1,4 @@
+import { getDeployedMultisendContract } from "@connext/nxtp-txservice";
 import {
   type ChainData,
   MultisendAbi,
@@ -5,11 +6,7 @@ import {
   domainToChainId,
   getChainData,
 } from "@connext/nxtp-utils";
-
-import { getDeployedMultisendContract } from "@connext/nxtp-txservice";
-
 import { ConnextAbi } from "@connext/smart-contracts";
-
 import { type BridgeActionParams, compressJson } from "@rabbitholegg/questdk";
 import { type Address, toHex } from "viem";
 import { ConnextContract } from "./contract-addresses.js";
@@ -31,13 +28,16 @@ const getWETHAddress = async (chainId: number) => {
   const chains = await _getChainData();
   const domainId = chainIdToDomain(chainId);
   const chainData = chains?.get(String(domainId));
-  const wethAddress = Object.keys(chainData?.assetId || {});
+  const assets = Object.keys(chainData?.assetId || {});
 
-  for (const address of wethAddress) {
+  let wethAddress;
+  for (const address of assets) {
     if (chainData?.assetId[address].symbol === "WETH") {
-      return address;
+      wethAddress = address;
+      break;
     }
   }
+  return wethAddress;
 };
 
 export const bridge = async (bridge: BridgeActionParams) => {
@@ -68,6 +68,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
         `No multisend contract deployed on chain ${sourceChainId}`,
       );
     }
+
     const wethAddress = await getWETHAddress(sourceChainId);
 
     return compressJson({
