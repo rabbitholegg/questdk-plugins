@@ -1,58 +1,44 @@
-import { ConnextContract } from './contract-addresses.js'
 import {
   type ChainData,
+  MultisendAbi,
   chainIdToDomain,
   domainToChainId,
   getChainData,
-} from '@connext/nxtp-utils'
-import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address, toHex } from 'viem'
+} from "@connext/nxtp-utils";
 
-let _chainDataCache: Map<string, ChainData> | null = null
+import { getDeployedMultisendContract } from "@connext/nxtp-txservice";
+
+import { ConnextAbi } from "@connext/smart-contracts";
+
+import { type BridgeActionParams, compressJson } from "@rabbitholegg/questdk";
+import { type Address, toHex } from "viem";
+import { ConnextContract } from "./contract-addresses.js";
+
+let _chainDataCache: Map<string, ChainData> | null = null;
+
+const ETH_TOKEN_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 const _getChainData = async () => {
   if (!_chainDataCache) {
-    const chainData = await getChainData()
-    _chainDataCache = chainData
+    const chainData = await getChainData();
+    _chainDataCache = chainData;
   }
 
-  return _chainDataCache
-}
+  return _chainDataCache;
+};
 
-export const XCALL_ABI_FRAGMENTS = [
-  {
-    inputs: [
-      { internalType: 'uint32', name: '_destination', type: 'uint32' },
-      { internalType: 'address', name: '_to', type: 'address' },
-      { internalType: 'address', name: '_asset', type: 'address' },
-      { internalType: 'address', name: '_delegate', type: 'address' },
-      { internalType: 'uint256', name: '_amount', type: 'uint256' },
-      { internalType: 'uint256', name: '_slippage', type: 'uint256' },
-      { internalType: 'bytes', name: '_callData', type: 'bytes' },
-    ],
-    name: 'xcall',
-    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  // This overloaded function is not found in the Connext ABI json for some reason
-  {
-    inputs: [
-      { internalType: 'uint32', name: '_destination', type: 'uint32' },
-      { internalType: 'address', name: '_to', type: 'address' },
-      { internalType: 'address', name: '_asset', type: 'address' },
-      { internalType: 'address', name: '_delegate', type: 'address' },
-      { internalType: 'uint256', name: '_amount', type: 'uint256' },
-      { internalType: 'uint256', name: '_slippage', type: 'uint256' },
-      { internalType: 'bytes', name: '_callData', type: 'bytes' },
-      { internalType: 'uint256', name: '_relayerFee', type: 'uint256' },
-    ],
-    name: 'xcall',
-    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-]
+const getWETHAddress = async (chainId: number) => {
+  const chains = await _getChainData();
+  const domainId = chainIdToDomain(chainId);
+  const chainData = chains?.get(String(domainId));
+  const wethAddress = Object.keys(chainData?.assetId || {});
+
+  for (const address of wethAddress) {
+    if (chainData?.assetId[address].symbol === "WETH") {
+      return address;
+    }
+  }
+};
 
 export const bridge = async (bridge: BridgeActionParams) => {
   const {
