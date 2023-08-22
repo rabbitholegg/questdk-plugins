@@ -6,9 +6,9 @@ import {
   domainToChainId,
   getChainData,
 } from "@connext/nxtp-utils";
-import { ConnextAbi } from "@connext/smart-contracts";
 import { type BridgeActionParams, compressJson } from "@rabbitholegg/questdk";
 import { type Address, toHex } from "viem";
+import { XCALL_ABI_FRAGMENTS } from "./abi.js";
 import { ConnextContract } from "./contract-addresses.js";
 
 let _chainDataCache: Map<string, ChainData> | null = null;
@@ -24,7 +24,7 @@ const _getChainData = async () => {
   return _chainDataCache;
 };
 
-const getWETHAddress = async (chainId: number) => {
+export const getWETHAddress = async (chainId: number) => {
   const chains = await _getChainData();
   const domainId = chainIdToDomain(chainId);
   const chainData = chains?.get(String(domainId));
@@ -86,12 +86,11 @@ export const bridge = async (bridge: BridgeActionParams) => {
     });
   }
 
-  // https://docs.connext.network/developers/reference/contracts/calls#xcall
   return compressJson({
     chainId: toHex(sourceChainId),
     to: contractAddress || defaultContractAddress,
     input: {
-      $abi: ConnextAbi,
+      $abi: XCALL_ABI_FRAGMENTS,
       _destination: Number(destinationDomain),
       _asset: tokenAddress,
       _amount: amount,
