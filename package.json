@@ -1,16 +1,16 @@
 {
   "name": "questdk-plugins",
   "scripts": {
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "format": "turbo run format",
-    "clean": "turbo run clean",
-    "test": "turbo run test",
-    "test:ci": "turbo run test:ci",
+    "build": "turbo run build --filter=!@rabbitholegg/questdk-plugin-project",
+    "lint": "turbo run lint --filter=!@rabbitholegg/questdk-plugin-project",
+    "format": "turbo run format --filter=!@rabbitholegg/questdk-plugin-project",
+    "clean": "turbo run clean --filter=!@rabbitholegg/questdk-plugin-project",
+    "test": "turbo run test --filter=!@rabbitholegg/questdk-plugin-project",
+    "test:ci": "turbo run test:ci --filter=!@rabbitholegg/questdk-plugin-project",
     "changeset": "changeset",
-    "changeset:release": "turbo run build && changeset publish",
+    "changeset:release": "turbo run build  --filter=!@rabbitholegg/questdk-plugin-project && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
-    "publish-packages": "turbo run build lint test:ci && pnpm changeset publish"
+    "publish-packages": "turbo run build lint test:ci  --filter=!@rabbitholegg/questdk-plugin-project && pnpm changeset publish"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
