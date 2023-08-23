@@ -33,7 +33,3 @@ export const INBOX_DEPOSIT_ETH_FRAG =  {
   stateMutability:"payable",
   type:"function"
 }
-
-
-
-
