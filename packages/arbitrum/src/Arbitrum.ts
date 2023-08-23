@@ -1,5 +1,5 @@
-
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
+import { CHAIN_ID_ARRAY} from './chain-ids'
 import { type Address } from 'viem'
 
 // If you're implementing swap or mint, simply duplicate this function and change the name
@@ -27,7 +27,8 @@ export const getSupportedTokenAddresses = async (_chainId: number): Promise<Addr
 }
 
 
-export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
 
+export const getSupportedChainIds = async () => {
+  return CHAIN_ID_ARRAY;
 }
+
