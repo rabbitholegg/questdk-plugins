@@ -8,8 +8,14 @@
     },
     "lint": {},
     "format": {},
-    "test": {},
-    "test:ci": {},
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "test:ci": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true
