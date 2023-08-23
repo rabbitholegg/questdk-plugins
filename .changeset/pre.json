@@ -5,6 +5,7 @@
     "brown-points-smile",
     "hungry-squids-drop",
     "pink-horses-change",
+    "sour-boxes-reflect",
     "tasty-bobcats-clean"
   ],
   "initialVersions": {
@@ -12,6 +13,7 @@
     "eslint-config-custom": "0.0.0",
     "tsconfig": "0.0.0",
     "@rabbitholegg/questdk-plugin-uniswap": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-registry": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-registry": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-project": "1.0.0-alpha.3"
   }
 }
