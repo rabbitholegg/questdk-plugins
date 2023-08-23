@@ -6,7 +6,11 @@ import {
   domainToChainId,
   getChainData,
 } from "@connext/nxtp-utils";
-import { type BridgeActionParams, compressJson } from "@rabbitholegg/questdk";
+import {
+  type BridgeActionParams,
+  type TransactionFilter,
+  compressJson,
+} from "@rabbitholegg/questdk";
 import { type Address, toHex } from "viem";
 import { XCALL_ABI_FRAGMENTS } from "./abi.js";
 import { ConnextContract } from "./contract-addresses.js";
@@ -40,7 +44,9 @@ export const getWETHAddress = async (chainId: number) => {
   return wethAddress;
 };
 
-export const bridge = async (bridge: BridgeActionParams) => {
+export const bridge = async (
+  bridge: BridgeActionParams,
+): Promise<TransactionFilter> => {
   const {
     sourceChainId,
     destinationChainId,
@@ -60,6 +66,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     https://github.com/connext/monorepo/issues/4218
     Contract addresses: https://github.com/search?q=repo%3Aconnext%2Fmonorepo%20MultiSend.json&type=code
   */
+
   if (requiresWrapperMultisend) {
     const multiSendContract = getDeployedMultisendContract(sourceChainId);
 
@@ -71,6 +78,10 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
     const wethAddress = await getWETHAddress(sourceChainId);
 
+    if (!wethAddress) {
+      throw new Error(`No WETH address found on chain ${sourceChainId}`);
+    }
+
     return compressJson({
       chainId: toHex(sourceChainId),
       to: multiSendContract.address,
@@ -78,9 +89,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       input: {
         $abi: MultisendAbi,
         transactions: {
-          $some: {
-            $regex: `/${wethAddress}/`,
-          },
+          $regex: wethAddress.slice(2),
         },
       },
     });
