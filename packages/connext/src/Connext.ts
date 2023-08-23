@@ -1,14 +1,23 @@
-import { ConnextContract } from './contract-addresses.js'
+import { getDeployedMultisendContract } from '@connext/nxtp-txservice'
 import {
   type ChainData,
+  MultisendAbi,
   chainIdToDomain,
   domainToChainId,
   getChainData,
 } from '@connext/nxtp-utils'
-import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
+import {
+  type BridgeActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { type Address, toHex } from 'viem'
+import { XCALL_ABI_FRAGMENTS } from './abi.js'
+import { ConnextContract } from './contract-addresses.js'
 
 let _chainDataCache: Map<string, ChainData> | null = null
+
+const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 const _getChainData = async () => {
   if (!_chainDataCache) {
@@ -19,42 +28,25 @@ const _getChainData = async () => {
   return _chainDataCache
 }
 
-export const XCALL_ABI_FRAGMENTS = [
-  {
-    inputs: [
-      { internalType: 'uint32', name: '_destination', type: 'uint32' },
-      { internalType: 'address', name: '_to', type: 'address' },
-      { internalType: 'address', name: '_asset', type: 'address' },
-      { internalType: 'address', name: '_delegate', type: 'address' },
-      { internalType: 'uint256', name: '_amount', type: 'uint256' },
-      { internalType: 'uint256', name: '_slippage', type: 'uint256' },
-      { internalType: 'bytes', name: '_callData', type: 'bytes' },
-    ],
-    name: 'xcall',
-    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  // This overloaded function is not found in the Connext ABI json for some reason
-  {
-    inputs: [
-      { internalType: 'uint32', name: '_destination', type: 'uint32' },
-      { internalType: 'address', name: '_to', type: 'address' },
-      { internalType: 'address', name: '_asset', type: 'address' },
-      { internalType: 'address', name: '_delegate', type: 'address' },
-      { internalType: 'uint256', name: '_amount', type: 'uint256' },
-      { internalType: 'uint256', name: '_slippage', type: 'uint256' },
-      { internalType: 'bytes', name: '_callData', type: 'bytes' },
-      { internalType: 'uint256', name: '_relayerFee', type: 'uint256' },
-    ],
-    name: 'xcall',
-    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-]
+export const getWETHAddress = async (chainId: number) => {
+  const chains = await _getChainData()
+  const domainId = chainIdToDomain(chainId)
+  const chainData = chains?.get(String(domainId))
+  const assets = Object.keys(chainData?.assetId || {})
 
-export const bridge = async (bridge: BridgeActionParams) => {
+  let wethAddress
+  for (const address of assets) {
+    if (chainData?.assetId[address].symbol === 'WETH') {
+      wethAddress = address
+      break
+    }
+  }
+  return wethAddress
+}
+
+export const bridge = async (
+  bridge: BridgeActionParams,
+): Promise<TransactionFilter> => {
   const {
     sourceChainId,
     destinationChainId,
@@ -66,8 +58,43 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
   const defaultContractAddress = ConnextContract[sourceChainId]
   const destinationDomain = chainIdToDomain(destinationChainId)
+  const requiresWrapperMultisend = tokenAddress === ETH_TOKEN_ADDRESS
 
-  // https://docs.connext.network/developers/reference/contracts/calls#xcall
+  /* 
+    Connext uses a MultiSend to wrap when briding ETH.
+    https://github.com/connext/monorepo/issues/2905
+    https://github.com/connext/monorepo/issues/4218
+    Contract addresses: https://github.com/search?q=repo%3Aconnext%2Fmonorepo%20MultiSend.json&type=code
+  */
+
+  if (requiresWrapperMultisend) {
+    const multiSendContract = getDeployedMultisendContract(sourceChainId)
+
+    if (!multiSendContract) {
+      throw new Error(
+        `No multisend contract deployed on chain ${sourceChainId}`,
+      )
+    }
+
+    const wethAddress = await getWETHAddress(sourceChainId)
+
+    if (!wethAddress) {
+      throw new Error(`No WETH address found on chain ${sourceChainId}`)
+    }
+
+    return compressJson({
+      chainId: toHex(sourceChainId),
+      to: multiSendContract.address,
+      value: amount,
+      input: {
+        $abi: MultisendAbi,
+        transactions: {
+          $regex: wethAddress.slice(2),
+        },
+      },
+    })
+  }
+
   return compressJson({
     chainId: toHex(sourceChainId),
     to: contractAddress || defaultContractAddress,

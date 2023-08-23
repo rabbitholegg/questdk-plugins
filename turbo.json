@@ -9,11 +9,11 @@
     "lint": {},
     "format": {},
     "test": {
-      "dependsOn": ["lint", "build"],
+      "dependsOn": ["build"],
       "outputs": []
     },
     "test:ci": {
-      "dependsOn": ["lint", "build"],
+      "dependsOn": ["build"],
       "outputs": []
     },
     "dev": {
