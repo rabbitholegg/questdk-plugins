@@ -28,7 +28,10 @@ export const bridge = async (bridge: BridgeActionParams) => {
       chainId: toHex(sourceChainId), // The chainId of the source chain
       to:  contractAddress || networkGateway,   // The contract address of the bridge
       input: {
-        $abi: GATEWAY_OUTBOUND_TRANSFER_FRAG
+        $abi: GATEWAY_OUTBOUND_TRANSFER_FRAG,
+        _token: tokenAddress,
+        _to: recipient,
+        _amount: amount
       }
     })
   }
@@ -38,6 +41,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     return compressJson({
       chainId: toHex(sourceChainId), // The chainId of the source chain
       to:  contractAddress || networkInbox,   // The contract address of the bridge
+      value: amount,
       input: {
         $abi: INBOX_DEPOSIT_ETH_FRAG
       }
@@ -49,7 +53,8 @@ export const bridge = async (bridge: BridgeActionParams) => {
     chainId: toHex(sourceChainId), // The chainId of the source chain
     to:  contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE,   // The contract address of the bridge
     input: {
-      $abi: ARBSYS_WITHDRAW_ETH_FRAG
+      $abi: ARBSYS_WITHDRAW_ETH_FRAG,
+      destination: recipient
     }
   })
 }
