@@ -1,5 +1,7 @@
+
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { CHAIN_ID_ARRAY} from './chain-ids'
+import { ArbitrumTokens } from './supported-token-addresses'
 import { type Address } from 'viem'
 
 // If you're implementing swap or mint, simply duplicate this function and change the name
@@ -22,10 +24,10 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   })
 }
 
-export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
-}
 
+export const getSupportedTokenAddresses = async (_chainId: number) => {
+  return ArbitrumTokens[_chainId];
+}
 
 
 export const getSupportedChainIds = async () => {
