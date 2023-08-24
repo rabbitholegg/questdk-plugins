@@ -1,5 +1,5 @@
 // This file is standard for more projects.
-// The main degree of nuance is in the 
+// The main degree of nuance is in the
 
 import {
   type IActionPlugin,
@@ -12,7 +12,7 @@ import {
   getSupportedTokenAddresses,
 } from './Optimism.js'
 
-export const {Optimism}: IActionPlugin = {
+export const { Optimism }: IActionPlugin = {
   pluginId: 'optimism',
   getSupportedTokenAddresses,
   getSupportedChainIds,
