@@ -21,7 +21,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     if(tokenAddress === ETH_TOKEN_ADDRESS) {
       return compressJson({
         chainId: toHex(sourceChainId), // The chainId of the source chain
-        to:  contractAddress || addresses.L1StandardBridge[sourceChainId],   // The contract address of the bridge
+        to:  contractAddress || addresses.L1StandardBridge[1],   // The contract address of the bridge
         value: amount,
         input: {
           $abi: l1StandardBridgeABI,
@@ -30,7 +30,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     }
     return compressJson({
       chainId: toHex(sourceChainId), // The chainId of the source chain
-      to:  contractAddress || addresses.L1StandardBridge[sourceChainId],   // The contract address of the bridge
+      to:  contractAddress || addresses.L1StandardBridge[1],   // The contract address of the bridge
       input: {
         $abi: l1StandardBridgeABI,
         _l1Token: tokenAddress,
@@ -40,7 +40,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   }
   return compressJson({
     chainId: toHex(sourceChainId), // The chainId of the source chain
-    to:  contractAddress || addresses.L2StandardBridge[sourceChainId],   // The contract address of the bridge
+    to:  contractAddress || addresses.L2StandardBridge[420],   // The contract address of the bridge
     input: {
       $abi: l2StandardBridgeABI,
       _l2Token: tokenAddress,
