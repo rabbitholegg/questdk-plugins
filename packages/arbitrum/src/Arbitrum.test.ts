@@ -1,6 +1,6 @@
 import { bridge } from './Arbitrum.js'
 import {GATEWAY_OUTBOUND_TRANSFER_FRAG} from './abi.js'
-import { GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID } from './chain-ids'
 import { MAINNET_TO_ARB_ONE_GATEWAY } from './contract-addresses'
@@ -34,8 +34,39 @@ describe('Given the arbitrum plugin', () => {
       
     })
 
-    test('should pass filter with valid transactions',  () => {
-      
+    test('should pass filter with valid transactions',  async () => {
+      const recipient = '0x72Ce9c846789fdB6fC1f34aC4AD25Dd9ef7031ef'
+
+      const transaction = {
+        hash: '0xcdbcb66c6a194ae2f0a58b00c1e6ec0daea08c901590ba056cc6806581bf5a94',
+        type: '0x2',
+        blockHash: '0x0cee2a6dc4e4031eefc6bd2368f35abd4fc1807469e7d6b176f1aad8c8cd0f8c',
+        blockNumber: '0x112579F',
+        transactionIndex: '0x32',
+        from: '0xF9Ce182b0FBe597773AB9BB5159B7479047de8fe',
+        gas: '0x73766',
+        gasPrice: '0x069b348152',
+        maxPriorityFeePerGas: '0x0133851a',
+        maxFeePerGas: '0x07a02e5814',
+        to: '0x72Ce9c846789fdB6fC1f34aC4AD25Dd9ef7031ef',
+        value: '0x0282d936eced40',
+        nonce: "0x41A",
+        input: '0xd2ce7d65000000000000000000000000514910771af9ca656af840dff83e8264ecf986ca000000000000000000000000f9ce182b0fbe597773ab9bb5159b7479047de8fe0000000000000000000000000000000000000000000000803216cf6e916f980000000000000000000000000000000000000000000000000000000000000177ee0000000000000000000000000000000000000000000000000000000011e1a30000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000268971162634000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000',
+        r: '0x39934954b9ff5b45e95f38f9388faa4c08c2c365ea1172284a1e450e402b193b',
+        s: '0x0b6f23e0b3ffb31bbab4a6abb23bcb3c8f2cf8e13f88da6b9fc08476c919585b',
+        v: '0x1',
+        accessList: [], 
+        chainId: '0x1',
+      }
+
+      const filter = await bridge({
+        sourceChainId: ETH_CHAIN_ID,
+        destinationChainId: ARB_ONE_CHAIN_ID, 
+        tokenAddress: '0x514910771AF9Ca656af840dff83E8264EcF986CA',  // LINK
+        amount: GreaterThanOrEqual(2000),
+      })
+
+      expect(apply(transaction, filter)).to.be.true
     })
     
     test('should not pass filter with invalid transactions',  () => {
