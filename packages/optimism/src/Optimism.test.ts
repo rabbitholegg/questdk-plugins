@@ -6,8 +6,7 @@ import { l1StandardBridgeABI, l2StandardBridgeABI, addresses } from '@eth-optimi
 // Replace *project* with the name of the project
 describe('Given the optimism plugin', () => {
   describe('When handling the bridge', () => {
-
-    test('should return a valid action filter', () => {
+    test('should return a valid action filter', () => {})
       const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
 
       test('should return a valid bridge action filter', async () => {
@@ -40,5 +39,4 @@ describe('Given the optimism plugin', () => {
       
     })
 
-  })
 })
