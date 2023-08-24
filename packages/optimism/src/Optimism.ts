@@ -1,9 +1,10 @@
 
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids'
+import { type Address, toHex } from 'viem'
+import { l1StandardBridgeABI, l2StandardBridgeABI } from '@eth-optimism/contracts-ts'
+import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids'
 // If you're implementing swap or mint, simply duplicate this function and change the name
-export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
+export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
     sourceChainId,
@@ -13,13 +14,26 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
     amount,
     recipient,
   } = bridge
-
+  const isL1 = sourceChainId === ETH_CHAIN_ID
+  if(isL1) {
+    // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+    return compressJson({
+      chainId: toHex(sourceChainId), // The chainId of the source chain
+      to:  0x0,   // The contract address of the bridge
+      input: {
+        $abi: l1StandardBridgeABI
+      },  // The input object is where we'll put the ABI and the parameters
+    })
+  }
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: 0, // The chainId of the source chain
+    chainId: toHex(sourceChainId), // The chainId of the source chain
     to:  0x0,   // The contract address of the bridge
-    input: {},  // The input object is where we'll put the ABI and the parameters
+    input: {
+      $abi: l2StandardBridgeABI
+    },  // The input object is where we'll put the ABI and the parameters
   })
+
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
