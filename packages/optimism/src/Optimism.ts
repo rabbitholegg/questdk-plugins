@@ -4,6 +4,7 @@ import { type Address, toHex } from 'viem'
 import { l1StandardBridgeABI, l2StandardBridgeABI, addresses } from '@eth-optimism/contracts-ts'
 import { ETH_CHAIN_ID, CHAIN_ID_ARRAY  } from './chain-ids'
 // If you're implementing swap or mint, simply duplicate this function and change the name
+const ETH_TOKEN_ADDRESS = '0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
@@ -16,19 +17,30 @@ export const bridge = async (bridge: BridgeActionParams) => {
   } = bridge
   const isL1 = sourceChainId === ETH_CHAIN_ID
   if(isL1) {
-    // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+    // If we're on the L1 and the token is ETH, we need to use a different input
+    if(tokenAddress === ETH_TOKEN_ADDRESS) {
+      return compressJson({
+        chainId: toHex(sourceChainId), // The chainId of the source chain
+        to:  contractAddress || addresses.L1StandardBridge[sourceChainId],   // The contract address of the bridge
+        value: amount,
+        input: {
+          $abi: l1StandardBridgeABI,
+        },  // The input object is where we'll put the ABI and the parameters
+      })
+    }
     return compressJson({
       chainId: toHex(sourceChainId), // The chainId of the source chain
-      to:  addresses.L1StandardBridge[sourceChainId],   // The contract address of the bridge
+      to:  contractAddress || addresses.L1StandardBridge[sourceChainId],   // The contract address of the bridge
       input: {
-        $abi: l1StandardBridgeABI
+        $abi: l1StandardBridgeABI,
+        _l1Token: tokenAddress,
+        _amount: amount
       },  // The input object is where we'll put the ABI and the parameters
     })
   }
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: toHex(sourceChainId), // The chainId of the source chain
-    to:  addresses.L2StandardBridge[sourceChainId],   // The contract address of the bridge
+    to:  contractAddress || addresses.L2StandardBridge[sourceChainId],   // The contract address of the bridge
     input: {
       $abi: l2StandardBridgeABI,
       _l2Token: tokenAddress,
