@@ -105,7 +105,6 @@ export const getSupportedChainIds = async () => {
   return []
 }
 
-export const getSupportedTokenAddresses = async (chainId: number) => {
-  ;() => chainId
+export const getSupportedTokenAddresses = async (_chainId: number) => {
   return []
 }
