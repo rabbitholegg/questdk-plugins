@@ -36,7 +36,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     })
   }
   if(sourceChainId === ETH_CHAIN_ID ) {
-    const networkInbox = sourceChainId === ARB_NOVA_CHAIN_ID ? ARB_NOVA_DELAYED_INBOX : ARB_ONE_DELAYED_INBOX;
+    const networkInbox = destinationChainId === ARB_NOVA_CHAIN_ID ? ARB_NOVA_DELAYED_INBOX : ARB_ONE_DELAYED_INBOX;
     // We're targeting the Delayed Inbox
     return compressJson({
       chainId: toHex(sourceChainId), // The chainId of the source chain
