@@ -30,7 +30,9 @@ export const bridge = async (bridge: BridgeActionParams) => {
     chainId: toHex(sourceChainId), // The chainId of the source chain
     to:  addresses.L2StandardBridge[sourceChainId],   // The contract address of the bridge
     input: {
-      $abi: l2StandardBridgeABI
+      $abi: l2StandardBridgeABI,
+      _l2Token: tokenAddress,
+      _amount: amount
     },  // The input object is where we'll put the ABI and the parameters
   })
 
