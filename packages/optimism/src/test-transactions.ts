@@ -1,9 +1,9 @@
-
 export const DEPOSIT_ETH = {
   hash: '0xf70d57685fdf5d75fe63dc034e5f45495d654a92b000ebcc8182cdeb6698d97f',
   type: 2,
   accessList: [],
-  blockHash: '0x523b8ca0fd81034b98d27031db2ff01ed155353b97d88a3d8d4d44099ba33950',
+  blockHash:
+    '0x523b8ca0fd81034b98d27031db2ff01ed155353b97d88a3d8d4d44099ba33950',
   blockNumber: 17987809,
   transactionIndex: 112,
   confirmations: 61,
@@ -27,7 +27,8 @@ export const DEPOSIT_TETHER = {
   hash: '0x1cbf392bfc8e2ee986232d1307d43faa2d1944d5fb186be661218809006bf307',
   type: 2,
   accessList: [],
-  blockHash: '0x016c2e38dc891fc1fd82468aec1a0991c14e2becd64cf8c090499bcdd0058b00',
+  blockHash:
+    '0x016c2e38dc891fc1fd82468aec1a0991c14e2becd64cf8c090499bcdd0058b00',
   blockNumber: 17985690,
   transactionIndex: 106,
   confirmations: 2227,
@@ -51,7 +52,8 @@ export const WITHDRAW_ETH = {
   hash: '0xbf49a65e6ce4b64a6f61e1dbfd13b228654f025a026f9cf5efc133dfc987597e',
   type: 2,
   accessList: [],
-  blockHash: '0x0bf2941a110bc8c9a2ab88114a0dd92aac05a6e9019558b969cd84cca1f9209b',
+  blockHash:
+    '0x0bf2941a110bc8c9a2ab88114a0dd92aac05a6e9019558b969cd84cca1f9209b',
   blockNumber: 108584468,
   transactionIndex: 11,
   confirmations: 76592,
@@ -71,12 +73,12 @@ export const WITHDRAW_ETH = {
   chainId: '0xa',
 }
 
-
 export const WITHDRAW_USDC = {
   hash: '0xe8e97436488fd580cb239cdff8fecf9b88ed27e1be2d21e1be1ddef55f1f7903',
   type: 2,
   accessList: [],
-  blockHash: '0xd6804d458c3e6730f483b5c6c213587e461aa33206a99913b357842414474a74',
+  blockHash:
+    '0xd6804d458c3e6730f483b5c6c213587e461aa33206a99913b357842414474a74',
   blockNumber: 108660365,
   transactionIndex: 2,
   confirmations: 668,

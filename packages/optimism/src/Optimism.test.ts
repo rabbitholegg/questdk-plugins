@@ -125,4 +125,5 @@ describe('Given the optimism plugin', () => {
     })
   
 
+  test('should not pass filter with invalid transactions', () => {})
 })
