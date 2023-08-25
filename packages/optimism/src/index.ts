@@ -12,7 +12,7 @@ import {
   getSupportedTokenAddresses,
 } from './Optimism.js'
 
-export const  Optimism: IActionPlugin = {
+export const Optimism: IActionPlugin = {
   pluginId: 'optimism',
   getSupportedTokenAddresses,
   getSupportedChainIds,

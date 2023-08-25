@@ -10,12 +10,7 @@ import { ETH_TOKEN_ADDRESS } from './token-addresses.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
-  const {
-    sourceChainId,
-    contractAddress,
-    tokenAddress,
-    amount,
-  } = bridge
+  const { sourceChainId, contractAddress, tokenAddress, amount } = bridge
   const isL1 = sourceChainId === ETH_CHAIN_ID
   if (isL1) {
     // If we're on the L1 and the token is ETH, we need to use a different input
@@ -50,9 +45,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   })
 }
 
-export const getSupportedTokenAddresses = async (
-  _chainId: number,
-) => {
+export const getSupportedTokenAddresses = async (_chainId: number) => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
   return []
 }
