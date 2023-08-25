@@ -1,22 +1,20 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address, toHex } from 'viem'
+import { toHex } from 'viem'
 import {
   l1StandardBridgeABI,
   l2StandardBridgeABI,
   addresses,
 } from '@eth-optimism/contracts-ts'
-import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids'
-import { ETH_TOKEN_ADDRESS } from './token-addresses'
+import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
+import { ETH_TOKEN_ADDRESS } from './token-addresses.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
     sourceChainId,
-    destinationChainId,
     contractAddress,
     tokenAddress,
     amount,
-    recipient,
   } = bridge
   const isL1 = sourceChainId === ETH_CHAIN_ID
   if (isL1) {
@@ -54,8 +52,9 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
-): Promise<Address[]> => {
+) => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
+  return []
 }
 
 export const getSupportedChainIds = async () => {
