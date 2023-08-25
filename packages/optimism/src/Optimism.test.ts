@@ -2,24 +2,27 @@ import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Optimism.js'
 import { l1StandardBridgeABI, l2StandardBridgeABI, addresses } from '@eth-optimism/contracts-ts'
+import {DEPOSIT_ETH, DEPOSIT_TETHER, WITHDRAW_ETH, WITHDRAW_USDC} from './test-transactions.js'
+import { ETH_TOKEN_ADDRESS } from './token-addresses'
+import { parseEther } from 'viem'
 
 // Replace *project* with the name of the project
 describe('Given the optimism plugin', () => {
-  describe('When handling the bridge', () => {
-    test('should return a valid action filter', () => {})
+  describe('When generating the filter', () => {
+    test('should return a valid bridge action filter for L2 token tx', async () => {
+
       const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
 
-      test('should return a valid bridge action filter', async () => {
         const filter = await bridge({
           sourceChainId: 10,
-          destinationChainId: 137,
+          destinationChainId: 1,
           tokenAddress: USDC,
           amount: GreaterThanOrEqual(100000n),
         })
   
         expect(filter).to.deep.equal({
           chainId: '0xa',
-          to: '0x8f7492DE823025b4CfaAB1D34c58963F2af5DEDA',
+          to: addresses.L2StandardBridge[420],
           input: {
             $abi: l2StandardBridgeABI,
             _l2Token: USDC,
@@ -29,14 +32,97 @@ describe('Given the optimism plugin', () => {
           },
         })
       })
-    })
 
-    test('should pass filter with valid transactions',  () => {
-      
+      test('should return a valid bridge action filter for L1 token tx', async () => {
+        const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
+
+        const filter = await bridge({
+          sourceChainId: 1,
+          destinationChainId: 10,
+          tokenAddress: USDC,
+          amount: GreaterThanOrEqual(100000n),
+        })
+  
+        expect(filter).to.deep.equal({
+          chainId: '0x1',
+          to: addresses.L1StandardBridge[1],
+          input: {
+            $abi: l1StandardBridgeABI,
+            _l1Token: USDC,
+            _amount: {
+              $gte: '100000',
+            },
+          },
+        })
+      })
+
+      test('should return a valid bridge action filter for L1 ETH tx', async () => {
+        const filter = await bridge({
+          sourceChainId: 1,
+          destinationChainId: 10,
+          tokenAddress: ETH_TOKEN_ADDRESS,
+          amount: GreaterThanOrEqual(100000n),
+        })
+  
+        expect(filter).to.deep.equal({
+          chainId: '0x1',
+          to: addresses.L1StandardBridge[1],
+          value: {
+            $gte: '100000',
+          },
+          input: {
+            $abi: l1StandardBridgeABI,
+          },
+        })
+      })
     })
-    
-    test('should not pass filter with invalid transactions',  () => {
-      
+    describe('When applying the filter', () => {
+
+    test('should pass filter with valid transactions', async() => { 
+        const transaction = DEPOSIT_ETH;
+        const filter = await bridge({
+          sourceChainId: 1,
+          destinationChainId: 10, // Optimism
+          //tokenAddress: ETH_TOKEN_ADDRESS,
+          amount: GreaterThanOrEqual(parseEther('.2')),
+        })
+  
+        expect(apply(transaction, filter)).to.be.true
     })
+    test('should pass filter with valid transactions', async() => { 
+        const transaction = DEPOSIT_TETHER;
+        const filter = await bridge({
+          sourceChainId: 1,
+          destinationChainId: 10, // Optimism
+          //tokenAddress: ETH_TOKEN_ADDRESS,
+          // amount: GreaterThanOrEqual(parseEther('.2')),
+        })
+  
+        expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid transactions', async() => { 
+        const transaction = WITHDRAW_ETH;
+        const filter = await bridge({
+          sourceChainId: 10,
+          destinationChainId: 1, // Optimism
+          //tokenAddress: ETH_TOKEN_ADDRESS,
+          // amount: GreaterThanOrEqual(parseEther('.2')),
+        })
+  
+        expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid transactions', async() => { 
+        const transaction = WITHDRAW_USDC;
+        const filter = await bridge({
+          sourceChainId: 10,
+          destinationChainId: 1, // Optimism
+          //tokenAddress: ETH_TOKEN_ADDRESS,
+          // amount: GreaterThanOrEqual(parseEther('.2')),
+        })
+  
+        expect(apply(transaction, filter)).to.be.true
+    })
+    })
+  
 
 })
