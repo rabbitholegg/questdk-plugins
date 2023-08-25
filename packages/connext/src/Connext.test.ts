@@ -1,8 +1,14 @@
-import { XCALL_ABI_FRAGMENTS, bridge } from './Connext.js'
+import { getDeployedMultisendContract } from '@connext/nxtp-txservice'
+import { MultisendAbi } from '@connext/nxtp-utils'
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
+import { bridge } from './Connext.js'
+import { XCALL_ABI_FRAGMENTS } from './abi.js'
 
 describe('Connext', () => {
+  const ETH = '0x0000000000000000000000000000000000000000'
+  const OP_WETH = '0x4200000000000000000000000000000000000006'
+
   describe('Bridge', () => {
     const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
 
@@ -26,6 +32,31 @@ describe('Connext', () => {
           },
         },
       })
+    })
+  })
+
+  test('should use the WETH wrapper multisend contract when bridging ETH', async () => {
+    const filter = await bridge({
+      sourceChainId: 10,
+      destinationChainId: 137,
+      tokenAddress: ETH,
+      amount: GreaterThanOrEqual(100000n),
+    })
+
+    const multiSendContract = getDeployedMultisendContract(10)
+
+    expect(filter).to.deep.equal({
+      chainId: '0xa',
+      to: multiSendContract?.address,
+      value: {
+        $gte: '100000',
+      },
+      input: {
+        $abi: MultisendAbi,
+        transactions: {
+          $regex: OP_WETH.slice(2),
+        },
+      },
     })
   })
 
@@ -60,6 +91,41 @@ describe('Connext', () => {
         destinationChainId: 100, // xDAI Chain
         tokenAddress: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
         amount: GreaterThanOrEqual(2000000000000000000n),
+      })
+
+      expect(apply(transaction, filter)).to.be.true
+    })
+
+    test('ETH bridge should pass filter', async () => {
+      const transaction = {
+        blockHash:
+          '0xfdb722e4a99e3422490bc12d15fafab54ebb7e2e83ff08e9fe20d70045e94889',
+        blockNumber: '0x67812f1',
+        from: '0xa4c8bb4658bc44bac430699c8b7b13dab28e0f4e',
+        gas: '0x8820a',
+        gasPrice: '0x1167',
+        maxFeePerGas: '0x11e2',
+        maxPriorityFeePerGas: '0x112d',
+        hash: '0xb8e2c0baf137b64553c91f286bde62cc37275d0b9f9d3e6c0041c6be79de45af',
+        input:
+          '0x8d80ff0a0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000026b004200000000000000000000000000000000000006000000000000000000000000000000000000000000000000008af8a1fa5fcc180000000000000000000000000000000000000000000000000000000000000004d0e30db000420000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000044095ea7b30000000000000000000000008f7492de823025b4cfaab1d34c58963f2af5deda000000000000000000000000000000000000000000000000008af8a1fa5fcc18008f7492de823025b4cfaab1d34c58963f2af5deda0000000000000000000000000000000000000000000000000026aa1a3465338400000000000000000000000000000000000000000000000000000000000001248aac16ba0000000000000000000000000000000000000000000000000000000000657468000000000000000000000000268682b7d9992ae7e2ca4a8bcc9d9655fb06056f0000000000000000000000004200000000000000000000000000000000000006000000000000000000000000a4c8bb4658bc44bac430699c8b7b13dab28e0f4e000000000000000000000000000000000000000000000000008af8a1fa5fcc18000000000000000000000000000000000000000000000000000000000000012c00000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000a4c8bb4658bc44bac430699c8b7b13dab28e0f4e000000000000000000000000000000000000000000',
+        nonce: '0x45',
+        to: '0xb0eef3e1de973d045c3858e072c540299585252d',
+        transactionIndex: '0x6',
+        value: '0xb1a2bc2ec4ff9c',
+        type: '0x2',
+        accessList: [],
+        chainId: '0xa',
+        v: '0x1',
+        r: '0x11d6fd962cf4090c1464404492a36ef7323c6173908883c87fbc695219e6d026',
+        s: '0x739b7240f8dd466881a66971b476f07c2fcce9a6f519d3c06f95133ad983092e',
+      }
+
+      const filter = await bridge({
+        sourceChainId: 10,
+        destinationChainId: 137,
+        tokenAddress: ETH,
+        amount: GreaterThanOrEqual(1000000000000000n),
       })
 
       expect(apply(transaction, filter)).to.be.true

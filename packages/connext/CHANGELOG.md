@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-connext
 
+## 1.0.0-alpha.4
+
+### Minor Changes
+
+- [#10](https://github.com/rabbitholegg/questdk-plugins/pull/10) [`00233bc`](https://github.com/rabbitholegg/questdk-plugins/commit/00233bc0ac0187eacc6d9c2088c840f785783399) Thanks [@jimobrien](https://github.com/jimobrien)! - Support wrapping ETH on Connext bridge
+
 ## 1.0.0-alpha.3
 
 ### Minor Changes
