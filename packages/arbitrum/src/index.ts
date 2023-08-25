@@ -12,7 +12,7 @@ import {
   getSupportedTokenAddresses,
 } from './Arbitrum.js'
 
-export const {Arbitrum}: IActionPlugin = {
+export const Arbitrum: IActionPlugin = {
   pluginId: 'arbitrum',
   getSupportedTokenAddresses,
   getSupportedChainIds,

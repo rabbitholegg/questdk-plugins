@@ -1,10 +1,10 @@
 
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address, toHex } from 'viem'
-import { CHAIN_ID_ARRAY, ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids'
-import { MAINNET_TO_ARB_NOVA_GATEWAY, MAINNET_TO_ARB_ONE_GATEWAY, ARB_NOVA_TO_MAINNET_GATEWAY, ARB_ONE_TO_MAINNET_GATEWAY, UNIVERSAL_ARBSYS_PRECOMPILE, ARB_ONE_DELAYED_INBOX, ARB_NOVA_DELAYED_INBOX } from './contract-addresses'
-import { ArbitrumTokens } from './supported-token-addresses'
-import { GATEWAY_OUTBOUND_TRANSFER_FRAG, ARBSYS_WITHDRAW_ETH_FRAG, INBOX_DEPOSIT_ETH_FRAG } from './abi'
+import { CHAIN_ID_ARRAY, ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids.js'
+import { MAINNET_TO_ARB_NOVA_GATEWAY, MAINNET_TO_ARB_ONE_GATEWAY, ARB_NOVA_TO_MAINNET_GATEWAY, ARB_ONE_TO_MAINNET_GATEWAY, UNIVERSAL_ARBSYS_PRECOMPILE, ARB_ONE_DELAYED_INBOX, ARB_NOVA_DELAYED_INBOX } from './contract-addresses.js'
+import { ArbitrumTokens } from './supported-token-addresses.js'
+import { GATEWAY_OUTBOUND_TRANSFER_FRAG, ARBSYS_WITHDRAW_ETH_FRAG, INBOX_DEPOSIT_ETH_FRAG } from './abi.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
 const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -68,7 +68,7 @@ export const getSupportedChainIds = async () => {
   return CHAIN_ID_ARRAY;
 }
 
-const getContractAddressFromChainId = (sourceChainId: number, destinationChainId): Address => {
+const getContractAddressFromChainId = (sourceChainId: number, destinationChainId: number): Address => {
   // This is klunky but the alternative is some sort of convoluted 2D mapping
   if(sourceChainId === ARB_NOVA_CHAIN_ID )
     return ARB_NOVA_TO_MAINNET_GATEWAY;
@@ -80,5 +80,5 @@ const getContractAddressFromChainId = (sourceChainId: number, destinationChainId
     if(destinationChainId === ARB_ONE_CHAIN_ID )
       return MAINNET_TO_ARB_ONE_GATEWAY;
   }
-
+  return '0x0';
 }
