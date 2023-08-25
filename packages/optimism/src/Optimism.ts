@@ -6,8 +6,8 @@ import {
   addresses,
 } from '@eth-optimism/contracts-ts'
 import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids'
+import { ETH_TOKEN_ADDRESS } from './token-addresses'
 // If you're implementing swap or mint, simply duplicate this function and change the name
-const ETH_TOKEN_ADDRESS = '0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {

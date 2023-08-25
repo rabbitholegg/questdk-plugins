@@ -1,0 +1,1 @@
+const ETH_TOKEN_ADDRESS = '0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000'
