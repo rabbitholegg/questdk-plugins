@@ -45,6 +45,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
+    "@maticnetwork/pos-portal": "^1.5.2",
     "@rabbitholegg/questdk": "1.0.1-alpha.8",
     "viem": "^1.2.15"
   }
