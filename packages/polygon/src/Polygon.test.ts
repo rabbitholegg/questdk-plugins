@@ -14,7 +14,7 @@ import {
   WITHDRAW_ERC20,
 } from './test-transactions.js'
 import {
-  ETHER_ADDRESS,
+  ETH_ADRESS_MAINNET,
   MATIC_ADDRESS_POLYGON,
   USDC_ADDRESS_MAINNET,
   WETH_ADDRESS_POLYGON,
@@ -70,7 +70,7 @@ describe('Given the optimism plugin', () => {
       const filter = await bridge({
         sourceChainId: 1,
         destinationChainId: 10,
-        tokenAddress: ETHER_ADDRESS,
+        tokenAddress: ETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER
       })
@@ -88,5 +88,54 @@ describe('Given the optimism plugin', () => {
       })
     })
   })
-  
+  describe('When applying the filter', () => {
+    test('should pass filter with valid L1 ETH tx', async () => {
+      const transaction = DEPOSIT_ETH
+      const filter = await bridge({
+        sourceChainId: ETH_CHAIN_ID,
+        destinationChainId: POLYGON_CHAIN_ID, // Optimism
+        tokenAddress: ETH_ADRESS_MAINNET,
+        amount: GreaterThanOrEqual(parseEther('.04')),
+        recipient: '0x72eaebda0182909c0db8be8c967f7be18bdfb04d'
+      })
+
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid L1 Token tx', async () => {
+      const transaction = DEPOSIT_ERC20
+      const filter = await bridge({
+        sourceChainId: ETH_CHAIN_ID,
+        destinationChainId: POLYGON_CHAIN_ID, // Optimism
+        tokenAddress: USDC_ADDRESS_MAINNET,
+        amount: GreaterThanOrEqual('400000000'), // $400 USDC,
+        recipient: '0xccab9d12c87437543936d986de870d7aa62f6212',
+      })
+
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid L2 ETH tx', async () => {
+      const transaction = WITHDRAW_ETH
+      const filter = await bridge({
+        sourceChainId: POLYGON_CHAIN_ID,
+        destinationChainId: ETH_CHAIN_ID, // Optimism
+        tokenAddress: ETH_ADRESS_MAINNET,
+        amount: GreaterThanOrEqual(parseEther('14')),
+      })
+
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid L2 token tx', async () => {
+      const transaction = WITHDRAW_ERC20
+      const filter = await bridge({
+        sourceChainId: POLYGON_CHAIN_ID,
+        destinationChainId: ETH_CHAIN_ID, // Optimism
+        tokenAddress: MATIC_ADDRESS_POLYGON,
+        amount: GreaterThanOrEqual(parseEther('495000')),
+      })
+
+      expect(apply(transaction, filter)).to.be.true
+    })
+  })
+
+  test('should not pass filter with invalid transactions', () => {})
 })
