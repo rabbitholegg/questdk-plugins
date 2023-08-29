@@ -22,6 +22,7 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
       to:  contractAddress || tokenAddress,   // on Polgon the contract that handles withdrawals is the token contract
       input: {
         $abi: POLYGON_BRIDGE_ABI_FUNCS,
+        amount: amount,
       },  
     })
   }
