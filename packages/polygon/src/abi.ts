@@ -11,7 +11,11 @@ export const POLYGON_BRIDGE_ABI_FUNCS = [
   },
   // Used for transferring ERC20 tokens from Mainnet to Polygon
   {inputs:
-    [{internalType:"bytes",name:"depositData",type:"bytes"}],
+    [
+     {internalType:"address",name:"user",type:"address"},
+     {internalType:"address",name:"rootToken",type:"address"},
+     {internalType:"bytes",name:"depositData",type:"bytes"}
+    ],
     name:"depositFor",
     outputs:[],
     stateMutability:"nonpayable",
@@ -26,4 +30,7 @@ export const POLYGON_BRIDGE_ABI_FUNCS = [
     type:"function"
   }
 ]
+
+
+
 
