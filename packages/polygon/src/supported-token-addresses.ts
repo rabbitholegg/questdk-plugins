@@ -4,11 +4,13 @@ import {
   POLYGON_CHAIN_ID
 } from './chain-ids.js'
 
+export const ETHER_ADDRESS = '0x0000000000000000000000000000000000000000';
+
 // For now we're mainly supported the highest traffic Polygon tokens as listed here
 //https://github.com/maticnetwork/polygon-token-list
 export const PolygonTokens: Record<number, Address[]> = {
   [ETH_CHAIN_ID]: [
-    '0x0000000000000000000000000000000000000000', //ether
+    ETHER_ADDRESS, //ether
     '0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0', //matic
     '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', //usdc
     '0xdac17f958d2ee523a2206206994597c13d831ec7', //usdt
