@@ -1,8 +1,8 @@
 
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
 import {POLYGON_BRIDGE_ABI_FUNCS} from './abi.js'
 import {CHAIN_ID_ARRAY} from './chain-ids.js'
+import { PolygonTokens } from './supported-token-addresses.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
@@ -26,8 +26,8 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   })
 }
 
-export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+export const getSupportedTokenAddresses = async (_chainId: number) => {
+  return PolygonTokens[_chainId];
 }
 
 
