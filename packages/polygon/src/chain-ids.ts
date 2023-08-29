@@ -2,3 +2,4 @@
 
 export const ETH_CHAIN_ID = 1
 export const POLYGON_CHAIN_ID = 137
+export const CHAIN_ID_ARRAY = [ETH_CHAIN_ID, POLYGON_CHAIN_ID]
