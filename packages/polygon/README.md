@@ -27,4 +27,7 @@ If withdrawing ETH you use the MaticWETH contract directly:
 https://polygonscan.com/address/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619#code
 
 
+Withdrawing MATIC(ERC20):
+https://polygonscan.com/tx/0xe5dd4b9b32c7265c1701002cb50b72aeba4abe9ee904c9f3faca1bd3c121012b
+
 All withdraws can be handled as "ChildERC20" since the WETH token inherits from this
