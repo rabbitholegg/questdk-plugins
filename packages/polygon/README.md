@@ -17,5 +17,14 @@ https://etherscan.io/txs?a=0xa0c68c638235ee32657e8f720a23cec1bfc77c77
 
 Withdrawing tokens on Polygon is measurably more complex due to their "predicate" token system and the bytes data chunk provided to the contract on exit
 
-here's a transaction for exiting/withdrawing from Polygon network:
+here's a transaction for exiting/withdrawing from Polygon network using predicates:
 https://etherscan.io/tx/0x9106905d05579d1604ed02002df901ca9632f7433181febe6e887c5269c21d2b
+
+This is a transaction calling withdraw directly on the token contract on the Polygon network to initiate a token withdrawal
+
+
+If withdrawing ETH you use the MaticWETH contract directly:
+https://polygonscan.com/address/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619#code
+
+
+All withdraws can be handled as "ChildERC20" since the WETH token inherits from this
