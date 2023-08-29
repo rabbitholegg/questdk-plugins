@@ -1,8 +1,9 @@
 
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import {POLYGON_BRIDGE_ABI_FUNCS} from './abi.js'
-import {CHAIN_ID_ARRAY} from './chain-ids.js'
-import { PolygonTokens } from './supported-token-addresses.js'
+import {POLYGON_CHAIN_ID, CHAIN_ID_ARRAY} from './chain-ids.js'
+import { PolygonTokens, ETHER_ADDRESS} from './supported-token-addresses.js'
+import { MAINNET_BRIDGE } from './contract-addresses.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
@@ -15,15 +16,37 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
     recipient,
   } = bridge
 
-
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  if(sourceChainId === POLYGON_CHAIN_ID) {
+    return compressJson({
+      chainId: sourceChainId, // The chainId of the source chain
+      to:  contractAddress || tokenAddress,   // on Polgon the contract that handles withdrawals is the token contract
+      input: {
+        $abi: POLYGON_BRIDGE_ABI_FUNCS,
+      },  
+    })
+  }
+  if(tokenAddress === ETHER_ADDRESS){
+    return compressJson({
+      chainId: sourceChainId, // The chainId of the source chain
+      to:  contractAddress || MAINNET_BRIDGE,   // on Polgon the contract that handles withdrawals is the token contract
+      value: amount,
+      input: {
+        $abi: POLYGON_BRIDGE_ABI_FUNCS,
+        user: recipient,
+      },  
+    })
+  }
+  // The deposit function takes a bytes chunk as the last argument, and the amount is encoded in that value
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to:  0x0,   // The contract address of the bridge
+    chainId: sourceChainId, // The chainId of the source chain
+    to:  contractAddress || MAINNET_BRIDGE,   // on Polgon the contract that handles withdrawals is the token contract
     input: {
       $abi: POLYGON_BRIDGE_ABI_FUNCS,
-    },  // The input object is where we'll put the ABI and the parameters
+      user: recipient,
+      rootToken: tokenAddress,
+    },  
   })
+
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
