@@ -82,4 +82,4 @@ export const WITHDRAW_ERC20 = {
   r : "0x1ba0b052ddfd51c2067b477b55ada457fa372c2312b34ee50ca1aef23cebe91a",
   s : "0x34790c5081cdd0a38e3dcf15079d555857193bc4d7c058c852bb04019f90238c",
   typeHex : "0x0"
-}
+} // MATIC Withdrawal
