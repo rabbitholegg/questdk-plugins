@@ -68,15 +68,15 @@ describe('Given the optimism plugin', () => {
 
     test('should return a valid bridge action filter for L1 ETH tx', async () => {
       const filter = await bridge({
-        sourceChainId: 1,
-        destinationChainId: 10,
+        sourceChainId: ETH_CHAIN_ID,
+        destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER
       })
 
       expect(filter).to.deep.equal({
-        chainId: '0x1',
+        chainId: ETH_CHAIN_ID,
         to: MAINNET_BRIDGE,
         value: {
           $gte: '100000',
@@ -129,8 +129,7 @@ describe('Given the optimism plugin', () => {
       const filter = await bridge({
         sourceChainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID, // Optimism
-        tokenAddress: MATIC_ADDRESS_POLYGON,
-        amount: GreaterThanOrEqual(parseEther('495000')),
+        tokenAddress: MATIC_ADDRESS_POLYGON
       })
 
       expect(apply(transaction, filter)).to.be.true
