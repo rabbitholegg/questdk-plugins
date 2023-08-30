@@ -18,6 +18,7 @@ import {
   MATIC_ADDRESS_POLYGON,
   USDC_ADDRESS_MAINNET,
   USDC_ADDRESS_POLYGON,
+  WETH_ADDRESS_POLYGON,
 } from './supported-token-addresses.js'
 import { parseEther } from 'viem'
 // Random ETHEREUM address
@@ -117,7 +118,7 @@ describe('Given the optimism plugin', () => {
       const filter = await bridge({
         sourceChainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
-        tokenAddress: ETH_ADRESS_MAINNET,
+        tokenAddress: WETH_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(parseEther('14')),
       })
 
@@ -128,7 +129,8 @@ describe('Given the optimism plugin', () => {
       const filter = await bridge({
         sourceChainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
-        tokenAddress: MATIC_ADDRESS_POLYGON
+        tokenAddress: MATIC_ADDRESS_POLYGON,
+        amount: GreaterThanOrEqual(parseEther('495000')),
       })
 
       expect(apply(transaction, filter)).to.be.true
