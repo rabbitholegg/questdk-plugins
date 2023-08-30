@@ -1,4 +1,7 @@
 
+import { tokens } from '@hop-protocol/core/metadata'
+import { mainnet } from '@hop-protocol/core/networks'
+
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 
@@ -21,13 +24,12 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
     input: {},  // The input object is where we'll put the ABI and the parameters
   })
 }
-
+// https://github.com/hop-protocol/hop/blob/develop/packages/core/src/metadata/tokens.ts
 export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
 }
 
-
-export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
-
+// https://github.com/hop-protocol/hop/blob/develop/packages/core/src/networks/mainnet.ts
+export const getSupportedChainIds = async () => {
+  return Object.entries(mainnet).map(([, chain]) => { return chain.networkId })
 }
