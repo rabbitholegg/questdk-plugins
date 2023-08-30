@@ -17,7 +17,6 @@ import {
   ETH_ADRESS_MAINNET,
   MATIC_ADDRESS_POLYGON,
   USDC_ADDRESS_MAINNET,
-  WETH_ADDRESS_POLYGON,
   USDC_ADDRESS_POLYGON,
 } from './supported-token-addresses.js'
 import { parseEther } from 'viem'
@@ -93,7 +92,7 @@ describe('Given the optimism plugin', () => {
       const transaction = DEPOSIT_ETH
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: POLYGON_CHAIN_ID, // Optimism
+        destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('.04')),
         recipient: '0x72eaebda0182909c0db8be8c967f7be18bdfb04d'
@@ -105,7 +104,7 @@ describe('Given the optimism plugin', () => {
       const transaction = DEPOSIT_ERC20
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: POLYGON_CHAIN_ID, // Optimism
+        destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual('400000000'), // $400 USDC,
         recipient: '0xccab9d12c87437543936d986de870d7aa62f6212',
@@ -117,7 +116,7 @@ describe('Given the optimism plugin', () => {
       const transaction = WITHDRAW_ETH
       const filter = await bridge({
         sourceChainId: POLYGON_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID, // Optimism
+        destinationChainId: ETH_CHAIN_ID,
         tokenAddress: ETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('14')),
       })
@@ -128,7 +127,7 @@ describe('Given the optimism plugin', () => {
       const transaction = WITHDRAW_ERC20
       const filter = await bridge({
         sourceChainId: POLYGON_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID, // Optimism
+        destinationChainId: ETH_CHAIN_ID,
         tokenAddress: MATIC_ADDRESS_POLYGON
       })
 
