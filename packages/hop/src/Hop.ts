@@ -3,7 +3,6 @@ import { mainnet as addresses } from '@hop-protocol/core/addresses'
 import { mainnet } from '@hop-protocol/core/networks'
 import { utils } from '@hop-protocol/sdk'
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
 
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
@@ -25,8 +24,8 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   })
 }
 // https://github.com/hop-protocol/hop/blob/develop/packages/core/src/metadata/tokens.ts
-export const getSupportedTokenAddresses = async (_chainId: number) => {
-  const chainSlug: string = utils.getChainSlugById(_chainId);
+export const getSupportedTokenAddresses = (_chainId: number) => {
+  const chainSlug = utils.chainIdToSlug("mainnet", _chainId);
 
   // For each entry in bridge take the token address [ l1CanonicalToken or l2CanonicalToken ]
   if(addresses && addresses.bridges) {
@@ -41,6 +40,6 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
 }
 
 // https://github.com/hop-protocol/hop/blob/develop/packages/core/src/networks/mainnet.ts
-export const getSupportedChainIds = async () => {
+export const getSupportedChainIds = () => {
   return Object.entries(mainnet).map(([, chain]) => { return chain.networkId })
 }
