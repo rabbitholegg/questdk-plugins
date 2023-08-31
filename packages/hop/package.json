@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@hop-protocol/core": "0.0.1-beta.182",
+    "@hop-protocol/sdk": "0.0.1-beta.535",
     "@rabbitholegg/questdk": "1.0.1-alpha.8",
     "viem": "^1.2.15"
   }
