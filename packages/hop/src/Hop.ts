@@ -3,14 +3,16 @@ import { mainnet as addresses } from '@hop-protocol/core/addresses'
 import { mainnet } from '@hop-protocol/core/networks'
 import { utils } from '@hop-protocol/sdk'
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type  Bridges, type Bridge, type L2BridgeProps, type L1BridgeProps } from './types.js'
+import { type  Bridges, type Bridge, type L2BridgeProps, type L1BridgeProps } from './types'
+import { l1BridgeAbi, l2AmmWrapperAbi, l2BridgeAbi } from '@hop-protocol/core/abi'
+
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
-export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
+
+export const bridge = (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
     sourceChainId,
     destinationChainId,
-    contractAddress,
     tokenAddress,
     amount,
     recipient,
@@ -18,24 +20,40 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   const bridges = addresses.bridges as Bridges
   const chainSlug = utils.chainIdToSlug("mainnet", sourceChainId);
   if(sourceChainId === 1) {
-    const bridgeData = Object.entries(bridges).filter(([, bridge]: [string, Bridge] ) => { return (bridge[chainSlug] as L1BridgeProps).l1CanonicalToken === tokenAddress })
-    const bridgeProps = (bridgeData[0][1][chainSlug] as L1BridgeProps)
+    const bridgeData: [string, Bridge] = Object.entries(bridges).filter(
+      ([, bridge]: [string, Bridge] ) => 
+      { return (bridge[chainSlug] as L1BridgeProps).l1CanonicalToken === tokenAddress }
+      )[0]
+    const bridgeProps = (bridgeData[1][chainSlug] as L1BridgeProps)
     const contractTarget = bridgeProps.l1Bridge
     // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
       to:  contractTarget,   // The contract address of the bridge
-      input: {},  // The input object is where we'll put the ABI and the parameters
+      input: {
+        $abi: l1BridgeAbi, // The ABI of the bridge contract
+        chainId: destinationChainId, // The chainId of the destination chain
+        recipient: recipient, // The recipient of the bridged tokens
+        amount: amount, // The amount of tokens to bridge
+      },  // The input object is where we'll put the ABI and the parameters
     })
   } else {
-    const bridgeData = Object.entries(bridges).filter(([, bridge]: [string, Bridge] ) => { return (bridge[chainSlug] as L2BridgeProps).l2CanonicalToken === tokenAddress })[0]
+    const bridgeData: [string, Bridge] = Object.entries(bridges).filter(([, bridge]: [string, Bridge] ) => { return (bridge[chainSlug] as L2BridgeProps).l2CanonicalToken === tokenAddress })[0]
     const bridgeProps = (bridgeData[1][chainSlug] as L2BridgeProps)
+    // Currently only HOP lacks an AMM wrapper
+    const hasAMM = bridgeProps.l2AmmWrapper !== ZERO_ADDRESS
     // If there is an AMM wrapper we want to target that, otherwise we target the L2 bridge
-    const contractTarget = bridgeProps.l2AmmWrapper === ZERO_ADDRESS ? bridgeProps.l2Bridge : bridgeProps.l2AmmWrapper
+    const contractTarget = hasAMM ? bridgeProps.l2AmmWrapper : bridgeProps.l2Bridge
+    const abi = hasAMM ?  l2AmmWrapperAbi: l2BridgeAbi
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
       to:  contractTarget,   // The contract address of the bridge
-      input: {},  // The input object is where we'll put the ABI and the parameters
+      input: {
+        $abi: abi, // The ABI of the bridge contract, if hop is the target token this is the bridge, otherwise it should be the AMM
+        chainId: destinationChainId, // The chainId of the destination chain
+        recipient: recipient, // The recipient of the bridged tokens
+        amount: amount, // The amount of tokens to bridge
+      },  // The input object is where we'll put the ABI and the parameters
     })
   }
 }
