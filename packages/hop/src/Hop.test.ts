@@ -2,7 +2,12 @@ import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Hop.js'
 import { l1BridgeAbi, l2AmmWrapperAbi } from '@hop-protocol/core/abi'
-import { DEPOSIT_ETH, DEPOSIT_ERC20, WITHDRAW_ETH, WITHDRAW_ERC20 } from './test-transactions.js'
+import {
+  DEPOSIT_ETH,
+  DEPOSIT_ERC20,
+  WITHDRAW_ETH,
+  WITHDRAW_ERC20,
+} from './test-transactions.js'
 const ETH_CHAIN_ID = 1
 const POLYGON_CHAIN_ID = 137
 const BASE_CHAIN_ID = 8453
@@ -19,10 +24,10 @@ import { parseEther } from 'viem'
 const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
 // Replace *project* with the name of the project
 describe('Given the optimism plugin', () => {
-
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
-      const USDC_POLYGON_AMM_ADDRESS = '0x76b22b8C1079A44F1211D867D68b1eda76a635A7'
+      const USDC_POLYGON_AMM_ADDRESS =
+        '0x76b22b8C1079A44F1211D867D68b1eda76a635A7'
       const filter = await bridge({
         sourceChainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
@@ -46,7 +51,8 @@ describe('Given the optimism plugin', () => {
     })
 
     test('should return a valid bridge action filter for L1 token tx', async () => {
-      const USDC_MAINNET_BRIDGE_ADDRESS = '0x3666f603Cc164936C1b87e207F36BEBa4AC5f18a'
+      const USDC_MAINNET_BRIDGE_ADDRESS =
+        '0x3666f603Cc164936C1b87e207F36BEBa4AC5f18a'
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
@@ -70,7 +76,8 @@ describe('Given the optimism plugin', () => {
     })
 
     test('should return a valid bridge action filter for L1 ETH tx', async () => {
-      const ETH_MAINNET_BRIDGE_ADDRESS = '0xb8901acB165ed027E32754E0FFe830802919727f'
+      const ETH_MAINNET_BRIDGE_ADDRESS =
+        '0xb8901acB165ed027E32754E0FFe830802919727f'
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
@@ -123,7 +130,7 @@ describe('Given the optimism plugin', () => {
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: WETH_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(parseEther('9')),
-        recipient: '0x467B79AAfD7977F6d1E772e0b121047AC655C389'
+        recipient: '0x467B79AAfD7977F6d1E772e0b121047AC655C389',
       })
       expect(apply(transaction, filter)).to.be.true
     })
@@ -134,7 +141,7 @@ describe('Given the optimism plugin', () => {
         destinationChainId: ARBITRUM_ONE_CHAIN_ID,
         tokenAddress: HOP_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(parseEther('4952')),
-        recipient: '0x34327028C727613872cd80122B9a489a4B9C0bFA'
+        recipient: '0x34327028C727613872cd80122B9a489a4B9C0bFA',
       })
       expect(apply(transaction, filter)).to.be.true
     })
