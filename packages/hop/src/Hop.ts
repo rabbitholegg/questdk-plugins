@@ -19,7 +19,6 @@ export const bridge = (bridge: BridgeActionParams) => {
   } = bridge
   const bridges = addresses.bridges as Bridges
   const chainSlug = utils.chainIdToSlug("mainnet", sourceChainId);
-  console.log("ChainSlug", chainSlug)
   if(sourceChainId === 1) {
     const bridgeData: [string, Bridge] = Object.entries(bridges).filter(
       ([, bridge]: [string, Bridge] ) => 
@@ -27,7 +26,6 @@ export const bridge = (bridge: BridgeActionParams) => {
         if(bridge[chainSlug]) return (bridge[chainSlug] as L1BridgeProps).l1CanonicalToken === tokenAddress 
         else return false
       })[0]
-      console.log("BridgeData", bridgeData)
       const bridgeProps = (bridgeData[1][chainSlug] as L1BridgeProps)
     const contractTarget = bridgeProps.l1Bridge
     // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
@@ -42,12 +40,10 @@ export const bridge = (bridge: BridgeActionParams) => {
       },  // The input object is where we'll put the ABI and the parameters
     })
   } else {
-
     const bridgeData: [string, Bridge] = Object.entries(bridges).filter(([, bridge]: [string, Bridge] ) => { 
       if(bridge[chainSlug]) return (bridge[chainSlug] as L2BridgeProps).l2CanonicalToken === tokenAddress 
       else return false
     })[0]
-    console.log("BridgeData", bridgeData)
     const bridgeProps = (bridgeData[1][chainSlug] as L2BridgeProps)
     // Currently only HOP lacks an AMM wrapper
     const hasAMM = bridgeProps.l2AmmWrapper !== ZERO_ADDRESS
