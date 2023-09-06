@@ -100,6 +100,50 @@ describe('Given the Across plugin', () => {
     })
   })
   describe('When applying the filter', () => {
+    test('should pass filter with valid L1 ETH tx', async () => {
+      const transaction = DEPOSIT_ETH
+      const filter = await bridge({
+        sourceChainId: ETH_CHAIN_ID,
+        destinationChainId: OPTIMISM_CHAIN_ID,
+        tokenAddress: ETH_ADRESS_MAINNET,
+        amount: GreaterThanOrEqual(parseEther('.315')),
+        recipient: '0xE751378EC5E5c0b64c4D16A077E8f11FBcfC958A',
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid L2 ETH tx', async () => {
+      const transaction = WITHDRAW_ETH
+      const filter = await bridge({
+        sourceChainId: ARBITRUM_CHAIN_ID,
+        destinationChainId: ETH_CHAIN_ID,
+        tokenAddress: WETH_ADDRESS_ARBITRUM,
+        amount: GreaterThanOrEqual(parseEther('.15')),
+        recipient: '0xbfe7A294ceD3Ce8C33c22c4dcAa6FD4522d6D32a',
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid L1 Token tx', async () => {
+      const transaction = DEPOSIT_ERC20
+      const filter = await bridge({
+        sourceChainId: ETH_CHAIN_ID,
+        destinationChainId: POLYGON_CHAIN_ID,
+        tokenAddress: USDT_ADDRESS_MAINNET,
+        amount: GreaterThanOrEqual('99000000'), // $250 USDC,
+        recipient: '0xb3b873a999cff617307A351e32a3dd7A94adD5B2',
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid L2 token tx', async () => {
+      const transaction = WITHDRAW_ERC20
+      const filter = await bridge({
+        sourceChainId: ARBITRUM_CHAIN_ID,
+        destinationChainId: POLYGON_CHAIN_ID,
+        tokenAddress: USDT_ADDRESS_ARBITRUM,
+        amount: GreaterThanOrEqual('19000000'),
+        recipient: '0x49b887e3f64C7007E76f72C17cE29c7bcFb9Af55',
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
   })
 
   test('should not pass filter with invalid transactions', () => {})
