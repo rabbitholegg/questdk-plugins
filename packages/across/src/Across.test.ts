@@ -12,9 +12,9 @@ import {ACROSS_BRIDGE_ABI} from './abi.js'
 import { parseEther } from 'viem'
 import { CHAIN_TO_CONTRACT } from './chain-to-contract.js'
 
-export const ETH_ADRESS_MAINNET = '0x0000000000000000000000000000000000000000'
+export const WETH_ADRESS_MAINNET = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
 export const WETH_ADDRESS_ARBITRUM = '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
-export const USDT_ADDRESS_ARBITRUM = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
+export const USDT_ADDRESS_ARBITRUM = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
 export const USDT_ADDRESS_MAINNET = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
 
 // Random ETHEREUM address
@@ -74,12 +74,10 @@ describe('Given the Across plugin', () => {
     })
 
     test('should return a valid bridge action filter for L1 ETH tx', async () => {
-      const ETH_MAINNET_BRIDGE_ADDRESS =
-        '0xb8901acB165ed027E32754E0FFe830802919727f'
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
-        tokenAddress: ETH_ADRESS_MAINNET,
+        tokenAddress: WETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
@@ -94,7 +92,7 @@ describe('Given the Across plugin', () => {
           amount: {
             $gte: '100000',
           },
-          originToken: ETH_ADRESS_MAINNET,
+          originToken: WETH_ADRESS_MAINNET,
         },
       })
     })
@@ -105,7 +103,7 @@ describe('Given the Across plugin', () => {
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: OPTIMISM_CHAIN_ID,
-        tokenAddress: ETH_ADRESS_MAINNET,
+        tokenAddress: WETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('.315')),
         recipient: '0xE751378EC5E5c0b64c4D16A077E8f11FBcfC958A',
       })
@@ -128,7 +126,7 @@ describe('Given the Across plugin', () => {
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: USDT_ADDRESS_MAINNET,
-        amount: GreaterThanOrEqual('99000000'), // $250 USDC,
+        amount: GreaterThanOrEqual('9900000'), // $250 USDC,
         recipient: '0xb3b873a999cff617307A351e32a3dd7A94adD5B2',
       })
       expect(apply(transaction, filter)).to.be.true
