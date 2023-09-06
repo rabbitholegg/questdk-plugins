@@ -10,7 +10,6 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   const {
     sourceChainId,
     destinationChainId,
-    contractAddress,
     tokenAddress,
     amount,
     recipient,
@@ -22,6 +21,10 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
     to:  CHAIN_TO_CONTRACT[sourceChainId],   // The contract address of the bridge
     input: {
       $abi: ACROSS_BRIDGE_ABI, // The ABI of the bridge contract
+      recipient: recipient, // The recipient of the funds
+      destinationChainId: destinationChainId, // The chainId of the destination chain
+      amount: amount, // The amount of tokens to send
+      originToken: tokenAddress, // The token address of the token to send
     },  // The input object is where we'll put the ABI and the parameters
   })
 }
