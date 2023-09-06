@@ -2,7 +2,8 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
-import {ACROSS_BRIDGE_ABI} from './abi.js'
+import {ACROSS_BRIDGE_ABI} from './abi.js'\
+import { CHAIN_TO_CONTRACT } from './chain-to-contract.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
@@ -17,8 +18,8 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to:  0x0,   // The contract address of the bridge
+    chainId: sourceChainId, // The chainId of the source chain
+    to:  CHAIN_TO_CONTRACT[sourceChainId],   // The contract address of the bridge
     input: {
       $abi: ACROSS_BRIDGE_ABI, // The ABI of the bridge contract
     },  // The input object is where we'll put the ABI and the parameters
