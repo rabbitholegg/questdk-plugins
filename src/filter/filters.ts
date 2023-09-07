@@ -230,7 +230,6 @@ export function apply(
 
   for (const key in filters) {
     if (!Object.hasOwnProperty.call(filters, key)) continue
-
     if (key in preprocessors) {
       context = preprocessors[key as PreprocessorKey](context, filters)
       continue
@@ -246,6 +245,15 @@ export function apply(
       if (!apply(context[key], filters[key])) return false
     } else if (isAddress(context[key])) {
       if (context[key].toLowerCase() !== filters[key].toLowerCase()) {
+        return false
+      }
+    } else if (
+      typeof filters[key] === 'bigint' ||
+      typeof filters[key] === 'number' ||
+      typeof context[key] === 'bigint' ||
+      typeof context[key] === 'number'
+    ) {
+      if (BigInt(context[key]) !== BigInt(filters[key])) {
         return false
       }
     } else if (context[key] !== filters[key]) {
