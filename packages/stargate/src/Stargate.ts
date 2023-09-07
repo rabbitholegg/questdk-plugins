@@ -2,6 +2,7 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STARGATE_BRIDGE_ABI } from './abi.js'
+import { CHAIN_ID_ARRAY } from './chain-ids.js'
 
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
@@ -30,7 +31,6 @@ export const getSupportedTokenAddresses = async (_chainId: number): Promise<Addr
 }
 
 
-export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
-
+export const getSupportedChainIds = async () => {
+  return CHAIN_ID_ARRAY;
 }
