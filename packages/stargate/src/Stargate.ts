@@ -1,6 +1,7 @@
 
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { STARGATE_BRIDGE_ABI } from './abi.js'
 
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
@@ -18,7 +19,9 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   return compressJson({
     chainId: 0, // The chainId of the source chain
     to:  0x0,   // The contract address of the bridge
-    input: {},  // The input object is where we'll put the ABI and the parameters
+    input: {
+      $abi: STARGATE_BRIDGE_ABI, // The ABI of the bridge contract
+    },  // The input object is where we'll put the ABI and the parameters
   })
 }
 
