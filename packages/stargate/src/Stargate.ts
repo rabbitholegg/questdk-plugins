@@ -16,7 +16,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     amount,
     recipient,
   } = bridge
-  const sourcePool = CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress];
+  const sourcePool = tokenAddress ? CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress] : 0;
   const targetContractAddress = sourcePool === 13 ? CHAIN_ID_TO_ETH_ROUTER_ADDRESS[sourceChainId] : CHAIN_ID_TO_ROUTER_ADDRESS[sourceChainId];
   
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
