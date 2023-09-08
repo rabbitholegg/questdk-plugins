@@ -58,8 +58,9 @@ export const CHAIN_ID_TO_ROUTER_ADDRESS = {
   [BASE_LAYER_ZERO_CHAIN_ID]: BASE_ROUTER,
 } as const
 
-
-export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {[chainId: number] : {[address: string]:number}} = {
+export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
+  [chainId: number]: { [address: string]: number }
+} = {
   [ETH_LAYER_ZERO_CHAIN_ID]: {
     '0xdf0770dF86a8034b3EFEf0A1Bb3c889B8332FF56': 1,
     '0x38ea452219524bb87e18de1c24d3bb59510bd783': 2,
