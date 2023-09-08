@@ -1,14 +1,14 @@
-export const ETH_LAYER_ZERO_CHAIN_ID = 101
-export const BNB_LAYER_ZERO_CHAIN_ID = 102
-export const AVALANCHE_LAYER_ZERO_CHAIN_ID = 106
-export const POLYGON_LAYER_ZERO_CHAIN_ID = 109
-export const ARBITRUM_LAYER_ZERO_CHAIN_ID = 110
-export const OPTIMISM_LAYER_ZERO_CHAIN_ID = 111
-export const FANTOM_LAYER_ZERO_CHAIN_ID = 112
-export const METIS_LAYER_ZERO_CHAIN_ID = 151
-export const KAVA_LAYER_ZERO_CHAIN_ID = 177
-export const LINEA_LAYER_ZERO_CHAIN_ID = 183
-export const BASE_LAYER_ZERO_CHAIN_ID = 184
+export const ETH_LAYER_ZERO_CHAIN_ID: number = 101
+export const BNB_LAYER_ZERO_CHAIN_ID: number = 102
+export const AVALANCHE_LAYER_ZERO_CHAIN_ID: number = 106
+export const POLYGON_LAYER_ZERO_CHAIN_ID: number = 109
+export const ARBITRUM_LAYER_ZERO_CHAIN_ID: number = 110
+export const OPTIMISM_LAYER_ZERO_CHAIN_ID: number = 111
+export const FANTOM_LAYER_ZERO_CHAIN_ID: number = 112
+export const METIS_LAYER_ZERO_CHAIN_ID: number = 151
+export const KAVA_LAYER_ZERO_CHAIN_ID: number = 177
+export const LINEA_LAYER_ZERO_CHAIN_ID: number = 183
+export const BASE_LAYER_ZERO_CHAIN_ID: number = 184
 
 export const CHAIN_ID_ARRAY = [
   ETH_LAYER_ZERO_CHAIN_ID,
