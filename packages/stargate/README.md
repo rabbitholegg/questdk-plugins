@@ -1,5 +1,8 @@
 
 ## ETH/BASE TOKEN
+Other than the token address retrieval this is a pretty trivial to implement plugin.
+Unfortunatly in order to get the token address we need to do some direct chain reads but nothing too heavy.
+
 
 ### Deposit ETH
 Deposit to Arbitrum Layer Zero
