@@ -2,7 +2,7 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STARGATE_BRIDGE_ABI } from './abi.js'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
+import { CHAIN_ID_ARRAY, LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID } from './chain-ids.js'
 import { CHAIN_AND_POOL_TO_TOKEN_ADDRESS, CHAIN_ID_TO_ROUTER_ADDRESS, CHAIN_ID_TO_ETH_ROUTER_ADDRESS } from './contract-addresses.js'
 
 // If you're implementing swap or mint, simply duplicate this function and change the name
@@ -16,18 +16,35 @@ export const bridge = async (bridge: BridgeActionParams) => {
     amount,
     recipient,
   } = bridge
+  const layerOneChainId = LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID[sourceChainId]
   const sourcePool = tokenAddress ? CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress] : 0;
-  const targetContractAddress = sourcePool === 13 ? CHAIN_ID_TO_ETH_ROUTER_ADDRESS[sourceChainId] : CHAIN_ID_TO_ROUTER_ADDRESS[sourceChainId];
-  
+
+  if(sourcePool === 13){
+
+    const targetContractAddress = CHAIN_ID_TO_ETH_ROUTER_ADDRESS[sourceChainId];
+    return compressJson({
+      chainId: layerOneChainId, // The chainId of the source chain
+      to:  contractAddress || targetContractAddress,   // The contract address of the bridge
+      input: {
+        $abi: STARGATE_BRIDGE_ABI, // The ABI of the bridge contract
+        _amountLD: amount,         // The amount of tokens to send
+        _toAddress: recipient,     // The recipient of the tokens
+        _dstChainId: destinationChainId, // The chainId of the destination chain
+      },  // The input object is where we'll put the ABI and the parameters
+    })
+  }
+  const targetContractAddress = CHAIN_ID_TO_ROUTER_ADDRESS[sourceChainId];
+
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
+
+    chainId: layerOneChainId, // The chainId of the source chain
     to:  contractAddress || targetContractAddress,   // The contract address of the bridge
     input: {
       $abi: STARGATE_BRIDGE_ABI, // The ABI of the bridge contract
       _srcPoolId: sourcePool,    // The source poolId
       _amountLD: amount,         // The amount of tokens to send
-      _toAddress: recipient,     // The recipient of the tokens
+      _to: recipient,     // The recipient of the tokens
       _dstChainId: destinationChainId, // The chainId of the destination chain
     },  // The input object is where we'll put the ABI and the parameters
   })
