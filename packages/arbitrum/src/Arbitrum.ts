@@ -45,7 +45,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     // We're targeting a gateway contract
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
-      to:  contractAddress || networkGateway,   // The contract address of the bridge
+      to: contractAddress || networkGateway, // The contract address of the bridge
       input: {
         $abi: GATEWAY_OUTBOUND_TRANSFER_FRAG,
         _token: tokenAddress,
@@ -62,7 +62,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     // We're targeting the Delayed Inbox
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
-      to:  contractAddress || networkInbox,   // The contract address of the bridge
+      to: contractAddress || networkInbox, // The contract address of the bridge
       value: amount,
       input: {
         $abi: INBOX_DEPOSIT_ETH_FRAG,
@@ -73,7 +73,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: sourceChainId, // The chainId of the source chain
-    to:  contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE,   // The contract address of the bridge
+    to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE, // The contract address of the bridge
     input: {
       $abi: ARBSYS_WITHDRAW_ETH_FRAG,
       destination: recipient,

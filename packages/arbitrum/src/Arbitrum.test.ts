@@ -39,8 +39,6 @@ describe('Given the arbitrum plugin', () => {
 
       const transaction = DEPOSIT_ERC20
 
-
-
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
@@ -55,7 +53,6 @@ describe('Given the arbitrum plugin', () => {
     test('should not pass filter with invalid amount', async () => {
       const recipient = '0xf9ce182b0fbe597773ab9bb5159b7479047de8fe'
       const transaction = DEPOSIT_ERC20
-
 
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
@@ -72,7 +69,6 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0xf9ce182b0fbe597773ab9bb5159b7479047de8fe'
       const transaction = DEPOSIT_ERC20
 
-
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
@@ -86,7 +82,6 @@ describe('Given the arbitrum plugin', () => {
     test('should not pass filter with invalid recipient', async () => {
       const recipient = '0x72Ce9c846789fdB6fC1f34aC4AD25Dd9ef7031ef'
       const transaction = DEPOSIT_ERC20
-
 
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
