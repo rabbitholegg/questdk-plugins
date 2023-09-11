@@ -31,7 +31,7 @@ describe('Given the optimism plugin', () => {
       })
 
       expect(filter).to.deep.equal({
-        chainId: '0xa',
+        chainId: 10,
         to: addresses.L2StandardBridge[420],
         input: {
           $abi: l2StandardBridgeABI,
@@ -52,7 +52,7 @@ describe('Given the optimism plugin', () => {
       })
 
       expect(filter).to.deep.equal({
-        chainId: '0x1',
+        chainId: 1,
         to: addresses.L1StandardBridge[1],
         input: {
           $abi: l1StandardBridgeABI,
@@ -73,7 +73,7 @@ describe('Given the optimism plugin', () => {
       })
 
       expect(filter).to.deep.equal({
-        chainId: '0x1',
+        chainId: 1,
         to: addresses.L1StandardBridge[1],
         value: {
           $gte: '100000',
