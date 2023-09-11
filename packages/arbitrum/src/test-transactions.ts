@@ -1,4 +1,4 @@
-const expot DEPOSIT_ERC20 = {
+export const DEPOSIT_ERC20 = {
   hash: '0xcdbcb66c6a194ae2f0a58b00c1e6ec0daea08c901590ba056cc6806581bf5a94',
   type: '0x2',
   blockHash: '0x0cee2a6dc4e4031eefc6bd2368f35abd4fc1807469e7d6b176f1aad8c8cd0f8c',
@@ -18,4 +18,4 @@ const expot DEPOSIT_ERC20 = {
   v: '0x1',
   accessList: [], 
   chainId: '0x1',
-}
+} as const
