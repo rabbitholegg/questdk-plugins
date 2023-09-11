@@ -21,7 +21,7 @@ describe('Given the arbitrum plugin', () => {
         amount: GreaterThanOrEqual(100000n),
       })
       expect(filter).to.deep.equal({
-        chainId: '0x1',
+        chainId: ETH_CHAIN_ID,
         to: MAINNET_TO_ARB_ONE_GATEWAY,
         input: {
           $abi: GATEWAY_OUTBOUND_TRANSFER_FRAG,
