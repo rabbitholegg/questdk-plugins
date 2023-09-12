@@ -1,6 +1,3 @@
-// This file is standard for more projects.
-// The main degree of nuance is in the
-
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,

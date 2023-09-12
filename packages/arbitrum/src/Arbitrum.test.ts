@@ -6,7 +6,6 @@ import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID } from './chain-ids'
 import { MAINNET_TO_ARB_ONE_GATEWAY } from './contract-addresses'
 import { parseEther } from 'viem'
 import { DEPOSIT_ERC20 } from './test-transactions.js'
-// Replace *project* with the name of the project
 describe('Given the arbitrum plugin', () => {
   describe('When handling the bridge', () => {
     const DAI = '0x6b175474e89094c44da98b954eedeac495271d0f'
