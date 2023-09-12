@@ -21,7 +21,6 @@ import {
   ARBSYS_WITHDRAW_ETH_FRAG,
   INBOX_DEPOSIT_ETH_FRAG,
 } from './abi.js'
-// If you're implementing swap or mint, simply duplicate this function and change the name
 const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 export const bridge = async (bridge: BridgeActionParams) => {
@@ -45,7 +44,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     // We're targeting a gateway contract
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
-      to:  contractAddress || networkGateway,   // The contract address of the bridge
+      to: contractAddress || networkGateway, // The contract address of the bridge
       input: {
         $abi: GATEWAY_OUTBOUND_TRANSFER_FRAG,
         _token: tokenAddress,
@@ -62,7 +61,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     // We're targeting the Delayed Inbox
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
-      to:  contractAddress || networkInbox,   // The contract address of the bridge
+      to: contractAddress || networkInbox, // The contract address of the bridge
       value: amount,
       input: {
         $abi: INBOX_DEPOSIT_ETH_FRAG,
@@ -73,7 +72,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: sourceChainId, // The chainId of the source chain
-    to:  contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE,   // The contract address of the bridge
+    to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE, // The contract address of the bridge
     input: {
       $abi: ARBSYS_WITHDRAW_ETH_FRAG,
       destination: recipient,
@@ -82,11 +81,11 @@ export const bridge = async (bridge: BridgeActionParams) => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return ArbitrumTokens[_chainId]
+  return ArbitrumTokens[_chainId] as Address[]
 }
 
 export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY
+  return CHAIN_ID_ARRAY as number[]
 }
 
 const getContractAddressFromChainId = (
