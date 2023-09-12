@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.9
+
+### Patch Changes
+
+- [#12](https://github.com/rabbitholegg/questdk/pull/12) [`aa1f428`](https://github.com/rabbitholegg/questdk/commit/aa1f428a9dd354cd7b8b17c49a8dcab43cf12724) Thanks [@Quazia](https://github.com/Quazia)! - Simple hotfix for BigInt handling in the filter function
+
 ## 1.0.1-alpha.8
 
 ### Patch Changes
