@@ -21,8 +21,7 @@
     "verbatimModuleSyntax": true,
     "importHelpers": true,
 
-    "moduleResolution": "NodeNext",
-    "module": "ESNext",
+    "moduleResolution": "node",
     "target": "ES2021",
     "lib": ["ES2022", "DOM"],
 
