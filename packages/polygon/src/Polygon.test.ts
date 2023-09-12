@@ -14,7 +14,7 @@ import {
   WITHDRAW_ERC20,
 } from './test-transactions.js'
 import {
-  ETH_ADRESS_MAINNET,
+  ETH_ADDRESS_MAINNET,
   MATIC_ADDRESS_POLYGON,
   USDC_ADDRESS_MAINNET,
   USDC_ADDRESS_POLYGON,
@@ -70,7 +70,7 @@ describe('Given the optimism plugin', () => {
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
-        tokenAddress: ETH_ADRESS_MAINNET,
+        tokenAddress: ETH_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER
       })
@@ -94,7 +94,7 @@ describe('Given the optimism plugin', () => {
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
-        tokenAddress: ETH_ADRESS_MAINNET,
+        tokenAddress: ETH_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('.04')),
         recipient: '0x72eaebda0182909c0db8be8c967f7be18bdfb04d'
       })
