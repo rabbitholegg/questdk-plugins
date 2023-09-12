@@ -24,7 +24,7 @@ const ETHEREUM_USDC_ADDRESS = '0xdf0770dF86a8034b3EFEf0A1Bb3c889B8332FF56'
 const ETHEREUM_SGETH_ADDRESS = '0x101816545F6bd2b1076434B54383a1E633390A2E'
 const ARBITRUM_SGETH_ADDRESS = '0x82CbeCF39bEe528B5476FE6d1550af59a9dB6Fc0'
 const TEST_USER = '0x7c3bd1a09d7d86920451def20ae503322c8d0412'
-// Replace *project* with the name of the project
+
 describe('Given the Across plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
