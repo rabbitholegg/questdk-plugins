@@ -25,3 +25,8 @@
 </p>
 <br/>
 
+### Publishing
+In order to publish you need to make sure that the pull request you're submitting has a changeset. If you don't want to publish this isn't needed.
+In order to generate a changeset run `pnpm changeset`, select a change type [major,minor,patch], and draft a small summary of the changeset.
+
+After this all you need to do is push and merge the pull request and the Github Action will handle the process of versioning, and publishing.
