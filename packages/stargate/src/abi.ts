@@ -33,4 +33,4 @@ export const STARGATE_BRIDGE_ABI = [
   "outputs":[],
   "stateMutability":"payable",
   "type":"function"
-}]
+}] as const
