@@ -12,11 +12,15 @@ import {
   POLYGON_LAYER_ZERO_CHAIN_ID,
   ETH_LAYER_ZERO_CHAIN_ID,
   OPTIMISM_LAYER_ZERO_CHAIN_ID,
-  LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID
+  LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID,
 } from './chain-ids.js'
 import { STARGATE_BRIDGE_ABI } from './abi.js'
 import { parseEther } from 'viem'
-import { CHAIN_AND_POOL_TO_TOKEN_ADDRESS, CHAIN_ID_TO_ROUTER_ADDRESS, CHAIN_ID_TO_ETH_ROUTER_ADDRESS } from './contract-addresses.js'
+import {
+  CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
+  CHAIN_ID_TO_ROUTER_ADDRESS,
+  CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
+} from './contract-addresses.js'
 
 const ARBITRUM_USDC_ADDRESS = '0x892785f33CdeE22A30AEF750F285E18c18040c3e'
 const ARBITRUM_USDT_ADDRESS = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
@@ -35,7 +39,10 @@ describe('Given the Across plugin', () => {
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
-      const sourcePool = CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ARBITRUM_LAYER_ZERO_CHAIN_ID][ARBITRUM_USDC_ADDRESS];
+      const sourcePool =
+        CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ARBITRUM_LAYER_ZERO_CHAIN_ID][
+          ARBITRUM_USDC_ADDRESS
+        ]
 
       expect(filter).to.deep.equal({
         chainId: LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID[ARBITRUM_LAYER_ZERO_CHAIN_ID],
@@ -60,7 +67,10 @@ describe('Given the Across plugin', () => {
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
-      const sourcePool = CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ETH_LAYER_ZERO_CHAIN_ID][ETHEREUM_USDC_ADDRESS];
+      const sourcePool =
+        CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ETH_LAYER_ZERO_CHAIN_ID][
+          ETHEREUM_USDC_ADDRESS
+        ]
 
       expect(filter).to.deep.equal({
         chainId: LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID[ETH_LAYER_ZERO_CHAIN_ID],
