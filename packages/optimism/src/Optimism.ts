@@ -5,8 +5,7 @@ import {
   addresses,
 } from '@eth-optimism/contracts-ts'
 import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
-import { ETH_TOKEN_ADDRESS } from './token-addresses.js'
-// If you're implementing swap or mint, simply duplicate this function and change the name
+import { ETH_TOKEN_ADDRESS, USDC_TOKEN_ADDRESS, TETHER_TOKEN_ADDRESS } from './token-addresses.js'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const { sourceChainId, contractAddress, tokenAddress, amount } = bridge
@@ -45,8 +44,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
-  return []
+  return [ETH_TOKEN_ADDRESS, USDC_TOKEN_ADDRESS, TETHER_TOKEN_ADDRESS]
 }
 
 export const getSupportedChainIds = async () => {
