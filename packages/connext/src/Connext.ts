@@ -11,7 +11,7 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address, toHex } from 'viem'
+import { type Address } from 'viem'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
 import { ConnextContract } from './contract-addresses.js'
 
@@ -83,7 +83,7 @@ export const bridge = async (
     }
 
     return compressJson({
-      chainId: toHex(sourceChainId),
+      chainId: sourceChainId,
       to: multiSendContract.address,
       value: amount,
       input: {
@@ -96,7 +96,7 @@ export const bridge = async (
   }
 
   return compressJson({
-    chainId: toHex(sourceChainId),
+    chainId: sourceChainId,
     to: contractAddress || defaultContractAddress,
     input: {
       $abi: XCALL_ABI_FRAGMENTS,

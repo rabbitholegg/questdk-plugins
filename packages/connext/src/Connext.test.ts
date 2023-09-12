@@ -1,6 +1,7 @@
 import { getDeployedMultisendContract } from '@connext/nxtp-txservice'
 import { MultisendAbi } from '@connext/nxtp-utils'
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import type { Transaction, TransactionEIP1559 } from 'viem'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Connext.js'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
@@ -21,7 +22,7 @@ describe('Connext', () => {
       })
 
       expect(filter).to.deep.equal({
-        chainId: '0xa',
+        chainId: 10,
         to: '0x8f7492DE823025b4CfaAB1D34c58963F2af5DEDA',
         input: {
           $abi: XCALL_ABI_FRAGMENTS,
@@ -46,7 +47,7 @@ describe('Connext', () => {
     const multiSendContract = getDeployedMultisendContract(10)
 
     expect(filter).to.deep.equal({
-      chainId: '0xa',
+      chainId: 10,
       to: multiSendContract?.address,
       value: {
         $gte: '100000',
@@ -80,7 +81,7 @@ describe('Connext', () => {
         value: '0x0',
         type: '0x2',
         accessList: [],
-        chainId: '0xa',
+        chainId: 10,
         v: '0x0',
         r: '0x4fcc9247c0b29a50b9db146191e93fbd503be520998f62c9445aa2eeb944d613',
         s: '0x78e1ace158ae1166687db900743fc7db36cc80e42a43a800577895c5cb2b95b3',
@@ -97,26 +98,26 @@ describe('Connext', () => {
     })
 
     test('ETH bridge should pass filter', async () => {
-      const transaction = {
+      const transaction: TransactionEIP1559 = {
         blockHash:
           '0xfdb722e4a99e3422490bc12d15fafab54ebb7e2e83ff08e9fe20d70045e94889',
-        blockNumber: '0x67812f1',
+        blockNumber: BigInt('0x67812f1'),
         from: '0xa4c8bb4658bc44bac430699c8b7b13dab28e0f4e',
-        gas: '0x8820a',
-        gasPrice: '0x1167',
-        maxFeePerGas: '0x11e2',
-        maxPriorityFeePerGas: '0x112d',
+        gas: BigInt('0x8820a'),
+        maxFeePerGas: BigInt('0x11e2'),
+        maxPriorityFeePerGas: BigInt('0x112d'),
         hash: '0xb8e2c0baf137b64553c91f286bde62cc37275d0b9f9d3e6c0041c6be79de45af',
         input:
           '0x8d80ff0a0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000026b004200000000000000000000000000000000000006000000000000000000000000000000000000000000000000008af8a1fa5fcc180000000000000000000000000000000000000000000000000000000000000004d0e30db000420000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000044095ea7b30000000000000000000000008f7492de823025b4cfaab1d34c58963f2af5deda000000000000000000000000000000000000000000000000008af8a1fa5fcc18008f7492de823025b4cfaab1d34c58963f2af5deda0000000000000000000000000000000000000000000000000026aa1a3465338400000000000000000000000000000000000000000000000000000000000001248aac16ba0000000000000000000000000000000000000000000000000000000000657468000000000000000000000000268682b7d9992ae7e2ca4a8bcc9d9655fb06056f0000000000000000000000004200000000000000000000000000000000000006000000000000000000000000a4c8bb4658bc44bac430699c8b7b13dab28e0f4e000000000000000000000000000000000000000000000000008af8a1fa5fcc18000000000000000000000000000000000000000000000000000000000000012c00000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000020000000000000000000000000a4c8bb4658bc44bac430699c8b7b13dab28e0f4e000000000000000000000000000000000000000000',
-        nonce: '0x45',
+        nonce: 45,
         to: '0xb0eef3e1de973d045c3858e072c540299585252d',
-        transactionIndex: '0x6',
-        value: '0xb1a2bc2ec4ff9c',
-        type: '0x2',
+        transactionIndex: 6,
+        value: BigInt('0xb1a2bc2ec4ff9c'),
+        type: 'eip1559',
         accessList: [],
-        chainId: '0xa',
-        v: '0x1',
+        typeHex: '0x2',
+        chainId: 10,
+        v: BigInt('0x1'),
         r: '0x11d6fd962cf4090c1464404492a36ef7323c6173908883c87fbc695219e6d026',
         s: '0x739b7240f8dd466881a66971b476f07c2fcce9a6f519d3c06f95133ad983092e',
       }
