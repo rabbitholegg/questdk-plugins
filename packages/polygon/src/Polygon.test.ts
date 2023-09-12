@@ -1,12 +1,10 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Polygon.js'
-import {POLYGON_CHAIN_ID, ETH_CHAIN_ID, CHAIN_ID_ARRAY} from './chain-ids.js'
+import { POLYGON_CHAIN_ID, ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
 import { MAINNET_BRIDGE } from './contract-addresses.js'
 
-import {
-  POLYGON_BRIDGE_ABI_FUNCS
-} from './abi.js'
+import { POLYGON_BRIDGE_ABI_FUNCS } from './abi.js'
 import {
   DEPOSIT_ETH,
   DEPOSIT_ERC20,
@@ -52,7 +50,7 @@ describe('Given the optimism plugin', () => {
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
-        recipient: TEST_USER
+        recipient: TEST_USER,
       })
 
       expect(filter).to.deep.equal({
@@ -61,7 +59,7 @@ describe('Given the optimism plugin', () => {
         input: {
           $abi: POLYGON_BRIDGE_ABI_FUNCS,
           rootToken: USDC_ADDRESS_MAINNET,
-          user: TEST_USER
+          user: TEST_USER,
         },
       })
     })
@@ -72,7 +70,7 @@ describe('Given the optimism plugin', () => {
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ETH_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
-        recipient: TEST_USER
+        recipient: TEST_USER,
       })
 
       expect(filter).to.deep.equal({
@@ -96,7 +94,7 @@ describe('Given the optimism plugin', () => {
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ETH_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('.04')),
-        recipient: '0x72eaebda0182909c0db8be8c967f7be18bdfb04d'
+        recipient: '0x72eaebda0182909c0db8be8c967f7be18bdfb04d',
       })
 
       expect(apply(transaction, filter)).to.be.true
