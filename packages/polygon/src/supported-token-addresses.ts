@@ -27,4 +27,4 @@ export const PolygonTokens: Record<number, Address[]> = {
     '0xc2132d05d31c914a87c6611c10748aeb04b58e8f', //usdt
     '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063', //dai
   ]
-}
+} as const

@@ -19,7 +19,7 @@ export const DEPOSIT_ETH = {
   chainId : 1,
   accessList : [],
   typeHex : "0x2"
-}
+} as const
 export const DEPOSIT_ERC20 = {  
   type : "eip1559",
   blockHash : "0xb5da9cfe5e3c470dc644ceaa0d04802498e911fc3404d9895a3d45f21815fd9d",
@@ -41,7 +41,7 @@ export const DEPOSIT_ERC20 = {
   chainId : 1,
   accessList : [],
   typeHex : "0x2"
-} // USDC Deposit
+} as const // USDC Deposit
 export const WITHDRAW_ETH = {
   blockHash : "0x20ba93290699087f4eeda5945c4e0c228409b73527f416866dfd8551236ced5d",
   blockNumber : "46912660",
@@ -63,7 +63,7 @@ export const WITHDRAW_ETH = {
   r : "0x163f1193097ce88d67eeadc1075b51eb5f2c40d006b9e17b21cf898756edcecb",
   s : "0x5844aabcf1c5382a074e4eb489562dfdcc074611d43350ec0f2e434f7ea0026f",
   typeHex : "0x2"
-}
+} as const
 export const WITHDRAW_ERC20 = {
   blockHash : "0xb00fd35674fae3a8708c042f374f5ae0328c67ed293fbcccf9e01c1156c50152",
   blockNumber : "46904561",
@@ -82,4 +82,4 @@ export const WITHDRAW_ERC20 = {
   r : "0x1ba0b052ddfd51c2067b477b55ada457fa372c2312b34ee50ca1aef23cebe91a",
   s : "0x34790c5081cdd0a38e3dcf15079d555857193bc4d7c058c852bb04019f90238c",
   typeHex : "0x0"
-} // MATIC Withdrawal
+} as const // MATIC Withdrawal
