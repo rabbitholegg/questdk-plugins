@@ -60,8 +60,9 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
+  return []
 }
 
 export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY
+  return CHAIN_ID_ARRAY as number[]
 }
