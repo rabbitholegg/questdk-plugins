@@ -26,7 +26,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+  return []
 }
 
 export const getSupportedChainIds = async () => {

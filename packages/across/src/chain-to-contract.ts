@@ -14,7 +14,7 @@ import {
   ZKSYNC_CHAIN_ID,
   BASE_CHAIN_ID,
 } from './chain-ids.js'
-export const CHAIN_TO_CONTRACT = {
+export const CHAIN_TO_CONTRACT: {[chainId: number]: string} = {
   [ETH_CHAIN_ID]: ETHEREUM_SPOKE,
   [POLYGON_CHAIN_ID]: POLYGON_SPOKE,
   [OPTIMISM_CHAIN_ID]: OPTIMISM_SPOKE,
