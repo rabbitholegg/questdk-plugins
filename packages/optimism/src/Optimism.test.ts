@@ -19,7 +19,6 @@ import {
 } from './token-addresses'
 import { parseEther } from 'viem'
 
-// Replace *project* with the name of the project
 describe('Given the optimism plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
