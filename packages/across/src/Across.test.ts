@@ -27,7 +27,6 @@ export const USDT_ADDRESS_MAINNET = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
 // Random ETHEREUM address
 const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
 
-// Replace *project* with the name of the project
 describe('Given the Across plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
