@@ -22,8 +22,8 @@ export const HOP_ADDRESS_POLYGON = '0xc5102fE9359FD9a28f877a67E36B0F050d81a3CC'
 import { parseEther } from 'viem'
 // Random ETHEREUM address
 const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
-// Replace *project* with the name of the project
-describe('Given the optimism plugin', () => {
+
+describe('Given the hop plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
       const USDC_POLYGON_AMM_ADDRESS =
