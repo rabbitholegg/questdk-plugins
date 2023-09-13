@@ -6,7 +6,6 @@ import {
   ETH_ADDRESS_MAINNET,
 } from './supported-token-addresses.js'
 import { MAINNET_BRIDGE } from './contract-addresses.js'
-// If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const { sourceChainId, contractAddress, tokenAddress, amount, recipient } =

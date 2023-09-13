@@ -21,7 +21,7 @@ import {
 import { parseEther } from 'viem'
 // Random ETHEREUM address
 const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
-// Replace *project* with the name of the project
+
 describe('Given the optimism plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
