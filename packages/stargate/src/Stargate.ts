@@ -11,7 +11,6 @@ import {
   CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
 } from './contract-addresses.js'
 
-// If you're implementing swap or mint, simply duplicate this function and change the name
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
