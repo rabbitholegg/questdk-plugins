@@ -1,4 +1,4 @@
-import { createPublicClient, http, type Address, Chain } from 'viem'
+import { createPublicClient, http, type Address, type Chain } from 'viem'
 
 // The only way to get the token is to lookup the factory, lookup the pool, then lookup the token
 export const getTokenFromPool = async (
