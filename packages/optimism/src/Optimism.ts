@@ -44,9 +44,9 @@ export const bridge = async (bridge: BridgeActionParams) => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return CHAIN_ID_TO_TOKENS[_chainId]
+  return CHAIN_ID_TO_TOKENS[_chainId] as `0x${string}`[]
 }
 
 export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY
+  return CHAIN_ID_ARRAY as number[]
 }
