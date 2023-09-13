@@ -49,10 +49,10 @@ export const bridge = async (bridge: BridgeActionParams) => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return PolygonTokens[_chainId]
+  return PolygonTokens[_chainId] as `0x${string}`[]
 }
 
 export const getSupportedChainIds = async () => {
   // This function should return a list of supported chainIds
-  return CHAIN_ID_ARRAY
+  return CHAIN_ID_ARRAY as number[]
 }
