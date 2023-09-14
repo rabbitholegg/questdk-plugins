@@ -43,7 +43,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       $abi: POLYGON_BRIDGE_ABI_FUNCS,
       user: recipient,
       rootToken: tokenAddress,
-      depositData: amount
+      depositData: amount,
     },
   })
 }
