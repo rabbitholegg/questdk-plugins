@@ -57,11 +57,12 @@ export const CHAIN_ID_TO_ROUTER_ADDRESS = {
   [LINEA_LAYER_ZERO_CHAIN_ID]: LINEA_ROUTER,
   [BASE_LAYER_ZERO_CHAIN_ID]: BASE_ROUTER,
 } as const
-
+export const USDC_POOL_ID: number = 1
+export const USDT_POOL_ID: number = 2
 export const ETH_POOL_ID: number = 13
 
 // A lot of these key values are incorrect
-export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
+export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS_UNUSED: {
   [chainId: number]: { [address: string]: number }
 } = {
   [ETH_LAYER_ZERO_CHAIN_ID]: {
@@ -131,5 +132,48 @@ export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
   [BASE_LAYER_ZERO_CHAIN_ID]: {
     '0x4c80e24119cfb836cdf0a6b53dc23f04f7e652ca': 1,
     '0x28fc411f9e1c480AD312b3d9C60c22b965015c6B': ETH_POOL_ID,
+  },
+}
+
+export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
+  [chainId: number]: { [address: string]: number }
+} = {
+  [ETH_LAYER_ZERO_CHAIN_ID]: {
+    '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48': USDC_POOL_ID,
+    '0xdAC17F958D2ee523a2206206994597C13D831ec7': USDT_POOL_ID,
+    '0x72E2F4830b9E45d52F80aC08CB2bEC0FeF72eD9c': ETH_POOL_ID,
+  },
+  [BNB_LAYER_ZERO_CHAIN_ID]: {
+    '0x55d398326f99059fF775485246999027B3197955': USDT_POOL_ID,
+
+  },
+  [AVALANCHE_LAYER_ZERO_CHAIN_ID]: {
+    '0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e': USDC_POOL_ID,
+    '0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7': USDT_POOL_ID,
+
+  },
+  [POLYGON_LAYER_ZERO_CHAIN_ID]: {
+    '0x2791bca1f2de4661ed88a30c99a7a9449aa84174': USDC_POOL_ID,
+    '0xc2132d05d31c914a87c6611c10748aeb04b58e8f': USDT_POOL_ID,
+
+  },
+  [ARBITRUM_LAYER_ZERO_CHAIN_ID]: {
+    '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8': USDC_POOL_ID,
+    '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9': USDT_POOL_ID,
+    '0x82cbecf39bee528b5476fe6d1550af59a9db6fc0': ETH_POOL_ID,
+  },
+  [OPTIMISM_LAYER_ZERO_CHAIN_ID]: {
+    '0x7f5c764cbc14f9669b88837ca1490cca17c31607': USDC_POOL_ID,
+    '0xb69c8cbcd90a39d8d3d3ccf0a3e968511c3856a0': ETH_POOL_ID,
+  },
+  [KAVA_LAYER_ZERO_CHAIN_ID]: {
+    '0x919c1c267bc06a7039e03fcc2ef738525769109c': USDT_POOL_ID,
+  },
+  [LINEA_LAYER_ZERO_CHAIN_ID]: {
+    '0x224d8fd7ab6ad4c6eb4611ce56ef35dec2277f03': ETH_POOL_ID,
+  },
+  [BASE_LAYER_ZERO_CHAIN_ID]: {
+    '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca': USDC_POOL_ID,
+    '0x224d8fd7ab6ad4c6eb4611ce56ef35dec2277f03': ETH_POOL_ID,
   },
 }
