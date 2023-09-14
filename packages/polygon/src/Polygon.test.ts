@@ -60,6 +60,9 @@ describe('Given the optimism plugin', () => {
           $abi: POLYGON_BRIDGE_ABI_FUNCS,
           rootToken: USDC_ADDRESS_MAINNET,
           user: TEST_USER,
+          depositData: {
+            $gte: '100000',
+          },
         },
       })
     })
