@@ -11,10 +11,12 @@ import {
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
+import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
   [Uniswap.pluginId]: Uniswap,
+  [Hop.pluginId]: Hop,
 }
 
 export const getPlugin = (pluginId: string) => {
