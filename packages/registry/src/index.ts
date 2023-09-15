@@ -11,10 +11,12 @@ import {
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
+import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
   [Uniswap.pluginId]: Uniswap,
+  [Polygon.pluginId]: Polygon,
 }
 
 export const getPlugin = (pluginId: string) => {
