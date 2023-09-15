@@ -48,6 +48,11 @@
     "@rabbitholegg/questdk-plugin-connext": "workspace:*",
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-stargate": "workspace:*",
+    "@rabbitholegg/questdk-plugin-across": "workspace:*",
+    "@rabbitholegg/questdk-plugin-polygon": "workspace:*",
+    "@rabbitholegg/questdk-plugin-hop": "workspace:*",
+    "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
+    "@rabbitholegg/questdk-plugin-optimism": "workspace:*",
     "viem": "^1.2.15"
   }
 }

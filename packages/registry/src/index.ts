@@ -12,14 +12,21 @@ import {
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
+import { Across } from '@rabbitholegg/questdk-plugin-across'
+import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
+import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
+import { Hop } from '@rabbitholegg/questdk-plugin-hop'
+import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
   [Uniswap.pluginId]: Uniswap,
   [Stargate.pluginId]: Stargate,
+  [Polygon.pluginId]: Polygon,
+  [Hop.pluginId]: Hop,
+  [Arbitrum.pluginId]: Arbitrum,
 }
 
-export const getPlugin = (pluginId: string) => {
   const plugin = plugins[pluginId]
   if (!plugin) {
     throw new Error(`Unknown plugin "${pluginId}"`)
