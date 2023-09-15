@@ -25,6 +25,8 @@ export const plugins: Record<string, IActionPlugin> = {
   [Polygon.pluginId]: Polygon,
   [Hop.pluginId]: Hop,
   [Arbitrum.pluginId]: Arbitrum,
+  [Across.pluginId]: Across,
+  [Optimism.pluginId]: Optimism,
 }
 
   const plugin = plugins[pluginId]
