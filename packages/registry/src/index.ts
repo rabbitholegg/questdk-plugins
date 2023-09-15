@@ -29,6 +29,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Optimism.pluginId]: Optimism,
 }
 
+export const getPlugin = (pluginId: string) => {
   const plugin = plugins[pluginId]
   if (!plugin) {
     throw new Error(`Unknown plugin "${pluginId}"`)
