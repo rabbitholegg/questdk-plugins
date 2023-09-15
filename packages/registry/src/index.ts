@@ -11,6 +11,7 @@ import {
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
+import { Across } from '@rabbitholegg/questdk-plugin-across'
 import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
 import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
 import { Hop } from '@rabbitholegg/questdk-plugin-hop'
@@ -19,6 +20,7 @@ import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
   [Uniswap.pluginId]: Uniswap,
+  [Across.pluginId]: Across,
   [Polygon.pluginId]: Polygon,
   [Optimism.pluginId]: Optimism,
   [Hop.pluginId]: Hop,
