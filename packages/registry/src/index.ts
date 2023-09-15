@@ -11,11 +11,13 @@ import {
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
+import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
   [Uniswap.pluginId]: Uniswap,
+  [Hop.pluginId]: Hop,
   [Arbitrum.pluginId]: Arbitrum,
 }
 
