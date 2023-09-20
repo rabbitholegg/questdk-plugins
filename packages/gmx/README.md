@@ -1,0 +1,1 @@
+Currently we only support swaps on Arbitrum and do not support derivatives.
