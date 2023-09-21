@@ -3,8 +3,8 @@ import { describe, expect, test } from 'vitest'
 import { GMX_SWAP_ABI } from './abi.js'
 import { swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
-import { buildPathQuery } from './utils.js'
-
+import { SWAP_ETH } from './test-transactions.js'
+import { parseEther } from 'viem'
 
 describe('Given the gmx plugin', () => {
   const GMX_ROUTER_ADDRESS = '0xabbc5f99639c9b6bcb58544ddf04efa6802f4064'
@@ -30,7 +30,7 @@ describe('Given the gmx plugin', () => {
       chainId: ARB_ONE_CHAIN_ID,
       input: {
         $abi: GMX_SWAP_ABI,
-        _path: buildPathQuery(BRIDGED_USDC_ADDRESS, USDT_ADDRESS),
+        _path: [BRIDGED_USDC_ADDRESS, USDT_ADDRESS],
         _amountIn: {
           $gte: '100000',
         },
@@ -42,8 +42,18 @@ describe('Given the gmx plugin', () => {
     })
     })
 
-    test('should pass filter with valid transactions',  () => {
-      
+    test('should pass filter with valid transactions',  async() => {
+      const transaction = SWAP_ETH
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: GMX_ROUTER_ADDRESS,
+        tokenIn: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
+        tokenOut: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        amountIn: GreaterThanOrEqual(3400000),
+        amountOut: GreaterThanOrEqual(parseEther(".57")),
+        recipient: "0xDA63F22BF4bDC0B88536bDf4375fc9E14862ABD8",
+      })
+      expect(apply(transaction, filter)).to.be.true
     })
   
 
