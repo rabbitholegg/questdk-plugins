@@ -7,17 +7,17 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  bridge,
+  swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Project.js'
+} from './GMX.js'
 
 // Replace *project* with the name of the project
-export const {Project}: IActionPlugin = {
-  pluginId: 'project',
+export const GMX: IActionPlugin = {
+  pluginId: 'gmx',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  bridge,
-  swap: async () => new PluginActionNotImplementedError(),
+  bridge: async () => new PluginActionNotImplementedError(),
+  swap,
   mint: async () => new PluginActionNotImplementedError(),
 }
