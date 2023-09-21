@@ -27,6 +27,7 @@ const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
 export const swap = async (swap: SwapActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
+    chainId,
     contractAddress,
     tokenIn,
     tokenOut,
@@ -39,6 +40,7 @@ export const swap = async (swap: SwapActionParams) => {
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     to:  contractAddress,   // The contract address of the swap
+    chain: chainId,         // The chain id of the swap
     input: {
       $abi:GMX_SWAP_ABI,
       _path: buildPathQuery(tokenIn, tokenOut), // The path of the swap
