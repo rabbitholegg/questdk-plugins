@@ -1,6 +1,8 @@
 import { GreaterThanOrEqual, apply, type FilterOperator } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { GMX_SWAP_ABI } from './abi.js'
+import { swap } from './GMX.js'
+import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 
 const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v3 paths are formatted as 0x<token><fee><token>
@@ -29,21 +31,23 @@ describe('Given the gmx plugin', () => {
   describe('When handling the swap', () => {
 
     test('should return a valid action filter', async () => {
-      const USDC_POLYGON_AMM_ADDRESS =
-      '0x76b22b8C1079A44F1211D867D68b1eda76a635A7'
+
     const filter = await swap({
-      GMX_ROUTER_ADDRESS,
-      BRIDGED_USDC_ADDRESS,
-      USDT_ADDRESS,
+      chainId: ARB_ONE_CHAIN_ID,
+      contractAddress: GMX_ROUTER_ADDRESS,
+      tokenIn: BRIDGED_USDC_ADDRESS,
+      tokenOut: USDT_ADDRESS,
       amountIn: GreaterThanOrEqual(100000n),
       amountOut: GreaterThanOrEqual(100000n),
+      recipient: TEST_USER,
     })
 
     expect(filter).to.deep.equal({
-      to: USDC_POLYGON_AMM_ADDRESS,
+      to: GMX_ROUTER_ADDRESS,
+      chainId: ARB_ONE_CHAIN_ID,
       input: {
         $abi: GMX_SWAP_ABI,
-        _path: buildV3PathQuery(USDT_ADDRESS, BRIDGED_USDC_ADDRESS),
+        _path: buildV3PathQuery(BRIDGED_USDC_ADDRESS, USDT_ADDRESS),
         _amountIn: {
           $gte: '100000',
         },
