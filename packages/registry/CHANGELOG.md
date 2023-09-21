@@ -1,5 +1,22 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.8
+
+### Minor Changes
+
+- [#29](https://github.com/rabbitholegg/questdk-plugins/pull/29) [`5fa3757`](https://github.com/rabbitholegg/questdk-plugins/commit/5fa375719ade2563143bafb4b690f7a53671fa82) Thanks [@Quazia](https://github.com/Quazia)! - Re-release all pre-existing plugins
+
+### Patch Changes
+
+- Updated dependencies [[`5fa3757`](https://github.com/rabbitholegg/questdk-plugins/commit/5fa375719ade2563143bafb4b690f7a53671fa82)]:
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.5
+
 ## 1.0.0-alpha.7
 
 ### Minor Changes

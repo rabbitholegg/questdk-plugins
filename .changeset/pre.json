@@ -12,7 +12,8 @@
     "sour-boxes-reflect",
     "tasty-bobcats-clean",
     "tough-cooks-hammer",
-    "twelve-kiwis-destroy"
+    "twelve-kiwis-destroy",
+    "wet-toes-prove"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
