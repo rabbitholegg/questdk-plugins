@@ -35,6 +35,7 @@ export const swap = async (swap: SwapActionParams) => {
     recipient,
   } = swap
 
+  // Fortunatly even though there are two different functions the parameters are the same
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     to:  contractAddress,   // The contract address of the swap
