@@ -17,6 +17,7 @@ import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
 import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
 import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
+import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -27,6 +28,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Arbitrum.pluginId]: Arbitrum,
   [Across.pluginId]: Across,
   [Optimism.pluginId]: Optimism,
+  [GMX.pluginId]: GMX,
 }
 
 export const getPlugin = (pluginId: string) => {
