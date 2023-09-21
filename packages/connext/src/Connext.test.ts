@@ -1,7 +1,7 @@
 import { getDeployedMultisendContract } from '@connext/nxtp-txservice'
 import { MultisendAbi } from '@connext/nxtp-utils'
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import type { Transaction, TransactionEIP1559 } from 'viem'
+import type { TransactionEIP1559 } from 'viem'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Connext.js'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
