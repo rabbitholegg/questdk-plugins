@@ -61,6 +61,7 @@ export const USDC_POOL_ID: number = 1
 export const USDT_POOL_ID: number = 2
 export const ETH_POOL_ID: number = 13
 
+/*
 // A lot of these key values are incorrect
 export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS_UNUSED: {
   [chainId: number]: { [address: string]: number }
@@ -134,6 +135,7 @@ export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS_UNUSED: {
     '0x28fc411f9e1c480AD312b3d9C60c22b965015c6B': ETH_POOL_ID,
   },
 }
+*/
 
 export const CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
   [chainId: number]: { [address: string]: number }
