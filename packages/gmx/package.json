@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "1.0.1-alpha.9",
+    "node-fetch": "^3.3.2",
     "viem": "^1.2.15"
   }
 }
