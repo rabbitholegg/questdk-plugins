@@ -141,8 +141,8 @@ importers:
   packages/gmx:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.0.1-alpha.8
-        version: 1.0.1-alpha.8(typescript@5.1.6)
+        specifier: 1.0.1-alpha.9
+        version: 1.0.1-alpha.9(typescript@5.1.6)
       viem:
         specifier: ^1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -2179,24 +2179,6 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
-
-  /@rabbitholegg/questdk@1.0.1-alpha.8(typescript@5.1.6):
-    resolution: {integrity: sha512-JXGhZUQGPP+WWfngd8YjfoT+qsuZuIUGjDm3ubmPETw/VGKno3DbOukXjuwGeLnkcy+8D4kP0C1wBwUgvIiddQ==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.8(typescript@5.1.6)
-      rimraf: 5.0.1
-      typescript: 5.1.6
-      viem: 1.6.7(typescript@5.1.6)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
 
   /@rabbitholegg/questdk@1.0.1-alpha.8(typescript@5.2.2):
     resolution: {integrity: sha512-JXGhZUQGPP+WWfngd8YjfoT+qsuZuIUGjDm3ubmPETw/VGKno3DbOukXjuwGeLnkcy+8D4kP0C1wBwUgvIiddQ==}
