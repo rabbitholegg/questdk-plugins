@@ -1,7 +1,9 @@
 import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
-import { GMX_SWAP_ABI } from './abi.js'
+import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
+import { GMX_ROUTERV1_ADDRESS } from './addresses.js'
 import fetch from 'node-fetch'
+
 export const swap = async (swap: SwapActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
@@ -16,18 +18,44 @@ export const swap = async (swap: SwapActionParams) => {
 
   // Fortunatly even though there are two different functions the parameters are the same
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  if (contractAddress === GMX_ROUTERV1_ADDRESS) {
+    return compressJson({
+      to: contractAddress, // The contract address of the swap
+      chainId: chainId, // The chain id of the swap
+      input: {
+        $abi: GMX_SWAPV1_ABI,
+        _path: [tokenIn, tokenOut], // The path of the swap
+        _amountIn: amountIn, // The amount of the input token
+        _minOut: amountOut, // The minimum amount of the output token
+        _receiver: recipient, // The recipient of the output token
+      }, // The input object is where we'll put the ABI and the parameters
+    })
+  }
   return compressJson({
     to: contractAddress, // The contract address of the swap
     chainId: chainId, // The chain id of the swap
     input: {
-      $abi: GMX_SWAP_ABI,
-      _path: [tokenIn, tokenOut], // The path of the swap
-      _amountIn: amountIn, // The amount of the input token
-      _minOut: amountOut, // The minimum amount of the output token
-      _receiver: recipient, // The recipient of the output token
-    }, // The input object is where we'll put the ABI and the parameters
+      $abi: GMX_SWAPV2_ABI,
+      $some: {
+        $abiParams: CREATE_ORDER_PARAMS,
+        path: buildV3PathQuery(tokenIn, tokenOut),
+        amountIn,
+        amountOut,
+        recipient,
+      },
+    },
   })
 }
+
+const CREATE_ORDER_PARAMS = [
+  'CreateOrderParamsAddresses addresses',
+  'CreateOrderParamsNumbers: numbers',
+  'Order.OrderType: orderType',
+  'Order.DecreasePositionSwapType decreasePositionSwapType',
+  'bool isLong',
+  'bool shouldUnwrapNativeToken',
+  'bytes32 referralCode',
+]
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
   try {
