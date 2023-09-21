@@ -3,25 +3,8 @@ import { describe, expect, test } from 'vitest'
 import { GMX_SWAP_ABI } from './abi.js'
 import { swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
+import { buildPathQuery } from './utils.js'
 
-const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
-  // v3 paths are formatted as 0x<token><fee><token>
-
-  const conditions: FilterOperator[] = []
-
-  if (tokenIn) {
-    conditions.push({ $regex: `^${tokenIn}` })
-  }
-
-  if (tokenOut) {
-    // Chop the 0x prefix before comparing
-    conditions.push({ $regex: `${tokenOut.slice(2)}$` })
-  }
-
-  return {
-    $and: conditions,
-  }
-}
 
 describe('Given the gmx plugin', () => {
   const GMX_ROUTER_ADDRESS = '0xabbc5f99639c9b6bcb58544ddf04efa6802f4064'
@@ -47,7 +30,7 @@ describe('Given the gmx plugin', () => {
       chainId: ARB_ONE_CHAIN_ID,
       input: {
         $abi: GMX_SWAP_ABI,
-        _path: buildV3PathQuery(BRIDGED_USDC_ADDRESS, USDT_ADDRESS),
+        _path: buildPathQuery(BRIDGED_USDC_ADDRESS, USDT_ADDRESS),
         _amountIn: {
           $gte: '100000',
         },
