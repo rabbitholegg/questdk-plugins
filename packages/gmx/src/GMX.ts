@@ -5,7 +5,7 @@ import {
   DEFAULT_TOKEN_LIST_URL,
   GMX_ROUTERV1_ADDRESS,
 } from './contract-addresses.js'
-import fetch from 'node-fetch'
+import axios from 'axios'
 import { type Address } from 'viem'
 
 enum OrderType {
@@ -84,12 +84,12 @@ export const swap = async (swap: SwapActionParams) => {
 export const getSupportedTokenAddresses = async (_chainId: number) => {
   try {
     // Send a GET request to the specified URL using the fetch API
-    const response = await fetch('https://api.gmx.io/tokens')
+    const response = await axios.get('https://api.gmx.io/tokens')
 
     // Check if the request was successful (status code 200)
-    if (response.ok) {
+    if (response.statusText === 'OK') {
       // Parse the JSON response into a JavaScript object
-      const data = (await response.json()) as Array<{ data: any; id: string }>
+      const data = (response.data) as Array<{ data: any; id: string }>
       return data.map((token) => token.id) as Address[]
     } else {
       console.error(`Request failed with status code: ${response.status}`)
