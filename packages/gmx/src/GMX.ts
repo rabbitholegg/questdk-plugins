@@ -1,7 +1,10 @@
 import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
-import { DEFAULT_TOKEN_LIST_URL, GMX_ROUTERV1_ADDRESS } from './contract-addresses.js'
+import {
+  DEFAULT_TOKEN_LIST_URL,
+  GMX_ROUTERV1_ADDRESS,
+} from './contract-addresses.js'
 import fetch from 'node-fetch'
 
 enum OrderType {
@@ -23,7 +26,7 @@ enum OrderType {
   // @dev StopLossDecrease: decrease position if the triggerPrice is reached and the acceptablePrice can be fulfilled
   StopLossDecrease,
   // @dev Liquidation: allows liquidation of positions if the criteria for liquidation are met
-  Liquidation
+  Liquidation,
 }
 
 export const swap = async (swap: SwapActionParams) => {
@@ -58,8 +61,8 @@ export const swap = async (swap: SwapActionParams) => {
     chainId: chainId, // The chain id of the swap
     input: {
       $abi: GMX_SWAPV2_ABI,
-      data:{
-        $some:{
+      data: {
+        $some: {
           $abi: GMX_SWAPV2_ABI,
           params: {
             numbers: {
@@ -69,12 +72,10 @@ export const swap = async (swap: SwapActionParams) => {
             addresses: {
               receiver: recipient,
               swapPath: [tokenIn, tokenOut],
-            }
-          }
-          ,
-          
+            },
+          },
+        },
       },
-      }
     },
   })
 }
