@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- [#34](https://github.com/rabbitholegg/questdk-plugins/pull/34) [`3ccb438`](https://github.com/rabbitholegg/questdk-plugins/commit/3ccb4384d0bb74a5df8c7cb6b418238eb618c02d) Thanks [@Quazia](https://github.com/Quazia)! - Switch from fetch to axios and return correct chain IDs in stargate
+
 ## 1.0.0-alpha.6
 
 ### Minor Changes
