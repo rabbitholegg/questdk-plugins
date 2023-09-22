@@ -53,6 +53,7 @@
     "@rabbitholegg/questdk-plugin-hop": "workspace:*",
     "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
     "@rabbitholegg/questdk-plugin-optimism": "workspace:*",
+    "@rabbitholegg/questdk-plugin-gmx": "workspace:*",
     "viem": "^1.2.15"
   }
 }
