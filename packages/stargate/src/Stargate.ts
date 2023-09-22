@@ -9,7 +9,7 @@ import {
   POLYGON_CHAIN_ID,
 } from './chain-ids.js'
 import {
-  CHAIN_ONE_AND_POOL_TO_TOKEN_ADDRESS,
+  NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
   CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
   CHAIN_ID_TO_ROUTER_ADDRESS,
 } from './contract-addresses.js'
@@ -26,7 +26,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   } = bridge
   const layerZeroDestination = LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
   const sourcePool = tokenAddress
-    ? CHAIN_ONE_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress]
+    ? NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress]
     : 0
 
   if (sourcePool === 13) {

@@ -186,7 +186,7 @@ export const CHAIN_ZERO_AND_POOL_TO_TOKEN_ADDRESS: {
   },
 }
 
-export const CHAIN_ONE_AND_POOL_TO_TOKEN_ADDRESS: {
+export const NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
   [chainId: number]: { [address: string]: number }
 } = {
   [ETH_CHAIN_ID]: {

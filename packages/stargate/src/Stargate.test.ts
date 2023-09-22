@@ -18,7 +18,7 @@ import {
 import { STARGATE_BRIDGE_ABI } from './abi.js'
 import { parseEther } from 'viem'
 import {
-  CHAIN_ONE_AND_POOL_TO_TOKEN_ADDRESS,
+  NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
   CHAIN_ID_TO_ROUTER_ADDRESS,
   CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
 } from './contract-addresses.js'
@@ -43,7 +43,7 @@ describe('Given the Across plugin', () => {
         recipient: TEST_USER,
       })
       const sourcePool =
-        CHAIN_ONE_AND_POOL_TO_TOKEN_ADDRESS[ARBITRUM_CHAIN_ID][
+        NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ARBITRUM_CHAIN_ID][
           ARBITRUM_USDC_ADDRESS
         ]
 
@@ -71,7 +71,7 @@ describe('Given the Across plugin', () => {
         recipient: TEST_USER,
       })
       const sourcePool =
-      CHAIN_ONE_AND_POOL_TO_TOKEN_ADDRESS[ETH_CHAIN_ID][
+      NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ETH_CHAIN_ID][
           ETHEREUM_USDC_ADDRESS
         ]
 
