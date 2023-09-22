@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#28](https://github.com/rabbitholegg/questdk-plugins/pull/28) [`ac7591c`](https://github.com/rabbitholegg/questdk-plugins/commit/ac7591c21abec5dfbaf0a9bd1a64b22084099e7c) Thanks [@Quazia](https://github.com/Quazia)! - Add swap support for GMX
+
+### Patch Changes
+
+- Updated dependencies [[`ac7591c`](https://github.com/rabbitholegg/questdk-plugins/commit/ac7591c21abec5dfbaf0a9bd1a64b22084099e7c), [`c0cdb28`](https://github.com/rabbitholegg/questdk-plugins/commit/c0cdb28e1c20c9f1e5fdefa7630c87f76db16ffc)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.6
+
 ## 1.0.0-alpha.8
 
 ### Minor Changes

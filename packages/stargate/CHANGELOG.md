@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.6
+
+### Minor Changes
+
+- [#32](https://github.com/rabbitholegg/questdk-plugins/pull/32) [`c0cdb28`](https://github.com/rabbitholegg/questdk-plugins/commit/c0cdb28e1c20c9f1e5fdefa7630c87f76db16ffc) Thanks [@Quazia](https://github.com/Quazia)! - Quick fix to chain id handling in stargate bridge plugin
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes
