@@ -237,12 +237,19 @@ export function apply(
 
     if (key in operators) {
       const operator = operators[key as OperatorKey]
-      if (!operator(context, filters[key])) return false
+      if (!operator(context, filters[key])) {
+        return false
+      }
       continue
     }
 
     if (typeof filters[key] === 'object') {
-      if (!apply(context[key], filters[key])) return false
+      if (!(key in context)) {
+        return false
+      }
+      if (!apply(context[key], filters[key])) {
+        return false
+      }
     } else if (isAddress(context[key])) {
       if (context[key].toLowerCase() !== filters[key].toLowerCase()) {
         return false
@@ -253,13 +260,15 @@ export function apply(
       typeof context[key] === 'bigint' ||
       typeof context[key] === 'number'
     ) {
-      if (BigInt(context[key]) !== BigInt(filters[key])) {
+      if (
+        context[key] === undefined ||
+        BigInt(context[key]) !== BigInt(filters[key])
+      ) {
         return false
       }
     } else if (context[key] !== filters[key]) {
       return false
     }
   }
-
   return true
 }
