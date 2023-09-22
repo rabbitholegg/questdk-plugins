@@ -3,12 +3,14 @@
   "tag": "alpha",
   "changesets": [
     "brown-points-smile",
+    "healthy-bugs-enjoy",
     "hungry-squids-drop",
     "late-scissors-wonder",
     "new-ears-study",
     "pink-horses-change",
     "pink-moons-tickle",
     "quick-eyes-retire",
+    "sixty-trains-yawn",
     "sour-boxes-reflect",
     "tasty-bobcats-clean",
     "tough-cooks-hammer",
@@ -27,6 +29,7 @@
     "@rabbitholegg/questdk-plugin-hop": "1.0.0-alpha.3",
     "@rabbitholegg/questdk-plugin-optimism": "1.0.0-alpha.3",
     "@rabbitholegg/questdk-plugin-polygon": "1.0.0-alpha.3",
-    "@rabbitholegg/questdk-plugin-stargate": "1.0.0-alpha.3"
+    "@rabbitholegg/questdk-plugin-stargate": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-gmx": "1.0.0-alpha.3"
   }
 }
