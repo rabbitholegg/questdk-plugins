@@ -89,7 +89,7 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
     // Check if the request was successful (status code 200)
     if (response.statusText === 'OK') {
       // Parse the JSON response into a JavaScript object
-      const data = (response.data) as Array<{ data: any; id: string }>
+      const data = response.data as Array<{ data: any; id: string }>
       return data.map((token) => token.id) as Address[]
     } else {
       console.error(`Request failed with status code: ${response.status}`)
