@@ -1,7 +1,7 @@
 import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
-import { GMX_ROUTERV1_ADDRESS } from './contract-addresses.js'
+import { DEFAULT_TOKEN_LIST_URL, GMX_ROUTERV1_ADDRESS } from './contract-addresses.js'
 import fetch from 'node-fetch'
 
 enum OrderType {
@@ -97,7 +97,7 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
     console.error(
       `An error occurred: ${(error as { message: string }).message}`,
     )
-    return []
+    return DEFAULT_TOKEN_LIST_URL
   }
 }
 
