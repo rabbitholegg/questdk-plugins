@@ -77,4 +77,3 @@ export const NATIVE_CHAIN_ID_ARRAY = [
   LINEA_CHAIN_ID,
   BASE_CHAIN_ID,
 ]
-
