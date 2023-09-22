@@ -6,6 +6,7 @@ import {
   GMX_ROUTERV1_ADDRESS,
 } from './contract-addresses.js'
 import fetch from 'node-fetch'
+import {type Address } from 'viem'
 
 enum OrderType {
   // @dev MarketSwap: swap token A to token B at the current market price
@@ -89,7 +90,7 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
     if (response.ok) {
       // Parse the JSON response into a JavaScript object
       const data = (await response.json()) as Array<{ data: any; id: string }>
-      return data.map((token) => token.id) as `0x${string}`[]
+      return data.map((token) => token.id) as Address[]
     } else {
       console.error(`Request failed with status code: ${response.status}`)
       return []
@@ -98,7 +99,7 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
     console.error(
       `An error occurred: ${(error as { message: string }).message}`,
     )
-    return DEFAULT_TOKEN_LIST_URL as `0x${string}`[]
+    return DEFAULT_TOKEN_LIST_URL
   }
 }
 
