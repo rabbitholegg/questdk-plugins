@@ -3,7 +3,7 @@ import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
   DEFAULT_TOKEN_LIST_URL,
-  GMX_ROUTERV1_ADDRESS,
+  GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
 import axios from 'axios'
 import { type Address } from 'viem'
@@ -42,42 +42,42 @@ export const swap = async (swap: SwapActionParams) => {
     recipient,
   } = swap
 
-  // Fortunatly even though there are two different functions the parameters are the same
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
-  if (contractAddress === GMX_ROUTERV1_ADDRESS) {
+  if (contractAddress === GMX_ROUTERV2_ADDRESS) {
     return compressJson({
       to: contractAddress, // The contract address of the swap
       chainId: chainId, // The chain id of the swap
       input: {
-        $abi: GMX_SWAPV1_ABI,
-        _path: [tokenIn, tokenOut], // The path of the swap
-        _amountIn: amountIn, // The amount of the input token
-        _minOut: amountOut, // The minimum amount of the output token
-        _receiver: recipient, // The recipient of the output token
-      }, // The input object is where we'll put the ABI and the parameters
-    })
-  }
-  return compressJson({
-    to: contractAddress, // The contract address of the swap
-    chainId: chainId, // The chain id of the swap
-    input: {
-      $abi: GMX_SWAPV2_ABI,
-      data: {
-        $some: {
-          $abi: GMX_SWAPV2_ABI,
-          params: {
-            numbers: {
-              minOutputAmount: amountOut,
-            },
-            orderType: OrderType.MarketSwap,
-            addresses: {
-              receiver: recipient,
-              swapPath: [tokenIn, tokenOut],
+        $abi: GMX_SWAPV2_ABI,
+        data: {
+          $some: {
+            $abi: GMX_SWAPV2_ABI,
+            params: {
+              numbers: {
+                minOutputAmount: amountOut,
+              },
+              orderType: OrderType.MarketSwap,
+              addresses: {
+                receiver: recipient,
+                swapPath: [tokenIn, tokenOut],
+              },
             },
           },
         },
       },
-    },
+    })
+  }
+  // Fortunatly even though there are two different functions the parameters are the same
+  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  return compressJson({
+    to: contractAddress, // The contract address of the swap
+    chainId: chainId, // The chain id of the swap
+    input: {
+      $abi: GMX_SWAPV1_ABI,
+      _path: [tokenIn, tokenOut], // The path of the swap
+      _amountIn: amountIn, // The amount of the input token
+      _minOut: amountOut, // The minimum amount of the output token
+      _receiver: recipient, // The recipient of the output token
+    }, // The input object is where we'll put the ABI and the parameters
   })
 }
 
