@@ -1,6 +1,5 @@
 {
   "name": "@rabbitholegg/questdk-plugin-across",
-  "private": true,
   "version": "1.0.0-alpha.4",
   "type": "module",
   "exports": {
