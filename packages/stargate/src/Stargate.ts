@@ -24,13 +24,17 @@ export const bridge = async (bridge: BridgeActionParams) => {
     amount,
     recipient,
   } = bridge
-  const layerZeroDestination = LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
+  const layerZeroDestination =
+    LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
   const sourcePool = tokenAddress
     ? CHAIN_ONE_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress]
     : 0
 
   if (sourcePool === 13) {
-    const targetContractAddress = CHAIN_ID_TO_ETH_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]]
+    const targetContractAddress =
+      CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
+        LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]
+      ]
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
       to: contractAddress || targetContractAddress, // The contract address of the bridge
@@ -42,7 +46,8 @@ export const bridge = async (bridge: BridgeActionParams) => {
       }, // The input object is where we'll put the ABI and the parameters
     })
   }
-  const targetContractAddress = CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]]
+  const targetContractAddress =
+    CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]]
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
@@ -62,9 +67,12 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
-  if(_chainId === POLYGON_CHAIN_ID) return ['0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174']
-  if(_chainId === ARBITRUM_CHAIN_ID) return ['0xaf88d065e77c8cC2239327C5EDb3A432268e5831']
-  if(_chainId === ETH_CHAIN_ID) return ['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48']
+  if (_chainId === POLYGON_CHAIN_ID)
+    return ['0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174']
+  if (_chainId === ARBITRUM_CHAIN_ID)
+    return ['0xaf88d065e77c8cC2239327C5EDb3A432268e5831']
+  if (_chainId === ETH_CHAIN_ID)
+    return ['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48']
   return []
 }
 

@@ -50,7 +50,6 @@ export const LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID: Record<number, number> = {
   [BASE_CHAIN_ID]: BASE_LAYER_ZERO_CHAIN_ID,
 } as const
 
-
 export const CHAIN_ID_ARRAY = [
   ETH_LAYER_ZERO_CHAIN_ID,
   BNB_LAYER_ZERO_CHAIN_ID,
