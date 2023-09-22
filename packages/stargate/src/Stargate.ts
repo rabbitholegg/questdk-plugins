@@ -3,7 +3,7 @@ import { type Address } from 'viem'
 import { STARGATE_BRIDGE_ABI } from './abi.js'
 import {
   ARBITRUM_CHAIN_ID,
-  CHAIN_ID_ARRAY,
+  NATIVE_CHAIN_ID_ARRAY,
   ETH_CHAIN_ID,
   LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID,
   POLYGON_CHAIN_ID,
@@ -77,5 +77,5 @@ export const getSupportedTokenAddresses = async (
 }
 
 export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY as number[]
+  return NATIVE_CHAIN_ID_ARRAY as number[]
 }
