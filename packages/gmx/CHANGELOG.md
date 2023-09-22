@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.6
+
+### Minor Changes
+
+- [#38](https://github.com/rabbitholegg/questdk-plugins/pull/38) [`ca9b1da`](https://github.com/rabbitholegg/questdk-plugins/commit/ca9b1dae94d44d0e2e5d97ba9894282c60f62e69) Thanks [@Quazia](https://github.com/Quazia)! - Small fix to gmx swap filter ordering
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes
