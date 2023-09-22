@@ -1,14 +1,14 @@
-import {
-  GreaterThanOrEqual,
-  apply
-} from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { GMX_SWAPV1_ABI } from './abi.js'
 import { swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { SWAP_ETH, SWAP_ETH_V2 } from './test-transactions.js'
 import { parseEther } from 'viem'
-import { GMX_ROUTERV1_ADDRESS, GMX_ROUTERV2_ADDRESS } from './contract-addresses.js'
+import {
+  GMX_ROUTERV1_ADDRESS,
+  GMX_ROUTERV2_ADDRESS,
+} from './contract-addresses.js'
 
 describe('Given the gmx plugin', () => {
   const BRIDGED_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
