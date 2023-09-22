@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.5
+
+### Minor Changes
+
+- [#36](https://github.com/rabbitholegg/questdk-plugins/pull/36) [`7cbc6c8`](https://github.com/rabbitholegg/questdk-plugins/commit/7cbc6c858cdd4ed992a58fe68264d806524efdac) Thanks [@Quazia](https://github.com/Quazia)! - Quick version sync for GMX
+
 ## 1.0.0-alpha.4
 
 ### Patch Changes
