@@ -1,11 +1,12 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { GMX_SWAPV1_ABI } from './abi.js'
-import { swap } from './GMX.js'
+import { getSupportedTokenAddresses, swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { SWAP_ETH, SWAP_ETH_V2 } from './test-transactions.js'
 import { parseEther } from 'viem'
 import {
+  DEFAULT_TOKEN_LIST_URL,
   GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
@@ -68,6 +69,10 @@ describe('Given the gmx plugin', () => {
         recipient: '0x38B8b00ec79f43E3Ec9b8142F32ea2210D2A7aff',
       })
       expect(apply(transaction, filter)).to.be.true
+    })
+    test('should return the correct list of tokens', async () => {
+      const tokens = await getSupportedTokenAddresses(ARB_ONE_CHAIN_ID)
+      expect(tokens).to.deep.equal(DEFAULT_TOKEN_LIST_URL)
     })
   })
 })
