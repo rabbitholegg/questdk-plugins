@@ -1,5 +1,46 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.8
+
+### Minor Changes
+
+- [#29](https://github.com/rabbitholegg/questdk-plugins/pull/29) [`5fa3757`](https://github.com/rabbitholegg/questdk-plugins/commit/5fa375719ade2563143bafb4b690f7a53671fa82) Thanks [@Quazia](https://github.com/Quazia)! - Re-release all pre-existing plugins
+
+### Patch Changes
+
+- Updated dependencies [[`5fa3757`](https://github.com/rabbitholegg/questdk-plugins/commit/5fa375719ade2563143bafb4b690f7a53671fa82)]:
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.5
+
+## 1.0.0-alpha.7
+
+### Minor Changes
+
+- [#21](https://github.com/rabbitholegg/questdk-plugins/pull/21) [`8907847`](https://github.com/rabbitholegg/questdk-plugins/commit/89078470a77757709c94587e421b6ebd222f7e02) Thanks [@Quazia](https://github.com/Quazia)! - Add bridging support for Across
+
+- [#20](https://github.com/rabbitholegg/questdk-plugins/pull/20) [`1ef051e`](https://github.com/rabbitholegg/questdk-plugins/commit/1ef051e7ab4fd2e1f58ebe2e543c79e856d3da99) Thanks [@Quazia](https://github.com/Quazia)! - Add bridge plugin for hop
+
+- [#17](https://github.com/rabbitholegg/questdk-plugins/pull/17) [`a39dff2`](https://github.com/rabbitholegg/questdk-plugins/commit/a39dff2fd2e2d02107a847e38ca3cc169c91e490) Thanks [@Quazia](https://github.com/Quazia)! - Add briding support for optimism
+
+- [#19](https://github.com/rabbitholegg/questdk-plugins/pull/19) [`3ade094`](https://github.com/rabbitholegg/questdk-plugins/commit/3ade0945625d9be75843d3cc60b3770adfdb68bd) Thanks [@Quazia](https://github.com/Quazia)! - Add bridging support for polygon
+
+- [#13](https://github.com/rabbitholegg/questdk-plugins/pull/13) [`82d1166`](https://github.com/rabbitholegg/questdk-plugins/commit/82d1166644c8728f903887f1417f72f4d1b1474d) Thanks [@Quazia](https://github.com/Quazia)! - Add support for bridging on Arbitrum
+
+### Patch Changes
+
+- Updated dependencies [[`8907847`](https://github.com/rabbitholegg/questdk-plugins/commit/89078470a77757709c94587e421b6ebd222f7e02), [`eb67e35`](https://github.com/rabbitholegg/questdk-plugins/commit/eb67e35bf487610efa545e5a34d4e6624371b0ca), [`1ef051e`](https://github.com/rabbitholegg/questdk-plugins/commit/1ef051e7ab4fd2e1f58ebe2e543c79e856d3da99), [`a39dff2`](https://github.com/rabbitholegg/questdk-plugins/commit/a39dff2fd2e2d02107a847e38ca3cc169c91e490), [`3ade094`](https://github.com/rabbitholegg/questdk-plugins/commit/3ade0945625d9be75843d3cc60b3770adfdb68bd), [`82d1166`](https://github.com/rabbitholegg/questdk-plugins/commit/82d1166644c8728f903887f1417f72f4d1b1474d)]:
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.4
+
 ## 1.0.0-alpha.4
 
 ### Patch Changes
