@@ -1,8 +1,30 @@
 import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
-import { GMX_ROUTERV1_ADDRESS } from './addresses.js'
+import { GMX_ROUTERV1_ADDRESS } from './contract-addresses.js'
 import fetch from 'node-fetch'
+
+enum OrderType {
+  // @dev MarketSwap: swap token A to token B at the current market price
+  // the order will be cancelled if the minOutputAmount cannot be fulfilled
+  MarketSwap,
+  // @dev LimitSwap: swap token A to token B if the minOutputAmount can be fulfilled
+  LimitSwap,
+  // @dev MarketIncrease: increase position at the current market price
+  // the order will be cancelled if the position cannot be increased at the acceptablePrice
+  MarketIncrease,
+  // @dev LimitIncrease: increase position if the triggerPrice is reached and the acceptablePrice can be fulfilled
+  LimitIncrease,
+  // @dev MarketDecrease: decrease position at the current market price
+  // the order will be cancelled if the position cannot be decreased at the acceptablePrice
+  MarketDecrease,
+  // @dev LimitDecrease: decrease position if the triggerPrice is reached and the acceptablePrice can be fulfilled
+  LimitDecrease,
+  // @dev StopLossDecrease: decrease position if the triggerPrice is reached and the acceptablePrice can be fulfilled
+  StopLossDecrease,
+  // @dev Liquidation: allows liquidation of positions if the criteria for liquidation are met
+  Liquidation
+}
 
 export const swap = async (swap: SwapActionParams) => {
   // This is the information we'll use to compose the Transaction object
@@ -36,26 +58,26 @@ export const swap = async (swap: SwapActionParams) => {
     chainId: chainId, // The chain id of the swap
     input: {
       $abi: GMX_SWAPV2_ABI,
-      $some: {
-        $abiParams: CREATE_ORDER_PARAMS,
-        path: buildV3PathQuery(tokenIn, tokenOut),
-        amountIn,
-        amountOut,
-        recipient,
+      data:{
+        $some:{
+          $abi: GMX_SWAPV2_ABI,
+          params: {
+            numbers: {
+              minOutputAmount: amountOut,
+            },
+            orderType: OrderType.MarketSwap,
+            addresses: {
+              receiver: recipient,
+              swapPath: [tokenIn, tokenOut],
+            }
+          }
+          ,
+          
       },
+      }
     },
   })
 }
-
-const CREATE_ORDER_PARAMS = [
-  'CreateOrderParamsAddresses addresses',
-  'CreateOrderParamsNumbers: numbers',
-  'Order.OrderType: orderType',
-  'Order.DecreasePositionSwapType decreasePositionSwapType',
-  'bool isLong',
-  'bool shouldUnwrapNativeToken',
-  'bytes32 referralCode',
-]
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
   try {
