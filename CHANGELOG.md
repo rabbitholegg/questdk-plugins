@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.11
+
+### Patch Changes
+
+- [#16](https://github.com/rabbitholegg/questdk/pull/16) [`143f568`](https://github.com/rabbitholegg/questdk/commit/143f56803d738de8153dfc22b325d8df48bb4587) Thanks [@Quazia](https://github.com/Quazia)! - Quick fix for handling undefined contexts
+
 ## 1.0.1-alpha.10
 
 ### Patch Changes
