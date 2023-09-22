@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.10
+
+### Patch Changes
+
+- [#14](https://github.com/rabbitholegg/questdk/pull/14) [`d646642`](https://github.com/rabbitholegg/questdk/commit/d64664236d1f8fcd0743c01e01d32a5b3aae15af) Thanks [@Quazia](https://github.com/Quazia)! - Handle undefined and non-existent key in filter better so $some doesn't fail
+
 ## 1.0.1-alpha.9
 
 ### Patch Changes
