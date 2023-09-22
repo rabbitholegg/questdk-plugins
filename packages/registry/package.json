@@ -44,7 +44,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "1.0.1-alpha.8",
+    "@rabbitholegg/questdk": "1.0.1-alpha.10",
     "@rabbitholegg/questdk-plugin-connext": "workspace:*",
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-stargate": "workspace:*",
@@ -53,6 +53,7 @@
     "@rabbitholegg/questdk-plugin-hop": "workspace:*",
     "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
     "@rabbitholegg/questdk-plugin-optimism": "workspace:*",
+    "@rabbitholegg/questdk-plugin-gmx": "workspace:*",
     "viem": "^1.2.15"
   }
 }
