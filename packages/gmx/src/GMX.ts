@@ -6,7 +6,7 @@ import {
   GMX_ROUTERV1_ADDRESS,
 } from './contract-addresses.js'
 import fetch from 'node-fetch'
-import {type Address } from 'viem'
+import { type Address } from 'viem'
 
 enum OrderType {
   // @dev MarketSwap: swap token A to token B at the current market price
