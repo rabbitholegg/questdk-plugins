@@ -1,6 +1,5 @@
 {
   "name": "@rabbitholegg/questdk-plugin-stargate",
-  "private": true,
   "version": "1.0.0-alpha.5",
   "type": "module",
   "exports": {
