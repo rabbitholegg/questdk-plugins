@@ -70,7 +70,10 @@ describe('Given the Across plugin', () => {
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
-      const sourcePool = NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ETH_CHAIN_ID][ETHEREUM_USDC_ADDRESS]
+      const sourcePool =
+        NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ETH_CHAIN_ID][
+          ETHEREUM_USDC_ADDRESS
+        ]
 
       expect(filter).to.deep.equal({
         chainId: ETH_CHAIN_ID,
