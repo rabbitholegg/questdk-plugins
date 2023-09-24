@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.0.1-alpha.12
+
+### Patch Changes
+
+- [#18](https://github.com/rabbitholegg/questdk/pull/18) [`5265001`](https://github.com/rabbitholegg/questdk/commit/5265001c75978f7223748bd377664e15070e0aa7) Thanks [@Quazia](https://github.com/Quazia)! - Fix to handle errors more gracefully
+
 ## 1.0.1-alpha.11
 
 ### Patch Changes
