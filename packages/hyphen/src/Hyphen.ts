@@ -37,6 +37,19 @@ export const bridge = async (
       },
     })
   }
+
+  // if transfer is for ERC-20 tokens
+  return compressJson({
+    chainId: sourceChainId,
+    to: bridgeContract,
+    input: {
+      $abi: ABI,
+      toChainId: destinationChainId,
+      tokenAddress,
+      receiver: recipient,
+      amount,
+    },
+  })
 }
 
 export const getSupportedTokenAddresses = async (
