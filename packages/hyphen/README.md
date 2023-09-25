@@ -1,25 +1,22 @@
-When First creating a template for a project we generally want to find at most 4 transactions. Some bridges don't have a sense of a source and target chain, but for bridges that do we need more information. Some bridges might use the same ABI and address for all 4 of these transaction types!
+# Hyphen Plugin
 
-## ETH/BASE TOKEN
-When trying to bridge ETH or the base network token (Matic for Polygon for instance) sometimes the pattern is different.
-We want to find a transaction from the base chain and the target chain that shows transferring ETH from and to those chains.
-In general we refer to moving value from a base chain (mainnet) to a higher order chain a `deposit` and returning back to a base chain a `withdrawal`.
-In the case where it's a general purpose bridge this process is simply a `transfer`. In that case you only need to find 1 transaction, not 2.
+This plugin is designed to filter valid bridge transaction on the biconomy hyphen bridge
 
-### Deposit ETH
-This handles the case where we have ETH that we want to bridge from Mainnet to L2. A lot of times this is handled differently. Often times this triggers a `payable` function and requires the `bridge` function to use the `value` param.
+## Overview
 
-### Withdraw ETH
-This handles the case where we have ETH that we want to bridge from an L2 to Mainnet. Depending on this chain this can also be a payable, but often times will just be a separate contract address.
+The Hyphen Bridge is relatively simple compared to other bridges. The same function is used regardless of wether you are bridging to or from L1. There is 3 functions we are watching, ```depositNative``` for native tokens like ETH (or MATIC for Polygon), ```depositErc20``` for supported ERC-20 tokens, and ```depositErc20AndSwap``` which will swap out some of the bridged tokens for some of the native gas token on the receiving chain.
 
-## ERC20
-ERC20 transactions are by far the most common for bridges.
-In some cases this might be the only transaction type you need to find, although most of the time ETH is handled different. If the protocol _always_ uses wrapped ETH, this may be the only transaction type.
-### Deposit ERC20
-Generally this is the same as moving from L2 to L1, but especially for native bridging sometimes there are precompiles for the withdraw process.
-### Withdraw ERC20 
+There is also a ```depositNativeAndSwap``` function, but I cannot find any instances of it being used in the wild, so I have chosen to exclude it from the filter.
+
+## Example Transactions
+
+### depositNative
+- [From L1 to L2](https://etherscan.io/tx/0x8658d84686792ff03e4749dcd08cd750ec00632965d423214381595f32673dea)
+- [From L2 to L1](https://optimistic.etherscan.io/tx/0x39349b8bc309e3e861565b2a08efa6fb5bb1726713ba17ff166396c15147e625)
 
 
+### depositErc20
+- https://etherscan.io/tx/0xbb7a23d915fd2b7e2df1e5116a785210c48671b0db5b790659db7f922d2c18ca
 
-You can use the following example code to pull down test transactions in the correct format easily:
-https://viem.sh/docs/actions/public/getTransaction.html#example
+### depositErc20AndSwap
+- https://polygonscan.com/tx/0x826839c49ecb2e25e263ad2299ac444d8e0bc92d92f8934d326a4ecd7ea8bc39
