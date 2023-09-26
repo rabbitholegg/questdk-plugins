@@ -34,6 +34,7 @@ describe('executePlugin', () => {
       bridge: vi.fn(),
       swap: vi.fn(),
       mint: vi.fn(),
+      delegate: vi.fn(),
     } as unknown as IActionPlugin
 
     await executePlugin(mockPlugin, ActionType.Bridge, mockParams)
@@ -44,6 +45,9 @@ describe('executePlugin', () => {
 
     await executePlugin(mockPlugin, ActionType.Mint, mockParams)
     expect(mockPlugin.mint).toHaveBeenCalledWith(mockParams)
+
+    await executePlugin(mockPlugin, ActionType.Delegate, mockParams)
+    expect(mockPlugin.delegate).toHaveBeenCalledWith(mockParams)
   })
 
   test('should throw an error for unknown action type', () => {
