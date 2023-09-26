@@ -3,9 +3,10 @@ import {
   ActionType,
   type BridgeActionParams,
   type IActionPlugin,
-  type MintActionParams,
   PluginActionNotImplementedError,
+  type MintActionParams,
   type SwapActionParams,
+  type DelegateActionParams,
   type TransactionFilter,
 } from '@rabbitholegg/questdk'
 
@@ -14,7 +15,7 @@ import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
 import { Across } from '@rabbitholegg/questdk-plugin-across'
 import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
-import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
+import { Optimism } from '@rab bitholegg/questdk-plugin-optimism'
 import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
@@ -51,6 +52,8 @@ export const executePlugin = (
       return plugin.swap(params as unknown as SwapActionParams)
     case ActionType.Mint:
       return plugin.mint(params as unknown as MintActionParams)
+    case ActionType.Delegate:
+      return plugin.delegate(params as unknown as DelegateActionParams)
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
