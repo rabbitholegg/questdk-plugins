@@ -1,4 +1,4 @@
-const TALLY_ABI = [
+export const TALLY_ABI = [
     {
         "inputs": [
           {
