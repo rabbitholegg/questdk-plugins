@@ -20,3 +20,12 @@ There is also a ```depositNativeAndSwap``` function, but I cannot find any insta
 
 ### depositErc20AndSwap
 - https://polygonscan.com/tx/0x826839c49ecb2e25e263ad2299ac444d8e0bc92d92f8934d326a4ecd7ea8bc39
+
+
+## Bridge Contract Addresses
+- Ethereum - https://etherscan.io/address/0x2a5c2568b10a0e826bfa892cf21ba7218310180b 
+- Polygon - https://polygonscan.com/address/0x2a5c2568b10a0e826bfa892cf21ba7218310180b 
+- Avalanche - https://snowtrace.io/address/0x2a5c2568b10a0e826bfa892cf21ba7218310180b 
+- Optimism - https://optimistic.etherscan.io/address/0x856cb5c3cBBe9e2E21293A644aA1f9363CEE11E8 
+- Arbitrum - https://arbiscan.io/address/0x856cb5c3cBBe9e2E21293A644aA1f9363CEE11E8 
+- Binance - https://bscscan.com/address/0x94D3E62151B12A12A4976F60EdC18459538FaF08
