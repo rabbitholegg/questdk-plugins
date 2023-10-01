@@ -9,7 +9,7 @@ import {
   getSupportedTokenAddresses,
 } from './Basepaint.js'
 
-export const { Project }: IActionPlugin = {
+export const BasePaint: IActionPlugin = {
   pluginId: 'basepaint',
   getSupportedTokenAddresses,
   getSupportedChainIds,
