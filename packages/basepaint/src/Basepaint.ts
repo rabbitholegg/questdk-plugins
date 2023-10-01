@@ -1,4 +1,8 @@
-import { type MintActionParams, compressJson } from '@rabbitholegg/questdk'
+import {
+  type MintActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { BASE_CHAIN_ID, CONTRACT_ADDRESS, MINT_ABI } from './constants'
 
