@@ -1,24 +1,23 @@
 
 import { type MintActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { CONTRACT_ADDRESS, MINT_ABI } from './constants'
 
-// If you're implementing swap or mint, simply duplicate this function and change the name
 export const mint = async (mint: MintActionParams): Promise<TransactionFilter> => {
-  // This is the information we'll use to compose the Transaction object
   const {
-    sourceChainId,
-    destinationChainId,
-    contractAddress,
-    tokenAddress,
-    amount,
-    recipient,
+    address,
+    tokenId,
+    quantity,
   } = mint
 
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to:  0x0,   // The contract address of the bridge
-    input: {},  // The input object is where we'll put the ABI and the parameters
+    chainId: 8453, // base
+    to:  address, // mint contract address
+    input: {
+      $abi: MINT_ABI,
+      day: tokenId,
+      count: quantity,
+    },  
   })
 }
 
@@ -29,5 +28,5 @@ export const getSupportedTokenAddresses = async (_chainId: number): Promise<Addr
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   // This should return all of the ChainIds that are supported by the Project we're integrating
-
+  return [8453] // base
 }
