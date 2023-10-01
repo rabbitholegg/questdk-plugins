@@ -22,11 +22,10 @@ export const mint = async (mint: MintActionParams): Promise<TransactionFilter> =
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+  return [CONTRACT_ADDRESS]
 }
 
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
   return [8453] // base
 }
