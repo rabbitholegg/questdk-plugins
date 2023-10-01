@@ -1,7 +1,7 @@
 
 import { type MintActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CONTRACT_ADDRESS, MINT_ABI } from './constants'
+import { BASE_CHAIN_ID, CONTRACT_ADDRESS, MINT_ABI } from './constants'
 
 export const mint = async (mint: MintActionParams): Promise<TransactionFilter> => {
   const {
@@ -11,7 +11,7 @@ export const mint = async (mint: MintActionParams): Promise<TransactionFilter> =
   } = mint
 
   return compressJson({
-    chainId: 8453, // base
+    chainId: BASE_CHAIN_ID,
     to:  address, // mint contract address
     input: {
       $abi: MINT_ABI,
@@ -27,5 +27,5 @@ export const getSupportedTokenAddresses = async (_chainId: number): Promise<Addr
 
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return [8453] // base
+  return [BASE_CHAIN_ID]
 }
