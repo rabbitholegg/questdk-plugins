@@ -18,6 +18,7 @@ import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
 import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
+import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -29,6 +30,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Across.pluginId]: Across,
   [Optimism.pluginId]: Optimism,
   [GMX.pluginId]: GMX,
+  [BasePaint.pluginId]: BasePaint,
 }
 
 export const getPlugin = (pluginId: string) => {
