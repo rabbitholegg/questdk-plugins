@@ -1,3 +1,6 @@
+// chain id for base
+export const BASE_CHAIN_ID = 8453
+
 // Contract Address for BasePaint
 export const CONTRACT_ADDRESS = "0xba5e05cb26b78eda3a2f8e3b3814726305dcac83";
 
