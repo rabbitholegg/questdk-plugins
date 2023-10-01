@@ -13,7 +13,7 @@ export const {Project}: IActionPlugin = {
   pluginId: 'basepaint',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  mint
+  mint,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
 }
