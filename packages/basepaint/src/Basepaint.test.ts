@@ -1,7 +1,6 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { mint } from './Basepaint'
-import { MINT_TRANSACTION } from './test-transactions'
 import { CONTRACT_ADDRESS, MINT_ABI } from './constants'
 
 // Replace *project* with the name of the project
