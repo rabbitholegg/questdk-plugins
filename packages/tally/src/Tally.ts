@@ -1,6 +1,5 @@
 
 import { type DelegateActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
 import { TALLY_ABI } from './abi.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { TALLY_TOKENS } from './token-addresses.js'
