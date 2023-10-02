@@ -10,6 +10,7 @@ export type {
   SwapActionParams,
   BridgeActionParams,
   MintActionParams,
+  DelegateActionParams,
   ActionParams,
   IActionPlugin,
 } from './actions/types.js'
