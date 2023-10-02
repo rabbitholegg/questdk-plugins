@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.1.0-alpha.13
+
+### Minor Changes
+
+- [#20](https://github.com/rabbitholegg/questdk/pull/20) [`eb57541`](https://github.com/rabbitholegg/questdk/commit/eb575418de29ffc8304373ba66d42bb356c4d3b1) Thanks [@Quazia](https://github.com/Quazia)! - Add support for delegate type actions
+
 ## 1.0.1-alpha.12
 
 ### Patch Changes
