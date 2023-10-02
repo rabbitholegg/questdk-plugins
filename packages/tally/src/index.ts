@@ -1,5 +1,5 @@
 // This file is standard for more projects.
-// The main degree of nuance is in the 
+// The main degree of nuance is in the
 
 import {
   type IActionPlugin,
@@ -17,7 +17,7 @@ export const Tally: IActionPlugin = {
   pluginId: 'tally',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  bridge:  async () => new PluginActionNotImplementedError(),
+  bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
   delegate,

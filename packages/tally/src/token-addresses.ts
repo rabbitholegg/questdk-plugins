@@ -1,7 +1,5 @@
 import { type Address } from 'viem'
-import {
-  ARB_ONE_CHAIN_ID,
-} from './chain-ids.js'
+import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 
 // For now we're mainly supported the highest traffic Arbitrum tokens
 // Support for USDC seems like it might be non-trivial

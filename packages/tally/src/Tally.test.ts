@@ -10,7 +10,6 @@ const TEST_PROJECT = TALLY_TOKENS[ARB_ONE_CHAIN_ID][0]
 // Replace *project* with the name of the project
 describe('Given the tally plugin', () => {
   describe('When handling the delegate', () => {
-
     test('should return a valid action filter', async () => {
       const filter = await delegate({
         chainId: ARB_ONE_CHAIN_ID,
@@ -27,25 +26,30 @@ describe('Given the tally plugin', () => {
       })
     })
 
-    test('should pass filter with valid transactions',  async () => {
+    test('should pass filter with valid transactions', async () => {
       const transaction = ARBITRUM_DELEGATION
-      const filter = apply(await delegate({
-        chainId: ARB_ONE_CHAIN_ID,
-        delegatee: "0x3f9e3fbbbe967481222ddaa98e84470d7099381f",
-        project: TEST_PROJECT,
-      }), transaction)
-      expect(filter).to.equal(true)
-    })
-    
-    test('should not pass filter with invalid transactions',  async () => {
-      const transaction = ARBITRUM_DELEGATION
-      const filter = apply(await delegate({
-        chainId: ARB_ONE_CHAIN_ID,
-        delegatee: TEST_ADDRESS,
-        project: TEST_PROJECT,
-      }), transaction)
+      const filter = apply(
+        await delegate({
+          chainId: ARB_ONE_CHAIN_ID,
+          delegatee: '0x3f9e3fbbbe967481222ddaa98e84470d7099381f',
+          project: TEST_PROJECT,
+        }),
+        transaction,
+      )
       expect(filter).to.equal(true)
     })
 
+    test('should not pass filter with invalid transactions', async () => {
+      const transaction = ARBITRUM_DELEGATION
+      const filter = apply(
+        await delegate({
+          chainId: ARB_ONE_CHAIN_ID,
+          delegatee: TEST_ADDRESS,
+          project: TEST_PROJECT,
+        }),
+        transaction,
+      )
+      expect(filter).to.equal(true)
+    })
   })
 })

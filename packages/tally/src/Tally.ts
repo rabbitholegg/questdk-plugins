@@ -1,24 +1,21 @@
-
 import { type DelegateActionParams, compressJson } from '@rabbitholegg/questdk'
 import { TALLY_ABI } from './abi.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { TALLY_TOKENS } from './token-addresses.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
-export const delegate = async (delegate: DelegateActionParams): Promise<TransactionFilter> => {
+export const delegate = async (
+  delegate: DelegateActionParams,
+): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
-  const {
-    chainId,
-    delegatee,
-    project
-  } = delegate
+  const { chainId, delegatee, project } = delegate
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: chainId, // The chainId of the source chain
-    to:  project,   // The contract address of the governance platform
+    to: project, // The contract address of the governance platform
     input: {
       $abi: TALLY_ABI, // The ABI of the contract
       delegatee: delegatee, // The address of the delegatee
-    },  // The input object is where we'll put the ABI and the parameters
+    }, // The input object is where we'll put the ABI and the parameters
   })
 }
 
@@ -26,7 +23,6 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
   return TALLY_TOKENS[_chainId]
 }
-
 
 export const getSupportedChainIds = async () => {
   // This should return all of the ChainIds that are supported by the Project we're integrating
