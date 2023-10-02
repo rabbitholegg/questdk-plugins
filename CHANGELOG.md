@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.1.0-alpha.14
+
+### Patch Changes
+
+- [#24](https://github.com/rabbitholegg/questdk/pull/24) [`924de76`](https://github.com/rabbitholegg/questdk/commit/924de766c9a6a82af47f7f415e950f65aad3f269) Thanks [@Quazia](https://github.com/Quazia)! - Export the new delegate object
+
 ## 1.1.0-alpha.13
 
 ### Minor Changes
