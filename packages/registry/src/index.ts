@@ -53,10 +53,10 @@ export const executePlugin = (
     case ActionType.Mint:
       return plugin.mint(params as unknown as MintActionParams)
     case ActionType.Delegate: {
-        if(plugin.delegate === undefined) {
-          return Promise.reject(new PluginActionNotImplementedError ())
-        } else  return plugin.delegate(params as unknown as DelegateActionParams)
-      }
+      if (plugin.delegate === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.delegate(params as unknown as DelegateActionParams)
+    }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
