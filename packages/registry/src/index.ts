@@ -44,7 +44,7 @@ export const executePlugin = (
   plugin: IActionPlugin,
   actionType: ActionType,
   params: ActionParams,
-): Promise<TransactionFilter> | Promise<PluginActionNotImplementedError> => {
+): Promise<TransactionFilter | PluginActionNotImplementedError> => {
   switch (actionType) {
     case ActionType.Bridge:
       return plugin.bridge(params as unknown as BridgeActionParams)
@@ -52,8 +52,11 @@ export const executePlugin = (
       return plugin.swap(params as unknown as SwapActionParams)
     case ActionType.Mint:
       return plugin.mint(params as unknown as MintActionParams)
-    case ActionType.Delegate:
-      return plugin.delegate(params as unknown as DelegateActionParams)
+    case ActionType.Delegate: {
+        if(plugin.delegate === undefined) {
+          return Promise.reject(new PluginActionNotImplementedError ())
+        } else  return plugin.delegate(params as unknown as DelegateActionParams)
+      }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
