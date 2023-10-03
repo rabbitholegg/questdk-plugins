@@ -3,9 +3,7 @@ import { TALLY_ABI } from './abi.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { TALLY_TOKENS } from './token-addresses.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
-export const delegate = async (
-  delegateParams: DelegateActionParams,
-) => {
+export const delegate = async (delegateParams: DelegateActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const { chainId, delegate, project } = delegateParams
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
