@@ -13,7 +13,7 @@ describe('Given the tally plugin', () => {
     test('should return a valid action filter', async () => {
       const filter = await delegate({
         chainId: ARB_ONE_CHAIN_ID,
-        delegate  : TEST_ADDRESS,
+        delegate: TEST_ADDRESS,
         project: TEST_PROJECT,
       })
       expect(filter).to.deep.equal({
@@ -30,12 +30,11 @@ describe('Given the tally plugin', () => {
       const transaction = ARBITRUM_DELEGATION
       const PROJECT_TARGET = '0x912ce59144191c1204e64559fe8253a0e49e6548'
 
-      const filter = 
-        await delegate({
-          chainId: ARB_ONE_CHAIN_ID,
-          delegate: '0x3f9e3fbbbe967481222ddaa98e84470d7099381f',
-          project: PROJECT_TARGET,
-        })
+      const filter = await delegate({
+        chainId: ARB_ONE_CHAIN_ID,
+        delegate: '0x3f9e3fbbbe967481222ddaa98e84470d7099381f',
+        project: PROJECT_TARGET,
+      })
       expect(apply(transaction, filter)).to.be.true
     })
 
