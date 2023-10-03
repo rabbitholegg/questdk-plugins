@@ -318,6 +318,9 @@ importers:
       '@rabbitholegg/questdk-plugin-stargate':
         specifier: workspace:*
         version: link:../stargate
+      '@rabbitholegg/questdk-plugin-tally':
+        specifier: workspace:*
+        version: link:../tally
       '@rabbitholegg/questdk-plugin-uniswap':
         specifier: workspace:*
         version: link:../uniswap
