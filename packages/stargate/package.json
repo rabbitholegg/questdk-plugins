@@ -44,7 +44,7 @@
     "vitest": "0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "1.0.1-alpha.10",
+    "@rabbitholegg/questdk": "1.1.0-alpha.13",
     "viem": "1.6.7"
   }
 }
