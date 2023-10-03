@@ -1,5 +1,5 @@
 // https://arbiscan.io/tx/0xb8f32ab6848dce8847782499c1558f5af834f855811746fdbc3ec6fefda0bb24
-const ARBITRUM_DELEGATION = {
+export const ARBITRUM_DELEGATION = {
   blockHash:
     '0xdf2e9fdcd475d9c28a70c2fd49fd08bb0ed29353ea6b515bfa9c3041f9292031',
   blockNumber: '135109029',
