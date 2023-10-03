@@ -8,6 +8,6 @@ import { getAddress } from 'viem'
 export const QUEST_FACTORY_ADDRESS = (chainId: number) => {
   switch (chainId) {
     default:
-      return getAddress('0x53431b13e9d353676658e6da81186301fee31526')
+      return getAddress('0x52629961F71C1C2564C5aa22372CB1b9fa9EBA3E')
   }
 }
