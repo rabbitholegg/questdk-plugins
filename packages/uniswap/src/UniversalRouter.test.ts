@@ -41,7 +41,7 @@ describe('UniversalRouter', () => {
 
       expect(filter).to.deep.equal({
         chainId: '0xa',
-        to: '0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD',
+        to: '0xeC8B0F7Ffe3ae75d7FfAb09429e3675bb63503e4',
         input: {
           $abi: EXECUTE_ABI_FRAGMENTS,
           inputs: {
