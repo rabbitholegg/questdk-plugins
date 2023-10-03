@@ -4,17 +4,17 @@ import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { TALLY_TOKENS } from './token-addresses.js'
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const delegate = async (
-  delegate: DelegateActionParams,
-): Promise<TransactionFilter> => {
+  delegateParams: DelegateActionParams,
+) => {
   // This is the information we'll use to compose the Transaction object
-  const { chainId, delegatee, project } = delegate
+  const { chainId, delegate, project } = delegateParams
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: chainId, // The chainId of the source chain
     to: project, // The contract address of the governance platform
     input: {
       $abi: TALLY_ABI, // The ABI of the contract
-      delegatee: delegatee, // The address of the delegatee
+      delegatee: delegate, // The address of the delegatee
     }, // The input object is where we'll put the ABI and the parameters
   })
 }
