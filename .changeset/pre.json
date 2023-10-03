@@ -3,10 +3,22 @@
   "tag": "alpha",
   "changesets": [
     "brown-points-smile",
+    "fluffy-adults-invite",
+    "healthy-bugs-enjoy",
     "hungry-squids-drop",
+    "late-scissors-wonder",
+    "neat-teachers-complain",
+    "new-ears-study",
     "pink-horses-change",
+    "pink-moons-tickle",
+    "quick-eyes-retire",
+    "sixty-trains-yawn",
+    "soft-apples-hang",
     "sour-boxes-reflect",
-    "tasty-bobcats-clean"
+    "tasty-bobcats-clean",
+    "tough-cooks-hammer",
+    "twelve-kiwis-destroy",
+    "wet-toes-prove"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
@@ -14,6 +26,13 @@
     "tsconfig": "0.0.0",
     "@rabbitholegg/questdk-plugin-uniswap": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-registry": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-project": "1.0.0-alpha.3"
+    "@rabbitholegg/questdk-plugin-project": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-across": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-arbitrum": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-hop": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-optimism": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-polygon": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-stargate": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-gmx": "1.0.0-alpha.3"
   }
 }

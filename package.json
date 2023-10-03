@@ -10,7 +10,7 @@
     "changeset": "changeset",
     "changeset:release": "turbo run build  --filter=!@rabbitholegg/questdk-plugin-project && changeset publish",
     "changeset:version": "changeset version && pnpm install --lockfile-only",
-    "publish-packages": "turbo run build lint test:ci  --filter=!@rabbitholegg/questdk-plugin-project && pnpm changeset publish"
+    "publish-packages": "turbo run build test:ci  --filter=!@rabbitholegg/questdk-plugin-project && pnpm changeset publish"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",

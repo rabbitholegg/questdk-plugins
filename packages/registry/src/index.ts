@@ -11,10 +11,24 @@ import {
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
+import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
+import { Across } from '@rabbitholegg/questdk-plugin-across'
+import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
+import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
+import { Hop } from '@rabbitholegg/questdk-plugin-hop'
+import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
+import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
   [Uniswap.pluginId]: Uniswap,
+  [Stargate.pluginId]: Stargate,
+  [Polygon.pluginId]: Polygon,
+  [Hop.pluginId]: Hop,
+  [Arbitrum.pluginId]: Arbitrum,
+  [Across.pluginId]: Across,
+  [Optimism.pluginId]: Optimism,
+  [GMX.pluginId]: GMX,
 }
 
 export const getPlugin = (pluginId: string) => {

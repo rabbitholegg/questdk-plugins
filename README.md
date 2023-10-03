@@ -116,7 +116,22 @@ return compressJson({
   })
 ```
 
-`chainId` and `to` both map directly to those params on the transaction object. For the input object you need to supply an ABI that contains the function signature of the relevant function. This can be a modified ABI that holds the function signature of multiple contracts, the filter will correctly pull out the one with the right signature, just watch out for poor handling of overloaded functions. The keys of the JSON object (i.e `originToken` ) needs to key into the expected value based on the parameters passed in from the action (`tokenAddress`).
+`chainId` and `to` both map directly to those params on the transaction object. Any param on the transaction object can be used in your filter (`from` is often useful). For the input object you need to supply an ABI that contains the function signature of the relevant function. This can be a modified ABI that holds the function signature of multiple contracts, the filter will correctly pull out the one with the right signature, just watch out for poor handling of overloaded functions. The keys of the JSON object (i.e `originToken` ) needs to key into the expected value based on the parameters passed in from the action (`tokenAddress`).
+
+### Adding To Registry
+
+In the registry `index.ts` import your new plugin and add it to the `plugins` object as follows:
+```
+  [Project.pluginId]: Project,
+
+```
+Replace 'Project' with the name of your project.
+
+Also remember to add the new repo within the monorepo to the `package.json` of the registry.
+
+### Private Repo
+
+If you're ready to publish, remove the `private` tag from your `package.json` file.
 
 ## Contributing
 If you'd like to build a plugin and get support for your protocol on RabbiteHole all you need to do is submit a PR with the finished plugin. Here are some useful tips to assist, and when in doubt please [join our discord](https://discord.com/invite/rabbitholegg) or reach out by email [<arthur@rabbithole.gg>] for assistance building a plugin.

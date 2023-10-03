@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-connext",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -47,7 +47,7 @@
     "@connext/nxtp-txservice": "^2.0.0",
     "@connext/nxtp-utils": "^2.0.4",
     "@connext/smart-contracts": "^2.0.0",
-    "@rabbitholegg/questdk": "1.0.1-alpha.8",
+    "@rabbitholegg/questdk": "1.0.1-alpha.10",
     "viem": "^1.2.15"
   }
 }
