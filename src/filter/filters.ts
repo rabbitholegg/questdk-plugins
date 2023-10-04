@@ -6,6 +6,7 @@ import {
   isAddress,
   parseAbiParameters,
   slice,
+  getFunctionSelector,
 } from 'viem'
 
 /**
@@ -166,6 +167,30 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
   }
 }
 
+export const handleAbstractAbiDecode = (context: any, filter: any) => {
+  let decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
+  const elementCount = filter.$abi.length
+  for(let i = 0; i < elementCount; i++){
+    const abiItem = filter.$abi[i]
+    if(abiItem.type === 'function') {
+      const functionSelector = getFunctionSelector(abiItem)
+      const functionSelectorSubstring = functionSelector.substring(2)
+      let index = context.indexOf(functionSelectorSubstring)
+      if(index !== -1) {
+        decodedReturn.push(handleAbiDecode(context.substring(index), { $abi: [abiItem] }))
+      }
+    }
+  }
+  const decodedReturnLength = decodedReturn.length
+  for(let i = 0; i < decodedReturnLength; i++) {
+    if(apply(decodedReturn[i] as Record<string, any>, filter)) {
+      return {}
+    }
+  }
+  return null
+}
+
+
 /**
  * Decodes ABI parameters from the context using the filter.
  * @param context - The context to decode.
@@ -213,6 +238,7 @@ const operators = {
 
 const preprocessors = {
   $abi: handleAbiDecode,
+  $abiAbstract: handleAbstractAbiDecode,
   $abiParams: handleAbiParamDecode,
 }
 
