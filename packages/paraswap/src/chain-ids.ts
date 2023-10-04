@@ -4,5 +4,5 @@ export const ARB_ONE_CHAIN_ID = 42161
 
 export const CHAIN_ID_ARRAY = [
   ETH_CHAIN_ID,
-  ARB_ONE_CHAIN_ID,,
+  ARB_ONE_CHAIN_ID,
 ]
