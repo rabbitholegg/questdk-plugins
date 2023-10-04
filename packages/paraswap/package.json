@@ -45,6 +45,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
+    "@paraswap/sdk": "^6.2.2",
     "@rabbitholegg/questdk": "1.0.1-alpha.10",
     "viem": "^1.2.15"
   }
