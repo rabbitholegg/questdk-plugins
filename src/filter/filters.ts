@@ -75,6 +75,19 @@ export const handleLessThanOrEqual = (
 }
 
 /**
+ * Checks if the context is equal to the filter.
+ * @param context - The context to compare.
+ * @param filter - The value to compare against.
+ * @returns True if context is equal to filter, false otherwise.
+ */
+export const handleEqual = (
+  context: any,
+  filter: bigint | number | string,
+): boolean => {
+  return BigInt(context) === BigInt(filter)
+}
+
+/**
  * Checks if the context is greater than the filter.
  * @param context - The context to compare.
  * @param filter - The value to compare against.
@@ -206,6 +219,7 @@ const operators = {
   // Numeric operators
   $lte: handleLessThanOrEqual,
   $lt: handleLessThan,
+  $eq: handleEqual,
   $gte: handleGreaterThanOrEqual,
   $gt: handleGreaterThan,
   $regex: handleRegex,
