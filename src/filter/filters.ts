@@ -84,7 +84,7 @@ export const handleEqual = (
   context: any,
   filter: bigint | number | string,
 ): boolean => {
-  return BigInt(context) == BigInt(filter)
+  return BigInt(context) === BigInt(filter)
 }
 
 /**
