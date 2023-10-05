@@ -256,10 +256,13 @@ importers:
     dependencies:
       '@paraswap/sdk':
         specifier: ^6.2.2
-        version: 6.2.2(typescript@5.1.6)
+        version: 6.2.2(axios@1.5.0)(typescript@5.1.6)
       '@rabbitholegg/questdk':
         specifier: 1.0.1-alpha.10
         version: 1.0.1-alpha.10(typescript@5.1.6)
+      axios:
+        specifier: 1.5.0
+        version: 1.5.0
       viem:
         specifier: ^1.2.15
         version: 1.6.7(typescript@5.1.6)
@@ -2221,7 +2224,7 @@ packages:
     resolution: {integrity: sha512-ecnX8ezlhYWFwolZxYEz+K+RfLr8xaxQqiJKlxJ8Yf00tXTGxDGn6/Acy00t4+9Kv0apewd7++J33eJt9yNfwg==}
     dev: false
 
-  /@paraswap/sdk@6.2.2(typescript@5.1.6):
+  /@paraswap/sdk@6.2.2(axios@1.5.0)(typescript@5.1.6):
     resolution: {integrity: sha512-W0sAIf/T4zAmI7Yp4TcAuQr68NtaopeuYOWop20piAGoko4K9eLY4DYwWgkXf9fw9bAeeGofwP+GYJJC8Q24xg==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -2237,6 +2240,7 @@ packages:
         optional: true
     dependencies:
       '@paraswap/core': 1.1.0
+      axios: 1.5.0
       bignumber.js: 9.1.2
       ts-essentials: 9.4.0(typescript@5.1.6)
     transitivePeerDependencies:
