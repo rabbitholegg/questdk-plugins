@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.1.0-alpha.16
+
+### Patch Changes
+
+- [#29](https://github.com/rabbitholegg/questdk/pull/29) [`c777f07`](https://github.com/rabbitholegg/questdk/commit/c777f074c1fe70540777e43fcedfa2630f61f0cc) Thanks [@kmairin](https://github.com/kmairin)! - Add Equal to index.ts
+
 ## 1.1.0-alpha.15
 
 ### Patch Changes
