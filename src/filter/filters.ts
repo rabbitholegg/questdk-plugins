@@ -75,10 +75,10 @@ export const handleLessThanOrEqual = (
 }
 
 /**
- * Checks if the context is less than or equal to the filter.
+ * Checks if the context is equal to the filter.
  * @param context - The context to compare.
  * @param filter - The value to compare against.
- * @returns True if context is less than or equal to filter, false otherwise.
+ * @returns True if context is equal to filter, false otherwise.
  */
 export const handleEqual = (
   context: any,
