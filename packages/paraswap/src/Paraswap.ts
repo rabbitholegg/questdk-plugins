@@ -2,10 +2,10 @@
 import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
-import { constructGetTokens, constructFetchFetcher } from '@paraswap/sdk';
+import { constructGetTokens, constructAxiosFetcher, constructGetSpender } from '@paraswap/sdk';
 import { PARASWAP_ABI } from './abi.js';
-const fetcher = constructFetchFetcher(window.fetch);
-
+import axios from 'axios';
+const fetcher = constructAxiosFetcher(axios); // alternatively constructFetchFetcher
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const swap = async (swap: SwapActionParams) => {
   // This is the information we'll use to compose the Transaction object
@@ -18,11 +18,11 @@ export const swap = async (swap: SwapActionParams) => {
     amountOut,
     recipient,
   } = swap
-
+  const {getAugustusSwapper} = constructGetSpender({chainId, fetcher});
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: chainId, // The chainId of the source chain
-    to:  contractAddress,   // The contract address of the bridge
+    to:  contractAddress || getAugustusSwapper(),   // The contract address of the bridge
     input: {
       $abiAbstract: PARASWAP_ABI,
       $or: [
@@ -53,7 +53,8 @@ export const swap = async (swap: SwapActionParams) => {
           toToken: tokenOut,
           fromAmount: amountIn,
           toAmount: amountOut,
-        },
+        }
+
       ]
     },
   })
