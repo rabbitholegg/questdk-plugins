@@ -3,6 +3,7 @@ export { apply } from './filters.js'
 export {
   GreaterThan,
   LessThan,
+  Equal,
   LessThanOrEqual,
   GreaterThanOrEqual,
   Or,
