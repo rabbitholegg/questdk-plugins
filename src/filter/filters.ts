@@ -141,7 +141,6 @@ export const handleRegex = (context: any, filter: string): boolean => {
 export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
   try {
     const sighash = slice(context, 0, 4)
-
     const { functionName, args = [] } = decodeFunctionData({
       abi: filter.$abi,
       data: context,
@@ -169,22 +168,23 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
 
 export const handleAbstractAbiDecode = (context: any, filter: any) => {
   let decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
-  const elementCount = filter.$abi.length
+  const elementCount = filter.$abiAbstract.length
   for(let i = 0; i < elementCount; i++){
-    const abiItem = filter.$abi[i]
+    const abiItem = filter.$abiAbstract[i]
     if(abiItem.type === 'function') {
       const functionSelector = getFunctionSelector(abiItem)
       const functionSelectorSubstring = functionSelector.substring(2)
       let index = context.indexOf(functionSelectorSubstring)
       if(index !== -1) {
-        decodedReturn.push(handleAbiDecode(context.substring(index), { $abi: [abiItem] }))
+        decodedReturn.push(handleAbiDecode('0x'+context.substring(index), { $abi: [abiItem] }))
       }
     }
   }
+  delete filter.$abiAbstract
   const decodedReturnLength = decodedReturn.length
   for(let i = 0; i < decodedReturnLength; i++) {
     if(apply(decodedReturn[i] as Record<string, any>, filter)) {
-      return {}
+      return true
     }
   }
   return null
@@ -264,7 +264,6 @@ export function apply(
   filters: any,
 ): boolean {
   let context = originalContext
-
   for (const key in filters) {
     if (!Object.hasOwnProperty.call(filters, key)) continue
     if (key in preprocessors) {
@@ -274,6 +273,9 @@ export function apply(
       )
       if (processedContext === null) {
         return false
+      }
+      if(processedContext === true) {
+        return true
       }
       context = processedContext
       continue
