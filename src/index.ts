@@ -49,5 +49,5 @@ export {
   Last,
   Any,
   All,
-  Equal
+  Equal,
 } from './filter/operators.js'
