@@ -21,7 +21,6 @@
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "npx simple-git-hooks",
     "prepublishOnly": "pnpm bun scripts/prepublishOnly.ts",
     "size": "size-limit",
     "test": "vitest dev",
@@ -110,7 +109,7 @@
   "dependencies": {
     "abitype": "^0.9.0",
     "rimraf": "^5.0.1",
-    "viem": "^1.2.13"
+    "viem": "^1.15.1"
   },
   "repository": "rabbitholegg/questdk",
   "publishConfig": {
