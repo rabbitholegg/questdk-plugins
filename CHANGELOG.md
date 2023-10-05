@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk
 
+## 1.1.0-alpha.15
+
+### Patch Changes
+
+- [#10](https://github.com/rabbitholegg/questdk/pull/10) [`c94464a`](https://github.com/rabbitholegg/questdk/commit/c94464a3f72b3fdb1b0493e731a4605fd7d03ada) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Update QuestFactory address to use proxy
+
+- [#28](https://github.com/rabbitholegg/questdk/pull/28) [`57093f4`](https://github.com/rabbitholegg/questdk/commit/57093f43fdd17f7c13c91acaea0edf7d7c497fbb) Thanks [@Quazia](https://github.com/Quazia)! - Add equal operator
+
 ## 1.1.0-alpha.14
 
 ### Patch Changes
