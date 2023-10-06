@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 1.1.0-alpha.17
+
+### Patch Changes
+
+- [#31](https://github.com/rabbitholegg/questdk/pull/31) [`dfe3698`](https://github.com/rabbitholegg/questdk/commit/dfe369860f32f22f9784dbf52db39e28176bddb3) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Make delegate optional
+
 ## 1.1.0-alpha.16
 
 ### Patch Changes
