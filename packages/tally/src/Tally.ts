@@ -6,6 +6,17 @@ import { TALLY_TOKENS } from './token-addresses.js'
 export const delegate = async (delegateParams: DelegateActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const { chainId, delegate, project } = delegateParams
+
+  if (!delegate) {
+    return compressJson({
+      chainId: chainId, // The chainId of the source chain
+      to: project, // The contract address of the governance platform
+      input: {
+        $abi: TALLY_ABI, // The ABI of the contract
+      }, // The input object is where we'll put the ABI
+    })
+  }
+
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: chainId, // The chainId of the source chain
