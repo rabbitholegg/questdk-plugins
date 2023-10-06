@@ -30,7 +30,7 @@ export type MintActionParams = {
 
 export type DelegateActionParams = {
   chainId: number
-  delegate: Address
+  delegate?: Address
   project: Address | string
   contractAddress?: Address
   amount?: bigint | FilterOperator
