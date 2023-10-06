@@ -5,6 +5,7 @@
     "@rabbitholegg/questdk": "1.0.0"
   },
   "changesets": [
+    "big-gifts-retire",
     "cool-geckos-sit",
     "early-schools-think",
     "empty-socks-worry",
