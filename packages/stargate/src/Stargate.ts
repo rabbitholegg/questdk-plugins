@@ -7,6 +7,7 @@ import {
   ETH_CHAIN_ID,
   LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID,
   POLYGON_CHAIN_ID,
+  OPTIMISM_CHAIN_ID,
 } from './chain-ids.js'
 import {
   NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
@@ -74,6 +75,8 @@ export const getSupportedTokenAddresses = async (
     return ['0xaf88d065e77c8cC2239327C5EDb3A432268e5831']
   if (_chainId === ETH_CHAIN_ID)
     return ['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48']
+  if (_chainId === OPTIMISM_CHAIN_ID)
+    return ['0x7F5c764cBc14f9669B88837ca1490cCa17c31607']
   return []
 }
 
