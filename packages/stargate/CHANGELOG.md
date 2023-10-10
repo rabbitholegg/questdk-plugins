@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#49](https://github.com/rabbitholegg/questdk-plugins/pull/49) [`d9774c3`](https://github.com/rabbitholegg/questdk-plugins/commit/d9774c38d7cc2a5b1af10548420a27c15a35eab3) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Add USDC and WETH to all supported networks
+
 ## 1.0.0-alpha.8
 
 ### Patch Changes
