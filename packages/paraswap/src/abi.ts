@@ -965,7 +965,85 @@ export const PARASWAP_ABI = [
         "stateMutability": "payable",
         "type": "function"
       },
+      {
+        "inputs": [
+          {
+            "internalType": "contract IERC20",
+            "name": "fromToken",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "toToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fromAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "networkFee",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "targetExchange",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "percent",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bytes",
+                "name": "payload",
+                "type": "bytes"
+              },
+              {
+                "internalType": "uint256",
+                "name": "networkFee",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Utils.Route[]",
+            "name": "route",
+            "type": "tuple[]"
+          }
+        ],
+        "name": "swap",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          { "internalType": "address", "name": "recipient", "type": "address" },
+          { "internalType": "bool", "name": "zeroToOne", "type": "bool" },
+          { "internalType": "int256", "name": "amountRequired", "type": "int256" },
+          {
+            "internalType": "uint160",
+            "name": "limitSqrtPrice",
+            "type": "uint160"
+          },
+          { "internalType": "bytes", "name": "data", "type": "bytes" }
+        ],
+        "name": "swap",
+        "outputs": [
+          { "internalType": "int256", "name": "amount0", "type": "int256" },
+          { "internalType": "int256", "name": "amount1", "type": "int256" }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+    
 ]
-
-
-
