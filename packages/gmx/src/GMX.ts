@@ -3,6 +3,7 @@ import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
   DEFAULT_TOKEN_LIST_URL,
+  GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
 import axios from 'axios'
@@ -69,7 +70,7 @@ export const swap = async (swap: SwapActionParams) => {
   // Fortunatly even though there are two different functions the parameters are the same
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    to: contractAddress, // The contract address of the swap
+    to: contractAddress || GMX_ROUTERV1_ADDRESS, // The contract address of the swap
     chainId: chainId, // The chain id of the swap
     input: {
       $abi: GMX_SWAPV1_ABI,
