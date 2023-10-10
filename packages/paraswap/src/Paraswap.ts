@@ -69,8 +69,19 @@ export const swap = async (swap: SwapActionParams) => {
             amountOutMinimum: amountOut,
             recipient: recipient,
           }
+        },
+        {
+          data: {
+            fromToken: tokenIn,
+            fromAmount: amountIn,
+            path: {
+              $last: 
+              {
+                to: tokenOut,
+              }
+            }
+          }
         }
-
       ]
     },
   })
