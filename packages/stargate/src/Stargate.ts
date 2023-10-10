@@ -7,6 +7,7 @@ import {
   ETH_CHAIN_ID,
   LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID,
   POLYGON_CHAIN_ID,
+  OPTIMISM_CHAIN_ID,
 } from './chain-ids.js'
 import {
   NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
@@ -69,11 +70,25 @@ export const getSupportedTokenAddresses = async (
 ): Promise<Address[]> => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
   if (_chainId === POLYGON_CHAIN_ID)
-    return ['0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174']
+    return [
+      '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+      '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
+    ] // [UDSC, WETH]
   if (_chainId === ARBITRUM_CHAIN_ID)
-    return ['0xaf88d065e77c8cC2239327C5EDb3A432268e5831']
+    return [
+      '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+      '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
+    ] // [USDC, WETH]
   if (_chainId === ETH_CHAIN_ID)
-    return ['0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48']
+    return [
+      '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+      '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+    ] // [USDC, WETH]
+  if (_chainId === OPTIMISM_CHAIN_ID)
+    return [
+      '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
+      '0x4200000000000000000000000000000000000006',
+    ] // [USDC, WETH]
   return []
 }
 
