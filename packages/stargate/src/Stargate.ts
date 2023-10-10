@@ -27,7 +27,9 @@ export const bridge = async (bridge: BridgeActionParams) => {
   const layerZeroDestination =
     LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
   const sourcePool = tokenAddress
-    ? NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress.toLowerCase()]
+    ? NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][
+        tokenAddress.toLowerCase()
+      ]
     : 0
   if (sourcePool === 13) {
     const targetContractAddress =
