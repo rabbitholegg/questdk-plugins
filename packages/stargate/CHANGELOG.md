@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [#52](https://github.com/rabbitholegg/questdk-plugins/pull/52) [`e64920f`](https://github.com/rabbitholegg/questdk-plugins/commit/e64920f36591ecc8182a98558b168d13d87eabe1) Thanks [@Quazia](https://github.com/Quazia)! - Handle lowercase values in stargate plugin
+
 ## 1.0.0-alpha.7
 
 ### Patch Changes
