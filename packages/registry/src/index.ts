@@ -20,6 +20,7 @@ import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 import { Tally } from '@rabbitholegg/questdk-plugin-tally'
+import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -62,4 +63,9 @@ export const executePlugin = (
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
+}
+
+
+export const getIndexedContracts = () => {
+  return [ENTRYPOINT]
 }
