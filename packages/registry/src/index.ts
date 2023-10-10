@@ -65,7 +65,6 @@ export const executePlugin = (
   }
 }
 
-
 export const getIndexedContracts = (_chainId: number) => {
   return [ENTRYPOINT]
 }
