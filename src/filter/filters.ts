@@ -3,10 +3,10 @@ import {
   decodeAbiParameters,
   decodeFunctionData,
   getAbiItem,
+  getFunctionSelector,
   isAddress,
   parseAbiParameters,
   slice,
-  getFunctionSelector,
 } from 'viem'
 
 /**
@@ -167,29 +167,30 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
 }
 
 export const handleAbstractAbiDecode = (context: any, filter: any) => {
-  let decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
+  const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
   const elementCount = filter.$abiAbstract.length
-  for(let i = 0; i < elementCount; i++){
+  for (let i = 0; i < elementCount; i++) {
     const abiItem = filter.$abiAbstract[i]
-    if(abiItem.type === 'function') {
+    if (abiItem.type === 'function') {
       const functionSelector = getFunctionSelector(abiItem)
       const functionSelectorSubstring = functionSelector.substring(2)
-      let index = context.indexOf(functionSelectorSubstring)
-      if(index !== -1) {
-        decodedReturn.push(handleAbiDecode('0x'+context.substring(index), { $abi: [abiItem] }))
+      const index = context.indexOf(functionSelectorSubstring)
+      if (index !== -1) {
+        decodedReturn.push(
+          handleAbiDecode(`0x${context.substring(index)}`, { $abi: [abiItem] }),
+        )
       }
     }
   }
   delete filter.$abiAbstract
   const decodedReturnLength = decodedReturn.length
-  for(let i = 0; i < decodedReturnLength; i++) {
-    if(apply(decodedReturn[i] as Record<string, any>, filter)) {
+  for (let i = 0; i < decodedReturnLength; i++) {
+    if (apply(decodedReturn[i] as Record<string, any>, filter)) {
       return true
     }
   }
   return null
 }
-
 
 /**
  * Decodes ABI parameters from the context using the filter.
@@ -274,7 +275,7 @@ export function apply(
       if (processedContext === null) {
         return false
       }
-      if(processedContext === true) {
+      if (processedContext === true) {
         return true
       }
       context = processedContext
