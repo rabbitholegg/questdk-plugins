@@ -7,7 +7,6 @@ import { parseEther, type Address } from 'viem'
 
 const USDT_ADDRESS = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
 const USDCE_ADDRESS = '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'
-const WETH_ADDRESS = '0x82af49447d8a07e3bd95bd0d56f35241523fbab1'
 const VELA_ADDRESS = '0x088cd8f5ef3652623c22d48b1605dcfe860cd704'
 const AUGUSTUS_SWAPPER_ARBITRUM = '0xdef171fe48cf0115b1d80b88dc8eab59176fee57'
 
@@ -38,7 +37,7 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: WETH_ADDRESS.toLowerCase() as Address,
+        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
         tokenOut: VELA_ADDRESS.toLowerCase() as Address,
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
