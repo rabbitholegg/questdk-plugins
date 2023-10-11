@@ -166,11 +166,11 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
   }
 }
 
-export const handleAbstractAbiDecode = (context: any, filter: any) => {
+export const handleAbstractAbiDecode = (context: any, filter: { $abiAbstract?: Abi}) => {
   const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
-  const elementCount = filter.$abiAbstract.length
+  const elementCount = filter.$abiAbstract!.length
   for (let i = 0; i < elementCount; i++) {
-    const abiItem = filter.$abiAbstract[i]
+    const abiItem = filter.$abiAbstract![i]
     if (abiItem.type === 'function') {
       const functionSelector = getFunctionSelector(abiItem)
       const functionSelectorSubstring = functionSelector.substring(2)
