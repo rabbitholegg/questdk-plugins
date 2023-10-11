@@ -1,7 +1,7 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { mint } from './Basepaint'
-import { CONTRACT_ADDRESS, MINT_ABI, TEST_TRANSACTION } from './constants'
+import { CONTRACT_ADDRESS, MINT_ABI, TEST_TRANSACTIONS } from './constants'
 
 describe('Given the basepaint plugin', () => {
   describe('When handling the mint filter', () => {
@@ -25,12 +25,13 @@ describe('Given the basepaint plugin', () => {
     })
 
     test('should pass filter with valid transactions', async () => {
+      const transaction = TEST_TRANSACTIONS[0]
       const filter = await mint({
         address: CONTRACT_ADDRESS,
         tokenId: 52,
         quantity: GreaterThanOrEqual(1),
       })
-      expect(apply(TEST_TRANSACTION, filter)).to.be.true
+      expect(apply(transaction, filter)).to.be.true
     })
   })
 })
