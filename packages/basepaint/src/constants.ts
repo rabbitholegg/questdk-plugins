@@ -21,6 +21,7 @@ export const MINT_ABI = [
 // Transactions for testing
 export const TEST_TRANSACTIONS = [
   {
+    // https://basescan.org/tx/0x356192c66fe49e9889215c5a47077b9b302c7d3a431fd463932788d9ea545fab
     blockHash:
       '0x5a41dfc5d26e20be65a7db73455e0ac617bdf864c76e1561586aeca98e7fd608',
     blockNumber: '4662683',
@@ -42,6 +43,7 @@ export const TEST_TRANSACTIONS = [
     typeHex: '0x0',
   },
   {
+    // https://basescan.org/tx/0x74863832fa3a92ca3cbf421f498131ea7169dc0e550b139f8addac595fd36999
     accessList: [],
     blockHash:
       '0x932cc928e3287400a8c46ea8a50bf63c52e71e10e7c880d3bb36826cae4ae17f',
