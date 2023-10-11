@@ -7,7 +7,7 @@ describe('Given the basepaint plugin', () => {
   describe('When handling the mint filter', () => {
     test('should return a valid action filter', async () => {
       const filter = await mint({
-        address: '0xba5e05cb26b78eda3a2f8e3b3814726305dcac83',
+        address: CONTRACT_ADDRESS,
         tokenId: 69,
         quantity: GreaterThanOrEqual(1),
       })
@@ -26,7 +26,7 @@ describe('Given the basepaint plugin', () => {
 
     test('should pass filter with valid transactions', async () => {
       const filter = await mint({
-        address: '0xba5e05cb26b78eda3a2f8e3b3814726305dcac83',
+        address: CONTRACT_ADDRESS,
         tokenId: 52,
         quantity: GreaterThanOrEqual(1),
       })
