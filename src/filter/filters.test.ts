@@ -1,6 +1,5 @@
 import {
   apply,
-  handleAbstractAbiDecode,
   handleAnd,
   handleGreaterThanOrEqual,
   handleOr,
@@ -8,7 +7,6 @@ import {
   handleSome,
 } from './filters.js'
 import type { Filter, FilterObject } from './types.js'
-import type { Abi } from 'viem'
 import { assertType, describe, expect, test } from 'vitest'
 
 describe('parser', () => {
