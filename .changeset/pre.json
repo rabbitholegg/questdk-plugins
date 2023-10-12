@@ -3,15 +3,20 @@
   "tag": "alpha",
   "changesets": [
     "brown-points-smile",
+    "dirty-plums-refuse",
+    "dull-cows-call",
     "fluffy-adults-invite",
     "healthy-bugs-enjoy",
     "hungry-squids-drop",
     "late-scissors-wonder",
     "neat-teachers-complain",
     "new-ears-study",
+    "nine-waves-lie",
     "pink-horses-change",
     "pink-moons-tickle",
     "quick-eyes-retire",
+    "quick-otters-deliver",
+    "rotten-monkeys-attack",
     "sixty-trains-yawn",
     "soft-apples-hang",
     "sour-boxes-reflect",
@@ -33,6 +38,7 @@
     "@rabbitholegg/questdk-plugin-optimism": "1.0.0-alpha.3",
     "@rabbitholegg/questdk-plugin-polygon": "1.0.0-alpha.3",
     "@rabbitholegg/questdk-plugin-stargate": "1.0.0-alpha.3",
-    "@rabbitholegg/questdk-plugin-gmx": "1.0.0-alpha.3"
+    "@rabbitholegg/questdk-plugin-gmx": "1.0.0-alpha.3",
+    "@rabbitholegg/questdk-plugin-tally": "1.0.0-alpha.1"
   }
 }

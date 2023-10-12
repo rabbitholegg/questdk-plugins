@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-gmx",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -44,7 +44,7 @@
     "vitest": "0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "1.0.1-alpha.10",
+    "@rabbitholegg/questdk": "1.1.0-alpha.13",
     "axios": "1.5.0",
     "viem": "1.2.15"
   }

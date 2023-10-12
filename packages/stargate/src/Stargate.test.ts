@@ -6,6 +6,8 @@ import {
   DEPOSIT_ERC20,
   WITHDRAW_ETH,
   WITHDRAW_ERC20,
+  USDC_POLY_PASS,
+  USDC_POLY_FAIL,
 } from './test-transactions.js'
 import {
   ARBITRUM_LAYER_ZERO_CHAIN_ID,
@@ -30,6 +32,8 @@ const ARBITRUM_SGETH_ADDRESS = '0x82cbecf39bee528b5476fe6d1550af59a9db6fc0'
 const ETHEREUM_USDC_ADDRESS = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
 const ETHEREUM_SGETH_ADDRESS = '0x72E2F4830b9E45d52F80aC08CB2bEC0FeF72eD9c'
 
+const POLYGON_USDCE_ADDRESS = '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'
+
 const TEST_USER = '0x7c3bd1a09d7d86920451def20ae503322c8d0412'
 
 describe('Given the Across plugin', () => {
@@ -44,7 +48,7 @@ describe('Given the Across plugin', () => {
       })
       const sourcePool =
         NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ARBITRUM_CHAIN_ID][
-          ARBITRUM_USDC_ADDRESS
+          ARBITRUM_USDC_ADDRESS.toLowerCase()
         ]
 
       expect(filter).to.deep.equal({
@@ -72,7 +76,7 @@ describe('Given the Across plugin', () => {
       })
       const sourcePool =
         NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[ETH_CHAIN_ID][
-          ETHEREUM_USDC_ADDRESS
+          ETHEREUM_USDC_ADDRESS.toLowerCase()
         ]
 
       expect(filter).to.deep.equal({
@@ -158,6 +162,29 @@ describe('Given the Across plugin', () => {
       expect(apply(transaction, filter)).to.be.true
     })
   })
+  describe('When bridging > $1 USDC from Poly to Arb', () => {
+    test('should pass filter with valid L2 token tx', async () => {
+      const transaction = USDC_POLY_PASS
+      const filter = await bridge({
+        sourceChainId: POLYGON_CHAIN_ID,
+        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+        tokenAddress: POLYGON_USDCE_ADDRESS,
+        amount: GreaterThanOrEqual('1000000'),
+      })
+      console.log(filter)
+      expect(apply(transaction, filter)).to.be.true
+    })
 
-  test('should not pass filter with invalid transactions', () => {})
+    test('should not pass filter with invalid transactions', async () => {
+      const transaction = USDC_POLY_FAIL
+      const filter = await bridge({
+        sourceChainId: POLYGON_CHAIN_ID,
+        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+        tokenAddress: POLYGON_USDCE_ADDRESS,
+        amount: GreaterThanOrEqual('1000000'),
+      })
+      console.log(filter)
+      expect(apply(transaction, filter)).to.be.false
+    })
+  })
 })

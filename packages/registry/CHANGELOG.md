@@ -1,5 +1,44 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- Updated dependencies [[`d9774c3`](https://github.com/rabbitholegg/questdk-plugins/commit/d9774c38d7cc2a5b1af10548420a27c15a35eab3)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.9
+
+## 1.0.0-alpha.16
+
+### Patch Changes
+
+- Updated dependencies [[`e64920f`](https://github.com/rabbitholegg/questdk-plugins/commit/e64920f36591ecc8182a98558b168d13d87eabe1)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.8
+
+## 1.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [[`2b8b877`](https://github.com/rabbitholegg/questdk-plugins/commit/2b8b87709f5c760b6cc337c78b97f05213639faf)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.7
+
+## 1.0.0-alpha.14
+
+### Patch Changes
+
+- Updated dependencies [[`b5ccefa`](https://github.com/rabbitholegg/questdk-plugins/commit/b5ccefab88935d8efff66671a962e053b98d7b4b)]:
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.3
+
+## 1.0.0-alpha.13
+
+### Minor Changes
+
+- [#41](https://github.com/rabbitholegg/questdk-plugins/pull/41) [`0289ed8`](https://github.com/rabbitholegg/questdk-plugins/commit/0289ed81726926687be0cb82e2955259ad0a9205) Thanks [@Quazia](https://github.com/Quazia)! - Add delegate for Tally
+
+### Patch Changes
+
+- Updated dependencies [[`0289ed8`](https://github.com/rabbitholegg/questdk-plugins/commit/0289ed81726926687be0cb82e2955259ad0a9205)]:
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.2
+
 ## 1.0.0-alpha.12
 
 ### Patch Changes
