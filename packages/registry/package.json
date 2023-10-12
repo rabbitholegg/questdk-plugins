@@ -55,6 +55,7 @@
     "@rabbitholegg/questdk-plugin-optimism": "workspace:*",
     "@rabbitholegg/questdk-plugin-gmx": "workspace:*",
     "@rabbitholegg/questdk-plugin-tally": "workspace:*",
+    "@rabbitholegg/questdk-plugin-camelot": "workspace:*",
     "viem": "^1.2.15"
   }
 }
