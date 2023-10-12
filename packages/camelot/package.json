@@ -1,6 +1,6 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.17",
+  "name": "@rabbitholegg/questdk-plugin-camelot",
+  "version": "1.0.0-alpha.1",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -44,18 +44,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "1.1.0-alpha.14",
-    "@rabbitholegg/questdk-plugin-connext": "workspace:*",
-    "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
-    "@rabbitholegg/questdk-plugin-stargate": "workspace:*",
-    "@rabbitholegg/questdk-plugin-across": "workspace:*",
-    "@rabbitholegg/questdk-plugin-polygon": "workspace:*",
-    "@rabbitholegg/questdk-plugin-hop": "workspace:*",
-    "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
-    "@rabbitholegg/questdk-plugin-optimism": "workspace:*",
-    "@rabbitholegg/questdk-plugin-gmx": "workspace:*",
-    "@rabbitholegg/questdk-plugin-tally": "workspace:*",
-    "@rabbitholegg/questdk-plugin-camelot": "workspace:*",
+    "@rabbitholegg/questdk": "1.1.0-alpha.13",
     "viem": "^1.2.15"
   }
 }
