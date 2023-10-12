@@ -31,7 +31,7 @@ export const swap = async (swap: SwapActionParams) => {
       $abiAbstract: PARASWAP_ABI,
       $or: [
         {
-          assets: [tokenIn, tokenOut],
+          assets: tokenIn !== undefined && tokenOut !== undefined ? [tokenIn, tokenOut] : undefined,
           funds: {
             recipient: recipient,
           },
@@ -39,7 +39,7 @@ export const swap = async (swap: SwapActionParams) => {
           expectedAmount: amountOut,
         },
         {
-          assets: [tokenIn, tokenOut],
+          assets: tokenIn !== undefined && tokenOut !== undefined ? [tokenIn, tokenOut] : undefined,
           funds: {
             recipient: recipient,
           },
@@ -68,7 +68,7 @@ export const swap = async (swap: SwapActionParams) => {
         },
         {
           params: {
-            path: tokenIn + tokenOut.substring(2),
+            path: tokenIn !== undefined && tokenOut !== undefined ? tokenIn + tokenOut.substring(2) : undefined,
             amountIn: amountIn,
             amountOutMinimum: amountOut,
             recipient: recipient,
