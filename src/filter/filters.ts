@@ -19,6 +19,7 @@ import {
  * @returns True if all filters pass, false otherwise.
  */
 export const handleAnd = (context: any, filter: Filter[]): boolean => {
+  console.log('handleAnd', context, filter)
   for (let i = 0; i < filter.length; i++) {
     if (!apply(context, filter[i] as FilterObject)) return false
   }
@@ -46,7 +47,7 @@ export const handleOr = (context: any, filter: Filter[]): boolean => {
  */
 export const handleSome = (
   context: any,
-  filter: TransactionFilter,
+  filter: TransactionFilter | FilterObject,
 ): boolean => {
   for (let i = 0; i < context.length; i++) {
     const result = apply(context[i], filter)
@@ -115,7 +116,7 @@ export const handleGreaterThanOrEqual = (
  */
 export const handleFirst = (
   context: any,
-  filter: TransactionFilter,
+  filter: TransactionFilter | FilterObject,
 ): boolean => {
   return apply(context[0], filter)
 }
@@ -128,7 +129,7 @@ export const handleFirst = (
  */
 export const handleLast = (
   context: any,
-  filter: TransactionFilter,
+  filter: TransactionFilter | FilterObject,
 ): boolean => {
   return apply(context[context.length - 1], filter)
 }
@@ -292,7 +293,7 @@ export function apply(
   filters: TransactionFilter | FilterObject,
 ): boolean {
   let context: TransactionEIP1559 | Record<string, any> = originalContext
-  for (const key in Object.keys(filters)) {
+  for (const key in filters) {
     // If the key is not a property of the filters object, skip it.
     if (!Object.hasOwnProperty.call(filters, key)) continue
     // If the key is a preprocessor, apply it.
