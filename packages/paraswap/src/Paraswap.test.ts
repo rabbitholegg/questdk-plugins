@@ -20,7 +20,6 @@ describe('Given the paraswap plugin', () => {
         tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
         amountIn: GreaterThanOrEqual(339000000),
       })
-      console.log(filter.input)
 
       expect(filter).to.deep.equal({
         chainId: ARB_ONE_CHAIN_ID,
