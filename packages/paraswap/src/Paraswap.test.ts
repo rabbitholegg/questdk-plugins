@@ -14,6 +14,91 @@ describe('Given the paraswap plugin', () => {
   describe('When handling the bridge', () => {
 
     test.only('should return a valid action filter', async () => {
+
+        const filter = await swap({
+          chainId: ARB_ONE_CHAIN_ID,
+          contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+          tokenIn: USDT_ADDRESS.toLowerCase() as Address,
+          tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+          amountIn: GreaterThanOrEqual(339000000),
+        })
+        console.log(filter.input)
+
+      expect(filter).to.deep.equal({
+        chainId: ARB_ONE_CHAIN_ID,
+        to: AUGUSTUS_SWAPPER_ARBITRUM,
+        input: {
+          '$abiAbstract': PARASWAP_ABI,
+          '$or': [
+            [
+              {
+                "assets": [
+                  "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+                  "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+                        ],
+                "fromAmount": {
+                  "$gte": "339000000",
+                },
+                "funds": {},
+              },
+              {
+                "assets": [
+                  "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+                  "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+                        ],
+                "fromAmount": {
+                  "$gte": "339000000",
+                },
+                "funds": {},
+              },
+              {
+                "fromAmount": {
+                  "$gte": "339000000",
+                },
+                "fromToken": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+                "toToken": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+              },
+              {
+                "fromAmount": {
+                  "$gte": "339000000",
+                },
+                "fromToken": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+                "toToken": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+              },
+              {
+                "params": {
+                  "amountIn": {
+                    "$gte": "339000000",
+                  },
+                  "tokenIn": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+                  "tokenOut": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+                },
+              },
+              {
+                "params": {
+                  "amountIn": {
+                    "$gte": "339000000",
+                  },
+                  "path": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9ff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+                },
+              },
+              {
+                "data": {
+                  "fromAmount": {
+                    "$gte": "339000000",
+                  },
+                  "fromToken": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+                  "path": {
+                    "$last": {
+                      "to": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+                    },
+                  },
+                },
+              },
+            ]
+          ]
+        }
+      })
     })
 
     test('should pass filter with valid transactions',  () => {
