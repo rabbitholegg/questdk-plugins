@@ -16,7 +16,7 @@ export const Camelot: IActionPlugin = {
   pluginId: 'camelot',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  bridge: async () => new PluginActionNotImplementedError()
+  bridge: async () => new PluginActionNotImplementedError(),
   swap,
   mint: async () => new PluginActionNotImplementedError(),
 }
