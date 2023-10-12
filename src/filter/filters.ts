@@ -1,4 +1,11 @@
-import type { TransactionFilter } from './types.js'
+import type {
+  AbiFilter,
+  AbiParamFilter,
+  AbstractAbiFilter,
+  Filter,
+  FilterObject,
+  TransactionFilter,
+} from './types.js'
 import {
   type Abi,
   type Address,
@@ -11,6 +18,7 @@ import {
   parseAbiParameters,
   slice,
 } from 'viem'
+type OperatorKey = keyof typeof operators
 
 /**
  * Applies the AND operator to a set of filters.
@@ -19,7 +27,6 @@ import {
  * @returns True if all filters pass, false otherwise.
  */
 export const handleAnd = (context: any, filter: Filter[]): boolean => {
-  console.log('handleAnd', context, filter)
   for (let i = 0; i < filter.length; i++) {
     if (!apply(context, filter[i] as FilterObject)) return false
   }
@@ -181,7 +188,7 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
 
 export const handleAbstractAbiDecode = (
   context: any,
-  filter: { $abiAbstract?: Abi },
+  filter: AbstractAbiFilter,
 ) => {
   const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
   const elementCount = filter.$abiAbstract!.length
@@ -202,7 +209,7 @@ export const handleAbstractAbiDecode = (
       }
     }
   }
-  delete filter.$abiAbstract
+  delete (filter as FilterObject).$abiAbstract
   const decodedReturnLength = decodedReturn.length
   for (let i = 0; i < decodedReturnLength; i++) {
     if (apply(decodedReturn[i] as Record<string, any>, filter)) {
@@ -261,25 +268,6 @@ const preprocessors = {
   $abi: handleAbiDecode,
   $abiAbstract: handleAbstractAbiDecode,
   $abiParams: handleAbiParamDecode,
-}
-
-type OperatorKey = keyof typeof operators
-
-type Primitive = string | number | boolean
-type FilterObject = {
-  [key: string]: Filter
-}
-export type Filter = Primitive | FilterObject | FilterArray | Abi
-export type FilterArray = Filter[]
-interface AbiFilter extends FilterObject {
-  $abi: Abi
-}
-
-interface AbstractAbiFilter extends FilterObject {
-  $abiAbstract: Abi
-}
-interface AbiParamFilter extends FilterObject {
-  $abiParams: string[]
 }
 
 /**
