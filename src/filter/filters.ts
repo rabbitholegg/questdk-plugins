@@ -193,13 +193,15 @@ export const handleAbstractAbiDecode = (
   const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
   const elementCount = filter.$abiAbstract!.length
   const contextMap = new Map<string, number>()
-  for (let i = 0; i < context.length - 6; i++) {
-    contextMap.set(context.substring(i, i + 6), i)
+  // Function selectors are 4 bytes long - 8 characters
+  for (let i = 2; i < context.length - 8; i++) {
+    contextMap.set(context.substring(i, i + 8), i)
   }
   for (let i = 0; i < elementCount; i++) {
     const abiItem = filter.$abiAbstract![i]
     if (abiItem.type === 'function') {
       const functionSelector = getFunctionSelector(abiItem)
+      // We want to omit the leading 0x from the function selector
       const functionSelectorSubstring = functionSelector.substring(2)
       const index = contextMap.get(functionSelectorSubstring)
       if (index !== undefined) {
@@ -286,14 +288,15 @@ export function apply(
     if (!Object.hasOwnProperty.call(filters, key)) continue
     // If the key is a preprocessor, apply it.
     if (key in preprocessors) {
-      if ('$abi' in Object.keys(filters)) {
+      if ('$abi' in filters) {
         const processedContext = handleAbiDecode(context, filters as AbiFilter)
         if (processedContext === null) {
           return false
         }
+        context = processedContext
       }
 
-      if ('$abiAbstract' in Object.keys(filters)) {
+      if ('$abiAbstract' in filters) {
         const processedContext = handleAbstractAbiDecode(
           context,
           filters as AbstractAbiFilter,
@@ -307,7 +310,7 @@ export function apply(
         context = processedContext
       }
 
-      if ('$abiParams' in Object.keys(filters)) {
+      if ('$abiParams' in filters) {
         const processedContext = handleAbiParamDecode(
           context,
           filters as AbiParamFilter,
@@ -323,7 +326,7 @@ export function apply(
         return false
       }
       const _context = context[key as keyof typeof context]
-      if (key in Object.keys(operators)) {
+      if (key in operators) {
         const operator = operators[key as OperatorKey]
         // Handle the operator cases with a switch to enforce casing
         // and type safety
