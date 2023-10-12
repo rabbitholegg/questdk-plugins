@@ -36,7 +36,7 @@ export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> =
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: 0, // The chainId of the source chain
+    chainId: chainId, // The chainId of the source chain
     to:  contractAddress || CAMELOT_ROUTER,   // The contract address of the bridge
     input: {
       $abi: CAMELOT_ABI, // The ABI of the bridge
