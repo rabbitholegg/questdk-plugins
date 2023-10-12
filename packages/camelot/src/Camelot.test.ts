@@ -20,15 +20,15 @@ describe('Given the camelot plugin', () => {
         chainId: 42161,
         to: '0xc873fEcbd354f5A56E00E710B90EF4201db2448d',
         input: {
-          '$abi': CAMELOT_ABI,
-          path: { '$and': [
-            {'$last': '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C'}
-          ] },
-          amountOutMin: { '$gte': '500000000000000' }
-        }
+          $abi: CAMELOT_ABI,
+          path: {
+            $and: [{ $last: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C' }],
+          },
+          amountOutMin: { $gte: '500000000000000' },
+        },
       })
     })
-    test('should pass filter with valid ETH transactions',  async () => {
+    test('should pass filter with valid ETH transactions', async () => {
       const transaction = SWAP_ETH
       const filter = await swap({
         chainId: ARBITRUM_CHAIN_ID,
@@ -39,8 +39,8 @@ describe('Given the camelot plugin', () => {
       console.log(filter)
       expect(apply(transaction, filter)).to.be.true
     })
-    
-    test('should not pass filter with valid tokens transactions',  async () => {
+
+    test('should not pass filter with valid tokens transactions', async () => {
       const transaction = SWAP_TOKENS
       const filter = await swap({
         chainId: ARBITRUM_CHAIN_ID,
@@ -50,6 +50,5 @@ describe('Given the camelot plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
-
   })
 })
