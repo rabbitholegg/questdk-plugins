@@ -12,96 +12,92 @@ const AUGUSTUS_SWAPPER_ARBITRUM = '0xdef171fe48cf0115b1d80b88dc8eab59176fee57'
 
 describe('Given the paraswap plugin', () => {
   describe('When handling the bridge', () => {
-
-    test.only('should return a valid action filter', async () => {
-
-        const filter = await swap({
-          chainId: ARB_ONE_CHAIN_ID,
-          contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-          tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-          tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
-          amountIn: GreaterThanOrEqual(339000000),
-        })
-        console.log(filter.input)
+    test('should return a valid action filter', async () => {
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
+        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        amountIn: GreaterThanOrEqual(339000000),
+      })
+      console.log(filter.input)
 
       expect(filter).to.deep.equal({
         chainId: ARB_ONE_CHAIN_ID,
         to: AUGUSTUS_SWAPPER_ARBITRUM,
         input: {
-          '$abiAbstract': PARASWAP_ABI,
-          '$or': [
-            [
-              {
-                "assets": [
-                  "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-                  "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
-                        ],
-                "fromAmount": {
-                  "$gte": "339000000",
-                },
-                "funds": {},
+          $abiAbstract: PARASWAP_ABI,
+          $or: [
+            {
+              assets: [
+                '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+              ],
+              fromAmount: {
+                $gte: '339000000',
               },
-              {
-                "assets": [
-                  "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-                  "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
-                        ],
-                "fromAmount": {
-                  "$gte": "339000000",
-                },
-                "funds": {},
+              funds: {},
+            },
+            {
+              assets: [
+                '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+              ],
+              fromAmount: {
+                $gte: '339000000',
               },
-              {
-                "fromAmount": {
-                  "$gte": "339000000",
-                },
-                "fromToken": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-                "toToken": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+              funds: {},
+            },
+            {
+              fromAmount: {
+                $gte: '339000000',
               },
-              {
-                "fromAmount": {
-                  "$gte": "339000000",
-                },
-                "fromToken": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-                "toToken": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+              fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+              toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+            },
+            {
+              fromAmount: {
+                $gte: '339000000',
               },
-              {
-                "params": {
-                  "amountIn": {
-                    "$gte": "339000000",
-                  },
-                  "tokenIn": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-                  "tokenOut": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+              fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+              toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+            },
+            {
+              params: {
+                amountIn: {
+                  $gte: '339000000',
                 },
+                tokenIn: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                tokenOut: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
               },
-              {
-                "params": {
-                  "amountIn": {
-                    "$gte": "339000000",
-                  },
-                  "path": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9ff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+            },
+            {
+              params: {
+                amountIn: {
+                  $gte: '339000000',
                 },
+                path: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9ff970a61a04b1ca14834a43f5de4533ebddb5cc8',
               },
-              {
-                "data": {
-                  "fromAmount": {
-                    "$gte": "339000000",
-                  },
-                  "fromToken": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-                  "path": {
-                    "$last": {
-                      "to": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
-                    },
+            },
+            {
+              data: {
+                fromAmount: {
+                  $gte: '339000000',
+                },
+                fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                path: {
+                  $last: {
+                    to: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
                   },
                 },
               },
-            ]
-          ]
-        }
+            },
+          ],
+        },
       })
     })
 
-    test('should pass filter with valid simple transactions',  async () => {
+    test('should pass filter with valid simple transactions', async () => {
       const transaction = SWAP_SIMPLE
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
@@ -112,7 +108,7 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
-    test('should not pass filter with invalid simple transactions',  async () => {
+    test('should not pass filter with invalid simple transactions', async () => {
       const transaction = SWAP_SIMPLE
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
@@ -123,7 +119,7 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.false
     })
-    test('should pass filter with valid multi transactions',  async () => {
+    test('should pass filter with valid multi transactions', async () => {
       const transaction = SWAP_MULTI
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
@@ -134,7 +130,7 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
-    test('should not pass filter with invalid transactions',  async () => {
+    test('should not pass filter with invalid transactions', async () => {
       const transaction = SWAP_MULTI
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
@@ -145,6 +141,5 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.false
     })
-
   })
 })
