@@ -6,7 +6,7 @@ import { DEFAULT_TOKEN_LIST_URL, WETH_ADDRESS_ARBITRUM } from './contract-addres
 import { CAMELOT_ABI } from './abi'
 import { CAMELOT_ROUTER } from './contract-addresses'
 
-const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
+export const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v2 paths are formatted as [<token>, <token>]
   const conditions: FilterOperator[] = []
 
