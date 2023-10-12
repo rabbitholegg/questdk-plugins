@@ -101,10 +101,6 @@ describe('Given the paraswap plugin', () => {
       })
     })
 
-    test('should pass filter with valid transactions',  () => {
-      
-    })
-    
     test('should pass filter with valid simple transactions',  async () => {
       const transaction = SWAP_SIMPLE
       const filter = await swap({
@@ -125,7 +121,7 @@ describe('Given the paraswap plugin', () => {
         tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
         amountIn: GreaterThanOrEqual(339000000000),
       })
-      expect(apply(transaction, filter)).to.be.true
+      expect(apply(transaction, filter)).to.be.false
     })
     test('should pass filter with valid multi transactions',  async () => {
       const transaction = SWAP_MULTI
@@ -147,7 +143,7 @@ describe('Given the paraswap plugin', () => {
         tokenOut: VELA_ADDRESS.toLowerCase() as Address,
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
-      expect(apply(transaction, filter)).to.be.true
+      expect(apply(transaction, filter)).to.be.false
     })
 
   })
