@@ -1,10 +1,8 @@
 import {
   type TransactionFilter,
-  type BridgeActionParams,
   type SwapActionParams,
-  type MintActionParams,
   compressJson,
-  FilterOperator,
+  type FilterOperator,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
