@@ -1,8 +1,8 @@
 
 import { type TransactionFilter, type BridgeActionParams, type SwapActionParams, type MintActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-
+import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
+import { DEFAULT_TOKEN_LIST_URL } from './contract-addresses'
 export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> => {
   const {
     chainId,
@@ -23,7 +23,8 @@ export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> =
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+  // Only return supported tokens for ARBITRUM_CHAIN_ID
+  return _chainId === ARBITRUM_CHAIN_ID ? DEFAULT_TOKEN_LIST_URL : []
 }
 
 
