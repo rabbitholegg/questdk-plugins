@@ -36,7 +36,6 @@ describe('Given the camelot plugin', () => {
         tokenOut: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C',
         amountOut: GreaterThanOrEqual(parseEther('0.0005')),
       })
-      console.log(filter)
       expect(apply(transaction, filter)).to.be.true
     })
     

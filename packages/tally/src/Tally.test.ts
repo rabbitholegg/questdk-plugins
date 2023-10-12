@@ -46,7 +46,6 @@ describe('Given the tally plugin', () => {
         delegate: TEST_ADDRESS,
         project: PROJECT_TARGET,
       })
-      console.log(filter)
       expect(apply(transaction, filter)).to.be.false
     })
   })

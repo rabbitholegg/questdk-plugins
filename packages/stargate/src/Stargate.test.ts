@@ -171,7 +171,6 @@ describe('Given the Across plugin', () => {
         tokenAddress: POLYGON_USDCE_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
       })
-      console.log(filter)
       expect(apply(transaction, filter)).to.be.true
     })
 
@@ -183,7 +182,6 @@ describe('Given the Across plugin', () => {
         tokenAddress: POLYGON_USDCE_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
       })
-      console.log(filter)
       expect(apply(transaction, filter)).to.be.false
     })
   })
