@@ -1,24 +1,50 @@
 
-import { type TransactionFilter, type BridgeActionParams, type SwapActionParams, type MintActionParams, compressJson } from '@rabbitholegg/questdk'
+import { type TransactionFilter, type BridgeActionParams, type SwapActionParams, type MintActionParams, compressJson, FilterOperator } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
-import { DEFAULT_TOKEN_LIST_URL } from './contract-addresses'
+import { DEFAULT_TOKEN_LIST_URL, WETH_ADDRESS_ARBITRUM } from './contract-addresses'
+import { CAMELOT_ABI } from './abi'
+import { CAMELOT_ROUTER } from './contract-addresses'
+
+const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
+  // v2 paths are formatted as [<token>, <token>]
+  const conditions: FilterOperator[] = []
+
+  if (tokenIn) {
+    conditions.push({ $first: tokenIn })
+  }
+
+  if (tokenOut) {
+    conditions.push({ $last: tokenOut })
+  }
+
+  return {
+    $and: conditions,
+  }
+}
+
 export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> => {
   const {
     chainId,
     contractAddress,
     tokenIn,
     tokenOut,
-    amountIn,
     amountOut,
     recipient,
   } = swap
+  const amountIn = tokenIn === WETH_ADDRESS_ARBITRUM ? swap.amountIn : undefined
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: 0, // The chainId of the source chain
-    to:  0x0,   // The contract address of the bridge
-    input: {},  // The input object is where we'll put the ABI and the parameters
+    to:  contractAddress || CAMELOT_ROUTER,   // The contract address of the bridge
+    input: {
+      $abi: CAMELOT_ABI, // The ABI of the bridge
+      to: recipient,     // The recipient of the swap
+      path: buildPathQuery(tokenIn, tokenOut), // The path of the swap
+      amountOutMin: amountOut, // The minimum amount of tokens to receive
+      amountIn: amountIn, // The amount of tokens to send
+    },  // The input object is where we'll put the ABI and the parameters
   })
 }
 
