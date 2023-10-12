@@ -1,21 +1,31 @@
 import {
   apply,
+  handleAbstractAbiDecode,
   handleAnd,
   handleGreaterThanOrEqual,
   handleOr,
   handleRegex,
   handleSome,
 } from './filters.js'
+import type { Filter, FilterObject } from './types.js'
+import type { Abi } from 'viem'
 import { assertType, describe, expect, test } from 'vitest'
 
 describe('parser', () => {
   describe('$and', () => {
-    test('should return true when all conditions are met', () => {
+    test('should return false when all conditions are not met', () => {
       const filter = [{ value: '0xa' }, { value: '0xb' }]
       const context = { value: '0xa' }
       const result = handleAnd(context, filter)
       assertType<boolean>(result)
       expect(result).to.be.false
+    })
+    test('should return true when all conditions are met', () => {
+      const filter: Filter = [{ a: '0xa' }, { b: '0xb' }]
+      const context = { a: '0xa', b: '0xb' }
+      const result = handleAnd(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.true
     })
   })
 
@@ -31,7 +41,7 @@ describe('parser', () => {
 
   describe('$some', () => {
     test('should return true when at least one item in the array meets the condition', () => {
-      const filter = { value: '0xa' }
+      const filter: FilterObject = { value: '0xa' }
       const context = [{ value: '0xa' }, { value: '0xb' }]
       const result = handleSome(context, filter)
       assertType<boolean>(result)
