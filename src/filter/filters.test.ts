@@ -96,22 +96,49 @@ describe('parser', () => {
       }
 
       const filter = {
-        $abiAbstract: [
-          {
-            inputs: [
-              { internalType: 'bytes', name: 'commands', type: 'bytes' },
-              { internalType: 'bytes[]', name: 'inputs', type: 'bytes[]' },
-              { internalType: 'uint256', name: 'deadline', type: 'uint256' },
-            ],
-            name: 'execute',
-            outputs: [],
-            stateMutability: 'payable',
-            type: 'function',
+        input: {
+          $abiAbstract: [
+            {
+              inputs: [
+                { internalType: 'bytes', name: 'commands', type: 'bytes' },
+                { internalType: 'bytes[]', name: 'inputs', type: 'bytes[]' },
+                { internalType: 'uint256', name: 'deadline', type: 'uint256' },
+              ],
+              name: 'execute',
+              outputs: [],
+              stateMutability: 'payable',
+              type: 'function',
+            },
+          ],
+          sighash: '0x3593564c',
+          commands: '0x00',
+          inputs: {
+            $some: {
+              $abiParams: [
+                'address recipient',
+                'uint256 amountIn',
+                'uint256 amountOut',
+                'bytes path',
+                'bool payerIsUser',
+              ],
+              amountOut: {
+                $gte: '0x4c4b400',
+              },
+              path: {
+                $and: [
+                  {
+                    $regex: '^0x9e1028f5f1d5ede59748ffcee5532509976840e0',
+                  },
+                  {
+                    $regex: '.*7f5c764cbc14f9669b88837ca1490cca17c31607$',
+                  },
+                ],
+              },
+            },
           },
-        ] as Abi,
-        sighash: '0x3593564c',
+        },
       }
-      expect(handleAbstractAbiDecode(transaction, filter)).to.be.true
+      expect(apply(transaction, filter)).to.be.true
     })
   })
 
