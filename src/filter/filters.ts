@@ -263,7 +263,6 @@ const preprocessors = {
 }
 
 type OperatorKey = keyof typeof operators
-type PreprocessorKey = keyof typeof preprocessors
 
 type Primitive = string | number | boolean
 type FilterObject = {
