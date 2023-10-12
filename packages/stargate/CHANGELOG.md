@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- [#57](https://github.com/rabbitholegg/questdk-plugins/pull/57) [`bdf199e`](https://github.com/rabbitholegg/questdk-plugins/commit/bdf199e69c781958066e5f3b18cc121010d01a94) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Adds USDC and WETH to Base
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes
