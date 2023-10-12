@@ -172,13 +172,17 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
 export const handleAbstractAbiDecode = (context: any, filter: { $abiAbstract?: Abi}) => {
   const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
   const elementCount = filter.$abiAbstract!.length
+  const contextMap = new Map<string, number>()
+  for(let i = 0; i < context.length - 6; i++) {
+    contextMap.set(context.substring(i, i + 6), i)
+  }
   for (let i = 0; i < elementCount; i++) {
     const abiItem = filter.$abiAbstract![i]
     if (abiItem.type === 'function') {
       const functionSelector = getFunctionSelector(abiItem)
       const functionSelectorSubstring = functionSelector.substring(2)
-      const index = context.indexOf(functionSelectorSubstring)
-      if (index !== -1) {
+      const index = contextMap.get(functionSelectorSubstring)
+      if (index !== undefined) {
         decodedReturn.push(
           handleAbiDecode(`0x${context.substring(index)}`, { $abi: [abiItem] }),
         )
