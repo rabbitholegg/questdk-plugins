@@ -93,7 +93,7 @@ export const getSupportedTokenAddresses = async (
   if (_chainId === BASE_CHAIN_ID)
     return [
       '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca',
-      '0x4200000000000000000000000000000000000006'
+      '0x4200000000000000000000000000000000000006',
     ] // [USDbC, WETH]
   return []
 }
