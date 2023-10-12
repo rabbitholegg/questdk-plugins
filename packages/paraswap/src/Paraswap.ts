@@ -8,6 +8,7 @@ import {
 } from '@paraswap/sdk'
 import { PARASWAP_ABI } from './abi.js'
 import axios from 'axios'
+import { DEFAULT_TOKEN_LIST_URL } from './contract-addresses.js'
 const fetcher = constructAxiosFetcher(axios) // alternatively constructFetchFetcher
 // If you're implementing swap or mint, simply duplicate this function and change the name
 export const swap = async (swap: SwapActionParams) => {
@@ -92,9 +93,9 @@ export const swap = async (swap: SwapActionParams) => {
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  // TODO: should we build this function for all chains? Might save a little compute having it pre-built once
   const { getTokens } = constructGetTokens({ chainId: _chainId, fetcher })
-  return (await getTokens()).map((token) => token.address as Address)
+  // Default list only valid for 
+  return getTokens ? (await getTokens()).map((token) => token.address as Address) : DEFAULT_TOKEN_LIST_URL[_chainId] as Address[]
 }
 
 export const getSupportedChainIds = async () => {
