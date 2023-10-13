@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.18
+
+### Minor Changes
+
+- [#56](https://github.com/rabbitholegg/questdk-plugins/pull/56) [`7be61f5`](https://github.com/rabbitholegg/questdk-plugins/commit/7be61f5d7c137eaefd74c5b8a93f0a3d4bf5085a) Thanks [@Quazia](https://github.com/Quazia)! - Release support for Camelot Swap
+
+### Patch Changes
+
+- Updated dependencies [[`bdf199e`](https://github.com/rabbitholegg/questdk-plugins/commit/bdf199e69c781958066e5f3b18cc121010d01a94), [`7be61f5`](https://github.com/rabbitholegg/questdk-plugins/commit/7be61f5d7c137eaefd74c5b8a93f0a3d4bf5085a)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.2
+
 ## 1.0.0-alpha.17
 
 ### Patch Changes

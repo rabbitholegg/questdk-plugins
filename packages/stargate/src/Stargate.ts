@@ -8,6 +8,7 @@ import {
   LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID,
   POLYGON_CHAIN_ID,
   OPTIMISM_CHAIN_ID,
+  BASE_CHAIN_ID,
 } from './chain-ids.js'
 import {
   NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
@@ -89,6 +90,11 @@ export const getSupportedTokenAddresses = async (
       '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
       '0x4200000000000000000000000000000000000006',
     ] // [USDC, WETH]
+  if (_chainId === BASE_CHAIN_ID)
+    return [
+      '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca',
+      '0x4200000000000000000000000000000000000006',
+    ] // [USDbC, WETH]
   return []
 }
 
