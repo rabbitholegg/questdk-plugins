@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-camelot
 
+## 1.0.0-alpha.3
+
+### Patch Changes
+
+- [#59](https://github.com/rabbitholegg/questdk-plugins/pull/59) [`60bedfa`](https://github.com/rabbitholegg/questdk-plugins/commit/60bedfa5b7f306d6bfe1874858a2f0969ab4a6c3) Thanks [@Quazia](https://github.com/Quazia)! - Pin camelot versions
+
 ## 1.0.0-alpha.2
 
 ### Minor Changes

@@ -1,5 +1,16 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.19
+
+### Minor Changes
+
+- [#61](https://github.com/rabbitholegg/questdk-plugins/pull/61) [`184686e`](https://github.com/rabbitholegg/questdk-plugins/commit/184686eefb22fb68a09a35658e0313f28ba7606c) Thanks [@Quazia](https://github.com/Quazia)! - Release Paraswap Plugin
+
+### Patch Changes
+
+- Updated dependencies [[`60bedfa`](https://github.com/rabbitholegg/questdk-plugins/commit/60bedfa5b7f306d6bfe1874858a2f0969ab4a6c3)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.3
+
 ## 1.0.0-alpha.18
 
 ### Minor Changes
