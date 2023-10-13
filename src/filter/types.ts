@@ -1,4 +1,4 @@
-import type { Transaction } from 'viem'
+import type { Abi, Transaction } from 'viem'
 
 export type ArrayOperator =
   | {
@@ -48,4 +48,21 @@ export type FilterOperator =
 
 export type TransactionFilter = {
   [K in keyof Transaction]: FilterOperator
+}
+
+type Primitive = string | number | boolean
+export type FilterObject = {
+  [key: string]: Filter
+}
+export type Filter = Primitive | FilterObject | FilterArray | Abi
+export type FilterArray = Filter[]
+export interface AbiFilter extends FilterObject {
+  $abi: Abi
+}
+
+export interface AbstractAbiFilter extends FilterObject {
+  $abiAbstract: Abi
+}
+export interface AbiParamFilter extends FilterObject {
+  $abiParams: string[]
 }

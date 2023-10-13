@@ -1,12 +1,24 @@
+import type {
+  AbiFilter,
+  AbiParamFilter,
+  AbstractAbiFilter,
+  Filter,
+  FilterObject,
+  TransactionFilter,
+} from './types.js'
 import {
   type Abi,
+  type Address,
+  type TransactionEIP1559,
   decodeAbiParameters,
   decodeFunctionData,
   getAbiItem,
+  getFunctionSelector,
   isAddress,
   parseAbiParameters,
   slice,
 } from 'viem'
+type OperatorKey = keyof typeof operators
 
 /**
  * Applies the AND operator to a set of filters.
@@ -16,7 +28,7 @@ import {
  */
 export const handleAnd = (context: any, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
-    if (!apply(context, filter[i])) return false
+    if (!apply(context, filter[i] as FilterObject)) return false
   }
   return true
 }
@@ -29,7 +41,7 @@ export const handleAnd = (context: any, filter: Filter[]): boolean => {
  */
 export const handleOr = (context: any, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
-    if (apply(context, filter[i])) return true
+    if (apply(context, filter[i] as FilterObject)) return true
   }
   return false
 }
@@ -40,7 +52,10 @@ export const handleOr = (context: any, filter: Filter[]): boolean => {
  * @param filter - The set of filters to apply.
  * @returns True if any filter passes, false otherwise.
  */
-export const handleSome = (context: any, filter: FilterObject): boolean => {
+export const handleSome = (
+  context: any,
+  filter: TransactionFilter | FilterObject,
+): boolean => {
   for (let i = 0; i < context.length; i++) {
     const result = apply(context[i], filter)
     if (result) return true
@@ -119,7 +134,10 @@ export const handleGreaterThanOrEqual = (
  * @param filter - The filter to apply.
  * @returns The result of applying the filter.
  */
-export const handleFirst = (context: any, filter: FilterObject): boolean => {
+export const handleFirst = (
+  context: any,
+  filter: TransactionFilter | FilterObject,
+): boolean => {
   return apply(context[0], filter)
 }
 
@@ -129,7 +147,10 @@ export const handleFirst = (context: any, filter: FilterObject): boolean => {
  * @param filter - The filter to apply.
  * @returns The result of applying the filter.
  */
-export const handleLast = (context: any, filter: FilterObject): boolean => {
+export const handleLast = (
+  context: any,
+  filter: TransactionFilter | FilterObject,
+): boolean => {
   return apply(context[context.length - 1], filter)
 }
 
@@ -153,7 +174,6 @@ export const handleRegex = (context: any, filter: string): boolean => {
 export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
   try {
     const sighash = slice(context, 0, 4)
-
     const { functionName, args = [] } = decodeFunctionData({
       abi: filter.$abi,
       data: context,
@@ -177,6 +197,41 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
   } catch (_e) {
     return null
   }
+}
+
+export const handleAbstractAbiDecode = (
+  context: any,
+  filter: AbstractAbiFilter,
+) => {
+  const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
+  const elementCount = filter.$abiAbstract!.length
+  const contextMap = new Map<string, number>()
+  // Function selectors are 4 bytes long - 8 characters
+  for (let i = 2; i < context.length - 8; i++) {
+    contextMap.set(context.substring(i, i + 8), i)
+  }
+  for (let i = 0; i < elementCount; i++) {
+    const abiItem = filter.$abiAbstract![i]
+    if (abiItem.type === 'function') {
+      const functionSelector = getFunctionSelector(abiItem)
+      // We want to omit the leading 0x from the function selector
+      const functionSelectorSubstring = functionSelector.substring(2)
+      const index = contextMap.get(functionSelectorSubstring)
+      if (index !== undefined) {
+        decodedReturn.push(
+          handleAbiDecode(`0x${context.substring(index)}`, { $abi: [abiItem] }),
+        )
+      }
+    }
+  }
+  delete (filter as FilterObject).$abiAbstract
+  const decodedReturnLength = decodedReturn.length
+  for (let i = 0; i < decodedReturnLength; i++) {
+    if (apply(decodedReturn[i] as Record<string, any>, filter)) {
+      return true
+    }
+  }
+  return null
 }
 
 /**
@@ -227,19 +282,9 @@ const operators = {
 
 const preprocessors = {
   $abi: handleAbiDecode,
+  $abiAbstract: handleAbstractAbiDecode,
   $abiParams: handleAbiParamDecode,
 }
-
-type OperatorKey = keyof typeof operators
-type PreprocessorKey = keyof typeof preprocessors
-
-type Primitive = string | number | boolean
-
-type FilterObject = {
-  [K in string]?: Filter
-}
-
-export type Filter = Primitive | FilterObject | Filter[]
 
 /**
  * Applies a set of filters to a context.
@@ -248,58 +293,95 @@ export type Filter = Primitive | FilterObject | Filter[]
  * @returns True if all filters pass, false otherwise.
  */
 export function apply(
-  originalContext: Record<string, any>,
-  filters: any,
+  originalContext: TransactionEIP1559 | Record<string, any>,
+  filters: TransactionFilter | FilterObject,
 ): boolean {
-  let context = originalContext
-
+  let context: TransactionEIP1559 | Record<string, any> = originalContext
   for (const key in filters) {
+    // If the key is not a property of the filters object, skip it.
     if (!Object.hasOwnProperty.call(filters, key)) continue
+    // If the key is a preprocessor, apply it.
     if (key in preprocessors) {
-      const processedContext = preprocessors[key as PreprocessorKey](
-        context,
-        filters,
-      )
-      if (processedContext === null) {
-        return false
+      if ('$abi' in filters) {
+        const processedContext = handleAbiDecode(context, filters as AbiFilter)
+        if (processedContext === null) {
+          return false
+        }
+        context = processedContext
       }
-      context = processedContext
-      continue
-    }
 
-    if (key in operators) {
-      const operator = operators[key as OperatorKey]
-      if (!operator(context, filters[key])) {
-        return false
+      if ('$abiAbstract' in filters) {
+        const processedContext = handleAbstractAbiDecode(
+          context,
+          filters as AbstractAbiFilter,
+        )
+        if (processedContext === true) {
+          return true
+        }
+        if (processedContext === null) {
+          return false
+        }
+        context = processedContext
       }
-      continue
-    }
 
-    if (typeof filters[key] === 'object') {
-      if (!(key in context)) {
+      if ('$abiParams' in filters) {
+        const processedContext = handleAbiParamDecode(
+          context,
+          filters as AbiParamFilter,
+        )
+        if (processedContext === null) {
+          return false
+        }
+        context = processedContext
+      }
+    } else {
+      const filter = filters[key as keyof typeof filters]
+      if (filter === undefined) {
         return false
       }
-      if (!apply(context[key], filters[key])) {
-        return false
+      const _context = context[key as keyof typeof context]
+      if (key in operators) {
+        const operator = operators[key as OperatorKey]
+        // Handle the operator cases with a switch to enforce casing
+        // and type safety
+
+        if (
+          !operator(context, filter as Filter[] & string & TransactionFilter)
+        ) {
+          return false
+        }
+        continue
       }
-    } else if (isAddress(context[key])) {
-      if (context[key].toLowerCase() !== filters[key].toLowerCase()) {
-        return false
-      }
-    } else if (
-      typeof filters[key] === 'bigint' ||
-      typeof filters[key] === 'number' ||
-      typeof context[key] === 'bigint' ||
-      typeof context[key] === 'number'
-    ) {
-      if (
-        context[key] === undefined ||
-        BigInt(context[key]) !== BigInt(filters[key])
+
+      if (typeof filter === 'object') {
+        if (!(key in context)) {
+          return false
+        }
+        if (!apply(_context, filter as FilterObject | TransactionFilter)) {
+          return false
+        }
+      } else if (isAddress(_context as string)) {
+        if (
+          typeof filter === 'string' &&
+          (_context as Address).toLowerCase() !== filter.toLowerCase()
+        ) {
+          return false
+        }
+      } else if (
+        typeof filter === 'bigint' ||
+        typeof filter === 'number' ||
+        typeof _context === 'bigint' ||
+        typeof _context === 'number'
       ) {
+        if (
+          _context === undefined ||
+          BigInt(_context) !== BigInt(filter as bigint | number | string)
+        ) {
+          return false
+        }
+      } else if (_context !== filter) {
         return false
       }
-    } else if (context[key] !== filters[key]) {
-      return false
     }
   }
   return true
