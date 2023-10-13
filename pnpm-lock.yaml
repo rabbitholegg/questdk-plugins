@@ -98,8 +98,8 @@ importers:
   packages/camelot:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 2.0.0-alpha.18
+        version: 2.0.0-alpha.18(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -2326,24 +2326,6 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
-
-  /@rabbitholegg/questdk@1.1.0-alpha.13(typescript@5.1.6):
-    resolution: {integrity: sha512-GkBKnfCdoTyoN5WZ3SItJkzwGkU6xsPFXOysAXY8Uj6bJ5PAT+GSTU75PrfNKKlv+O+kSHAJh8wKXc7EPz133Q==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.8(typescript@5.1.6)
-      rimraf: 5.0.1
-      typescript: 5.1.6
-      viem: 1.6.7(typescript@5.1.6)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
 
   /@rabbitholegg/questdk@2.0.0-alpha.18(typescript@5.1.6):
     resolution: {integrity: sha512-RNv4T5YZ3KhBPqJjoQNZLtKuu5s3ubhsmCbql08XRqJJzIdYO0nAfdCdUClqAWAH9lZHz2vkFjaA+P2GQr1gYQ==}
