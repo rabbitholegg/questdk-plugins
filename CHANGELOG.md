@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.18
+
+### Major Changes
+
+- [#27](https://github.com/rabbitholegg/questdk/pull/27) [`81f1f80`](https://github.com/rabbitholegg/questdk/commit/81f1f803b13a893d9762f1c4e05464ee7cd8e316) Thanks [@Quazia](https://github.com/Quazia)! - Change types on filter and add ABIAbstract preproccesor
+
 ## 1.1.0-alpha.17
 
 ### Patch Changes
