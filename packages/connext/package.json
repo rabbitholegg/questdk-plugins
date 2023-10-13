@@ -47,7 +47,7 @@
     "@connext/nxtp-txservice": "^2.0.0",
     "@connext/nxtp-utils": "^2.0.4",
     "@connext/smart-contracts": "^2.0.0",
-    "@rabbitholegg/questdk": "1.1.0-alpha.17",
+    "@rabbitholegg/questdk": "2.0.0-alpha.18",
     "viem": "^1.2.15"
   }
 }
