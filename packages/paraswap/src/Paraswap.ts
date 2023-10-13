@@ -31,7 +31,10 @@ export const swap = async (swap: SwapActionParams) => {
       $abiAbstract: PARASWAP_ABI,
       $or: [
         {
-          assets: tokenIn !== undefined && tokenOut !== undefined ? [tokenIn, tokenOut] : undefined,
+          assets:
+            tokenIn !== undefined && tokenOut !== undefined
+              ? [tokenIn, tokenOut]
+              : undefined,
           funds: {
             recipient: recipient,
           },
@@ -39,7 +42,10 @@ export const swap = async (swap: SwapActionParams) => {
           expectedAmount: amountOut,
         },
         {
-          assets: tokenIn !== undefined && tokenOut !== undefined ? [tokenIn, tokenOut] : undefined,
+          assets:
+            tokenIn !== undefined && tokenOut !== undefined
+              ? [tokenIn, tokenOut]
+              : undefined,
           funds: {
             recipient: recipient,
           },
@@ -68,7 +74,10 @@ export const swap = async (swap: SwapActionParams) => {
         },
         {
           params: {
-            path: tokenIn !== undefined && tokenOut !== undefined ? tokenIn + tokenOut.substring(2) : undefined,
+            path:
+              tokenIn !== undefined && tokenOut !== undefined
+                ? tokenIn + tokenOut.substring(2)
+                : undefined,
             amountIn: amountIn,
             amountOutMinimum: amountOut,
             recipient: recipient,
@@ -94,8 +103,10 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   const { getTokens } = constructGetTokens({ chainId: _chainId, fetcher })
-  // Default list only valid for 
-  return getTokens ? (await getTokens()).map((token) => token.address as Address) : DEFAULT_TOKEN_LIST_URL[_chainId] as Address[]
+  // Default list only valid for
+  return getTokens
+    ? (await getTokens()).map((token) => token.address as Address)
+    : (DEFAULT_TOKEN_LIST_URL[_chainId] as Address[])
 }
 
 export const getSupportedChainIds = async () => {
