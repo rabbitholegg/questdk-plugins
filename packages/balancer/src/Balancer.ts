@@ -1,6 +1,26 @@
 
 import { type TransactionFilter, type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { BALANCER_ABI } from './abi'
+import { FilterOperator } from '@rabbitholegg/questdk'
+
+
+export const buildPathQuery = (In?: string, Out?: string) => {
+  // v2 paths are formatted as [<token>, <token>]
+  const conditions: FilterOperator[] = []
+
+  if (In) {
+    conditions.push({ $first: In })
+  }
+
+  if (Out) {
+    conditions.push({ $last: Out })
+  }
+
+  return {
+    $and: conditions,
+  }
+}
 
 export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> => {
   const {
@@ -15,9 +35,26 @@ export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> =
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: 0, // The chainId of the source chain
+    chainId: chainId, // The chainId of the source chain
     to:  0x0,   // The contract address of the bridge
-    input: {},  // The input object is where we'll put the ABI and the parameters
+    input: {
+      $abiAbstract: BALANCER_ABI,
+      $or: [
+        {
+          singleSwap: {
+            assetIn: tokenIn,
+            assetOut: tokenOut,
+            amount: amountIn,
+          },
+          recipient: recipient,
+        },
+        {
+          assets: buildPathQuery(tokenIn, tokenOut),
+          recipient: recipient,
+          limits: buildPathQuery(amountIn, amountOut),
+        }
+      ]
+    },  // The input object is where we'll put the ABI and the parameters
   })
 }
 
