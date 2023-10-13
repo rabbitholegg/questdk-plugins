@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@maticnetwork/pos-portal": "1.5.2",
-    "@rabbitholegg/questdk": "1.1.0-alpha.13",
+    "@rabbitholegg/questdk": "1.1.0-alpha.17",
     "viem": "1.2.15"
   }
 }

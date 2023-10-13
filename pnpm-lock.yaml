@@ -30,8 +30,8 @@ importers:
   packages/across:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -64,8 +64,8 @@ importers:
   packages/arbitrum:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -107,8 +107,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(ethers@5.7.2)
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.2.2)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.2.2)
       viem:
         specifier: ^1.2.15
         version: 1.12.1(typescript@5.2.2)
@@ -141,8 +141,8 @@ importers:
   packages/gmx:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -184,8 +184,8 @@ importers:
         specifier: 0.0.1-beta.535
         version: 0.0.1-beta.535
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -221,8 +221,8 @@ importers:
         specifier: 0.15.0
         version: 0.15.0(typescript@5.1.6)
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -258,14 +258,14 @@ importers:
         specifier: ^6.2.2
         version: 6.2.2(axios@1.5.0)(typescript@5.1.6)
       '@rabbitholegg/questdk':
-        specifier: 1.0.1-alpha.10
-        version: 1.0.1-alpha.10(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       axios:
         specifier: 1.5.0
         version: 1.5.0
       viem:
-        specifier: ^1.2.15
-        version: 1.6.7(typescript@5.1.6)
+        specifier: 1.2.15
+        version: 1.2.15(typescript@5.1.6)
     devDependencies:
       '@types/node':
         specifier: ^20.4.5
@@ -298,8 +298,8 @@ importers:
         specifier: 1.5.2
         version: 1.5.2
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -332,8 +332,8 @@ importers:
   packages/registry:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.14
-        version: 1.1.0-alpha.14(typescript@5.2.2)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.2.2)
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
@@ -396,8 +396,8 @@ importers:
   packages/stargate:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.1.6)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.1.6)
       viem:
         specifier: 1.6.7
         version: 1.6.7(typescript@5.1.6)
@@ -464,8 +464,8 @@ importers:
   packages/template:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.2.2)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.2.2)
       viem:
         specifier: ^1.2.15
         version: 1.12.1(typescript@5.2.2)
@@ -500,8 +500,8 @@ importers:
   packages/uniswap:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 1.1.0-alpha.13
-        version: 1.1.0-alpha.13(typescript@5.2.2)
+        specifier: 1.1.0-alpha.17
+        version: 1.1.0-alpha.17(typescript@5.2.2)
       '@uniswap/universal-router':
         specifier: ^1.4.3
         version: 1.5.0
@@ -2290,78 +2290,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@rabbitholegg/questdk@1.0.1-alpha.10(typescript@5.1.6):
-    resolution: {integrity: sha512-OfOyfLgBDaZmL/vZPjKnQQEEoHOBZo1QH43OM8zIZuaHGjEFsks5RYHQzladwhGoUAxK4IggWfwguuXEZHKKUg==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.8(typescript@5.1.6)
-      rimraf: 5.0.1
-      typescript: 5.1.6
-      viem: 1.6.7(typescript@5.1.6)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
-  /@rabbitholegg/questdk@1.1.0-alpha.13(typescript@5.1.6):
-    resolution: {integrity: sha512-GkBKnfCdoTyoN5WZ3SItJkzwGkU6xsPFXOysAXY8Uj6bJ5PAT+GSTU75PrfNKKlv+O+kSHAJh8wKXc7EPz133Q==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.8(typescript@5.1.6)
-      rimraf: 5.0.1
-      typescript: 5.1.6
-      viem: 1.6.7(typescript@5.1.6)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
-  /@rabbitholegg/questdk@1.1.0-alpha.13(typescript@5.2.2):
-    resolution: {integrity: sha512-GkBKnfCdoTyoN5WZ3SItJkzwGkU6xsPFXOysAXY8Uj6bJ5PAT+GSTU75PrfNKKlv+O+kSHAJh8wKXc7EPz133Q==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.8(typescript@5.2.2)
-      rimraf: 5.0.1
-      typescript: 5.2.2
-      viem: 1.6.7(typescript@5.2.2)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
-  /@rabbitholegg/questdk@1.1.0-alpha.14(typescript@5.2.2):
-    resolution: {integrity: sha512-geIDu/5vC0nJxJFbkxpdopBySCVmzx6NtelfTtB71ReNEyX65gKdTbEeip1orHQHe48e1BYXAv4yVzOTmCDMww==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.8(typescript@5.2.2)
-      rimraf: 5.0.1
-      typescript: 5.2.2
-      viem: 1.6.7(typescript@5.2.2)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
   /@rabbitholegg/questdk@1.1.0-alpha.17(typescript@5.1.6):
     resolution: {integrity: sha512-sHid0MO51eRKSxbcP1FuhYyZ6ggx9M4EiN8izI6m9j1Ntsy7au/xOpAVajPscjbLv7yQy8Pw+iO8W0LJbq9OQA==}
     peerDependencies:
@@ -2374,6 +2302,24 @@ packages:
       rimraf: 5.0.1
       typescript: 5.1.6
       viem: 1.6.7(typescript@5.1.6)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@rabbitholegg/questdk@1.1.0-alpha.17(typescript@5.2.2):
+    resolution: {integrity: sha512-sHid0MO51eRKSxbcP1FuhYyZ6ggx9M4EiN8izI6m9j1Ntsy7au/xOpAVajPscjbLv7yQy8Pw+iO8W0LJbq9OQA==}
+    peerDependencies:
+      typescript: '>=5.1.6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      abitype: 0.9.8(typescript@5.2.2)
+      rimraf: 5.0.1
+      typescript: 5.2.2
+      viem: 1.6.7(typescript@5.2.2)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
