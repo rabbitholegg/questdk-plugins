@@ -36,7 +36,7 @@ const POLYGON_USDCE_ADDRESS = '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'
 
 const TEST_USER = '0x7c3bd1a09d7d86920451def20ae503322c8d0412'
 
-describe('Given the Across plugin', () => {
+describe('Given the Stargate plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
       const filter = await bridge({
