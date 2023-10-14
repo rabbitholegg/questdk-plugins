@@ -1,5 +1,56 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.19
+
+### Minor Changes
+
+- [#61](https://github.com/rabbitholegg/questdk-plugins/pull/61) [`184686e`](https://github.com/rabbitholegg/questdk-plugins/commit/184686eefb22fb68a09a35658e0313f28ba7606c) Thanks [@Quazia](https://github.com/Quazia)! - Release Paraswap Plugin
+
+### Patch Changes
+
+- Updated dependencies [[`60bedfa`](https://github.com/rabbitholegg/questdk-plugins/commit/60bedfa5b7f306d6bfe1874858a2f0969ab4a6c3)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.3
+
+## 1.0.0-alpha.18
+
+### Minor Changes
+
+- [#56](https://github.com/rabbitholegg/questdk-plugins/pull/56) [`7be61f5`](https://github.com/rabbitholegg/questdk-plugins/commit/7be61f5d7c137eaefd74c5b8a93f0a3d4bf5085a) Thanks [@Quazia](https://github.com/Quazia)! - Release support for Camelot Swap
+
+### Patch Changes
+
+- Updated dependencies [[`bdf199e`](https://github.com/rabbitholegg/questdk-plugins/commit/bdf199e69c781958066e5f3b18cc121010d01a94), [`7be61f5`](https://github.com/rabbitholegg/questdk-plugins/commit/7be61f5d7c137eaefd74c5b8a93f0a3d4bf5085a)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.2
+
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- Updated dependencies [[`d9774c3`](https://github.com/rabbitholegg/questdk-plugins/commit/d9774c38d7cc2a5b1af10548420a27c15a35eab3)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.9
+
+## 1.0.0-alpha.16
+
+### Patch Changes
+
+- Updated dependencies [[`e64920f`](https://github.com/rabbitholegg/questdk-plugins/commit/e64920f36591ecc8182a98558b168d13d87eabe1)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.8
+
+## 1.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [[`2b8b877`](https://github.com/rabbitholegg/questdk-plugins/commit/2b8b87709f5c760b6cc337c78b97f05213639faf)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.7
+
+## 1.0.0-alpha.14
+
+### Patch Changes
+
+- Updated dependencies [[`b5ccefa`](https://github.com/rabbitholegg/questdk-plugins/commit/b5ccefab88935d8efff66671a962e053b98d7b4b)]:
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.3
+
 ## 1.0.0-alpha.13
 
 ### Minor Changes
