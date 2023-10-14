@@ -21,6 +21,7 @@ import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
 import { Tally } from '@rabbitholegg/questdk-plugin-tally'
+import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -35,6 +36,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [GMX.pluginId]: GMX,
   [Tally.pluginId]: Tally,
   [Camelot.pluginId]: Camelot,
+  [BasePaint.pluginId]: BasePaint,
 }
 
 export const getPlugin = (pluginId: string) => {
