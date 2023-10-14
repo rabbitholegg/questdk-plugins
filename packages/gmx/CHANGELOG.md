@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- [#50](https://github.com/rabbitholegg/questdk-plugins/pull/50) [`2b8b877`](https://github.com/rabbitholegg/questdk-plugins/commit/2b8b87709f5c760b6cc337c78b97f05213639faf) Thanks [@Quazia](https://github.com/Quazia)! - Add fallback for GMX contract address
+
 ## 1.0.0-alpha.6
 
 ### Minor Changes

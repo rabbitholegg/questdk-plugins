@@ -3,9 +3,10 @@ import {
   ActionType,
   type BridgeActionParams,
   type IActionPlugin,
-  type MintActionParams,
   PluginActionNotImplementedError,
+  type MintActionParams,
   type SwapActionParams,
+  type DelegateActionParams,
   type TransactionFilter,
 } from '@rabbitholegg/questdk'
 
@@ -18,7 +19,11 @@ import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
 import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
+import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
+import { Tally } from '@rabbitholegg/questdk-plugin-tally'
+import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
+import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -30,6 +35,9 @@ export const plugins: Record<string, IActionPlugin> = {
   [Across.pluginId]: Across,
   [Optimism.pluginId]: Optimism,
   [GMX.pluginId]: GMX,
+  [Tally.pluginId]: Tally,
+  [Camelot.pluginId]: Camelot,
+  [BasePaint.pluginId]: BasePaint,
   [Hyphen.pluginId]: Hyphen,
 }
 
@@ -45,7 +53,7 @@ export const executePlugin = (
   plugin: IActionPlugin,
   actionType: ActionType,
   params: ActionParams,
-): Promise<TransactionFilter> | Promise<PluginActionNotImplementedError> => {
+): Promise<TransactionFilter | PluginActionNotImplementedError> => {
   switch (actionType) {
     case ActionType.Bridge:
       return plugin.bridge(params as unknown as BridgeActionParams)
@@ -53,7 +61,16 @@ export const executePlugin = (
       return plugin.swap(params as unknown as SwapActionParams)
     case ActionType.Mint:
       return plugin.mint(params as unknown as MintActionParams)
+    case ActionType.Delegate: {
+      if (plugin.delegate === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.delegate(params as unknown as DelegateActionParams)
+    }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
+}
+
+export const getIndexedContracts = (_chainId: number) => {
+  return [ENTRYPOINT]
 }
