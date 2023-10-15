@@ -73,8 +73,7 @@ export const getSupportedTokenAddresses = async (
   if (_chainId === POLYGON_CHAIN_ID)
     return [
       '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-      '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
-    ] // [UDSC, WETH]
+    ] // [UDSC]
   if (_chainId === ARBITRUM_CHAIN_ID)
     return [
       '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
