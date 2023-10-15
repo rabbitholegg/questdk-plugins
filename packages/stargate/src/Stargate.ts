@@ -6,7 +6,6 @@ import {
   NATIVE_CHAIN_ID_ARRAY,
   ETH_CHAIN_ID,
   LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID,
-  POLYGON_CHAIN_ID,
   OPTIMISM_CHAIN_ID,
   BASE_CHAIN_ID,
 } from './chain-ids.js'
@@ -70,10 +69,6 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
-  if (_chainId === POLYGON_CHAIN_ID)
-    return [
-      '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-    ] // [UDSC]
   if (_chainId === ARBITRUM_CHAIN_ID)
     return [
       '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',

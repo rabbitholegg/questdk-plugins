@@ -8,6 +8,7 @@ import {
   WITHDRAW_ERC20,
   USDC_POLY_PASS,
   USDC_POLY_FAIL,
+  USDC_OP_FAIL,
 } from './test-transactions.js'
 import {
   ARBITRUM_LAYER_ZERO_CHAIN_ID,
@@ -181,6 +182,17 @@ describe('Given the Stargate plugin', () => {
         destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
         tokenAddress: POLYGON_USDCE_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
+      })
+      expect(apply(transaction, filter)).to.be.false
+    })
+
+    test('should not pass filter with invalid token Address', async () => {
+      const transaction = USDC_OP_FAIL
+      const filter = await bridge({
+        sourceChainId: OPTIMISM_CHAIN_ID,
+        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+        tokenAddress: '0x4200000000000000000000000000000000000006',
+        amount: GreaterThanOrEqual('1'),
       })
       expect(apply(transaction, filter)).to.be.false
     })
