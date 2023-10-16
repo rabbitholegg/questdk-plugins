@@ -57,6 +57,7 @@
     "@rabbitholegg/questdk-plugin-tally": "workspace:*",
     "@rabbitholegg/questdk-plugin-camelot": "workspace:*",
     "@rabbitholegg/questdk-plugin-basepaint": "workspace:*",
+    "@rabbitholegg/questdk-plugin-paraswap": "workspace:*",
     "viem": "^1.2.15"
   }
 }
