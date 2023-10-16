@@ -297,17 +297,14 @@ export function apply(
   filters: TransactionFilter | FilterObject,
 ): boolean {
   let context: TransactionEIP1559 | Record<string, any> = originalContext
-  console.log('test1', context, filters)
   for (const key in filters) {
     // If the key is not a property of the filters object, skip it.
     if (!Object.hasOwnProperty.call(filters, key)) continue
     // If the key is a preprocessor, apply it.
     if (key in preprocessors) {
-      console.log('test2', key, filters)
       if ('$abi' in filters) {
         const processedContext = handleAbiDecode(context, filters as AbiFilter)
         if (processedContext === null) {
-          console.log('test3', context, filters)
           return false
         }
         context = processedContext
@@ -322,7 +319,6 @@ export function apply(
           return true
         }
         if (processedContext === null) {
-          console.log('test4', context, filters)
           return false
         }
         context = processedContext
@@ -334,7 +330,6 @@ export function apply(
           filters as AbiParamFilter,
         )
         if (processedContext === null) {
-          console.log('test5', context, filters)
           return false
         }
         context = processedContext
@@ -353,7 +348,6 @@ export function apply(
         if (
           !operator(context, filter as Filter[] & string & TransactionFilter)
         ) {
-          console.log('test6', context, filter)
           return false
         }
         continue
@@ -361,11 +355,9 @@ export function apply(
 
       if (typeof filter === 'object') {
         if (!(key in context)) {
-          console.log('test7', context, filter)
           return false
         }
         if (!apply(_context, filter as FilterObject | TransactionFilter)) {
-          console.log('test8', context, filter)
           return false
         }
       } else if (isAddress(_context as string)) {
@@ -373,7 +365,6 @@ export function apply(
           typeof filter === 'string' &&
           (_context as Address).toLowerCase() !== filter.toLowerCase()
         ) {
-          console.log('test9', context, filter)
           return false
         }
       } else if (
@@ -386,7 +377,6 @@ export function apply(
           _context === undefined ||
           BigInt(_context) !== BigInt(filter as bigint | number | string)
         ) {
-          console.log('test10', context, filter)
           return false
         }
       } else if (_context !== filter) {
