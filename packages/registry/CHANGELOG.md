@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.20
+
+### Minor Changes
+
+- [#43](https://github.com/rabbitholegg/questdk-plugins/pull/43) [`973b838`](https://github.com/rabbitholegg/questdk-plugins/commit/973b8382b7ce1eee9d4b8d3fac6e25bf7a412272) Thanks [@Mmackz](https://github.com/Mmackz)! - add mint support for basepaint
+
+### Patch Changes
+
+- Updated dependencies [[`9e299f5`](https://github.com/rabbitholegg/questdk-plugins/commit/9e299f5bf7cf831486ced06532d529240e1253a9), [`973b838`](https://github.com/rabbitholegg/questdk-plugins/commit/973b8382b7ce1eee9d4b8d3fac6e25bf7a412272)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.5
+
 ## 1.0.0-alpha.19
 
 ### Minor Changes
