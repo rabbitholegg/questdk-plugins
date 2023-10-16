@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-basepaint
 
+## 1.0.0-alpha.6
+
+### Patch Changes
+
+- [#67](https://github.com/rabbitholegg/questdk-plugins/pull/67) [`257c02b`](https://github.com/rabbitholegg/questdk-plugins/commit/257c02b8a87918b7de7853f62128106868b21427) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Make BasePaint plugin public
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes

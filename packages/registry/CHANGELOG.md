@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.21
+
+### Patch Changes
+
+- Updated dependencies [[`257c02b`](https://github.com/rabbitholegg/questdk-plugins/commit/257c02b8a87918b7de7853f62128106868b21427)]:
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.6
+
 ## 1.0.0-alpha.20
 
 ### Minor Changes
