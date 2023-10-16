@@ -11,6 +11,7 @@ import {
 } from './chain-ids.js'
 import {
   NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
+  NATIVE_TOKEN_ADDRESS,
   CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
   CHAIN_ID_TO_ROUTER_ADDRESS,
 } from './contract-addresses.js'
@@ -25,13 +26,12 @@ export const bridge = async (bridge: BridgeActionParams) => {
     amount,
     recipient,
   } = bridge
+
   const layerZeroDestination =
     LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
-  const sourcePool = tokenAddress
-    ? NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][
-        tokenAddress.toLowerCase()
-      ]
-    : 0
+
+   const sourcePool = tokenAddress === NATIVE_TOKEN_ADDRESS ? 13 : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress.toLowerCase()]
+
   if (sourcePool === 13) {
     const targetContractAddress =
       CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
@@ -48,6 +48,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       }, // The input object is where we'll put the ABI and the parameters
     })
   }
+
   const targetContractAddress =
     CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]]
 
