@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-basepaint",
-  "private": true,
+  "private": false,
   "version": "1.0.0-alpha.5",
   "type": "module",
   "exports": {
