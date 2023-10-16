@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.19
+
+### Minor Changes
+
+- [#34](https://github.com/rabbitholegg/questdk/pull/34) [`7b40a96`](https://github.com/rabbitholegg/questdk/commit/7b40a96d588b1f31f741944fa38d926632fd9fb2) Thanks [@Quazia](https://github.com/Quazia)! - Add Stake Action exports
+
 ## 2.0.0-alpha.18
 
 ### Major Changes
