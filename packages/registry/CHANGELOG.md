@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- Updated dependencies [[`e16d7b1`](https://github.com/rabbitholegg/questdk-plugins/commit/e16d7b1af66e8c8d5e3f82acabf84fb4dce62af0)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.7
+
 ## 1.0.0-alpha.21
 
 ### Patch Changes
