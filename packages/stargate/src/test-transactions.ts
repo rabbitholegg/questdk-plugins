@@ -145,7 +145,7 @@ export const USDC_OP_FAIL = {
   typeHex: '0x2',
 }
 
-export const WETH_OP_PASS = {
+export const ETH_OP_ARB = {
   accessList: [],
   blockHash:
     '0xdbe7de8c36de291d843158665f44b3c321d7d3e3384c2b16cd9b0b2faa6a3924',
