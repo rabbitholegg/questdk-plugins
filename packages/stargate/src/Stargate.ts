@@ -73,22 +73,22 @@ export const getSupportedTokenAddresses = async (
     return [
       '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
       '0x0000000000000000000000000000000000000000',
-    ] // [USDC, WETH]
+    ] // [USDC, ETH]
   if (_chainId === ETH_CHAIN_ID)
     return [
       '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
       '0x0000000000000000000000000000000000000000',
-    ] // [USDC, WETH]
+    ] // [USDC, ETH]
   if (_chainId === OPTIMISM_CHAIN_ID)
     return [
       '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
       '0x0000000000000000000000000000000000000000',
-    ] // [USDC, WETH]
+    ] // [USDC, ETH]
   if (_chainId === BASE_CHAIN_ID)
     return [
       '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca',
       '0x0000000000000000000000000000000000000000',
-    ] // [USDbC, WETH]
+    ] // [USDbC, ETH]
   return []
 }
 
