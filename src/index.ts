@@ -8,6 +8,7 @@ export { PluginActionNotImplementedError } from './errors/plugin.js'
 
 export type {
   SwapActionParams,
+  StakeActionParams,
   BridgeActionParams,
   MintActionParams,
   DelegateActionParams,

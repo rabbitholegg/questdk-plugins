@@ -13,6 +13,14 @@ export type SwapActionParams = {
   deadline?: bigint | FilterOperator
 }
 
+export type StakeActionParams = {
+  chainId: number
+  contractAddress?: Address
+  token?: Address
+  amount?: bigint | FilterOperator
+  duration?: bigint | FilterOperator
+}
+
 export type BridgeActionParams = {
   sourceChainId: number
   destinationChainId: number
@@ -39,6 +47,7 @@ export type DelegateActionParams = {
 
 export type ActionParams =
   | SwapActionParams
+  | StakeActionParams
   | BridgeActionParams
   | MintActionParams
   | DelegateActionParams
@@ -56,6 +65,9 @@ export interface IActionPlugin {
   mint: (
     params: MintActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  stake?: (
+    params: StakeActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   delegate?: (
     params: DelegateActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
@@ -63,6 +75,7 @@ export interface IActionPlugin {
 
 export enum ActionType {
   Bridge = 'bridge',
+  Stake = 'stake',
   Swap = 'swap',
   Mint = 'mint',
   Deposit = 'deposit',
