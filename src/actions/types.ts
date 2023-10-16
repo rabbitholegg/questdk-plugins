@@ -16,8 +16,10 @@ export type SwapActionParams = {
 export type StakeActionParams = {
   chainId: number
   contractAddress?: Address
-  token?: Address
-  amount?: bigint | FilterOperator
+  tokenOne?: Address
+  amountOne?: bigint | FilterOperator
+  tokenTwo?: Address
+  amountTwo?: bigint | FilterOperator
   duration?: bigint | FilterOperator
 }
 
