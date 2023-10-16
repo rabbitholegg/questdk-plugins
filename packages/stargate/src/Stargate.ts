@@ -30,13 +30,19 @@ export const bridge = async (bridge: BridgeActionParams) => {
   const layerZeroDestination =
     LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
 
-   const sourcePool = tokenAddress === NATIVE_TOKEN_ADDRESS ? 13 : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][tokenAddress.toLowerCase()]
+  const sourcePool =
+    tokenAddress === NATIVE_TOKEN_ADDRESS
+      ? 13
+      : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][
+          tokenAddress.toLowerCase()
+        ]
 
   if (sourcePool === 13) {
     const targetContractAddress =
       CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
         LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]
       ]
+      
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
       to: contractAddress || targetContractAddress, // The contract address of the bridge
