@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-paraswap
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- [#69](https://github.com/rabbitholegg/questdk-plugins/pull/69) [`e16d7b1`](https://github.com/rabbitholegg/questdk-plugins/commit/e16d7b1af66e8c8d5e3f82acabf84fb4dce62af0) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Fix the augustus swapper call
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes
