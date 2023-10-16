@@ -1,6 +1,8 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { describe, expect, test } from 'vitest'
-import { bridge } from './Stargate.js'
+import { beforeEach, describe, expect, test } from 'vitest'
+import { bridge, getSupportedTokenAddresses } from './Stargate.js'
+import { LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID } from './chain-ids.js'
+import { getFilteredChainIds, shortenAddress } from './utils.js'
 import {
   DEPOSIT_ETH,
   DEPOSIT_ERC20,
@@ -221,4 +223,61 @@ describe('Given the Stargate plugin', () => {
       }
     })
   })
+
+  describe('when adding supported tokens', async () => {
+
+   const chainIds = await getFilteredChainIds();
+ 
+   chainIds.forEach((chainId) => {
+     describe(`for chainId: ${chainId}`, async () => {
+       const tokens = await getSupportedTokenAddresses(chainId);
+
+       tokens.forEach((token) => {
+         test(`should create a valid filter for ${shortenAddress(token)}`, async () => {
+           const filter = await bridge({
+            sourceChainId: chainId,
+            destinationChainId: ETH_CHAIN_ID,
+            tokenAddress: token,
+            amount: GreaterThanOrEqual(100000n),
+            recipient: TEST_USER,
+          })
+          const sourcePool = token === NATIVE_TOKEN_ADDRESS ? 13 :
+            NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[chainId][
+              token.toLowerCase()
+            ]
+
+         if (sourcePool === 13) {
+            expect(filter).to.deep.equal({
+               chainId: chainId,
+               to: CHAIN_ID_TO_ETH_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]],
+               input: {
+                 $abi: STARGATE_BRIDGE_ABI,
+                 _amountLD: {
+                   $gte: '100000',
+                 },
+                 _toAddress: TEST_USER,
+                 _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
+               },
+             })
+         } else {
+            expect(filter).to.deep.equal({
+               chainId: chainId,
+               to: CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]],
+               input: {
+                 $abi: STARGATE_BRIDGE_ABI,
+                 _srcPoolId: sourcePool,
+                 _amountLD: {
+                   $gte: '100000',
+                 },
+                 _to: TEST_USER,
+                 _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
+               },
+             })
+         }
+         });
+       });
+     });
+   });
+ });
+ 
 })
