@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.20
+
+### Patch Changes
+
+- [#36](https://github.com/rabbitholegg/questdk/pull/36) [`bf8fe69`](https://github.com/rabbitholegg/questdk/commit/bf8fe697c60ad4f10e90f24f88d8d304fb6c1f1a) Thanks [@Quazia](https://github.com/Quazia)! - Add second tokens
+
 ## 2.0.0-alpha.19
 
 ### Minor Changes
