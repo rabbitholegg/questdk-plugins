@@ -197,7 +197,7 @@ describe('Given the Stargate plugin', () => {
           throw new Error('Expected bridge function to throw, but it did not.')
         } catch (err) {
           expect(err.message).toBe(
-            'No pool found for provided tokenAddress: undefined',
+            'tokenAddress is undefined. Please provide a valid token address.',
           )
         }
       })

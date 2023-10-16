@@ -17,7 +17,7 @@ export async function getFilteredChainIds(): Promise<number[]> {
   return filteredChainIds.filter((id) => id !== null) as number[]
 }
 
-export function shortenAddress(address): string {
+export function shortenAddress(address: string): string {
   const prefix = address.slice(0, 6)
   const suffix = address.slice(-4)
   return `${prefix}...${suffix}`
