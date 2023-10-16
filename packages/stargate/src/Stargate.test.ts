@@ -6,6 +6,7 @@ import {
   DEPOSIT_ERC20,
   WITHDRAW_ETH,
   WITHDRAW_ERC20,
+  ETH_OP_ARB,
   USDC_OP_PASS,
   USDC_OP_FAIL,
 } from './test-transactions.js'
@@ -182,6 +183,42 @@ describe('Given the Stargate plugin', () => {
         amount: GreaterThanOrEqual('1000000'),
       })
       expect(apply(transaction, filter)).to.be.false
+    })
+
+    describe('when bridging ETH', () => {
+      test('should throw error with undefined tokenAddress', async () => {
+        const transaction = ETH_OP_ARB
+        try {
+          const filter = await bridge({
+            sourceChainId: OPTIMISM_CHAIN_ID,
+            destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+            amount: GreaterThanOrEqual('1000000'),
+          })
+          apply(transaction, filter)
+          throw new Error('Expected bridge function to throw, but it did not.')
+        } catch (err) {
+          expect(err.message).toBe(
+            'No pool found for provided tokenAddress: undefined',
+          )
+        }
+      })
+    })
+    test('should throw error with unknown tokenAddress', async () => {
+      const transaction = ETH_OP_ARB
+      try {
+        const filter = await bridge({
+          sourceChainId: OPTIMISM_CHAIN_ID,
+          destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+          tokenAddress: ARBITRUM_USDT_ADDRESS, // correct address, but wrong chain
+          amount: GreaterThanOrEqual('1000000'),
+        })
+        apply(transaction, filter)
+        throw new Error('Expected bridge function to throw, but it did not.')
+      } catch (err) {
+        expect(err.message).toBe(
+          `No pool found for provided tokenAddress: ${ARBITRUM_USDT_ADDRESS}`,
+        )
+      }
     })
   })
 })
