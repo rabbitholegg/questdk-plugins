@@ -18,7 +18,7 @@ export type StakeActionParams = {
   contractAddress?: Address
   token?: Address
   amount?: bigint | FilterOperator
-  duration?: Address
+  duration?: bigint | FilterOperator
 }
 
 export type BridgeActionParams = {
