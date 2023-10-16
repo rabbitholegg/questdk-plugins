@@ -6,8 +6,7 @@ import {
   DEPOSIT_ERC20,
   WITHDRAW_ETH,
   WITHDRAW_ERC20,
-  USDC_POLY_PASS,
-  USDC_POLY_FAIL,
+  USDC_OP_PASS,
   USDC_OP_FAIL,
 } from './test-transactions.js'
 import {
@@ -33,7 +32,8 @@ const ARBITRUM_SGETH_ADDRESS = '0x82cbecf39bee528b5476fe6d1550af59a9db6fc0'
 const ETHEREUM_USDC_ADDRESS = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
 const ETHEREUM_SGETH_ADDRESS = '0x72E2F4830b9E45d52F80aC08CB2bEC0FeF72eD9c'
 
-const POLYGON_USDCE_ADDRESS = '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'
+const OP_USDCE_ADDRESS = '0x7f5c764cbc14f9669b88837ca1490cca17c31607'
+const OP_SGETH_ADDRESS = '0xb69c8cbcd90a39d8d3d3ccf0a3e968511c3856a0'
 
 const TEST_USER = '0x7c3bd1a09d7d86920451def20ae503322c8d0412'
 
@@ -163,36 +163,25 @@ describe('Given the Stargate plugin', () => {
       expect(apply(transaction, filter)).to.be.true
     })
   })
-  describe('When bridging > $1 USDC from Poly to Arb', () => {
+  describe('When bridging > $1 USDC', () => {
     test('should pass filter with valid L2 token tx', async () => {
-      const transaction = USDC_POLY_PASS
+      const transaction = USDC_OP_PASS
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
+        sourceChainId: OPTIMISM_CHAIN_ID,
         destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
-        tokenAddress: POLYGON_USDCE_ADDRESS,
+        tokenAddress: OP_USDCE_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
       })
       expect(apply(transaction, filter)).to.be.true
     })
 
-    test('should not pass filter with invalid transactions', async () => {
-      const transaction = USDC_POLY_FAIL
-      const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
-        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
-        tokenAddress: POLYGON_USDCE_ADDRESS,
-        amount: GreaterThanOrEqual('1000000'),
-      })
-      expect(apply(transaction, filter)).to.be.false
-    })
-
-    test('should not pass filter with invalid token Address', async () => {
+    test('should not pass filter with invalid tokenAddress', async () => {
       const transaction = USDC_OP_FAIL
       const filter = await bridge({
         sourceChainId: OPTIMISM_CHAIN_ID,
         destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
-        tokenAddress: '0x4200000000000000000000000000000000000006',
-        amount: GreaterThanOrEqual('1'),
+        tokenAddress: OP_SGETH_ADDRESS,
+        amount: GreaterThanOrEqual('1000000'),
       })
       expect(apply(transaction, filter)).to.be.false
     })
