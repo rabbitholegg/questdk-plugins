@@ -31,11 +31,8 @@ import {
 
 const ARBITRUM_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
 const ARBITRUM_USDT_ADDRESS = '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9'
-
 const ETHEREUM_USDC_ADDRESS = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
-
 const OP_USDCE_ADDRESS = '0x7f5c764cbc14f9669b88837ca1490cca17c31607'
-
 const TEST_USER = '0x7c3bd1a09d7d86920451def20ae503322c8d0412'
 
 describe('Given the Stargate plugin', () => {
@@ -225,59 +222,65 @@ describe('Given the Stargate plugin', () => {
   })
 
   describe('when adding supported tokens', async () => {
+    const chainIds = await getFilteredChainIds()
 
-   const chainIds = await getFilteredChainIds();
- 
-   chainIds.forEach((chainId) => {
-     describe(`for chainId: ${chainId}`, async () => {
-       const tokens = await getSupportedTokenAddresses(chainId);
+    chainIds.forEach((chainId) => {
+      describe(`for chainId: ${chainId}`, async () => {
+        const tokens = await getSupportedTokenAddresses(chainId)
 
-       tokens.forEach((token) => {
-         test(`should create a valid filter for ${shortenAddress(token)}`, async () => {
-           const filter = await bridge({
-            sourceChainId: chainId,
-            destinationChainId: ETH_CHAIN_ID,
-            tokenAddress: token,
-            amount: GreaterThanOrEqual(100000n),
-            recipient: TEST_USER,
+        tokens.forEach((token) => {
+          test(`should create a valid filter for ${shortenAddress(
+            token,
+          )}`, async () => {
+            const filter = await bridge({
+              sourceChainId: chainId,
+              destinationChainId: ETH_CHAIN_ID,
+              tokenAddress: token,
+              amount: GreaterThanOrEqual(100000n),
+              recipient: TEST_USER,
+            })
+            const sourcePool =
+              token === NATIVE_TOKEN_ADDRESS
+                ? 13
+                : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[chainId][
+                    token.toLowerCase()
+                  ]
+
+            if (sourcePool === 13) {
+              expect(filter).to.deep.equal({
+                chainId: chainId,
+                to: CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
+                  LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]
+                ],
+                input: {
+                  $abi: STARGATE_BRIDGE_ABI,
+                  _amountLD: {
+                    $gte: '100000',
+                  },
+                  _toAddress: TEST_USER,
+                  _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
+                },
+              })
+            } else {
+              expect(filter).to.deep.equal({
+                chainId: chainId,
+                to: CHAIN_ID_TO_ROUTER_ADDRESS[
+                  LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]
+                ],
+                input: {
+                  $abi: STARGATE_BRIDGE_ABI,
+                  _srcPoolId: sourcePool,
+                  _amountLD: {
+                    $gte: '100000',
+                  },
+                  _to: TEST_USER,
+                  _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
+                },
+              })
+            }
           })
-          const sourcePool = token === NATIVE_TOKEN_ADDRESS ? 13 :
-            NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[chainId][
-              token.toLowerCase()
-            ]
-
-         if (sourcePool === 13) {
-            expect(filter).to.deep.equal({
-               chainId: chainId,
-               to: CHAIN_ID_TO_ETH_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]],
-               input: {
-                 $abi: STARGATE_BRIDGE_ABI,
-                 _amountLD: {
-                   $gte: '100000',
-                 },
-                 _toAddress: TEST_USER,
-                 _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
-               },
-             })
-         } else {
-            expect(filter).to.deep.equal({
-               chainId: chainId,
-               to: CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]],
-               input: {
-                 $abi: STARGATE_BRIDGE_ABI,
-                 _srcPoolId: sourcePool,
-                 _amountLD: {
-                   $gte: '100000',
-                 },
-                 _to: TEST_USER,
-                 _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
-               },
-             })
-         }
-         });
-       });
-     });
-   });
- });
- 
+        })
+      })
+    })
+  })
 })
