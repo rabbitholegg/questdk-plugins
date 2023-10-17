@@ -1,7 +1,7 @@
 import type { Address } from 'viem'
-import { ARB_ONE_CHAIN_ID, ETH_CHAIN_ID } from './chain-ids'
+import { ARB_ONE_CHAIN_ID, ETH_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids'
 
-export const DEFAULT_TOKEN_LIST_URL: { [chainId: number]: readonly Address[] } =
+export const DEFAULT_SWAP_TOKEN_LIST: { [chainId: number]: readonly Address[] } =
   {
     [ETH_CHAIN_ID]: [
       '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
@@ -19,5 +19,19 @@ export const DEFAULT_TOKEN_LIST_URL: { [chainId: number]: readonly Address[] } =
       '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
       '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
       '0xf97f4df75117a78c1A5a0DBb814Af92458539FB4',
+    ],
+  } as const
+
+
+
+  export const DEFAULT_STAKE_TOKEN_LIST: { [chainId: number]: readonly Address[] } =
+  {
+    [ETH_CHAIN_ID]: [
+      '0xcafe001067cdef266afb7eb5a286dcfd277f3de5', //PSP
+      '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', //WETH
+    ],
+    [OPTIMISM_CHAIN_ID]: [
+      '0xd3594E879B358F430E20F82bea61e83562d49D48', //PSP
+      '0x4200000000000000000000000000000000000006', //WETH
     ],
   } as const
