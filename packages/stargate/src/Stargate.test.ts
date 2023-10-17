@@ -166,7 +166,7 @@ describe('Given the Stargate plugin', () => {
       const transaction = USDC_OP_PASS
       const filter = await bridge({
         sourceChainId: OPTIMISM_CHAIN_ID,
-        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+        destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: OP_USDCE_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
       })
@@ -177,37 +177,36 @@ describe('Given the Stargate plugin', () => {
       const transaction = USDC_OP_FAIL
       const filter = await bridge({
         sourceChainId: OPTIMISM_CHAIN_ID,
-        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+        destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
       })
       expect(apply(transaction, filter)).to.be.false
     })
-
-    describe('when bridging ETH', () => {
-      test('should throw error with undefined tokenAddress', async () => {
-        const transaction = ETH_OP_ARB
-        try {
-          const filter = await bridge({
-            sourceChainId: OPTIMISM_CHAIN_ID,
-            destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
-            amount: GreaterThanOrEqual('1000000'),
-          })
-          apply(transaction, filter)
-          throw new Error('Expected bridge function to throw, but it did not.')
-        } catch (err) {
-          expect(err.message).toBe(
-            'tokenAddress is undefined. Please provide a valid token address.',
-          )
-        }
-      })
+  })
+  describe('When bridging ETH', () => {
+    test('should throw error with undefined tokenAddress', async () => {
+      const transaction = ETH_OP_ARB
+      try {
+        const filter = await bridge({
+          sourceChainId: OPTIMISM_CHAIN_ID,
+          destinationChainId: ARBITRUM_CHAIN_ID,
+          amount: GreaterThanOrEqual('1000000'),
+        })
+        apply(transaction, filter)
+        throw new Error('Expected bridge function to throw, but it did not.')
+      } catch (err) {
+        expect(err.message).toBe(
+          'tokenAddress is undefined. Please provide a valid token address.',
+        )
+      }
     })
     test('should throw error with unknown tokenAddress', async () => {
       const transaction = ETH_OP_ARB
       try {
         const filter = await bridge({
           sourceChainId: OPTIMISM_CHAIN_ID,
-          destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
+          destinationChainId: ARBITRUM_CHAIN_ID,
           tokenAddress: ARBITRUM_USDT_ADDRESS, // correct address, but wrong chain
           amount: GreaterThanOrEqual('1000000'),
         })
@@ -221,7 +220,7 @@ describe('Given the Stargate plugin', () => {
     })
   })
 
-  describe('when adding supported tokens', async () => {
+  describe('When adding supported tokens', async () => {
     const chainIds = await getFilteredChainIds()
 
     chainIds.forEach((chainId) => {
