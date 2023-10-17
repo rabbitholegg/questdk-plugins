@@ -30,6 +30,14 @@ export const bridge = async (bridge: BridgeActionParams) => {
   const layerZeroDestination =
     LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
 
+  if (
+    destinationChainId !== undefined &&
+    typeof layerZeroDestination === 'undefined'
+  ) {
+    // throw error if destinationChainId is specified, but doesnt map to layerZeroDestination
+    throw new Error(`Invalid destinationChainId: ${destinationChainId}`)
+  }
+
   if (typeof tokenAddress === 'undefined') {
     throw new Error(
       'tokenAddress is undefined. Please provide a valid token address.',
