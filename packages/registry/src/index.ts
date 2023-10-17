@@ -23,6 +23,7 @@ import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
 import { Tally } from '@rabbitholegg/questdk-plugin-tally'
 import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
+import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -39,6 +40,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Camelot.pluginId]: Camelot,
   [BasePaint.pluginId]: BasePaint,
   [Hyphen.pluginId]: Hyphen,
+  [Paraswap.pluginId]: Paraswap,
 }
 
 export const getPlugin = (pluginId: string) => {

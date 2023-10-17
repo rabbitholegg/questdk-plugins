@@ -2,9 +2,11 @@
   "mode": "pre",
   "tag": "alpha",
   "changesets": [
+    "angry-ants-return",
     "brown-points-smile",
     "dirty-plums-refuse",
     "dull-cows-call",
+    "eight-plants-visit",
     "fluffy-adults-invite",
     "healthy-bugs-enjoy",
     "hungry-squids-drop",
@@ -19,6 +21,7 @@
     "quick-otters-deliver",
     "rotten-monkeys-attack",
     "sharp-candles-live",
+    "sixty-countries-leave",
     "sixty-trains-yawn",
     "soft-apples-hang",
     "soft-starfishes-draw",
@@ -26,6 +29,7 @@
     "tasty-bobcats-clean",
     "tough-cooks-hammer",
     "twelve-kiwis-destroy",
+    "unlucky-dolphins-stare",
     "wet-toes-prove",
     "wicked-readers-clean"
   ],
@@ -45,6 +49,7 @@
     "@rabbitholegg/questdk-plugin-gmx": "1.0.0-alpha.3",
     "@rabbitholegg/questdk-plugin-tally": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-camelot": "1.0.0-alpha.1",
-    "@rabbitholegg/questdk-plugin-paraswap": "1.0.0-alpha.4"
+    "@rabbitholegg/questdk-plugin-paraswap": "1.0.0-alpha.4",
+    "@rabbitholegg/questdk-plugin-basepaint": "1.0.0-alpha.4"
   }
 }

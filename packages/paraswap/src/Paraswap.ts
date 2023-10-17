@@ -23,10 +23,11 @@ export const swap = async (swap: SwapActionParams) => {
     recipient,
   } = swap
   const { getAugustusSwapper } = constructGetSpender({ chainId, fetcher })
+  const to = contractAddress || (await getAugustusSwapper())
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: chainId, // The chainId of the source chain
-    to: contractAddress || getAugustusSwapper(), // The contract address of the bridge
+    to: to,
     input: {
       $abiAbstract: PARASWAP_ABI,
       $or: [

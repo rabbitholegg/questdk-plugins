@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-alpha.22",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -58,6 +58,7 @@
     "@rabbitholegg/questdk-plugin-camelot": "workspace:*",
     "@rabbitholegg/questdk-plugin-basepaint": "workspace:*",
     "@rabbitholegg/questdk-plugin-hyphen": "workspace:*",
+    "@rabbitholegg/questdk-plugin-paraswap": "workspace:*",
     "viem": "^1.2.15"
   }
 }
