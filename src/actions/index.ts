@@ -1,5 +1,6 @@
 export type {
   SwapActionParams,
+  StakeActionParams,
   BridgeActionParams,
   MintActionParams,
   DelegateActionParams,
