@@ -1,6 +1,6 @@
-import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
+import { type SwapActionParams, type StakeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
+import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
 import {
   constructGetTokens,
   constructAxiosFetcher,
@@ -100,9 +100,19 @@ export const swap = async (swap: SwapActionParams) => {
   })
 }
 
+export const stake = async (stake: StakeActionParams) => {
+  const { chainId, contractAddress, tokenOne, amountOne, tokenTwo, amountTwo, duration } = stake
+
+  // Only token combination options are WETH, ETH, and PSP
+
+  // There are two pools and two contracts - sePSP2 and sePSP
+}
+
 export const getSupportedTokenAddresses = async (
   _chainId: number,
+  task: string,
 ): Promise<Address[]> => {
+
   const { getTokens } = constructGetTokens({ chainId: _chainId, fetcher })
   // Default list only valid for
   return getTokens
@@ -110,6 +120,9 @@ export const getSupportedTokenAddresses = async (
     : (DEFAULT_TOKEN_LIST_URL[_chainId] as Address[])
 }
 
-export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY
+export const getSupportedChainIds = async (task: string) => {
+  if(task === 'stake') {
+    STAKE_CHAIN_ID_ARRAY
+  }
+  return SWAP_CHAIN_ID_ARRAY
 }
