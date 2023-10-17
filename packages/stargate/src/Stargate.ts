@@ -30,11 +30,8 @@ export const bridge = async (bridge: BridgeActionParams) => {
   const layerZeroDestination =
     LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
 
-  if (
-    destinationChainId !== undefined &&
-    typeof layerZeroDestination === 'undefined'
-  ) {
-    // throw error if destinationChainId is specified, but doesnt map to layerZeroDestination
+  // throw error if destinationChainId is specified, but doesnt map to layerZeroDestination
+  if (typeof layerZeroDestination === 'undefined') {
     throw new Error(`Invalid destinationChainId: ${destinationChainId}`)
   }
 
