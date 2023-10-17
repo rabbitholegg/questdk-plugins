@@ -4,7 +4,7 @@ import { SWAP_MULTI, SWAP_SIMPLE } from './test-transactions'
 import { swap } from './Paraswap.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { parseEther, type Address } from 'viem'
-import { PARASWAP_ABI } from './abi.js'
+import { PARASWAP_SWAP_ABI } from './abi.js'
 const USDT_ADDRESS = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
 const USDCE_ADDRESS = '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'
 const VELA_ADDRESS = '0x088cd8f5ef3652623c22d48b1605dcfe860cd704'
@@ -25,7 +25,7 @@ describe('Given the paraswap plugin', () => {
         chainId: ARB_ONE_CHAIN_ID,
         to: AUGUSTUS_SWAPPER_ARBITRUM,
         input: {
-          $abiAbstract: PARASWAP_ABI,
+          $abiAbstract: PARASWAP_SWAP_ABI,
           $or: [
             {
               assets: [
