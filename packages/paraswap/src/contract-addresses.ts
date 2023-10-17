@@ -9,6 +9,9 @@ export const MAINNET_SEPSP1_ADDRESS = '0x716fbc68e0c761684d9280484243ff094cc5ffa
 
 export const MAINNET_SEPSP2_ADDRESS = '0x593F39A4Ba26A9c8ed2128ac95D109E8e403C485'
 
+export const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
+
+
 export const DEFAULT_SWAP_TOKEN_LIST: { [chainId: number]: readonly Address[] } =
   {
     [ETH_CHAIN_ID]: [
@@ -37,9 +40,11 @@ export const DEFAULT_SWAP_TOKEN_LIST: { [chainId: number]: readonly Address[] } 
     [ETH_CHAIN_ID]: [
       '0xcafe001067cdef266afb7eb5a286dcfd277f3de5', //PSP
       '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', //WETH
+      ETH_TOKEN_ADDRESS
     ],
     [OPTIMISM_CHAIN_ID]: [
       '0xd3594E879B358F430E20F82bea61e83562d49D48', //PSP
       '0x4200000000000000000000000000000000000006', //WETH
+      ETH_TOKEN_ADDRESS
     ],
   } as const
