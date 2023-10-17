@@ -45,8 +45,8 @@ export type ActionParams =
 
 export interface IActionPlugin {
   pluginId: string
-  getSupportedChainIds: () => Promise<number[]>
-  getSupportedTokenAddresses: (chainId: number) => Promise<Address[]>
+  getSupportedChainIds: (task?: string) => Promise<number[]>
+  getSupportedTokenAddresses: (chainId: number, task?: string) => Promise<Address[]>
   bridge: (
     params: BridgeActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
