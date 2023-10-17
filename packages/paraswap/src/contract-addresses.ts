@@ -1,6 +1,14 @@
 import type { Address } from 'viem'
 import { ARB_ONE_CHAIN_ID, ETH_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids'
 
+export const OPTIMISM_SEPSP1_ADDRESS = '0x8C934b7dBc782568d14ceaBbEAeDF37cB6348615'
+
+export const OPTIMISM_SEPSP2_ADDRESS = '0x26ee65874f5dbefa629eb103e7bbb2deaf4fb2c8'
+
+export const MAINNET_SEPSP1_ADDRESS = '0x716fbc68e0c761684d9280484243ff094cc5ffab'
+
+export const MAINNET_SEPSP2_ADDRESS = '0x593F39A4Ba26A9c8ed2128ac95D109E8e403C485'
+
 export const DEFAULT_SWAP_TOKEN_LIST: { [chainId: number]: readonly Address[] } =
   {
     [ETH_CHAIN_ID]: [
