@@ -1,4 +1,5 @@
 import { type SwapActionParams, type StakeActionParams, compressJson, type ActionType } from '@rabbitholegg/questdk'
+import { getIndexedContracts } from '@rabbitholegg/questdk-plugin-registry'
 import { type Address } from 'viem'
 import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
 import {
@@ -106,7 +107,7 @@ export const stake = async (stake: StakeActionParams) => {
     const addressArray = chainId === 1 ? [MAINNET_SEPSP2_ADDRESS] : [OPTIMISM_SEPSP2_ADDRESS]
     return compressJson({
       chainId: chainId,
-      to: addressArray, // If both tokens are defined it has to be sePSP2
+      to: addressArray.concat(getIndexedContracts(chainId ?? 1)), // If both tokens are defined it has to be sePSP2
       $abiAbstract: PARASWAP_SWAP_ABI,
       $or: [
         {
@@ -126,7 +127,7 @@ export const stake = async (stake: StakeActionParams) => {
           MAINNET_SEPSP2_ADDRESS,
           OPTIMISM_SEPSP1_ADDRESS,
           MAINNET_SEPSP1_ADDRESS,
-        ]
+        ].concat(getIndexedContracts(chainId ?? 1)),
       },
       $abiAbstract: PARASWAP_SWAP_ABI,
       $or: [
