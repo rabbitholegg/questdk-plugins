@@ -1047,142 +1047,141 @@ export const PARASWAP_SWAP_ABI = [
   },
 ]
 
-
 export const PARASWAP_STAKE_ABI = [
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_assetAmount",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '_assetAmount',
+        type: 'uint256',
+      },
     ],
-    "name": "deposit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: 'deposit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "pspAmount",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'pspAmount',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "minBptOut",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'minBptOut',
+        type: 'uint256',
       },
       {
-        "internalType": "bytes",
-        "name": "pspPermit",
-        "type": "bytes"
-      }
+        internalType: 'bytes',
+        name: 'pspPermit',
+        type: 'bytes',
+      },
     ],
-    "name": "depositPSPAndEth",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+    name: 'depositPSPAndEth',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "pspAmount",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'pspAmount',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "wethAmount",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'wethAmount',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "minBptOut",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'minBptOut',
+        type: 'uint256',
       },
       {
-        "internalType": "bytes",
-        "name": "pspPermit",
-        "type": "bytes"
-      }
+        internalType: 'bytes',
+        name: 'pspPermit',
+        type: 'bytes',
+      },
     ],
-    "name": "depositPSPAndWeth",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: 'depositPSPAndWeth',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_assetAmount",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '_assetAmount',
+        type: 'uint256',
       },
       {
-        "internalType": "bytes",
-        "name": "permit",
-        "type": "bytes"
-      }
+        internalType: 'bytes',
+        name: 'permit',
+        type: 'bytes',
+      },
     ],
-    "name": "depositWithPermit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: 'depositWithPermit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_assetAmount",
-        "type": "uint256"
-      }
+        internalType: 'uint256',
+        name: '_assetAmount',
+        type: 'uint256',
+      },
     ],
-    "name": "deposit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: 'deposit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "pspAmount",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'pspAmount',
+        type: 'uint256',
       },
       {
-        "internalType": "uint256",
-        "name": "minBptOut",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: 'minBptOut',
+        type: 'uint256',
       },
       {
-        "internalType": "bytes",
-        "name": "pspPermit",
-        "type": "bytes"
-      }
+        internalType: 'bytes',
+        name: 'pspPermit',
+        type: 'bytes',
+      },
     ],
-    "name": "depositPSPAndEth",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
+    name: 'depositPSPAndEth',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "_assetAmount",
-        "type": "uint256"
+        internalType: 'uint256',
+        name: '_assetAmount',
+        type: 'uint256',
       },
       {
-        "internalType": "bytes",
-        "name": "permit",
-        "type": "bytes"
-      }
+        internalType: 'bytes',
+        name: 'permit',
+        type: 'bytes',
+      },
     ],
-    "name": "depositWithPermit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
+    name: 'depositWithPermit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
 ]
