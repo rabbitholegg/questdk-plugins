@@ -95,6 +95,15 @@ export const swap = async (swap: SwapActionParams) => {
             },
           },
         },
+        {
+          data: {
+            fromToken: tokenIn,
+            fromAmount: amountIn,
+            toToken: tokenOut,
+            toAmount: amountOut,
+            
+          },
+        },
       ],
     },
   })
