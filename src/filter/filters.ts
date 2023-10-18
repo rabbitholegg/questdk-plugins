@@ -7,7 +7,6 @@ import type {
   TransactionFilter,
 } from './types.js'
 import {
-  type Abi,
   type Address,
   type TransactionEIP1559,
   decodeAbiParameters,
@@ -41,7 +40,9 @@ export const handleAnd = (context: any, filter: Filter[]): boolean => {
  */
 export const handleOr = (context: any, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
-    if (apply(context, filter[i] as FilterObject)) return true
+    if (apply(context, filter[i] as FilterObject)) {
+      return true
+    }
   }
   return false
 }
@@ -171,7 +172,7 @@ export const handleRegex = (context: any, filter: string): boolean => {
  * @param filter - The filter containing the ABI.
  * @returns The decoded ABI.
  */
-export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
+export const handleAbiDecode = (context: any, filter: AbiFilter) => {
   try {
     const sighash = slice(context, 0, 4)
     const { functionName, args = [] } = decodeFunctionData({
@@ -192,8 +193,11 @@ export const handleAbiDecode = (context: any, filter: { $abi: Abi }) => {
       },
       {},
     )
-
-    return { ...namedArgs, sighash, functionName }
+    delete (filter as FilterObject).$abi
+    if (apply({ ...namedArgs, sighash, functionName }, filter)) {
+      return true
+    }
+    return null
   } catch (_e) {
     return null
   }
@@ -205,13 +209,15 @@ export const handleAbstractAbiDecode = (
 ) => {
   const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
   const elementCount = filter.$abiAbstract!.length
+  const $abiAbstract = filter.$abiAbstract
+  delete (filter as FilterObject).$abiAbstract
   const contextMap = new Map<string, number>()
   // Function selectors are 4 bytes long - 8 characters
   for (let i = 2; i < context.length - 8; i++) {
     contextMap.set(context.substring(i, i + 8), i)
   }
   for (let i = 0; i < elementCount; i++) {
-    const abiItem = filter.$abiAbstract![i]
+    const abiItem = $abiAbstract![i]
     if (abiItem.type === 'function') {
       const functionSelector = getFunctionSelector(abiItem)
       // We want to omit the leading 0x from the function selector
@@ -219,15 +225,17 @@ export const handleAbstractAbiDecode = (
       const index = contextMap.get(functionSelectorSubstring)
       if (index !== undefined) {
         decodedReturn.push(
-          handleAbiDecode(`0x${context.substring(index)}`, { $abi: [abiItem] }),
+          handleAbiDecode(`0x${context.substring(index)}`, {
+            ...filter,
+            $abi: [abiItem],
+          }),
         )
       }
     }
   }
-  delete (filter as FilterObject).$abiAbstract
   const decodedReturnLength = decodedReturn.length
   for (let i = 0; i < decodedReturnLength; i++) {
-    if (apply(decodedReturn[i] as Record<string, any>, filter)) {
+    if (decodedReturn[i]) {
       return true
     }
   }
@@ -240,10 +248,7 @@ export const handleAbstractAbiDecode = (
  * @param filter - The filter containing the ABI parameters.
  * @returns The decoded ABI parameters.
  */
-export const handleAbiParamDecode = (
-  context: any,
-  filter: { $abiParams: string[] },
-) => {
+export const handleAbiParamDecode = (context: any, filter: AbiParamFilter) => {
   try {
     const params = parseAbiParameters(filter.$abiParams.join(', '))
     const args = decodeAbiParameters(params, context)
@@ -254,8 +259,11 @@ export const handleAbiParamDecode = (
       },
       {},
     )
-
-    return namedArgs
+    delete (filter as FilterObject).$abiParams
+    if (apply(namedArgs, filter)) {
+      return true
+    }
+    return null
   } catch (_e) {
     return null
   }
@@ -280,12 +288,6 @@ const operators = {
   $regex: handleRegex,
 }
 
-const preprocessors = {
-  $abi: handleAbiDecode,
-  $abiAbstract: handleAbstractAbiDecode,
-  $abiParams: handleAbiParamDecode,
-}
-
 /**
  * Applies a set of filters to a context.
  * @param originalContext - The original context to apply the filters to.
@@ -297,91 +299,90 @@ export function apply(
   filters: TransactionFilter | FilterObject,
 ): boolean {
   let context: TransactionEIP1559 | Record<string, any> = originalContext
+  if ('$abi' in filters) {
+    const processedContext = handleAbiDecode(context, filters as AbiFilter)
+    if (processedContext === true) {
+      return true
+    }
+    if (processedContext === null) {
+      return false
+    }
+    context = processedContext
+  }
+
+  if ('$abiAbstract' in filters) {
+    const processedContext = handleAbstractAbiDecode(
+      context,
+      filters as AbstractAbiFilter,
+    )
+    if (processedContext === true) {
+      return true
+    }
+    if (processedContext === null) {
+      return false
+    }
+    context = processedContext
+  }
+
+  if ('$abiParams' in filters) {
+    const processedContext = handleAbiParamDecode(
+      context,
+      filters as AbiParamFilter,
+    )
+    if (processedContext === true) {
+      return true
+    }
+    if (processedContext === null) {
+      return false
+    }
+    context = processedContext
+  }
   for (const key in filters) {
     // If the key is not a property of the filters object, skip it.
     if (!Object.hasOwnProperty.call(filters, key)) continue
-    // If the key is a preprocessor, apply it.
-    if (key in preprocessors) {
-      if ('$abi' in filters) {
-        const processedContext = handleAbiDecode(context, filters as AbiFilter)
-        if (processedContext === null) {
-          return false
-        }
-        context = processedContext
-      }
+    const filter = filters[key as keyof typeof filters]
+    if (filter === undefined) {
+      return false
+    }
+    const _context = context[key as keyof typeof context]
+    if (key in operators) {
+      const operator = operators[key as OperatorKey]
+      // Handle the operator cases with a switch to enforce casing
+      // and type safety
 
-      if ('$abiAbstract' in filters) {
-        const processedContext = handleAbstractAbiDecode(
-          context,
-          filters as AbstractAbiFilter,
-        )
-        if (processedContext === true) {
-          return true
-        }
-        if (processedContext === null) {
-          return false
-        }
-        context = processedContext
-      }
-
-      if ('$abiParams' in filters) {
-        const processedContext = handleAbiParamDecode(
-          context,
-          filters as AbiParamFilter,
-        )
-        if (processedContext === null) {
-          return false
-        }
-        context = processedContext
-      }
-    } else {
-      const filter = filters[key as keyof typeof filters]
-      if (filter === undefined) {
+      if (!operator(context, filter as Filter[] & string & TransactionFilter)) {
         return false
       }
-      const _context = context[key as keyof typeof context]
-      if (key in operators) {
-        const operator = operators[key as OperatorKey]
-        // Handle the operator cases with a switch to enforce casing
-        // and type safety
-
-        if (
-          !operator(context, filter as Filter[] & string & TransactionFilter)
-        ) {
-          return false
-        }
-        continue
+      continue
+    }
+    if (typeof filter === 'object') {
+      if (!(key in context)) {
+        return false
       }
-
-      if (typeof filter === 'object') {
-        if (!(key in context)) {
-          return false
-        }
-        if (!apply(_context, filter as FilterObject | TransactionFilter)) {
-          return false
-        }
-      } else if (isAddress(_context as string)) {
-        if (
-          typeof filter === 'string' &&
-          (_context as Address).toLowerCase() !== filter.toLowerCase()
-        ) {
-          return false
-        }
-      } else if (
-        typeof filter === 'bigint' ||
-        typeof filter === 'number' ||
-        typeof _context === 'bigint' ||
-        typeof _context === 'number'
+      if (!apply(_context, filter as FilterObject | TransactionFilter)) {
+        return false
+      }
+    } else if (isAddress(_context as string)) {
+      if (
+        typeof filter === 'string' &&
+        (_context as Address).toLowerCase() !== filter.toLowerCase()
       ) {
-        if (
-          _context === undefined ||
-          BigInt(_context) !== BigInt(filter as bigint | number | string)
-        ) {
-          return false
-        }
-      } else if (_context !== filter) {
         return false
       }
+    } else if (
+      typeof filter === 'bigint' ||
+      typeof filter === 'number' ||
+      typeof _context === 'bigint' ||
+      typeof _context === 'number'
+    ) {
+      if (
+        _context === undefined ||
+        BigInt(_context) !== BigInt(filter as bigint | number | string)
+      ) {
+        return false
+      }
+    } else if (_context !== filter) {
+      return false
     }
   }
   return true
