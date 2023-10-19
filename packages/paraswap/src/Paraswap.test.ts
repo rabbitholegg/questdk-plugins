@@ -1,6 +1,6 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { PROD_SWAP_SIMPLE, SWAP_MULTI, SWAP_SIMPLE } from './test-transactions'
+import { PROD_SWAP_SIMPLE, SWAP_MULTI, SWAP_SIMPLE, WETH_PROD_TEST } from './test-transactions'
 import { swap } from './Paraswap.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { parseEther, type Address } from 'viem'
@@ -188,6 +188,17 @@ describe('Given the paraswap plugin', () => {
         amountIn: GreaterThanOrEqual(339000000000),
       })
       expect(apply(transaction, filter)).to.be.false
+    })
+
+    test('should pass filter with valid singe swap WETH -> USDC', async () => {
+      const transaction = WETH_PROD_TEST
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: ARB_WETH_ADDRESS.toLowerCase() as Address,
+        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+      })
+      expect(apply(transaction, filter)).to.be.true
     })
     test('should pass filter with valid multi transactions', async () => {
       const transaction = SWAP_MULTI
