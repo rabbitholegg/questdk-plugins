@@ -20,8 +20,5 @@
     "prettier": "^2.8.8",
     "turbo": "latest"
   },
-  "dependencies": {
-    "@rabbitholegg/questdk-plugin-registry": "workspace:*"
-  },
   "packageManager": "pnpm@7.15.0"
 }
