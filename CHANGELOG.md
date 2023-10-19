@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.22
+
+### Minor Changes
+
+- [#40](https://github.com/rabbitholegg/questdk/pull/40) [`8aaa580`](https://github.com/rabbitholegg/questdk/commit/8aaa580ed358c5b77d2e50731b8e349cb5303cc6) Thanks [@Quazia](https://github.com/Quazia)! - Fix non-objects correctly
+
 ## 2.0.0-alpha.21
 
 ### Minor Changes
