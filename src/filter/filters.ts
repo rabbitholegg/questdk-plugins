@@ -27,7 +27,9 @@ type OperatorKey = keyof typeof operators
  */
 export const handleAnd = (context: any, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
-    if (!apply(context, filter[i] as FilterObject)) return false
+    if (!apply(context, filter[i] as FilterObject)) {
+      return false
+    }
   }
   return true
 }
@@ -299,43 +301,45 @@ export function apply(
   filters: TransactionFilter | FilterObject,
 ): boolean {
   let context: TransactionEIP1559 | Record<string, any> = originalContext
-  if ('$abi' in filters) {
-    const processedContext = handleAbiDecode(context, filters as AbiFilter)
-    if (processedContext === true) {
-      return true
+  if (typeof filters === 'object') {
+    if ('$abi' in filters) {
+      const processedContext = handleAbiDecode(context, filters as AbiFilter)
+      if (processedContext === true) {
+        return true
+      }
+      if (processedContext === null) {
+        return false
+      }
+      context = processedContext
     }
-    if (processedContext === null) {
-      return false
-    }
-    context = processedContext
-  }
 
-  if ('$abiAbstract' in filters) {
-    const processedContext = handleAbstractAbiDecode(
-      context,
-      filters as AbstractAbiFilter,
-    )
-    if (processedContext === true) {
-      return true
+    if ('$abiAbstract' in filters) {
+      const processedContext = handleAbstractAbiDecode(
+        context,
+        filters as AbstractAbiFilter,
+      )
+      if (processedContext === true) {
+        return true
+      }
+      if (processedContext === null) {
+        return false
+      }
+      context = processedContext
     }
-    if (processedContext === null) {
-      return false
-    }
-    context = processedContext
-  }
 
-  if ('$abiParams' in filters) {
-    const processedContext = handleAbiParamDecode(
-      context,
-      filters as AbiParamFilter,
-    )
-    if (processedContext === true) {
-      return true
+    if ('$abiParams' in filters) {
+      const processedContext = handleAbiParamDecode(
+        context,
+        filters as AbiParamFilter,
+      )
+      if (processedContext === true) {
+        return true
+      }
+      if (processedContext === null) {
+        return false
+      }
+      context = processedContext
     }
-    if (processedContext === null) {
-      return false
-    }
-    context = processedContext
   }
   for (const key in filters) {
     // If the key is not a property of the filters object, skip it.
