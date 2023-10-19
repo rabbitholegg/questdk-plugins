@@ -2,8 +2,12 @@ import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import {
   PROD_SWAP_SIMPLE,
+  SIMPLE_SWAP_ZYBER_TO_ETH,
+  SINGLE_SWAP_EURO,
+  SINGLE_SWAP_USDC_BTC,
   SWAP_MULTI,
   SWAP_SIMPLE,
+  UNISWAP_V3_SWAP,
   WETH_PROD_TEST,
 } from './test-transactions'
 import { swap } from './Paraswap.js'
@@ -15,6 +19,7 @@ const USDCE_ADDRESS = '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'
 const VELA_ADDRESS = '0x088cd8f5ef3652623c22d48b1605dcfe860cd704'
 const AUGUSTUS_SWAPPER_ARBITRUM = '0xdef171fe48cf0115b1d80b88dc8eab59176fee57'
 const ARB_WETH_ADDRESS = '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
+const ARB_ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 describe('Given the paraswap plugin', () => {
   describe('When handling the bridge', () => {
     test('should return a valid action filter', async () => {
@@ -205,6 +210,47 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
+    
+    test('should pass filter with valid singe swap USDC -> WBTC', async () => {
+      const transaction = SINGLE_SWAP_USDC_BTC
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    
+    test('should pass filter with valid singe swap USDC -> EURO', async () => {
+      const transaction = SINGLE_SWAP_EURO
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+
+    test.only('should pass filter with valid Uniswap swap', async () => {
+      const transaction = UNISWAP_V3_SWAP
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: ARB_ETH_ADDRESS.toLowerCase() as Address,
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    
+    test('should pass filter with valid Simple swap Zyber -> ETH', async () => {
+      const transaction = SIMPLE_SWAP_ZYBER_TO_ETH
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenOut: ARB_ETH_ADDRESS.toLowerCase() as Address,
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    
     test('should pass filter with valid multi transactions', async () => {
       const transaction = SWAP_MULTI
       const filter = await swap({
