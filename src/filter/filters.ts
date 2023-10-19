@@ -195,8 +195,8 @@ export const handleAbiDecode = (context: any, filter: AbiFilter) => {
       },
       {},
     )
-    delete (filter as FilterObject).$abi
-    if (apply({ ...namedArgs, sighash, functionName }, filter)) {
+    const {$abi: _, ...newFilter}  = filter
+    if (apply({ ...namedArgs, sighash, functionName }, newFilter)) {
       return true
     }
     return null
@@ -212,7 +212,8 @@ export const handleAbstractAbiDecode = (
   const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
   const elementCount = filter.$abiAbstract!.length
   const $abiAbstract = filter.$abiAbstract
-  delete (filter as FilterObject).$abiAbstract
+  const {$abiAbstract: _, ...newFilter}  = filter
+
   const contextMap = new Map<string, number>()
   // Function selectors are 4 bytes long - 8 characters
   for (let i = 2; i < context.length - 8; i++) {
@@ -228,7 +229,7 @@ export const handleAbstractAbiDecode = (
       if (index !== undefined) {
         decodedReturn.push(
           handleAbiDecode(`0x${context.substring(index)}`, {
-            ...filter,
+            ...newFilter,
             $abi: [abiItem],
           }),
         )
@@ -261,8 +262,8 @@ export const handleAbiParamDecode = (context: any, filter: AbiParamFilter) => {
       },
       {},
     )
-    delete (filter as FilterObject).$abiParams
-    if (apply(namedArgs, filter)) {
+    const {$abiParams: _, ...newFilter}  = filter
+    if (apply(namedArgs, newFilter)) {
       return true
     }
     return null
