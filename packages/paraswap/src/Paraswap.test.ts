@@ -210,7 +210,7 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
-    
+
     test('should pass filter with valid singe swap USDC -> WBTC', async () => {
       const transaction = SINGLE_SWAP_USDC_BTC
       const filter = await swap({
@@ -220,7 +220,7 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
-    
+
     test('should pass filter with valid singe swap USDC -> EURO', async () => {
       const transaction = SINGLE_SWAP_EURO
       const filter = await swap({
@@ -240,7 +240,7 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
-    
+
     test('should pass filter with valid Simple swap Zyber -> ETH', async () => {
       const transaction = SIMPLE_SWAP_ZYBER_TO_ETH
       const filter = await swap({
@@ -250,7 +250,7 @@ describe('Given the paraswap plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
-    
+
     test('should pass filter with valid multi transactions', async () => {
       const transaction = SWAP_MULTI
       const filter = await swap({
