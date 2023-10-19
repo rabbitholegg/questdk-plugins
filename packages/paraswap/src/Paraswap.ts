@@ -120,7 +120,9 @@ export const stake = async (stake: StakeActionParams) => {
       chainId === 1 ? [MAINNET_SEPSP2_ADDRESS] : [OPTIMISM_SEPSP2_ADDRESS]
     return compressJson({
       chainId: chainId,
-      to: addressArray.concat(getIndexedContracts(chainId ?? 1)), // If both tokens are defined it has to be sePSP2
+      to: {
+        $or: addressArray.concat(getIndexedContracts(chainId ?? 1)), // If both tokens are defined it has to be sePSP2
+      },
       $abiAbstract: PARASWAP_SWAP_ABI,
       $or: [
         {
