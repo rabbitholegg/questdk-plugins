@@ -1,8 +1,8 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { SWAP_MULTI, SWAP_SIMPLE } from './test-transactions'
-import { swap } from './Paraswap.js'
-import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
+import { MULTI_DEPOSIT, SIMPLE_DEPOSIT, SWAP_MULTI, SWAP_SIMPLE } from './test-transactions'
+import { stake, swap } from './Paraswap.js'
+import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids.js'
 import { parseEther, type Address } from 'viem'
 import { PARASWAP_SWAP_ABI } from './abi.js'
 const USDT_ADDRESS = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
@@ -11,7 +11,7 @@ const VELA_ADDRESS = '0x088cd8f5ef3652623c22d48b1605dcfe860cd704'
 const AUGUSTUS_SWAPPER_ARBITRUM = '0xdef171fe48cf0115b1d80b88dc8eab59176fee57'
 
 describe('Given the paraswap plugin', () => {
-  describe('When handling the bridge', () => {
+  describe('When handling the swap', () => {
     test('should return a valid action filter', async () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
@@ -139,6 +139,70 @@ describe('Given the paraswap plugin', () => {
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.false
+    })
+    test('should pass filter with valid simple transactions', async () => {
+      const transaction = SWAP_SIMPLE
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
+        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        amountIn: GreaterThanOrEqual(339000000),
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should not pass filter with invalid simple transactions', async () => {
+      const transaction = SWAP_SIMPLE
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
+        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        amountIn: GreaterThanOrEqual(339000000000),
+      })
+      expect(apply(transaction, filter)).to.be.false
+    })
+    test('should pass filter with valid multi transactions', async () => {
+      const transaction = SWAP_MULTI
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenOut: VELA_ADDRESS.toLowerCase() as Address,
+        amountOut: GreaterThanOrEqual(parseEther('0.037')),
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should not pass filter with invalid transactions', async () => {
+      const transaction = SWAP_MULTI
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
+        tokenOut: VELA_ADDRESS.toLowerCase() as Address,
+        amountOut: GreaterThanOrEqual(parseEther('0.037')),
+      })
+      expect(apply(transaction, filter)).to.be.false
+    })
+  })
+  describe('When handling the stake', () => {
+    test('should pass with a simple deposit', async () => {
+      const transaction = SIMPLE_DEPOSIT
+      const filter = await stake({
+        chainId: OPTIMISM_CHAIN_ID,
+        contractAddress: '0x8C934b7dBc782568d14ceaBbEAeDF37cB6348615',
+        amountOne: GreaterThanOrEqual(parseEther('46128')),
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass with a multi deposit', async () => {
+      const transaction = MULTI_DEPOSIT
+      const filter = await stake({
+        chainId: OPTIMISM_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        amountOne: GreaterThanOrEqual(parseEther('659')),
+      })
+      expect(apply(transaction, filter)).to.be.true
     })
   })
 })
