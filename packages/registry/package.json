@@ -44,7 +44,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.21",
+    "@rabbitholegg/questdk": "2.0.0-alpha.22",
     "@rabbitholegg/questdk-plugin-connext": "workspace:*",
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-stargate": "workspace:*",
