@@ -20,7 +20,7 @@ importers:
 
   packages/across:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -31,7 +31,7 @@ importers:
       viem: 1.2.15
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -45,7 +45,7 @@ importers:
 
   packages/arbitrum:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -56,7 +56,7 @@ importers:
       viem: 1.2.15
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -95,7 +95,7 @@ importers:
 
   packages/camelot:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -106,7 +106,7 @@ importers:
       viem: 1.2.15
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -123,7 +123,7 @@ importers:
       '@connext/nxtp-txservice': ^2.0.0
       '@connext/nxtp-utils': ^2.0.4
       '@connext/smart-contracts': ^2.0.0
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': ^20.4.5
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.1
@@ -137,7 +137,7 @@ importers:
       '@connext/nxtp-txservice': 2.0.0_sinon@16.1.1
       '@connext/nxtp-utils': 2.0.4_sinon@16.1.1
       '@connext/smart-contracts': 2.0.0_ethers@5.7.2
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.2.2
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.2.2
       viem: 1.16.6_typescript@5.2.2
     devDependencies:
       '@types/node': 20.8.7
@@ -151,7 +151,7 @@ importers:
 
   packages/gmx:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       axios: 1.5.0
@@ -163,7 +163,7 @@ importers:
       viem: 1.2.15
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       axios: 1.5.0
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
@@ -180,7 +180,7 @@ importers:
     specifiers:
       '@hop-protocol/core': 0.0.1-beta.182
       '@hop-protocol/sdk': 0.0.1-beta.535
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -193,7 +193,7 @@ importers:
     dependencies:
       '@hop-protocol/core': 0.0.1-beta.182
       '@hop-protocol/sdk': 0.0.1-beta.535
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -208,7 +208,7 @@ importers:
   packages/optimism:
     specifiers:
       '@eth-optimism/contracts-ts': 0.15.0
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -220,7 +220,7 @@ importers:
       vitest: 0.33.0
     dependencies:
       '@eth-optimism/contracts-ts': 0.15.0_typescript@5.1.6
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -235,7 +235,7 @@ importers:
   packages/paraswap:
     specifiers:
       '@paraswap/sdk': ^6.2.2
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': ^20.4.5
       '@vitest/coverage-v8': ^0.33.0
       axios: 1.5.0
@@ -248,7 +248,7 @@ importers:
       vitest: ^0.33.0
     dependencies:
       '@paraswap/sdk': 6.2.4_ugpk5otv3uuel5tlgro6sz4wmq
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.2.2
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.2.2
       axios: 1.5.0
       viem: 1.2.15_typescript@5.2.2
     devDependencies:
@@ -264,7 +264,7 @@ importers:
   packages/polygon:
     specifiers:
       '@maticnetwork/pos-portal': 1.5.2
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -276,7 +276,7 @@ importers:
       vitest: 0.33.0
     dependencies:
       '@maticnetwork/pos-portal': 1.5.2
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -290,7 +290,7 @@ importers:
 
   packages/registry:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@rabbitholegg/questdk-plugin-across': workspace:*
       '@rabbitholegg/questdk-plugin-arbitrum': workspace:*
       '@rabbitholegg/questdk-plugin-basepaint': workspace:*
@@ -314,7 +314,7 @@ importers:
       viem: ^1.2.15
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.2.2
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.2.2
       '@rabbitholegg/questdk-plugin-across': link:../across
       '@rabbitholegg/questdk-plugin-arbitrum': link:../arbitrum
       '@rabbitholegg/questdk-plugin-basepaint': link:../basepaint
@@ -341,7 +341,7 @@ importers:
 
   packages/stargate:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -352,7 +352,7 @@ importers:
       viem: 1.6.7
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.1.6
       viem: 1.6.7_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -366,7 +366,7 @@ importers:
 
   packages/tally:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': ^20.4.5
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.1
@@ -377,7 +377,7 @@ importers:
       viem: ^1.2.15
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.2.2
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.2.2
       viem: 1.16.6_typescript@5.2.2
     devDependencies:
       '@types/node': 20.8.7
@@ -391,7 +391,7 @@ importers:
 
   packages/template:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@types/node': ^20.4.5
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.1
@@ -402,7 +402,7 @@ importers:
       viem: ^1.2.15
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.2.2
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.2.2
       viem: 1.16.6_typescript@5.2.2
     devDependencies:
       '@types/node': 20.8.7
@@ -419,7 +419,7 @@ importers:
 
   packages/uniswap:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21
+      '@rabbitholegg/questdk': 2.0.0-alpha.22
       '@uniswap/universal-router': ^1.4.3
       '@uniswap/universal-router-sdk': ^1.5.4
       '@vitest/coverage-v8': ^0.33.0
@@ -430,7 +430,7 @@ importers:
       viem: ^1.2.15
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.21_typescript@5.2.2
+      '@rabbitholegg/questdk': 2.0.0-alpha.22_typescript@5.2.2
       '@uniswap/universal-router': 1.5.1
       '@uniswap/universal-router-sdk': 1.5.8_hardhat@2.18.1
       viem: 1.16.6_typescript@5.2.2
@@ -2208,8 +2208,8 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk/2.0.0-alpha.21_typescript@5.1.6:
-    resolution: {integrity: sha512-dZpVGmKtB7V0Zurt/s7fzWqBnIwVaaaNIvOuwjIFBtzql4HEDDuJEFx/Jvg7JaC+dghuOyZkfQeVy2stq5afuA==}
+  /@rabbitholegg/questdk/2.0.0-alpha.22_typescript@5.1.6:
+    resolution: {integrity: sha512-MBKDHYEmaKLScFEqDcLkg9s2BehA+Mh8brBwEhz/QE7OKHQkyAC1udxkXsSDGjg9q4e5y0apNdcpel3ktwnV+g==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:
@@ -2226,8 +2226,8 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk/2.0.0-alpha.21_typescript@5.2.2:
-    resolution: {integrity: sha512-dZpVGmKtB7V0Zurt/s7fzWqBnIwVaaaNIvOuwjIFBtzql4HEDDuJEFx/Jvg7JaC+dghuOyZkfQeVy2stq5afuA==}
+  /@rabbitholegg/questdk/2.0.0-alpha.22_typescript@5.2.2:
+    resolution: {integrity: sha512-MBKDHYEmaKLScFEqDcLkg9s2BehA+Mh8brBwEhz/QE7OKHQkyAC1udxkXsSDGjg9q4e5y0apNdcpel3ktwnV+g==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:
