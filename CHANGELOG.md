@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.21
+
+### Minor Changes
+
+- [#38](https://github.com/rabbitholegg/questdk/pull/38) [`a3d69ab`](https://github.com/rabbitholegg/questdk/commit/a3d69abd5ec209e31576b7282c25796de8d90b80) Thanks [@Quazia](https://github.com/Quazia)! - Change preprocessors to not rely on JSON ordering
+
 ## 2.0.0-alpha.20
 
 ### Patch Changes
