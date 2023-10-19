@@ -195,7 +195,7 @@ export const handleAbiDecode = (context: any, filter: AbiFilter) => {
       },
       {},
     )
-    const {$abi: _, ...newFilter}  = filter
+    const { $abi: _, ...newFilter } = filter
     if (apply({ ...namedArgs, sighash, functionName }, newFilter)) {
       return true
     }
@@ -212,7 +212,7 @@ export const handleAbstractAbiDecode = (
   const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
   const elementCount = filter.$abiAbstract!.length
   const $abiAbstract = filter.$abiAbstract
-  const {$abiAbstract: _, ...newFilter}  = filter
+  const { $abiAbstract: _, ...newFilter } = filter
 
   const contextMap = new Map<string, number>()
   // Function selectors are 4 bytes long - 8 characters
@@ -262,7 +262,7 @@ export const handleAbiParamDecode = (context: any, filter: AbiParamFilter) => {
       },
       {},
     )
-    const {$abiParams: _, ...newFilter}  = filter
+    const { $abiParams: _, ...newFilter } = filter
     if (apply(namedArgs, newFilter)) {
       return true
     }
