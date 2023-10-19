@@ -47,7 +47,7 @@
   "dependencies": {
     "@paraswap/sdk": "^6.2.2",
     "axios": "1.5.0",
-    "@rabbitholegg/questdk": "2.0.0-alpha.20",
+    "@rabbitholegg/questdk": "2.0.0-alpha.21",
     "viem": "1.2.15"
   }
 }

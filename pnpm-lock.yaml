@@ -30,8 +30,8 @@ importers:
   packages/across:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -64,8 +64,8 @@ importers:
   packages/arbitrum:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -132,8 +132,8 @@ importers:
   packages/camelot:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -175,8 +175,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(ethers@5.7.2)
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.2.2)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.2.2)
       viem:
         specifier: ^1.2.15
         version: 1.16.5(typescript@5.2.2)
@@ -209,8 +209,8 @@ importers:
   packages/gmx:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -252,8 +252,8 @@ importers:
         specifier: 0.0.1-beta.535
         version: 0.0.1-beta.535
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -289,8 +289,8 @@ importers:
         specifier: 0.15.0
         version: 0.15.0(typescript@5.1.6)
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -326,8 +326,8 @@ importers:
         specifier: ^6.2.2
         version: 6.2.4(axios@1.5.0)(typescript@5.2.2)
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.20
-        version: 2.0.0-alpha.20(typescript@5.2.2)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.2.2)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -366,8 +366,8 @@ importers:
         specifier: 1.5.2
         version: 1.5.2
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -400,8 +400,8 @@ importers:
   packages/registry:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.2.2)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.2.2)
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
@@ -473,8 +473,8 @@ importers:
   packages/stargate:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.1.6)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.1.6)
       viem:
         specifier: 1.6.7
         version: 1.6.7(typescript@5.1.6)
@@ -507,8 +507,8 @@ importers:
   packages/tally:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.2.2)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.2.2)
       viem:
         specifier: ^1.2.15
         version: 1.16.5(typescript@5.2.2)
@@ -541,8 +541,8 @@ importers:
   packages/template:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.2.2)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.2.2)
       viem:
         specifier: ^1.2.15
         version: 1.16.5(typescript@5.2.2)
@@ -577,8 +577,8 @@ importers:
   packages/uniswap:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.18
-        version: 2.0.0-alpha.18(typescript@5.2.2)
+        specifier: 2.0.0-alpha.21
+        version: 2.0.0-alpha.21(typescript@5.2.2)
       '@uniswap/universal-router':
         specifier: ^1.4.3
         version: 1.5.1
@@ -2390,8 +2390,8 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk@2.0.0-alpha.18(typescript@5.1.6):
-    resolution: {integrity: sha512-RNv4T5YZ3KhBPqJjoQNZLtKuu5s3ubhsmCbql08XRqJJzIdYO0nAfdCdUClqAWAH9lZHz2vkFjaA+P2GQr1gYQ==}
+  /@rabbitholegg/questdk@2.0.0-alpha.21(typescript@5.1.6):
+    resolution: {integrity: sha512-dZpVGmKtB7V0Zurt/s7fzWqBnIwVaaaNIvOuwjIFBtzql4HEDDuJEFx/Jvg7JaC+dghuOyZkfQeVy2stq5afuA==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:
@@ -2408,26 +2408,8 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk@2.0.0-alpha.18(typescript@5.2.2):
-    resolution: {integrity: sha512-RNv4T5YZ3KhBPqJjoQNZLtKuu5s3ubhsmCbql08XRqJJzIdYO0nAfdCdUClqAWAH9lZHz2vkFjaA+P2GQr1gYQ==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.10(typescript@5.2.2)
-      rimraf: 5.0.1
-      typescript: 5.2.2
-      viem: 1.16.5(typescript@5.2.2)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
-  /@rabbitholegg/questdk@2.0.0-alpha.20(typescript@5.2.2):
-    resolution: {integrity: sha512-TvUk7DQtQokVE2t5M1wUHSKybBb8LBgr+ossvgz56TJZtx+YyM3q4R0NSJdjGs9boDhSTShxRuy+ua9xVCp+qg==}
+  /@rabbitholegg/questdk@2.0.0-alpha.21(typescript@5.2.2):
+    resolution: {integrity: sha512-dZpVGmKtB7V0Zurt/s7fzWqBnIwVaaaNIvOuwjIFBtzql4HEDDuJEFx/Jvg7JaC+dghuOyZkfQeVy2stq5afuA==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:

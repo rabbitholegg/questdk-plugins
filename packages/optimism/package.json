@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@eth-optimism/contracts-ts": "0.15.0",
-    "@rabbitholegg/questdk": "2.0.0-alpha.18",
+    "@rabbitholegg/questdk": "2.0.0-alpha.21",
     "viem": "1.2.15"
   }
 }
