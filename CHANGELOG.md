@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.23
+
+### Patch Changes
+
+- [#42](https://github.com/rabbitholegg/questdk/pull/42) [`7203b30`](https://github.com/rabbitholegg/questdk/commit/7203b3042cf5229d8671863753914b70cfd0212e) Thanks [@Quazia](https://github.com/Quazia)! - Use shallow copies instead of true copies
+
 ## 2.0.0-alpha.22
 
 ### Minor Changes
