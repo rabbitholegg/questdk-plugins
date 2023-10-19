@@ -231,7 +231,7 @@ describe('Given the paraswap plugin', () => {
       expect(apply(transaction, filter)).to.be.true
     })
 
-    test.only('should pass filter with valid Uniswap swap', async () => {
+    test('should pass filter with valid Uniswap swap', async () => {
       const transaction = UNISWAP_V3_SWAP
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
