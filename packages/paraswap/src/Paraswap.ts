@@ -101,7 +101,6 @@ export const swap = async (swap: SwapActionParams) => {
             fromAmount: amountIn,
             toToken: tokenOut,
             toAmount: amountOut,
-            
           },
         },
       ],

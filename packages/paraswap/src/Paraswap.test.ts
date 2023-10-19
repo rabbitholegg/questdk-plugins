@@ -98,8 +98,8 @@ describe('Given the paraswap plugin', () => {
                   $gte: '339000000',
                 },
                 toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
-              }
-            }
+              },
+            },
           ],
         },
       })
@@ -119,62 +119,62 @@ describe('Given the paraswap plugin', () => {
     test('should pass filter with valid production simple transactions', async () => {
       const transaction = PROD_SWAP_SIMPLE
       const testFilter = {
-        to: "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+        to: '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57',
         input: {
           $or: [
             {
               funds: {},
               assets: [
-                "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-                "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-              ]
+                '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+                '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              ],
             },
             {
               funds: {},
               assets: [
-                "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-                "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-              ]
+                '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+                '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              ],
             },
             {
-              toToken: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
-              fromToken: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
+              toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
             },
             {
-              toToken: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
-              fromToken: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
-            },
-            {
-              params: {
-                tokenIn: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
-                tokenOut: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-              }
+              toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
             },
             {
               params: {
-                path: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1EeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-              }
+                tokenIn: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+                tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              },
+            },
+            {
+              params: {
+                path: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1EeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              },
             },
             {
               data: {
                 path: {
                   $last: {
-                    to: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-                  }
+                    to: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+                  },
                 },
-                fromToken: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
-              }
+                fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+              },
             },
             {
               data: {
-                toToken: "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
-                fromToken: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"
-              }
-            }
+                toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+                fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+              },
+            },
           ],
-          $abiAbstract: PARASWAP_ABI
+          $abiAbstract: PARASWAP_ABI,
         },
-        chainId: 42161
+        chainId: 42161,
       }
       expect(apply(transaction, testFilter)).to.be.true
     })
