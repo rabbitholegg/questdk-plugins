@@ -187,7 +187,7 @@ export const CHAIN_ZERO_AND_POOL_TO_TOKEN_ADDRESS: {
 }
 
 export const NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
-  [chainId: number]: { [address: string]: number }
+  [sourceChainId: number]: { [tokenAddress: string]: number }
 } = {
   [ETH_CHAIN_ID]: {
     '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48': USDC_POOL_ID,
@@ -225,3 +225,5 @@ export const NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS: {
     '0x224d8fd7ab6ad4c6eb4611ce56ef35dec2277f03': ETH_POOL_ID,
   },
 }
+
+export const NATIVE_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
