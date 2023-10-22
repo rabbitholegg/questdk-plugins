@@ -5,6 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { metaBurnABI, metaRouteABI, metaSynthesizeABI } from './abi'
+import { symbiosis } from './symbiosis-sdk'
 
 export const bridge = async (
   bridge: BridgeActionParams,
@@ -17,6 +18,8 @@ export const bridge = async (
     amount,
     recipient,
   } = bridge
+
+  const bridgeContract = contractAddress ?? symbiosis.metaRouter(sourceChainId).address
 
   return compressJson({
     chainId: sourceChainId,
