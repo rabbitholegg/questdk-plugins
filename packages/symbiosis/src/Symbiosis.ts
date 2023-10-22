@@ -4,6 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { metaBurnABI, metaRouteABI, metaSynthesizeABI } from './abi'
 
 export const bridge = async (
   bridge: BridgeActionParams,
@@ -18,9 +19,27 @@ export const bridge = async (
   } = bridge
 
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to: 0x0, // The contract address of the bridge
-    input: {}, // The input object is where we'll put the ABI and the parameters
+    chainId: sourceChainId,
+    to: contractAddress,
+    input: {
+      $abi: metaRouteABI,
+      _metarouteTransaction: {
+        amount: amount,
+        otherSideCalldata: {
+          $abi: metaSynthesizeABI,
+          _metaSynthesizeTransaction: {
+            rtoken: tokenAddress,
+            chain2address: recipient,
+            finalCalldata: {
+              $abi: metaBurnABI,
+              _metaBurnTransaction: {
+                chainID: destinationChainId,
+              },
+            },
+          },
+        },
+      },
+    },
   })
 }
 
