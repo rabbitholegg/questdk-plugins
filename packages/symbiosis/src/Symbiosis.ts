@@ -31,12 +31,11 @@ export const bridge = async (
         otherSideCalldata: {
           $abi: metaSynthesizeABI,
           _metaSynthesizeTransaction: {
-            rtoken: tokenAddress,
-            chain2address: recipient,
             finalCalldata: {
               $abi: metaBurnABI,
               _metaBurnTransaction: {
                 chainID: destinationChainId,
+                chain2address: recipient,
               },
             },
           },
