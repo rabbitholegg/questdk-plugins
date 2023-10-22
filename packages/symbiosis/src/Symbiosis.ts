@@ -27,6 +27,7 @@ export const bridge = async (
     input: {
       $abi: metaRouteABI,
       _metarouteTransaction: {
+        approvedTokens: tokenAddress ? [tokenAddress] : undefined, // if tokenAddress is undefined, any input token will pass filter
         amount: amount,
         otherSideCalldata: {
           $abi: metaSynthesizeABI,
