@@ -19,11 +19,12 @@ export const bridge = async (
     recipient,
   } = bridge
 
-  const bridgeContract = contractAddress ?? symbiosis.metaRouter(sourceChainId).address
+  const bridgeContract =
+    contractAddress ?? symbiosis.metaRouter(sourceChainId).address
 
   return compressJson({
     chainId: sourceChainId,
-    to: contractAddress,
+    to: bridgeContract,
     input: {
       $abi: metaRouteABI,
       _metarouteTransaction: {
