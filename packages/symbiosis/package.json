@@ -46,6 +46,8 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.22",
+    "ethers": "^5.2.0",
+    "symbiosis-js-sdk": "^3.0.9",
     "viem": "^1.2.15"
   }
 }
