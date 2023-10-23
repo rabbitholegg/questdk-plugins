@@ -4,7 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './constants'
+import { CHAIN_ID_ARRAY, CHAIN_TO_TOKENS } from './constants'
 import { metaBurnABI, metaRouteABI, metaSynthesizeABI } from './abi'
 import { symbiosis } from './symbiosis-sdk'
 
@@ -51,7 +51,7 @@ export const bridge = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+  return CHAIN_TO_TOKENS[_chainId]
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
