@@ -131,17 +131,16 @@ export const stake = async (stake: StakeActionParams) => {
         $or: addressArray, // If both tokens are defined it has to be sePSP2
       },
       input: {
-
-      $abi: PARASWAP_STAKE_ABI,
-      $or: [
-        {
-          pspAmount: amountOne,
-        },
-        {
-          _assetAmount: amountOne,
-        },
-      ],
-    }
+        $abi: PARASWAP_STAKE_ABI,
+        $or: [
+          {
+            pspAmount: amountOne,
+          },
+          {
+            _assetAmount: amountOne,
+          },
+        ],
+      },
     })
   } else {
     return compressJson({
@@ -157,14 +156,14 @@ export const stake = async (stake: StakeActionParams) => {
       input: {
         $abi: PARASWAP_STAKE_ABI,
         $or: [
-        {
-          pspAmount: amountOne,
-        },
-        {
-          _assetAmount: amountOne,
-        },
+          {
+            pspAmount: amountOne,
+          },
+          {
+            _assetAmount: amountOne,
+          },
         ],
-      }
+      },
     })
   }
 }
