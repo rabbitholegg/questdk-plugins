@@ -4,6 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import { metaBurnABI, metaRouteABI, metaSynthesizeABI } from './abi'
 import { symbiosis } from './symbiosis-sdk'
 
@@ -20,7 +21,7 @@ export const bridge = async (
   } = bridge
 
   const bridgeContract: Address =
-    contractAddress ?? symbiosis.metaRouter(sourceChainId).address as Address
+    contractAddress ?? (symbiosis.metaRouter(sourceChainId).address as Address)
 
   return compressJson({
     chainId: sourceChainId,
@@ -54,5 +55,5 @@ export const getSupportedTokenAddresses = async (
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
+  return CHAIN_ID_ARRAY
 }
