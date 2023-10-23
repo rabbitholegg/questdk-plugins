@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-camelot",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

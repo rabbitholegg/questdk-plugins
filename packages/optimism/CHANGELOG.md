@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-optimism
 
+## 1.0.0-alpha.7
+
+### Minor Changes
+
+- [#71](https://github.com/rabbitholegg/questdk-plugins/pull/71) [`53d2ee5`](https://github.com/rabbitholegg/questdk-plugins/commit/53d2ee51b9479008bd549ebacba29fcfd82c4684) Thanks [@Quazia](https://github.com/Quazia)! - Update questdk instance and add Paraswap Stake action
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes
