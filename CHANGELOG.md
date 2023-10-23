@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.24
+
+### Patch Changes
+
+- [#44](https://github.com/rabbitholegg/questdk/pull/44) [`92c5a2a`](https://github.com/rabbitholegg/questdk/commit/92c5a2aaeb9c71c2177db944cbfcfe2100897443) Thanks [@Quazia](https://github.com/Quazia)! - Tweak only-allow command
+
 ## 2.0.0-alpha.23
 
 ### Patch Changes
