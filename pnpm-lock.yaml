@@ -2376,24 +2376,6 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk@2.0.0-alpha.25(typescript@5.2.2):
-    resolution: {integrity: sha512-MBKDHYEmaKLScFEqDcLkg9s2BehA+Mh8brBwEhz/QE7OKHQkyAC1udxkXsSDGjg9q4e5y0apNdcpel3ktwnV+g==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.10(typescript@5.2.2)
-      rimraf: 5.0.5
-      typescript: 5.2.2
-      viem: 1.16.6(typescript@5.2.2)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
   /@rabbitholegg/questdk@2.0.0-alpha.25(typescript@5.1.6):
     resolution: {integrity: sha512-KhTZSfBlfG3rUNQ+9r2eAW/bR3eTD3y1TPiF7ydZEPI44w6rgW7gzrSuwX/lHYBRMSVm6nHryk2JXaJtfsS0AQ==}
     peerDependencies:
