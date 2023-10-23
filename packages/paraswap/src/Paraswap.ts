@@ -172,8 +172,7 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
   actionType?: ActionType,
 ): Promise<Address[]> => {
-  if(actionType === undefined)
-    return []
+  if (actionType === undefined) return []
   if (actionType === 'stake') {
     return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
   }
@@ -186,7 +185,7 @@ export const getSupportedTokenAddresses = async (
 export const getSupportedChainIds = async (actionType?: ActionType) => {
   if (actionType === 'stake') {
     return STAKE_CHAIN_ID_ARRAY
-  } else if(actionType === 'swap') {
+  } else if (actionType === 'swap') {
     return SWAP_CHAIN_ID_ARRAY
   }
   return []
