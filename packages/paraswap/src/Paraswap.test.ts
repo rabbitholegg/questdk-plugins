@@ -16,7 +16,10 @@ import { stake, swap } from './Paraswap.js'
 import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids.js'
 import { parseEther, type Address } from 'viem'
 import { PARASWAP_SWAP_ABI } from './abi.js'
-import type { FilterObject, TransactionFilter } from '@rabbitholegg/questdk/dist/types/filter/types'
+import type {
+  FilterObject,
+  TransactionFilter,
+} from '@rabbitholegg/questdk/dist/types/filter/types'
 const USDT_ADDRESS = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
 const USDCE_ADDRESS = '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'
 const VELA_ADDRESS = '0x088cd8f5ef3652623c22d48b1605dcfe860cd704'
@@ -148,26 +151,26 @@ describe('Given the paraswap plugin', () => {
                 '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
                 '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
               ],
-            }  as FilterObject,
+            } as FilterObject,
             {
               toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
               fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-            }  as FilterObject,
+            } as FilterObject,
             {
               toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
               fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-            }  as FilterObject,
+            } as FilterObject,
             {
               params: {
                 tokenIn: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
                 tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
               },
-            }  as FilterObject,
+            } as FilterObject,
             {
               params: {
                 path: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1EeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
               },
-            }  as FilterObject,
+            } as FilterObject,
             {
               data: {
                 path: {
@@ -177,13 +180,13 @@ describe('Given the paraswap plugin', () => {
                 },
                 fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
               },
-            }  as FilterObject,
+            } as FilterObject,
             {
               data: {
                 toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
                 fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
               },
-            }  as FilterObject,
+            } as FilterObject,
           ],
           $abiAbstract: PARASWAP_SWAP_ABI,
         },
