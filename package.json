@@ -20,7 +20,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx -y only-allow pnpm",
     "prepublishOnly": "pnpm bun scripts/prepublishOnly.ts",
     "size": "size-limit",
     "test": "vitest dev",
