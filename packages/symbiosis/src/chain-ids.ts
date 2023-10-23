@@ -19,14 +19,3 @@ export const CHAIN_ID_ARRAY = [
   LINEA_CHAIN_ID,
   SCROLL_CHAIN_ID,
 ]
-
-export type ChainIds =
-  | typeof ETH_CHAIN_ID
-  | typeof OPTIMISM_CHAIN_ID
-  | typeof POLYGON_CHAIN_ID
-  | typeof ZK_ERA_CHAIN_ID
-  | typeof MANTLE_CHAIN_ID
-  | typeof BASE_CHAIN_ID
-  | typeof ARBITRUM_CHAIN_ID
-  | typeof LINEA_CHAIN_ID
-  | typeof SCROLL_CHAIN_ID
