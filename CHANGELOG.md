@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.25
+
+### Minor Changes
+
+- [#46](https://github.com/rabbitholegg/questdk/pull/46) [`2c30836`](https://github.com/rabbitholegg/questdk/commit/2c30836d0f7381797047f53783d5031e94905dfd) Thanks [@Quazia](https://github.com/Quazia)! - Add optional task param for getter typng
+
+### Patch Changes
+
+- [#48](https://github.com/rabbitholegg/questdk/pull/48) [`d12b505`](https://github.com/rabbitholegg/questdk/commit/d12b505f62723c9353db388686812606a1f8cc90) Thanks [@Quazia](https://github.com/Quazia)! - remove preinstall hook
+
 ## 2.0.0-alpha.24
 
 ### Patch Changes
