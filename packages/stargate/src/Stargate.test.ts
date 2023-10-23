@@ -1,13 +1,16 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Stargate.js'
+import { bridge, getSupportedTokenAddresses } from './Stargate.js'
+import { LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID } from './chain-ids.js'
+import { getFilteredChainIds, shortenAddress } from './utils.js'
 import {
   DEPOSIT_ETH,
   DEPOSIT_ERC20,
   WITHDRAW_ETH,
   WITHDRAW_ERC20,
-  USDC_POLY_PASS,
-  USDC_POLY_FAIL,
+  ETH_OP_ARB,
+  USDC_OP_PASS,
+  USDC_OP_FAIL,
 } from './test-transactions.js'
 import {
   ARBITRUM_LAYER_ZERO_CHAIN_ID,
@@ -21,22 +24,18 @@ import { STARGATE_BRIDGE_ABI } from './abi.js'
 import { parseEther } from 'viem'
 import {
   NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
+  NATIVE_TOKEN_ADDRESS,
   CHAIN_ID_TO_ROUTER_ADDRESS,
   CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
 } from './contract-addresses.js'
 
 const ARBITRUM_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
 const ARBITRUM_USDT_ADDRESS = '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9'
-const ARBITRUM_SGETH_ADDRESS = '0x82cbecf39bee528b5476fe6d1550af59a9db6fc0'
-
 const ETHEREUM_USDC_ADDRESS = '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
-const ETHEREUM_SGETH_ADDRESS = '0x72E2F4830b9E45d52F80aC08CB2bEC0FeF72eD9c'
-
-const POLYGON_USDCE_ADDRESS = '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'
-
+const OP_USDCE_ADDRESS = '0x7f5c764cbc14f9669b88837ca1490cca17c31607'
 const TEST_USER = '0x7c3bd1a09d7d86920451def20ae503322c8d0412'
 
-describe('Given the Across plugin', () => {
+describe('Given the Stargate plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
       const filter = await bridge({
@@ -98,7 +97,7 @@ describe('Given the Across plugin', () => {
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
-        tokenAddress: ETHEREUM_SGETH_ADDRESS,
+        tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
@@ -122,7 +121,7 @@ describe('Given the Across plugin', () => {
       const filter = await bridge({
         sourceChainId: ETH_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
-        tokenAddress: ETHEREUM_SGETH_ADDRESS,
+        tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual(parseEther('.04')),
         recipient: '0x7c3bd1a09d7d86920451def20ae503322c8d0412',
       })
@@ -133,7 +132,7 @@ describe('Given the Across plugin', () => {
       const filter = await bridge({
         sourceChainId: ARBITRUM_CHAIN_ID,
         destinationChainId: OPTIMISM_CHAIN_ID,
-        tokenAddress: ARBITRUM_SGETH_ADDRESS,
+        tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual(parseEther('.6')),
         recipient: '0x08bfa4ef61a457792c45240829529b43b019d941',
       })
@@ -162,27 +161,125 @@ describe('Given the Across plugin', () => {
       expect(apply(transaction, filter)).to.be.true
     })
   })
-  describe('When bridging > $1 USDC from Poly to Arb', () => {
+  describe('When bridging > $1 USDC', () => {
     test('should pass filter with valid L2 token tx', async () => {
-      const transaction = USDC_POLY_PASS
+      const transaction = USDC_OP_PASS
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
-        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
-        tokenAddress: POLYGON_USDCE_ADDRESS,
+        sourceChainId: OPTIMISM_CHAIN_ID,
+        destinationChainId: ARBITRUM_CHAIN_ID,
+        tokenAddress: OP_USDCE_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
       })
       expect(apply(transaction, filter)).to.be.true
     })
 
-    test('should not pass filter with invalid transactions', async () => {
-      const transaction = USDC_POLY_FAIL
+    test('should not pass filter with invalid tokenAddress', async () => {
+      const transaction = USDC_OP_FAIL
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
-        destinationChainId: ARBITRUM_LAYER_ZERO_CHAIN_ID,
-        tokenAddress: POLYGON_USDCE_ADDRESS,
+        sourceChainId: OPTIMISM_CHAIN_ID,
+        destinationChainId: ARBITRUM_CHAIN_ID,
+        tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
       })
       expect(apply(transaction, filter)).to.be.false
+    })
+  })
+  describe('When bridging ETH', () => {
+    test('should throw error with undefined tokenAddress', async () => {
+      const transaction = ETH_OP_ARB
+      try {
+        const filter = await bridge({
+          sourceChainId: OPTIMISM_CHAIN_ID,
+          destinationChainId: ARBITRUM_CHAIN_ID,
+          amount: GreaterThanOrEqual('1000000'),
+        })
+        apply(transaction, filter)
+        throw new Error('Expected bridge function to throw, but it did not.')
+      } catch (err) {
+        expect(err.message).toBe(
+          'tokenAddress is undefined. Please provide a valid token address.',
+        )
+      }
+    })
+    test('should throw error with unknown tokenAddress', async () => {
+      const transaction = ETH_OP_ARB
+      try {
+        const filter = await bridge({
+          sourceChainId: OPTIMISM_CHAIN_ID,
+          destinationChainId: ARBITRUM_CHAIN_ID,
+          tokenAddress: ARBITRUM_USDT_ADDRESS, // correct address, but wrong chain
+          amount: GreaterThanOrEqual('1000000'),
+        })
+        apply(transaction, filter)
+        throw new Error('Expected bridge function to throw, but it did not.')
+      } catch (err) {
+        expect(err.message).toBe(
+          `No pool found for provided tokenAddress: ${ARBITRUM_USDT_ADDRESS}`,
+        )
+      }
+    })
+  })
+
+  describe('When adding supported tokens', async () => {
+    const chainIds = await getFilteredChainIds()
+
+    chainIds.forEach((chainId) => {
+      describe(`for chainId: ${chainId}`, async () => {
+        const tokens = await getSupportedTokenAddresses(chainId)
+
+        tokens.forEach((token) => {
+          test(`should create a valid filter for ${shortenAddress(
+            token,
+          )}`, async () => {
+            const filter = await bridge({
+              sourceChainId: chainId,
+              destinationChainId: ETH_CHAIN_ID,
+              tokenAddress: token,
+              amount: GreaterThanOrEqual(100000n),
+              recipient: TEST_USER,
+            })
+            const sourcePool =
+              token === NATIVE_TOKEN_ADDRESS
+                ? 13
+                : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[chainId][
+                    token.toLowerCase()
+                  ]
+
+            if (sourcePool === 13) {
+              expect(filter).to.deep.equal({
+                chainId: chainId,
+                to: CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
+                  LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]
+                ],
+                input: {
+                  $abi: STARGATE_BRIDGE_ABI,
+                  _amountLD: {
+                    $gte: '100000',
+                  },
+                  _toAddress: TEST_USER,
+                  _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
+                },
+              })
+            } else {
+              expect(filter).to.deep.equal({
+                chainId: chainId,
+                to: CHAIN_ID_TO_ROUTER_ADDRESS[
+                  LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]
+                ],
+                input: {
+                  $abi: STARGATE_BRIDGE_ABI,
+                  _srcPoolId: sourcePool,
+                  _amountLD: {
+                    $gte: '100000',
+                  },
+                  _to: TEST_USER,
+                  _dstChainId: LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[ETH_CHAIN_ID],
+                },
+              })
+            }
+          })
+        })
+      })
     })
   })
 })

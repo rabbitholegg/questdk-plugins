@@ -28,6 +28,12 @@ Also remember the package must be built for changes to take effect in this repo.
 
 At times it may be necesary to [restart the typescript server](https://tinytip.co/tips/vscode-restart-ts/) when working with a linked package in VSCode.
 
+In order to link the `questdk` run this from root of this package:
+```
+pnpm link path/to/questdk
+
+```
+
 ## Plugins: an Overview
 
 ### What Are Quest Plugins?

@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-paraswap
 
+## 1.0.0-alpha.8
+
+### Minor Changes
+
+- [#73](https://github.com/rabbitholegg/questdk-plugins/pull/73) [`1bcba48`](https://github.com/rabbitholegg/questdk-plugins/commit/1bcba48d2fe8ad781382475b7ce9ebba0bdb584c) Thanks [@Quazia](https://github.com/Quazia)! - Update tests and single swap filter for paraswap
+
 ## 1.0.0-alpha.7
 
 ### Patch Changes
