@@ -35,7 +35,7 @@
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
   "devDependencies": {
-    "@types/node": "^20.8.6",
+    "@types/node": "^20.8.7",
     "@vitest/coverage-v8": "^0.33.0",
     "rimraf": "^5.0.5",
     "rome": "^12.1.3",
