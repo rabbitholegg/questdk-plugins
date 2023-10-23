@@ -19,8 +19,8 @@ export const bridge = async (
     recipient,
   } = bridge
 
-  const bridgeContract =
-    contractAddress ?? symbiosis.metaRouter(sourceChainId).address
+  const bridgeContract: Address =
+    contractAddress ?? symbiosis.metaRouter(sourceChainId).address as Address
 
   return compressJson({
     chainId: sourceChainId,
