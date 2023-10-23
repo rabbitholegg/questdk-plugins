@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-project",
   "private": true,
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -23,7 +23,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx only-allow pnpm",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
@@ -45,7 +44,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.24",
+    "@rabbitholegg/questdk": "2.0.0-alpha.25",
     "viem": "^1.16.6"
   }
 }

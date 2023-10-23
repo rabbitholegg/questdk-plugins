@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-connext",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -22,7 +22,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx only-allow pnpm",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
@@ -47,7 +46,7 @@
     "@connext/nxtp-txservice": "^2.0.0",
     "@connext/nxtp-utils": "^2.0.4",
     "@connext/smart-contracts": "^2.0.0",
-    "@rabbitholegg/questdk": "2.0.0-alpha.24",
+    "@rabbitholegg/questdk": "2.0.0-alpha.25",
     "viem": "^1.16.6"
   }
 }

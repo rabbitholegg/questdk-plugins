@@ -30,8 +30,8 @@ importers:
   packages/across:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -64,8 +64,8 @@ importers:
   packages/arbitrum:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -132,8 +132,8 @@ importers:
   packages/camelot:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -175,8 +175,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(ethers@5.7.2)
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.2.2)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.2.2)
       viem:
         specifier: ^1.16.6
         version: 1.16.6(typescript@5.2.2)
@@ -209,8 +209,8 @@ importers:
   packages/gmx:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -252,8 +252,8 @@ importers:
         specifier: 0.0.1-beta.535
         version: 0.0.1-beta.535
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -289,8 +289,8 @@ importers:
         specifier: 0.15.0
         version: 0.15.0(typescript@5.1.6)
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -326,8 +326,8 @@ importers:
         specifier: ^6.2.4
         version: 6.2.4(axios@1.5.0)(typescript@5.2.2)
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.2.2)
+        specifier: 2.0.0-alpha.22
+        version: 2.0.0-alpha.22(typescript@5.2.2)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -366,8 +366,8 @@ importers:
         specifier: 1.5.2
         version: 1.5.2
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       viem:
         specifier: 1.2.15
         version: 1.2.15(typescript@5.1.6)
@@ -400,8 +400,8 @@ importers:
   packages/registry:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.2.2)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.2.2)
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
@@ -473,8 +473,8 @@ importers:
   packages/stargate:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.1.6)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.1.6)
       viem:
         specifier: 1.6.7
         version: 1.6.7(typescript@5.1.6)
@@ -507,8 +507,8 @@ importers:
   packages/tally:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.2.2)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.2.2)
       viem:
         specifier: ^1.16.6
         version: 1.16.6(typescript@5.2.2)
@@ -541,8 +541,8 @@ importers:
   packages/template:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.2.2)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.2.2)
       viem:
         specifier: ^1.16.6
         version: 1.16.6(typescript@5.2.2)
@@ -577,8 +577,8 @@ importers:
   packages/uniswap:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.24
-        version: 2.0.0-alpha.24(typescript@5.2.2)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.2.2)
       '@uniswap/universal-router':
         specifier: ^1.5.1
         version: 1.5.1
@@ -2376,8 +2376,26 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk@2.0.0-alpha.24(typescript@5.1.6):
-    resolution: {integrity: sha512-eZiuq0WOR7mFqJayVRXEbU2II4lpvvaZpPJNdLT6OtubKnTVMssl7c0XIE6Bqw9MqGRjRRt+43nSgEKP/WnyvQ==}
+  /@rabbitholegg/questdk@2.0.0-alpha.22(typescript@5.2.2):
+    resolution: {integrity: sha512-MBKDHYEmaKLScFEqDcLkg9s2BehA+Mh8brBwEhz/QE7OKHQkyAC1udxkXsSDGjg9q4e5y0apNdcpel3ktwnV+g==}
+    peerDependencies:
+      typescript: '>=5.1.6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      abitype: 0.9.10(typescript@5.2.2)
+      rimraf: 5.0.5
+      typescript: 5.2.2
+      viem: 1.16.6(typescript@5.2.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@rabbitholegg/questdk@2.0.0-alpha.25(typescript@5.1.6):
+    resolution: {integrity: sha512-KhTZSfBlfG3rUNQ+9r2eAW/bR3eTD3y1TPiF7ydZEPI44w6rgW7gzrSuwX/lHYBRMSVm6nHryk2JXaJtfsS0AQ==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:
@@ -2385,7 +2403,7 @@ packages:
         optional: true
     dependencies:
       abitype: 0.9.10(typescript@5.1.6)
-      rimraf: 5.0.1
+      rimraf: 5.0.5
       typescript: 5.1.6
       viem: 1.16.6(typescript@5.1.6)
     transitivePeerDependencies:
@@ -2394,8 +2412,8 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk@2.0.0-alpha.24(typescript@5.2.2):
-    resolution: {integrity: sha512-eZiuq0WOR7mFqJayVRXEbU2II4lpvvaZpPJNdLT6OtubKnTVMssl7c0XIE6Bqw9MqGRjRRt+43nSgEKP/WnyvQ==}
+  /@rabbitholegg/questdk@2.0.0-alpha.25(typescript@5.2.2):
+    resolution: {integrity: sha512-KhTZSfBlfG3rUNQ+9r2eAW/bR3eTD3y1TPiF7ydZEPI44w6rgW7gzrSuwX/lHYBRMSVm6nHryk2JXaJtfsS0AQ==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:
@@ -2403,7 +2421,7 @@ packages:
         optional: true
     dependencies:
       abitype: 0.9.10(typescript@5.2.2)
-      rimraf: 5.0.1
+      rimraf: 5.0.5
       typescript: 5.2.2
       viem: 1.16.6(typescript@5.2.2)
     transitivePeerDependencies:
@@ -2476,7 +2494,7 @@ packages:
     resolution: {integrity: sha512-bcKpo1oj54hGholplGLpqPHRbIsnbixFtc06nwuNM5/dwSXOq/AAYoIBRsBmnZJSdfeNW5rnff7NTAz3ZCqR9Q==}
     dependencies:
       '@noble/curves': 1.0.0
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.3
     dev: false
 
@@ -2484,7 +2502,7 @@ packages:
     resolution: {integrity: sha512-osvveYtyzdEVbt3OfwwXFr4P2iVBL5u1Q3q4ONBfDY/UpOuXmOlbgwc1xECEboY8wIays8Yt6onaWMUdUbfl0A==}
     dependencies:
       '@noble/curves': 1.1.0
-      '@noble/hashes': 1.3.1
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.3
     dev: false
 
@@ -2506,7 +2524,7 @@ packages:
   /@scure/bip39@1.2.0:
     resolution: {integrity: sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==}
     dependencies:
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.3
     dev: false
 
@@ -2764,7 +2782,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.3
       '@types/keyv': 3.1.4
-      '@types/node': 20.4.5
+      '@types/node': 20.8.7
       '@types/responselike': 1.0.2
     dev: false
 
@@ -2809,7 +2827,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.8.7
     dev: false
 
   /@types/level-errors@3.0.1:
@@ -2821,7 +2839,7 @@ packages:
     dependencies:
       '@types/abstract-leveldown': 7.2.4
       '@types/level-errors': 3.0.1
-      '@types/node': 20.4.5
+      '@types/node': 20.8.7
     dev: false
 
   /@types/lru-cache@5.1.1:
@@ -2841,6 +2859,7 @@ packages:
 
   /@types/node@20.4.5:
     resolution: {integrity: sha512-rt40Nk13II9JwQBdeYqmbn2Q6IVTA5uPhvSO+JVqdXw/6/4glI6oR9ezty/A9Hg5u7JH4OmYmuQ+XvjKm0Datg==}
+    dev: true
 
   /@types/node@20.8.7:
     resolution: {integrity: sha512-21TKHHh3eUHIi2MloeptJWALuCu5H7HQTdTrWIFReA8ad+aggoX+lRes3ex7/FtpC+sVUpFMQ+QTfYr74mruiQ==}
@@ -2854,7 +2873,7 @@ packages:
   /@types/pbkdf2@3.1.1:
     resolution: {integrity: sha512-4HCoGwR3221nOc7G0Z/6KgTNGgaaFGkbGrtUJsB+zlKX2LBVjFHHIUkieMBgHHXgBH5Gq6dZHJKdBYdtlhBQvw==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.8.7
     dev: false
 
   /@types/prop-types@15.7.9:
@@ -2885,7 +2904,7 @@ packages:
   /@types/responselike@1.0.2:
     resolution: {integrity: sha512-/4YQT5Kp6HxUDb4yhRkm0bJ7TbjvTddqX7PZ5hz6qV3pxSo72f/6YPRo+Mu2DU307tm9IioO69l7uAwn5XNcFA==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.8.7
     dev: false
 
   /@types/scheduler@0.16.5:
@@ -2895,7 +2914,7 @@ packages:
   /@types/secp256k1@4.0.5:
     resolution: {integrity: sha512-aIonTBMErtE3T9MxDvTZRzcrT/mCqpEZBw3CCY/i+oG9n57N/+7obBkhFgavUAIrX21bU0LHg1XRgtaLdelBhA==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.8.7
     dev: false
 
   /@types/semver@7.5.4:
@@ -2915,7 +2934,7 @@ packages:
   /@types/ws@8.5.8:
     resolution: {integrity: sha512-flUksGIQCnJd6sZ1l5dqCEG/ksaoAg/eUwiLAGTJQcfgvZJKF++Ta4bJA6A5aPSJmsr+xlseHn4KLgVlNnvPTg==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.8.7
     dev: false
 
   /@uniswap/lib@4.0.1-alpha:
@@ -8613,6 +8632,7 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
+    dev: true
 
   /rimraf@5.0.5:
     resolution: {integrity: sha512-CqDakW+hMe/Bz202FPEymy68P+G50RfMQK+Qo5YUqc9SPipvbGjCGKd0RSKEelbsfQuw3g5NZDSrlZZAJurH1A==}

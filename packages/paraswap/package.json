@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-paraswap",
   "private": false,
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -23,7 +23,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx only-allow pnpm",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
@@ -46,7 +45,7 @@
   },
   "dependencies": {
     "@paraswap/sdk": "^6.2.4",
-    "@rabbitholegg/questdk": "2.0.0-alpha.24",
+    "@rabbitholegg/questdk": "2.0.0-alpha.22",
     "axios": "1.5.0",
     "viem": "1.2.15"
   }

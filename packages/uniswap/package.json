@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-uniswap",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -20,7 +20,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx only-allow pnpm",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
@@ -40,7 +39,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.24",
+    "@rabbitholegg/questdk": "2.0.0-alpha.25",
     "@uniswap/universal-router": "^1.5.1",
     "@uniswap/universal-router-sdk": "^1.5.8",
     "viem": "^1.16.6"
