@@ -1,5 +1,26 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.24
+
+### Patch Changes
+
+- [#79](https://github.com/rabbitholegg/questdk-plugins/pull/79) [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7) Thanks [@Quazia](https://github.com/Quazia)! - Remove preinstall hook and update questdk
+
+- Updated dependencies [[`e1069f0`](https://github.com/rabbitholegg/questdk-plugins/commit/e1069f0092873564fa4638fc4051b8e362892319), [`09d7f79`](https://github.com/rabbitholegg/questdk-plugins/commit/09d7f79565b119f3409589a2be0ebdfe49d7cb95), [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.6
+
 ## 1.0.0-alpha.23
 
 ### Minor Changes
