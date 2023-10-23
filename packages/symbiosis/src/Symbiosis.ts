@@ -4,7 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids'
+import { CHAIN_ID_ARRAY } from './constants'
 import { metaBurnABI, metaRouteABI, metaSynthesizeABI } from './abi'
 import { symbiosis } from './symbiosis-sdk'
 
