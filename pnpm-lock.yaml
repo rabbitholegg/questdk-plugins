@@ -326,8 +326,8 @@ importers:
         specifier: ^6.2.4
         version: 6.2.4(axios@1.5.0)(typescript@5.2.2)
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.22
-        version: 2.0.0-alpha.22(typescript@5.2.2)
+        specifier: 2.0.0-alpha.25
+        version: 2.0.0-alpha.25(typescript@5.2.2)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -2376,7 +2376,7 @@ packages:
       - zod
     dev: false
 
-  /@rabbitholegg/questdk@2.0.0-alpha.22(typescript@5.2.2):
+  /@rabbitholegg/questdk@2.0.0-alpha.25(typescript@5.2.2):
     resolution: {integrity: sha512-MBKDHYEmaKLScFEqDcLkg9s2BehA+Mh8brBwEhz/QE7OKHQkyAC1udxkXsSDGjg9q4e5y0apNdcpel3ktwnV+g==}
     peerDependencies:
       typescript: '>=5.1.6'
