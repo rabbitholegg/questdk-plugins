@@ -23,7 +23,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx only-allow pnpm",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
@@ -45,7 +44,8 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@paraswap/sdk": "^6.2.2",
+    "@paraswap/sdk": "^6.2.4",
+    "@rabbitholegg/questdk": "2.0.0-alpha.25",
     "axios": "1.5.0",
     "@rabbitholegg/questdk": "2.0.0-alpha.22",
     "viem": "1.2.15"
