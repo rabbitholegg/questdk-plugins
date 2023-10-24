@@ -47,27 +47,26 @@ describe('Given the symbiosis plugin', () => {
       })
     })
   })
-})
+  describe('should pass filter with valid transactions', () => {
+    PASSING_TEST_TRANSACTIONS.forEach((testTransaction) => {
+      test(testTransaction.description, async () => {
+        const {
+          transaction,
+          destinationChainId,
+          tokenAddress,
+          amount,
+          recipient,
+        } = testTransaction
 
-describe('should pass filter with valid transactions', () => {
-  PASSING_TEST_TRANSACTIONS.forEach((testTransaction) => {
-    test(testTransaction.description, async () => {
-      const {
-        transaction,
-        destinationChainId,
-        tokenAddress,
-        amount,
-        recipient,
-      } = testTransaction
-
-      const filter = await bridge({
-        sourceChainId: transaction.chainId,
-        destinationChainId,
-        tokenAddress,
-        amount: GreaterThanOrEqual(amount),
-        recipient,
+        const filter = await bridge({
+          sourceChainId: transaction.chainId,
+          destinationChainId,
+          tokenAddress,
+          amount: GreaterThanOrEqual(amount),
+          recipient,
+        })
+        expect(apply(transaction, filter)).to.be.true
       })
-      expect(apply(transaction, filter)).to.be.true
     })
   })
 })
