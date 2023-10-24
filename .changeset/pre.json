@@ -19,12 +19,14 @@
     "nine-waves-lie",
     "pink-horses-change",
     "pink-moons-tickle",
+    "poor-ducks-share",
     "quick-eyes-retire",
     "quick-otters-deliver",
     "rotten-monkeys-attack",
     "sharp-candles-live",
     "sixty-countries-leave",
     "sixty-trains-yawn",
+    "slow-vans-mate",
     "small-baboons-sneeze",
     "soft-apples-hang",
     "soft-starfishes-draw",
@@ -55,6 +57,7 @@
     "@rabbitholegg/questdk-plugin-tally": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-camelot": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-paraswap": "1.0.0-alpha.4",
-    "@rabbitholegg/questdk-plugin-basepaint": "1.0.0-alpha.4"
+    "@rabbitholegg/questdk-plugin-basepaint": "1.0.0-alpha.4",
+    "@rabbitholegg/questdk-plugin-hyphen": "1.0.0-alpha.4"
   }
 }
