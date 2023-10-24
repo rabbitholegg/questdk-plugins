@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-paraswap
 
+## 1.0.0-alpha.11
+
+### Patch Changes
+
+- [#81](https://github.com/rabbitholegg/questdk-plugins/pull/81) [`4827c89`](https://github.com/rabbitholegg/questdk-plugins/commit/4827c89e10d00b51469d965a7e80f3b62640c616) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Include stake action in Paraswap export
+
 ## 1.0.0-alpha.10
 
 ### Minor Changes

@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.26
+
+### Minor Changes
+
+- [#44](https://github.com/rabbitholegg/questdk-plugins/pull/44) [`c161fc4`](https://github.com/rabbitholegg/questdk-plugins/commit/c161fc40d326e3d672049f5162394e17a2bf5bd0) Thanks [@mmackz](https://github.com/mmackz)! - add bridge support for hyphen
+
+### Patch Changes
+
+- Updated dependencies [[`c161fc4`](https://github.com/rabbitholegg/questdk-plugins/commit/c161fc40d326e3d672049f5162394e17a2bf5bd0), [`4827c89`](https://github.com/rabbitholegg/questdk-plugins/commit/4827c89e10d00b51469d965a7e80f3b62640c616)]:
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.11
+
 ## 1.0.0-alpha.25
 
 ### Minor Changes
