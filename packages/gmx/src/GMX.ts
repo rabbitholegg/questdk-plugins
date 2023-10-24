@@ -48,20 +48,15 @@ export const swap = async (swap: SwapActionParams) => {
       to: contractAddress, // The contract address of the swap
       chainId: chainId, // The chain id of the swap
       input: {
-        $abi: GMX_SWAPV2_ABI,
-        data: {
-          $some: {
-            $abi: GMX_SWAPV2_ABI,
-            params: {
-              numbers: {
-                minOutputAmount: amountOut,
-              },
-              orderType: OrderType.MarketSwap,
-              addresses: {
-                receiver: recipient,
-                swapPath: [tokenIn, tokenOut],
-              },
-            },
+        $abiAbstract: GMX_SWAPV2_ABI,
+        params: {
+          numbers: {
+            minOutputAmount: amountOut,
+          },
+          orderType: OrderType.MarketSwap,
+          addresses: {
+            receiver: recipient,
+            swapPath: [tokenIn, tokenOut],
           },
         },
       },

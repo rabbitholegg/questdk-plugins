@@ -6,12 +6,12 @@ import {
   NATIVE_CHAIN_ID_ARRAY,
   ETH_CHAIN_ID,
   LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID,
-  POLYGON_CHAIN_ID,
   OPTIMISM_CHAIN_ID,
   BASE_CHAIN_ID,
 } from './chain-ids.js'
 import {
   NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
+  NATIVE_TOKEN_ADDRESS,
   CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
   CHAIN_ID_TO_ROUTER_ADDRESS,
 } from './contract-addresses.js'
@@ -26,18 +26,38 @@ export const bridge = async (bridge: BridgeActionParams) => {
     amount,
     recipient,
   } = bridge
+
   const layerZeroDestination =
     LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[destinationChainId]
-  const sourcePool = tokenAddress
-    ? NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][
-        tokenAddress.toLowerCase()
-      ]
-    : 0
+
+  // throw error if destinationChainId is specified, but doesnt map to layerZeroDestination
+  if (typeof layerZeroDestination === 'undefined') {
+    throw new Error(`Invalid destinationChainId: ${destinationChainId}`)
+  }
+
+  if (typeof tokenAddress === 'undefined') {
+    throw new Error(
+      'tokenAddress is undefined. Please provide a valid token address.',
+    )
+  }
+
+  const sourcePool =
+    tokenAddress === NATIVE_TOKEN_ADDRESS
+      ? 13
+      : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][
+          tokenAddress.toLowerCase()
+        ]
+
+  if (typeof sourcePool === 'undefined') {
+    throw new Error(`No pool found for provided tokenAddress: ${tokenAddress}`)
+  }
+
   if (sourcePool === 13) {
     const targetContractAddress =
       CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
         LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]
       ]
+
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
       to: contractAddress || targetContractAddress, // The contract address of the bridge
@@ -49,6 +69,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       }, // The input object is where we'll put the ABI and the parameters
     })
   }
+
   const targetContractAddress =
     CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]]
 
@@ -70,31 +91,26 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
-  if (_chainId === POLYGON_CHAIN_ID)
-    return [
-      '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
-      '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
-    ] // [UDSC, WETH]
   if (_chainId === ARBITRUM_CHAIN_ID)
     return [
-      '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
-      '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
-    ] // [USDC, WETH]
+      '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+      '0x0000000000000000000000000000000000000000',
+    ] // [USDC, ETH]
   if (_chainId === ETH_CHAIN_ID)
     return [
       '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-      '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-    ] // [USDC, WETH]
+      '0x0000000000000000000000000000000000000000',
+    ] // [USDC, ETH]
   if (_chainId === OPTIMISM_CHAIN_ID)
     return [
       '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
-      '0x4200000000000000000000000000000000000006',
-    ] // [USDC, WETH]
+      '0x0000000000000000000000000000000000000000',
+    ] // [USDC, ETH]
   if (_chainId === BASE_CHAIN_ID)
     return [
       '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca',
-      '0x4200000000000000000000000000000000000006',
-    ] // [USDbC, WETH]
+      '0x0000000000000000000000000000000000000000',
+    ] // [USDbC, ETH]
   return []
 }
 
