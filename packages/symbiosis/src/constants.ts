@@ -19,7 +19,7 @@ export const CHAIN_ID_ARRAY = [
 ]
 
 export const CHAIN_TO_TOKENS: {
-  [chainId: number]: [tokens: Address[]]
+  [chainId: number]: Address[]
 } = {
   [ETH_CHAIN_ID]: [
     '0x0000000000000000000000000000000000000000', // ETH
