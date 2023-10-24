@@ -84,7 +84,7 @@ export const PASSING_TEST_TRANSACTIONS: TestTransaction[] = [
   },
 ]
 
-const failTransaction = {
+const failTransaction: Transaction = {
   chainId: 42161,
   from: '0xa99f898530df1514a566f1a6562d62809e99557d',
   input:
