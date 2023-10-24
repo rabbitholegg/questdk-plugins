@@ -1,12 +1,36 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
+import { bridge } from './Symbiosis'
+
+import { TEST_TRANSACTIONS } from './test-transactions'
 
 describe('Given the symbiosis plugin', () => {
   describe('When handling the bridge', () => {
     test('should return a valid action filter', () => {})
+      return true
+    
+    })
+  })
 
-    test('should pass filter with valid transactions', () => {})
+  describe('should pass filter with valid transactions', () => {
+    TEST_TRANSACTIONS.forEach((testTransaction) => {
+      test(testTransaction.description, async () => {
+        const {
+          transaction,
+          destinationChainId,
+          tokenAddress,
+          amount,
+          recipient,
+        } = testTransaction
 
-    test('should not pass filter with invalid transactions', () => {})
+        const filter = await bridge({
+          sourceChainId: transaction.chainId,
+          destinationChainId,
+          tokenAddress,
+          amount: GreaterThanOrEqual(amount),
+          recipient,
+        })
+        expect(apply(transaction, filter)).to.be.true
+      })
   })
 })
