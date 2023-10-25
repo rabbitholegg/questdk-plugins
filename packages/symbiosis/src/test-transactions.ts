@@ -122,7 +122,7 @@ export const FAILING_TEST_TRANSACTIONS: TestTransaction[] = [
     transaction: failTransaction,
     destinationChainId: 5000,
     amount: 10000000n,
-    tokenAddress: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+    tokenAddress: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
     recipient: '0xB7e98B3F16CC915B9C7a321c1bd95fa406BDbabe',
     description: 'when recipient is incorrect',
   },
