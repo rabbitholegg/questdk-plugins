@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.28
+
+### Patch Changes
+
+- [#86](https://github.com/rabbitholegg/questdk-plugins/pull/86) [`059df8b`](https://github.com/rabbitholegg/questdk-plugins/commit/059df8bb8ae2c9daa3a11adbb0d84c5670536039) Thanks [@Quazia](https://github.com/Quazia)! - Add Stake switch to plugin execution
+
 ## 1.0.0-alpha.27
 
 ### Patch Changes
