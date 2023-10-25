@@ -7,6 +7,7 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
+  stake,
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
@@ -20,4 +21,5 @@ export const Paraswap: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap,
   mint: async () => new PluginActionNotImplementedError(),
+  stake,
 }

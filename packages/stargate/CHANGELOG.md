@@ -1,5 +1,21 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#71](https://github.com/rabbitholegg/questdk-plugins/pull/71) [`53d2ee5`](https://github.com/rabbitholegg/questdk-plugins/commit/53d2ee51b9479008bd549ebacba29fcfd82c4684) Thanks [@Quazia](https://github.com/Quazia)! - Update questdk instance and add Paraswap Stake action
+
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#64](https://github.com/rabbitholegg/questdk-plugins/pull/64) [`e1069f0`](https://github.com/rabbitholegg/questdk-plugins/commit/e1069f0092873564fa4638fc4051b8e362892319) Thanks [@mmackz](https://github.com/mmackz)! - fix filter behavior for unsupported tokens
+
+### Patch Changes
+
+- [#79](https://github.com/rabbitholegg/questdk-plugins/pull/79) [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7) Thanks [@Quazia](https://github.com/Quazia)! - Remove preinstall hook and update questdk
+
 ## 1.0.0-alpha.10
 
 ### Patch Changes

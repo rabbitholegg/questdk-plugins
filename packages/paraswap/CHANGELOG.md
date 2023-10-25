@@ -1,5 +1,27 @@
 # @rabbitholegg/questdk-plugin-paraswap
 
+## 1.0.0-alpha.11
+
+### Patch Changes
+
+- [#81](https://github.com/rabbitholegg/questdk-plugins/pull/81) [`4827c89`](https://github.com/rabbitholegg/questdk-plugins/commit/4827c89e10d00b51469d965a7e80f3b62640c616) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Include stake action in Paraswap export
+
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#71](https://github.com/rabbitholegg/questdk-plugins/pull/71) [`53d2ee5`](https://github.com/rabbitholegg/questdk-plugins/commit/53d2ee51b9479008bd549ebacba29fcfd82c4684) Thanks [@Quazia](https://github.com/Quazia)! - Update questdk instance and add Paraswap Stake action
+
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#77](https://github.com/rabbitholegg/questdk-plugins/pull/77) [`09d7f79`](https://github.com/rabbitholegg/questdk-plugins/commit/09d7f79565b119f3409589a2be0ebdfe49d7cb95) Thanks [@Quazia](https://github.com/Quazia)! - Add additional testing to paraswap plug-in
+
+### Patch Changes
+
+- [#79](https://github.com/rabbitholegg/questdk-plugins/pull/79) [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7) Thanks [@Quazia](https://github.com/Quazia)! - Remove preinstall hook and update questdk
+
 ## 1.0.0-alpha.8
 
 ### Minor Changes
