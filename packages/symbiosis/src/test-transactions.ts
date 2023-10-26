@@ -84,7 +84,7 @@ export const PASSING_TEST_TRANSACTIONS: TestTransaction[] = [
   },
 ]
 
-const failTransaction: Transaction = {
+const bridgeTx: Transaction = {
   chainId: 42161,
   from: '0xa99f898530df1514a566f1a6562d62809e99557d',
   input:
@@ -93,36 +93,33 @@ const failTransaction: Transaction = {
   value: '0',
 }
 
+export const controlTransaction: TestTransaction = {
+  transaction: bridgeTx,
+  destinationChainId: 5000,
+  amount: 10000000n,
+  tokenAddress: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+  recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
+  description: 'when all parameters are correctly set',
+}
+
 export const FAILING_TEST_TRANSACTIONS: TestTransaction[] = [
   {
-    transaction: failTransaction,
+    ...controlTransaction,
     destinationChainId: 10, // 5000
-    amount: 10000000n,
-    tokenAddress: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
-    recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
     description: 'when destination chain is incorrect',
   },
   {
-    transaction: failTransaction,
-    destinationChainId: 5000,
+    ...controlTransaction,
     amount: 20000000n, // 10000000n
-    tokenAddress: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
-    recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
     description: 'when amount is insufficient',
   },
   {
-    transaction: failTransaction,
-    destinationChainId: 5000,
-    amount: 10000000n,
+    ...controlTransaction,
     tokenAddress: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831', // wrong USDC token
-    recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
     description: 'when input token is incorrect',
   },
   {
-    transaction: failTransaction,
-    destinationChainId: 5000,
-    amount: 10000000n,
-    tokenAddress: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+    ...controlTransaction,
     recipient: '0xB7e98B3F16CC915B9C7a321c1bd95fa406BDbabe',
     description: 'when recipient is incorrect',
   },
