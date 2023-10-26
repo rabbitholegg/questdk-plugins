@@ -8,6 +8,7 @@ import {
   type SwapActionParams,
   type DelegateActionParams,
   type TransactionFilter,
+  type StakeActionParams,
 } from '@rabbitholegg/questdk'
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
@@ -69,6 +70,11 @@ export const executePlugin = (
       if (plugin.delegate === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.delegate(params as unknown as DelegateActionParams)
+    }
+    case ActionType.Stake: {
+      if (plugin.stake === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.stake(params as unknown as StakeActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
