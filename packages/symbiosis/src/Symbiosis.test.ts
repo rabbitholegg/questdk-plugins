@@ -86,6 +86,20 @@ describe('Given the symbiosis plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.false
     })
+    test('when bridge contract address is incorrect', async () => {
+      const { transaction, tokenAddress, recipient } =
+        FAILING_TEST_TRANSACTIONS[0]
+
+      const filter = await bridge({
+        sourceChainId: 42161,
+        destinationChainId: 5000,
+        contractAddress: '0x1DCfbC3fA01b2a86bC3a3f43479cCe9E8D438Adc',
+        tokenAddress,
+        amount: GreaterThanOrEqual(10000n),
+        recipient,
+      })
+      expect(apply(transaction, filter)).to.be.false
+    })
     FAILING_TEST_TRANSACTIONS.forEach((testTransaction) => {
       test(testTransaction.description, async () => {
         const {
