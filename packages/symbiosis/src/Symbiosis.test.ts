@@ -5,7 +5,7 @@ import {
   PASSING_TEST_TRANSACTIONS,
   FAILING_TEST_TRANSACTIONS,
 } from './test-transactions'
-import { metaBurnABI, metaRouteABI, metaSynthesizeABI } from './abi'
+import { metaBurnABI, metaRouteABI } from './abi'
 import { ETH_CHAIN_ID, OPTIMISM_CHAIN_ID } from './constants'
 import { symbiosis } from './symbiosis-sdk'
 
@@ -34,15 +34,10 @@ describe('Given the symbiosis plugin', () => {
               $gte: '100000',
             },
             otherSideCalldata: {
-              $abi: metaSynthesizeABI,
-              _metaSynthesizeTransaction: {
-                finalCalldata: {
-                  $abi: metaBurnABI,
-                  _metaBurnTransaction: {
-                    chainID: 1,
-                    chain2address: TEST_USER,
-                  },
-                },
+              $abiAbstract: metaBurnABI,
+              _metaBurnTransaction: {
+                chainID: 1,
+                chain2address: TEST_USER,
               },
             },
           },

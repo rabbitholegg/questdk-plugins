@@ -5,7 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, CHAIN_TO_TOKENS } from './constants'
-import { metaBurnABI, metaRouteABI, metaSynthesizeABI } from './abi'
+import { metaBurnABI, metaRouteABI } from './abi'
 import { symbiosis } from './symbiosis-sdk'
 
 export const bridge = async (
@@ -32,15 +32,10 @@ export const bridge = async (
         approvedTokens: tokenAddress ? [tokenAddress] : undefined, // if tokenAddress is undefined, any input token will pass filter
         amount: amount,
         otherSideCalldata: {
-          $abi: metaSynthesizeABI,
-          _metaSynthesizeTransaction: {
-            finalCalldata: {
-              $abi: metaBurnABI,
-              _metaBurnTransaction: {
-                chainID: destinationChainId,
-                chain2address: recipient,
-              },
-            },
+          $abiAbstract: metaBurnABI,
+          _metaBurnTransaction: {
+            chainID: destinationChainId,
+            chain2address: recipient,
           },
         },
       },
