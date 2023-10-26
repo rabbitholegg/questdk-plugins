@@ -4,6 +4,7 @@ import { bridge } from './Symbiosis'
 import {
   PASSING_TEST_TRANSACTIONS,
   FAILING_TEST_TRANSACTIONS,
+  controlTransaction,
 } from './test-transactions'
 import { metaBurnABI, metaRouteABI } from './abi'
 import { ETH_CHAIN_ID, OPTIMISM_CHAIN_ID } from './constants'
@@ -69,8 +70,7 @@ describe('Given the symbiosis plugin', () => {
   })
   describe('should not pass filter with invalid parameters', () => {
     test('when sourceChainId is incorrect', async () => {
-      const { transaction, tokenAddress, recipient } =
-        FAILING_TEST_TRANSACTIONS[0]
+      const { transaction, tokenAddress, recipient } = controlTransaction
 
       const filter = await bridge({
         sourceChainId: 1, // 42161
@@ -82,8 +82,7 @@ describe('Given the symbiosis plugin', () => {
       expect(apply(transaction, filter)).to.be.false
     })
     test('when bridge contract address is incorrect', async () => {
-      const { transaction, tokenAddress, recipient } =
-        FAILING_TEST_TRANSACTIONS[0]
+      const { transaction, tokenAddress, recipient } = controlTransaction
 
       const filter = await bridge({
         sourceChainId: 42161,
@@ -114,6 +113,26 @@ describe('Given the symbiosis plugin', () => {
         })
         expect(apply(transaction, filter)).to.be.false
       })
+    })
+  })
+  describe('control transaction should pass filter', () => {
+    test(controlTransaction.description, async () => {
+      const {
+        transaction,
+        destinationChainId,
+        tokenAddress,
+        amount,
+        recipient,
+      } = controlTransaction
+
+      const filter = await bridge({
+        sourceChainId: transaction.chainId,
+        destinationChainId,
+        tokenAddress,
+        amount: GreaterThanOrEqual(amount),
+        recipient,
+      })
+      expect(apply(transaction, filter)).to.be.true
     })
   })
 })
