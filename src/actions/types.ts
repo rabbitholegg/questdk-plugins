@@ -38,6 +38,8 @@ export type MintActionParams = {
   amount: number
 }
 
+export type BurnActionParams = MintActionParams
+
 export type QuestActionParams = {
   rewardToken?: Address,
   rewardAmount?: bigint | FilterOperator,
