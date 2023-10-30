@@ -38,6 +38,7 @@
     "tough-cooks-hammer",
     "twelve-kiwis-destroy",
     "twenty-pets-jump",
+    "two-pandas-jump",
     "unlucky-dolphins-stare",
     "wet-toes-prove",
     "wicked-readers-clean"
@@ -60,6 +61,7 @@
     "@rabbitholegg/questdk-plugin-camelot": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-paraswap": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-basepaint": "1.0.0-alpha.4",
-    "@rabbitholegg/questdk-plugin-hyphen": "1.0.0-alpha.4"
+    "@rabbitholegg/questdk-plugin-hyphen": "1.0.0-alpha.4",
+    "@rabbitholegg/questdk-plugin-symbiosis": "1.0.0-alpha.4"
   }
 }
