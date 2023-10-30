@@ -38,6 +38,15 @@ export type MintActionParams = {
   amount: number
 }
 
+export type QuestActionParams = {
+  rewardToken?: Address,
+  rewardAmount?: bigint | FilterOperator,
+  startTime?: bigint | FilterOperator,
+  endTime?: bigint | FilterOperator,
+  totalParticipants?: bigint | FilterOperator,
+  actionSpec?: string,
+}
+
 export type DelegateActionParams = {
   chainId: number
   delegate?: Address
