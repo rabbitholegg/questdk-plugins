@@ -35,7 +35,7 @@ export type BridgeActionParams = {
 export type MintActionParams = {
   address: string
   tokenId: number
-  quantity: number
+  amount: number
 }
 
 export type DelegateActionParams = {
