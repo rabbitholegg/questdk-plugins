@@ -64,6 +64,8 @@ export type ActionParams =
   | BridgeActionParams
   | MintActionParams
   | DelegateActionParams
+  | MintActionParams
+  | QuestActionParams
 
 export interface IActionPlugin {
   pluginId: string
@@ -87,6 +89,12 @@ export interface IActionPlugin {
   delegate?: (
     params: DelegateActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  burn?: (
+    params: DelegateActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  quest?: (
+    params: DelegateActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
 }
 
 export enum ActionType {
@@ -94,6 +102,8 @@ export enum ActionType {
   Stake = 'stake',
   Swap = 'swap',
   Mint = 'mint',
+  Burn = 'burn',
+  Quest = 'quest',
   Deposit = 'deposit',
   Delegate = 'delegate',
   Lend = 'lend',

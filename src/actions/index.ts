@@ -3,6 +3,8 @@ export type {
   StakeActionParams,
   BridgeActionParams,
   MintActionParams,
+  BurnActionParams,
+  QuestActionParams,
   DelegateActionParams,
   ActionParams,
   IActionPlugin,
