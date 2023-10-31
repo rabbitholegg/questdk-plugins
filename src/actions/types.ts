@@ -42,13 +42,13 @@ export type MintActionParams = {
 export type BurnActionParams = MintActionParams
 
 export type QuestActionParams = {
-  chainId: number,
-  rewardToken?: Address,
-  rewardAmount?: bigint | FilterOperator,
-  startTime?: bigint | FilterOperator,
-  endTime?: bigint | FilterOperator,
-  totalParticipants?: bigint | FilterOperator,
-  actionSpec?: string,
+  chainId: number
+  rewardToken?: Address
+  rewardAmount?: bigint | FilterOperator
+  startTime?: bigint | FilterOperator
+  endTime?: bigint | FilterOperator
+  totalParticipants?: bigint | FilterOperator
+  actionSpec?: string
 }
 
 export type DelegateActionParams = {
