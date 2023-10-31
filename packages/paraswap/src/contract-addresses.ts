@@ -53,8 +53,8 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
     '0x6d80113e533a2c0fe82eabd35f1875dcea89ea97',
     '0x625e7708f30ca75bfd92586e17077590c60eb4cd',
     '0x078f358208685046a11c85e8ad32895ded33a249',
-    '0xe50fa9b3c56ffb159cb0fca61f5c9d750e8128c8'
-  ]
+    '0xe50fa9b3c56ffb159cb0fca61f5c9d750e8128c8',
+  ],
 } as const
 
 export const DEFAULT_STAKE_TOKEN_LIST: {
