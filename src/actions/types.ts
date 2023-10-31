@@ -33,6 +33,7 @@ export type BridgeActionParams = {
 }
 
 export type MintActionParams = {
+  chainId: number
   address: string
   tokenId: number
   amount: number
@@ -41,6 +42,7 @@ export type MintActionParams = {
 export type BurnActionParams = MintActionParams
 
 export type QuestActionParams = {
+  chainId: number,
   rewardToken?: Address,
   rewardAmount?: bigint | FilterOperator,
   startTime?: bigint | FilterOperator,
