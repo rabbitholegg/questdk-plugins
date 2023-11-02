@@ -6,10 +6,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
-import {
-  DEFAULT_TOKEN_LIST_URL,
-  ETH_ADDRESS,
-} from './contract-addresses'
+import { DEFAULT_TOKEN_LIST_URL, ETH_ADDRESS } from './contract-addresses'
 import { CAMELOT_ABI } from './abi'
 import { CAMELOT_ROUTER } from './contract-addresses'
 
