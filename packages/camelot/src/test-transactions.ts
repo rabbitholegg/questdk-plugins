@@ -73,7 +73,7 @@ export const SWAP_TOKENS: TestParams<SwapActionParams> = {
     tokenOut: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9', // TETHER
     amountIn: GreaterThanOrEqual(parseUnits('750', 18)),
     amountOut: GreaterThanOrEqual(parseUnits('15', 6)),
-    recipient: '0x1a185e25636306A13D3164a511F7C610F3930cAa'
+    recipient: '0x1a185e25636306A13D3164a511F7C610F3930cAa',
   },
 }
 
