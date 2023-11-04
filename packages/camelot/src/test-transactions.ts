@@ -52,7 +52,7 @@ export const SWAP_ETH: TestParams<SwapActionParams> = {
     contractAddress: CAMELOT_ROUTER,
     tokenIn: ETH_ADDRESS,
     tokenOut: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C',
-    amountIn: GreaterThanOrEqual(parseEther('0.0005'))
+    amountIn: GreaterThanOrEqual(parseEther('0.0005')),
   },
 }
 
