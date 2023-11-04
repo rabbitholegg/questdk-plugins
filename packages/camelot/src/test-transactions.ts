@@ -1,9 +1,9 @@
 import type { Address, Hash } from 'viem'
 import type { ActionParams, SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { parseEther } from 'viem'
+import { parseEther, parseUnits } from 'viem'
 import { ARBITRUM_CHAIN_ID } from './chain-ids'
-import { CAMELOT_ROUTER, ETH_ADDRESS } from './contract-addresses'
+import { CAMELOT_ROUTER, ETH_ADDRESS, WETH_ADDRESS } from './contract-addresses'
 
 interface Transaction {
   chainId: number
@@ -52,7 +52,8 @@ export const SWAP_ETH: TestParams<SwapActionParams> = {
     contractAddress: CAMELOT_ROUTER,
     tokenIn: ETH_ADDRESS,
     tokenOut: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C',
-    amountIn: GreaterThanOrEqual(parseEther('0.0005')),
+    amountIn: GreaterThanOrEqual(parseEther('0.00055')),
+    amountOut: GreaterThanOrEqual(parseUnits('9.25', 18)),
   },
 }
 
@@ -70,11 +71,35 @@ export const SWAP_TOKENS: TestParams<SwapActionParams> = {
     chainId: ARBITRUM_CHAIN_ID,
     tokenIn: '0x5190F06EaceFA2C552dc6BD5e763b81C73293293', // WOMBEX
     tokenOut: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9', // TETHER
-    amountIn: GreaterThanOrEqual(parseEther('750')),
+    amountIn: GreaterThanOrEqual(parseUnits('750', 18)),
+    amountOut: GreaterThanOrEqual(parseUnits('15', 6)),
+    recipient: '0x1a185e25636306A13D3164a511F7C610F3930cAa'
   },
 }
 
 export const passingTestCases = [
   createTestCase(SWAP_ETH, 'when swapping ETH for tokens'),
   createTestCase(SWAP_TOKENS, 'when swapping tokens for tokens'),
+]
+
+export const failingTestCases = [
+  createTestCase(SWAP_TOKENS, 'when chainId is incorrect', { chainId: 10 }),
+  createTestCase(SWAP_ETH, 'when contractAddress is incorrect', {
+    contractAddress: '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57',
+  }),
+  createTestCase(SWAP_TOKENS, 'when tokenIn is incorrect', {
+    tokenIn: WETH_ADDRESS,
+  }),
+  createTestCase(SWAP_TOKENS, 'when tokenOut is incorrect', {
+    tokenOut: WETH_ADDRESS,
+  }),
+  createTestCase(SWAP_ETH, 'when amountIn is insufficient', {
+    amountIn: GreaterThanOrEqual(parseEther('0.1')),
+  }),
+  createTestCase(SWAP_TOKENS, 'when amountOut is insufficient', {
+    amountOut: GreaterThanOrEqual(parseUnits('20', 6)),
+  }),
+  createTestCase(SWAP_TOKENS, 'when recipient in incorrect', {
+    recipient: '0x12e80D4b52023eDd8cB2294C6948D4c5d5D5D266',
+  }),
 ]
