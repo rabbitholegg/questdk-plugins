@@ -5,8 +5,7 @@ import { ARBITRUM_CHAIN_ID } from './chain-ids'
 import { parseEther } from 'viem'
 import { swap } from './Camelot'
 import { CAMELOT_ABI } from './abi'
-
-import { passingTestCases } from './test-transactions'
+import { failingTestCases, passingTestCases } from './test-transactions'
 
 describe('Given the camelot plugin', () => {
   describe('When handling the plugin', () => {
@@ -37,6 +36,15 @@ describe('Given the camelot plugin', () => {
       test(description, async () => {
         const filter = await swap({ ...params })
         expect(apply(transaction, filter)).to.be.true
+      })
+    })
+  })
+  describe('should not pass filter when parameters are invalid', () => {
+    failingTestCases.forEach((testCase) => {
+      const { transaction, params, description } = testCase
+      test(description, async () => {
+        const filter = await swap({ ...params })
+        expect(apply(transaction, filter)).to.be.false
       })
     })
   })
