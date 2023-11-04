@@ -14,15 +14,15 @@ interface Transaction {
   value: string
 }
 
-type TestParams<T extends ActionParams> = {
-  transaction: Transaction
-  params: T
-}
-
 interface TestCase<T extends ActionParams> {
   transaction: Transaction
   params: T
   description: string
+}
+
+type TestParams<T extends ActionParams> = {
+  transaction: Transaction
+  params: T
 }
 
 function createTestCase<T extends ActionParams>(
