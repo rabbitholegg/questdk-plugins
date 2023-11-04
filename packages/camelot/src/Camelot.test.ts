@@ -7,23 +7,6 @@ import { swap } from './Camelot'
 import { CAMELOT_ABI } from './abi'
 import { failingTestCases, passingTestCases } from './test-transactions'
 
-function testCasesGroup(testCases, shouldPass) {
-  const expectation = shouldPass ? 'true' : 'false'
-  const descriptionPrefix = shouldPass ? 'should pass' : 'should not pass'
-
-  describe(`${descriptionPrefix} filter when parameters are ${
-    shouldPass ? 'valid' : 'invalid'
-  }`, () => {
-    testCases.forEach((testCase) => {
-      const { transaction, params, description } = testCase
-      test(description, async () => {
-        const filter = await swap({ ...params })
-        expect(apply(transaction, filter)).to.be[expectation]
-      })
-    })
-  })
-}
-
 describe('Given the camelot plugin', () => {
   describe('When handling the plugin', () => {
     test('should return a valid action filter', async () => {
@@ -47,6 +30,22 @@ describe('Given the camelot plugin', () => {
       })
     })
   })
-  testCasesGroup(passingTestCases, true)
-  testCasesGroup(failingTestCases, false)
+  describe('should pass filter when all parameters are valid', () => {
+    passingTestCases.forEach((testCase) => {
+      const { transaction, params, description } = testCase
+      test(description, async () => {
+        const filter = await swap({ ...params })
+        expect(apply(transaction, filter)).to.be.true
+      })
+    })
+  })
+  describe('should not pass filter when parameters are invalid', () => {
+    failingTestCases.forEach((testCase) => {
+      const { transaction, params, description } = testCase
+      test(description, async () => {
+        const filter = await swap({ ...params })
+        expect(apply(transaction, filter)).to.be.false
+      })
+    })
+  })
 })
