@@ -1,54 +1,9 @@
-import type { Address, Hash } from 'viem'
-import type { ActionParams, SwapActionParams } from '@rabbitholegg/questdk'
+import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
 import { ARBITRUM_CHAIN_ID } from './chain-ids'
 import { CAMELOT_ROUTER, ETH_ADDRESS, WETH_ADDRESS } from './contract-addresses'
-
-interface Transaction {
-  chainId: number
-  from: Address
-  hash?: Hash
-  input: string
-  to: Address
-  value: string
-}
-
-interface TestCase<T extends ActionParams> {
-  transaction: Transaction
-  params: T
-  description: string
-}
-
-type TestParams<T extends ActionParams> = {
-  transaction: Transaction
-  params: T
-}
-
-/**
- * Creates a test case object for a given action and transaction.
- *
- * This function takes a `TestParams` object that includes both a `Transaction` and
- * `ActionParams`, a description of the test case, and an optional set of overrides
- * for the action parameters. It returns a `TestCase` object that contains the transaction,
- * the combined action parameters with any overrides applied, and the description.
- *
- * @param {TestParams<T>} testParams - An object containing the transaction and action parameters.
- * @param {string} description - A brief description of the test case.
- * @param {Partial<T>} [overrides] - Optional overrides for the action parameters.
- * @returns {TestCase<T>} A test case object with the transaction, params, and description.
- */
-function createTestCase<T extends ActionParams>(
-  testParams: TestParams<T>,
-  description: string,
-  overrides: Partial<T> = {},
-): TestCase<T> {
-  return {
-    transaction: testParams.transaction,
-    params: { ...testParams.params, ...overrides },
-    description,
-  }
-}
+import { createTestCase, type TestParams } from './create-test'
 
 export const SWAP_ETH: TestParams<SwapActionParams> = {
   transaction: {

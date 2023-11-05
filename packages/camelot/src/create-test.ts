@@ -1,0 +1,50 @@
+import type { Address, Hash, TransactionEIP1559, TransactionLegacy } from 'viem'
+import type { ActionParams } from '@rabbitholegg/questdk'
+
+type Transaction =
+  | {
+      chainId: number
+      from: Address
+      hash?: Hash
+      input: string
+      to: Address
+      value: string
+    }
+  | TransactionLegacy
+  | TransactionEIP1559
+
+export interface TestCase<T extends ActionParams> {
+  transaction: Transaction
+  params: T
+  description: string
+}
+
+export type TestParams<T extends ActionParams> = {
+  transaction: Transaction
+  params: T
+}
+
+/**
+ * Creates a test case object for a given action and transaction.
+ *
+ * This function takes a `TestParams` object that includes both a `Transaction` and
+ * `ActionParams`, a description of the test case, and an optional set of overrides
+ * for the action parameters. It returns a `TestCase` object that contains the transaction,
+ * the combined action parameters with any overrides applied, and the description.
+ *
+ * @param {TestParams<T>} testParams - An object containing the transaction and action parameters.
+ * @param {string} description - A brief description of the test case.
+ * @param {Partial<T>} [overrides] - Optional overrides for the action parameters.
+ * @returns {TestCase<T>} A test case object with the transaction, params, and description.
+ */
+export function createTestCase<T extends ActionParams>(
+  testParams: TestParams<T>,
+  description: string,
+  overrides: Partial<T> = {},
+): TestCase<T> {
+  return {
+    transaction: testParams.transaction,
+    params: { ...testParams.params, ...overrides },
+    description,
+  }
+}
