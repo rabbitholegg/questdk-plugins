@@ -5,7 +5,7 @@ import { ARBITRUM_CHAIN_ID } from './chain-ids'
 import { parseEther } from 'viem'
 import { swap } from './Camelot'
 import { CAMELOT_ABI } from './abi'
-import { failingTestCases, passingTestCases } from './test-transactions'
+import { failingTestCases, passingTestCases } from './test-setup'
 
 describe('Given the camelot plugin', () => {
   describe('When handling the plugin', () => {
