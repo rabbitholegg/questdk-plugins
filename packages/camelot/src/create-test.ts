@@ -1,17 +1,14 @@
-import type { Address, Hash, TransactionEIP1559, TransactionLegacy } from 'viem'
+import type { Address, Hash } from 'viem'
 import type { ActionParams } from '@rabbitholegg/questdk'
 
-type Transaction =
-  | {
-      chainId: number
-      from: Address
-      hash?: Hash
-      input: string
-      to: Address
-      value: string
-    }
-  | TransactionLegacy
-  | TransactionEIP1559
+interface Transaction {
+  chainId: number
+  from: Address
+  hash?: Hash
+  input: string
+  to: Address
+  value: string
+}
 
 export interface TestCase<T extends ActionParams> {
   transaction: Transaction
