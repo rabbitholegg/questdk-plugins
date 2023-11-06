@@ -84,15 +84,19 @@ describe('Given the camelot plugin', () => {
     })
   })
   describe('all supported tokens addresses are properly checksummed', () => {
-   test('should have all addresses properly checksummed', () => {
-     const improperlyChecksummedAddresses = DEFAULT_TOKEN_LIST_URL.filter(
-       tokenAddress => tokenAddress !== getAddress(tokenAddress)
-     );
- 
-     if (improperlyChecksummedAddresses.length > 0) {
-       console.error(`The following addresses are not properly checksummed: ${improperlyChecksummedAddresses.join(', ')}`);
-     }
-     expect(improperlyChecksummedAddresses).to.be.empty;
-   });
- });
+    test('should have all addresses properly checksummed', () => {
+      const notChecksummed = DEFAULT_TOKEN_LIST_URL.filter(
+        (tokenAddress) => tokenAddress !== getAddress(tokenAddress),
+      )
+
+      if (notChecksummed.length > 0) {
+        console.error(
+          `The following addresses are not properly checksummed: ${notChecksummed.join(
+            ', ',
+          )}`,
+        )
+      }
+      expect(notChecksummed).to.be.empty
+    })
+  })
 })
