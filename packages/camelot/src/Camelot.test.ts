@@ -1,8 +1,12 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { CAMELOT_ROUTER, ETH_ADDRESS } from './contract-addresses'
+import {
+  CAMELOT_ROUTER,
+  ETH_ADDRESS,
+  DEFAULT_TOKEN_LIST_URL,
+} from './contract-addresses'
 import { ARBITRUM_CHAIN_ID } from './chain-ids'
-import { parseEther } from 'viem'
+import { parseEther, getAddress } from 'viem'
 import { swap } from './Camelot'
 import { CAMELOT_ABI } from './abi'
 import { failingTestCases, passingTestCases } from './test-setup'
@@ -79,4 +83,16 @@ describe('Given the camelot plugin', () => {
       })
     })
   })
+  describe('all supported tokens addresses are properly checksummed', () => {
+   test('should have all addresses properly checksummed', () => {
+     const improperlyChecksummedAddresses = DEFAULT_TOKEN_LIST_URL.filter(
+       tokenAddress => tokenAddress !== getAddress(tokenAddress)
+     );
+ 
+     if (improperlyChecksummedAddresses.length > 0) {
+       console.error(`The following addresses are not properly checksummed: ${improperlyChecksummedAddresses.join(', ')}`);
+     }
+     expect(improperlyChecksummedAddresses).to.be.empty;
+   });
+ });
 })
