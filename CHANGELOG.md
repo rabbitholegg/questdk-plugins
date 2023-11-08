@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.26
+
+### Minor Changes
+
+- [#50](https://github.com/rabbitholegg/questdk/pull/50) [`35992bd`](https://github.com/rabbitholegg/questdk/commit/35992bdaeebd04db61c2c09eff447fee97221fc6) Thanks [@Quazia](https://github.com/Quazia)! - Add mint, burn, and quest action types
+
 ## 2.0.0-alpha.25
 
 ### Minor Changes
