@@ -93,7 +93,7 @@ describe('Given the gmx plugin', () => {
     })
     test('should return the correct list of tokens', async () => {
       const tokens = await getSupportedTokenAddresses(ARB_ONE_CHAIN_ID)
-      expect(tokens).to.deep.equal(DEFAULT_TOKEN_LIST_URL)
+      expect(tokens.sort()).to.deep.equal(DEFAULT_TOKEN_LIST_URL.sort())
     })
   })
 })
