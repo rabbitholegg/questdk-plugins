@@ -39,6 +39,18 @@ describe('Given the gmx plugin', () => {
           $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
           $or: [
             {
+              // V1 Path
+              _path: [BRIDGED_USDC_ADDRESS, USDT_ADDRESS],
+              _amountIn: {
+                $gte: '100000',
+              },
+              _minOut: {
+                $gte: '100000',
+              },
+              _receiver: TEST_USER,
+            },
+            {
+              // V2 Path
               params: {
                 numbers: { minOutputAmount: { $gte: '100000' } },
                 orderType: 0,
@@ -50,16 +62,6 @@ describe('Given the gmx plugin', () => {
                   ],
                 },
               },
-            },
-            {
-              _path: [BRIDGED_USDC_ADDRESS, USDT_ADDRESS],
-              _amountIn: {
-                $gte: '100000',
-              },
-              _minOut: {
-                $gte: '100000',
-              },
-              _receiver: TEST_USER,
             },
           ],
         },

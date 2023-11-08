@@ -56,6 +56,12 @@ export const swap = async (swap: SwapActionParams) => {
       $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
       $or: [
         {
+          _path: [tokenIn, tokenOut], // The path of the swap
+          _amountIn: amountIn, // The amount of the input token
+          _minOut: amountOut, // The minimum amount of the output token
+          _receiver: recipient, // The recipient of the output token
+        },
+        {
           params: {
             numbers: {
               minOutputAmount: amountOut,
@@ -66,12 +72,6 @@ export const swap = async (swap: SwapActionParams) => {
               swapPath: [tokenIn, tokenOut],
             },
           },
-        },
-        {
-          _path: [tokenIn, tokenOut], // The path of the swap
-          _amountIn: amountIn, // The amount of the input token
-          _minOut: amountOut, // The minimum amount of the output token
-          _receiver: recipient, // The recipient of the output token
         },
       ],
     },
