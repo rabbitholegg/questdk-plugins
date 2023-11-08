@@ -21,18 +21,7 @@ enum OrderType {
 }
 
 export const swap = async (swap: SwapActionParams) => {
-  // This is the information we'll use to compose the Transaction object
-  const {
-    chainId,
-    // contractAddress,
-    tokenIn,
-    tokenOut,
-    amountIn,
-    amountOut,
-    recipient,
-  } = swap
-
-  // What do about invalid contract addresses?
+  const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
 
   return compressJson({
     chainId: chainId,
@@ -43,10 +32,10 @@ export const swap = async (swap: SwapActionParams) => {
       $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
       $or: [
         {
-          _path: [tokenIn, tokenOut], // The path of the swap
-          _amountIn: amountIn, // The amount of the input token
-          _minOut: amountOut, // The minimum amount of the output token
-          _receiver: recipient, // The recipient of the output token
+          _path: [tokenIn, tokenOut],
+          _amountIn: amountIn,
+          _minOut: amountOut,
+          _receiver: recipient,
         },
         {
           params: {
