@@ -1,39 +1,34 @@
 import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
+import { type Address } from 'viem'
+import axios from 'axios'
+import { OrderType } from './utils.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
   DEFAULT_TOKEN_LIST_URL,
   GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
+  ETH_ADDRESS,
+  WETH_ADDRESS,
 } from './contract-addresses.js'
-import axios from 'axios'
-import { type Address, getAddress } from 'viem'
-
-enum OrderType {
-  MarketSwap = 0,
-  LimitSwap = 1,
-  MarketIncrease = 2,
-  LimitIncrease = 3,
-  MarketDecrease = 4,
-  LimitDecrease = 5,
-  StopLossDecrease = 6,
-  Liquidation = 7,
-}
 
 export const swap = async (swap: SwapActionParams) => {
   const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
 
+  const ETH_USED = tokenIn === ETH_ADDRESS
+
   return compressJson({
     chainId: chainId,
+    value: ETH_USED ? amountIn : undefined,
     to: {
-      $or: [getAddress(GMX_ROUTERV1_ADDRESS), getAddress(GMX_ROUTERV2_ADDRESS)],
+      $or: [GMX_ROUTERV1_ADDRESS.toLowerCase(), GMX_ROUTERV2_ADDRESS.toLowerCase()],
     },
     input: {
       $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
       $or: [
         {
-          _path: [tokenIn, tokenOut],
-          _amountIn: amountIn,
+          _path: [ETH_USED ? WETH_ADDRESS: tokenIn, tokenOut],
+          _amountIn: ETH_USED ? undefined : amountIn,
           _minOut: amountOut,
           _receiver: recipient,
         },
@@ -45,7 +40,7 @@ export const swap = async (swap: SwapActionParams) => {
             orderType: OrderType.MarketSwap,
             addresses: {
               receiver: recipient,
-              swapPath: [tokenIn, tokenOut],
+              swapPath: [ETH_USED ? WETH_ADDRESS: tokenIn, tokenOut],
             },
           },
         },
@@ -63,7 +58,9 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
     if (response.statusText === 'OK') {
       // Parse the JSON response into a JavaScript object
       const data = response.data as Array<{ data: any; id: string }>
-      return data.map((token) => token.id) as Address[]
+      const tokenAddresses = data.map((token) => token.id) as Address[]
+      tokenAddresses.push(ETH_ADDRESS)
+      return tokenAddresses
     } else {
       console.error(`Request failed with status code: ${response.status}`)
       return []
