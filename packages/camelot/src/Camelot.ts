@@ -2,7 +2,6 @@ import {
   type TransactionFilter,
   type SwapActionParams,
   compressJson,
-  type FilterOperator,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
@@ -11,25 +10,9 @@ import {
   ETH_ADDRESS,
   WETH_ADDRESS,
 } from './contract-addresses'
-import { CAMELOT_ABI } from './abi'
-import { CAMELOT_ROUTER } from './contract-addresses'
-
-export const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
-  // v2 paths are formatted as [<token>, <token>]
-  const conditions: FilterOperator[] = []
-
-  if (tokenIn) {
-    conditions.push({ $first: tokenIn })
-  }
-
-  if (tokenOut) {
-    conditions.push({ $last: tokenOut })
-  }
-
-  return {
-    $and: conditions,
-  }
-}
+import { buildPathQuery } from './utils'
+import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
+import { CAMELOT_ROUTER, PARASWAP_ROUTER } from './contract-addresses'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -46,16 +29,38 @@ export const swap = async (
 
   const ethUsed = tokenIn === ETH_ADDRESS
 
+  if (
+    contractAddress &&
+    ![CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()].includes(
+      contractAddress?.toLowerCase() as Address,
+    )
+  ) {
+    throw new Error('Invalid Contract Address')
+  }
+
   return compressJson({
     chainId: chainId,
-    to: contractAddress || CAMELOT_ROUTER,
+    to: { $or: [CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()] },
     value: ethUsed ? amountIn : undefined,
     input: {
-      $abi: CAMELOT_ABI,
-      to: recipient,
-      path: buildPathQuery(ethUsed ? WETH_ADDRESS : tokenIn, tokenOut), // The path of the swap
-      amountOutMin: amountOut, // The minimum amount of tokens to receive
-      amountIn: ethUsed ? undefined : amountIn, // The amount of tokens to send
+      $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
+      $or: [
+        {
+          to: recipient,
+          path: buildPathQuery(ethUsed ? WETH_ADDRESS : tokenIn, tokenOut),
+          amountOutMin: amountOut,
+          amountIn: ethUsed ? undefined : amountIn,
+        },
+        {
+          data: {
+            fromToken: tokenIn,
+            fromAmount: amountIn,
+            toToken: tokenOut,
+            toAmount: amountOut,
+            partner: '0x353d2d14bb674892910685520ac040f560ccbc06',
+          },
+        },
+      ],
     },
   })
 }
