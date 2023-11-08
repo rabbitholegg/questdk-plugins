@@ -9,35 +9,22 @@ import {
 import axios from 'axios'
 import { type Address, getAddress } from 'viem'
 
-// Need fix type error "This enum declaration contains members that are implicitly initialized."
-
 enum OrderType {
-  // @dev MarketSwap: swap token A to token B at the current market price
-  // the order will be cancelled if the minOutputAmount cannot be fulfilled
-  MarketSwap,
-  // @dev LimitSwap: swap token A to token B if the minOutputAmount can be fulfilled
-  LimitSwap,
-  // @dev MarketIncrease: increase position at the current market price
-  // the order will be cancelled if the position cannot be increased at the acceptablePrice
-  MarketIncrease,
-  // @dev LimitIncrease: increase position if the triggerPrice is reached and the acceptablePrice can be fulfilled
-  LimitIncrease,
-  // @dev MarketDecrease: decrease position at the current market price
-  // the order will be cancelled if the position cannot be decreased at the acceptablePrice
-  MarketDecrease,
-  // @dev LimitDecrease: decrease position if the triggerPrice is reached and the acceptablePrice can be fulfilled
-  LimitDecrease,
-  // @dev StopLossDecrease: decrease position if the triggerPrice is reached and the acceptablePrice can be fulfilled
-  StopLossDecrease,
-  // @dev Liquidation: allows liquidation of positions if the criteria for liquidation are met
-  Liquidation,
+  MarketSwap = 0,
+  LimitSwap = 1,
+  MarketIncrease = 2,
+  LimitIncrease = 3,
+  MarketDecrease = 4,
+  LimitDecrease = 5,
+  StopLossDecrease = 6,
+  Liquidation = 7,
 }
 
 export const swap = async (swap: SwapActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
     chainId,
-    contractAddress,
+    // contractAddress,
     tokenIn,
     tokenOut,
     amountIn,
