@@ -1,6 +1,6 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { GMX_SWAPV1_ABI } from './abi.js'
+import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import { getSupportedTokenAddresses, swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { SWAP_ETH, SWAP_ETH_V2 } from './test-transactions.js'
@@ -28,18 +28,40 @@ describe('Given the gmx plugin', () => {
       })
 
       expect(filter).to.deep.equal({
-        to: GMX_ROUTERV1_ADDRESS,
         chainId: ARB_ONE_CHAIN_ID,
+        to: {
+          $or: [
+            '0xaBBc5F99639c9B6bCb58544ddf04EFA6802F4064',
+            '0x3B070aA6847bd0fB56eFAdB351f49BBb7619dbc2',
+          ],
+        },
         input: {
-          $abi: GMX_SWAPV1_ABI,
-          _path: [BRIDGED_USDC_ADDRESS, USDT_ADDRESS],
-          _amountIn: {
-            $gte: '100000',
-          },
-          _minOut: {
-            $gte: '100000',
-          },
-          _receiver: TEST_USER,
+          $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
+          $or: [
+            {
+              params: {
+                numbers: { minOutputAmount: { $gte: '100000' } },
+                orderType: 0,
+                addresses: {
+                  receiver: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
+                  swapPath: [
+                    '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                    '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                  ],
+                },
+              },
+            },
+            {
+              _path: [BRIDGED_USDC_ADDRESS, USDT_ADDRESS],
+              _amountIn: {
+                $gte: '100000',
+              },
+              _minOut: {
+                $gte: '100000',
+              },
+              _receiver: TEST_USER,
+            },
+          ],
         },
       })
     })
