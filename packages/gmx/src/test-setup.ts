@@ -69,3 +69,27 @@ export const passingTestCasesV1 = [
   createTestCase(TOKENS_FOR_ETH_V1, 'when swapping tokens for ETH'),
   createTestCase(ETH_FOR_TOKENS_V1, 'when swapping ETH for tokens'),
 ]
+
+export const failingTestCasesV1 = [
+  createTestCase(TOKENS_FOR_TOKENS_V1, 'when chainId is incorrect', {
+    chainId: 10,
+  }),
+  createTestCase(TOKENS_FOR_ETH_V1, 'when tokenIn is incorrect', {
+    tokenIn: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+  }),
+  createTestCase(ETH_FOR_TOKENS_V1, 'when tokenOut is incorrect', {
+    tokenOut: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+  }),
+  createTestCase(ETH_FOR_TOKENS_V1, 'when amountIn is insufficient using ETH', {
+    amountIn: GreaterThanOrEqual(parseEther('0.0193')),
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V1, 'when amountIn is insufficient', {
+    amountIn: GreaterThanOrEqual(parseUnits('5001', 6)),
+  }),
+  createTestCase(TOKENS_FOR_ETH_V1, 'when amountOut is insufficient', {
+    amountOut: GreaterThanOrEqual(parseEther('.58')),
+  }),
+  createTestCase(TOKENS_FOR_ETH_V1, 'when recipient is incorrect', {
+    recipient: '0x052c68abe8e4bf0b78925e488b98f6fdc18a3af9',
+  }),
+]

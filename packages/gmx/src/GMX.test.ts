@@ -9,7 +9,7 @@ import {
   GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
-import { passingTestCasesV1 } from './test-setup.js'
+import { passingTestCasesV1, failingTestCasesV1 } from './test-setup.js'
 
 describe('Given the gmx plugin', () => {
   const BRIDGED_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
@@ -69,12 +69,23 @@ describe('Given the gmx plugin', () => {
         })
       })
     })
+
     describe('should pass filter with valid V1 transactions', () => {
       passingTestCasesV1.forEach((testCase) => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await swap({ ...params })
           expect(apply(transaction, filter)).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid V1 transactions', () => {
+      failingTestCasesV1.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await swap({ ...params })
+          expect(apply(transaction, filter)).to.be.false
         })
       })
     })
