@@ -21,13 +21,16 @@ export const swap = async (swap: SwapActionParams) => {
     chainId: chainId,
     value: ETH_USED ? amountIn : undefined,
     to: {
-      $or: [GMX_ROUTERV1_ADDRESS.toLowerCase(), GMX_ROUTERV2_ADDRESS.toLowerCase()],
+      $or: [
+        GMX_ROUTERV1_ADDRESS.toLowerCase(),
+        GMX_ROUTERV2_ADDRESS.toLowerCase(),
+      ],
     },
     input: {
       $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
       $or: [
         {
-          _path: [ETH_USED ? WETH_ADDRESS: tokenIn, tokenOut],
+          _path: [ETH_USED ? WETH_ADDRESS : tokenIn, tokenOut],
           _amountIn: ETH_USED ? undefined : amountIn,
           _minOut: amountOut,
           _receiver: recipient,
@@ -40,7 +43,7 @@ export const swap = async (swap: SwapActionParams) => {
             orderType: OrderType.MarketSwap,
             addresses: {
               receiver: recipient,
-              swapPath: [ETH_USED ? WETH_ADDRESS: tokenIn, tokenOut],
+              swapPath: [ETH_USED ? WETH_ADDRESS : tokenIn, tokenOut],
             },
           },
         },
