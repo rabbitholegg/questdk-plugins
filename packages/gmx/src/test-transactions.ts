@@ -2,7 +2,7 @@ export const SWAP_ETH_V2 = {
   blockHash:
     '0x7ef5e14fca37d002b8e65b1ef4706afb99fd47c7c1f5e26a5a81f93401f3fdca',
   blockNumber: '133269458',
-  from: '0x38B8b00ec79f43E3Ec9b8142F32ea2210D2A7aff'.toLowerCase(),
+  from: '0x38B8b00ec79f43E3Ec9b8142F32ea2210D2A7aff',
   gas: '2404279',
   gasPrice: '100000000',
   hash: '0x0a4d3e61f9b9bb829ce1b27992b8a028332289186aa77aa6a590d03fd2b47d64',
@@ -11,7 +11,7 @@ export const SWAP_ETH_V2 = {
   nonce: '1989',
   r: '0xbb6a2b82d4a58f86f1ad03e414d1a3abe629a8f9cce0050baecda0b2a9f0aa73',
   s: '0x35f28ecc21511211a2141c07616e24f1bbc5cab7ffeb97f488c1824da52397d1',
-  to: '0x3B070aA6847bd0fB56eFAdB351f49BBb7619dbc2'.toLowerCase(),
+  to: '0x3B070aA6847bd0fB56eFAdB351f49BBb7619dbc2',
   transactionIndex: '1',
   v: '1',
   value: '826000000000000',

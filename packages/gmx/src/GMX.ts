@@ -1,5 +1,5 @@
 import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, getAddress } from 'viem'
 import axios from 'axios'
 import { OrderType } from './utils.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
@@ -21,10 +21,7 @@ export const swap = async (swap: SwapActionParams) => {
     chainId: chainId,
     value: ETH_USED ? amountIn : undefined,
     to: {
-      $or: [
-        GMX_ROUTERV1_ADDRESS.toLowerCase(),
-        GMX_ROUTERV2_ADDRESS.toLowerCase(),
-      ],
+      $or: [getAddress(GMX_ROUTERV1_ADDRESS), getAddress(GMX_ROUTERV2_ADDRESS)],
     },
     input: {
       $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],

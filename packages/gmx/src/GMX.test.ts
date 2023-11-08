@@ -32,8 +32,8 @@ describe('Given the gmx plugin', () => {
           chainId: ARB_ONE_CHAIN_ID,
           to: {
             $or: [
-              '0xabbc5f99639c9b6bcb58544ddf04efa6802f4064',
-              '0x3b070aa6847bd0fb56efadb351f49bbb7619dbc2',
+              '0xaBBc5F99639c9B6bCb58544ddf04EFA6802F4064',
+              '0x3B070aA6847bd0fB56eFAdB351f49BBb7619dbc2',
             ],
           },
           input: {
