@@ -7,7 +7,9 @@ import {
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
 import axios from 'axios'
-import { type Address } from 'viem'
+import { type Address, getAddress } from 'viem'
+
+// Need fix type error "This enum declaration contains members that are implicitly initialized."
 
 enum OrderType {
   // @dev MarketSwap: swap token A to token B at the current market price
@@ -43,37 +45,36 @@ export const swap = async (swap: SwapActionParams) => {
     recipient,
   } = swap
 
-  if (contractAddress === GMX_ROUTERV2_ADDRESS) {
-    return compressJson({
-      to: contractAddress, // The contract address of the swap
-      chainId: chainId, // The chain id of the swap
-      input: {
-        $abiAbstract: GMX_SWAPV2_ABI,
-        params: {
-          numbers: {
-            minOutputAmount: amountOut,
-          },
-          orderType: OrderType.MarketSwap,
-          addresses: {
-            receiver: recipient,
-            swapPath: [tokenIn, tokenOut],
+  // What do about invalid contract addresses?
+
+  return compressJson({
+    chainId: chainId,
+    to: {
+      $or: [getAddress(GMX_ROUTERV1_ADDRESS), getAddress(GMX_ROUTERV2_ADDRESS)],
+    },
+    input: {
+      $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
+      $or: [
+        {
+          params: {
+            numbers: {
+              minOutputAmount: amountOut,
+            },
+            orderType: OrderType.MarketSwap,
+            addresses: {
+              receiver: recipient,
+              swapPath: [tokenIn, tokenOut],
+            },
           },
         },
-      },
-    })
-  }
-  // Fortunatly even though there are two different functions the parameters are the same
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
-  return compressJson({
-    to: contractAddress || GMX_ROUTERV1_ADDRESS, // The contract address of the swap
-    chainId: chainId, // The chain id of the swap
-    input: {
-      $abi: GMX_SWAPV1_ABI,
-      _path: [tokenIn, tokenOut], // The path of the swap
-      _amountIn: amountIn, // The amount of the input token
-      _minOut: amountOut, // The minimum amount of the output token
-      _receiver: recipient, // The recipient of the output token
-    }, // The input object is where we'll put the ABI and the parameters
+        {
+          _path: [tokenIn, tokenOut], // The path of the swap
+          _amountIn: amountIn, // The amount of the input token
+          _minOut: amountOut, // The minimum amount of the output token
+          _receiver: recipient, // The recipient of the output token
+        },
+      ],
+    },
   })
 }
 
