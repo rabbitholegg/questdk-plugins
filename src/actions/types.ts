@@ -95,7 +95,7 @@ export interface IActionPlugin {
     params: DelegateActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   quest?: (
-    params: DelegateActionParams,
+    params: QuestActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
 }
 
