@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -468,8 +464,8 @@ importers:
   packages/registry:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.25
-        version: 2.0.0-alpha.25(typescript@5.2.2)
+        specifier: 2.0.0-alpha.27
+        version: 2.0.0-alpha.27(typescript@5.2.2)
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
@@ -503,6 +499,9 @@ importers:
       '@rabbitholegg/questdk-plugin-polygon':
         specifier: workspace:*
         version: link:../polygon
+      '@rabbitholegg/questdk-plugin-rabbithole':
+        specifier: workspace:*
+        version: link:../rabbithole
       '@rabbitholegg/questdk-plugin-stargate':
         specifier: workspace:*
         version: link:../stargate
@@ -2467,6 +2466,24 @@ packages:
 
   /@rabbitholegg/questdk@2.0.0-alpha.25(typescript@5.2.2):
     resolution: {integrity: sha512-KhTZSfBlfG3rUNQ+9r2eAW/bR3eTD3y1TPiF7ydZEPI44w6rgW7gzrSuwX/lHYBRMSVm6nHryk2JXaJtfsS0AQ==}
+    peerDependencies:
+      typescript: '>=5.1.6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      abitype: 0.9.10(typescript@5.2.2)
+      rimraf: 5.0.5
+      typescript: 5.2.2
+      viem: 1.16.6(typescript@5.2.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@rabbitholegg/questdk@2.0.0-alpha.27(typescript@5.2.2):
+    resolution: {integrity: sha512-9QXBLWqJWsCSLCRTjzuG0TdSqBq987IjoSpPooUEJ2Jiqnx7rM88KMM9EBNu+4ra7O9amFCnYNrUz8xiFfU3ng==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:
@@ -11149,3 +11166,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
