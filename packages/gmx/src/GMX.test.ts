@@ -1,21 +1,21 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { getAddress, parseEther } from 'viem'
-import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
+import { parseEther } from 'viem'
+// import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import { getSupportedTokenAddresses, swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { SWAP_TOKENS_FOR_TOKENS_V2 } from './test-transactions.js'
 import {
   DEFAULT_TOKEN_LIST_URL,
-  GMX_ROUTERV1_ADDRESS,
-  GMX_ROUTERV2_ADDRESS,
+  // GMX_ROUTERV1_ADDRESS,
+  // GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
 import { passingTestCasesV1, failingTestCasesV1 } from './test-setup.js'
 
 describe('Given the gmx plugin', () => {
-  const BRIDGED_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
-  const USDT_ADDRESS = '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9'
-  const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
+  // const BRIDGED_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
+  // const USDT_ADDRESS = '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9'
+  // const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
   describe('When handling the swap', () => {
     // describe('should return a valid action filter', () => {
     //   test('when swapping tokens', async () => {
