@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.27
+
+### Patch Changes
+
+- [#55](https://github.com/rabbitholegg/questdk/pull/55) [`7ebf31a`](https://github.com/rabbitholegg/questdk/commit/7ebf31a0697787ac9ef28fbad0f78943174d7932) Thanks [@Quazia](https://github.com/Quazia)! - quickfix IActionPlugin
+
 ## 2.0.0-alpha.26
 
 ### Minor Changes
