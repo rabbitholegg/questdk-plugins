@@ -106,6 +106,15 @@ describe('Given the gmx plugin', () => {
       })
       expect(apply(transaction, filter)).to.be.true
     })
+    test('should not pass filter with invalid tokenIn', async () => {
+      const transaction = SWAP_TOKENS_FOR_TOKENS_V2
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        tokenIn: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
+        amountIn: GreaterThanOrEqual(1n),
+      })
+      expect(apply(transaction, filter)).to.be.false
+    })
     test('should return the correct list of tokens', async () => {
       const tokens = await getSupportedTokenAddresses(ARB_ONE_CHAIN_ID)
       expect(tokens.sort()).to.deep.equal(DEFAULT_TOKEN_LIST_URL.sort())
