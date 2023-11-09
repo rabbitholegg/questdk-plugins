@@ -4,6 +4,7 @@ import axios from 'axios'
 import { OrderType } from './utils.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
+
 import {
   DEFAULT_TOKEN_LIST_URL,
   GMX_ROUTERV1_ADDRESS,
@@ -33,16 +34,26 @@ export const swap = async (swap: SwapActionParams) => {
           _receiver: recipient,
         },
         {
-          params: {
-            numbers: {
-              minOutputAmount: amountOut,
+          $and: [
+            {
+              params: {
+                numbers: {
+                  minOutputAmount: amountOut,
+                },
+                orderType: OrderType.MarketSwap,
+                addresses: {
+                  initialCollateralToken: ETH_USED ? WETH_ADDRESS : tokenIn,
+                  receiver: recipient,
+                  // swapPath: [ETH_USED ? WETH_ADDRESS : tokenIn, tokenOut],
+                },
+                shouldUnwrapNativeToken: tokenOut === ETH_ADDRESS,
+              },
             },
-            orderType: OrderType.MarketSwap,
-            addresses: {
-              receiver: recipient,
-              swapPath: [ETH_USED ? WETH_ADDRESS : tokenIn, tokenOut],
-            },
-          },
+            // ^vTHESE BOTH WORK SEPERATELY, BUT NOT TOGETHER
+            // {
+            //     amount: amountIn,
+            // }
+          ]
         },
       ],
     },
