@@ -1,6 +1,6 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { getAddress } from 'viem'
+import { getAddress, parseEther } from 'viem'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import { getSupportedTokenAddresses, swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
@@ -112,6 +112,15 @@ describe('Given the gmx plugin', () => {
         chainId: ARB_ONE_CHAIN_ID,
         tokenIn: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
         amountIn: GreaterThanOrEqual(1n),
+      })
+      expect(apply(transaction, filter)).to.be.false
+    })
+    test('should not pass filter with insufficient amountIn', async () => {
+      const transaction = SWAP_TOKENS_FOR_TOKENS_V2
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        tokenIn: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+        amountIn: GreaterThanOrEqual(parseEther('10000')),
       })
       expect(apply(transaction, filter)).to.be.false
     })
