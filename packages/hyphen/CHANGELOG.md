@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-hyphen
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- [#97](https://github.com/rabbitholegg/questdk-plugins/pull/97) [`8496a49`](https://github.com/rabbitholegg/questdk-plugins/commit/8496a49d99ba2dcecef60211e1e9108d8128f5d3) Thanks [@Quazia](https://github.com/Quazia)! - Remove only-allow from hyphen plugin
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes
