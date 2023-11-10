@@ -27,7 +27,12 @@ function getMarketAddress(
     tokenIn === Tokens.USDC &&
     (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH)
   ) {
-    return '0x70d95587d40A2caf56bd97485aB3Eec10Bee6336'
+    return {
+      $or: [
+        '0x70d95587d40A2caf56bd97485aB3Eec10Bee6336',
+        '0x0CCB4fAa6f1F1B30911619f1184082aB4E25813c',
+      ],
+    }
   }
   if (tokenOut === ETH_ADDRESS) {
     return MARKET_TOKENS[Tokens.WETH]
