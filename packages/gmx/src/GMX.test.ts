@@ -10,7 +10,11 @@ import {
   // GMX_ROUTERV1_ADDRESS,
   // GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
-import { passingTestCasesV1, failingTestCasesV1 } from './test-setup.js'
+import {
+  passingTestCasesV1,
+  failingTestCasesV1,
+  passingTestCasesV2,
+} from './test-setup.js'
 
 describe('Given the gmx plugin', () => {
   // const BRIDGED_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
@@ -97,12 +101,23 @@ describe('Given the gmx plugin', () => {
       })
     })
 
+    describe('should pass filter with valid V2 transactions', () => {
+      passingTestCasesV2.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await swap({ ...params })
+          expect(apply(transaction, filter)).to.be.true
+        })
+      })
+    })
+
     test('should pass filter with valid V2 transactions', async () => {
       const transaction = SWAP_TOKENS_FOR_TOKENS_V2
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         tokenIn: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
         amountIn: GreaterThanOrEqual(1n),
+        tokenOut: '0x912CE59144191C1204E64559FE8253a0e49E6548',
       })
       expect(apply(transaction, filter)).to.be.true
     })
