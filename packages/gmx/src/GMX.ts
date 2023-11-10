@@ -36,7 +36,7 @@ export const swap = async (swap: SwapActionParams) => {
         {
           $and: [
             {
-              $abiAbstract: GMX_SWAPV2_ABI,              
+              $abiAbstract: GMX_SWAPV2_ABI,
               params: {
                 numbers: {
                   minOutputAmount: amountOut,
@@ -51,10 +51,10 @@ export const swap = async (swap: SwapActionParams) => {
               },
             },
             {
-              $abiAbstract: GMX_SWAPV2_ABI,              
+              $abiAbstract: GMX_SWAPV2_ABI,
               amount: amountIn,
-            }
-          ]
+            },
+          ],
         },
       ],
     },
