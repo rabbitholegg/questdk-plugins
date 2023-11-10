@@ -118,9 +118,19 @@ export const passingTestCasesV2 = [
 ]
 
 export const failingTestCasesV2 = [
-  createTestCase(TOKENS_FOR_TOKENS_V2, 'when chainId is incorrect', { chainId: 10 }),
-  createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenIn is incorrect', { tokenIn: Tokens.UNI }),
-  createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenOut is incorrect', { tokenOut: Tokens.UNI }),
-  createTestCase(TOKENS_FOR_TOKENS_V2, 'when amountIn is insufficient', { amountIn: GreaterThanOrEqual(parseUnits('20.01', 6)) }),
-  createTestCase(TOKENS_FOR_TOKENS_V2, 'when amountOut is insufficient', { amountOut: GreaterThanOrEqual(parseUnits('0.00055', 8)) }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when chainId is incorrect', {
+    chainId: 10,
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenIn is incorrect', {
+    tokenIn: Tokens.UNI,
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenOut is incorrect', {
+    tokenOut: Tokens.UNI,
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when amountIn is insufficient', {
+    amountIn: GreaterThanOrEqual(parseUnits('20.01', 6)),
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when amountOut is insufficient', {
+    amountOut: GreaterThanOrEqual(parseUnits('0.00055', 8)),
+  }),
 ]
