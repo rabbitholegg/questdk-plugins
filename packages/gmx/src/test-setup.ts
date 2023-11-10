@@ -12,6 +12,7 @@ import {
   TOKENS_FOR_USDC_V2,
   ETH_FOR_USDC_V2,
   USDC_FOR_ETH_V2,
+  USDC_FOR_WETH_V2,
   REDUCE_ORDER_V2,
   ALT_ETHOUT_V2,
 } from './test-transactions'
@@ -53,6 +54,7 @@ export const passingTestCasesV2 = [
   createTestCase(TOKENS_FOR_USDC_V2, 'when swapping LINK to USDC'),
   createTestCase(ETH_FOR_USDC_V2, 'when swapping ETH to USDC'),
   createTestCase(USDC_FOR_ETH_V2, 'when swapping USDC to ETH'),
+  createTestCase(USDC_FOR_WETH_V2, 'when swapping USDC to WETH'),
   createTestCase(ALT_ETHOUT_V2, 'when swapping USDC.e to ETH'),
   createTestCase(SWAP_TOKENS_V2, 'when all parameters are correct'),
 ]
