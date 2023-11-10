@@ -25,9 +25,9 @@ export const swap = async (swap: SwapActionParams) => {
       $or: [getAddress(GMX_ROUTERV1_ADDRESS), getAddress(GMX_ROUTERV2_ADDRESS)],
     },
     input: {
-      $abiAbstract: [...GMX_SWAPV1_ABI, ...GMX_SWAPV2_ABI],
       $or: [
         {
+          $abiAbstract: GMX_SWAPV1_ABI,
           _path: [ETH_USED ? WETH_ADDRESS : tokenIn, tokenOut],
           _amountIn: ETH_USED ? undefined : amountIn,
           _minOut: amountOut,
@@ -36,6 +36,7 @@ export const swap = async (swap: SwapActionParams) => {
         {
           $and: [
             {
+              $abiAbstract: GMX_SWAPV2_ABI,
               params: {
                 numbers: {
                   minOutputAmount: amountOut,
@@ -49,11 +50,11 @@ export const swap = async (swap: SwapActionParams) => {
                 shouldUnwrapNativeToken: tokenOut === ETH_ADDRESS,
               },
             },
-            // ^vTHESE BOTH WORK SEPERATELY, BUT NOT TOGETHER
-            // {
-            //     amount: amountIn,
-            // }
-          ]
+            {
+              $abiAbstract: GMX_SWAPV2_ABI,
+              amount: amountIn,
+            },
+          ],
         },
       ],
     },
