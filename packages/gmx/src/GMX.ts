@@ -40,8 +40,9 @@ export const swap = async (swap: SwapActionParams) => {
   - If USDC_OUT is true, we want to return MARKET_TOKENS[TokenIn]
   - Everyother token outside of ETH and USDC will return MARKET_TOKENS[TokenOut]
 
-  Unintended Behaviour
-  - If amountIn is specified, only tokens will work if input token is set to any (ETH will not pass)
+  Unusual Behaviour
+  - When using ETH, amountIn has the protocol fee of 0.00121 included. (should be ok?)
+  - If amountIn is specified and tokenIn is set to any, only tokens will work (ETH will not pass)
   - If tokenIn is any, and tokenOut is USDC, any token will pass the check. (see getMarketAddress)
 
   ToDO:
