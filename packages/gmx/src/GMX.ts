@@ -21,8 +21,12 @@ function getMarketAddress(
   tokenOut: Address | undefined,
 ): Address | FilterOperator | undefined {
   if (tokenOut === undefined) return undefined
-  if (!tokenIn && tokenOut === ETH_ADDRESS) return undefined
-  if (tokenIn === Tokens.USDC && tokenOut === ETH_ADDRESS) {
+  if (!tokenIn && (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH))
+    return undefined
+  if (
+    tokenIn === Tokens.USDC &&
+    (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH)
+  ) {
     return '0x70d95587d40A2caf56bd97485aB3Eec10Bee6336'
   }
   if (tokenOut === ETH_ADDRESS) {
