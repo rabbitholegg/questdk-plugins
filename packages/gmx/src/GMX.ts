@@ -12,20 +12,43 @@ import {
   MARKET_TOKENS,
 } from './contract-addresses.js'
 
+function getMarketAddress(
+  tokenIn: Address | undefined,
+  tokenOut: Address | undefined,
+): Address | undefined {
+  if (tokenOut === undefined) return undefined
+  if (tokenOut === ETH_ADDRESS) {
+    return MARKET_TOKENS[WETH_ADDRESS]
+  }
+  if (tokenOut === Tokens.USDC) {
+    // This will wildcard (return undefined) if tokenIn is not provided
+    return MARKET_TOKENS[tokenIn as Address]
+  }
+  return MARKET_TOKENS[tokenOut]
+}
+
 export const swap = async (swap: SwapActionParams) => {
   const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
 
   const ETH_USED = tokenIn === ETH_ADDRESS
-  const USDC_OUT = tokenOut === Tokens.USDC
 
-  const marketToken =
-    MARKET_TOKENS[
-      ETH_USED
-        ? WETH_ADDRESS
-        : USDC_OUT
-        ? (tokenIn as Address)
-        : (tokenOut as Address)
-    ]
+  /* 
+  NOTES
+  -----
+  Logic for returning market tokens 
+  - If tokenOut === ETH_ADDRESS is true, we want to return MARKET_TOKENS[WETH_ADDRESS]
+  - If USDC_OUT is true, we want to return MARKET_TOKENS[TokenIn]
+  - Everyother token outside of ETH and USDC will return MARKET_TOKENS[TokenOut]
+
+  Unintended Behaviour
+  - If amountIn is specified, only tokens will work if input token is set to any (ETH will not pass)
+  - If tokenIn is any, and tokenOut is USDC, any token will pass the check. (see getMarketAddress)
+
+  ToDO:
+  - More tests
+  - Check behavior when swap ETH -> USDC and vice-versa
+  - Check behavior of token -> ETH 
+  */
 
   return compressJson({
     chainId: chainId,
@@ -54,14 +77,16 @@ export const swap = async (swap: SwapActionParams) => {
                 addresses: {
                   initialCollateralToken: ETH_USED ? WETH_ADDRESS : tokenIn,
                   receiver: recipient,
-                  swapPath: { $last: marketToken },
+                  swapPath: { $last: getMarketAddress(tokenIn, tokenOut) },
                 },
-                shouldUnwrapNativeToken: tokenOut === ETH_ADDRESS,
+                shouldUnwrapNativeToken: tokenOut
+                  ? tokenOut === ETH_ADDRESS
+                  : undefined,
               },
             },
             {
               $abiAbstract: GMX_SWAPV2_ABI,
-              amount: amountIn,
+              amount: ETH_USED ? undefined : amountIn,
             },
           ],
         },
