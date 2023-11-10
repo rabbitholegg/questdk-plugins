@@ -2,6 +2,7 @@ import {
   type SwapActionParams,
   type TransactionFilter,
   compressJson,
+  type FilterOperator,
 } from '@rabbitholegg/questdk'
 import { getAddress, type Address } from 'viem'
 import { OrderType, Tokens } from './utils.js'
@@ -19,7 +20,7 @@ import {
 function getMarketAddress(
   tokenIn: Address | undefined,
   tokenOut: Address | undefined,
-): Address | undefined {
+): Address | FilterOperator | undefined {
   if (tokenOut === undefined) return undefined
   if (!tokenIn && tokenOut === ETH_ADDRESS) return undefined
   if (tokenIn === Tokens.USDC && tokenOut === ETH_ADDRESS) {
