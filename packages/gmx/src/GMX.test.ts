@@ -14,6 +14,7 @@ import {
   passingTestCasesV1,
   failingTestCasesV1,
   passingTestCasesV2,
+  failingTestCasesV2,
 } from './test-setup.js'
 
 describe('Given the gmx plugin', () => {
@@ -107,6 +108,16 @@ describe('Given the gmx plugin', () => {
         test(description, async () => {
           const filter = await swap({ ...params })
           expect(apply(transaction, filter)).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid V2 transactions', () => {
+      failingTestCasesV2.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await swap({ ...params })
+          expect(apply(transaction, filter)).to.be.false
         })
       })
     })

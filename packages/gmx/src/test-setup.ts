@@ -109,10 +109,18 @@ const TOKENS_FOR_TOKENS_V2: TestParams<SwapActionParams> = {
     tokenIn: Tokens.USDCe,
     tokenOut: Tokens.WBTC,
     amountIn: GreaterThanOrEqual(parseUnits('20', 6)),
-    amountOut: GreaterThanOrEqual(parseUnits('0.0005', 8)),
+    amountOut: GreaterThanOrEqual(parseUnits('0.00054', 8)),
   },
 }
 
 export const passingTestCasesV2 = [
   createTestCase(TOKENS_FOR_TOKENS_V2, 'when swapping USDC.e to WBTC'),
+]
+
+export const failingTestCasesV2 = [
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when chainId is incorrect', { chainId: 10 }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenIn is incorrect', { tokenIn: Tokens.UNI }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenOut is incorrect', { tokenOut: Tokens.UNI }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when amountIn is insufficient', { amountIn: GreaterThanOrEqual(parseUnits('20.01', 6)) }),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when amountOut is insufficient', { amountOut: GreaterThanOrEqual(parseUnits('0.00055', 8)) }),
 ]
