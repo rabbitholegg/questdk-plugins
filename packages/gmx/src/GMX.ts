@@ -13,7 +13,6 @@ import {
   GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
   ETH_ADDRESS,
-  WETH_ADDRESS,
   MARKET_TOKENS,
 } from './contract-addresses.js'
 
@@ -27,7 +26,7 @@ function getMarketAddress(
     return '0x70d95587d40A2caf56bd97485aB3Eec10Bee6336'
   }
   if (tokenOut === ETH_ADDRESS) {
-    return MARKET_TOKENS[WETH_ADDRESS]
+    return MARKET_TOKENS[Tokens.WETH]
   }
   if (tokenOut === Tokens.USDC) {
     // This will wildcard (return undefined) if tokenIn is not provided
@@ -47,7 +46,7 @@ export const swap = async (
   NOTES
   -----
   Logic for returning market tokens 
-  - If tokenOut === ETH_ADDRESS is true, we want to return MARKET_TOKENS[WETH_ADDRESS]
+  - If tokenOut === ETH_ADDRESS is true, we want to return MARKET_TOKENS[Tokens.WETH]
   - If USDC_OUT is true, we want to return MARKET_TOKENS[TokenIn]
   - Everyother token outside of ETH and USDC will return MARKET_TOKENS[TokenOut]
 
@@ -73,7 +72,7 @@ export const swap = async (
       $or: [
         {
           $abi: GMX_SWAPV1_ABI,
-          _path: [ETH_USED ? WETH_ADDRESS : tokenIn, tokenOut],
+          _path: [ETH_USED ? Tokens.WETH : tokenIn, tokenOut],
           _amountIn: ETH_USED ? undefined : amountIn,
           _minOut: amountOut,
           _receiver: recipient,
@@ -88,7 +87,7 @@ export const swap = async (
                 },
                 orderType: OrderType.MarketSwap,
                 addresses: {
-                  initialCollateralToken: ETH_USED ? WETH_ADDRESS : tokenIn,
+                  initialCollateralToken: ETH_USED ? Tokens.WETH : tokenIn,
                   receiver: recipient,
                   swapPath: { $last: getMarketAddress(tokenIn, tokenOut) },
                 },
