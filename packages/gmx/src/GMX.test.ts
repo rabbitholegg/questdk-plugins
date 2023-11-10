@@ -64,16 +64,18 @@ describe('Given the gmx plugin', () => {
                       addresses: {
                         initialCollateralToken: Tokens.USDCe,
                         receiver: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',
-                        swapPath: { $last: '0xB686BcB112660343E6d15BDb65297e110C8311c4' },
+                        swapPath: {
+                          $last: '0xB686BcB112660343E6d15BDb65297e110C8311c4',
+                        },
                       },
-                      shouldUnwrapNativeToken: false
+                      shouldUnwrapNativeToken: false,
                     },
                   },
                   {
                     $abiAbstract: GMX_SWAPV2_ABI,
-                    amount: { $gte: '100000' }
-                  }
-                ]
+                    amount: { $gte: '100000' },
+                  },
+                ],
               },
             ],
           },
