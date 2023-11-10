@@ -1,4 +1,8 @@
-import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
+import {
+  type SwapActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { getAddress, type Address } from 'viem'
 import { OrderType, Tokens } from './utils.js'
 import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
@@ -17,6 +21,10 @@ function getMarketAddress(
   tokenOut: Address | undefined,
 ): Address | undefined {
   if (tokenOut === undefined) return undefined
+  if (!tokenIn && tokenOut === ETH_ADDRESS) return undefined
+  if (tokenIn === Tokens.USDC && tokenOut === ETH_ADDRESS) {
+    return '0x70d95587d40A2caf56bd97485aB3Eec10Bee6336'
+  }
   if (tokenOut === ETH_ADDRESS) {
     return MARKET_TOKENS[WETH_ADDRESS]
   }
@@ -27,7 +35,9 @@ function getMarketAddress(
   return MARKET_TOKENS[tokenOut]
 }
 
-export const swap = async (swap: SwapActionParams) => {
+export const swap = async (
+  swap: SwapActionParams,
+): Promise<TransactionFilter> => {
   const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
 
   const ETH_USED = tokenIn === ETH_ADDRESS
@@ -41,9 +51,10 @@ export const swap = async (swap: SwapActionParams) => {
   - Everyother token outside of ETH and USDC will return MARKET_TOKENS[TokenOut]
 
   Unusual Behaviour
-  - When using ETH, amountIn has the protocol fee of 0.00121 included. (should be ok?)
+  - When using ETH, amountIn has the protocol fee of ~0.00121 included. (should be ok?)
   - If amountIn is specified and tokenIn is set to any, only tokens will work (ETH will not pass)
   - If tokenIn is any, and tokenOut is USDC, any token will pass the check. (see getMarketAddress)
+  - If tokenIn is any, and tokenOut is ETH, any token will pass the check. (see getMarketAddress)
 
   ToDO:
   - More tests
