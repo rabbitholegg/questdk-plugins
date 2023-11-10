@@ -30,6 +30,7 @@ export const MARKET_TOKENS: {
     $or: [
       '0x0CCB4fAa6f1F1B30911619f1184082aB4E25813c',
       '0x6853EA96FF216fAb11D2d930CE3C508556A4bdc4',
+      '0x70d95587d40A2caf56bd97485aB3Eec10Bee6336',
     ],
   },
 }

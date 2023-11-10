@@ -23,22 +23,11 @@ function getMarketAddress(
   if (tokenOut === undefined) return undefined
   if (!tokenIn && (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH))
     return undefined
-  if (
-    tokenIn === Tokens.USDC &&
-    (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH)
-  ) {
-    return {
-      $or: [
-        '0x70d95587d40A2caf56bd97485aB3Eec10Bee6336',
-        '0x0CCB4fAa6f1F1B30911619f1184082aB4E25813c',
-      ],
-    }
-  }
   if (tokenOut === ETH_ADDRESS) {
     return MARKET_TOKENS[Tokens.WETH]
   }
   if (tokenOut === Tokens.USDC) {
-    // This will wildcard (return undefined) if tokenIn is not provided
+    if (tokenIn === ETH_ADDRESS) return MARKET_TOKENS[Tokens.WETH]
     return MARKET_TOKENS[tokenIn as Address]
   }
   return MARKET_TOKENS[tokenOut]
