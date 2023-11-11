@@ -21,14 +21,16 @@ function getMarketAddress(
   tokenOut: Address | undefined,
 ): Address | FilterOperator | undefined {
   if (tokenOut === undefined) return undefined
-  if (!tokenIn && (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH))
+  if (!tokenIn && (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH)) {
     return undefined
+  }
   if (tokenOut === ETH_ADDRESS) {
     return MARKET_TOKENS[Tokens.WETH]
   }
   if (tokenOut === Tokens.USDC) {
-    if (tokenIn === ETH_ADDRESS) return MARKET_TOKENS[Tokens.WETH]
-    return MARKET_TOKENS[tokenIn as Address]
+    return MARKET_TOKENS[
+      tokenIn === ETH_ADDRESS ? Tokens.WETH : (tokenIn as Address)
+    ]
   }
   return MARKET_TOKENS[tokenOut]
 }
@@ -37,28 +39,7 @@ export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
   const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
-
   const ETH_USED = tokenIn === ETH_ADDRESS
-
-  /* 
-  NOTES
-  -----
-  Logic for returning market tokens 
-  - If tokenOut === ETH_ADDRESS is true, we want to return MARKET_TOKENS[Tokens.WETH]
-  - If USDC_OUT is true, we want to return MARKET_TOKENS[TokenIn]
-  - Everyother token outside of ETH and USDC will return MARKET_TOKENS[TokenOut]
-
-  Unusual Behaviour
-  - When using ETH, amountIn has the protocol fee of ~0.00121 included. (should be ok?)
-  - If amountIn is specified and tokenIn is set to any, only tokens will work (ETH will not pass)
-  - If tokenIn is any, and tokenOut is USDC, any token will pass the check. (see getMarketAddress)
-  - If tokenIn is any, and tokenOut is ETH, any token will pass the check. (see getMarketAddress)
-
-  ToDO:
-  - More tests
-  - Check behavior when swap ETH -> USDC and vice-versa
-  - Check behavior of token -> ETH 
-  */
 
   return compressJson({
     chainId: chainId,
