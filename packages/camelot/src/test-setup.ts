@@ -3,8 +3,7 @@ import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
 import { ARBITRUM_CHAIN_ID } from './chain-ids'
 import { CAMELOT_ROUTER } from './contract-addresses'
-import { Tokens } from './utils'
-import { createTestCase, type TestParams } from './create-test'
+import { Tokens, createTestCase, type TestParams } from './utils'
 
 export const SWAP_ETH: TestParams<SwapActionParams> = {
   transaction: {
