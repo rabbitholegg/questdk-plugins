@@ -39,10 +39,10 @@ export const failingTestCasesV1 = [
     chainId: 10,
   }),
   createTestCase(TOKENS_FOR_ETH_V1, 'when tokenIn is incorrect', {
-    tokenIn: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+    tokenIn: Tokens.USDCe,
   }),
   createTestCase(ETH_FOR_TOKENS_V1, 'when tokenOut is incorrect', {
-    tokenOut: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+    tokenOut: Tokens.USDC,
   }),
   createTestCase(ETH_FOR_TOKENS_V1, 'when amountIn is insufficient using ETH', {
     amountIn: GreaterThanOrEqual(parseEther('0.0193')),
