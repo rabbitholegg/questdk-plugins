@@ -6,7 +6,7 @@ import { getSupportedTokenAddresses, swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { Tokens } from './utils.js'
 import {
-  DEFAULT_TOKEN_LIST_URL,
+  DEFAULT_TOKEN_LIST,
   GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
@@ -125,7 +125,7 @@ describe('Given the gmx plugin', () => {
 
     test('should return the correct list of tokens', async () => {
       const tokens = await getSupportedTokenAddresses(ARB_ONE_CHAIN_ID)
-      expect(tokens.sort()).to.deep.equal(DEFAULT_TOKEN_LIST_URL.sort())
+      expect(tokens.sort()).to.deep.equal(DEFAULT_TOKEN_LIST.sort())
     })
   })
 })

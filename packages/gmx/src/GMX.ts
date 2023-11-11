@@ -9,7 +9,7 @@ import { OrderType, Tokens } from './utils.js'
 import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
-  DEFAULT_TOKEN_LIST_URL,
+  DEFAULT_TOKEN_LIST,
   GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
   ETH_ADDRESS,
@@ -52,8 +52,8 @@ export const swap = async (
         {
           $abi: GMX_SWAPV1_ABI,
           _path: [
-            ETH_USED ? Tokens.WETH : tokenIn ?? { $or: DEFAULT_TOKEN_LIST_URL },
-            tokenOut ?? { $or: DEFAULT_TOKEN_LIST_URL },
+            ETH_USED ? Tokens.WETH : tokenIn ?? { $or: DEFAULT_TOKEN_LIST },
+            tokenOut ?? { $or: DEFAULT_TOKEN_LIST },
           ],
           _amountIn: ETH_USED ? undefined : amountIn,
           _minOut: amountOut,
@@ -95,7 +95,7 @@ export const swap = async (
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return _chainId === ARB_ONE_CHAIN_ID ? DEFAULT_TOKEN_LIST_URL : []
+  return _chainId === ARB_ONE_CHAIN_ID ? DEFAULT_TOKEN_LIST : []
 }
 
 export const getSupportedChainIds = async () => {
