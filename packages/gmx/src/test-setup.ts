@@ -22,6 +22,16 @@ export const passingTestCasesV1 = [
   createTestCase(TOKENS_FOR_TOKENS_V1, 'when swapping tokens for tokens'),
   createTestCase(TOKENS_FOR_ETH_V1, 'when swapping tokens for ETH'),
   createTestCase(ETH_FOR_TOKENS_V1, 'when swapping ETH for tokens'),
+  createTestCase(TOKENS_FOR_TOKENS_V1, 'tokenIn is set to "any"', {
+    tokenIn: undefined,
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V1, 'tokenOut is set to "any"', {
+    tokenOut: undefined,
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V1, 'tokens are set to "any/any"', {
+    tokenIn: undefined,
+    tokenOut: undefined,
+  }),
 ]
 
 export const failingTestCasesV1 = [
@@ -59,6 +69,16 @@ export const passingTestCasesV2 = [
   createTestCase(USDCe_FOR_WETH_V2, 'when swapping USDC.e to WETH'),
   createTestCase(ALT_ETHOUT_V2, 'when swapping USDC.e to ETH'),
   createTestCase(SWAP_TOKENS_V2, 'when all parameters are correct'),
+  createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenIn is set to "any', {
+    tokenIn: undefined,
+  }),
+  createTestCase(TOKENS_FOR_USDC_V2, 'when tokenOut is set to "any', {
+    tokenOut: undefined,
+  }),
+  createTestCase(USDCe_FOR_WETH_V2, 'when tokens are set to "any/any', {
+    tokenOut: undefined,
+    tokenIn: undefined,
+  }),
 ]
 
 export const failingTestCasesV2 = [
