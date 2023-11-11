@@ -76,8 +76,8 @@ export const passingTestCasesV2 = [
     tokenOut: undefined,
   }),
   createTestCase(USDCe_FOR_WETH_V2, 'when tokens are set to "any/any', {
-    tokenOut: undefined,
     tokenIn: undefined,
+    tokenOut: undefined,
   }),
 ]
 
