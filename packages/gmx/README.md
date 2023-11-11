@@ -12,7 +12,7 @@ We've identified some limitations in the current version of the GMX swap filter:
    - When `amountIn` is specified and `tokenIn` is set to `any`, only transactions involving tokens (excluding ETH) will pass the filter.
 
 3. **Token Filtering with `tokenOut` Parameter:**
-   - If `tokenIn` is set to `any` and `tokenOut` is specified as USDC or ETH/WETH, transactions involving any token (or TH) as input will pass the filter. This occurs because the MarketToken check depends on the `tokenIn` being explicitly provided.
+   - If `tokenIn` is set to `any` and `tokenOut` is specified as USDC, transactions involving any token (excluding ETH) as input will pass the filter. This occurs because the MarketToken for USDC check depends on the `tokenIn` being explicitly provided.
 
 
 ## V2 Notes
