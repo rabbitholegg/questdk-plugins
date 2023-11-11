@@ -5,12 +5,17 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address, getAddress } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
-import {
-  DEFAULT_TOKEN_LIST_URL,
-} from './contract-addresses'
+import { DEFAULT_TOKEN_LIST_URL } from './contract-addresses'
 import { buildPathQuery, Tokens } from './utils'
 import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
 import { CAMELOT_ROUTER, PARASWAP_ROUTER } from './contract-addresses'
+
+const isValidContractAddress = (address: Address) => {
+  return (
+    address?.toLowerCase() === CAMELOT_ROUTER.toLowerCase() ||
+    address?.toLowerCase() === PARASWAP_ROUTER.toLowerCase()
+  )
+}
 
 export const swap = async (
   swap: SwapActionParams,
@@ -27,12 +32,7 @@ export const swap = async (
 
   const ethUsed = tokenIn === Tokens.ETH
 
-  if (
-    contractAddress &&
-    ![CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()].includes(
-      contractAddress?.toLowerCase() as Address,
-    )
-  ) {
+  if (contractAddress && !isValidContractAddress(contractAddress)) {
     throw new Error('Invalid Contract Address')
   }
 
