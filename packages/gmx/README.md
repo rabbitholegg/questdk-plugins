@@ -9,7 +9,7 @@ We've identified some limitations in the current version of the GMX swap filter:
    - This additional fee may lead to discrepancies when comparing amounts, especially in cases where exact equality (`==`) or less-than-or-equal-to (`<=`) operators are used.
 
 2. **Behavior with `amountIn` and `tokenIn` Parameters:**
-   - When `amountIn` is specified and `tokenIn` is set to `any`, only transactions involving tokens (excluding ETH) will pass the filter.
+   - When `amountIn` is specified and `tokenIn` is set to `any`, transactions involving any token will pass the filter, but ETH will not. This is due to the way the amount is compared when using ETH vs tokens. When `amountIn` is set to `any`, and `tokenIn` is set to `any`, both ETH and tokens will pass the filter.
 
 3. **Token Filtering with `tokenOut` Parameter:**
    - If `tokenIn` is set to `any` and `tokenOut` is specified as USDC, transactions involving any token (excluding ETH) as input will pass the filter. This occurs because the MarketToken for USDC check depends on the `tokenIn` being explicitly provided.
