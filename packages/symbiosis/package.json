@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-symbiosis",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -22,7 +22,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx only-allow pnpm",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
