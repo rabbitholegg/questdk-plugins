@@ -51,7 +51,10 @@ export const swap = async (
       $or: [
         {
           $abi: GMX_SWAPV1_ABI,
-          _path: [ETH_USED ? Tokens.WETH : tokenIn, tokenOut],
+          _path: [
+            ETH_USED ? Tokens.WETH : tokenIn ?? { $or: DEFAULT_TOKEN_LIST_URL },
+            tokenOut ?? { $or: DEFAULT_TOKEN_LIST_URL },
+          ],
           _amountIn: ETH_USED ? undefined : amountIn,
           _minOut: amountOut,
           _receiver: recipient,
