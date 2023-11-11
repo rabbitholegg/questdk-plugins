@@ -2,7 +2,8 @@ import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
 import { ARBITRUM_CHAIN_ID } from './chain-ids'
-import { CAMELOT_ROUTER, ETH_ADDRESS, WETH_ADDRESS } from './contract-addresses'
+import { CAMELOT_ROUTER } from './contract-addresses'
+import { Tokens } from './utils'
 import { createTestCase, type TestParams } from './create-test'
 
 export const SWAP_ETH: TestParams<SwapActionParams> = {
@@ -18,8 +19,8 @@ export const SWAP_ETH: TestParams<SwapActionParams> = {
   params: {
     chainId: ARBITRUM_CHAIN_ID,
     contractAddress: CAMELOT_ROUTER,
-    tokenIn: ETH_ADDRESS,
-    tokenOut: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C',
+    tokenIn: Tokens.ETH,
+    tokenOut: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C', // EQB Token
     amountIn: GreaterThanOrEqual(parseEther('0.00055')),
     amountOut: GreaterThanOrEqual(parseUnits('9.25', 18)),
   },
@@ -38,7 +39,7 @@ export const SWAP_TOKENS: TestParams<SwapActionParams> = {
   params: {
     chainId: ARBITRUM_CHAIN_ID,
     tokenIn: '0x5190F06EaceFA2C552dc6BD5e763b81C73293293', // WOMBEX
-    tokenOut: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9', // TETHER
+    tokenOut: Tokens.USDT,
     amountIn: GreaterThanOrEqual(parseUnits('750', 18)),
     amountOut: GreaterThanOrEqual(parseUnits('15', 6)),
     recipient: '0x1a185e25636306A13D3164a511F7C610F3930cAa',
@@ -58,8 +59,8 @@ export const PARASWAP_MULTISWAP: TestParams<SwapActionParams> = {
   params: {
     chainId: 42161,
     contractAddress: '0xdef171fe48cf0115b1d80b88dc8eab59176fee57',
-    tokenIn: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
-    // tokenOut: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'
+    tokenIn: Tokens.USDT,
+    // tokenOut: Tokens.USDCE
   },
 }
 
@@ -75,8 +76,8 @@ export const PARASWAP_MEGASWAP: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: 42161,
-    tokenIn: '0xB64E280e9D1B5DbEc4AcceDb2257A87b400DB149',
-    tokenOut: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+    tokenIn: '0xB64E280e9D1B5DbEc4AcceDb2257A87b400DB149', // LVL Token
+    tokenOut: Tokens.USDCE,
   },
 }
 
@@ -92,8 +93,8 @@ export const PARASWAP_SIMPLESWAP: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: ARBITRUM_CHAIN_ID,
-    tokenIn: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
-    tokenOut: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
+    tokenIn: Tokens.USDT,
+    tokenOut: Tokens.USDCE,
     amountIn: GreaterThanOrEqual(parseUnits('330', 6)),
     amountOut: GreaterThanOrEqual(parseUnits('330', 6)),
     recipient: '0xcDd37Ada79F589c15bD4f8fD2083dc88E34A2af2',
@@ -113,7 +114,7 @@ const PARASWAP_UNISWAP: TestParams<SwapActionParams> = {
   params: {
     chainId: 42161,
     contractAddress: '0xdef171fe48cf0115b1d80b88dc8eab59176fee57',
-    tokenIn: '0x9ed7E4B1BFF939ad473dA5E7a218C771D1569456',
+    tokenIn: '0x9ed7E4B1BFF939ad473dA5E7a218C771D1569456', // REUNI token
   },
 }
 
@@ -129,10 +130,10 @@ export const passingTestCases = [
 export const failingTestCases = [
   createTestCase(SWAP_TOKENS, 'when chainId is incorrect', { chainId: 10 }),
   createTestCase(SWAP_TOKENS, 'when tokenIn is incorrect', {
-    tokenIn: WETH_ADDRESS,
+    tokenIn: Tokens.WETH,
   }),
   createTestCase(SWAP_TOKENS, 'when tokenOut is incorrect', {
-    tokenOut: WETH_ADDRESS,
+    tokenOut: Tokens.WETH,
   }),
   createTestCase(SWAP_ETH, 'when amountIn is insufficient', {
     amountIn: GreaterThanOrEqual(parseEther('0.1')),

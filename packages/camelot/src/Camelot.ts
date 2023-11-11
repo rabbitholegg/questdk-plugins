@@ -7,10 +7,8 @@ import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
 import {
   DEFAULT_TOKEN_LIST_URL,
-  ETH_ADDRESS,
-  WETH_ADDRESS,
 } from './contract-addresses'
-import { buildPathQuery } from './utils'
+import { buildPathQuery, Tokens } from './utils'
 import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
 import { CAMELOT_ROUTER, PARASWAP_ROUTER } from './contract-addresses'
 
@@ -27,7 +25,7 @@ export const swap = async (
     recipient,
   } = swap
 
-  const ethUsed = tokenIn === ETH_ADDRESS
+  const ethUsed = tokenIn === Tokens.ETH
 
   if (
     contractAddress &&
@@ -47,7 +45,7 @@ export const swap = async (
       $or: [
         {
           to: recipient,
-          path: buildPathQuery(ethUsed ? WETH_ADDRESS : tokenIn, tokenOut),
+          path: buildPathQuery(ethUsed ? Tokens.WETH : tokenIn, tokenOut),
           amountOutMin: amountOut,
           amountIn: ethUsed ? undefined : amountIn,
         },
