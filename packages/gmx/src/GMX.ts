@@ -20,19 +20,22 @@ function getMarketAddress(
   tokenIn: Address | undefined,
   tokenOut: Address | undefined,
 ): Address | FilterOperator | undefined {
-  if (tokenOut === undefined) return undefined
-  if (!tokenIn && (tokenOut === ETH_ADDRESS || tokenOut === Tokens.WETH)) {
+  // return undefined if tokenOut is not provided
+  if (tokenOut === undefined) {
+    return tokenOut
+  }
+  // convert ETH to WETH address if present
+  const outboundToken = tokenOut === ETH_ADDRESS ? Tokens.WETH : tokenOut
+  // return undefined if tokenIn is undefined and tokenOut is ETH
+  if (!tokenIn && outboundToken === Tokens.WETH) {
     return undefined
   }
-  if (tokenOut === ETH_ADDRESS) {
-    return MARKET_TOKENS[Tokens.WETH]
+  // if tokenOut is USDC, use the marketToken for tokenIn instead
+  if (outboundToken === Tokens.USDC) {
+    // if tokenIn is "any"/undefined and tokenOut is USDC, any token will pass
+    return MARKET_TOKENS[tokenIn as Address]
   }
-  if (tokenOut === Tokens.USDC) {
-    return MARKET_TOKENS[
-      tokenIn === ETH_ADDRESS ? Tokens.WETH : (tokenIn as Address)
-    ]
-  }
-  return MARKET_TOKENS[tokenOut]
+  return MARKET_TOKENS[outboundToken]
 }
 
 export const swap = async (
@@ -71,7 +74,12 @@ export const swap = async (
                 addresses: {
                   initialCollateralToken: ETH_USED ? Tokens.WETH : tokenIn,
                   receiver: recipient,
-                  swapPath: { $last: getMarketAddress(tokenIn, tokenOut) },
+                  swapPath: {
+                    $last: getMarketAddress(
+                      ETH_USED ? Tokens.WETH : tokenIn,
+                      tokenOut,
+                    ),
+                  },
                 },
                 shouldUnwrapNativeToken: tokenOut
                   ? tokenOut === ETH_ADDRESS
