@@ -4,7 +4,6 @@ import type { FilterOperator } from '@rabbitholegg/questdk'
 export const GMX_ROUTERV1_ADDRESS = '0xabbc5f99639c9b6bcb58544ddf04efa6802f4064'
 export const GMX_ROUTERV2_ADDRESS = '0x7C68C7866A64FA2160F78EEaE12217FFbf871fa8'
 export const ETH_ADDRESS = '0x0000000000000000000000000000000000000000'
-export const WETH_ADDRESS = '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
 export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.DAI,
   Tokens.LINK,
@@ -13,7 +12,7 @@ export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.USDCe,
   Tokens.USDT,
   Tokens.WBTC,
-  WETH_ADDRESS,
+  Tokens.WETH,
   ETH_ADDRESS,
 ]
 
@@ -26,7 +25,7 @@ export const MARKET_TOKENS: {
   [Tokens.USDCe]: '0x9C2433dFD71096C435Be9465220BB2B189375eA7',
   [Tokens.USDT]: '0xB686BcB112660343E6d15BDb65297e110C8311c4',
   [Tokens.WBTC]: '0x47c031236e19d024b42f8AE6780E44A573170703',
-  [WETH_ADDRESS]: {
+  [Tokens.WETH]: {
     $or: [
       '0x0CCB4fAa6f1F1B30911619f1184082aB4E25813c',
       '0x6853EA96FF216fAb11D2d930CE3C508556A4bdc4',
