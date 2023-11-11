@@ -3,7 +3,7 @@ import {
   type SwapActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, getAddress } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
 import {
   DEFAULT_TOKEN_LIST_URL,
@@ -38,7 +38,7 @@ export const swap = async (
 
   return compressJson({
     chainId: chainId,
-    to: { $or: [CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()] },
+    to: { $or: [getAddress(CAMELOT_ROUTER), getAddress(PARASWAP_ROUTER)] },
     value: ethUsed ? amountIn : undefined,
     input: {
       $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
@@ -55,7 +55,7 @@ export const swap = async (
             fromAmount: amountIn,
             toToken: tokenOut,
             toAmount: amountOut,
-            partner: '0x353d2d14bb674892910685520ac040f560ccbc06',
+            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
       ],
