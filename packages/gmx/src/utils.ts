@@ -1,5 +1,5 @@
 import type { Address, Hash } from 'viem'
-import type { ActionParams } from '@rabbitholegg/questdk'
+import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
 
 export enum OrderType {
   MarketSwap = 0,
@@ -65,5 +65,22 @@ export function createTestCase<T extends ActionParams>(
     transaction: testParams.transaction,
     params: { ...testParams.params, ...overrides },
     description,
+  }
+}
+
+export const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
+  // v2 paths are formatted as [<token>, <token>]
+  const conditions: FilterOperator[] = []
+
+  if (tokenIn) {
+    conditions.push({ $first: tokenIn })
+  }
+
+  if (tokenOut) {
+    conditions.push({ $last: tokenOut })
+  }
+
+  return {
+    $and: conditions,
   }
 }

@@ -44,7 +44,9 @@ describe('Given the gmx plugin', () => {
               {
                 // V1 Path
                 $abi: GMX_SWAPV1_ABI,
-                _path: [Tokens.USDCe, Tokens.USDT],
+                _path: {
+                  $and: [{ $first: Tokens.USDCe }, { $last: Tokens.USDT }],
+                },
                 _amountIn: {
                   $gte: '100000',
                 },

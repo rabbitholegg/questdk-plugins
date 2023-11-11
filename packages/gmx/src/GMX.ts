@@ -5,7 +5,7 @@ import {
   type FilterOperator,
 } from '@rabbitholegg/questdk'
 import { getAddress, type Address } from 'viem'
-import { OrderType, Tokens } from './utils.js'
+import { OrderType, Tokens, buildPathQuery } from './utils.js'
 import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
@@ -51,10 +51,7 @@ export const swap = async (
       $or: [
         {
           $abi: GMX_SWAPV1_ABI,
-          _path: [
-            ETH_USED ? Tokens.WETH : tokenIn ?? { $or: DEFAULT_TOKEN_LIST },
-            tokenOut ?? { $or: DEFAULT_TOKEN_LIST },
-          ],
+          _path: buildPathQuery(ETH_USED ? Tokens.WETH : tokenIn, tokenOut),
           _amountIn: ETH_USED ? undefined : amountIn,
           _minOut: amountOut,
           _receiver: recipient,
