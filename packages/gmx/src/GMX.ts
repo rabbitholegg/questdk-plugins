@@ -26,11 +26,8 @@ function getMarketAddress(
   }
   // convert ETH to WETH address if present
   const outboundToken = tokenOut === ETH_ADDRESS ? Tokens.WETH : tokenOut
-  // return undefined if tokenIn is undefined and tokenOut is ETH
-  if (!tokenIn && outboundToken === Tokens.WETH) {
-    return undefined
-  }
-  // if tokenOut is USDC, use the marketToken for tokenIn instead
+
+  // if tokenOut is USDC, use the marketToken for tokenIn
   if (outboundToken === Tokens.USDC) {
     // if tokenIn is "any"/undefined and tokenOut is USDC, any token will pass
     return MARKET_TOKENS[tokenIn as Address]
