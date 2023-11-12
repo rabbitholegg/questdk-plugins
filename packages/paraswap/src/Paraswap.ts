@@ -6,6 +6,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
+import { Tokens, buildPathQuery } from './utils.js'
 import {
   constructGetTokens,
   constructAxiosFetcher,
@@ -22,96 +23,66 @@ import {
   OPTIMISM_SEPSP2_ADDRESS,
 } from './contract-addresses.js'
 const fetcher = constructAxiosFetcher(axios) // alternatively constructFetchFetcher
-// If you're implementing swap or mint, simply duplicate this function and change the name
+const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+
 export const swap = async (swap: SwapActionParams) => {
-  // This is the information we'll use to compose the Transaction object
-  const {
-    chainId,
-    contractAddress,
-    tokenIn,
-    tokenOut,
-    amountIn,
-    amountOut,
-    recipient,
-  } = swap
+  const { chainId, contractAddress, tokenIn, tokenOut, amountIn, amountOut } =
+    swap
   const { getAugustusSwapper } = constructGetSpender({ chainId, fetcher })
   const to = contractAddress || (await getAugustusSwapper())
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  const ethUsedIn = tokenIn === Tokens.ETH
+  const ethUsedOut = tokenOut === Tokens.ETH
+
   return compressJson({
-    chainId: chainId, // The chainId of the source chain
+    chainId: chainId,
     to: to,
     input: {
-      $abiAbstract: PARASWAP_SWAP_ABI,
+      $abi: PARASWAP_SWAP_ABI,
       $or: [
         {
-          assets:
-            tokenIn !== undefined && tokenOut !== undefined
-              ? [tokenIn, tokenOut]
-              : undefined,
-          funds: {
-            recipient: recipient,
-          },
-          fromAmount: amountIn,
-          expectedAmount: amountOut,
-        },
-        {
-          assets:
-            tokenIn !== undefined && tokenOut !== undefined
-              ? [tokenIn, tokenOut]
-              : undefined,
-          funds: {
-            recipient: recipient,
-          },
-          fromAmount: amountIn,
-          expectedAmount: amountOut,
-        },
-        {
-          fromToken: tokenIn,
-          toToken: tokenOut,
-          fromAmount: amountIn,
-          expectedAmount: amountOut,
-        },
-        {
-          fromToken: tokenIn,
-          toToken: tokenOut,
-          fromAmount: amountIn,
-          toAmount: amountOut,
-        },
-        {
-          params: {
-            amountIn: amountIn,
-            amountOut: amountOut,
-            tokenIn: tokenIn,
-            tokenOut: tokenOut,
-          },
-        },
-        {
-          params: {
-            path:
-              tokenIn !== undefined && tokenOut !== undefined
-                ? tokenIn + tokenOut.substring(2)
-                : undefined,
-            amountIn: amountIn,
-            amountOutMinimum: amountOut,
-            recipient: recipient,
-          },
-        },
-        {
+          // simpleswap, directUniV3Swap, directCurveSwap
           data: {
-            fromToken: tokenIn,
+            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
+            toAmount: amountOut,
+            toToken: ethUsedOut ? ETH_ADDRESS : tokenOut,
+          },
+        },
+        {
+          // multiswap
+          data: {
+            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
+            fromAmount: amountIn,
+            toAmount: amountOut,
             path: {
               $last: {
-                to: tokenOut,
+                to: ethUsedOut ? ETH_ADDRESS : tokenOut,
               },
             },
           },
         },
         {
+          // megaswap
           data: {
-            fromToken: tokenIn,
+            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
-            toToken: tokenOut,
+            toAmount: amountOut,
+            path: {
+              $last: {
+                path: {
+                  $last: {
+                    to: ethUsedOut ? ETH_ADDRESS : tokenOut,
+                  },
+                },
+              },
+            },
+          },
+        },
+        {
+          // directBalancerV2
+          data: {
+            assets: buildPathQuery(tokenIn, tokenOut),
+            fromAmount: amountIn,
             toAmount: amountOut,
           },
         },
