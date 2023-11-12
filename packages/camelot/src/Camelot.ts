@@ -59,8 +59,40 @@ export const swap = async (
           data: {
             fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
-            toToken: ethUsedOut ? ETH_ADDRESS : tokenOut,
             toAmount: amountOut,
+            toToken: ethUsedOut ? ETH_ADDRESS : tokenOut,
+            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+          },
+        },
+        {
+          // multiswap
+          data: {
+            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
+            fromAmount: amountIn,
+            toAmount: amountOut,
+            path: {
+              $last: {
+                to: ethUsedOut ? ETH_ADDRESS : tokenOut,
+              },
+            },
+            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+          },
+        },
+        {
+          // megaswap
+          data: {
+            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
+            fromAmount: amountIn,
+            toAmount: amountOut,
+            path: {
+              $last: {
+                path: {
+                  $last: {
+                    to: ethUsedOut ? ETH_ADDRESS : tokenOut,
+                  },
+                },
+              },
+            },
             // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
