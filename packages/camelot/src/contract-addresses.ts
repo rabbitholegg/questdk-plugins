@@ -14,5 +14,6 @@ export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.GMX, // '0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a' - GMX
 ]
 
+export const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 export const CAMELOT_ROUTER = '0xc873fEcbd354f5A56E00E710B90EF4201db2448d'
 export const PARASWAP_ROUTER = '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57'

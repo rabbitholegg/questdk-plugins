@@ -8,7 +8,11 @@ import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
 import { DEFAULT_TOKEN_LIST } from './contract-addresses'
 import { buildPathQuery, Tokens } from './utils'
 import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
-import { CAMELOT_ROUTER, PARASWAP_ROUTER } from './contract-addresses'
+import {
+  CAMELOT_ROUTER,
+  PARASWAP_ROUTER,
+  ETH_ADDRESS,
+} from './contract-addresses'
 
 const isValidContractAddress = (address: Address) => {
   return (
@@ -30,7 +34,8 @@ export const swap = async (
     recipient,
   } = swap
 
-  const ethUsed = tokenIn === Tokens.ETH
+  const ethUsedIn = tokenIn === Tokens.ETH
+  const ethUsedOut = tokenOut === Tokens.ETH
 
   if (contractAddress && !isValidContractAddress(contractAddress)) {
     throw new Error('Invalid Contract Address')
@@ -39,24 +44,24 @@ export const swap = async (
   return compressJson({
     chainId: chainId,
     to: { $or: [getAddress(CAMELOT_ROUTER), getAddress(PARASWAP_ROUTER)] },
-    value: ethUsed ? amountIn : undefined,
+    value: ethUsedIn ? amountIn : undefined,
     input: {
       $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
       $or: [
         {
           to: recipient,
-          path: buildPathQuery(ethUsed ? Tokens.WETH : tokenIn, tokenOut),
+          path: buildPathQuery(ethUsedIn ? Tokens.WETH : tokenIn, tokenOut),
           amountOutMin: amountOut,
-          amountIn: ethUsed ? undefined : amountIn,
+          amountIn: ethUsedIn ? undefined : amountIn,
         },
         {
           // simpleswap
           data: {
-            fromToken: tokenIn,
+            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
-            toToken: tokenOut,
+            toToken: ethUsedOut ? ETH_ADDRESS : tokenOut,
             toAmount: amountOut,
-            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
       ],
