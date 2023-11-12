@@ -9,6 +9,7 @@ import {
   PARASWAP_MEGASWAP,
   PARASWAP_UNISWAP,
   PARASWAP_BALANCER,
+  PARASWAP_CURVE,
 } from './test-transactions'
 
 export const passingTestCases = [
@@ -19,6 +20,7 @@ export const passingTestCases = [
   createTestCase(PARASWAP_MEGASWAP, 'for mega swap'),
   createTestCase(PARASWAP_UNISWAP, 'for directUniV3Swap'),
   createTestCase(PARASWAP_BALANCER, 'for directBalancerV2'),
+  createTestCase(PARASWAP_CURVE, 'for directCurveV2Swap'),
 ]
 
 export const failingTestCases = [
