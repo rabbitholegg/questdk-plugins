@@ -7,6 +7,7 @@ import {
   SIMPLE_SWAP_ZYBER_TO_ETH,
   SINGLE_SWAP_EURO,
   SINGLE_SWAP_USDC_BTC,
+  SWAP_MEGA,
   SWAP_MULTI,
   SWAP_SIMPLE,
   SWAP_BALANCER,
@@ -16,7 +17,7 @@ import {
 import { stake, swap } from './Paraswap.js'
 import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids.js'
 import { Tokens } from './utils'
-import { parseEther, type Address } from 'viem'
+import { parseEther, parseUnits, type Address } from 'viem'
 import { PARASWAP_SWAP_ABI } from './abi.js'
 import type {
   FilterObject,
@@ -301,6 +302,17 @@ describe('Given the paraswap plugin', () => {
         tokenIn: Tokens.ETH,
         tokenOut: '0xEC70Dcb4A1EFa46b8F2D97C310C9c4790ba5ffA8',
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid megaswap transaction', async () => {
+      const transaction = SWAP_MEGA
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        tokenIn: '0xB64E280e9D1B5DbEc4AcceDb2257A87b400DB149', // LVL Token
+        tokenOut: Tokens.USDT,
+        amountIn: GreaterThanOrEqual(parseUnits('500', 18)),
+        amountOut: GreaterThanOrEqual(parseUnits('100', 6)),
       })
       expect(apply(transaction, filter)).to.be.true
     })
