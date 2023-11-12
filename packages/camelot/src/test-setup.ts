@@ -13,9 +13,9 @@ import {
 export const passingTestCases = [
   createTestCase(V2_SWAP_ETH, 'when swapping ETH for tokens'),
   createTestCase(V2_SWAP_TOKENS, 'when swapping tokens for tokens'),
-  createTestCase(PARASWAP_SIMPLESWAP, 'when using aggregator mode'),
-  createTestCase(PARASWAP_MULTISWAP, 'when using aggregator mode'),
-  createTestCase(PARASWAP_MEGASWAP, 'when using aggregator mode'),
+  createTestCase(PARASWAP_SIMPLESWAP, 'for simple swap'),
+  createTestCase(PARASWAP_MULTISWAP, 'for multi swap'),
+  createTestCase(PARASWAP_MEGASWAP, 'for mega swap'),
   createTestCase(PARASWAP_UNISWAP, 'when using aggregator mode'),
 ]
 
