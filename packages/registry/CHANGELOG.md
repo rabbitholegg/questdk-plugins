@@ -1,5 +1,14 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [[`dd8dc14`](https://github.com/rabbitholegg/questdk-plugins/commit/dd8dc14659be61a9fb64cf09c90d907126718044), [`8496a49`](https://github.com/rabbitholegg/questdk-plugins/commit/8496a49d99ba2dcecef60211e1e9108d8128f5d3)]:
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.7
+
 ## 1.0.0-alpha.30
 
 ### Minor Changes
