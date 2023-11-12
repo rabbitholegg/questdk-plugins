@@ -300,7 +300,7 @@ describe('Given the paraswap plugin', () => {
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
         tokenIn: Tokens.ETH,
         tokenOut: '0xEC70Dcb4A1EFa46b8F2D97C310C9c4790ba5ffA8',
-        // amountOut: GreaterThanOrEqual(parseEther('0.037')),
+        amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.true
     })
