@@ -5,7 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address, getAddress } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
-import { DEFAULT_TOKEN_LIST_URL } from './contract-addresses'
+import { DEFAULT_TOKEN_LIST } from './contract-addresses'
 import { buildPathQuery, Tokens } from './utils'
 import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
 import { CAMELOT_ROUTER, PARASWAP_ROUTER } from './contract-addresses'
@@ -50,6 +50,7 @@ export const swap = async (
           amountIn: ethUsed ? undefined : amountIn,
         },
         {
+          // simpleswap
           data: {
             fromToken: tokenIn,
             fromAmount: amountIn,
@@ -67,7 +68,7 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   // Only return supported tokens for ARBITRUM_CHAIN_ID
-  return _chainId === ARBITRUM_CHAIN_ID ? DEFAULT_TOKEN_LIST_URL : []
+  return _chainId === ARBITRUM_CHAIN_ID ? DEFAULT_TOKEN_LIST : []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
