@@ -2,13 +2,15 @@ import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import {
   CAMELOT_ROUTER,
-  DEFAULT_TOKEN_LIST_URL,
+  DEFAULT_TOKEN_LIST,
+  ETH_ADDRESS,
+  PARASWAP_ROUTER,
 } from './contract-addresses'
 import { ARBITRUM_CHAIN_ID } from './chain-ids'
 import { parseEther, getAddress } from 'viem'
 import { swap } from './Camelot'
 import { Tokens } from './utils'
-import { CAMELOT_ABI } from './abi'
+import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
 import { failingTestCases, passingTestCases } from './test-setup'
 
 describe('Given the camelot plugin', () => {
@@ -25,17 +27,77 @@ describe('Given the camelot plugin', () => {
 
       expect(filter).to.deep.equal({
         chainId: 42161,
-        to: '0xc873fEcbd354f5A56E00E710B90EF4201db2448d',
+        to: { $or: [CAMELOT_ROUTER, PARASWAP_ROUTER] },
         input: {
-          $abi: CAMELOT_ABI,
-          path: {
-            $and: [
-              { $first: Tokens.USDT },
-              { $last: Tokens.WETH },
-            ],
-          },
-          amountIn: { $gte: '1000000' },
-          amountOutMin: { $gte: '500000000000000' },
+          $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
+          $or: [
+            {
+              path: {
+                $and: [
+                  {
+                    $first: Tokens.USDT,
+                  },
+                  {
+                    $last: Tokens.WETH,
+                  },
+                ],
+              },
+              amountOutMin: {
+                $gte: '500000000000000',
+              },
+              amountIn: {
+                $gte: '1000000',
+              },
+            },
+            {
+              data: {
+                fromToken: Tokens.USDT,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                toToken: Tokens.WETH,
+              },
+            },
+            {
+              data: {
+                fromToken: Tokens.USDT,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    to: Tokens.WETH,
+                  },
+                },
+              },
+            },
+            {
+              data: {
+                fromToken: Tokens.USDT,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    path: {
+                      $last: {
+                        to: Tokens.WETH,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          ],
         },
       })
     })
@@ -45,22 +107,84 @@ describe('Given the camelot plugin', () => {
         contractAddress: CAMELOT_ROUTER,
         tokenIn: Tokens.ETH,
         tokenOut: Tokens.USDT,
-        amountIn: GreaterThanOrEqual(parseEther('0.5')),
+        amountIn: GreaterThanOrEqual(1000000n),
+        amountOut: GreaterThanOrEqual(parseEther('0.0005')),
         recipient: '0x67ef327038b25ff762a0606bc92c4a0a6e767048',
       })
       expect(filter).to.deep.equal({
         chainId: 42161,
-        to: '0xc873fEcbd354f5A56E00E710B90EF4201db2448d',
-        value: { $gte: '500000000000000000' },
+        to: { $or: [CAMELOT_ROUTER, PARASWAP_ROUTER] },
+        value: {
+          $gte: '1000000',
+        },
         input: {
-          $abi: CAMELOT_ABI,
-          to: '0x67ef327038b25ff762a0606bc92c4a0a6e767048',
-          path: {
-            $and: [
-              { $first: Tokens.WETH },
-              { $last: Tokens.USDT },
-            ],
-          },
+          $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
+          $or: [
+            {
+              to: '0x67ef327038b25ff762a0606bc92c4a0a6e767048',
+              path: {
+                $and: [
+                  {
+                    $first: Tokens.WETH,
+                  },
+                  {
+                    $last: Tokens.USDT,
+                  },
+                ],
+              },
+              amountOutMin: {
+                $gte: '500000000000000',
+              },
+            },
+            {
+              data: {
+                fromToken: ETH_ADDRESS,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                toToken: Tokens.USDT,
+              },
+            },
+            {
+              data: {
+                fromToken: ETH_ADDRESS,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    to: Tokens.USDT,
+                  },
+                },
+              },
+            },
+            {
+              data: {
+                fromToken: ETH_ADDRESS,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    path: {
+                      $last: {
+                        to: Tokens.USDT,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          ],
         },
       })
     })
@@ -91,7 +215,6 @@ describe('Given the camelot plugin', () => {
         throw new Error('Expected bridge function to throw, but it did not.')
       } catch (err) {
         if (err instanceof Error) {
-          // This is a type guard
           expect(err.message).toBe('Invalid Contract Address')
         }
       }
@@ -99,22 +222,15 @@ describe('Given the camelot plugin', () => {
   })
   describe('all supported tokens addresses are properly checksummed', () => {
     test('should have all addresses properly checksummed', () => {
-      const notChecksummed = DEFAULT_TOKEN_LIST_URL.filter(
+      const notChecksummed = DEFAULT_TOKEN_LIST.filter(
         (tokenAddress) => tokenAddress !== getAddress(tokenAddress),
       )
-
-      if (notChecksummed.length > 0) {
-        console.error(
-          `The following addresses are not properly checksummed: ${notChecksummed.join(
-            ', ',
-          )}`,
-        )
-      }
       expect(notChecksummed).to.be.empty
     })
 
     test('should pass filter with valid simple transactions', async () => {
       const transaction = {
+        chainId: 42161,
         from: '0x6682cEDE4F8bd59AdBb103392F2780E71013aEca',
         hash: '0xa7ba51c4894a13985d330c6ab12e6577b9c8379670755d4cbad2283e4b6b3fa8',
         input:
@@ -124,9 +240,8 @@ describe('Given the camelot plugin', () => {
       }
       const filter = await swap({
         chainId: 42161,
-        tokenIn: Tokens.USDT,
-        tokenOut: Tokens.USDCE,
-        amountIn: GreaterThanOrEqual(339000000),
+        tokenIn: Tokens.WETH,
+        tokenOut: Tokens.ETH,
       })
       expect(apply(transaction, filter)).to.be.true
     })
