@@ -148,10 +148,14 @@ export const getSupportedTokenAddresses = async (
     return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
   }
   const { getTokens } = constructGetTokens({ chainId: _chainId, fetcher })
-  // Default list only valid for
-  return getTokens
-    ? (await getTokens()).map((token) => token.address as Address)
+  const tokenList = getTokens
+    ? ((await getTokens()).map((token) =>
+        token.address.toLowerCase() === ETH_ADDRESS.toLowerCase()
+          ? Tokens.ETH
+          : token.address,
+      ) as Address[])
     : (DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[])
+  return tokenList
 }
 export const getSupportedChainIds = async (actionType?: ActionType) => {
   if (actionType === 'stake') {

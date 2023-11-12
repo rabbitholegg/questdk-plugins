@@ -19,11 +19,13 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
   [chainId: number]: readonly Address[]
 } = {
   [ETH_CHAIN_ID]: [
+    ETH_TOKEN_ADDRESS,
     '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
     '0xdac17f958d2ee523a2206206994597c13d831ec7',
     '0x72e2f4830b9e45d52f80ac08cb2bec0fef72ed9c',
   ],
   [ARB_ONE_CHAIN_ID]: [
+    ETH_TOKEN_ADDRESS,
     '0x17fc002b466eec40dae837fc4be5c67993ddbd6f',
     '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f',
     '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
@@ -36,7 +38,7 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
     '0xf97f4df75117a78c1a5a0dbb814af92458539fb4',
   ],
   [OPTIMISM_CHAIN_ID]: [
-    '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+    ETH_TOKEN_ADDRESS,
     '0x4200000000000000000000000000000000000006',
     '0x4200000000000000000000000000000000000042',
     '0x76fb31fb4af56892a25e32cfc43de717950c9278',
