@@ -17,26 +17,21 @@ import {
 import { stake, swap } from './Paraswap.js'
 import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids.js'
 import { Tokens } from './utils'
-import { parseEther, parseUnits, type Address } from 'viem'
+import { parseEther, parseUnits } from 'viem'
 import { PARASWAP_SWAP_ABI } from './abi.js'
 import type {
   FilterObject,
   TransactionFilter,
 } from '@rabbitholegg/questdk/dist/types/filter/types'
-const USDT_ADDRESS = '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
-const USDCE_ADDRESS = '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8'
-const VELA_ADDRESS = '0x088cd8f5ef3652623c22d48b1605dcfe860cd704'
 const AUGUSTUS_SWAPPER_ARBITRUM = '0xdef171fe48cf0115b1d80b88dc8eab59176fee57'
-const ARB_WETH_ADDRESS = '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'
-const ARB_ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 describe('Given the paraswap plugin', () => {
   describe('When handling the swap', () => {
     test('should return a valid action filter', async () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.USDCE,
         amountIn: GreaterThanOrEqual(339000000),
       })
 
@@ -48,29 +43,29 @@ describe('Given the paraswap plugin', () => {
           $or: [
             {
               data: {
-                fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                fromToken: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
                 fromAmount: {
                   $gte: '339000000',
                 },
-                toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                toToken: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
               },
             },
             {
               data: {
-                fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                fromToken: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
                 fromAmount: {
                   $gte: '339000000',
                 },
                 path: {
                   $last: {
-                    to: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                    to: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
                   },
                 },
               },
             },
             {
               data: {
-                fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                fromToken: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
                 fromAmount: {
                   $gte: '339000000',
                 },
@@ -78,7 +73,7 @@ describe('Given the paraswap plugin', () => {
                   $last: {
                     path: {
                       $last: {
-                        to: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                        to: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
                       },
                     },
                   },
@@ -90,10 +85,10 @@ describe('Given the paraswap plugin', () => {
                 assets: {
                   $and: [
                     {
-                      $first: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                      $first: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
                     },
                     {
-                      $last: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                      $last: '0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8',
                     },
                   ],
                 },
@@ -112,8 +107,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.USDCE,
         amountIn: GreaterThanOrEqual(339000000),
       })
       expect(apply(transaction, filter)).to.be.true
@@ -181,8 +176,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.USDCE,
         amountIn: GreaterThanOrEqual(339000000000),
       })
       expect(apply(transaction, filter)).to.be.false
@@ -193,8 +188,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: ARB_WETH_ADDRESS.toLowerCase() as Address,
-        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.WETH,
+        tokenOut: Tokens.USDCE,
       })
       expect(apply(transaction, filter)).to.be.true
     })
@@ -204,7 +199,7 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDCE,
       })
       expect(apply(transaction, filter)).to.be.true
     })
@@ -214,7 +209,7 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDCE,
       })
       expect(apply(transaction, filter)).to.be.true
     })
@@ -224,7 +219,7 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: ARB_ETH_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.ETH,
       })
       expect(apply(transaction, filter)).to.be.true
     })
@@ -234,7 +229,7 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenOut: ARB_ETH_ADDRESS.toLowerCase() as Address,
+        tokenOut: Tokens.ETH,
       })
       expect(apply(transaction, filter)).to.be.true
     })
@@ -244,8 +239,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
-        tokenOut: VELA_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDCE,
+        tokenOut: Tokens.VELA,
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.true
@@ -255,8 +250,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-        tokenOut: VELA_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.VELA,
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.false
@@ -266,8 +261,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.USDCE,
         amountIn: GreaterThanOrEqual(339000000),
       })
       expect(apply(transaction, filter)).to.be.true
@@ -277,8 +272,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-        tokenOut: USDCE_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.USDCE,
         amountIn: GreaterThanOrEqual(339000000000),
       })
       expect(apply(transaction, filter)).to.be.false
@@ -288,8 +283,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
-        tokenOut: VELA_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDCE,
+        tokenOut: Tokens.VELA,
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.true
@@ -321,8 +316,8 @@ describe('Given the paraswap plugin', () => {
       const filter = await swap({
         chainId: ARB_ONE_CHAIN_ID,
         contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
-        tokenIn: USDT_ADDRESS.toLowerCase() as Address,
-        tokenOut: VELA_ADDRESS.toLowerCase() as Address,
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.VELA,
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.false
