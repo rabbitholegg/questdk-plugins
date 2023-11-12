@@ -55,7 +55,7 @@ export const swap = async (
           amountIn: ethUsedIn ? undefined : amountIn,
         },
         {
-          // simpleswap
+          // simpleswap, directUniV3Swap, directCurveSwap
           data: {
             fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
@@ -93,6 +93,15 @@ export const swap = async (
                 },
               },
             },
+            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+          },
+        },
+        {
+          // directBalancerV2
+          data: {
+            assets: buildPathQuery(tokenIn, tokenOut),
+            fromAmount: amountIn,
+            toAmount: amountOut,
             // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
