@@ -135,6 +135,6 @@ export const PARASWAP_BALANCER: TestParams<SwapActionParams> = {
     tokenIn: Tokens.ETH,
     tokenOut: '0xEC70Dcb4A1EFa46b8F2D97C310C9c4790ba5ffA8', // RETH
     amountIn: GreaterThanOrEqual(parseEther('10')),
-    amountOut: GreaterThanOrEqual(parseEther('9.135'))
+    amountOut: GreaterThanOrEqual(parseEther('9.135')),
   },
 }
