@@ -60,8 +60,8 @@ export const PARASWAP_MULTISWAP: TestParams<SwapActionParams> = {
   params: {
     chainId: 42161,
     contractAddress: '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57',
-    tokenIn: Tokens.USDT,
-    // tokenOut: Tokens.USDCE
+    tokenIn: Tokens.USDT, // 0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9
+    tokenOut: Tokens.USDC, // 0xaf88d065e77c8cc2239327c5edb3a432268e5831
   },
 }
 
@@ -78,7 +78,7 @@ export const PARASWAP_MEGASWAP: TestParams<SwapActionParams> = {
   params: {
     chainId: 42161,
     tokenIn: '0xB64E280e9D1B5DbEc4AcceDb2257A87b400DB149', // LVL Token
-    tokenOut: Tokens.USDCE,
+    tokenOut: Tokens.USDT,
   },
 }
 
