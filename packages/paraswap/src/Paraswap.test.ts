@@ -9,11 +9,13 @@ import {
   SINGLE_SWAP_USDC_BTC,
   SWAP_MULTI,
   SWAP_SIMPLE,
+  SWAP_BALANCER,
   UNISWAP_V3_SWAP,
   WETH_PROD_TEST,
 } from './test-transactions'
 import { stake, swap } from './Paraswap.js'
 import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids.js'
+import { Tokens } from './utils'
 import { parseEther, type Address } from 'viem'
 import { PARASWAP_SWAP_ABI } from './abi.js'
 import type {
@@ -41,65 +43,23 @@ describe('Given the paraswap plugin', () => {
         chainId: ARB_ONE_CHAIN_ID,
         to: AUGUSTUS_SWAPPER_ARBITRUM,
         input: {
-          $abiAbstract: PARASWAP_SWAP_ABI,
+          $abi: PARASWAP_SWAP_ABI,
           $or: [
             {
-              assets: [
-                '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
-                '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
-              ],
-              fromAmount: {
-                $gte: '339000000',
-              },
-              funds: {},
-            },
-            {
-              assets: [
-                '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
-                '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
-              ],
-              fromAmount: {
-                $gte: '339000000',
-              },
-              funds: {},
-            },
-            {
-              fromAmount: {
-                $gte: '339000000',
-              },
-              fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
-              toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
-            },
-            {
-              fromAmount: {
-                $gte: '339000000',
-              },
-              fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
-              toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
-            },
-            {
-              params: {
-                amountIn: {
+              data: {
+                fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                fromAmount: {
                   $gte: '339000000',
                 },
-                tokenIn: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
-                tokenOut: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
-              },
-            },
-            {
-              params: {
-                amountIn: {
-                  $gte: '339000000',
-                },
-                path: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9ff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
               },
             },
             {
               data: {
+                fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
                 fromAmount: {
                   $gte: '339000000',
                 },
-                fromToken: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
                 path: {
                   $last: {
                     to: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
@@ -113,7 +73,32 @@ describe('Given the paraswap plugin', () => {
                 fromAmount: {
                   $gte: '339000000',
                 },
-                toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                path: {
+                  $last: {
+                    path: {
+                      $last: {
+                        to: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+            {
+              data: {
+                assets: {
+                  $and: [
+                    {
+                      $first: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+                    },
+                    {
+                      $last: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+                    },
+                  ],
+                },
+                fromAmount: {
+                  $gte: '339000000',
+                },
               },
             },
           ],
@@ -137,38 +122,35 @@ describe('Given the paraswap plugin', () => {
       const testFilter: TransactionFilter = {
         to: '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57',
         input: {
+          //@ts-ignore
+          $abi: PARASWAP_SWAP_ABI,
           $or: [
             {
-              funds: {},
-              assets: [
-                '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-                '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-              ],
-            } as FilterObject,
-            {
-              funds: {},
-              assets: [
-                '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-                '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-              ],
-            } as FilterObject,
-            {
-              toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-              fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-            } as FilterObject,
-            {
-              toToken: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
-              fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-            } as FilterObject,
-            {
-              params: {
-                tokenIn: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-                tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              data: {
+                assets: {
+                  $and: [
+                    {
+                      $first: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+                    },
+                    {
+                      $last: '0x0000000000000000000000000000000000000000',
+                    },
+                  ],
+                },
               },
             } as FilterObject,
             {
-              params: {
-                path: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1EeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+              data: {
+                path: {
+                  $last: {
+                    path: {
+                      $last: {
+                        to: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+                      },
+                    },
+                  },
+                },
+                fromToken: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
               },
             } as FilterObject,
             {
@@ -188,7 +170,6 @@ describe('Given the paraswap plugin', () => {
               },
             } as FilterObject,
           ],
-          $abiAbstract: PARASWAP_SWAP_ABI,
         },
         chainId: 42161,
       }
@@ -309,6 +290,17 @@ describe('Given the paraswap plugin', () => {
         tokenIn: USDCE_ADDRESS.toLowerCase() as Address,
         tokenOut: VELA_ADDRESS.toLowerCase() as Address,
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid balancer transaction', async () => {
+      const transaction = SWAP_BALANCER
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: Tokens.ETH,
+        tokenOut: '0xEC70Dcb4A1EFa46b8F2D97C310C9c4790ba5ffA8',
+        // amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.true
     })
