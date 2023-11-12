@@ -59,6 +59,7 @@ describe('Given the camelot plugin', () => {
                   $gte: '500000000000000',
                 },
                 toToken: Tokens.WETH,
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -75,6 +76,7 @@ describe('Given the camelot plugin', () => {
                     to: Tokens.WETH,
                   },
                 },
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -95,6 +97,21 @@ describe('Given the camelot plugin', () => {
                     },
                   },
                 },
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                assets: {
+                  $and: [{ $first: Tokens.USDT }, { $last: Tokens.WETH }],
+                },
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
           ],
@@ -146,6 +163,7 @@ describe('Given the camelot plugin', () => {
                   $gte: '500000000000000',
                 },
                 toToken: Tokens.USDT,
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -162,6 +180,7 @@ describe('Given the camelot plugin', () => {
                     to: Tokens.USDT,
                   },
                 },
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -182,6 +201,21 @@ describe('Given the camelot plugin', () => {
                     },
                   },
                 },
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                assets: {
+                  $and: [{ $first: Tokens.ETH }, { $last: Tokens.USDT }],
+                },
+                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
           ],
@@ -228,7 +262,7 @@ describe('Given the camelot plugin', () => {
       expect(notChecksummed).to.be.empty
     })
 
-    test('should pass filter with valid simple transactions', async () => {
+    test('should pass filter with valid simple transaction', async () => {
       const transaction = {
         chainId: 42161,
         from: '0x6682cEDE4F8bd59AdBb103392F2780E71013aEca',
