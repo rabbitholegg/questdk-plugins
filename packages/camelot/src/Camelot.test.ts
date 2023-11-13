@@ -59,7 +59,7 @@ describe('Given the camelot plugin', () => {
                   $gte: '500000000000000',
                 },
                 toToken: Tokens.WETH,
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -76,7 +76,7 @@ describe('Given the camelot plugin', () => {
                     to: Tokens.WETH,
                   },
                 },
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -97,7 +97,7 @@ describe('Given the camelot plugin', () => {
                     },
                   },
                 },
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -111,7 +111,7 @@ describe('Given the camelot plugin', () => {
                 assets: {
                   $and: [{ $first: Tokens.USDT }, { $last: Tokens.WETH }],
                 },
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
           ],
@@ -163,7 +163,7 @@ describe('Given the camelot plugin', () => {
                   $gte: '500000000000000',
                 },
                 toToken: Tokens.USDT,
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -180,7 +180,7 @@ describe('Given the camelot plugin', () => {
                     to: Tokens.USDT,
                   },
                 },
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -201,7 +201,7 @@ describe('Given the camelot plugin', () => {
                     },
                   },
                 },
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
             {
@@ -215,7 +215,7 @@ describe('Given the camelot plugin', () => {
                 assets: {
                   $and: [{ $first: Tokens.ETH }, { $last: Tokens.USDT }],
                 },
-                // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
               },
             },
           ],

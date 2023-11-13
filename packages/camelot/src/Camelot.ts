@@ -61,7 +61,7 @@ export const swap = async (
             fromAmount: amountIn,
             toAmount: amountOut,
             toToken: ethUsedOut ? ETH_ADDRESS : tokenOut,
-            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
         {
@@ -75,7 +75,7 @@ export const swap = async (
                 to: ethUsedOut ? ETH_ADDRESS : tokenOut,
               },
             },
-            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
         {
@@ -93,7 +93,7 @@ export const swap = async (
                 },
               },
             },
-            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
         {
@@ -102,7 +102,7 @@ export const swap = async (
             assets: buildPathQuery(tokenIn, tokenOut),
             fromAmount: amountIn,
             toAmount: amountOut,
-            // partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
           },
         },
       ],
