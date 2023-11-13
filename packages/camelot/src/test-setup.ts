@@ -10,6 +10,7 @@ import {
   PARASWAP_UNISWAP,
   PARASWAP_BALANCER,
   PARASWAP_CURVE,
+  SWAP_WRONG_PARTNER,
 } from './test-transactions'
 
 export const passingTestCases = [
@@ -40,4 +41,5 @@ export const failingTestCases = [
   createTestCase(V2_SWAP_TOKENS, 'when recipient in incorrect', {
     recipient: '0x12e80D4b52023eDd8cB2294C6948D4c5d5D5D266',
   }),
+  createTestCase(SWAP_WRONG_PARTNER, 'if swap did not originate from camelot'),
 ]
