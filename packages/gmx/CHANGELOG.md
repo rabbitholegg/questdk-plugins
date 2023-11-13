@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#99](https://github.com/rabbitholegg/questdk-plugins/pull/99) [`9ec3d23`](https://github.com/rabbitholegg/questdk-plugins/commit/9ec3d23b7fd49ff973a14ef4cbf3f38ec2157ea7) Thanks [@mmackz](https://github.com/mmackz)! - add support for V1 and V2 swap
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes
