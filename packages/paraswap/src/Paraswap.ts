@@ -152,6 +152,9 @@ export const getSupportedTokenAddresses = async (
   if (actionType === 'stake') {
     return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
   }
+  if (_chainId === 1) {
+    return DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[]
+  }
   const { getTokens } = constructGetTokens({ chainId: _chainId, fetcher })
 
   try {
