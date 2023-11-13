@@ -1,5 +1,6 @@
 import type { FilterOperator } from '@rabbitholegg/questdk'
 import type { Address } from 'viem'
+import type { Token } from '@paraswap/sdk'
 
 export enum Tokens {
   ETH = '0x0000000000000000000000000000000000000000',
@@ -26,14 +27,7 @@ export const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
   }
 }
 
-export function convertETHFormat(address: Address): Address {
-  if (address.toLowerCase() === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
-    return '0x0000000000000000000000000000000000000000'
-  }
-  return address
-}
-
-export function filterAtokens(tokenList: Address[]): Address[] {
+export function filterTokenList(tokenList: Token[]): Address[] {
   const aTokens = [
     '0xf329e36c7bf6e5e86ce2150875a84ce77f477375',
     '0x82e64f49ed5ec1bc6e43dad4fc8af9bb3a2312ee',
@@ -44,10 +38,16 @@ export function filterAtokens(tokenList: Address[]): Address[] {
     '0x078f358208685046a11c85e8ad32895ded33a249',
     '0xe50fa9b3c56ffb159cb0fca61f5c9d750e8128c8',
   ]
-  return tokenList.filter(
-    (token) =>
-      !aTokens
-        .map((aToken) => aToken.toLowerCase())
-        .includes(token.toLowerCase()),
-  )
+
+  const convertFormat = (address: Address): Address =>
+    address.toLowerCase() === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+      ? '0x0000000000000000000000000000000000000000'
+      : address
+
+  return tokenList.reduce((arr, token) => {
+    if (!aTokens.includes(token.address.toLowerCase())) {
+      arr.push(convertFormat(token.address as Address))
+    }
+    return arr
+  }, [] as Address[])
 }

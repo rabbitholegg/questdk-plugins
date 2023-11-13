@@ -9,8 +9,7 @@ import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
 import {
   Tokens,
   buildPathQuery,
-  convertETHFormat,
-  filterAtokens,
+  filterTokenList,
 } from './utils.js'
 import {
   constructGetTokens,
@@ -160,9 +159,7 @@ export const getSupportedTokenAddresses = async (
     if (!tokenList || tokenList.length === 0) {
       return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
     }
-    return filterAtokens(
-      tokenList.map((token) => convertETHFormat(token.address as Address)),
-    )
+    return filterTokenList(tokenList)
   } catch {
     return DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[]
   }
