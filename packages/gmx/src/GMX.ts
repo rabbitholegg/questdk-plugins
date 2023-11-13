@@ -4,7 +4,7 @@ import {
   compressJson,
   type FilterOperator,
 } from '@rabbitholegg/questdk'
-import { getAddress, type Address } from 'viem'
+import { type Address } from 'viem'
 import { OrderType, Tokens, buildPathQuery } from './utils.js'
 import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
