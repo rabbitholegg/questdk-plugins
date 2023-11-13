@@ -1,4 +1,6 @@
+Currently when using array operators ($or/$and), address within are case-sensitive. This will effect the stake plugin, as it uses an $or array for the contract addresses. 
 
+The current implentation expects addresses in lowercase.
 
 There are two pools for staking:
 
