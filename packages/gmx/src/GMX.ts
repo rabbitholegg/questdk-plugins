@@ -45,7 +45,7 @@ export const swap = async (
     chainId: chainId,
     value: ETH_USED ? amountIn : undefined,
     to: {
-      $or: [getAddress(GMX_ROUTERV1_ADDRESS), getAddress(GMX_ROUTERV2_ADDRESS)],
+      $or: [GMX_ROUTERV1_ADDRESS.toLowerCase(), GMX_ROUTERV2_ADDRESS.toLowerCase()],
     },
     input: {
       $or: [
