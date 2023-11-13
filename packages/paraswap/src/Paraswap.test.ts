@@ -12,6 +12,7 @@ import {
   SWAP_MULTI,
   SWAP_SIMPLE,
   SWAP_BALANCER,
+  SWAP_CURVE,
   UNISWAP_V3_SWAP,
   WETH_PROD_TEST,
 } from './test-transactions'
@@ -299,6 +300,18 @@ describe('Given the paraswap plugin', () => {
         tokenIn: Tokens.ETH,
         tokenOut: '0xEC70Dcb4A1EFa46b8F2D97C310C9c4790ba5ffA8',
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+    test('should pass filter with valid curve transaction', async () => {
+      const transaction = SWAP_CURVE
+      const filter = await swap({
+        chainId: ARB_ONE_CHAIN_ID,
+        contractAddress: AUGUSTUS_SWAPPER_ARBITRUM,
+        tokenIn: Tokens.ETH,
+        tokenOut: Tokens.USDT,
+        amountIn: GreaterThanOrEqual(parseEther('0.121')),
+        amountOut: GreaterThanOrEqual(parseUnits('249.50', 6))
       })
       expect(apply(transaction, filter)).to.be.true
     })
