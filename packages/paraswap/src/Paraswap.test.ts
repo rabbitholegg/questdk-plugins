@@ -24,7 +24,7 @@ import type {
   FilterObject,
   TransactionFilter,
 } from '@rabbitholegg/questdk/dist/types/filter/types'
-const AUGUSTUS_SWAPPER_ARBITRUM = '0xdef171fe48cf0115b1d80b88dc8eab59176fee57'
+const AUGUSTUS_SWAPPER_ARBITRUM = '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57'
 
 describe('Given the paraswap plugin', () => {
   describe('When handling the swap', () => {
@@ -118,7 +118,7 @@ describe('Given the paraswap plugin', () => {
     test('should pass filter with valid production simple transactions', async () => {
       const transaction = PROD_SWAP_SIMPLE
       const testFilter: TransactionFilter = {
-        to: '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57',
+        to: AUGUSTUS_SWAPPER_ARBITRUM,
         input: {
           //@ts-ignore
           $abi: PARASWAP_SWAP_ABI,
