@@ -311,7 +311,7 @@ describe('Given the paraswap plugin', () => {
         tokenIn: Tokens.ETH,
         tokenOut: Tokens.USDT,
         amountIn: GreaterThanOrEqual(parseEther('0.121')),
-        amountOut: GreaterThanOrEqual(parseUnits('249.50', 6))
+        amountOut: GreaterThanOrEqual(parseUnits('249.50', 6)),
       })
       expect(apply(transaction, filter)).to.be.true
     })
