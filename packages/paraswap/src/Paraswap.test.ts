@@ -1,4 +1,5 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { ActionType } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import {
   MULTI_DEPOSIT,
@@ -14,7 +15,7 @@ import {
   UNISWAP_V3_SWAP,
   WETH_PROD_TEST,
 } from './test-transactions'
-import { stake, swap } from './Paraswap.js'
+import { stake, swap, getSupportedTokenAddresses } from './Paraswap.js'
 import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids.js'
 import { Tokens } from './utils'
 import { parseEther, parseUnits } from 'viem'
@@ -24,6 +25,7 @@ import type {
   TransactionFilter,
 } from '@rabbitholegg/questdk/dist/types/filter/types'
 const AUGUSTUS_SWAPPER_ARBITRUM = '0xdef171fe48cf0115b1d80b88dc8eab59176fee57'
+
 describe('Given the paraswap plugin', () => {
   describe('When handling the swap', () => {
     test('should return a valid action filter', async () => {
@@ -321,6 +323,19 @@ describe('Given the paraswap plugin', () => {
         amountOut: GreaterThanOrEqual(parseEther('0.037')),
       })
       expect(apply(transaction, filter)).to.be.false
+    })
+
+    describe('when returning supported tokens (swap)', () => {
+      const chainIds = [1, 10, 42161]
+      for (const chainId of chainIds) {
+        test(`should return list of tokens for chainId ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(
+            chainId,
+            ActionType.Swap,
+          )
+          expect(tokens).to.not.be.empty
+        })
+      }
     })
   })
   describe('When handling the stake', () => {
