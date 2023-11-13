@@ -23,7 +23,7 @@ interface Transaction {
   value: string
 }
 
-interface TestCase<T extends ActionParams> {
+export interface TestCase<T extends ActionParams> {
   transaction: Transaction
   params: T
   description: string
