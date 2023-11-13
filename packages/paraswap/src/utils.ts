@@ -1,4 +1,5 @@
 import type { FilterOperator } from '@rabbitholegg/questdk'
+import type { Address } from 'viem'
 
 export enum Tokens {
   ETH = '0x0000000000000000000000000000000000000000',
@@ -23,4 +24,30 @@ export const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
   return {
     $and: conditions,
   }
+}
+
+export function convertETHFormat(address: Address): Address {
+  if (address.toLowerCase() === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
+    return '0x0000000000000000000000000000000000000000'
+  }
+  return address
+}
+
+export function filterAtokens(tokenList: Address[]): Address[] {
+  const aTokens = [
+    '0xf329e36c7bf6e5e86ce2150875a84ce77f477375',
+    '0x82e64f49ed5ec1bc6e43dad4fc8af9bb3a2312ee',
+    '0x6ab707aca953edaefbc4fd23ba73294241490620',
+    '0x191c10aa4af7c30e871e70c95db0e4eb77237530',
+    '0x6d80113e533a2c0fe82eabd35f1875dcea89ea97',
+    '0x625e7708f30ca75bfd92586e17077590c60eb4cd',
+    '0x078f358208685046a11c85e8ad32895ded33a249',
+    '0xe50fa9b3c56ffb159cb0fca61f5c9d750e8128c8',
+  ]
+  return tokenList.filter(
+    (token) =>
+      !aTokens
+        .map((aToken) => aToken.toLowerCase())
+        .includes(token.toLowerCase()),
+  )
 }

@@ -6,7 +6,12 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
-import { Tokens, buildPathQuery } from './utils.js'
+import {
+  Tokens,
+  buildPathQuery,
+  convertETHFormat,
+  filterAtokens,
+} from './utils.js'
 import {
   constructGetTokens,
   constructAxiosFetcher,
@@ -98,6 +103,7 @@ export const stake = async (stake: StakeActionParams) => {
       chainId === 1 ? [MAINNET_SEPSP2_ADDRESS] : [OPTIMISM_SEPSP2_ADDRESS]
     return compressJson({
       chainId: chainId,
+      // check which address format to use. LowerCase or CheckSummed
       to: {
         $or: addressArray, // If both tokens are defined it has to be sePSP2
       },
@@ -148,15 +154,20 @@ export const getSupportedTokenAddresses = async (
     return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
   }
   const { getTokens } = constructGetTokens({ chainId: _chainId, fetcher })
-  const tokenList = getTokens
-    ? ((await getTokens()).map((token) =>
-        token.address.toLowerCase() === ETH_ADDRESS.toLowerCase()
-          ? Tokens.ETH
-          : token.address,
-      ) as Address[])
-    : (DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[])
-  return tokenList
+
+  try {
+    const tokenList = await getTokens()
+    if (!tokenList || tokenList.length === 0) {
+      return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
+    }
+    return filterAtokens(
+      tokenList.map((token) => convertETHFormat(token.address as Address)),
+    )
+  } catch {
+    return DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[]
+  }
 }
+
 export const getSupportedChainIds = async (actionType?: ActionType) => {
   if (actionType === 'stake') {
     return STAKE_CHAIN_ID_ARRAY
