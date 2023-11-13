@@ -6,11 +6,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
-import {
-  Tokens,
-  buildPathQuery,
-  filterTokenList,
-} from './utils.js'
+import { Tokens, buildPathQuery, filterTokenList } from './utils.js'
 import {
   constructGetTokens,
   constructAxiosFetcher,
