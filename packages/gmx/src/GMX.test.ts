@@ -1,6 +1,5 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { getAddress } from 'viem'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import { getSupportedTokenAddresses, swap } from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
@@ -35,8 +34,8 @@ describe('Given the gmx plugin', () => {
           chainId: ARB_ONE_CHAIN_ID,
           to: {
             $or: [
-              getAddress(GMX_ROUTERV1_ADDRESS),
-              getAddress(GMX_ROUTERV2_ADDRESS),
+              GMX_ROUTERV1_ADDRESS.toLowerCase(),
+              GMX_ROUTERV2_ADDRESS.toLowerCase(),
             ],
           },
           input: {
