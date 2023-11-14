@@ -32,10 +32,8 @@ export const swap = async (
     value: ethUsedIn ? amountIn : undefined,
     input: {
       $abi: TRADER_JOE_SWAP_ABI,
-      $or: [
+      $and: [
         {
-          amountIn: ethUsedIn ? undefined : amountIn,
-          amountOutMin: amountOut,
           to: recipient,
           path: {
             tokenPath: buildPathQuery(
@@ -45,36 +43,15 @@ export const swap = async (
           },
         },
         {
-          amountIn: amountIn,
-          amountOutMinNATIVE: amountOut,
-          to: recipient,
-          path: {
-            tokenPath: buildPathQuery(
-              ethUsedIn ? Tokens.WETH : tokenIn,
-              ethUsedOut ? Tokens.WETH : tokenOut,
-            ),
-          },
-        },
-        {
-          amountOut: amountOut,
-          to: recipient,
-          path: {
-            tokenPath: buildPathQuery(
-              ethUsedIn ? Tokens.WETH : tokenIn,
-              ethUsedOut ? Tokens.WETH : tokenOut,
-            ),
-          },
-        },
-        {
-          amountNATIVEOut: amountOut,
-          amountInMax: amountIn,
-          to: recipient,
-          path: {
-            tokenPath: buildPathQuery(
-              ethUsedIn ? Tokens.WETH : tokenIn,
-              ethUsedOut ? Tokens.WETH : tokenOut,
-            ),
-          },
+          $or: [
+            {
+              amountIn: ethUsedIn ? undefined : amountIn,
+              amountOutMin: amountOut,
+            },
+            { amountOut: amountOut },
+            { amountIn: amountIn, amountOutMinNATIVE: amountOut },
+            { amountNATIVEOut: amountOut, amountInMax: amountIn },
+          ],
         },
       ],
     },
