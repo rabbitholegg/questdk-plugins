@@ -27,7 +27,9 @@ describe('Given the camelot plugin', () => {
 
       expect(filter).to.deep.equal({
         chainId: 42161,
-        to: { $or: [CAMELOT_ROUTER, PARASWAP_ROUTER] },
+        to: {
+          $or: [CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()],
+        },
         input: {
           $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
           $or: [
@@ -130,7 +132,9 @@ describe('Given the camelot plugin', () => {
       })
       expect(filter).to.deep.equal({
         chainId: 42161,
-        to: { $or: [CAMELOT_ROUTER, PARASWAP_ROUTER] },
+        to: {
+          $or: [CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()],
+        },
         value: {
           $gte: '1000000',
         },
