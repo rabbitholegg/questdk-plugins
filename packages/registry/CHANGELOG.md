@@ -1,5 +1,14 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- [#103](https://github.com/rabbitholegg/questdk-plugins/pull/103) [`cf068cd`](https://github.com/rabbitholegg/questdk-plugins/commit/cf068cd55e772af1b9aec8e8fa38af52a63445b9) Thanks [@Quazia](https://github.com/Quazia)! - Quick fix to handle lower case TO for gmx
+
+- Updated dependencies [[`cf068cd`](https://github.com/rabbitholegg/questdk-plugins/commit/cf068cd55e772af1b9aec8e8fa38af52a63445b9)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.11
+
 ## 1.0.0-alpha.32
 
 ### Patch Changes
