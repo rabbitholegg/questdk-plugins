@@ -2,10 +2,9 @@ import {
   type SwapActionParams,
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
+import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { parseEther, parseUnits } from 'viem'
 import { Tokens, type TestParams } from './utils'
-import { LB_ROUTER } from './contract-addresses'
-import { ARB_CHAIN_ID } from './chain-ids'
 
 export const EXACT_NATIVE_FOR_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
@@ -18,7 +17,7 @@ export const EXACT_NATIVE_FOR_TOKENS: TestParams<SwapActionParams> = {
     value: '500000000000000000',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
+    chainId: ChainId.ARBITRUM_ONE,
     tokenIn: Tokens.ETH,
     tokenOut: Tokens.ARB,
     amountIn: GreaterThanOrEqual(parseEther('0.5')),
@@ -38,8 +37,8 @@ export const EXACT_NATIVE_FOR_TOKENS_FEE: TestParams<SwapActionParams> = {
     value: '3000000000000000',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
-    contractAddress: LB_ROUTER,
+    chainId: ChainId.ARBITRUM_ONE,
+    contractAddress: '0xb4315e873dbcf96ffd0acd8ea43f689d8c20fb30',
     tokenIn: Tokens.ETH,
     tokenOut: Tokens.USDCE,
     amountIn: GreaterThanOrEqual(parseEther('0.003')),
@@ -59,7 +58,7 @@ export const EXACT_TOKENS_FOR_NATIVE: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
+    chainId: ChainId.ARBITRUM_ONE,
     tokenIn: Tokens.ARB,
     tokenOut: Tokens.ETH,
     amountIn: GreaterThanOrEqual(parseUnits('18', 18)),
@@ -79,7 +78,7 @@ export const EXACT_TOKENS_FOR_NATIVE_FEE: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
+    chainId: ChainId.ARBITRUM_ONE,
     tokenIn: '0x0C4681e6C0235179ec3D4F4fc4DF3d14FDD96017', // Old RDNT
     tokenOut: Tokens.ETH,
     amountIn: GreaterThanOrEqual(parseUnits('27.35', 18)),
@@ -99,7 +98,7 @@ export const EXACT_TOKENS_FOR_TOKENS: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
+    chainId: ChainId.ARBITRUM_ONE,
     tokenIn: Tokens.USDC,
     tokenOut: Tokens.USDCE,
     amountIn: GreaterThanOrEqual(parseUnits('809', 6)),
@@ -119,7 +118,7 @@ export const EXACT_TOKENS_FOR_TOKENS_FEE: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
+    chainId: ChainId.ARBITRUM_ONE,
     tokenIn: Tokens.USDC,
     tokenOut: Tokens.USDCE,
     amountIn: GreaterThanOrEqual(parseUnits('80.98', 6)),
@@ -139,8 +138,8 @@ export const NATIVE_FOR_EXACT_TOKENS: TestParams<SwapActionParams> = {
     value: '971531935037032960',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
-    contractAddress: LB_ROUTER,
+    chainId: ChainId.ARBITRUM_ONE,
+    contractAddress: '0xb4315e873dbcf96ffd0acd8ea43f689d8c20fb30',
     tokenIn: Tokens.ETH,
     tokenOut: Tokens.JOE,
     amountIn: GreaterThanOrEqual(parseEther('0.971')),
@@ -160,8 +159,8 @@ export const TOKENS_FOR_EXACT_NATIVE: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
-    contractAddress: LB_ROUTER,
+    chainId: ChainId.ARBITRUM_ONE,
+    contractAddress: '0xb4315e873dbcf96ffd0acd8ea43f689d8c20fb30',
     tokenIn: Tokens.USDT,
     tokenOut: Tokens.ETH,
     amountIn: GreaterThanOrEqual(parseUnits('90.38', 6)),
@@ -181,7 +180,7 @@ export const TOKENS_FOR_EXACT_TOKENS: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARB_CHAIN_ID,
+    chainId: ChainId.ARBITRUM_ONE,
     tokenIn: Tokens.USDCE,
     tokenOut: Tokens.ARB,
     amountIn: GreaterThanOrEqual(parseUnits('5996', 6)),

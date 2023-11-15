@@ -1,2 +1,3 @@
-export const ARB_CHAIN_ID = 42161
-export const CHAIN_ID_ARRAY = [ARB_CHAIN_ID]
+import { ChainId } from '@traderjoe-xyz/sdk-core'
+
+export const CHAIN_ID_ARRAY = [ChainId.ARBITRUM_ONE]

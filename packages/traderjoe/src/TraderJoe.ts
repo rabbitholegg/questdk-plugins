@@ -4,9 +4,10 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { LB_ROUTER, DEFAULT_SWAP_TOKEN_LIST } from './contract-addresses'
+import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from '@traderjoe-xyz/sdk-v2'
+import { ChainId } from '@traderjoe-xyz/sdk-core'
+import { DEFAULT_SWAP_TOKEN_LIST } from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { TRADER_JOE_SWAP_ABI } from './abi'
 import { Tokens, buildPathQuery } from './utils'
 
 export const swap = async (
@@ -24,14 +25,14 @@ export const swap = async (
 
   const ethUsedIn = tokenIn === Tokens.ETH
   const ethUsedOut = tokenOut === Tokens.ETH
-  const to = contractAddress ?? LB_ROUTER
+  const to = contractAddress ?? LB_ROUTER_V21_ADDRESS[chainId as ChainId]
 
   return compressJson({
     chainId,
     to,
     value: ethUsedIn ? amountIn : undefined,
     input: {
-      $abi: TRADER_JOE_SWAP_ABI,
+      $abi: LBRouterV21ABI,
       $and: [
         {
           to: recipient,

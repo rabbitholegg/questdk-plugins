@@ -1,13 +1,11 @@
+import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { type Address } from "viem"
-import { ARB_CHAIN_ID } from "./chain-ids"
 import { Tokens } from "./utils"
-
-export const LB_ROUTER = '0xb4315e873dbcf96ffd0acd8ea43f689d8c20fb30'
 
 export const DEFAULT_SWAP_TOKEN_LIST: {
   [chainId: number]: readonly Address[]
 } = {
-  [ARB_CHAIN_ID]: [
+  [ChainId.ARBITRUM_ONE]: [
     Tokens.ETH,
     Tokens.ARB,
     Tokens.DAI,

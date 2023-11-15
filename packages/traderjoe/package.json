@@ -45,6 +45,9 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.25",
+    "@traderjoe-xyz/sdk-core": "^1.1.0",
+    "@traderjoe-xyz/sdk-v2": "^2.1.8",
+    "ethers": "^5.7.2",
     "viem": "^1.16.6"
   }
 }
