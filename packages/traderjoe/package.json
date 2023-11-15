@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-traderjoe",
-  "private": true,
+  "private": false,
   "version": "1.0.0-alpha.6",
   "type": "module",
   "exports": {
