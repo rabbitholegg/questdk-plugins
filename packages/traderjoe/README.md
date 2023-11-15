@@ -1,8 +1,15 @@
-TraderJoe 
+##TraderJoe
 
+This plugin covers the V2.1 LB Router contract on arbitrum. Other networks can be added easily by adding the chain id to the `CHAIN_ID_ARRAY` in `chain-ids.ts` and adding supported token addresses in `contract-addresses.ts`
 
-Sample Transactions
--------------------
+### Current Limitations
+
+AmountOut is not very reliable for some methods (Exact_X_For_X), as it uses amountOutMin, which can be much lower then expected. In extreme cases it can even be zero if slippage is set high enough. This will cause issues when using (==) operator or the (>=) operator.
+
+AmountIn also can not be very accurate in some scenarios and will be higher then expected (X_ForExact_X), this will cause issues when using (==) operator or the (<=) operator.
+
+### Sample Transactions
+
 ExactNATIVEForTokens: ETH -> ARB - https://arbiscan.io/tx/0x051d5bb371cac1ec38e51befe07fc1eec220e2cecb68aa5624da99c3c436de9a
 
 ExactNATIVEForTokensSupportingFee - ETH -> USDC.e https://arbiscan.io/tx/0xdfa2628244bc82a8da1d18e3bfb4f37723d05f915b7cbd47a23ff81671317689
