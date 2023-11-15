@@ -26,7 +26,7 @@ const CREATE_AND_QUEUE_QUEST_TX: TransactionEIP1559 = {
   maxPriorityFeePerGas: 8351427n,
   nonce: 1234,
   r: '0xa412708d837481ae00e8dae092298693eeff2f22f800d235f57e555035e20fab' as Hash,
-  s: '0x61980066e926b15123a6d35025d6ce9448e8c0c25e88b99374e5354cb0e11f06'as Hash,
+  s: '0x61980066e926b15123a6d35025d6ce9448e8c0c25e88b99374e5354cb0e11f06' as Hash,
   to: '0x52629961f71c1c2564c5aa22372cb1b9fa9eba3e' as Hash,
   transactionIndex: 4,
   type: 'eip1559' as const,
@@ -74,4 +74,3 @@ export const FAILING_TEST_TRANSACTIONS: TestTransaction[] = [
     description: 'when total participants is incorrect',
   },
 ]
-
