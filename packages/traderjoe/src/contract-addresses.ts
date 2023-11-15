@@ -2,7 +2,7 @@ import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { type Address } from 'viem'
 
 export const Tokens: {
-  [chainId: number]: { [token: string]: Address }
+  [_chainId: number]: { [token: string]: Address }
 } = {
   [ChainId.ARBITRUM_ONE]: {
     ARB: '0x912CE59144191C1204E64559FE8253a0e49E6548',
