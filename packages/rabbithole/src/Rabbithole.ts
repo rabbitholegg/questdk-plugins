@@ -1,9 +1,17 @@
-
-import { type TransactionFilter, type QuestActionParams, compressJson } from '@rabbitholegg/questdk'
+import {
+  type TransactionFilter,
+  type QuestActionParams,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { RABBITHOLE_ABI } from './abi'
-import {DEFAULT_SWAP_TOKEN_LIST, RABBITHOLE_QUEST_FACTORY} from './contract-addresses'
+import {
+  DEFAULT_SWAP_TOKEN_LIST,
+  RABBITHOLE_QUEST_FACTORY,
+} from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-export const quest = async (quest: QuestActionParams): Promise<TransactionFilter> => {
+export const quest = async (
+  quest: QuestActionParams,
+): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
   const {
     chainId,
@@ -19,7 +27,7 @@ export const quest = async (quest: QuestActionParams): Promise<TransactionFilter
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: chainId, // The chainId of the source chain
-    to:  contractAddress || RABBITHOLE_QUEST_FACTORY,   // The contract address of the bridge
+    to: contractAddress || RABBITHOLE_QUEST_FACTORY, // The contract address of the bridge
     input: {
       $abi: RABBITHOLE_ABI,
       rewardTokenAddress_: rewardTokenId,
@@ -27,7 +35,7 @@ export const quest = async (quest: QuestActionParams): Promise<TransactionFilter
       startTime_: startTime,
       totalParticipants_: totalParticipants,
       rewardAmount_: rewardAmount,
-    },  // The input object is where we'll put the ABI and the parameters
+    }, // The input object is where we'll put the ABI and the parameters
   })
 }
 
@@ -36,9 +44,7 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
   return DEFAULT_SWAP_TOKEN_LIST[_chainId]
 }
 
-
 export const getSupportedChainIds = async () => {
   // This should return all of the ChainIds that are supported by the Project we're integrating
   return CHAIN_ID_ARRAY
-
 }
