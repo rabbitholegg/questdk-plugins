@@ -430,8 +430,8 @@ importers:
   packages/rabbithole:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.25
-        version: 2.0.0-alpha.25(typescript@5.2.2)
+        specifier: 2.0.0-alpha.27
+        version: 2.0.0-alpha.27(typescript@5.2.2)
       viem:
         specifier: ^1.16.6
         version: 1.16.6(typescript@5.2.2)
