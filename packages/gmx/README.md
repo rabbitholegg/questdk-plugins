@@ -1,5 +1,21 @@
 Currently we only support swaps on Arbitrum and do not support derivatives.
 
+## Limitations with V2 swap filtering
+
+We've identified some limitations in the current version of the GMX swap filter:
+
+1. **Protocol Fee with Raw Ether Transactions:**
+   - There is a small protocol fee of approximately 0.001 ETH included in the payable amount for transactions using raw Ether as the input token.
+   - This additional fee may lead to discrepancies when comparing amounts, especially in cases where exact equality (`==`) or less-than-or-equal-to (`<=`) operators are used.
+
+2. **Behavior with `amountIn` and `tokenIn` Parameters:**
+   - When `amountIn` is specified and `tokenIn` is set to `any`, transactions involving any token will pass the filter, but ETH will not. This is due to the way the amount is compared when using ETH vs tokens. When `amountIn` is set to `any`, and `tokenIn` is set to `any`, both ETH and tokens will pass the filter.
+
+3. **Token Filtering with `tokenOut` Parameter:**
+   - If `tokenIn` is set to `any` and `tokenOut` is specified as USDC, transactions involving any token (excluding ETH) as input will pass the filter. This occurs because the MarketToken for USDC check depends on the `tokenIn` being explicitly provided.
+
+
+## V2 Notes
 
 MultiCall calls several functions - the main one we're concerned with is [createOrder](https://github.com/gmx-io/gmx-synthetics/blob/main/contracts/router/ExchangeRouter.sol#L170).
 

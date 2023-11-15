@@ -1,5 +1,58 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- [#103](https://github.com/rabbitholegg/questdk-plugins/pull/103) [`cf068cd`](https://github.com/rabbitholegg/questdk-plugins/commit/cf068cd55e772af1b9aec8e8fa38af52a63445b9) Thanks [@Quazia](https://github.com/Quazia)! - Quick fix to handle lower case TO for gmx
+
+- Updated dependencies [[`cf068cd`](https://github.com/rabbitholegg/questdk-plugins/commit/cf068cd55e772af1b9aec8e8fa38af52a63445b9)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.11
+
+## 1.0.0-alpha.32
+
+### Patch Changes
+
+- Updated dependencies [[`9ec3d23`](https://github.com/rabbitholegg/questdk-plugins/commit/9ec3d23b7fd49ff973a14ef4cbf3f38ec2157ea7)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.10
+
+## 1.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [[`dd8dc14`](https://github.com/rabbitholegg/questdk-plugins/commit/dd8dc14659be61a9fb64cf09c90d907126718044), [`8496a49`](https://github.com/rabbitholegg/questdk-plugins/commit/8496a49d99ba2dcecef60211e1e9108d8128f5d3)]:
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.7
+
+## 1.0.0-alpha.30
+
+### Minor Changes
+
+- [#91](https://github.com/rabbitholegg/questdk-plugins/pull/91) [`312b9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/312b9f7d4bc93fe5b4f18d1fc29ad98f8468edeb) Thanks [@Quazia](https://github.com/Quazia)! - Add Optimism to Paraswap Swap
+
+### Patch Changes
+
+- Updated dependencies [[`312b9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/312b9f7d4bc93fe5b4f18d1fc29ad98f8468edeb)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.12
+
+## 1.0.0-alpha.29
+
+### Minor Changes
+
+- [#85](https://github.com/rabbitholegg/questdk-plugins/pull/85) [`473f96d`](https://github.com/rabbitholegg/questdk-plugins/commit/473f96dfe8e3ae49bc14c7464323a02242756b56) Thanks [@mmackz](https://github.com/mmackz)! - implement symbiosis bridge plugin
+
+### Patch Changes
+
+- Updated dependencies [[`473f96d`](https://github.com/rabbitholegg/questdk-plugins/commit/473f96dfe8e3ae49bc14c7464323a02242756b56)]:
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.5
+
+## 1.0.0-alpha.28
+
+### Patch Changes
+
+- [#86](https://github.com/rabbitholegg/questdk-plugins/pull/86) [`059df8b`](https://github.com/rabbitholegg/questdk-plugins/commit/059df8bb8ae2c9daa3a11adbb0d84c5670536039) Thanks [@Quazia](https://github.com/Quazia)! - Add Stake switch to plugin execution
+
 ## 1.0.0-alpha.27
 
 ### Patch Changes

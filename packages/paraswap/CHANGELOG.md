@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-paraswap
 
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#91](https://github.com/rabbitholegg/questdk-plugins/pull/91) [`312b9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/312b9f7d4bc93fe5b4f18d1fc29ad98f8468edeb) Thanks [@Quazia](https://github.com/Quazia)! - Add Optimism to Paraswap Swap
+
 ## 1.0.0-alpha.11
 
 ### Patch Changes

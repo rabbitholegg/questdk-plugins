@@ -9,6 +9,7 @@ import {
   type QuestActionParams,
   type DelegateActionParams,
   type TransactionFilter,
+  type StakeActionParams,
 } from '@rabbitholegg/questdk'
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
@@ -26,6 +27,7 @@ import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
 import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
 import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
+import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -44,6 +46,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
   [Rabbithole.pluginId]: Rabbithole,
+  [Symbiosis.pluginId]: Symbiosis,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -75,6 +78,11 @@ export const executePlugin = (
       if (plugin.quest === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.quest(params as unknown as QuestActionParams)
+    }
+    case ActionType.Stake: {
+      if (plugin.stake === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.stake(params as unknown as StakeActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
