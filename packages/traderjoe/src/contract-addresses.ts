@@ -4,7 +4,7 @@ import { type Address } from 'viem'
 export const Tokens: {
   [chainId: number]: { [token: string]: Address }
 } = {
-  [42161]: {
+  [ChainId.ARBITRUM_ONE]: {
     ARB: '0x912CE59144191C1204E64559FE8253a0e49E6548',
     DAI: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
     ETH: '0x0000000000000000000000000000000000000000',
