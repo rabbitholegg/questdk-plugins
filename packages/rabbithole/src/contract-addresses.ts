@@ -1,6 +1,7 @@
-export const RABBITHOLE_QUEST_FACTORY = '0x52629961F71C1C2564C5aa22372CB1b9fa9EBA3E'
+export const RABBITHOLE_QUEST_FACTORY =
+  '0x52629961F71C1C2564C5aa22372CB1b9fa9EBA3E'
 import type { Address } from "viem"
-import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from "./chain-ids"
+import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids'
 
 export const DEFAULT_SWAP_TOKEN_LIST: {
   [chainId: number]: readonly Address[]
@@ -29,5 +30,5 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
     '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599', // WBTC
     '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI
     '0x4200000000000000000000000000000000000006', // WETH
-  ]
+  ],
 } as const
