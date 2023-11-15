@@ -26,7 +26,7 @@ export const quest = async (
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: chainId, // The chainId of the source chain
-    to: RABBITHOLE_QUEST_FACTORY,   // The contract address of the bridge
+    to: RABBITHOLE_QUEST_FACTORY, // The contract address of the bridge
     input: {
       $abi: RABBITHOLE_ABI,
       rewardTokenAddress_: rewardToken,
