@@ -1,4 +1,5 @@
 export const RABBITHOLE_QUEST_FACTORY = '0x52629961F71C1C2564C5aa22372CB1b9fa9EBA3E'
+import type { Address } from "viem"
 import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from "./chain-ids"
 
 export const DEFAULT_SWAP_TOKEN_LIST: {
