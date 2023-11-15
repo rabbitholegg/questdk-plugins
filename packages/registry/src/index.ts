@@ -42,7 +42,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [GMX.pluginId]: GMX,
   [Tally.pluginId]: Tally,
   [Camelot.pluginId]: Camelot,
-  [BasePaint.pluginId]: BasePaint,
+  // [BasePaint.pluginId]: BasePaint,
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
   [Rabbithole.pluginId]: Rabbithole,
