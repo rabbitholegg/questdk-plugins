@@ -16,5 +16,5 @@ export const Rabbithole: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-  quest,s
+  quest,
 }
