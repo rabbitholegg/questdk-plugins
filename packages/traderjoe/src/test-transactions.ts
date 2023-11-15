@@ -4,7 +4,8 @@ import {
 } from '@rabbitholegg/questdk'
 import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { parseEther, parseUnits } from 'viem'
-import { Tokens, type TestParams } from './utils'
+import { Tokens } from './contract-addresses'
+import { type TestParams } from './utils'
 
 export const EXACT_NATIVE_FOR_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
@@ -18,8 +19,8 @@ export const EXACT_NATIVE_FOR_TOKENS: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: ChainId.ARBITRUM_ONE,
-    tokenIn: Tokens.ETH,
-    tokenOut: Tokens.ARB,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].ETH,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].ARB,
     amountIn: GreaterThanOrEqual(parseEther('0.5')),
     amountOut: GreaterThanOrEqual(parseUnits('920', 18)),
     recipient: '0xe3964b997f1c7e6dee6ef028d7d2e6bbd3532acc',
@@ -39,8 +40,8 @@ export const EXACT_NATIVE_FOR_TOKENS_FEE: TestParams<SwapActionParams> = {
   params: {
     chainId: ChainId.ARBITRUM_ONE,
     contractAddress: '0xb4315e873dbcf96ffd0acd8ea43f689d8c20fb30',
-    tokenIn: Tokens.ETH,
-    tokenOut: Tokens.USDCE,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].ETH,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].USDCE,
     amountIn: GreaterThanOrEqual(parseEther('0.003')),
     amountOut: GreaterThanOrEqual(parseUnits('5.95', 6)),
     recipient: '0x6442bfbefcd1a854d20ce5fd8dd065e7e975aa29',
@@ -59,8 +60,8 @@ export const EXACT_TOKENS_FOR_NATIVE: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: ChainId.ARBITRUM_ONE,
-    tokenIn: Tokens.ARB,
-    tokenOut: Tokens.ETH,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].ARB,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].ETH,
     amountIn: GreaterThanOrEqual(parseUnits('18', 18)),
     amountOut: GreaterThanOrEqual(parseEther('0.00964')),
     recipient: '0x64b29cf8a5b2ec1133f2ea5b8be644f41c9d6d53',
@@ -80,7 +81,7 @@ export const EXACT_TOKENS_FOR_NATIVE_FEE: TestParams<SwapActionParams> = {
   params: {
     chainId: ChainId.ARBITRUM_ONE,
     tokenIn: '0x0C4681e6C0235179ec3D4F4fc4DF3d14FDD96017', // Old RDNT
-    tokenOut: Tokens.ETH,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].ETH,
     amountIn: GreaterThanOrEqual(parseUnits('27.35', 18)),
     amountOut: GreaterThanOrEqual(parseEther('0.0034')),
     recipient: '0xb7985a153ff4c8fc197b859f6f7979b126aaa315',
@@ -99,8 +100,8 @@ export const EXACT_TOKENS_FOR_TOKENS: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: ChainId.ARBITRUM_ONE,
-    tokenIn: Tokens.USDC,
-    tokenOut: Tokens.USDCE,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].USDC,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].USDCE,
     amountIn: GreaterThanOrEqual(parseUnits('809', 6)),
     amountOut: GreaterThanOrEqual(parseUnits('808.81', 6)),
     recipient: '0x1e6edffb9b11251d8165641d282eee2f9a30b173',
@@ -119,8 +120,8 @@ export const EXACT_TOKENS_FOR_TOKENS_FEE: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: ChainId.ARBITRUM_ONE,
-    tokenIn: Tokens.USDC,
-    tokenOut: Tokens.USDCE,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].USDC,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].USDCE,
     amountIn: GreaterThanOrEqual(parseUnits('80.98', 6)),
     amountOut: GreaterThanOrEqual(parseUnits('80.98', 6)),
     recipient: '0xe1aaaa2ce1243c8cadbb5162031fa5e8e73c01bd',
@@ -140,8 +141,8 @@ export const NATIVE_FOR_EXACT_TOKENS: TestParams<SwapActionParams> = {
   params: {
     chainId: ChainId.ARBITRUM_ONE,
     contractAddress: '0xb4315e873dbcf96ffd0acd8ea43f689d8c20fb30',
-    tokenIn: Tokens.ETH,
-    tokenOut: Tokens.JOE,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].ETH,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].JOE,
     amountIn: GreaterThanOrEqual(parseEther('0.971')),
     amountOut: GreaterThanOrEqual(parseUnits('5665.91', 18)),
     recipient: '0x00904a678800616f2cdf4fde57f7c4df5f2e117e',
@@ -161,8 +162,8 @@ export const TOKENS_FOR_EXACT_NATIVE: TestParams<SwapActionParams> = {
   params: {
     chainId: ChainId.ARBITRUM_ONE,
     contractAddress: '0xb4315e873dbcf96ffd0acd8ea43f689d8c20fb30',
-    tokenIn: Tokens.USDT,
-    tokenOut: Tokens.ETH,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].USDT,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].ETH,
     amountIn: GreaterThanOrEqual(parseUnits('90.38', 6)),
     amountOut: GreaterThanOrEqual(parseEther('0.0438')),
     recipient: '0xb5d44bead66bf31eae7e47bc7780b8553330b7e6',
@@ -181,8 +182,8 @@ export const TOKENS_FOR_EXACT_TOKENS: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: ChainId.ARBITRUM_ONE,
-    tokenIn: Tokens.USDCE,
-    tokenOut: Tokens.ARB,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].USDCE,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].ARB,
     amountIn: GreaterThanOrEqual(parseUnits('5996', 6)),
     amountOut: GreaterThanOrEqual(parseUnits('5315.3', 18)),
     recipient: '0x22e798f9440f563b92aae24e94c75dfa499e3d3e',

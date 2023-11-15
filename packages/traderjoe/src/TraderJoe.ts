@@ -6,9 +6,13 @@ import {
 import { type Address } from 'viem'
 import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from '@traderjoe-xyz/sdk-v2'
 import { ChainId } from '@traderjoe-xyz/sdk-core'
-import { DEFAULT_SWAP_TOKEN_LIST } from './contract-addresses'
+import {
+  DEFAULT_SWAP_TOKEN_LIST,
+  ETH_ADDRESS,
+  Tokens,
+} from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { Tokens, buildPathQuery } from './utils'
+import { buildPathQuery } from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -23,8 +27,8 @@ export const swap = async (
     recipient,
   } = swap
 
-  const ethUsedIn = tokenIn === Tokens.ETH
-  const ethUsedOut = tokenOut === Tokens.ETH
+  const ethUsedIn = tokenIn === ETH_ADDRESS
+  const ethUsedOut = tokenOut === ETH_ADDRESS
   const to = contractAddress ?? LB_ROUTER_V21_ADDRESS[chainId as ChainId]
 
   return compressJson({
@@ -38,8 +42,8 @@ export const swap = async (
           to: recipient,
           path: {
             tokenPath: buildPathQuery(
-              ethUsedIn ? Tokens.WETH : tokenIn,
-              ethUsedOut ? Tokens.WETH : tokenOut,
+              ethUsedIn ? Tokens[chainId]?.WETH : tokenIn,
+              ethUsedOut ? Tokens[chainId]?.WETH : tokenOut,
             ),
           },
         },

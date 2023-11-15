@@ -2,8 +2,10 @@ import {
   type SwapActionParams,
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
+import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { parseEther, parseUnits } from 'viem'
-import { type TestCase, createTestCase, Tokens } from './utils'
+import { type TestCase, createTestCase } from './utils'
+import { Tokens } from './contract-addresses'
 import {
   EXACT_NATIVE_FOR_TOKENS,
   EXACT_NATIVE_FOR_TOKENS_FEE,
@@ -45,10 +47,10 @@ export const failingTestCases: TestCase<SwapActionParams>[] = [
     contractAddress: '0xc873fEcbd354f5A56E00E710B90EF4201db2448d',
   }),
   createTestCase(TOKENS_FOR_EXACT_NATIVE, 'when tokenIn is incorrect', {
-    tokenIn: Tokens.STG,
+    tokenIn: Tokens[ChainId.ARBITRUM_ONE].STG,
   }),
   createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when tokenOut is incorrect', {
-    tokenOut: Tokens.STG,
+    tokenOut: Tokens[ChainId.ARBITRUM_ONE].STG,
   }),
   createTestCase(EXACT_NATIVE_FOR_TOKENS, 'when amountIn is insufficient', {
     amountIn: GreaterThanOrEqual(parseEther('100')),
