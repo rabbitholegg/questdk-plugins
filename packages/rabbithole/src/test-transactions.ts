@@ -33,7 +33,8 @@ const CREATE_AND_QUEUE_QUEST_TX: TransactionEIP1559 = {
   v: 1n,
   value: 0n,
   typeHex: '0x2' as Hash,
-}
+  yParity: 0,
+} as TransactionEIP1559
 
 export const controlTransaction: TestTransaction = {
   transaction: CREATE_AND_QUEUE_QUEST_TX,
