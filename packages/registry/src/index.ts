@@ -45,7 +45,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
   [Symbiosis.pluginId]: Symbiosis,
-  [TraderJoe.pluginId]: TraderJoe
+  [TraderJoe.pluginId]: TraderJoe,
 }
 
 export const getPlugin = (pluginId: string) => {
