@@ -38,7 +38,7 @@ const CREATE_AND_QUEUE_QUEST_TX: TransactionEIP1559 = {
 
 export const controlTransaction: TestTransaction = {
   transaction: CREATE_AND_QUEUE_QUEST_TX,
-  rewardTokenId: '0x4200000000000000000000000000000000000042',
+  rewardToken: '0x4200000000000000000000000000000000000042',
   rewardAmount: 1500000000000000000,
   startTime: 1698765273,
   endTime: 1701273600,
@@ -51,7 +51,7 @@ export const PASSING_TEST_TRANSACTIONS: TestTransaction[] = [controlTransaction]
 export const FAILING_TEST_TRANSACTIONS: TestTransaction[] = [
   {
     ...controlTransaction,
-    rewardTokenId: '0x0',
+    rewardToken: '0x0',
     description: 'when reward token is incorrect',
   },
   {

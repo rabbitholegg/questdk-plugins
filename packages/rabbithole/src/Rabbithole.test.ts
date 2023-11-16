@@ -15,7 +15,7 @@ describe('Given the rabbithole plugin', () => {
         test(testTransaction.description, async () => {
           const {
             transaction,
-            rewardTokenId,
+            rewardToken,
             rewardAmount,
             startTime,
             endTime,
@@ -24,7 +24,7 @@ describe('Given the rabbithole plugin', () => {
 
           const filter = await quest({
             chainId: transaction.chainId,
-            rewardTokenId,
+            rewardToken,
             rewardAmount: GreaterThanOrEqual(rewardAmount),
             startTime: startTime,
             endTime: endTime,
@@ -39,7 +39,7 @@ describe('Given the rabbithole plugin', () => {
         test(testTransaction.description, async () => {
           const {
             transaction,
-            rewardTokenId,
+            rewardToken,
             rewardAmount,
             startTime,
             endTime,
@@ -48,7 +48,7 @@ describe('Given the rabbithole plugin', () => {
 
           const filter = await quest({
             chainId: transaction.chainId,
-            rewardTokenId,
+            rewardToken,
             rewardAmount: GreaterThanOrEqual(rewardAmount),
             startTime: startTime,
             endTime: endTime,
