@@ -2,7 +2,7 @@ import type { TransactionEIP1559, Address, Hash } from 'viem'
 
 interface TestTransaction {
   transaction: TransactionEIP1559
-  rewardTokenId?: Address
+  rewardToken?: Address
   rewardAmount?: number
   startTime?: number
   endTime?: number
