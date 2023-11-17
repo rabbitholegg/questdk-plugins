@@ -8,7 +8,7 @@ import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from '@traderjoe-xyz/sdk-v2'
 import { ChainId } from '@traderjoe-xyz/sdk-core'
 import {
   DEFAULT_SWAP_TOKEN_LIST,
-  ETH_ADDRESS,
+  NATIVE_TOKEN,
   Tokens,
 } from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
@@ -27,14 +27,14 @@ export const swap = async (
     recipient,
   } = swap
 
-  const ethUsedIn = tokenIn === ETH_ADDRESS
-  const ethUsedOut = tokenOut === ETH_ADDRESS
+  const nativeIn = tokenIn === NATIVE_TOKEN
+  const nativeOut = tokenOut === NATIVE_TOKEN
   const to = contractAddress ?? LB_ROUTER_V21_ADDRESS[chainId as ChainId]
 
   return compressJson({
     chainId,
     to,
-    value: ethUsedIn ? amountIn : undefined,
+    value: nativeIn ? amountIn : undefined,
     input: {
       $abi: LBRouterV21ABI,
       $and: [
@@ -42,20 +42,20 @@ export const swap = async (
           to: recipient,
           path: {
             tokenPath: buildPathQuery(
-              ethUsedIn ? Tokens[chainId]?.WETH : tokenIn,
-              ethUsedOut ? Tokens[chainId]?.WETH : tokenOut,
+              nativeIn ? Tokens[chainId]?.WETH : tokenIn,
+              nativeOut ? Tokens[chainId]?.WETH : tokenOut,
             ),
           },
         },
         {
           $or: [
             {
-              amountIn: ethUsedIn ? undefined : amountIn,
+              amountIn: nativeIn ? undefined : amountIn,
               amountOutMin: amountOut,
             },
             { amountOut: amountOut },
             { amountIn: amountIn, amountOutMinNATIVE: amountOut },
-            { amountNATIVEOut: amountOut, amountInMax: amountIn },
+            { amountInMax: amountIn, amountNATIVEOut: amountOut },
           ],
         },
       ],
