@@ -26,6 +26,7 @@ import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
 import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
 import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
+import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -44,6 +45,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
   [Symbiosis.pluginId]: Symbiosis,
+  [Synapse.pluginId]: Synapse,
 }
 
 export const getPlugin = (pluginId: string) => {
