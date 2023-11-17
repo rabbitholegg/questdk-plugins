@@ -28,6 +28,7 @@
     "quick-eyes-retire",
     "quick-otters-deliver",
     "rotten-monkeys-attack",
+    "selfish-beers-check",
     "sharp-candles-live",
     "shiny-pets-brush",
     "short-sloths-talk",
@@ -70,6 +71,7 @@
     "@rabbitholegg/questdk-plugin-paraswap": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-basepaint": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-hyphen": "1.0.0-alpha.4",
-    "@rabbitholegg/questdk-plugin-symbiosis": "1.0.0-alpha.4"
+    "@rabbitholegg/questdk-plugin-symbiosis": "1.0.0-alpha.4",
+    "@rabbitholegg/questdk-plugin-rabbithole": "1.0.0-alpha.1"
   }
 }
