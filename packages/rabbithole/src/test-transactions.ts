@@ -46,7 +46,34 @@ export const controlTransaction: TestTransaction = {
   description: 'Control Create and Queue Quest TCX',
 }
 
-export const PASSING_TEST_TRANSACTIONS: TestTransaction[] = [controlTransaction]
+export const PASSING_TEST_TRANSACTIONS: TestTransaction[] = [
+  controlTransaction,
+  {
+    ...controlTransaction,
+    rewardToken: undefined,
+    description: 'when reward token is undefined',
+  },
+  {
+    ...controlTransaction,
+    rewardAmount: undefined,
+    description: 'when reward amount is undefined',
+  },
+  {
+    ...controlTransaction,
+    startTime: undefined,
+    description: 'when start time is undefined',
+  },
+  {
+    ...controlTransaction,
+    endTime: undefined,
+    description: 'when end time is undefined',
+  },
+  {
+    ...controlTransaction,
+    totalParticipants: undefined,
+    description: 'when total participants is undefined',
+  },
+]
 
 export const FAILING_TEST_TRANSACTIONS: TestTransaction[] = [
   {
