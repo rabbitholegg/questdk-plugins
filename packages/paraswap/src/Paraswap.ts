@@ -6,7 +6,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
-import { Tokens, buildPathQuery, filterTokenList } from './utils.js'
+import { buildPathQuery, filterTokenList } from './utils.js'
 import {
   constructGetTokens,
   constructAxiosFetcher,
@@ -17,11 +17,12 @@ import axios from 'axios'
 import {
   DEFAULT_STAKE_TOKEN_LIST,
   DEFAULT_SWAP_TOKEN_LIST,
+  INTERNAL_ETH_ADDRESS,
   MAINNET_SEPSP1_ADDRESS,
   MAINNET_SEPSP2_ADDRESS,
+  NATIVE_TOKEN_ADDRESS,
   OPTIMISM_SEPSP1_ADDRESS,
   OPTIMISM_SEPSP2_ADDRESS,
-  INTERNAL_ETH_ADDRESS,
 } from './contract-addresses.js'
 const fetcher = constructAxiosFetcher(axios) // alternatively constructFetchFetcher
 
@@ -30,8 +31,10 @@ export const swap = async (swap: SwapActionParams) => {
     swap
   const { getAugustusSwapper } = constructGetSpender({ chainId, fetcher })
   const to = contractAddress || (await getAugustusSwapper())
-  const ethUsedIn = tokenIn === Tokens.ETH
-  const ethUsedOut = tokenOut === Tokens.ETH
+  const tokenInUsed =
+    tokenIn === NATIVE_TOKEN_ADDRESS ? INTERNAL_ETH_ADDRESS : tokenIn
+  const tokenOutUsed =
+    tokenOut === NATIVE_TOKEN_ADDRESS ? INTERNAL_ETH_ADDRESS : tokenOut
 
   return compressJson({
     chainId: chainId,
@@ -42,21 +45,21 @@ export const swap = async (swap: SwapActionParams) => {
         {
           // simpleswap, directUniV3Swap, directCurveSwap
           data: {
-            fromToken: ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn,
+            fromToken: tokenInUsed,
             fromAmount: amountIn,
             toAmount: amountOut,
-            toToken: ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut,
+            toToken: tokenOutUsed,
           },
         },
         {
           // multiswap
           data: {
-            fromToken: ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn,
+            fromToken: tokenInUsed,
             fromAmount: amountIn,
             toAmount: amountOut,
             path: {
               $last: {
-                to: ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut,
+                to: tokenOutUsed,
               },
             },
           },
@@ -64,14 +67,14 @@ export const swap = async (swap: SwapActionParams) => {
         {
           // megaswap
           data: {
-            fromToken: ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn,
+            fromToken: tokenInUsed,
             fromAmount: amountIn,
             toAmount: amountOut,
             path: {
               $last: {
                 path: {
                   $last: {
-                    to: ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut,
+                    to: tokenOutUsed,
                   },
                 },
               },
