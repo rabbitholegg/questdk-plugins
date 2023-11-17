@@ -6,6 +6,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
+import { Tokens, buildPathQuery, filterTokenList } from './utils.js'
 import {
   constructGetTokens,
   constructAxiosFetcher,
@@ -16,102 +17,72 @@ import axios from 'axios'
 import {
   DEFAULT_STAKE_TOKEN_LIST,
   DEFAULT_SWAP_TOKEN_LIST,
+  INTERNAL_ETH_ADDRESS,
   MAINNET_SEPSP1_ADDRESS,
   MAINNET_SEPSP2_ADDRESS,
   OPTIMISM_SEPSP1_ADDRESS,
   OPTIMISM_SEPSP2_ADDRESS,
 } from './contract-addresses.js'
 const fetcher = constructAxiosFetcher(axios) // alternatively constructFetchFetcher
-// If you're implementing swap or mint, simply duplicate this function and change the name
+
 export const swap = async (swap: SwapActionParams) => {
-  // This is the information we'll use to compose the Transaction object
-  const {
-    chainId,
-    contractAddress,
-    tokenIn,
-    tokenOut,
-    amountIn,
-    amountOut,
-    recipient,
-  } = swap
+  const { chainId, contractAddress, tokenIn, tokenOut, amountIn, amountOut } =
+    swap
   const { getAugustusSwapper } = constructGetSpender({ chainId, fetcher })
   const to = contractAddress || (await getAugustusSwapper())
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  const tokenInUsed = tokenIn === Tokens.ETH ? INTERNAL_ETH_ADDRESS : tokenIn
+  const tokenOutUsed = tokenOut === Tokens.ETH ? INTERNAL_ETH_ADDRESS : tokenOut
+
   return compressJson({
-    chainId: chainId, // The chainId of the source chain
+    chainId: chainId,
     to: to,
     input: {
-      $abiAbstract: PARASWAP_SWAP_ABI,
+      $abi: PARASWAP_SWAP_ABI,
       $or: [
         {
-          assets:
-            tokenIn !== undefined && tokenOut !== undefined
-              ? [tokenIn, tokenOut]
-              : undefined,
-          funds: {
-            recipient: recipient,
-          },
-          fromAmount: amountIn,
-          expectedAmount: amountOut,
-        },
-        {
-          assets:
-            tokenIn !== undefined && tokenOut !== undefined
-              ? [tokenIn, tokenOut]
-              : undefined,
-          funds: {
-            recipient: recipient,
-          },
-          fromAmount: amountIn,
-          expectedAmount: amountOut,
-        },
-        {
-          fromToken: tokenIn,
-          toToken: tokenOut,
-          fromAmount: amountIn,
-          expectedAmount: amountOut,
-        },
-        {
-          fromToken: tokenIn,
-          toToken: tokenOut,
-          fromAmount: amountIn,
-          toAmount: amountOut,
-        },
-        {
-          params: {
-            amountIn: amountIn,
-            amountOut: amountOut,
-            tokenIn: tokenIn,
-            tokenOut: tokenOut,
-          },
-        },
-        {
-          params: {
-            path:
-              tokenIn !== undefined && tokenOut !== undefined
-                ? tokenIn + tokenOut.substring(2)
-                : undefined,
-            amountIn: amountIn,
-            amountOutMinimum: amountOut,
-            recipient: recipient,
-          },
-        },
-        {
+          // simpleswap, directUniV3Swap, directCurveSwap
           data: {
-            fromToken: tokenIn,
+            fromToken: tokenInUsed,
             fromAmount: amountIn,
+            toAmount: amountOut,
+            toToken: tokenOutUsed,
+          },
+        },
+        {
+          // multiswap
+          data: {
+            fromToken: tokenInUsed,
+            fromAmount: amountIn,
+            toAmount: amountOut,
             path: {
               $last: {
-                to: tokenOut,
+                to: tokenOutUsed,
               },
             },
           },
         },
         {
+          // megaswap
           data: {
-            fromToken: tokenIn,
+            fromToken: tokenInUsed,
             fromAmount: amountIn,
-            toToken: tokenOut,
+            toAmount: amountOut,
+            path: {
+              $last: {
+                path: {
+                  $last: {
+                    to: tokenOutUsed,
+                  },
+                },
+              },
+            },
+          },
+        },
+        {
+          // directBalancerV2
+          data: {
+            assets: buildPathQuery(tokenIn, tokenOut),
+            fromAmount: amountIn,
             toAmount: amountOut,
           },
         },
@@ -127,6 +98,7 @@ export const stake = async (stake: StakeActionParams) => {
       chainId === 1 ? [MAINNET_SEPSP2_ADDRESS] : [OPTIMISM_SEPSP2_ADDRESS]
     return compressJson({
       chainId: chainId,
+      // check which address format to use. LowerCase or CheckSummed
       to: {
         $or: addressArray, // If both tokens are defined it has to be sePSP2
       },
@@ -176,12 +148,22 @@ export const getSupportedTokenAddresses = async (
   if (actionType === 'stake') {
     return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
   }
+  if (_chainId === 1) {
+    return DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[]
+  }
   const { getTokens } = constructGetTokens({ chainId: _chainId, fetcher })
-  // Default list only valid for
-  return getTokens
-    ? (await getTokens()).map((token) => token.address as Address)
-    : (DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[])
+
+  try {
+    const tokenList = await getTokens()
+    if (!tokenList || tokenList.length === 0) {
+      return DEFAULT_STAKE_TOKEN_LIST[_chainId] as Address[]
+    }
+    return filterTokenList(tokenList)
+  } catch {
+    return DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[]
+  }
 }
+
 export const getSupportedChainIds = async (actionType?: ActionType) => {
   if (actionType === 'stake') {
     return STAKE_CHAIN_ID_ARRAY
