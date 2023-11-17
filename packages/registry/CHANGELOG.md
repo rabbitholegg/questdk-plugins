@@ -1,5 +1,31 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.35
+
+### Minor Changes
+
+- [#90](https://github.com/rabbitholegg/questdk-plugins/pull/90) [`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57) Thanks [@Quazia](https://github.com/Quazia)! - Update QuestDK version and add Rabbithole Plugin
+
+### Patch Changes
+
+- Updated dependencies [[`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57)]:
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.8
+
 ## 1.0.0-alpha.34
 
 ### Patch Changes
