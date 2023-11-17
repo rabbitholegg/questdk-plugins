@@ -1,13 +1,15 @@
 import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { type Address } from 'viem'
 
+export const NATIVE_TOKEN = '0x0000000000000000000000000000000000000000'
+
 export const Tokens: {
   [_chainId: number]: { [token: string]: Address }
 } = {
   [ChainId.ARBITRUM_ONE]: {
     ARB: '0x912CE59144191C1204E64559FE8253a0e49E6548',
     DAI: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
-    ETH: '0x0000000000000000000000000000000000000000',
+    ETH: NATIVE_TOKEN,
     GMX: '0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a',
     JOE: '0x371c7ec6D8039ff7933a2AA28EB827Ffe1F52f07',
     LINK: '0xf97f4df75117a78c1A5a0DBb814Af92458539FB4',
@@ -42,5 +44,3 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
     Tokens[ChainId.ARBITRUM_ONE].WETH,
   ],
 } as const
-
-export const ETH_ADDRESS = '0x0000000000000000000000000000000000000000'
