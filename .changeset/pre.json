@@ -16,6 +16,7 @@
     "hungry-squids-drop",
     "late-scissors-wonder",
     "little-llamas-rescue",
+    "lovely-buses-tan",
     "moody-students-flash",
     "neat-teachers-complain",
     "new-ears-study",
@@ -28,6 +29,7 @@
     "quick-otters-deliver",
     "rotten-monkeys-attack",
     "sharp-candles-live",
+    "shiny-pets-brush",
     "short-sloths-talk",
     "silent-rats-explode",
     "sixty-countries-leave",
@@ -46,7 +48,8 @@
     "unlucky-dolphins-stare",
     "unlucky-impalas-shake",
     "wet-toes-prove",
-    "wicked-readers-clean"
+    "wicked-readers-clean",
+    "wild-cobras-help"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",

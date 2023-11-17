@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-camelot
 
+## 1.0.0-alpha.6
+
+### Minor Changes
+
+- [#102](https://github.com/rabbitholegg/questdk-plugins/pull/102) [`10ae9d9`](https://github.com/rabbitholegg/questdk-plugins/commit/10ae9d9df23e09373fe18968e3c1b4cfefa79500) Thanks [@mmackz](https://github.com/mmackz)! - minor: bug fixes and test suite improvements
+
+- [#102](https://github.com/rabbitholegg/questdk-plugins/pull/102) [`eeaa97b`](https://github.com/rabbitholegg/questdk-plugins/commit/eeaa97b454014b39c9493e165f15545c2299f628) Thanks [@mmackz](https://github.com/mmackz)! - add paraswap aggregator support for camelot plugin
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes
