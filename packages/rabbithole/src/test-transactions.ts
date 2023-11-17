@@ -39,9 +39,9 @@ const CREATE_AND_QUEUE_QUEST_TX: TransactionEIP1559 = {
 export const controlTransaction: TestTransaction = {
   transaction: CREATE_AND_QUEUE_QUEST_TX,
   rewardToken: '0x4200000000000000000000000000000000000042',
-  rewardAmount: 1500000000000000000,
-  startTime: 1698765273,
-  endTime: 1701273600,
+  rewardAmount: 1500000000000000000n,
+  startTime: 1698765273n,
+  endTime: 1701273600n,
   totalParticipants: 1,
   description: 'Control Create and Queue Quest TCX',
 }
@@ -83,17 +83,17 @@ export const FAILING_TEST_TRANSACTIONS: TestTransaction[] = [
   },
   {
     ...controlTransaction,
-    rewardAmount: controlTransaction.rewardAmount! + 1000000,
+    rewardAmount: controlTransaction.rewardAmount! + 1000000n,
     description: 'when reward amount is incorrect',
   },
   {
     ...controlTransaction,
-    startTime: controlTransaction.startTime! - 100,
+    startTime: controlTransaction.startTime! - 100n,
     description: 'when start time is incorrect',
   },
   {
     ...controlTransaction,
-    endTime: controlTransaction.endTime! + 100,
+    endTime: controlTransaction.endTime! + 100n,
     description: 'when end time is incorrect',
   },
   {
