@@ -15,6 +15,8 @@ export const MAINNET_SEPSP2_ADDRESS =
 
 export const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
 
+export const INTERNAL_ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+
 export const DEFAULT_SWAP_TOKEN_LIST: {
   [chainId: number]: readonly Address[]
 } = {

@@ -21,9 +21,9 @@ import {
   MAINNET_SEPSP2_ADDRESS,
   OPTIMISM_SEPSP1_ADDRESS,
   OPTIMISM_SEPSP2_ADDRESS,
+  INTERNAL_ETH_ADDRESS,
 } from './contract-addresses.js'
 const fetcher = constructAxiosFetcher(axios) // alternatively constructFetchFetcher
-const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 
 export const swap = async (swap: SwapActionParams) => {
   const { chainId, contractAddress, tokenIn, tokenOut, amountIn, amountOut } =
@@ -42,21 +42,21 @@ export const swap = async (swap: SwapActionParams) => {
         {
           // simpleswap, directUniV3Swap, directCurveSwap
           data: {
-            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
+            fromToken: ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
             toAmount: amountOut,
-            toToken: ethUsedOut ? ETH_ADDRESS : tokenOut,
+            toToken: ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut,
           },
         },
         {
           // multiswap
           data: {
-            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
+            fromToken: ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
             toAmount: amountOut,
             path: {
               $last: {
-                to: ethUsedOut ? ETH_ADDRESS : tokenOut,
+                to: ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut,
               },
             },
           },
@@ -64,14 +64,14 @@ export const swap = async (swap: SwapActionParams) => {
         {
           // megaswap
           data: {
-            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
+            fromToken: ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn,
             fromAmount: amountIn,
             toAmount: amountOut,
             path: {
               $last: {
                 path: {
                   $last: {
-                    to: ethUsedOut ? ETH_ADDRESS : tokenOut,
+                    to: ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut,
                   },
                 },
               },
