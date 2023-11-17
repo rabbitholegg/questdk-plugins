@@ -49,6 +49,7 @@ export const swap = async (
       $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
       $or: [
         {
+          // camelotV2 swap
           to: recipient,
           path: buildPathQuery(ethUsedIn ? Tokens.WETH : tokenIn, tokenOut),
           amountOutMin: amountOut,
