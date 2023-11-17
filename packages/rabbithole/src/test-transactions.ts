@@ -3,9 +3,9 @@ import type { TransactionEIP1559, Address, Hash } from 'viem'
 interface TestTransaction {
   transaction: TransactionEIP1559
   rewardToken?: Address
-  rewardAmount?: number
-  startTime?: number
-  endTime?: number
+  rewardAmount?: bigint
+  startTime?: bigint
+  endTime?: bigint
   totalParticipants?: number
   description: string
 }
