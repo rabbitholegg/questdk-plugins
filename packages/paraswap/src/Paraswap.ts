@@ -6,7 +6,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
-import { buildPathQuery, filterTokenList } from './utils.js'
+import { Tokens, buildPathQuery, filterTokenList } from './utils.js'
 import {
   constructGetTokens,
   constructAxiosFetcher,
@@ -20,7 +20,6 @@ import {
   INTERNAL_ETH_ADDRESS,
   MAINNET_SEPSP1_ADDRESS,
   MAINNET_SEPSP2_ADDRESS,
-  NATIVE_TOKEN_ADDRESS,
   OPTIMISM_SEPSP1_ADDRESS,
   OPTIMISM_SEPSP2_ADDRESS,
 } from './contract-addresses.js'
@@ -31,10 +30,8 @@ export const swap = async (swap: SwapActionParams) => {
     swap
   const { getAugustusSwapper } = constructGetSpender({ chainId, fetcher })
   const to = contractAddress || (await getAugustusSwapper())
-  const tokenInUsed =
-    tokenIn === NATIVE_TOKEN_ADDRESS ? INTERNAL_ETH_ADDRESS : tokenIn
-  const tokenOutUsed =
-    tokenOut === NATIVE_TOKEN_ADDRESS ? INTERNAL_ETH_ADDRESS : tokenOut
+  const tokenInUsed = tokenIn === Tokens.ETH ? INTERNAL_ETH_ADDRESS : tokenIn
+  const tokenOutUsed = tokenOut === Tokens.ETH ? INTERNAL_ETH_ADDRESS : tokenOut
 
   return compressJson({
     chainId: chainId,

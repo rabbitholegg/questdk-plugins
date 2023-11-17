@@ -1,5 +1,6 @@
 import type { Address } from 'viem'
 import { ARB_ONE_CHAIN_ID, ETH_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids'
+import { Tokens } from './utils'
 
 export const OPTIMISM_SEPSP1_ADDRESS =
   '0x8c934b7dbc782568d14ceabbeaedf37cb6348615'
@@ -13,15 +14,13 @@ export const MAINNET_SEPSP1_ADDRESS =
 export const MAINNET_SEPSP2_ADDRESS =
   '0x593f39a4ba26a9c8ed2128ac95d109e8e403c485'
 
-export const NATIVE_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
-
 export const INTERNAL_ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 
 export const DEFAULT_SWAP_TOKEN_LIST: {
   [chainId: number]: readonly Address[]
 } = {
   [ETH_CHAIN_ID]: [
-    NATIVE_TOKEN_ADDRESS, // ETH
+    Tokens.ETH,
     '0xcafe001067cdef266afb7eb5a286dcfd277f3de5',
     '0xdac17f958d2ee523a2206206994597c13d831ec7',
     '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
@@ -34,7 +33,7 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
     '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
   ],
   [ARB_ONE_CHAIN_ID]: [
-    NATIVE_TOKEN_ADDRESS, // ETH
+    Tokens.ETH,
     '0x17fc002b466eec40dae837fc4be5c67993ddbd6f',
     '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f',
     '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
@@ -49,7 +48,7 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
     '0x912ce59144191c1204e64559fe8253a0e49e6548',
   ],
   [OPTIMISM_CHAIN_ID]: [
-    NATIVE_TOKEN_ADDRESS, // ETH
+    Tokens.ETH,
     '0x4200000000000000000000000000000000000006',
     '0x4200000000000000000000000000000000000042',
     '0x76fb31fb4af56892a25e32cfc43de717950c9278',
@@ -69,11 +68,11 @@ export const DEFAULT_STAKE_TOKEN_LIST: {
   [ETH_CHAIN_ID]: [
     '0xcafe001067cdef266afb7eb5a286dcfd277f3de5', //PSP
     '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', //WETH
-    NATIVE_TOKEN_ADDRESS, // ETH
+    Tokens.ETH,
   ],
   [OPTIMISM_CHAIN_ID]: [
     '0xd3594e879b358f430e20f82bea61e83562d49d48', //PSP
     '0x4200000000000000000000000000000000000006', //WETH
-    NATIVE_TOKEN_ADDRESS, // ETH
+    Tokens.ETH,
   ],
 } as const
