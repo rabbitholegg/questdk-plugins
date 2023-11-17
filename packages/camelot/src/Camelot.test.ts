@@ -2,13 +2,15 @@ import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import {
   CAMELOT_ROUTER,
+  DEFAULT_TOKEN_LIST,
   ETH_ADDRESS,
-  DEFAULT_TOKEN_LIST_URL,
+  PARASWAP_ROUTER,
 } from './contract-addresses'
 import { ARBITRUM_CHAIN_ID } from './chain-ids'
 import { parseEther, getAddress } from 'viem'
 import { swap } from './Camelot'
-import { CAMELOT_ABI } from './abi'
+import { Tokens } from './utils'
+import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
 import { failingTestCases, passingTestCases } from './test-setup'
 
 describe('Given the camelot plugin', () => {
@@ -17,25 +19,104 @@ describe('Given the camelot plugin', () => {
       const filter = await swap({
         chainId: ARBITRUM_CHAIN_ID,
         contractAddress: CAMELOT_ROUTER,
-        tokenIn: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
-        tokenOut: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C',
+        tokenIn: Tokens.USDT,
+        tokenOut: Tokens.WETH,
         amountIn: GreaterThanOrEqual(1000000n),
         amountOut: GreaterThanOrEqual(parseEther('0.0005')),
       })
 
       expect(filter).to.deep.equal({
         chainId: 42161,
-        to: '0xc873fEcbd354f5A56E00E710B90EF4201db2448d',
+        to: {
+          $or: [CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()],
+        },
         input: {
-          $abi: CAMELOT_ABI,
-          path: {
-            $and: [
-              { $first: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9' },
-              { $last: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C' },
-            ],
-          },
-          amountIn: { $gte: '1000000' },
-          amountOutMin: { $gte: '500000000000000' },
+          $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
+          $or: [
+            {
+              path: {
+                $and: [
+                  {
+                    $first: Tokens.USDT,
+                  },
+                  {
+                    $last: Tokens.WETH,
+                  },
+                ],
+              },
+              amountOutMin: {
+                $gte: '500000000000000',
+              },
+              amountIn: {
+                $gte: '1000000',
+              },
+            },
+            {
+              data: {
+                fromToken: Tokens.USDT,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                toToken: Tokens.WETH,
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromToken: Tokens.USDT,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    to: Tokens.WETH,
+                  },
+                },
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromToken: Tokens.USDT,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    path: {
+                      $last: {
+                        to: Tokens.WETH,
+                      },
+                    },
+                  },
+                },
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                assets: {
+                  $and: [{ $first: Tokens.USDT }, { $last: Tokens.WETH }],
+                },
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+          ],
         },
       })
     })
@@ -43,24 +124,105 @@ describe('Given the camelot plugin', () => {
       const filter = await swap({
         chainId: ARBITRUM_CHAIN_ID,
         contractAddress: CAMELOT_ROUTER,
-        tokenIn: ETH_ADDRESS,
-        tokenOut: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9',
-        amountIn: GreaterThanOrEqual(parseEther('0.5')),
+        tokenIn: Tokens.ETH,
+        tokenOut: Tokens.USDT,
+        amountIn: GreaterThanOrEqual(1000000n),
+        amountOut: GreaterThanOrEqual(parseEther('0.0005')),
         recipient: '0x67ef327038b25ff762a0606bc92c4a0a6e767048',
       })
       expect(filter).to.deep.equal({
         chainId: 42161,
-        to: '0xc873fEcbd354f5A56E00E710B90EF4201db2448d',
-        value: { $gte: '500000000000000000' },
+        to: {
+          $or: [CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()],
+        },
+        value: {
+          $gte: '1000000',
+        },
         input: {
-          $abi: CAMELOT_ABI,
-          to: '0x67ef327038b25ff762a0606bc92c4a0a6e767048',
-          path: {
-            $and: [
-              { $first: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1' },
-              { $last: '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9' },
-            ],
-          },
+          $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
+          $or: [
+            {
+              to: '0x67ef327038b25ff762a0606bc92c4a0a6e767048',
+              path: {
+                $and: [
+                  {
+                    $first: Tokens.WETH,
+                  },
+                  {
+                    $last: Tokens.USDT,
+                  },
+                ],
+              },
+              amountOutMin: {
+                $gte: '500000000000000',
+              },
+            },
+            {
+              data: {
+                fromToken: ETH_ADDRESS,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                toToken: Tokens.USDT,
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromToken: ETH_ADDRESS,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    to: Tokens.USDT,
+                  },
+                },
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromToken: ETH_ADDRESS,
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                path: {
+                  $last: {
+                    path: {
+                      $last: {
+                        to: Tokens.USDT,
+                      },
+                    },
+                  },
+                },
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+            {
+              data: {
+                fromAmount: {
+                  $gte: '1000000',
+                },
+                toAmount: {
+                  $gte: '500000000000000',
+                },
+                assets: {
+                  $and: [{ $first: Tokens.ETH }, { $last: Tokens.USDT }],
+                },
+                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+              },
+            },
+          ],
         },
       })
     })
@@ -82,20 +244,25 @@ describe('Given the camelot plugin', () => {
         expect(apply(transaction, filter)).to.be.false
       })
     })
+    test('should throw error when contract address is incorrect', async () => {
+      try {
+        const { transaction, params } = passingTestCases[0]
+        params.contractAddress = '0xE592427A0AEce92De3Edee1F18E0157C05861564'
+        const filter = await swap({ ...params })
+        apply(transaction, filter)
+        throw new Error('Expected bridge function to throw, but it did not.')
+      } catch (err) {
+        if (err instanceof Error) {
+          expect(err.message).toBe('Invalid Contract Address')
+        }
+      }
+    })
   })
   describe('all supported tokens addresses are properly checksummed', () => {
     test('should have all addresses properly checksummed', () => {
-      const notChecksummed = DEFAULT_TOKEN_LIST_URL.filter(
+      const notChecksummed = DEFAULT_TOKEN_LIST.filter(
         (tokenAddress) => tokenAddress !== getAddress(tokenAddress),
       )
-
-      if (notChecksummed.length > 0) {
-        console.error(
-          `The following addresses are not properly checksummed: ${notChecksummed.join(
-            ', ',
-          )}`,
-        )
-      }
       expect(notChecksummed).to.be.empty
     })
   })
