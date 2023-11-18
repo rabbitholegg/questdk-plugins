@@ -5,7 +5,6 @@ import {
   UNIVERSAL_ARBSYS_PRECOMPILE,
   ARB_ONE_DELAYED_INBOX,
   ARB_NOVA_DELAYED_INBOX,
-  L2_TO_L1_GATEWAYS,
 } from './contract-addresses'
 import { ArbitrumTokens } from './supported-token-addresses'
 import { findL1TokenForL2Token, getContractAddressFromChainId } from './utils'
@@ -31,14 +30,14 @@ export const bridge = async (bridge: BridgeActionParams) => {
   const isBridgingToken = tokenAddress !== ETH_TOKEN_ADDRESS
 
   if (isBridgingToken) {
-    const networkGateway = getContractAddressFromChainId(
-      sourceChainId,
-      destinationChainId,
-    )
-    if (L2_TO_L1_GATEWAYS.includes(networkGateway.toLowerCase())) {
+    const bridgeContract =
+      contractAddress ||
+      getContractAddressFromChainId(sourceChainId, destinationChainId)
+
+    if (sourceChainId !== ETH_CHAIN_ID) {
       return compressJson({
         chainId: sourceChainId, // The chainId of the source chain
-        to: contractAddress || networkGateway, // The contract address of the bridge
+        to: bridgeContract ? bridgeContract : undefined,
         input: {
           $abi: OUTBOUND_TRANSFER_L2_TO_L1,
           _to: recipient,
@@ -47,10 +46,11 @@ export const bridge = async (bridge: BridgeActionParams) => {
         },
       })
     }
+
     // We're targeting a gateway contract
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
-      to: contractAddress || networkGateway, // The contract address of the bridge
+      to: bridgeContract, // The contract address of the bridge
       input: {
         $abi: OUTBOUND_TRANSFER_L1_TO_L2,
         _to: recipient,

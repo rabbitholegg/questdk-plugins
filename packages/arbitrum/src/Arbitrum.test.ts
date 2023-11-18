@@ -99,7 +99,7 @@ describe('Given the arbitrum plugin', () => {
         sourceChainId: ARB_NOVA_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         contractAddress: '0x0000000000000000000000000000000000000064',
-        tokenAddress: '0x0000000000000000000000000000000000000000',
+        tokenAddress: zeroAddress,
         amount: GreaterThanOrEqual(parseEther('.005')),
         recipient: recipient,
       })
