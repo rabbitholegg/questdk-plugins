@@ -69,7 +69,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       },
     })
   }
-  
+
   if (sourceChainId === ETH_CHAIN_ID) {
     const networkInbox =
       destinationChainId === ARB_NOVA_CHAIN_ID
