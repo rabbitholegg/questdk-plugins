@@ -44,8 +44,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       sourceChainId,
       destinationChainId,
     )
-
-    if (L2_TO_L1_GATEWAYS.includes(networkGateway)) {
+    if (L2_TO_L1_GATEWAYS.includes(networkGateway.toLowerCase())) {
       return compressJson({
         chainId: sourceChainId, // The chainId of the source chain
         to: contractAddress || networkGateway, // The contract address of the bridge

@@ -15,12 +15,12 @@ export const ARB_NOVA_DELAYED_INBOX =
   '0xc4448b71118c9071bcb9734a0eac55d18a153949'
 export const UNIVERSAL_ARBSYS_PRECOMPILE =
   '0x0000000000000000000000000000000000000064'
+
 export const L2_TO_L1_GATEWAYS = [
   ARB_ONE_TO_MAINNET_GATEWAY,
   ARB_NOVA_TO_MAINNET_GATEWAY,
-]
+].map((address) => address.toLowerCase())
 
-// USE LOWER-CASE ADDRESS STRINGS
 const l1ToL2Map: [string, Address][] = [
   [
     // USDC
@@ -60,8 +60,8 @@ export function findL1TokenForL2Token(
 ): Address | undefined {
   if (l2TokenAddress) {
     for (const [key, value] of l1TokenFromL2Tokens) {
-      const pair: Address[] = JSON.parse(key)
-      if (pair.includes(l2TokenAddress)) {
+      const pair: Address[] = JSON.parse(key.toLowerCase())
+      if (pair.includes(l2TokenAddress.toLowerCase() as Address)) {
         return value
       }
     }
