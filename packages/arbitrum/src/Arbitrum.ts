@@ -1,23 +1,14 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { CHAIN_ID_ARRAY, ETH_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids.js'
 import {
-  CHAIN_ID_ARRAY,
-  ETH_CHAIN_ID,
-  ARB_ONE_CHAIN_ID,
-  ARB_NOVA_CHAIN_ID,
-} from './chain-ids.js'
-import {
-  MAINNET_TO_ARB_NOVA_GATEWAY,
-  MAINNET_TO_ARB_ONE_GATEWAY,
-  ARB_NOVA_TO_MAINNET_GATEWAY,
-  ARB_ONE_TO_MAINNET_GATEWAY,
   UNIVERSAL_ARBSYS_PRECOMPILE,
   ARB_ONE_DELAYED_INBOX,
   ARB_NOVA_DELAYED_INBOX,
   L2_TO_L1_GATEWAYS,
-  findL1TokenForL2Token,
 } from './contract-addresses.js'
 import { ArbitrumTokens } from './supported-token-addresses.js'
+import { findL1TokenForL2Token, getContractAddressFromChainId } from './utils'
 import {
   ARBSYS_WITHDRAW_ETH_FRAG,
   INBOX_DEPOSIT_ETH_FRAG,
@@ -104,20 +95,4 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
 
 export const getSupportedChainIds = async () => {
   return CHAIN_ID_ARRAY as number[]
-}
-
-const getContractAddressFromChainId = (
-  sourceChainId: number,
-  destinationChainId: number,
-): Address => {
-  // This is klunky but the alternative is some sort of convoluted 2D mapping
-  if (sourceChainId === ARB_NOVA_CHAIN_ID) return ARB_NOVA_TO_MAINNET_GATEWAY
-  if (sourceChainId === ARB_ONE_CHAIN_ID) return ARB_ONE_TO_MAINNET_GATEWAY
-  if (sourceChainId === ETH_CHAIN_ID) {
-    if (destinationChainId === ARB_NOVA_CHAIN_ID)
-      return MAINNET_TO_ARB_NOVA_GATEWAY
-    if (destinationChainId === ARB_ONE_CHAIN_ID)
-      return MAINNET_TO_ARB_ONE_GATEWAY
-  }
-  return '0x0'
 }
