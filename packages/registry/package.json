@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.33",
+  "version": "1.0.0-alpha.35",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -43,7 +43,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.25",
+    "@rabbitholegg/questdk": "2.0.0-alpha.27",
     "@rabbitholegg/questdk-plugin-across": "workspace:*",
     "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
     "@rabbitholegg/questdk-plugin-basepaint": "workspace:*",
@@ -59,6 +59,7 @@
     "@rabbitholegg/questdk-plugin-symbiosis": "workspace:*",
     "@rabbitholegg/questdk-plugin-tally": "workspace:*",
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
+    "@rabbitholegg/questdk-plugin-rabbithole": "workspace:*",
     "@rabbitholegg/questdk-plugin-traderjoe": "workspace:*",
     "viem": "^1.16.6"
   }

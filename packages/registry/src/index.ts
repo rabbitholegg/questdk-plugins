@@ -6,6 +6,7 @@ import {
   PluginActionNotImplementedError,
   type MintActionParams,
   type SwapActionParams,
+  type QuestActionParams,
   type DelegateActionParams,
   type TransactionFilter,
   type StakeActionParams,
@@ -25,6 +26,7 @@ import { Tally } from '@rabbitholegg/questdk-plugin-tally'
 import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
 import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
+import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
 import { ENTRYPOINT } from './contract-addresses'
@@ -44,6 +46,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [BasePaint.pluginId]: BasePaint,
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
+  [Rabbithole.pluginId]: Rabbithole,
   [Symbiosis.pluginId]: Symbiosis,
   [TraderJoe.pluginId]: TraderJoe,
 }
@@ -72,6 +75,11 @@ export const executePlugin = (
       if (plugin.delegate === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.delegate(params as unknown as DelegateActionParams)
+    }
+    case ActionType.Quest: {
+      if (plugin.quest === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.quest(params as unknown as QuestActionParams)
     }
     case ActionType.Stake: {
       if (plugin.stake === undefined) {

@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-paraswap
 
+## 1.0.0-alpha.14
+
+### Minor Changes
+
+- [#90](https://github.com/rabbitholegg/questdk-plugins/pull/90) [`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57) Thanks [@Quazia](https://github.com/Quazia)! - Update QuestDK version and add Rabbithole Plugin
+
+## 1.0.0-alpha.13
+
+### Minor Changes
+
+- [#100](https://github.com/rabbitholegg/questdk-plugins/pull/100) [`df04ffe`](https://github.com/rabbitholegg/questdk-plugins/commit/df04ffec2c55f4e41028607423c1c9920768b78c) Thanks [@mmackz](https://github.com/mmackz)! - add support for additional swap methods
+
 ## 1.0.0-alpha.12
 
 ### Minor Changes
