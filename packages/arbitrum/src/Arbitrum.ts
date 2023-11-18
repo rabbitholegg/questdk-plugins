@@ -50,13 +50,10 @@ export const bridge = async (bridge: BridgeActionParams) => {
     const abiFrags =
       sourceChainId === ETH_CHAIN_ID
         ? [...OUTBOUND_TRANSFER_L1_TO_L2, ...INBOX_DEPOSIT_ETH_FRAG]
-        : [
-            ...OUTBOUND_TRANSFER_L2_TO_L1,
-            ...ARBSYS_WITHDRAW_ETH_FRAG,
-          ]
+        : [...OUTBOUND_TRANSFER_L2_TO_L1, ...ARBSYS_WITHDRAW_ETH_FRAG]
 
     return compressJson({
-      chainId: sourceChainId, 
+      chainId: sourceChainId,
       from: recipient,
       to: {
         $or: contracts,
@@ -78,7 +75,15 @@ export const bridge = async (bridge: BridgeActionParams) => {
       return compressJson({
         // L2 to L1 Token Transfer
         chainId: sourceChainId,
-        to: bridgeContract ? bridgeContract : undefined,
+        to: bridgeContract
+          ? bridgeContract
+          : {
+              $or: [
+                ARB_ONE_TO_MAINNET_GATEWAY,
+                ARB_NOVA_TO_MAINNET_GATEWAY,
+                UNIVERSAL_ARBSYS_PRECOMPILE,
+              ],
+            },
         input: {
           $abi: OUTBOUND_TRANSFER_L2_TO_L1,
           _to: recipient,
@@ -91,7 +96,16 @@ export const bridge = async (bridge: BridgeActionParams) => {
     // L1 to L2 Token Transfer
     return compressJson({
       chainId: sourceChainId,
-      to: bridgeContract,
+      to: bridgeContract
+        ? bridgeContract
+        : {
+            $or: [
+              MAINNET_TO_ARB_NOVA_GATEWAY,
+              MAINNET_TO_ARB_ONE_GATEWAY,
+              ARB_ONE_DELAYED_INBOX,
+              ARB_NOVA_DELAYED_INBOX,
+            ],
+          },
       input: {
         $abi: OUTBOUND_TRANSFER_L1_TO_L2,
         _to: recipient,
