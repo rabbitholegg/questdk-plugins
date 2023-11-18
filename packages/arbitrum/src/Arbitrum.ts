@@ -36,6 +36,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
     if (sourceChainId !== ETH_CHAIN_ID) {
       return compressJson({
+        // L2 to L1 Token Transfer
         chainId: sourceChainId, // The chainId of the source chain
         to: bridgeContract ? bridgeContract : undefined,
         input: {
@@ -47,10 +48,10 @@ export const bridge = async (bridge: BridgeActionParams) => {
       })
     }
 
-    // We're targeting a gateway contract
+    // L1 to L2 Token Transfer
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
-      to: bridgeContract, // The contract address of the bridge
+      chainId: sourceChainId,
+      to: bridgeContract,
       input: {
         $abi: OUTBOUND_TRANSFER_L1_TO_L2,
         _to: recipient,
@@ -65,10 +66,11 @@ export const bridge = async (bridge: BridgeActionParams) => {
       destinationChainId === ARB_NOVA_CHAIN_ID
         ? ARB_NOVA_DELAYED_INBOX
         : ARB_ONE_DELAYED_INBOX
-    // We're targeting the Delayed Inbox
+
+    // L1 to L2 ETH Transfer
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
-      to: contractAddress || networkInbox, // The contract address of the bridge
+      chainId: sourceChainId,
+      to: contractAddress || networkInbox,
       from: recipient,
       value: amount,
       input: {
@@ -76,12 +78,11 @@ export const bridge = async (bridge: BridgeActionParams) => {
       },
     })
   }
-  // Otherwise we're targeting the chain specific precompile
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  // L2 to L1 ETH Transfer
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
+    chainId: sourceChainId, 
     value: amount,
-    to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE, // The contract address of the bridge
+    to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE, 
     input: {
       $abi: ARBSYS_WITHDRAW_ETH_FRAG,
       destination: recipient,
