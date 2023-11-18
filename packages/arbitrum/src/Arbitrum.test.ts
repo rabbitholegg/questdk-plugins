@@ -1,6 +1,6 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { bridge } from './Arbitrum.js'
-import { OUTBOUND_TRANSFER_L1_TO_L2 } from './abi.js'
+import { bridge } from './Arbitrum'
+import { OUTBOUND_TRANSFER_L1_TO_L2 } from './abi'
 import { describe, expect, test } from 'vitest'
 import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids'
 import { MAINNET_TO_ARB_ONE_GATEWAY } from './contract-addresses'

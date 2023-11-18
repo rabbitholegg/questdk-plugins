@@ -1,9 +1,5 @@
 import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
-import {
-  ETH_CHAIN_ID,
-  ARB_ONE_CHAIN_ID,
-  ARB_NOVA_CHAIN_ID,
-} from './chain-ids.js'
+import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids'
 
 // For now we're mainly supported the highest traffic Arbitrum tokens
 // Support for USDC seems like it might be non-trivial

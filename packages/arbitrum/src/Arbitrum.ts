@@ -1,20 +1,20 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY, ETH_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids.js'
+import { CHAIN_ID_ARRAY, ETH_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids'
 import {
   UNIVERSAL_ARBSYS_PRECOMPILE,
   ARB_ONE_DELAYED_INBOX,
   ARB_NOVA_DELAYED_INBOX,
   L2_TO_L1_GATEWAYS,
-} from './contract-addresses.js'
-import { ArbitrumTokens } from './supported-token-addresses.js'
+} from './contract-addresses'
+import { ArbitrumTokens } from './supported-token-addresses'
 import { findL1TokenForL2Token, getContractAddressFromChainId } from './utils'
 import {
   ARBSYS_WITHDRAW_ETH_FRAG,
   INBOX_DEPOSIT_ETH_FRAG,
   OUTBOUND_TRANSFER_L2_TO_L1,
   OUTBOUND_TRANSFER_L1_TO_L2,
-} from './abi.js'
+} from './abi'
 const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 export const bridge = async (bridge: BridgeActionParams) => {
