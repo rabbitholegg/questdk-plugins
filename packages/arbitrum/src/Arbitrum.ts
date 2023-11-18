@@ -1,5 +1,5 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, zeroAddress as ETH_TOKEN_ADDRESS } from 'viem'
 import { CHAIN_ID_ARRAY, ETH_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids'
 import {
   UNIVERSAL_ARBSYS_PRECOMPILE,
@@ -18,7 +18,6 @@ import {
   OUTBOUND_TRANSFER_L2_TO_L1,
   OUTBOUND_TRANSFER_L1_TO_L2,
 } from './abi'
-const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
