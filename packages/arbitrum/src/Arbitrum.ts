@@ -14,12 +14,15 @@ import {
   UNIVERSAL_ARBSYS_PRECOMPILE,
   ARB_ONE_DELAYED_INBOX,
   ARB_NOVA_DELAYED_INBOX,
+  L2_TO_L1_GATEWAYS,
+  findL1TokenForL2Token,
 } from './contract-addresses.js'
 import { ArbitrumTokens } from './supported-token-addresses.js'
 import {
-  GATEWAY_OUTBOUND_TRANSFER_FRAG,
   ARBSYS_WITHDRAW_ETH_FRAG,
   INBOX_DEPOSIT_ETH_FRAG,
+  OUTBOUND_TRANSFER_L2_TO_L1,
+  OUTBOUND_TRANSFER_L1_TO_L2,
 } from './abi.js'
 const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -41,18 +44,32 @@ export const bridge = async (bridge: BridgeActionParams) => {
       sourceChainId,
       destinationChainId,
     )
+
+    if (L2_TO_L1_GATEWAYS.includes(networkGateway)) {
+      return compressJson({
+        chainId: sourceChainId, // The chainId of the source chain
+        to: contractAddress || networkGateway, // The contract address of the bridge
+        input: {
+          $abi: OUTBOUND_TRANSFER_L2_TO_L1,
+          _to: recipient,
+          _amount: amount,
+          _l1Token: findL1TokenForL2Token(tokenAddress),
+        },
+      })
+    }
     // We're targeting a gateway contract
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
       to: contractAddress || networkGateway, // The contract address of the bridge
       input: {
-        $abi: GATEWAY_OUTBOUND_TRANSFER_FRAG,
-        _token: tokenAddress,
+        $abi: OUTBOUND_TRANSFER_L1_TO_L2,
         _to: recipient,
         _amount: amount,
+        _token: tokenAddress,
       },
     })
   }
+  
   if (sourceChainId === ETH_CHAIN_ID) {
     const networkInbox =
       destinationChainId === ARB_NOVA_CHAIN_ID
@@ -62,6 +79,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     return compressJson({
       chainId: sourceChainId, // The chainId of the source chain
       to: contractAddress || networkInbox, // The contract address of the bridge
+      from: recipient,
       value: amount,
       input: {
         $abi: INBOX_DEPOSIT_ETH_FRAG,
