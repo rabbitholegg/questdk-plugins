@@ -33,7 +33,7 @@ export const L1_ETH_TO_NOVA = {
   to: '0xc4448b71118c9071bcb9734a0eac55d18a153949',
   hash: '0xe3df33a0ad03d7c26eb523a28dfb9884873ba9475255878a75ff3881025c5768',
   input: '0x439370b1',
-  value: '',
+  value: '250000000000000000',
 } as const
 
 export const L2_ETH_TO_L1 = {
