@@ -119,6 +119,31 @@ describe('Given the arbitrum plugin', () => {
       expect(apply(transaction, filter)).to.be.true
     })
 
+    test('should pass filter when tokenAddress is "any" using ETH', async () => {
+      const recipient = '0x7169b95c460a75bc6677481a1fcae1ea598f3b65'
+      const transaction = L2_ETH_TO_L1
+      const filter = await bridge({
+        sourceChainId: ARB_NOVA_CHAIN_ID,
+        destinationChainId: ETH_CHAIN_ID,
+        contractAddress: '0x0000000000000000000000000000000000000064',
+        tokenAddress: undefined,
+        recipient: recipient,
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+
+    test('should pass filter when tokenAddress is "any" using tokens', async () => {
+      const recipient = '0x572b093d735b9e91cbd90972e846333d444f25cd'
+      const transaction = L2_TOKEN_TO_L1
+      const filter = await bridge({
+        sourceChainId: ARB_ONE_CHAIN_ID,
+        destinationChainId: ETH_CHAIN_ID,
+        tokenAddress: undefined,
+        recipient: recipient,
+      })
+      expect(apply(transaction, filter)).to.be.true
+    })
+
     test('should not pass filter with invalid amount', async () => {
       const recipient = '0xf9ce182b0fbe597773ab9bb5159b7479047de8fe'
       const transaction = L1_TOKEN_TO_ONE
