@@ -72,6 +72,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: sourceChainId, // The chainId of the source chain
+    value: amount,
     to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE, // The contract address of the bridge
     input: {
       $abi: ARBSYS_WITHDRAW_ETH_FRAG,
