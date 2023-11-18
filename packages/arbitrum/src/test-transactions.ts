@@ -21,3 +21,12 @@ export const DEPOSIT_ERC20 = {
   accessList: [],
   chainId: '0x1',
 } as const
+
+export const WITHDRAW_ETH = {
+  chainId: 42170,
+  from: '0x7169b95c460a75bc6677481a1fcae1ea598f3b65',
+  to: '0x0000000000000000000000000000000000000064',
+  hash: '0xbaf3a0440ea37971ee1c7b2ee1139e5ba474497a28d15b80e749434cb6063e73',
+  input: '0x25e160630000000000000000000000007169b95c460a75bc6677481a1fcae1ea598f3b65',
+  value: '5000000000000000'
+} as const

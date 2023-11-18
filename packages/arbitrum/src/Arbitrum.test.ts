@@ -2,10 +2,10 @@ import { bridge } from './Arbitrum.js'
 import { GATEWAY_OUTBOUND_TRANSFER_FRAG } from './abi.js'
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID } from './chain-ids'
+import { ETH_CHAIN_ID, ARB_ONE_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids'
 import { MAINNET_TO_ARB_ONE_GATEWAY } from './contract-addresses'
 import { parseEther } from 'viem'
-import { DEPOSIT_ERC20 } from './test-transactions.js'
+import { DEPOSIT_ERC20, WITHDRAW_ETH } from './test-transactions.js'
 describe('Given the arbitrum plugin', () => {
   describe('When handling the bridge', () => {
     const DAI = '0x6b175474e89094c44da98b954eedeac495271d0f'
@@ -43,6 +43,23 @@ describe('Given the arbitrum plugin', () => {
         destinationChainId: ARB_ONE_CHAIN_ID,
         tokenAddress: '0x514910771AF9Ca656af840dff83E8264EcF986CA', // LINK
         amount: GreaterThanOrEqual(parseEther('2000')),
+        recipient: recipient,
+      })
+
+      expect(apply(transaction, filter)).to.be.true
+    })
+
+    test('should pass filter with valid withdraw transactions', async () => {
+      const recipient = '0x7169b95c460a75bc6677481a1fcae1ea598f3b65'
+
+      const transaction = WITHDRAW_ETH
+
+      const filter = await bridge({
+        sourceChainId: ARB_NOVA_CHAIN_ID,
+        destinationChainId: ETH_CHAIN_ID,
+        contractAddress: '0x0000000000000000000000000000000000000064',
+        tokenAddress: '0x0000000000000000000000000000000000000000',
+        amount: GreaterThanOrEqual(parseEther('.005')),
         recipient: recipient,
       })
 
