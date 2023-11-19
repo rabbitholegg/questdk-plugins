@@ -68,7 +68,6 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
   return CHAIN_ID_ARRAY
 }
 
-//Need to edit based on CCTP domains
 export const chainDomainToID = (id: number): number => {
   switch(id) {
     case 0:
