@@ -77,11 +77,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
         to: bridgeContract
           ? bridgeContract
           : {
-              $or: [
-                ARB_ONE_TO_MAINNET_GATEWAY,
-                ARB_NOVA_TO_MAINNET_GATEWAY,
-                UNIVERSAL_ARBSYS_PRECOMPILE,
-              ],
+              $or: [ARB_ONE_TO_MAINNET_GATEWAY, ARB_NOVA_TO_MAINNET_GATEWAY],
             },
         input: {
           $abi: OUTBOUND_TRANSFER_L2_TO_L1,
@@ -98,12 +94,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       to: bridgeContract
         ? bridgeContract
         : {
-            $or: [
-              MAINNET_TO_ARB_NOVA_GATEWAY,
-              MAINNET_TO_ARB_ONE_GATEWAY,
-              ARB_ONE_DELAYED_INBOX,
-              ARB_NOVA_DELAYED_INBOX,
-            ],
+            $or: [MAINNET_TO_ARB_NOVA_GATEWAY, MAINNET_TO_ARB_ONE_GATEWAY],
           },
       input: {
         $abi: OUTBOUND_TRANSFER_L1_TO_L2,
