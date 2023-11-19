@@ -1,7 +1,5 @@
 import { ChainId } from '@traderjoe-xyz/sdk-core'
-import { type Address } from 'viem'
-
-export const NATIVE_TOKEN = '0x0000000000000000000000000000000000000000'
+import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
 
 export const Tokens: {
   [_chainId: number]: { [token: string]: Address }

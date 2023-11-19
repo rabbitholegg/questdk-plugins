@@ -3,14 +3,10 @@ import {
   type SwapActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
 import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from '@traderjoe-xyz/sdk-v2'
 import { ChainId } from '@traderjoe-xyz/sdk-core'
-import {
-  DEFAULT_SWAP_TOKEN_LIST,
-  NATIVE_TOKEN,
-  Tokens,
-} from './contract-addresses'
+import { DEFAULT_SWAP_TOKEN_LIST, Tokens } from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { buildPathQuery } from './utils'
 

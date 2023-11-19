@@ -4,9 +4,9 @@ import { LBRouterV21ABI } from '@traderjoe-xyz/sdk-v2'
 import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { swap, getSupportedTokenAddresses } from './TraderJoe'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { passingTestCases, failingTestCases } from './test-setup'
-import { TOKENS_FOR_EXACT_TOKENS } from './test-transactions'
 import { Tokens } from './contract-addresses'
+import { TOKENS_FOR_EXACT_TOKENS } from './test-transactions'
+import { passingTestCases, failingTestCases } from './test-setup'
 
 describe('Given the TraderJoe plugin', () => {
   describe('When handling the swap action', () => {
