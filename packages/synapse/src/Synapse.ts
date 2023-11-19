@@ -76,7 +76,11 @@ export const chainDomainToID = (id: number): number => {
     case 1:
       return 43114;
     case 2:
+      return 10;
+    case 3:
       return 42161;
+    case 6:
+        return 8453
     default:
       throw new Error('Invalid ID');
   }
