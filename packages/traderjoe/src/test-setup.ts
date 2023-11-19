@@ -37,6 +37,16 @@ export const passingTestCases: TestCase<SwapActionParams>[] = [
   createTestCase(NATIVE_FOR_EXACT_TOKENS, 'when using NativeForExactTokens'),
   createTestCase(TOKENS_FOR_EXACT_NATIVE, 'when using TokensForExactNative'),
   createTestCase(TOKENS_FOR_EXACT_TOKENS, 'when using TokensForExactTokens'),
+  createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when tokenIn is set to "any"', {
+    tokenIn: undefined,
+  }),
+  createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when tokenOut is set to "any"', {
+    tokenOut: undefined,
+  }),
+  createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when tokens are set to "any/any"', {
+    tokenIn: undefined,
+    tokenOut: undefined,
+  }),
 ]
 
 export const failingTestCases: TestCase<SwapActionParams>[] = [
