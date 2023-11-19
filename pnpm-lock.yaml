@@ -503,7 +503,7 @@ importers:
 
   packages/traderjoe:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.25
+      '@rabbitholegg/questdk': 2.0.0-alpha.27
       '@traderjoe-xyz/sdk-core': ^1.1.0
       '@traderjoe-xyz/sdk-v2': ^2.1.8
       '@types/node': ^20.8.7
@@ -516,7 +516,7 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.25_typescript@5.2.2
+      '@rabbitholegg/questdk': 2.0.0-alpha.27_typescript@5.2.2
       '@traderjoe-xyz/sdk-core': 1.1.0_viem@1.19.3
       '@traderjoe-xyz/sdk-v2': 2.1.8_viem@1.19.3
       viem: 1.19.3_typescript@5.2.2
@@ -2025,24 +2025,6 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
-
-  /@rabbitholegg/questdk/2.0.0-alpha.25_typescript@5.2.2:
-    resolution: {integrity: sha512-KhTZSfBlfG3rUNQ+9r2eAW/bR3eTD3y1TPiF7ydZEPI44w6rgW7gzrSuwX/lHYBRMSVm6nHryk2JXaJtfsS0AQ==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.10_typescript@5.2.2
-      rimraf: 5.0.5
-      typescript: 5.2.2
-      viem: 1.19.3_typescript@5.2.2
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
 
   /@rabbitholegg/questdk/2.0.0-alpha.27_typescript@5.1.6:
     resolution: {integrity: sha512-9QXBLWqJWsCSLCRTjzuG0TdSqBq987IjoSpPooUEJ2Jiqnx7rM88KMM9EBNu+4ra7O9amFCnYNrUz8xiFfU3ng==}
@@ -6281,11 +6263,9 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: false
 
-  /lru-cache/10.0.2:
-    resolution: {integrity: sha512-Yj9mA8fPiVgOUpByoTZO5pNrcl5Yk37FcSHsUINpAsaBIEZIuqcCclDZJCVxqQShDsmYX8QG63svJiTbOATZwg==}
+  /lru-cache/10.0.3:
+    resolution: {integrity: sha512-B7gr+F6MkqB3uzINHXNctGieGsRTMwIBgxkp0yq/5BwcuDzD4A8wQpHQW6vDAm1uKSLQghmRdD9sKqf2vJ1cEg==}
     engines: {node: 14 || >=16.14}
-    dependencies:
-      semver: 7.5.4
 
   /lru-cache/4.1.5:
     resolution: {integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==}
@@ -7151,7 +7131,7 @@ packages:
     resolution: {integrity: sha512-MkhCqzzBEpPvxxQ71Md0b1Kk51W01lrYvlMzSUaIzNsODdd7mqhiimSZlr+VegAz5Z6Vzt9Xg2ttE//XBhH3EQ==}
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
-      lru-cache: 10.0.2
+      lru-cache: 10.0.3
       minipass: 7.0.4
 
   /path-to-regexp/0.1.7:
@@ -7747,6 +7727,7 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
+    dev: true
 
   /ripemd160/2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
