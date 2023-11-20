@@ -46,12 +46,14 @@ export const swap = async (
         {
           $or: [
             {
+              // exactNativeforTokens, exactTokensForTokens
               amountIn: nativeIn ? undefined : amountIn,
               amountOutMin: amountOut,
             },
-            { amountOut: amountOut },
-            { amountIn: amountIn, amountOutMinNATIVE: amountOut },
-            { amountInMax: amountIn, amountNATIVEOut: amountOut },
+            { amountOut: amountOut }, // nativeForExactTokens
+            { amountInMax: amountIn, amountOut: amountOut }, // tokensForExactTokens
+            { amountIn: amountIn, amountOutMinNATIVE: amountOut }, // exactTokensForNative
+            { amountInMax: amountIn, amountNATIVEOut: amountOut }, // tokensForExactNative
           ],
         },
       ],
