@@ -51,6 +51,14 @@ describe('Given the TraderJoe plugin', () => {
                     },
                   },
                   {
+                    amountInMax: {
+                      $gte: '5996000000',
+                    },
+                    amountOut: {
+                      $gte: '5315300000000000000000',
+                    },
+                  },
+                  {
                     amountIn: {
                       $gte: '5996000000',
                     },
