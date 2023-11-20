@@ -1,6 +1,6 @@
 import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { compressJson } from '@rabbitholegg/questdk'
-import { UNIVERSAL_ROUTER_ADDRESS,  } from '@uniswap/universal-router-sdk'
+import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
 import {
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
