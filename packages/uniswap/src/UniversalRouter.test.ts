@@ -1,37 +1,14 @@
+import { GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
+import { describe, expect, test } from 'vitest'
+import { swap } from './UniversalRouter.js'
 import {
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
-  swap,
-} from './UniversalRouter.js'
-import { GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
-import { describe, expect, test } from 'vitest'
+  EXECUTE_ABI_FRAGMENTS,
+} from './constants.js'
 
 describe('UniversalRouter', () => {
   describe('swap', () => {
-    const EXECUTE_ABI_FRAGMENTS = [
-      {
-        inputs: [
-          { internalType: 'bytes', name: 'commands', type: 'bytes' },
-          { internalType: 'bytes[]', name: 'inputs', type: 'bytes[]' },
-        ],
-        name: 'execute',
-        outputs: [],
-        stateMutability: 'payable',
-        type: 'function',
-      },
-      {
-        inputs: [
-          { internalType: 'bytes', name: 'commands', type: 'bytes' },
-          { internalType: 'bytes[]', name: 'inputs', type: 'bytes[]' },
-          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
-        ],
-        name: 'execute',
-        outputs: [],
-        stateMutability: 'payable',
-        type: 'function',
-      },
-    ]
-
     test('should return a valid v3 swap action', async () => {
       const filter = await swap({
         chainId: 10,
@@ -40,7 +17,7 @@ describe('UniversalRouter', () => {
       })
 
       expect(filter).to.deep.equal({
-        chainId: '0xa',
+        chainId: 10,
         to: '0xeC8B0F7Ffe3ae75d7FfAb09429e3675bb63503e4',
         input: {
           $abi: EXECUTE_ABI_FRAGMENTS,
