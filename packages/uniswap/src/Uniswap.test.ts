@@ -1,12 +1,12 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { swap } from './UniversalRouter.js'
+import { swap } from './Uniswap.js'
 import {
+  EXECUTE_ABI_FRAGMENTS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
-  EXECUTE_ABI_FRAGMENTS,
 } from './constants.js'
-import { failingTestCases, passingTestCases } from './test-transactions'
+import { failingTestCases, passingTestCases } from './test-transactions.js'
 
 describe('Given the uniswap plugin', () => {
   describe('When handling the swap', () => {
