@@ -1,5 +1,4 @@
-import type { SwapActionParams } from '@rabbitholegg/questdk'
-import { compressJson } from '@rabbitholegg/questdk'
+import { compressJson, type SwapActionParams } from '@rabbitholegg/questdk'
 import {
   UNIVERSAL_ROUTER_ADDRESS,
   WETH_ADDRESS,
