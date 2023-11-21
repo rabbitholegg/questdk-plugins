@@ -11,8 +11,7 @@ export const V2_SWAP_ETH: TestParams<SwapActionParams> = {
     chainId: 42161,
     from: '0x0',
     hash: '0x0',
-    input:
-      '0x0',
+    input: '0x0',
     to: '00',
     value: '0',
   },

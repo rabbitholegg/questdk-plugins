@@ -1,4 +1,4 @@
-import {  apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { DEFAULT_TOKEN_LIST } from './contract-addresses'
 import { failingTestCases, passingTestCases } from './test-setup'
@@ -6,15 +6,10 @@ import { getAddress } from 'viem'
 
 describe('Given the balancer plugin', () => {
   describe('When handling the bridge', () => {
+    test('should return a valid action filter', () => {})
 
-    test('should return a valid action filter', () => {
-      
-    })
+    test('should pass filter with valid transactions', () => {})
 
-    test('should pass filter with valid transactions',  () => {
-      
-    })
-    
     describe('should pass filter when all parameters are valid', () => {
       passingTestCases.forEach((testCase) => {
         const { transaction, params, description } = testCase
@@ -54,6 +49,5 @@ describe('Given the balancer plugin', () => {
         expect(notChecksummed).to.be.empty
       })
     })
-
   })
 })

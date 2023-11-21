@@ -1,10 +1,7 @@
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
 import { Tokens, createTestCase } from '../../camelot/src/utils'
-import {
-  V2_SWAP_ETH,
-
-} from './test-transactions'
+import { V2_SWAP_ETH } from './test-transactions'
 
 export const passingTestCases = [
   createTestCase(V2_SWAP_ETH, 'when swapping ETH for tokens'),
