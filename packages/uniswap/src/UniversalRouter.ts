@@ -1,4 +1,8 @@
-import { compressJson, type SwapActionParams } from '@rabbitholegg/questdk'
+import {
+  compressJson,
+  type SwapActionParams,
+  type TransactionFilter,
+} from '@rabbitholegg/questdk'
 import {
   UNIVERSAL_ROUTER_ADDRESS,
   WETH_ADDRESS,
@@ -11,7 +15,9 @@ import {
 } from './constants'
 import { buildV2PathQuery, buildV3PathQuery } from './utils'
 
-export const swap = async (swap: SwapActionParams) => {
+export const swap = async (
+  swap: SwapActionParams,
+): Promise<TransactionFilter> => {
   const {
     chainId,
     contractAddress,
