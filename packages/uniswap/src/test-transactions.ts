@@ -1,6 +1,6 @@
 import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { type TestParams } from './utils'
+import { createTestCase, type TestParams } from './utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const V3_NATIVE_TO_TOKENS: TestParams<SwapActionParams> = {
@@ -119,3 +119,17 @@ export const V2_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
     recipient: '0x9baa635e318cdb9c5924858f1d3900a0d1cb4beb',
   },
 }
+
+export const passingTestCases = [
+  createTestCase(V3_NATIVE_TO_TOKENS, 'swapping native to tokens on V3'),
+  createTestCase(V3_TOKENS_TO_NATIVE, 'swapping tokens to native on V3'),
+  createTestCase(V3_TOKENS_TO_TOKENS, 'swapping tokens to tokens on V3'),
+  createTestCase(V2_NATIVE_TO_TOKENS, 'swapping native to tokens on V2'),
+  createTestCase(V2_TOKENS_TO_NATIVE, 'swapping tokens to native on V2'),
+  createTestCase(V2_TOKENS_TO_TOKENS, 'swapping tokens to tokens on V2'),
+  createTestCase(V3_NATIVE_TO_TOKENS, 'swapping tokenIn is set to "any" (using ETH)', { tokenIn: undefined }),
+  createTestCase(V2_TOKENS_TO_TOKENS, 'swapping tokenIn is set to "any" (using tokens)', { tokenIn: undefined }),
+  createTestCase(V3_TOKENS_TO_NATIVE, 'swapping tokenOut is set to "any" (using ETH)', { tokenOut: undefined }),
+  createTestCase(V3_TOKENS_TO_TOKENS, 'swapping tokenOut is set to "any" (using tokens)', { tokenOut: undefined }),
+  createTestCase(V3_TOKENS_TO_TOKENS, 'swapping tokens are set to "any/any', { tokenIn: undefined, tokenOut: undefined }),
+]
