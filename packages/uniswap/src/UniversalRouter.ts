@@ -1,6 +1,10 @@
 import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { compressJson } from '@rabbitholegg/questdk'
-import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
+import {
+  UNIVERSAL_ROUTER_ADDRESS,
+  WETH_ADDRESS,
+} from '@uniswap/universal-router-sdk'
+import { zeroAddress as ETH_ADDRESS } from 'viem'
 import {
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
@@ -19,6 +23,8 @@ export const swap = async (swap: SwapActionParams) => {
     recipient,
   } = swap
 
+  const inputToken = tokenIn === ETH_ADDRESS ? WETH_ADDRESS(chainId) : tokenIn
+
   return compressJson({
     chainId,
     to: contractAddress || UNIVERSAL_ROUTER_ADDRESS(chainId),
@@ -30,13 +36,13 @@ export const swap = async (swap: SwapActionParams) => {
           $or: [
             {
               $abiParams: V3_SWAP_EXACT_TYPES,
-              path: buildV3PathQuery(tokenIn, tokenOut),
+              path: buildV3PathQuery(inputToken, tokenOut),
               amountIn,
               amountOut,
             },
             {
               $abiParams: V2_SWAP_EXACT_TYPES,
-              path: buildV2PathQuery(tokenIn, tokenOut),
+              path: buildV2PathQuery(inputToken, tokenOut),
               amountIn,
               amountOut,
             },
