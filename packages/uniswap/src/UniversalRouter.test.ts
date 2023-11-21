@@ -6,6 +6,7 @@ import {
   V3_SWAP_EXACT_TYPES,
   EXECUTE_ABI_FRAGMENTS,
 } from './constants.js'
+import { passingTestCases } from './test-transactions'
 
 describe('Given the uniswap plugin', () => {
   describe('When handling the swap', () => {
@@ -69,6 +70,16 @@ describe('Given the uniswap plugin', () => {
               },
             },
           },
+        })
+      })
+    })
+
+    describe('should pass filter with valid transactions', () => {
+      passingTestCases.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await swap(params)
+          expect(apply(transaction, filter)).to.be.true
         })
       })
     })
