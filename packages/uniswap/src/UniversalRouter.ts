@@ -22,7 +22,10 @@ export const swap = async (swap: SwapActionParams) => {
     recipient,
   } = swap
 
-  const inputToken = tokenIn === ETH_ADDRESS ? WETH_ADDRESS(chainId) : tokenIn
+  const inputToken =
+    tokenIn === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenIn
+  const outputToken =
+    tokenOut === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenOut
 
   return compressJson({
     chainId,
@@ -35,13 +38,13 @@ export const swap = async (swap: SwapActionParams) => {
           $or: [
             {
               $abiParams: V3_SWAP_EXACT_TYPES,
-              path: buildV3PathQuery(inputToken, tokenOut),
+              path: buildV3PathQuery(inputToken, outputToken),
               amountIn,
               amountOut,
             },
             {
               $abiParams: V2_SWAP_EXACT_TYPES,
-              path: buildV2PathQuery(inputToken, tokenOut),
+              path: buildV2PathQuery(inputToken, outputToken),
               amountIn,
               amountOut,
             },
