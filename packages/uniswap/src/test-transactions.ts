@@ -133,3 +133,12 @@ export const passingTestCases = [
   createTestCase(V3_TOKENS_TO_TOKENS, 'swapping tokenOut is set to "any" (using tokens)', { tokenOut: undefined }),
   createTestCase(V3_TOKENS_TO_TOKENS, 'swapping tokens are set to "any/any', { tokenIn: undefined, tokenOut: undefined }),
 ]
+
+export const failingTestCases = [
+  createTestCase(V3_NATIVE_TO_TOKENS, 'when chainId is incorrect', { chainId: 1 }),
+  createTestCase(V3_TOKENS_TO_NATIVE, 'when contract address is incorrect', { contractAddress: '0x3fc91a3afd70395cd496c647d5a6cc9d4b2b7fad' }),
+  createTestCase(V3_TOKENS_TO_TOKENS, 'when tokenIn is incorrect', { tokenIn: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f' }),
+  createTestCase(V2_NATIVE_TO_TOKENS, 'when tokenOut is incorrect', { tokenOut: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f' }),
+  createTestCase(V2_TOKENS_TO_NATIVE, 'when amountIn is insufficient', { amountIn: GreaterThanOrEqual(parseEther('100000')) }),
+  createTestCase(V2_TOKENS_TO_TOKENS, 'when amountOut is insufficient', { amountOut: GreaterThanOrEqual(parseEther('100000')) }),
+]
