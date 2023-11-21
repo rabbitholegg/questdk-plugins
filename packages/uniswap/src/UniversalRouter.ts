@@ -22,6 +22,7 @@ export const swap = async (swap: SwapActionParams) => {
   return compressJson({
     chainId,
     to: contractAddress || UNIVERSAL_ROUTER_ADDRESS(chainId),
+    from: recipient,
     input: {
       $abi: EXECUTE_ABI_FRAGMENTS,
       inputs: {
@@ -32,14 +33,12 @@ export const swap = async (swap: SwapActionParams) => {
               path: buildV3PathQuery(tokenIn, tokenOut),
               amountIn,
               amountOut,
-              recipient,
             },
             {
               $abiParams: V2_SWAP_EXACT_TYPES,
               path: buildV2PathQuery(tokenIn, tokenOut),
               amountIn,
               amountOut,
-              recipient,
             },
           ],
         },
