@@ -1,5 +1,5 @@
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import type { Address, Hash } from 'viem'
+import { getAddress, type Address, type Hash } from 'viem'
 
 interface Transaction {
   chainId: number
@@ -70,11 +70,11 @@ export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
   const conditions: FilterOperator[] = []
 
   if (tokenIn) {
-    conditions.push({ $first: tokenIn })
+    conditions.push({ $first: getAddress(tokenIn) })
   }
 
   if (tokenOut) {
-    conditions.push({ $last: tokenOut })
+    conditions.push({ $last: getAddress(tokenOut) })
   }
 
   return {
