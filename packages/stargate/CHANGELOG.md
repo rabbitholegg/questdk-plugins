@@ -1,5 +1,33 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.14
+
+### Minor Changes
+
+- [#90](https://github.com/rabbitholegg/questdk-plugins/pull/90) [`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57) Thanks [@Quazia](https://github.com/Quazia)! - Update QuestDK version and add Rabbithole Plugin
+
+## 1.0.0-alpha.13
+
+### Patch Changes
+
+- [#97](https://github.com/rabbitholegg/questdk-plugins/pull/97) [`8496a49`](https://github.com/rabbitholegg/questdk-plugins/commit/8496a49d99ba2dcecef60211e1e9108d8128f5d3) Thanks [@Quazia](https://github.com/Quazia)! - Remove only-allow from hyphen plugin
+
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#71](https://github.com/rabbitholegg/questdk-plugins/pull/71) [`53d2ee5`](https://github.com/rabbitholegg/questdk-plugins/commit/53d2ee51b9479008bd549ebacba29fcfd82c4684) Thanks [@Quazia](https://github.com/Quazia)! - Update questdk instance and add Paraswap Stake action
+
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#64](https://github.com/rabbitholegg/questdk-plugins/pull/64) [`e1069f0`](https://github.com/rabbitholegg/questdk-plugins/commit/e1069f0092873564fa4638fc4051b8e362892319) Thanks [@mmackz](https://github.com/mmackz)! - fix filter behavior for unsupported tokens
+
+### Patch Changes
+
+- [#79](https://github.com/rabbitholegg/questdk-plugins/pull/79) [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7) Thanks [@Quazia](https://github.com/Quazia)! - Remove preinstall hook and update questdk
+
 ## 1.0.0-alpha.10
 
 ### Patch Changes

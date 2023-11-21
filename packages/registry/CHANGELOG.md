@@ -1,5 +1,203 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.35
+
+### Minor Changes
+
+- [#90](https://github.com/rabbitholegg/questdk-plugins/pull/90) [`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57) Thanks [@Quazia](https://github.com/Quazia)! - Update QuestDK version and add Rabbithole Plugin
+
+### Patch Changes
+
+- Updated dependencies [[`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57)]:
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.8
+
+## 1.0.0-alpha.34
+
+### Patch Changes
+
+- Updated dependencies [[`df04ffe`](https://github.com/rabbitholegg/questdk-plugins/commit/df04ffec2c55f4e41028607423c1c9920768b78c), [`10ae9d9`](https://github.com/rabbitholegg/questdk-plugins/commit/10ae9d9df23e09373fe18968e3c1b4cfefa79500), [`eeaa97b`](https://github.com/rabbitholegg/questdk-plugins/commit/eeaa97b454014b39c9493e165f15545c2299f628)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.6
+
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- [#103](https://github.com/rabbitholegg/questdk-plugins/pull/103) [`cf068cd`](https://github.com/rabbitholegg/questdk-plugins/commit/cf068cd55e772af1b9aec8e8fa38af52a63445b9) Thanks [@Quazia](https://github.com/Quazia)! - Quick fix to handle lower case TO for gmx
+
+- Updated dependencies [[`cf068cd`](https://github.com/rabbitholegg/questdk-plugins/commit/cf068cd55e772af1b9aec8e8fa38af52a63445b9)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.11
+
+## 1.0.0-alpha.32
+
+### Patch Changes
+
+- Updated dependencies [[`9ec3d23`](https://github.com/rabbitholegg/questdk-plugins/commit/9ec3d23b7fd49ff973a14ef4cbf3f38ec2157ea7)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.10
+
+## 1.0.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [[`dd8dc14`](https://github.com/rabbitholegg/questdk-plugins/commit/dd8dc14659be61a9fb64cf09c90d907126718044), [`8496a49`](https://github.com/rabbitholegg/questdk-plugins/commit/8496a49d99ba2dcecef60211e1e9108d8128f5d3)]:
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.7
+
+## 1.0.0-alpha.30
+
+### Minor Changes
+
+- [#91](https://github.com/rabbitholegg/questdk-plugins/pull/91) [`312b9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/312b9f7d4bc93fe5b4f18d1fc29ad98f8468edeb) Thanks [@Quazia](https://github.com/Quazia)! - Add Optimism to Paraswap Swap
+
+### Patch Changes
+
+- Updated dependencies [[`312b9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/312b9f7d4bc93fe5b4f18d1fc29ad98f8468edeb)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.12
+
+## 1.0.0-alpha.29
+
+### Minor Changes
+
+- [#85](https://github.com/rabbitholegg/questdk-plugins/pull/85) [`473f96d`](https://github.com/rabbitholegg/questdk-plugins/commit/473f96dfe8e3ae49bc14c7464323a02242756b56) Thanks [@mmackz](https://github.com/mmackz)! - implement symbiosis bridge plugin
+
+### Patch Changes
+
+- Updated dependencies [[`473f96d`](https://github.com/rabbitholegg/questdk-plugins/commit/473f96dfe8e3ae49bc14c7464323a02242756b56)]:
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.5
+
+## 1.0.0-alpha.28
+
+### Patch Changes
+
+- [#86](https://github.com/rabbitholegg/questdk-plugins/pull/86) [`059df8b`](https://github.com/rabbitholegg/questdk-plugins/commit/059df8bb8ae2c9daa3a11adbb0d84c5670536039) Thanks [@Quazia](https://github.com/Quazia)! - Add Stake switch to plugin execution
+
+## 1.0.0-alpha.27
+
+### Patch Changes
+
+- Updated dependencies [[`a83c701`](https://github.com/rabbitholegg/questdk-plugins/commit/a83c70100de90631ea20e5d52684c6f9f4ac8baa)]:
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.6
+
+## 1.0.0-alpha.26
+
+### Minor Changes
+
+- [#44](https://github.com/rabbitholegg/questdk-plugins/pull/44) [`c161fc4`](https://github.com/rabbitholegg/questdk-plugins/commit/c161fc40d326e3d672049f5162394e17a2bf5bd0) Thanks [@mmackz](https://github.com/mmackz)! - add bridge support for hyphen
+
+### Patch Changes
+
+- Updated dependencies [[`c161fc4`](https://github.com/rabbitholegg/questdk-plugins/commit/c161fc40d326e3d672049f5162394e17a2bf5bd0), [`4827c89`](https://github.com/rabbitholegg/questdk-plugins/commit/4827c89e10d00b51469d965a7e80f3b62640c616)]:
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.11
+
+## 1.0.0-alpha.25
+
+### Minor Changes
+
+- [#71](https://github.com/rabbitholegg/questdk-plugins/pull/71) [`53d2ee5`](https://github.com/rabbitholegg/questdk-plugins/commit/53d2ee51b9479008bd549ebacba29fcfd82c4684) Thanks [@Quazia](https://github.com/Quazia)! - Update questdk instance and add Paraswap Stake action
+
+### Patch Changes
+
+- Updated dependencies [[`53d2ee5`](https://github.com/rabbitholegg/questdk-plugins/commit/53d2ee51b9479008bd549ebacba29fcfd82c4684)]:
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.7
+
+## 1.0.0-alpha.24
+
+### Patch Changes
+
+- [#79](https://github.com/rabbitholegg/questdk-plugins/pull/79) [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7) Thanks [@Quazia](https://github.com/Quazia)! - Remove preinstall hook and update questdk
+
+- Updated dependencies [[`e1069f0`](https://github.com/rabbitholegg/questdk-plugins/commit/e1069f0092873564fa4638fc4051b8e362892319), [`09d7f79`](https://github.com/rabbitholegg/questdk-plugins/commit/09d7f79565b119f3409589a2be0ebdfe49d7cb95), [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7)]:
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.6
+
+## 1.0.0-alpha.23
+
+### Minor Changes
+
+- [#73](https://github.com/rabbitholegg/questdk-plugins/pull/73) [`1bcba48`](https://github.com/rabbitholegg/questdk-plugins/commit/1bcba48d2fe8ad781382475b7ce9ebba0bdb584c) Thanks [@Quazia](https://github.com/Quazia)! - Update tests and single swap filter for paraswap
+
+### Patch Changes
+
+- Updated dependencies [[`1bcba48`](https://github.com/rabbitholegg/questdk-plugins/commit/1bcba48d2fe8ad781382475b7ce9ebba0bdb584c)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.8
+
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- Updated dependencies [[`e16d7b1`](https://github.com/rabbitholegg/questdk-plugins/commit/e16d7b1af66e8c8d5e3f82acabf84fb4dce62af0)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.7
+
+## 1.0.0-alpha.21
+
+### Patch Changes
+
+- Updated dependencies [[`257c02b`](https://github.com/rabbitholegg/questdk-plugins/commit/257c02b8a87918b7de7853f62128106868b21427)]:
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.6
+
+## 1.0.0-alpha.20
+
+### Minor Changes
+
+- [#43](https://github.com/rabbitholegg/questdk-plugins/pull/43) [`973b838`](https://github.com/rabbitholegg/questdk-plugins/commit/973b8382b7ce1eee9d4b8d3fac6e25bf7a412272) Thanks [@Mmackz](https://github.com/Mmackz)! - add mint support for basepaint
+
+### Patch Changes
+
+- Updated dependencies [[`9e299f5`](https://github.com/rabbitholegg/questdk-plugins/commit/9e299f5bf7cf831486ced06532d529240e1253a9), [`973b838`](https://github.com/rabbitholegg/questdk-plugins/commit/973b8382b7ce1eee9d4b8d3fac6e25bf7a412272)]:
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.5
+
+## 1.0.0-alpha.19
+
+### Minor Changes
+
+- [#61](https://github.com/rabbitholegg/questdk-plugins/pull/61) [`184686e`](https://github.com/rabbitholegg/questdk-plugins/commit/184686eefb22fb68a09a35658e0313f28ba7606c) Thanks [@Quazia](https://github.com/Quazia)! - Release Paraswap Plugin
+
+### Patch Changes
+
+- Updated dependencies [[`60bedfa`](https://github.com/rabbitholegg/questdk-plugins/commit/60bedfa5b7f306d6bfe1874858a2f0969ab4a6c3)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.3
+
 ## 1.0.0-alpha.18
 
 ### Minor Changes

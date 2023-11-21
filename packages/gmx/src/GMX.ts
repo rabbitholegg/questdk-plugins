@@ -1,107 +1,101 @@
-import { type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
+import {
+  type SwapActionParams,
+  type TransactionFilter,
+  compressJson,
+  type FilterOperator,
+} from '@rabbitholegg/questdk'
+import { type Address } from 'viem'
+import { OrderType, Tokens, buildPathQuery } from './utils.js'
+import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
-  DEFAULT_TOKEN_LIST_URL,
+  DEFAULT_TOKEN_LIST,
   GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
+  ETH_ADDRESS,
+  MARKET_TOKENS,
 } from './contract-addresses.js'
-import axios from 'axios'
-import { type Address } from 'viem'
 
-enum OrderType {
-  // @dev MarketSwap: swap token A to token B at the current market price
-  // the order will be cancelled if the minOutputAmount cannot be fulfilled
-  MarketSwap,
-  // @dev LimitSwap: swap token A to token B if the minOutputAmount can be fulfilled
-  LimitSwap,
-  // @dev MarketIncrease: increase position at the current market price
-  // the order will be cancelled if the position cannot be increased at the acceptablePrice
-  MarketIncrease,
-  // @dev LimitIncrease: increase position if the triggerPrice is reached and the acceptablePrice can be fulfilled
-  LimitIncrease,
-  // @dev MarketDecrease: decrease position at the current market price
-  // the order will be cancelled if the position cannot be decreased at the acceptablePrice
-  MarketDecrease,
-  // @dev LimitDecrease: decrease position if the triggerPrice is reached and the acceptablePrice can be fulfilled
-  LimitDecrease,
-  // @dev StopLossDecrease: decrease position if the triggerPrice is reached and the acceptablePrice can be fulfilled
-  StopLossDecrease,
-  // @dev Liquidation: allows liquidation of positions if the criteria for liquidation are met
-  Liquidation,
+function getMarketAddress(
+  tokenIn: Address | undefined,
+  tokenOut: Address | undefined,
+): Address | FilterOperator | undefined {
+  // return undefined if tokenOut is not provided
+  if (tokenOut === undefined) {
+    return tokenOut
+  }
+  // convert ETH to WETH address if present
+  const outboundToken = tokenOut === ETH_ADDRESS ? Tokens.WETH : tokenOut
+
+  // if tokenOut is USDC, use the marketToken for tokenIn
+  if (outboundToken === Tokens.USDC) {
+    // if tokenIn is "any"/undefined and tokenOut is USDC, any token will pass
+    return MARKET_TOKENS[tokenIn as Address]
+  }
+  return MARKET_TOKENS[outboundToken]
 }
 
-export const swap = async (swap: SwapActionParams) => {
-  // This is the information we'll use to compose the Transaction object
-  const {
-    chainId,
-    contractAddress,
-    tokenIn,
-    tokenOut,
-    amountIn,
-    amountOut,
-    recipient,
-  } = swap
+export const swap = async (
+  swap: SwapActionParams,
+): Promise<TransactionFilter> => {
+  const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
+  const ETH_USED = tokenIn === ETH_ADDRESS
 
-  if (contractAddress === GMX_ROUTERV2_ADDRESS) {
-    return compressJson({
-      to: contractAddress, // The contract address of the swap
-      chainId: chainId, // The chain id of the swap
-      input: {
-        $abi: GMX_SWAPV2_ABI,
-        data: {
-          $some: {
-            $abi: GMX_SWAPV2_ABI,
-            params: {
-              numbers: {
-                minOutputAmount: amountOut,
-              },
-              orderType: OrderType.MarketSwap,
-              addresses: {
-                receiver: recipient,
-                swapPath: [tokenIn, tokenOut],
+  return compressJson({
+    chainId: chainId,
+    value: ETH_USED ? amountIn : undefined,
+    to: {
+      $or: [
+        GMX_ROUTERV1_ADDRESS.toLowerCase(),
+        GMX_ROUTERV2_ADDRESS.toLowerCase(),
+      ],
+    },
+    input: {
+      $or: [
+        {
+          $abi: GMX_SWAPV1_ABI,
+          _path: buildPathQuery(ETH_USED ? Tokens.WETH : tokenIn, tokenOut),
+          _amountIn: ETH_USED ? undefined : amountIn,
+          _minOut: amountOut,
+          _receiver: recipient,
+        },
+        {
+          $and: [
+            {
+              $abiAbstract: GMX_SWAPV2_ABI,
+              params: {
+                numbers: {
+                  minOutputAmount: amountOut,
+                },
+                orderType: OrderType.MarketSwap,
+                addresses: {
+                  initialCollateralToken: ETH_USED ? Tokens.WETH : tokenIn,
+                  receiver: recipient,
+                  swapPath: {
+                    $last: getMarketAddress(
+                      ETH_USED ? Tokens.WETH : tokenIn,
+                      tokenOut,
+                    ),
+                  },
+                },
+                shouldUnwrapNativeToken: tokenOut
+                  ? tokenOut === ETH_ADDRESS
+                  : undefined,
               },
             },
-          },
+            {
+              $abiAbstract: GMX_SWAPV2_ABI,
+              amount: ETH_USED ? undefined : amountIn,
+            },
+          ],
         },
-      },
-    })
-  }
-  // Fortunatly even though there are two different functions the parameters are the same
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
-  return compressJson({
-    to: contractAddress || GMX_ROUTERV1_ADDRESS, // The contract address of the swap
-    chainId: chainId, // The chain id of the swap
-    input: {
-      $abi: GMX_SWAPV1_ABI,
-      _path: [tokenIn, tokenOut], // The path of the swap
-      _amountIn: amountIn, // The amount of the input token
-      _minOut: amountOut, // The minimum amount of the output token
-      _receiver: recipient, // The recipient of the output token
-    }, // The input object is where we'll put the ABI and the parameters
+      ],
+    },
   })
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  try {
-    // Send a GET request to the specified URL using the fetch API
-    const response = await axios.get('https://api.gmx.io/tokens')
-
-    // Check if the request was successful (status code 200)
-    if (response.statusText === 'OK') {
-      // Parse the JSON response into a JavaScript object
-      const data = response.data as Array<{ data: any; id: string }>
-      return data.map((token) => token.id) as Address[]
-    } else {
-      console.error(`Request failed with status code: ${response.status}`)
-      return []
-    }
-  } catch (error) {
-    console.error(
-      `An error occurred: ${(error as { message: string }).message}`,
-    )
-    return DEFAULT_TOKEN_LIST_URL
-  }
+  return _chainId === ARB_ONE_CHAIN_ID ? DEFAULT_TOKEN_LIST : []
 }
 
 export const getSupportedChainIds = async () => {

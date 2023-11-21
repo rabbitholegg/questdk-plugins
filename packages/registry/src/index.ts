@@ -6,8 +6,10 @@ import {
   PluginActionNotImplementedError,
   type MintActionParams,
   type SwapActionParams,
+  type QuestActionParams,
   type DelegateActionParams,
   type TransactionFilter,
+  type StakeActionParams,
 } from '@rabbitholegg/questdk'
 
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
@@ -21,6 +23,11 @@ import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
 import { Tally } from '@rabbitholegg/questdk-plugin-tally'
+import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
+import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
+import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
+import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
+import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -35,6 +42,11 @@ export const plugins: Record<string, IActionPlugin> = {
   [GMX.pluginId]: GMX,
   [Tally.pluginId]: Tally,
   [Camelot.pluginId]: Camelot,
+  [BasePaint.pluginId]: BasePaint,
+  [Hyphen.pluginId]: Hyphen,
+  [Paraswap.pluginId]: Paraswap,
+  [Rabbithole.pluginId]: Rabbithole,
+  [Symbiosis.pluginId]: Symbiosis,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -61,6 +73,16 @@ export const executePlugin = (
       if (plugin.delegate === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.delegate(params as unknown as DelegateActionParams)
+    }
+    case ActionType.Quest: {
+      if (plugin.quest === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.quest(params as unknown as QuestActionParams)
+    }
+    case ActionType.Stake: {
+      if (plugin.stake === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.stake(params as unknown as StakeActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)

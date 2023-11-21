@@ -1,5 +1,35 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#90](https://github.com/rabbitholegg/questdk-plugins/pull/90) [`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57) Thanks [@Quazia](https://github.com/Quazia)! - Update QuestDK version and add Rabbithole Plugin
+
+## 1.0.0-alpha.11
+
+### Patch Changes
+
+- [#103](https://github.com/rabbitholegg/questdk-plugins/pull/103) [`cf068cd`](https://github.com/rabbitholegg/questdk-plugins/commit/cf068cd55e772af1b9aec8e8fa38af52a63445b9) Thanks [@Quazia](https://github.com/Quazia)! - Quick fix to handle lower case TO for gmx
+
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#99](https://github.com/rabbitholegg/questdk-plugins/pull/99) [`9ec3d23`](https://github.com/rabbitholegg/questdk-plugins/commit/9ec3d23b7fd49ff973a14ef4cbf3f38ec2157ea7) Thanks [@mmackz](https://github.com/mmackz)! - add support for V1 and V2 swap
+
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#71](https://github.com/rabbitholegg/questdk-plugins/pull/71) [`53d2ee5`](https://github.com/rabbitholegg/questdk-plugins/commit/53d2ee51b9479008bd549ebacba29fcfd82c4684) Thanks [@Quazia](https://github.com/Quazia)! - Update questdk instance and add Paraswap Stake action
+
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [#79](https://github.com/rabbitholegg/questdk-plugins/pull/79) [`d6843bd`](https://github.com/rabbitholegg/questdk-plugins/commit/d6843bd48d83bc84ca652ea081fd825f37a5f6d7) Thanks [@Quazia](https://github.com/Quazia)! - Remove preinstall hook and update questdk
+
 ## 1.0.0-alpha.7
 
 ### Patch Changes

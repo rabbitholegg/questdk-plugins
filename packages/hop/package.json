@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-hop",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.8",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -22,7 +22,6 @@
     "format": "rome format . --write",
     "lint": "rome check .",
     "lint:fix": "pnpm lint --apply",
-    "preinstall": "npx only-allow pnpm",
     "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
@@ -46,7 +45,7 @@
   "dependencies": {
     "@hop-protocol/core": "0.0.1-beta.182",
     "@hop-protocol/sdk": "0.0.1-beta.535",
-    "@rabbitholegg/questdk": "2.0.0-alpha.18",
+    "@rabbitholegg/questdk": "2.0.0-alpha.27",
     "viem": "1.2.15"
   }
 }
