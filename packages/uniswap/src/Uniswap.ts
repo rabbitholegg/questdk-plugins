@@ -9,12 +9,12 @@ import {
 } from '@uniswap/universal-router-sdk'
 import { zeroAddress as ETH_ADDRESS } from 'viem'
 import {
+  CHAIN_ID_ARRAY,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
   EXECUTE_ABI_FRAGMENTS,
 } from './constants'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import { buildV2PathQuery, buildV3PathQuery } from './utils'
+import { buildV2PathQuery, buildV3PathQuery, getTokens } from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -63,9 +63,9 @@ export const swap = async (
 }
 
 export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY
+  return CHAIN_ID_ARRAY as number[]
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return []
+  return await getTokens(_chainId)
 }
