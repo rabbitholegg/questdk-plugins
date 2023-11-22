@@ -1,7 +1,8 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { swap } from './Uniswap.js'
+import { getSupportedTokenAddresses, swap } from './Uniswap.js'
 import {
+  CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
@@ -90,6 +91,17 @@ describe('Given the uniswap plugin', () => {
         test(description, async () => {
           const filter = await swap(params)
           expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+
+    describe('should return a valid list of tokens for each supported chain', () => {
+      CHAIN_ID_ARRAY.forEach((chainId) => {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(chainId)
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.greaterThan(0)
+          expect(tokens).to.have.length.lessThan(100)
         })
       })
     })
