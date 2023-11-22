@@ -1,5 +1,6 @@
+import axios from 'axios';
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import { getAddress, type Address, type Hash } from 'viem'
+import { zeroAddress ,getAddress, type Address, type Hash } from 'viem'
 
 interface Transaction {
   chainId: number
@@ -19,6 +20,20 @@ export interface TestCase<T extends ActionParams> {
 export type TestParams<T extends ActionParams> = {
   transaction: Transaction
   params: T
+}
+
+interface Token {
+  name: string;
+  address: Address;
+  symbol: string;
+  decimals: number;
+  chainId: number;
+  logoURI: string;
+  extensions?: { bridgeInfo: any }; 
+}
+
+interface TokenResponse {
+  tokens: Token[];
 }
 
 /**
@@ -79,5 +94,17 @@ export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
 
   return {
     $and: conditions,
+  }
+}
+
+export async function getTokens(_chainId: number): Promise<Address[]> {
+  try {
+    const response = await axios.get<TokenResponse>('https://indigo-dear-vicuna-972.mypinata.cloud/ipfs/QmbPxSU5RLbJJTCCvos6bHsZXNBg8NJHUuZQiaMEP1z3c1');
+    const { tokens } = response.data
+    const tokenlist = tokens.filter(token => token.chainId === _chainId).map(token => token.name) as Address[]
+    return [zeroAddress, ...tokenlist]
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [] as Address[];
   }
 }

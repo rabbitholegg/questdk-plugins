@@ -1,3 +1,4 @@
+import { ChainId, SUPPORTED_CHAINS } from '@uniswap/sdk-core'
 /* 
   Command param type definitions:
   https://github.com/Uniswap/universal-router-sdk/blob/6ec60ce9ff2853e236ba8f40a3aaa8819a97bd8b/src/utils/routerCommands.ts#L74
@@ -41,3 +42,17 @@ export const EXECUTE_ABI_FRAGMENTS = [
     type: 'function',
   },
 ]
+
+const TESTNETS = [
+  ChainId.GOERLI,
+  ChainId.SEPOLIA,
+  ChainId.OPTIMISM_GOERLI,
+  ChainId.ARBITRUM_GOERLI,
+  ChainId.POLYGON_MUMBAI,
+  ChainId.CELO_ALFAJORES,
+  ChainId.BASE_GOERLI,
+]
+
+export const CHAIN_ID_ARRAY = SUPPORTED_CHAINS.filter(
+  (chainId) => !TESTNETS.includes(chainId),
+)
