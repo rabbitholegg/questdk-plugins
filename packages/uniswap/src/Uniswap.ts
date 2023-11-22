@@ -13,6 +13,7 @@ import {
   V3_SWAP_EXACT_TYPES,
   EXECUTE_ABI_FRAGMENTS,
 } from './constants'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import { buildV2PathQuery, buildV3PathQuery } from './utils'
 
 export const swap = async (
@@ -62,7 +63,7 @@ export const swap = async (
 }
 
 export const getSupportedChainIds = async () => {
-  return []
+  return CHAIN_ID_ARRAY
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
