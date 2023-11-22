@@ -97,18 +97,28 @@ export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
   }
 }
 
-export async function getTokens(_chainId: number): Promise<Address[]> {
-  try {
-    const response = await axios.get<TokenResponse>(
-      'https://indigo-dear-vicuna-972.mypinata.cloud/ipfs/QmbPxSU5RLbJJTCCvos6bHsZXNBg8NJHUuZQiaMEP1z3c1',
-    )
-    const { tokens } = response.data
-    const tokenlist = tokens
+function createCachedTokenGetter() {
+  let cachedTokens: Token[] = []
+
+  async function getTokens(_chainId: number): Promise<Address[]> {
+    if (!cachedTokens.length) {
+      try {
+        const response = await axios.get<TokenResponse>(
+          'https://indigo-dear-vicuna-972.mypinata.cloud/ipfs/QmbPxSU5RLbJJTCCvos6bHsZXNBg8NJHUuZQiaMEP1z3c1',
+        )
+        cachedTokens = response.data.tokens
+      } catch (error) {
+        console.error('Error fetching data:', error)
+        return [] as Address[]
+      }
+    }
+
+    const tokenlist = cachedTokens
       .filter((token) => token.chainId === _chainId)
       .map((token) => token.name) as Address[]
     return [zeroAddress, ...tokenlist]
-  } catch (error) {
-    console.error('Error fetching data:', error)
-    return [] as Address[]
   }
+  return getTokens
 }
+
+export const getTokens = createCachedTokenGetter()
