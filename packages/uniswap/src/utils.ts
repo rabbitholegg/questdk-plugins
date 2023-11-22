@@ -108,7 +108,11 @@ function createCachedTokenGetter() {
         )
         cachedTokens = response.data.tokens
       } catch (error) {
-        console.error('Error fetching data:', error)
+        if (error instanceof Error) {
+          console.error('Error fetching data:', error.message)
+        } else {
+          console.error('An unknown error occurred')
+        }
         return [] as Address[]
       }
     }
