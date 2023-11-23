@@ -1,9 +1,19 @@
 import {
-  type TransactionFilter,
-  type SwapActionParams,
   compressJson,
+  type SwapActionParams,
+  type TransactionFilter,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import {
+  WETH_ADDRESS,
+} from '@uniswap/universal-router-sdk'
+import { zeroAddress as ETH_ADDRESS } from 'viem'
+import {
+  CHAIN_ID_ARRAY,
+  V2_SWAP_EXACT_TYPES,
+  V3_SWAP_EXACT_TYPES,
+  EXECUTE_ABI_FRAGMENTS,
+} from './constants'
+import { buildV2PathQuery, buildV3PathQuery, getTokens, getUniversalRouter } from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -18,20 +28,43 @@ export const swap = async (
     recipient,
   } = swap
 
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  const inputToken =
+    tokenIn === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenIn
+  const outputToken =
+    tokenOut === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenOut
+
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to: 0x0, // The contract address of the bridge
-    input: {}, // The input object is where we'll put the ABI and the parameters
+    chainId,
+    to: contractAddress || getUniversalRouter(chainId),
+    from: recipient,
+    input: {
+      $abi: EXECUTE_ABI_FRAGMENTS,
+      inputs: {
+        $some: {
+          $or: [
+            {
+              $abiParams: V3_SWAP_EXACT_TYPES,
+              path: buildV3PathQuery(inputToken, outputToken),
+              amountIn,
+              amountOut,
+            },
+            {
+              $abiParams: V2_SWAP_EXACT_TYPES,
+              path: buildV2PathQuery(inputToken, outputToken),
+              amountIn,
+              amountOut,
+            },
+          ],
+        },
+      },
+    },
   })
 }
 
-export const getSupportedTokenAddresses = async (
-  _chainId: number,
-): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+export const getSupportedChainIds = async () => {
+  return CHAIN_ID_ARRAY as number[]
 }
 
-export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
+export const getSupportedTokenAddresses = async (_chainId: number) => {
+  return await getTokens(_chainId)
 }
