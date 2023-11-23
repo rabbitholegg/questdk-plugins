@@ -95,7 +95,7 @@ describe('Given the uniswap plugin', () => {
         })
       })
     })
-    
+
     describe('should return a valid list of tokens for each supported chain', () => {
       CHAIN_ID_ARRAY.forEach((chainId) => {
         test(`for chainId: ${chainId}`, async () => {
@@ -105,8 +105,11 @@ describe('Given the uniswap plugin', () => {
           expect(tokens).to.contain(zeroAddress)
           expect(tokens).to.have.length.greaterThan(0)
           expect(tokens).to.have.length.lessThan(100)
-          tokens.forEach(token => {
-            expect(token).to.match(addressRegex, `Token address ${token} is not a valid Ethereum address`)
+          tokens.forEach((token) => {
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
           })
         })
       })
