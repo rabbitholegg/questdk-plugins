@@ -97,10 +97,10 @@ export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
   }
 }
 
-function createCachedTokenGetter() {
+export const getTokens = (() => {
   let cachedTokens: Token[] = []
 
-  async function getTokens(_chainId: number): Promise<Address[]> {
+  async function _getTokens(_chainId: number): Promise<Address[]> {
     if (!cachedTokens.length) {
       try {
         const response = await axios.get<TokenResponse>(
@@ -122,7 +122,6 @@ function createCachedTokenGetter() {
       .map((token) => token.address) as Address[]
     return [zeroAddress, ...tokenlist]
   }
-  return getTokens
-}
 
-export const getTokens = createCachedTokenGetter()
+  return _getTokens
+})()
