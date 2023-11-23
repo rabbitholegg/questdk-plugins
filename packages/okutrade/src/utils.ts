@@ -1,6 +1,7 @@
 import axios from 'axios'
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
 import { zeroAddress, getAddress, type Address, type Hash } from 'viem'
+import { Chains } from './constants'
 
 interface Transaction {
   chainId: number
@@ -95,6 +96,22 @@ export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
   return {
     $and: conditions,
   }
+}
+
+const chainToContract: Record<number, Address> = {
+  [Chains.ETHEREUM]: '0xEf1c6E67703c7BD7107eed8303Fbe6EC2554BF6B',
+  [Chains.OPTIMISM]: '0xb555edF5dcF85f42cEeF1f3630a52A108E55A654',
+  [Chains.POLYGON]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
+  [Chains.ZKSYNC_ERA]: '0x28731BCC616B5f51dD52CF2e4dF0E78dD1136C06',
+  [Chains.ARBITRUM]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
+}
+
+export function getUniversalRouter(chainId: number): Address {
+  const address = chainToContract[chainId]
+  if (!address) {
+    throw new Error(`Contract address not found for chain ID ${chainId}`)
+  }
+  return address
 }
 
 export const getTokens = (() => {
