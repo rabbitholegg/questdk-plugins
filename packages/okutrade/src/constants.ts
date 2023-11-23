@@ -1,3 +1,19 @@
+export enum Chains {
+  ETHEREUM = 1,
+  OPTIMISM = 10,
+  POLYGON = 137,
+  ZKSYNC_ERA = 324,
+  ARBITRUM = 42161,
+}
+
+export const CHAIN_ID_ARRAY = [
+  Chains.ETHEREUM,
+  Chains.OPTIMISM,
+  Chains.ARBITRUM,
+  Chains.POLYGON,
+  Chains.ZKSYNC_ERA,
+] as number[]
+
 /* 
   Command param type definitions:
   https://github.com/Uniswap/universal-router-sdk/blob/6ec60ce9ff2853e236ba8f40a3aaa8819a97bd8b/src/utils/routerCommands.ts#L74
