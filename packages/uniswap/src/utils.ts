@@ -119,7 +119,7 @@ function createCachedTokenGetter() {
 
     const tokenlist = cachedTokens
       .filter((token) => token.chainId === _chainId)
-      .map((token) => token.name) as Address[]
+      .map((token) => token.address) as Address[]
     return [zeroAddress, ...tokenlist]
   }
   return getTokens
