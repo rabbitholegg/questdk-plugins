@@ -8,6 +8,7 @@ import {
   V3_SWAP_EXACT_TYPES,
 } from './constants.js'
 import { failingTestCases, passingTestCases } from './test-transactions.js'
+import { zeroAddress } from 'viem'
 
 describe('Given the uniswap plugin', () => {
   describe('When handling the swap', () => {
@@ -94,14 +95,19 @@ describe('Given the uniswap plugin', () => {
         })
       })
     })
-
+    
     describe('should return a valid list of tokens for each supported chain', () => {
       CHAIN_ID_ARRAY.forEach((chainId) => {
         test(`for chainId: ${chainId}`, async () => {
           const tokens = await getSupportedTokenAddresses(chainId)
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
           expect(tokens).to.be.an('array')
+          expect(tokens).to.contain(zeroAddress)
           expect(tokens).to.have.length.greaterThan(0)
           expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach(token => {
+            expect(token).to.match(addressRegex, `Token address ${token} is not a valid Ethereum address`)
+          })
         })
       })
     })
