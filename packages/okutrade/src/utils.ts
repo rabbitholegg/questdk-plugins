@@ -1,7 +1,14 @@
 import axios from 'axios'
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
 import { zeroAddress, getAddress, type Address, type Hash } from 'viem'
-import { Chains } from './constants'
+
+export enum Chains {
+  ETHEREUM = 1,
+  OPTIMISM = 10,
+  POLYGON = 137,
+  ZKSYNC_ERA = 324,
+  ARBITRUM = 42161,
+}
 
 interface Transaction {
   chainId: number
@@ -137,7 +144,7 @@ export const getTokens = (() => {
     if (!cachedTokens.length) {
       try {
         const response = await axios.get<TokenResponse>(
-          'https://indigo-dear-vicuna-972.mypinata.cloud/ipfs/QmbPxSU5RLbJJTCCvos6bHsZXNBg8NJHUuZQiaMEP1z3c1',
+          'https://indigo-dear-vicuna-972.mypinata.cloud',
         )
         cachedTokens = response.data.tokens
       } catch (error) {

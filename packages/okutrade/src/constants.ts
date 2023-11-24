@@ -1,10 +1,4 @@
-export enum Chains {
-  ETHEREUM = 1,
-  OPTIMISM = 10,
-  POLYGON = 137,
-  ZKSYNC_ERA = 324,
-  ARBITRUM = 42161,
-}
+import { Chains } from './utils'
 
 export const CHAIN_ID_ARRAY = [
   Chains.ETHEREUM,
