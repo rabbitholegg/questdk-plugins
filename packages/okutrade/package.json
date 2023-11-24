@@ -44,7 +44,6 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.27",
-    "@uniswap/universal-router-sdk": "^1.5.8",
     "axios": "1.5.0",
     "viem": "^1.16.6"
   }
