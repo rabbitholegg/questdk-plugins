@@ -104,7 +104,7 @@ export const getTokens = (() => {
     if (!cachedTokens.length) {
       try {
         const response = await axios.get<TokenResponse>(
-          'https://indigo-dear-vicuna-972.mypinata.cloud/ipfs/QmbPxSU5RLbJJTCCvos6bHsZXNBg8NJHUuZQiaMEP1z3c1',
+          'https://indigo-dear-vicuna-972.mypinata.cloud',
         )
         cachedTokens = response.data.tokens
       } catch (error) {
