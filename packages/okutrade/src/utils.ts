@@ -106,10 +106,26 @@ const chainToContract: Record<number, Address> = {
   [Chains.ARBITRUM]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
 }
 
+const chainToWETH: Record<number, Address> = {
+  [Chains.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  [Chains.OPTIMISM]: '0x4200000000000000000000000000000000000006',
+  [Chains.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+  [Chains.POLYGON]: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+  [Chains.ZKSYNC_ERA]: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
+}
+
 export function getUniversalRouter(chainId: number): Address {
   const address = chainToContract[chainId]
   if (!address) {
     throw new Error(`Contract address not found for chain ID ${chainId}`)
+  }
+  return address
+}
+
+export function getWETHAddress(chainId: number): Address {
+  const address = chainToWETH[chainId]
+  if (!address) {
+    throw new Error(`WETH address not found for chain ID ${chainId}`)
   }
   return address
 }

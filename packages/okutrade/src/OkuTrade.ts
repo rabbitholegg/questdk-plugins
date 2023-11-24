@@ -3,9 +3,6 @@ import {
   type SwapActionParams,
   type TransactionFilter,
 } from '@rabbitholegg/questdk'
-import {
-  WETH_ADDRESS,
-} from '@uniswap/universal-router-sdk'
 import { zeroAddress as ETH_ADDRESS } from 'viem'
 import {
   CHAIN_ID_ARRAY,
@@ -13,7 +10,13 @@ import {
   V3_SWAP_EXACT_TYPES,
   EXECUTE_ABI_FRAGMENTS,
 } from './constants'
-import { buildV2PathQuery, buildV3PathQuery, getTokens, getUniversalRouter } from './utils'
+import {
+  buildV2PathQuery,
+  buildV3PathQuery,
+  getTokens,
+  getUniversalRouter,
+  getWETHAddress,
+} from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -29,9 +32,9 @@ export const swap = async (
   } = swap
 
   const inputToken =
-    tokenIn === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenIn
+    tokenIn === ETH_ADDRESS ? getWETHAddress(chainId).toLowerCase() : tokenIn
   const outputToken =
-    tokenOut === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenOut
+    tokenOut === ETH_ADDRESS ? getWETHAddress(chainId).toLowerCase() : tokenOut
 
   return compressJson({
     chainId,
