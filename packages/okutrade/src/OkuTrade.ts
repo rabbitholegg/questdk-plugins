@@ -13,6 +13,7 @@ import {
 import {
   buildV2PathQuery,
   buildV3PathQuery,
+  Chains,
   getTokens,
   getUniversalRouter,
   getWETHAddress,
@@ -69,5 +70,12 @@ export const getSupportedChainIds = async () => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
+  if (_chainId === Chains.ZKSYNC_ERA) {
+    return [
+      ETH_ADDRESS, // ETH
+      '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4', // USDC
+      '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91', // WETH
+    ]
+  }
   return await getTokens(_chainId)
 }
