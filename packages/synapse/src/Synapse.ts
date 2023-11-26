@@ -1,7 +1,7 @@
 
 import { type TransactionFilter, type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { SynapseContract } from './contract-addresses'
+import { SynapseContract, SynapseCCTPContract } from './contract-addresses'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { Token } from './Token'
@@ -11,7 +11,7 @@ const allTokens: Token[] = Object.values(tokens)
 
 const cctpMapping: { [key: number]: string } = {
   [1]: "0xfb2bfc368a7edfd51aa2cbec513ad50edea74e84",
-  [10]:"0xfb2bfc368a7edfd51aa2cbec513ad50edea74e84",
+  [10]:"0x5e69c336661dde70404e3345BA61F9c01DdB4C36",
   [8453]: "0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84",
   [42161]: "0xfb2bfc368a7edfd51aa2cbec513ad50edea74e84",
   [43114]:"0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84",
@@ -33,13 +33,13 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   if (contractAddress && Object.values(cctpMapping).includes(contractAddress)) {
     return compressJson({
       chainId: sourceChainId,
-      to: cctpMapping[sourceChainId],
+      to: SynapseCCTPContract[sourceChainId],
       input: {
         $abi: SYNAPSE_BRIDGE_FRAGMENTS,
         sender: recipient,
         amount: amount,
-        //Need to test this. 
-        chainId: destinationDomain,
+        // The following may need to be edited:
+        chainId: destinationChainId,
         token: tokenAddress,
       },
     })

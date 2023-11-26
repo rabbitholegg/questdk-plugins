@@ -41,3 +41,19 @@ export const SynapseContract: Record< any, string> = {
     [AURORA_CHAIN_ID]: '0xaeD5b25BE1c3163c907a471082640450F928DDFE'
   }
   
+
+  export const SynapseCCTPContract: Record< any, string> = {
+    [ETH_CHAIN_ID]: '0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84',
+    [OPTIMISM_CHAIN_ID]: '0x5e69c336661dde70404e3345BA61F9c01DdB4C36',
+    [ARBITRUM_CHAIN_ID]: '0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84',
+    [BASE_CHAIN_ID]: '0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84',
+    [AVALANCHE_CHAIN_ID]: '0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84',
+  }
+
+  export function getContractAddress(chainId: any): `0x${string}` | undefined {
+    const address = SynapseCCTPContract[chainId];
+    if (address && address.startsWith('0x')) {
+      return address as `0x${string}`;
+    }
+    return undefined;
+}
