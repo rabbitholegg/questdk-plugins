@@ -49,6 +49,7 @@ const TESTNETS = [
   ChainId.OPTIMISM_GOERLI,
   ChainId.ARBITRUM_GOERLI,
   ChainId.POLYGON_MUMBAI,
+  ChainId.CELO,
   ChainId.CELO_ALFAJORES,
   ChainId.BASE_GOERLI,
 ]
