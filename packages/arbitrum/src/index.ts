@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Arbitrum.js'
+} from './Arbitrum'
 
 export const Arbitrum: IActionPlugin = {
   pluginId: 'arbitrum',

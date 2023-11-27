@@ -1,6 +1,11 @@
 # Arbitrum Plugin
 This plugin allows for the decoding of Arbitrum transactions by way of action spec.
 
+## Important Considerations
+- Ethereum must be either sourceChain, or destinationChain, otherwise the quest will not be passable. It is not possible to bridge between Arbitrum Nova and Arbitrum One.
+- Only tokens which are compatible with all three chains were added. USDT was considered, but there is issues with bridging USDT to Arbitrum Nova
+- If tokenAddress is set to any, then amount will also be set to any, regardless of what is input.
+
 ## General Overview
 Arbitrum's native token bridge is a general messaging bridge allowing for transfer of ETH, and any token.
 
