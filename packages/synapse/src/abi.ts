@@ -7,6 +7,7 @@ export const SYNAPSE_BRIDGE_FRAGMENTS = [
         { internalType: "uint256", name: "amount", type: "uint256" }
         ],
         name: "deposit",
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -22,6 +23,7 @@ export const SYNAPSE_BRIDGE_FRAGMENTS = [
         { internalType: "uint256", name: "deadline", type: "uint256" }
         ],
         name: "depositAndSwap",
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -33,6 +35,7 @@ export const SYNAPSE_BRIDGE_FRAGMENTS = [
         { internalType: "uint256", name: "amount", type: "uint256" }
         ],
         name: "redeem",
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -47,6 +50,7 @@ export const SYNAPSE_BRIDGE_FRAGMENTS = [
         { internalType: "uint256", name: "swapDeadline", type: "uint256" }
         ],
         name: "redeemAndRemove",
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -62,6 +66,7 @@ export const SYNAPSE_BRIDGE_FRAGMENTS = [
         { internalType: "uint256", name: "deadline", type: "uint256" }
         ],
         name: "redeemAndSwap",
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -73,6 +78,7 @@ export const SYNAPSE_BRIDGE_FRAGMENTS = [
         { internalType: "uint256", name: "amount", type: "uint256" }
         ],
         name: "redeemV2",
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },
@@ -89,6 +95,7 @@ export const SYNAPSE_BRIDGE_FRAGMENTS = [
         { internalType: "bytes32", name: "requestID", type: "bytes32" }
         ],
         name: "CircleRequestSent",
+        outputs: [],
         stateMutability: "nonpayable",
         type: "function"
     },

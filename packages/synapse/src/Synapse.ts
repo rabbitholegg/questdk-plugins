@@ -1,7 +1,7 @@
 
 import { type TransactionFilter, type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { SynapseContract, SynapseCCTPContract } from './contract-addresses'
+import { CHAIN_TO_CONTRACT, SynapseCCTPContract } from './contract-addresses'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { Token } from './Token'
@@ -22,32 +22,32 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   const {
     sourceChainId,
     destinationChainId,
-    contractAddress,
+    // contractAddress = null,
     tokenAddress,
     amount,
     recipient,
   } = bridge
 
-  const destinationDomain = chainDomainToID(destinationChainId)
+  // const destinationDomain = chainDomainToID(destinationChainId)
 
-  if (contractAddress && Object.values(cctpMapping).includes(contractAddress)) {
-    return compressJson({
-      chainId: sourceChainId,
-      to: SynapseCCTPContract[sourceChainId],
-      input: {
-        $abi: SYNAPSE_BRIDGE_FRAGMENTS,
-        sender: recipient,
-        amount: amount,
-        // The following may need to be edited:
-        chainId: destinationChainId,
-        token: tokenAddress,
-      },
-    })
-  }
+  // if (contractAddress && Object.values(cctpMapping).includes(contractAddress)) {
+  //   return compressJson({
+  //     chainId: sourceChainId,
+  //     to: SynapseCCTPContract[sourceChainId],
+  //     input: {
+  //       $abi: SYNAPSE_BRIDGE_FRAGMENTS,
+  //       sender: recipient,
+  //       amount: amount,
+  //       // The following may need to be edited:
+  //       chainId: destinationChainId,
+  //       token: tokenAddress,
+  //     },
+  //   })
+  // }
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId: sourceChainId, // The chainId of the source chain
-    to: SynapseContract[sourceChainId], // The contract address of the bridge
+    to: CHAIN_TO_CONTRACT[sourceChainId], // The contract address of the bridge
     input: {
       $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
       to: recipient, // The recipient of tokens

@@ -20,7 +20,7 @@ import {
 } from "./chain-ids"
 
 
-export const SynapseContract: Record< any, string> = {
+export const CHAIN_TO_CONTRACT: { [chainId: number]: string } = {
     [ETH_CHAIN_ID]: '0x2796317b0fF8538F253012862c06787Adfb8cEb6',
     [BSC_CHAIN_ID]: '0xd123f70AE324d34A9E76b67a27bf77593bA8749f',
     [OPTIMISM_CHAIN_ID]: '0xAf41a65F786339e7911F4acDAD6BD49426F2Dc6b',
@@ -39,7 +39,7 @@ export const SynapseContract: Record< any, string> = {
     [METIS_CHAIN_ID]: '0x06Fea8513FF03a0d3f61324da709D4cf06F42A5c',
     [MOONBEAM_CHAIN_ID]: '0x84A420459cd31C3c34583F67E0f0fB191067D32f',
     [AURORA_CHAIN_ID]: '0xaeD5b25BE1c3163c907a471082640450F928DDFE'
-  }
+  } as const
   
 
   export const SynapseCCTPContract: Record< any, string> = {
