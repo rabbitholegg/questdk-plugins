@@ -2,7 +2,7 @@ import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
 import { Chains } from './utils'
 
 const ethereumTokenAddresses: Address[] = [
-  ETH_ADDRESS,                                  // ETH
+  ETH_ADDRESS, // ETH
   '0x6B175474E89094C44Da98b954EedeAC495271d0F', // DAI
   '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // USDC
   '0xdAC17F958D2ee523a2206206994597C13D831ec7', // USDT
@@ -17,7 +17,7 @@ const ethereumTokenAddresses: Address[] = [
 ]
 
 const optimismTokenAddresses: Address[] = [
-  ETH_ADDRESS,                                  // ETH
+  ETH_ADDRESS, // ETH
   '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1', // DAI
   '0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db', // VELO
   '0xFf733b2A3557a7ed6697007ab5D11B79FdD1b76B', // ACX
@@ -58,7 +58,7 @@ const polygonTokenAddresses: Address[] = [
 ]
 
 const baseTokenAddresses: Address[] = [
-  ETH_ADDRESS,                                  // ETH
+  ETH_ADDRESS, // ETH
   '0x4158734D47Fc9692176B5085E0F52ee0Da5d47F1', // BAL
   '0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22', // cbETH
   '0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb', // DAI
@@ -68,7 +68,7 @@ const baseTokenAddresses: Address[] = [
 ]
 
 const arbitrumTokenAddresses: Address[] = [
-  ETH_ADDRESS,                                  // ETH
+  ETH_ADDRESS, // ETH
   '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB
   '0x23ee2343B892b1BB63503a4FAbc840E0e2C6810f', // AXL
   '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1', // DAI
