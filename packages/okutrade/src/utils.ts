@@ -1,6 +1,5 @@
-import axios from 'axios'
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import { zeroAddress, getAddress, type Address, type Hash } from 'viem'
+import { getAddress, type Address, type Hash } from 'viem'
 
 export enum Chains {
   ETHEREUM = 1,
@@ -28,20 +27,6 @@ export interface TestCase<T extends ActionParams> {
 export type TestParams<T extends ActionParams> = {
   transaction: Transaction
   params: T
-}
-
-interface Token {
-  name: string
-  address: Address
-  symbol: string
-  decimals: number
-  chainId: number
-  logoURI: string
-  extensions?: { bridgeInfo: any }
-}
-
-interface TokenResponse {
-  tokens: Token[]
 }
 
 /**
@@ -136,32 +121,3 @@ export function getWETHAddress(chainId: number): Address {
   }
   return address
 }
-
-export const getTokens = (() => {
-  let cachedTokens: Token[] = []
-
-  async function _getTokens(_chainId: number): Promise<Address[]> {
-    if (!cachedTokens.length) {
-      try {
-        const response = await axios.get<TokenResponse>(
-          'https://indigo-dear-vicuna-972.mypinata.cloud',
-        )
-        cachedTokens = response.data.tokens
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error('Error fetching data:', error.message)
-        } else {
-          console.error('An unknown error occurred')
-        }
-        return [] as Address[]
-      }
-    }
-
-    const tokenlist = cachedTokens
-      .filter((token) => token.chainId === _chainId)
-      .map((token) => token.address) as Address[]
-    return [zeroAddress, ...tokenlist]
-  }
-
-  return _getTokens
-})()
