@@ -14,7 +14,8 @@ import {
   V3_SWAP_EXACT_TYPES,
   EXECUTE_ABI_FRAGMENTS,
 } from './constants'
-import { buildV2PathQuery, buildV3PathQuery, getTokens } from './utils'
+import { CHAIN_TO_TOKENS } from './token-addresses'
+import { buildV2PathQuery, buildV3PathQuery } from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -67,5 +68,5 @@ export const getSupportedChainIds = async () => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return await getTokens(_chainId)
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
