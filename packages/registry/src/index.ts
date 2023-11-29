@@ -28,6 +28,7 @@ import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
 import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
 import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
+import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -47,6 +48,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Paraswap.pluginId]: Paraswap,
   [Rabbithole.pluginId]: Rabbithole,
   [Symbiosis.pluginId]: Symbiosis,
+  [OkuTrade.pluginId]: OkuTrade,
 }
 
 export const getPlugin = (pluginId: string) => {
