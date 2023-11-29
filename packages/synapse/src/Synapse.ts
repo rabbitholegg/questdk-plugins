@@ -1,7 +1,7 @@
 
 import { type TransactionFilter, type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_TO_CONTRACT, SynapseCCTPContract } from './contract-addresses'
+import { SYNAPSE_CCTP_ROUTER, CHAIN_TO_ROUTER } from './contract-addresses'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { Token } from './Token'
@@ -9,45 +9,35 @@ import * as tokens from './tokens'
 
 const allTokens: Token[] = Object.values(tokens)
 
-const cctpMapping: { [key: number]: string } = {
-  [1]: "0xfb2bfc368a7edfd51aa2cbec513ad50edea74e84",
-  [10]:"0x5e69c336661dde70404e3345BA61F9c01DdB4C36",
-  [8453]: "0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84",
-  [42161]: "0xfb2bfc368a7edfd51aa2cbec513ad50edea74e84",
-  [43114]:"0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84",
-}
-
 export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
   const {
     sourceChainId,
     destinationChainId,
-    // contractAddress = null,
+    contractAddress = null,
     tokenAddress,
     amount,
     recipient,
   } = bridge
 
-  // const destinationDomain = chainDomainToID(destinationChainId)
-
-  // if (contractAddress && Object.values(cctpMapping).includes(contractAddress)) {
-  //   return compressJson({
-  //     chainId: sourceChainId,
-  //     to: SynapseCCTPContract[sourceChainId],
-  //     input: {
-  //       $abi: SYNAPSE_BRIDGE_FRAGMENTS,
-  //       sender: recipient,
-  //       amount: amount,
-  //       // The following may need to be edited:
-  //       chainId: destinationChainId,
-  //       token: tokenAddress,
-  //     },
-  //   })
-  // }
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  // This if statement checks if the transaction is a CCTP transaction. 
+  if (contractAddress == '0xd359bc471554504f683fbd4f6e36848612349ddf') {
+    return compressJson({
+      chainId: sourceChainId,
+      to: SYNAPSE_CCTP_ROUTER[sourceChainId],
+      input: {
+        $abi: SYNAPSE_BRIDGE_FRAGMENTS,
+        sender: recipient,
+        amount: amount,
+        chainId: destinationChainId,
+        token: tokenAddress,
+      },
+    })
+  }
+  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter (for non cctp)
   return compressJson({
     chainId: sourceChainId, // The chainId of the source chain
-    to: CHAIN_TO_CONTRACT[sourceChainId], // The contract address of the bridge
+    to: CHAIN_TO_ROUTER[sourceChainId],
     input: {
       $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
       to: recipient, // The recipient of tokens
@@ -68,19 +58,3 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
   return CHAIN_ID_ARRAY
 }
 
-export const chainDomainToID = (id: number): number => {
-  switch(id) {
-    case 0:
-      return 1;
-    case 1:
-      return 43114;
-    case 2:
-      return 10;
-    case 3:
-      return 42161;
-    case 6:
-        return 8453
-    default:
-      throw new Error('Invalid ID');
-  }
-}
