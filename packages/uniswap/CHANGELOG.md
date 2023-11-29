@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.7
+
+### Minor Changes
+
+- [#110](https://github.com/rabbitholegg/questdk-plugins/pull/110) [`4a11c4f`](https://github.com/rabbitholegg/questdk-plugins/commit/4a11c4fbb7008d53ec007857d8ad2361e9e9b15c) Thanks [@mmackz](https://github.com/mmackz)! - implement uniswap "swap" plugin
+
 ## 1.0.0-alpha.6
 
 ### Minor Changes
