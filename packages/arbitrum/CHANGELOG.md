@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-arbitrum
 
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#108](https://github.com/rabbitholegg/questdk-plugins/pull/108) [`064321e`](https://github.com/rabbitholegg/questdk-plugins/commit/064321e94e9f51aac707e8bf6d81056fe699a08c) Thanks [@mmackz](https://github.com/mmackz)! - implement arbitrum bridge plugin
+
 ## 1.0.0-alpha.8
 
 ### Minor Changes

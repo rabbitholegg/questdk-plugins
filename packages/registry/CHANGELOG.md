@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.36
+
+### Patch Changes
+
+- Updated dependencies [[`064321e`](https://github.com/rabbitholegg/questdk-plugins/commit/064321e94e9f51aac707e8bf6d81056fe699a08c), [`4a11c4f`](https://github.com/rabbitholegg/questdk-plugins/commit/4a11c4fbb7008d53ec007857d8ad2361e9e9b15c)]:
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.7
+
 ## 1.0.0-alpha.35
 
 ### Minor Changes
