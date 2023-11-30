@@ -5,8 +5,9 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { BALANCER_ABI } from './abi'
-import { VAULT_CONTRACT } from './constants'
+import { CHAIN_ID_ARRAY, VAULT_CONTRACT } from './constants'
 import { buildAmountQuery, buildPathQuery } from './utils'
+import { CHAIN_TO_TOKENS } from './token-addresses'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -54,9 +55,9 @@ export const swap = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return CHAIN_ID_ARRAY as number[]
 }
