@@ -61,6 +61,7 @@
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-rabbithole": "workspace:*",
     "@rabbitholegg/questdk-plugin-okutrade": "workspace:*",
+    "@rabbitholegg/questdk-plugin-balancer": "workspace:*",
     "viem": "^1.16.6"
   }
 }

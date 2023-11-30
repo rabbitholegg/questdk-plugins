@@ -393,6 +393,7 @@ importers:
       '@rabbitholegg/questdk': 2.0.0-alpha.27
       '@rabbitholegg/questdk-plugin-across': workspace:*
       '@rabbitholegg/questdk-plugin-arbitrum': workspace:*
+      '@rabbitholegg/questdk-plugin-balancer': workspace:*
       '@rabbitholegg/questdk-plugin-basepaint': workspace:*
       '@rabbitholegg/questdk-plugin-camelot': workspace:*
       '@rabbitholegg/questdk-plugin-connext': workspace:*
@@ -421,6 +422,7 @@ importers:
       '@rabbitholegg/questdk': 2.0.0-alpha.27_typescript@5.2.2
       '@rabbitholegg/questdk-plugin-across': link:../across
       '@rabbitholegg/questdk-plugin-arbitrum': link:../arbitrum
+      '@rabbitholegg/questdk-plugin-balancer': link:../balancer
       '@rabbitholegg/questdk-plugin-basepaint': link:../basepaint
       '@rabbitholegg/questdk-plugin-camelot': link:../camelot
       '@rabbitholegg/questdk-plugin-connext': link:../connext
