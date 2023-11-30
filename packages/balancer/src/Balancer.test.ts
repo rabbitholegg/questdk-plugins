@@ -1,10 +1,10 @@
 import { apply, GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { zeroAddress, parseEther, parseUnits } from 'viem'
-import { swap } from './Balancer'
+import { swap, getSupportedTokenAddresses } from './Balancer'
 import { Chains } from './utils'
 import { BALANCER_ABI } from './abi'
-import { VAULT_CONTRACT } from './constants'
+import { VAULT_CONTRACT, CHAIN_ID_ARRAY } from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
 
 describe('Given the balancer plugin', () => {
@@ -90,6 +90,24 @@ describe('Given the balancer plugin', () => {
         test(description, async () => {
           const filter = await swap(params)
           expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+
+    describe('should return a valid list of tokens for each supported chain', () => {
+      CHAIN_ID_ARRAY.forEach((chainId) => {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(chainId)
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.greaterThan(0)
+          expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach((token) => {
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
+          })
         })
       })
     })
