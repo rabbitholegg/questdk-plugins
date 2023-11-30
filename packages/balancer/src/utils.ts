@@ -95,7 +95,7 @@ export const buildAmountQuery = (
     let condition: FilterOperator | undefined
     switch (operator) {
       case '$gte':
-        condition = { $lte: BigInt(-value)}
+        condition = { $lte: BigInt(-value) }
         break
       case '$lte':
         condition = { $gte: BigInt(-value) }
