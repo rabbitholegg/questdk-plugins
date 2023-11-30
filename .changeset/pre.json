@@ -16,6 +16,8 @@
     "hungry-squids-drop",
     "late-scissors-wonder",
     "little-llamas-rescue",
+    "lovely-buses-tan",
+    "modern-pumpkins-kiss",
     "moody-students-flash",
     "neat-teachers-complain",
     "new-ears-study",
@@ -27,7 +29,9 @@
     "quick-eyes-retire",
     "quick-otters-deliver",
     "rotten-monkeys-attack",
+    "selfish-beers-check",
     "sharp-candles-live",
+    "shiny-pets-brush",
     "short-sloths-talk",
     "silent-rats-explode",
     "sixty-countries-leave",
@@ -37,6 +41,8 @@
     "soft-apples-hang",
     "soft-starfishes-draw",
     "sour-boxes-reflect",
+    "spicy-dancers-attend",
+    "spotty-apes-decide",
     "strong-kiwis-crash",
     "tasty-bobcats-clean",
     "tough-cooks-hammer",
@@ -46,7 +52,8 @@
     "unlucky-dolphins-stare",
     "unlucky-impalas-shake",
     "wet-toes-prove",
-    "wicked-readers-clean"
+    "wicked-readers-clean",
+    "wild-cobras-help"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
@@ -67,6 +74,8 @@
     "@rabbitholegg/questdk-plugin-paraswap": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-basepaint": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-hyphen": "1.0.0-alpha.4",
-    "@rabbitholegg/questdk-plugin-symbiosis": "1.0.0-alpha.4"
+    "@rabbitholegg/questdk-plugin-symbiosis": "1.0.0-alpha.4",
+    "@rabbitholegg/questdk-plugin-rabbithole": "1.0.0-alpha.1",
+    "@rabbitholegg/questdk-plugin-okutrade": "1.0.0-alpha.7"
   }
 }

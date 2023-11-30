@@ -9,7 +9,7 @@ describe('Given the basepaint plugin', () => {
       const filter = await mint({
         address: CONTRACT_ADDRESS,
         tokenId: 69,
-        quantity: GreaterThanOrEqual(1),
+        amount: GreaterThanOrEqual(1),
       })
       expect(filter).to.deep.equal({
         to: CONTRACT_ADDRESS,
@@ -29,7 +29,7 @@ describe('Given the basepaint plugin', () => {
       const filter = await mint({
         address: CONTRACT_ADDRESS,
         tokenId: 52,
-        quantity: GreaterThanOrEqual(1),
+        amount: GreaterThanOrEqual(1),
       })
       expect(apply(transaction, filter)).to.be.true
     })
@@ -39,17 +39,17 @@ describe('Given the basepaint plugin', () => {
       const filter = await mint({
         address: CONTRACT_ADDRESS,
         tokenId: 52, // valid tokenId is 62
-        quantity: GreaterThanOrEqual(1),
+        amount: GreaterThanOrEqual(1),
       })
       expect(apply(transaction, filter)).to.be.false
     })
 
-    test('should fail filter with invalid quantity', async () => {
+    test('should fail filter with invalid amount', async () => {
       const transaction = TEST_TRANSACTIONS[0]
       const filter = await mint({
         address: CONTRACT_ADDRESS,
         tokenId: 52,
-        quantity: GreaterThanOrEqual(2),
+        amount: GreaterThanOrEqual(2),
       })
       expect(apply(transaction, filter)).to.be.false
     })

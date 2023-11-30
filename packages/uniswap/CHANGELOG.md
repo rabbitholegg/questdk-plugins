@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.7
+
+### Minor Changes
+
+- [#110](https://github.com/rabbitholegg/questdk-plugins/pull/110) [`4a11c4f`](https://github.com/rabbitholegg/questdk-plugins/commit/4a11c4fbb7008d53ec007857d8ad2361e9e9b15c) Thanks [@mmackz](https://github.com/mmackz)! - implement uniswap "swap" plugin
+
+## 1.0.0-alpha.6
+
+### Minor Changes
+
+- [#90](https://github.com/rabbitholegg/questdk-plugins/pull/90) [`f357c84`](https://github.com/rabbitholegg/questdk-plugins/commit/f357c84e5582e966521cb669e577530b5c3bfc57) Thanks [@Quazia](https://github.com/Quazia)! - Update QuestDK version and add Rabbithole Plugin
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes
