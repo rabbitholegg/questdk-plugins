@@ -4,13 +4,13 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
+  swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-  swap,
-} from './Uniswap.js'
+} from './OkuTrade.js'
 
-export const Uniswap: IActionPlugin = {
-  pluginId: 'uniswap',
+export const OkuTrade: IActionPlugin = {
+  pluginId: 'okutrade',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   swap,
