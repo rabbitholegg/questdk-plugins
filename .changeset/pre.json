@@ -17,6 +17,7 @@
     "late-scissors-wonder",
     "little-llamas-rescue",
     "lovely-buses-tan",
+    "modern-pumpkins-kiss",
     "moody-students-flash",
     "neat-teachers-complain",
     "new-ears-study",
@@ -40,6 +41,8 @@
     "soft-apples-hang",
     "soft-starfishes-draw",
     "sour-boxes-reflect",
+    "spicy-dancers-attend",
+    "spotty-apes-decide",
     "strong-kiwis-crash",
     "tasty-bobcats-clean",
     "tough-cooks-hammer",
@@ -72,6 +75,7 @@
     "@rabbitholegg/questdk-plugin-basepaint": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-hyphen": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-symbiosis": "1.0.0-alpha.4",
-    "@rabbitholegg/questdk-plugin-rabbithole": "1.0.0-alpha.1"
+    "@rabbitholegg/questdk-plugin-rabbithole": "1.0.0-alpha.1",
+    "@rabbitholegg/questdk-plugin-okutrade": "1.0.0-alpha.7"
   }
 }
