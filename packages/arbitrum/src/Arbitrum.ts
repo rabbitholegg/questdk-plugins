@@ -1,27 +1,23 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, zeroAddress as ETH_TOKEN_ADDRESS } from 'viem'
+import { CHAIN_ID_ARRAY, ETH_CHAIN_ID, ARB_NOVA_CHAIN_ID } from './chain-ids'
 import {
-  CHAIN_ID_ARRAY,
-  ETH_CHAIN_ID,
-  ARB_ONE_CHAIN_ID,
-  ARB_NOVA_CHAIN_ID,
-} from './chain-ids.js'
-import {
-  MAINNET_TO_ARB_NOVA_GATEWAY,
-  MAINNET_TO_ARB_ONE_GATEWAY,
-  ARB_NOVA_TO_MAINNET_GATEWAY,
-  ARB_ONE_TO_MAINNET_GATEWAY,
   UNIVERSAL_ARBSYS_PRECOMPILE,
   ARB_ONE_DELAYED_INBOX,
   ARB_NOVA_DELAYED_INBOX,
-} from './contract-addresses.js'
-import { ArbitrumTokens } from './supported-token-addresses.js'
+  ARB_NOVA_TO_MAINNET_GATEWAY,
+  ARB_ONE_TO_MAINNET_GATEWAY,
+  MAINNET_TO_ARB_NOVA_GATEWAY,
+  MAINNET_TO_ARB_ONE_GATEWAY,
+} from './contract-addresses'
+import { ArbitrumTokens } from './supported-token-addresses'
+import { findL1TokenForL2Token, getContractAddressFromChainId } from './utils'
 import {
-  GATEWAY_OUTBOUND_TRANSFER_FRAG,
   ARBSYS_WITHDRAW_ETH_FRAG,
   INBOX_DEPOSIT_ETH_FRAG,
-} from './abi.js'
-const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
+  OUTBOUND_TRANSFER_L2_TO_L1,
+  OUTBOUND_TRANSFER_L1_TO_L2,
+} from './abi'
 
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
@@ -34,45 +30,106 @@ export const bridge = async (bridge: BridgeActionParams) => {
     recipient,
   } = bridge
 
-  const isBridgingToken = tokenAddress !== ETH_TOKEN_ADDRESS
+  if (!tokenAddress) {
+    // If token address is undefined, determining the exact bridge contract is not possible
+    const contracts =
+      sourceChainId === ETH_CHAIN_ID
+        ? [
+            MAINNET_TO_ARB_NOVA_GATEWAY,
+            MAINNET_TO_ARB_ONE_GATEWAY,
+            ARB_ONE_DELAYED_INBOX,
+            ARB_NOVA_DELAYED_INBOX,
+          ]
+        : [
+            ARB_ONE_TO_MAINNET_GATEWAY,
+            ARB_NOVA_TO_MAINNET_GATEWAY,
+            UNIVERSAL_ARBSYS_PRECOMPILE,
+          ]
 
-  if (isBridgingToken) {
-    const networkGateway = getContractAddressFromChainId(
-      sourceChainId,
-      destinationChainId,
-    )
-    // We're targeting a gateway contract
+    const abiFrags =
+      sourceChainId === ETH_CHAIN_ID
+        ? [...OUTBOUND_TRANSFER_L1_TO_L2, ...INBOX_DEPOSIT_ETH_FRAG]
+        : [...OUTBOUND_TRANSFER_L2_TO_L1, ...ARBSYS_WITHDRAW_ETH_FRAG]
+
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
-      to: contractAddress || networkGateway, // The contract address of the bridge
+      chainId: sourceChainId,
+      from: recipient,
+      to: {
+        $or: contracts,
+      },
       input: {
-        $abi: GATEWAY_OUTBOUND_TRANSFER_FRAG,
-        _token: tokenAddress,
-        _to: recipient,
-        _amount: amount,
+        $abi: abiFrags,
       },
     })
   }
-  if (sourceChainId === ETH_CHAIN_ID) {
-    const networkInbox =
-      destinationChainId === ARB_NOVA_CHAIN_ID
-        ? ARB_NOVA_DELAYED_INBOX
-        : ARB_ONE_DELAYED_INBOX
-    // We're targeting the Delayed Inbox
+
+  const isBridgingToken = tokenAddress !== ETH_TOKEN_ADDRESS
+
+  if (isBridgingToken) {
+    const bridgeContract =
+      contractAddress ||
+      getContractAddressFromChainId(sourceChainId, destinationChainId)
+
+    if (sourceChainId !== ETH_CHAIN_ID) {
+      return compressJson({
+        // L2 to L1 Token Transfer
+        chainId: sourceChainId,
+        to: bridgeContract
+          ? bridgeContract
+          : {
+              $or: [ARB_ONE_TO_MAINNET_GATEWAY, ARB_NOVA_TO_MAINNET_GATEWAY],
+            },
+        input: {
+          $abi: OUTBOUND_TRANSFER_L2_TO_L1,
+          _to: recipient,
+          _amount: amount,
+          _l1Token: findL1TokenForL2Token(tokenAddress),
+        },
+      })
+    }
+
+    // L1 to L2 Token Transfer
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
-      to: contractAddress || networkInbox, // The contract address of the bridge
+      chainId: sourceChainId,
+      to: bridgeContract
+        ? bridgeContract
+        : {
+            $or: [MAINNET_TO_ARB_NOVA_GATEWAY, MAINNET_TO_ARB_ONE_GATEWAY],
+          },
+      input: {
+        $abi: OUTBOUND_TRANSFER_L1_TO_L2,
+        _to: recipient,
+        _amount: amount,
+        _token: tokenAddress,
+      },
+    })
+  }
+
+  if (sourceChainId === ETH_CHAIN_ID) {
+    let networkInbox: Address | undefined
+    if (destinationChainId) {
+      networkInbox =
+        destinationChainId === ARB_NOVA_CHAIN_ID
+          ? ARB_NOVA_DELAYED_INBOX
+          : ARB_ONE_DELAYED_INBOX
+    }
+
+    // L1 to L2 ETH Transfer
+    return compressJson({
+      chainId: sourceChainId,
+      to: contractAddress || networkInbox,
+      from: recipient,
       value: amount,
       input: {
         $abi: INBOX_DEPOSIT_ETH_FRAG,
       },
     })
   }
-  // Otherwise we're targeting the chain specific precompile
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  // L2 to L1 ETH Transfer
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
-    to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE, // The contract address of the bridge
+    chainId: sourceChainId,
+    value: amount,
+    to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE,
     input: {
       $abi: ARBSYS_WITHDRAW_ETH_FRAG,
       destination: recipient,
@@ -86,20 +143,4 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
 
 export const getSupportedChainIds = async () => {
   return CHAIN_ID_ARRAY as number[]
-}
-
-const getContractAddressFromChainId = (
-  sourceChainId: number,
-  destinationChainId: number,
-): Address => {
-  // This is klunky but the alternative is some sort of convoluted 2D mapping
-  if (sourceChainId === ARB_NOVA_CHAIN_ID) return ARB_NOVA_TO_MAINNET_GATEWAY
-  if (sourceChainId === ARB_ONE_CHAIN_ID) return ARB_ONE_TO_MAINNET_GATEWAY
-  if (sourceChainId === ETH_CHAIN_ID) {
-    if (destinationChainId === ARB_NOVA_CHAIN_ID)
-      return MAINNET_TO_ARB_NOVA_GATEWAY
-    if (destinationChainId === ARB_ONE_CHAIN_ID)
-      return MAINNET_TO_ARB_ONE_GATEWAY
-  }
-  return '0x0'
 }

@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.37",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -60,6 +60,7 @@
     "@rabbitholegg/questdk-plugin-tally": "workspace:*",
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-rabbithole": "workspace:*",
+    "@rabbitholegg/questdk-plugin-okutrade": "workspace:*",
     "@rabbitholegg/questdk-plugin-traderjoe": "workspace:*",
     "viem": "^1.16.6"
   }
