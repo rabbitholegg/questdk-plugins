@@ -150,3 +150,25 @@ export const passingTestCases = [
     tokenOut: undefined,
   }),
 ]
+
+export const failingTestCases = [
+  createTestCase(POLYGON_SWAP, 'when chainId is not correct', { chainId: 1 }),
+  createTestCase(POLYGON_BATCH_SWAP, 'when contract address is not correct', {
+    contractAddress: '0xa062aE8A9c5e11aaA026fc2670B0D65cCc8B2858',
+  }),
+  createTestCase(OPTIMISM_SWAP, 'when tokenIn is not correct', {
+    tokenIn: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58',
+  }),
+  createTestCase(OPTIMISM_BATCH_SWAP, 'when tokenOut is not correct', {
+    tokenOut: '0x7f5c764cbc14f9669b88837ca1490cca17c31607',
+  }),
+  createTestCase(ARBITRUM_SWAP, 'when amountIn is not sufficient', {
+    amountIn: GreaterThanOrEqual(parseEther('100')),
+  }),
+  createTestCase(ARBITRUM_BATCH_SWAP, 'when amountOut is not sufficient', {
+    amountOut: GreaterThanOrEqual(parseEther('100')),
+  }),
+  createTestCase(OPTIMISM_BATCH_SWAP, 'when recipient is not correct', {
+    recipient: '0xCB6586874cc04B01Cc4fDB777dE502cEa7b3D6c1',
+  }),
+]
