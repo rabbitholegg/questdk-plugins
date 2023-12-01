@@ -91,22 +91,27 @@ export const buildAmountQuery = (
   }
 
   if (amountOut) {
-    const [operator, value] = Object.entries(amountOut)[0]
     let condition: FilterOperator | undefined
-    switch (operator) {
-      case '$gte':
-        condition = { $lte: BigInt(-value) }
-        break
-      case '$lte':
-        condition = { $gte: BigInt(-value) }
-        break
-      case '$gt':
-        condition = { $lt: BigInt(-value) }
-        break
-      case '$lt':
-        condition = { $gt: BigInt(-value) }
-        break
+    if (typeof amountOut === 'object') {
+      const [operator, value] = Object.entries(amountOut)[0]
+      switch (operator) {
+        case '$gte':
+          condition = { $lte: BigInt(-value) }
+          break
+        case '$lte':
+          condition = { $gte: BigInt(-value) }
+          break
+        case '$gt':
+          condition = { $lt: BigInt(-value) }
+          break
+        case '$lt':
+          condition = { $gt: BigInt(-value) }
+          break
+      }
+    } else {
+      condition = BigInt(-amountOut)
     }
+
     if (condition) {
       conditions.push({ $last: condition })
     }
