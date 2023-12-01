@@ -45,6 +45,8 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.27",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+
     "viem": "^1.16.6"
   }
 }

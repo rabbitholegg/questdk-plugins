@@ -1,0 +1,7 @@
+{
+  "name": "@rabbitholegg/questdk-plugin-utils",
+  "private": true,
+  "devDependencies": {
+    "typescript": "5.2.2"
+  }
+}

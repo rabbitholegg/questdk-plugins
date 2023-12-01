@@ -47,6 +47,8 @@
     "@connext/nxtp-utils": "^2.0.4",
     "@connext/smart-contracts": "^2.0.0",
     "@rabbitholegg/questdk": "2.0.0-alpha.27",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+
     "viem": "^1.16.6"
   }
 }

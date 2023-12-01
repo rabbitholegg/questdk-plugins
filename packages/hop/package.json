@@ -46,6 +46,8 @@
     "@hop-protocol/core": "0.0.1-beta.182",
     "@hop-protocol/sdk": "0.0.1-beta.535",
     "@rabbitholegg/questdk": "2.0.0-alpha.27",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+
     "viem": "1.2.15"
   }
 }
