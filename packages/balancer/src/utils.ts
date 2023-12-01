@@ -87,7 +87,11 @@ export const buildAmountQuery = (
   const conditions: FilterOperator[] = []
 
   if (amountIn) {
-    conditions.push({ $first: amountIn })
+    if (typeof amountIn === 'object') {
+      conditions.push({ $first: amountIn })
+    } else {
+      conditions.push({ $first: { $gte: BigInt(amountIn) } })
+    }
   }
 
   if (amountOut) {
@@ -109,7 +113,7 @@ export const buildAmountQuery = (
           break
       }
     } else {
-      condition = BigInt(-amountOut)
+      condition = { $lte: BigInt(-amountOut) }
     }
 
     if (condition) {
