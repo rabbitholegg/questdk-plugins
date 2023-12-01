@@ -149,12 +149,20 @@ export const passingTestCases = [
     tokenIn: undefined,
     tokenOut: undefined,
   }),
-  createTestCase(OPTIMISM_BATCH_SWAP, 'when `==` comaprison is used for amountIn', {
-    amountIn: 3150002636n,
-  }),
-  createTestCase(OPTIMISM_BATCH_SWAP, 'when `==` comaprison is used for amountOut', {
-    amountOut: 3146355657n,
-  }),
+  createTestCase(
+    OPTIMISM_BATCH_SWAP,
+    'when `==` comaprison is used for amountIn',
+    {
+      amountIn: 3150002636n,
+    },
+  ),
+  createTestCase(
+    OPTIMISM_BATCH_SWAP,
+    'when `==` comaprison is used for amountOut',
+    {
+      amountOut: 3146355657n,
+    },
+  ),
 ]
 
 export const failingTestCases = [
