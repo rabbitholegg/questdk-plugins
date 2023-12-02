@@ -1,6 +1,11 @@
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
 import type { Address, Hash } from 'viem'
 
+export enum Chains {
+  ARBITRUM_ONE = 42161,
+  AVALANCHE = 43114,
+}
+
 interface Transaction {
   chainId: number
   from: Address

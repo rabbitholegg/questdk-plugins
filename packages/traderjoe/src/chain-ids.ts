@@ -1,3 +1,3 @@
-import { ChainId } from '@traderjoe-xyz/sdk-core'
+import { Chains } from './utils'
 
-export const CHAIN_ID_ARRAY = [ChainId.ARBITRUM_ONE]
+export const CHAIN_ID_ARRAY = [Chains.ARBITRUM_ONE]

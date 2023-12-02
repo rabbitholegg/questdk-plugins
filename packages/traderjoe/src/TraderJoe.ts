@@ -5,10 +5,9 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
 import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from '@traderjoe-xyz/sdk-v2'
-import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { DEFAULT_SWAP_TOKEN_LIST, Tokens } from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { buildPathQuery } from './utils'
+import { buildPathQuery, Chains } from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -25,7 +24,7 @@ export const swap = async (
 
   const nativeIn = tokenIn === NATIVE_TOKEN
   const nativeOut = tokenOut === NATIVE_TOKEN
-  const to = contractAddress ?? LB_ROUTER_V21_ADDRESS[chainId as ChainId]
+  const to = contractAddress ?? LB_ROUTER_V21_ADDRESS[chainId as Chains]
 
   return compressJson({
     chainId,
