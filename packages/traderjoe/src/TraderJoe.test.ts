@@ -1,8 +1,8 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { LBRouterV21ABI } from '@traderjoe-xyz/sdk-v2'
-import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { swap, getSupportedTokenAddresses } from './TraderJoe'
+import { Chains } from './utils'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { Tokens } from './contract-addresses'
 import { TOKENS_FOR_EXACT_TOKENS } from './test-transactions'
@@ -26,10 +26,10 @@ describe('Given the TraderJoe plugin', () => {
                   tokenPath: {
                     $and: [
                       {
-                        $first: Tokens[ChainId.ARBITRUM_ONE].USDCE,
+                        $first: Tokens[Chains.ARBITRUM_ONE].USDCE,
                       },
                       {
-                        $last: Tokens[ChainId.ARBITRUM_ONE].ARB,
+                        $last: Tokens[Chains.ARBITRUM_ONE].ARB,
                       },
                     ],
                   },
