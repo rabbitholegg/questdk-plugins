@@ -1,6 +1,6 @@
 import { Chains } from './utils'
 
-export const VAULT_CONTRACT = '0xBA12222222228d8Ba445958a75a0704d566BF2C8'
+export const VAULT_CONTRACT = '0xba12222222228d8ba445958a75a0704d566bf2c8'
 
 export const CHAIN_ID_ARRAY = [
   Chains.ETHEREUM,
