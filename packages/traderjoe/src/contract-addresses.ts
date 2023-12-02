@@ -1,10 +1,10 @@
-import { ChainId } from '@traderjoe-xyz/sdk-core'
 import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
+import { Chains } from './utils'
 
 export const Tokens: {
   [_chainId: number]: { [token: string]: Address }
 } = {
-  [ChainId.ARBITRUM_ONE]: {
+  [Chains.ARBITRUM_ONE]: {
     ARB: '0x912CE59144191C1204E64559FE8253a0e49E6548',
     DAI: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
     ETH: NATIVE_TOKEN,
@@ -25,20 +25,20 @@ export const Tokens: {
 export const DEFAULT_SWAP_TOKEN_LIST: {
   [chainId: number]: readonly Address[]
 } = {
-  [ChainId.ARBITRUM_ONE]: [
-    Tokens[ChainId.ARBITRUM_ONE].ETH,
-    Tokens[ChainId.ARBITRUM_ONE].ARB,
-    Tokens[ChainId.ARBITRUM_ONE].DAI,
-    Tokens[ChainId.ARBITRUM_ONE].GMX,
-    Tokens[ChainId.ARBITRUM_ONE].JOE,
-    Tokens[ChainId.ARBITRUM_ONE].LINK,
-    Tokens[ChainId.ARBITRUM_ONE].MAGIC,
-    Tokens[ChainId.ARBITRUM_ONE].RDNT,
-    Tokens[ChainId.ARBITRUM_ONE].STG,
-    Tokens[ChainId.ARBITRUM_ONE].USDC,
-    Tokens[ChainId.ARBITRUM_ONE].USDCE,
-    Tokens[ChainId.ARBITRUM_ONE].USDT,
-    Tokens[ChainId.ARBITRUM_ONE].WBTC,
-    Tokens[ChainId.ARBITRUM_ONE].WETH,
+  [Chains.ARBITRUM_ONE]: [
+    Tokens[Chains.ARBITRUM_ONE].ETH,
+    Tokens[Chains.ARBITRUM_ONE].ARB,
+    Tokens[Chains.ARBITRUM_ONE].DAI,
+    Tokens[Chains.ARBITRUM_ONE].GMX,
+    Tokens[Chains.ARBITRUM_ONE].JOE,
+    Tokens[Chains.ARBITRUM_ONE].LINK,
+    Tokens[Chains.ARBITRUM_ONE].MAGIC,
+    Tokens[Chains.ARBITRUM_ONE].RDNT,
+    Tokens[Chains.ARBITRUM_ONE].STG,
+    Tokens[Chains.ARBITRUM_ONE].USDC,
+    Tokens[Chains.ARBITRUM_ONE].USDCE,
+    Tokens[Chains.ARBITRUM_ONE].USDT,
+    Tokens[Chains.ARBITRUM_ONE].WBTC,
+    Tokens[Chains.ARBITRUM_ONE].WETH,
   ],
 } as const
