@@ -74,7 +74,6 @@ export class Token {
     nativeTokens,
     description,
     docUrl = '',
-    forceMeta,
     swapableType,
     isNative = false,
     swapExceptions,
@@ -145,7 +144,6 @@ export class Token {
     notStake?: boolean
     routeSymbol?: string
   }) {
-    const isMetaVar = Boolean(swapDepositAddresses || forceMeta)
     this.addresses = addresses
     this.wrapperAddresses = wrapperAddresses
     this.symbol = symbol
