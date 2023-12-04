@@ -13,7 +13,7 @@ import {
 } from './Zora.js'
 
 // Replace *project* with the name of the project
-export const {Zora}: IActionPlugin = {
+export const Zora: IActionPlugin = {
   pluginId: 'zora',
   getSupportedTokenAddresses,
   getSupportedChainIds,
