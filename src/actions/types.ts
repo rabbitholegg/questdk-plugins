@@ -34,9 +34,9 @@ export type BridgeActionParams = {
 
 export type MintActionParams = {
   chainId: number
-  contractAddress: string
+  contractAddress: Address
   tokenId?: number
-  amount?: number
+  amount?: number | FilterOperator
   recipient?: Address
 }
 
