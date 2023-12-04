@@ -84,5 +84,5 @@ export const getSupportedTokenAddresses = async (
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return CHAIN_ID_ARRAY
+  return CHAIN_ID_ARRAY as number[]
 }
