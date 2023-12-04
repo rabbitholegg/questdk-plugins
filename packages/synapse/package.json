@@ -1,5 +1,5 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-project",
+  "name": "@rabbitholegg/questdk-plugin-synapse",
   "private": true,
   "version": "1.0.0-alpha.6",
   "type": "module",
