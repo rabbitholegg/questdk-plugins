@@ -17,7 +17,7 @@ import {
 } from './chain-ids.js'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi.js'
 import { parseEther } from 'viem'
-import { SynapseCCTPContract, getContractAddress, CHAIN_TO_ROUTER } from './contract-addresses'
+import { SynapseCCTPContract, getContractAddress, CHAIN_TO_ROUTER, SYNAPSE_CCTP_ROUTER } from './contract-addresses'
 
 
 const ARBITRUM_USDCE_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
@@ -39,18 +39,22 @@ describe('When given the Synapse plugin', () => {
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER
       })
-
+      console.log(filter)
       expect(filter).to.deep.equal({
         chainId: ARBITRUM_CHAIN_ID, 
-        to: CHAIN_TO_ROUTER[ARBITRUM_CHAIN_ID], 
+        to: {$or: [CHAIN_TO_ROUTER[ARBITRUM_CHAIN_ID].toLowerCase(), SYNAPSE_CCTP_ROUTER[ARBITRUM_CHAIN_ID].toLowerCase() ]}, 
         input: {
           $abi: SYNAPSE_BRIDGE_FRAGMENTS,
-          to: TEST_USER,
-          amount: {
-            $gte: '100000'
-          },
-          chainId: ETH_CHAIN_ID,
-          token: ARBITRUM_USDCE_ADDRESS,
+          $and: [  
+            {
+              amount: {
+                $gte: '100000'
+              },
+              chainId: ETH_CHAIN_ID,
+              token: ARBITRUM_USDCE_ADDRESS,
+            },
+            { $or: [{ sender: TEST_USER}, {to: TEST_USER}]}
+          ]
         },
       })
     })
