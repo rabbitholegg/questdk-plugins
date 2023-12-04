@@ -1,20 +1,33 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
+import { failingTestCases, passingTestCases } from './test-setup'
+import { mint } from './Zora'
 
-// Replace *project* with the name of the project
-describe('Given the project plugin', () => {
-  describe('When handling the bridge', () => {
+describe('Given the zora plugin', () => {
+  describe('When handling the mint', () => {
 
     test('should return a valid action filter', () => {
       
     })
 
-    test('should pass filter with valid transactions',  () => {
-      
+    describe('should pass filter with valid transactions', () => {
+      passingTestCases.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await mint(params)
+          expect(apply(transaction, filter)).to.be.true
+        })
+      })
     })
-    
-    test('should not pass filter with invalid transactions',  () => {
-      
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingTestCases.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await mint(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
     })
 
   })
