@@ -29,6 +29,7 @@ import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
 import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
+import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -49,6 +50,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Rabbithole.pluginId]: Rabbithole,
   [Symbiosis.pluginId]: Symbiosis,
   [OkuTrade.pluginId]: OkuTrade,
+  [Zora.pluginId]: Zora,
 }
 
 export const getPlugin = (pluginId: string) => {
