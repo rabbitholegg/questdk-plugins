@@ -34,9 +34,10 @@ export type BridgeActionParams = {
 
 export type MintActionParams = {
   chainId: number
-  address: string
-  tokenId: number
-  amount: number
+  contractAddress: string
+  tokenId?: number
+  amount?: number
+  recipient?: Address
 }
 
 export type BurnActionParams = MintActionParams
