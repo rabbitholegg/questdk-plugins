@@ -30,6 +30,8 @@ import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
 import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
+import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
+import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -51,6 +53,8 @@ export const plugins: Record<string, IActionPlugin> = {
   [Symbiosis.pluginId]: Symbiosis,
   [Synapse.pluginId]: Synapse,
   [OkuTrade.pluginId]: OkuTrade,
+  [Balancer.pluginId]: Balancer,
+  [TraderJoe.pluginId]: TraderJoe,
 }
 
 export const getPlugin = (pluginId: string) => {
