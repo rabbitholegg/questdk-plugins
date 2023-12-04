@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  jsbi@>3.2.5: 3.2.5
+
 importers:
 
   .:
@@ -93,6 +96,40 @@ importers:
         version: 5.1.6
       vitest:
         specifier: 0.33.0
+        version: 0.33.0
+
+  packages/balancer:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: 2.0.0-alpha.27
+        version: 2.0.0-alpha.27(typescript@5.3.2)
+      viem:
+        specifier: ^1.2.15
+        version: 1.19.11(typescript@5.3.2)
+    devDependencies:
+      '@types/node':
+        specifier: ^20.4.5
+        version: 20.10.3
+      '@vitest/coverage-v8':
+        specifier: ^0.33.0
+        version: 0.33.0(vitest@0.33.0)
+      rimraf:
+        specifier: ^5.0.1
+        version: 5.0.5
+      rome:
+        specifier: ^12.1.3
+        version: 12.1.3
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.1(@types/node@20.10.3)(typescript@5.3.2)
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      typescript:
+        specifier: ^5.1.6
+        version: 5.3.2
+      vitest:
+        specifier: ^0.33.0
         version: 0.33.0
 
   packages/basepaint:
@@ -510,6 +547,9 @@ importers:
       '@rabbitholegg/questdk-plugin-arbitrum':
         specifier: workspace:*
         version: link:../arbitrum
+      '@rabbitholegg/questdk-plugin-balancer':
+        specifier: workspace:*
+        version: link:../balancer
       '@rabbitholegg/questdk-plugin-basepaint':
         specifier: workspace:*
         version: link:../basepaint
@@ -552,12 +592,12 @@ importers:
       '@rabbitholegg/questdk-plugin-tally':
         specifier: workspace:*
         version: link:../tally
+      '@rabbitholegg/questdk-plugin-traderjoe':
+        specifier: workspace:*
+        version: link:../traderjoe
       '@rabbitholegg/questdk-plugin-uniswap':
         specifier: workspace:*
         version: link:../uniswap
-      '@rabbitholegg/questdk-plugin-zora':
-        specifier: workspace:*
-        version: link:../zora
       viem:
         specifier: ^1.16.6
         version: 1.19.11(typescript@5.3.2)
@@ -2623,6 +2663,24 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@rabbitholegg/questdk@2.0.0-alpha.27(typescript@5.3.2):
+    resolution: {integrity: sha512-9QXBLWqJWsCSLCRTjzuG0TdSqBq987IjoSpPooUEJ2Jiqnx7rM88KMM9EBNu+4ra7O9amFCnYNrUz8xiFfU3ng==}
+    peerDependencies:
+      typescript: '>=5.1.6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      abitype: 0.9.10(typescript@5.3.2)
+      rimraf: 5.0.5
+      typescript: 5.3.2
+      viem: 1.19.11(typescript@5.3.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
   /@rabbitholegg/questdk@2.0.0-alpha.28(typescript@5.1.6):
     resolution: {integrity: sha512-YNjry2FcWHRtNuUj+OIsoLeEhmQ0mNidhLC2BWjhQgEUcIwmTzkuSw/QczjZoDZojTOe8DKgVpLOSIs9qoDoXw==}
     peerDependencies:
@@ -2731,7 +2789,7 @@ packages:
     resolution: {integrity: sha512-osvveYtyzdEVbt3OfwwXFr4P2iVBL5u1Q3q4ONBfDY/UpOuXmOlbgwc1xECEboY8wIays8Yt6onaWMUdUbfl0A==}
     dependencies:
       '@noble/curves': 1.1.0
-      '@noble/hashes': 1.3.1
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.3
     dev: false
 
@@ -2937,7 +2995,7 @@ packages:
     dependencies:
       big.js: 6.2.1
       decimal.js-light: 2.5.1
-      jsbi: 4.3.0
+      jsbi: 3.2.5
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
       toformat: 2.0.0
@@ -2952,7 +3010,7 @@ packages:
     dependencies:
       '@traderjoe-xyz/sdk-core': 1.1.0(viem@1.19.11)
       big.js: 6.2.1
-      jsbi: 4.3.0
+      jsbi: 3.2.5
       lodash.flatmap: 4.5.0
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
@@ -7021,10 +7079,6 @@ packages:
 
   /jsbi@3.2.5:
     resolution: {integrity: sha512-aBE4n43IPvjaddScbvWRA2YlTzKEynHzu7MqOyTipdHucf/VxS63ViCjxYRg86M8Rxwbt/GfzHl1kKERkt45fQ==}
-    dev: false
-
-  /jsbi@4.3.0:
-    resolution: {integrity: sha512-SnZNcinB4RIcnEyZqFPdGPVgrg2AcnykiBy0sHVJQKHYeaLUvi3Exj+iaPpLnFVkDPZIV4U0yvgC9/R4uEAZ9g==}
     dev: false
 
   /jsbn@0.1.1:
