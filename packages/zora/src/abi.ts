@@ -1,4 +1,4 @@
-const ZORA_MINTER_ABI = [
+export const ZORA_MINTER_ABI = [
   // https://github.com/ourzora/zora-721-contracts/blob/main/src/ERC721Drop.sol#L384
   {
     "inputs": [
@@ -284,5 +284,30 @@ const ZORA_MINTER_ABI = [
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
-  } // ZoraCreator1155Impl
+  } // ZoraCreator1155Impl,
+  ,
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenRecipient",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "message",
+        "type": "string"
+      }
+    ],
+    "name": "purchase",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },  // Legacy WritingEditions
 ]

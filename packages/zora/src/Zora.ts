@@ -14,23 +14,31 @@ export const mint = async (mint: MintActionParams): Promise<TransactionFilter> =
     recipient,
   } = mint
 
+  let andArray = []
+  if (recipient) {
+    andArray.push({
+      $or: [
+        {recipient},
+        {minter: recipient},
+        {tokenRecipient: recipient}
+      ]
+    })
+  }
+  if (tokenId || amount) {
+    andArray.push({
+      quantity: amount,
+      tokenId
+    })
+  }
+
+
+
   return compressJson({
     chainId,
     to: contractAddress,
     input : {
       $abi: ZORA_MINTER_ABI,
-      $and: [
-        {
-          quantity: amount,
-          tokenId
-        },
-        {
-          $or: [
-            {recipient},
-            {minter: recipient}
-          ]
-        }
-      ]
+      $and: andArray,
     }
   })
 }

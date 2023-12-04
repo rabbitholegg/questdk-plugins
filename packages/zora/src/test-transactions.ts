@@ -3,6 +3,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type TestParams } from './utils'
 import { Chains } from './utils'
+import type { Address } from 'viem'
 
 export const BASIC_PURCHASE: TestParams<MintActionParams> = {
   transaction: {
@@ -17,6 +18,6 @@ export const BASIC_PURCHASE: TestParams<MintActionParams> = {
   params: {
     chainId: Chains.OPTIMISM,
     contractAddress: '0xfff631ef40557f8705e89053af794a1dcfa0a90b',
-    recipient: '0x628D4C61d81Ac4F286B1778a063ED2F8810Bc367',
+    recipient: '0x628D4C61d81Ac4F286B1778a063ED2F8810Bc367'.toLowerCase() as Address,
   },
 }
