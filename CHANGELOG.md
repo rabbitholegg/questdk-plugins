@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.28
+
+### Patch Changes
+
+- [#57](https://github.com/rabbitholegg/questdk/pull/57) [`ef0c564`](https://github.com/rabbitholegg/questdk/commit/ef0c564e522c28fcad052b3d89ad034dd3956027) Thanks [@Quazia](https://github.com/Quazia)! - Update Mint Action Param Type
+
 ## 2.0.0-alpha.27
 
 ### Patch Changes
