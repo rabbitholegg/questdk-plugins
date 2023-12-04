@@ -1,32 +1,46 @@
 
-import { type TransactionFilter, type BridgeActionParams, type SwapActionParams, type MintActionParams, compressJson } from '@rabbitholegg/questdk'
+import { type TransactionFilter, type MintActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { ZORA_MINTER_ABI } from './abi'
 
 
 export const mint = async (mint: MintActionParams): Promise<TransactionFilter> => {
   const {
     chainId,
     contractAddress,
-    tokenAddress,
+    tokenId,
     amount,
     recipient,
   } = mint
 
   return compressJson({
-    chainId: 0, 
-    to:  0x0,  
-    input: {}, 
+    chainId,
+    to: contractAddress,
+    input : {
+      $abi: ZORA_MINTER_ABI,
+      $and: [
+        {
+          quantity: amount,
+          tokenId
+        },
+        {
+          $or: [
+            {recipient},
+            {minter: recipient}
+          ]
+        }
+      ]
+    }
   })
 }
 
 
 export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+  return [] /// Supported tokens don't apply for the mint action
 }
 
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
-
+  return CHAIN_ID_ARRAY as number[]
 }
