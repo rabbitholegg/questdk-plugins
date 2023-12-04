@@ -14,36 +14,50 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   const {
     sourceChainId,
     destinationChainId,
-    contractAddress = null,
+    contractAddress,
     tokenAddress,
     amount,
     recipient,
   } = bridge
 
-  // This if statement checks if the transaction is a CCTP transaction. 
-  if (contractAddress == '0xd359bc471554504f683fbd4f6e36848612349ddf') {
+  const inputObject = {
+    to: recipient,
+    amount: amount,
+    chainId: destinationChainId,
+    token: tokenAddress,
+  }
+
+  const contractTarget = contractAddress ? contractAddress : {$or: [CHAIN_TO_ROUTER[sourceChainId], SYNAPSE_CCTP_ROUTER[sourceChainId] ]}
+
+
+  if(recipient) {
     return compressJson({
       chainId: sourceChainId,
-      to: SYNAPSE_CCTP_ROUTER[sourceChainId],
+      to: contractTarget,
       input: {
-        $abi: SYNAPSE_BRIDGE_FRAGMENTS,
-        sender: recipient,
-        amount: amount,
-        chainId: destinationChainId,
-        token: tokenAddress,
+        $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
+        $and: [
+          inputObject,
+          $or: [
+            {
+              sender: recipient,
+            },
+            {
+              to: recipient,
+            }
+          ]
+        ]
       },
     })
   }
+
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter (for non cctp)
   return compressJson({
     chainId: sourceChainId, // The chainId of the source chain
-    to: CHAIN_TO_ROUTER[sourceChainId],
+    to: contractTarget,
     input: {
       $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
-      to: recipient, // The recipient of tokens
-      amount: amount,  // The amount of tokens to send
-      chainId: destinationChainId, // The chainId of the destination chian
-      token: tokenAddress, // The address of the token to be recieved
+      inputObject,
     },
   })
 }
