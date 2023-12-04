@@ -16,7 +16,7 @@ export const BASIC_PURCHASE: TestParams<MintActionParams> = {
   },
   params: {
     chainId: Chains.OPTIMISM,
-    contract: '0xfff631ef40557f8705e89053af794a1dcfa0a90b',
+    contractAddress: '0xfff631ef40557f8705e89053af794a1dcfa0a90b',
     recipient: '0x628D4C61d81Ac4F286B1778a063ED2F8810Bc367',
   },
 }
