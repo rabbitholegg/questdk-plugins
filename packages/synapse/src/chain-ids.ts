@@ -17,7 +17,6 @@ export const DOGECHAIN_CHAIN_ID = 2000
 export const KLAYTN_CHAIN_ID = 8217
 export const BOBA_CHAIN_ID = 288
 
-
 export const CHAIN_ID_ARRAY = [
   ETH_CHAIN_ID,
   POLYGON_CHAIN_ID,

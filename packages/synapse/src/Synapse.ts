@@ -1,5 +1,8 @@
-
-import { type TransactionFilter, type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
+import {
+  type TransactionFilter,
+  type BridgeActionParams,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { SYNAPSE_CCTP_ROUTER, CHAIN_TO_ROUTER } from './contract-addresses'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
@@ -9,7 +12,9 @@ import * as tokens from './tokens'
 
 const allTokens: Token[] = Object.values(tokens)
 
-export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFilter> => {
+export const bridge = async (
+  bridge: BridgeActionParams,
+): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
   const {
     sourceChainId,
@@ -26,10 +31,16 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
     token: tokenAddress,
   }
 
-  const contractTarget = contractAddress ? contractAddress : {$or: [CHAIN_TO_ROUTER[sourceChainId].toLowerCase(), SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase() ]}
+  const contractTarget = contractAddress
+    ? contractAddress
+    : {
+        $or: [
+          CHAIN_TO_ROUTER[sourceChainId].toLowerCase(),
+          SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase(),
+        ],
+      }
 
-
-  if(recipient !== undefined) {
+  if (recipient !== undefined) {
     return compressJson({
       chainId: sourceChainId,
       to: contractTarget,
@@ -37,15 +48,17 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
         $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
         $and: [
           inputObject,
-          {$or: [
-            {
-              sender: recipient,
-            },
-            {
-              to: recipient,
-            }
-          ]}
-        ]
+          {
+            $or: [
+              {
+                sender: recipient,
+              },
+              {
+                to: recipient,
+              },
+            ],
+          },
+        ],
       },
     })
   }
@@ -61,13 +74,15 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   })
 }
 
-export const getSupportedTokenAddresses = async (chainId: number): Promise<Address[]> => {
-  const supportedTokens = allTokens.filter(token => token.addresses.hasOwnProperty(chainId));
-  return supportedTokens.map(token => token.addresses[chainId]) as Address[];
+export const getSupportedTokenAddresses = async (
+  chainId: number,
+): Promise<Address[]> => {
+  const supportedTokens = allTokens.filter((token) =>
+    token.addresses.hasOwnProperty(chainId),
+  )
+  return supportedTokens.map((token) => token.addresses[chainId]) as Address[]
 }
-
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return CHAIN_ID_ARRAY
 }
-
