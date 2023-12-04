@@ -23,7 +23,7 @@ export const failingTestCases = [
     recipient: '0xd31143Ca8503b25DdE780dc1B92E9aA61D0E326d',
   }),
   createTestCase(MINT_WITH_REWARDS_1155, 'when tokenId is incorrect', {
-    tokenId: '1',
+    tokenId: 1,
   }),
   createTestCase(MINT_WITH_REWARDS_1155, 'when amount is incorrect', {
     amount: '72',

@@ -55,6 +55,6 @@ export const MINT_WITH_REWARDS_1155: TestParams<MintActionParams> = {
     chainId: Chains.ZORA,
     contractAddress: '0x4c0c2DD31d2661E8BCeC60a42e803dCc6F81Baad'.toLowerCase() as Address,
     amount: '1',
-    tokenId: '25',
+    tokenId: 25,
   }
 }
