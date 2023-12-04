@@ -5,6 +5,7 @@ export enum Chains {
   ETHEREUM = 1,
   OPTIMISM = 10,
   BASE = 8453,
+  ZORA = 7777777,
 }
 
 interface Transaction {
