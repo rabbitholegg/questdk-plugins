@@ -19,7 +19,6 @@ export const mint = async (mint: MintActionParams): Promise<TransactionFilter> =
     andArray.push({
       $or: [
         {recipient},
-        {minter: recipient},
         {tokenRecipient: recipient}
       ]
     })
