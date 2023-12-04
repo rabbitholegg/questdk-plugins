@@ -671,7 +671,7 @@ importers:
         version: 5.7.2
       symbiosis-js-sdk:
         specifier: ^3.0.9
-        version: 3.0.35(ethers@5.7.2)
+        version: 3.1.1(ethers@5.7.2)
       viem:
         specifier: ^1.2.15
         version: 1.19.11(typescript@5.3.2)
@@ -696,40 +696,6 @@ importers:
         version: link:../tsconfig
       typescript:
         specifier: ^5.1.6
-        version: 5.3.2
-      vitest:
-        specifier: ^0.33.0
-        version: 0.33.0
-
-  packages/synapse:
-    dependencies:
-      '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.28
-        version: 2.0.0-alpha.28(typescript@5.3.2)
-      viem:
-        specifier: ^1.16.6
-        version: 1.19.11(typescript@5.3.2)
-    devDependencies:
-      '@types/node':
-        specifier: ^20.8.7
-        version: 20.10.3
-      '@vitest/coverage-v8':
-        specifier: ^0.33.0
-        version: 0.33.0(vitest@0.33.0)
-      rimraf:
-        specifier: ^5.0.5
-        version: 5.0.5
-      rome:
-        specifier: ^12.1.3
-        version: 12.1.3
-      ts-node:
-        specifier: ^10.9.1
-        version: 10.9.1(@types/node@20.10.3)(typescript@5.3.2)
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-      typescript:
-        specifier: ^5.2.2
         version: 5.3.2
       vitest:
         specifier: ^0.33.0
@@ -2789,7 +2755,7 @@ packages:
     resolution: {integrity: sha512-osvveYtyzdEVbt3OfwwXFr4P2iVBL5u1Q3q4ONBfDY/UpOuXmOlbgwc1xECEboY8wIays8Yt6onaWMUdUbfl0A==}
     dependencies:
       '@noble/curves': 1.1.0
-      '@noble/hashes': 1.3.2
+      '@noble/hashes': 1.3.1
       '@scure/base': 1.1.3
     dev: false
 
@@ -3203,11 +3169,11 @@ packages:
   /@types/react-dom@18.2.17:
     resolution: {integrity: sha512-rvrT/M7Df5eykWFxn6MYt5Pem/Dbyc1N8Y0S9Mrkw2WFCRiqUgw9P7ul2NpwsXCSM1DVdENzdG9J5SreqfAIWg==}
     dependencies:
-      '@types/react': 18.2.41
+      '@types/react': 18.2.42
     dev: false
 
-  /@types/react@18.2.41:
-    resolution: {integrity: sha512-CwOGr/PiLiNBxEBqpJ7fO3kocP/2SSuC9fpH5K7tusrg4xPSRT/193rzolYwQnTN02We/ATXKnb6GqA5w4fRxw==}
+  /@types/react@18.2.42:
+    resolution: {integrity: sha512-c1zEr96MjakLYus/wPnuWDo1/zErfdU9rNsIGmE+NV71nx88FG9Ttgo5dqorXTu/LImX2f63WBP986gJkMPNbA==}
     dependencies:
       '@types/prop-types': 15.7.11
       '@types/scheduler': 0.16.8
@@ -6182,6 +6148,7 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
+    dev: true
 
   /global@4.4.0:
     resolution: {integrity: sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==}
@@ -8980,7 +8947,7 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.3
+      glob: 7.2.0
     dev: false
 
   /rimraf@3.0.2:
@@ -9695,8 +9662,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /symbiosis-js-sdk@3.0.35(ethers@5.7.2):
-    resolution: {integrity: sha512-6MpAezUocTlqUSLJll10qUg1g2n+KdYZt97PloLNG04+vb+9ZkKqe4ez9Z5oc0WS+h4lIiDqe5Be+I8IH1/YvA==}
+  /symbiosis-js-sdk@3.1.1(ethers@5.7.2):
+    resolution: {integrity: sha512-VDvWjyFvCVCFHj1zcgXVfllE5m7NPI8KjnbLpAdF8T6/1RDN8XNWJuqW6dGAuMEXC/qhR4LjFa8GeVy0QDaVwA==}
     engines: {node: '>=10'}
     peerDependencies:
       ethers: ^5.2.0
