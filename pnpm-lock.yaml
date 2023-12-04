@@ -555,6 +555,9 @@ importers:
       '@rabbitholegg/questdk-plugin-uniswap':
         specifier: workspace:*
         version: link:../uniswap
+      '@rabbitholegg/questdk-plugin-zora':
+        specifier: workspace:*
+        version: link:../zora
       viem:
         specifier: ^1.16.6
         version: 1.19.11(typescript@5.3.2)
@@ -6121,7 +6124,6 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
-    dev: true
 
   /global@4.4.0:
     resolution: {integrity: sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==}
@@ -8924,7 +8926,7 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
     dev: false
 
   /rimraf@3.0.2:
