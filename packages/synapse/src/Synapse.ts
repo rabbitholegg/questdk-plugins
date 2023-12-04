@@ -21,16 +21,15 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
   } = bridge
 
   const inputObject = {
-    to: recipient,
     amount: amount,
     chainId: destinationChainId,
     token: tokenAddress,
   }
 
-  const contractTarget = contractAddress ? contractAddress : {$or: [CHAIN_TO_ROUTER[sourceChainId], SYNAPSE_CCTP_ROUTER[sourceChainId] ]}
+  const contractTarget = contractAddress ? contractAddress : {$or: [CHAIN_TO_ROUTER[sourceChainId].toLowerCase(), SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase() ]}
 
 
-  if(recipient) {
+  if(recipient !== undefined) {
     return compressJson({
       chainId: sourceChainId,
       to: contractTarget,
@@ -38,14 +37,14 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
         $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
         $and: [
           inputObject,
-          $or: [
+          {$or: [
             {
               sender: recipient,
             },
             {
               to: recipient,
             }
-          ]
+          ]}
         ]
       },
     })
@@ -57,7 +56,7 @@ export const bridge = async (bridge: BridgeActionParams): Promise<TransactionFil
     to: contractTarget,
     input: {
       $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
-      inputObject,
+      ...inputObject,
     },
   })
 }
