@@ -1,47 +1,45 @@
-
-
 export class Token {
-    addresses: { [key: number]: string } // list of token addresses on each chain
-    wrapperAddresses?: Record<number, string> // list of wrapper addresses on each chain like gmx
-    decimals: number | Record<number, number> = {} // list of decimals on each chain
-    symbol?: string // token symbol
-    name?: string // token name
-    logo?: any // token logo
-    icon?: any // token icon
-    poolName?: string // token pool name
-    swapAddresses?: Record<number, string> // list of swap addresses on each chain
-    swapWrapperAddresses?: Record<number, string> // list of swap wrapper addresses on each chain
-    swapDepositAddresses?: Record<number, string> // list of swap deposit addresses on each chain
-    swapEthAddresses?: Record<number, string> // list of swap eth addresses on each chain
-    routerIndex?: string // router index
-    poolId: number | Record<number, number> = {} // list of pool ids on each chain
-    poolType?: string // pool type
-    poolTokens?: Token[] // list of pool tokens
-    depositTokens?: Token[] // list of deposit tokens
-    nativeTokens?: Token[] // list of native tokens
-    description?: string // token description
-    docUrl = '' // token doc url
-    forceMeta?: boolean // force meta
-    swapableType?: string // swapable type
-    isNative = false // is native
-    swapExceptions: number | Record<number, number[]> = {} // for specifying tokens where limited dest chains are available.
-    visibilityRank = 0 // rank in which token is displayed, least visible is 0, there is no max
-    isMeta = false // is meta
-    isEthSwap = false // is eth swap
-    category: { bridge: boolean; swap: boolean; pool: boolean } = {
-      bridge: true,
-      swap: true,
-      pool: true,
-    } // list of categories on each chain
-    swapableOn: number[] = [] // list of chains where token is swapable
-    display = true // display token
-    legacy = false // legacy token
-    priorityRank: number // priority token ordering
-    chainId?: number // chain id of swap pool
-    incentivized?: boolean // pool is incentivized or not
-    customRewardToken?: string // reward token symbol when pool staking rewards are in something other than SYN
-    priorityPool?: boolean = false // priority pool
-    color?:
+  addresses: { [key: number]: string } // list of token addresses on each chain
+  wrapperAddresses?: Record<number, string> // list of wrapper addresses on each chain like gmx
+  decimals: number | Record<number, number> = {} // list of decimals on each chain
+  symbol?: string // token symbol
+  name?: string // token name
+  logo?: any // token logo
+  icon?: any // token icon
+  poolName?: string // token pool name
+  swapAddresses?: Record<number, string> // list of swap addresses on each chain
+  swapWrapperAddresses?: Record<number, string> // list of swap wrapper addresses on each chain
+  swapDepositAddresses?: Record<number, string> // list of swap deposit addresses on each chain
+  swapEthAddresses?: Record<number, string> // list of swap eth addresses on each chain
+  routerIndex?: string // router index
+  poolId: number | Record<number, number> = {} // list of pool ids on each chain
+  poolType?: string // pool type
+  poolTokens?: Token[] // list of pool tokens
+  depositTokens?: Token[] // list of deposit tokens
+  nativeTokens?: Token[] // list of native tokens
+  description?: string // token description
+  docUrl = '' // token doc url
+  forceMeta?: boolean // force meta
+  swapableType?: string // swapable type
+  isNative = false // is native
+  swapExceptions: number | Record<number, number[]> = {} // for specifying tokens where limited dest chains are available.
+  visibilityRank = 0 // rank in which token is displayed, least visible is 0, there is no max
+  isMeta = false // is meta
+  isEthSwap = false // is eth swap
+  category: { bridge: boolean; swap: boolean; pool: boolean } = {
+    bridge: true,
+    swap: true,
+    pool: true,
+  } // list of categories on each chain
+  swapableOn: number[] = [] // list of chains where token is swapable
+  display = true // display token
+  legacy = false // legacy token
+  priorityRank: number // priority token ordering
+  chainId?: number // chain id of swap pool
+  incentivized?: boolean // pool is incentivized or not
+  customRewardToken?: string // reward token symbol when pool staking rewards are in something other than SYN
+  priorityPool?: boolean = false // priority pool
+  color?:
     | 'gray'
     | 'yellow'
     | 'green'
@@ -91,7 +89,7 @@ export class Token {
     priceUnits,
     notStake,
     routeSymbol,
-}: {
+  }: {
     addresses: { [x: number]: string }
     wrapperAddresses?: Record<number, string>
     decimals?: number | Record<number, number>
