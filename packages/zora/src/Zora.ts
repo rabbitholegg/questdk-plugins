@@ -15,7 +15,7 @@ export const mint = async (
   const andArray = []
   if (recipient) {
     andArray.push({
-      $or: [{ recipient }, { tokenRecipient: recipient }],
+      $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
     })
   }
   if (tokenId || amount) {

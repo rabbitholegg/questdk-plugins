@@ -309,4 +309,29 @@ export const ZORA_MINTER_ABI = [
     stateMutability: 'payable',
     type: 'function',
   }, // Legacy WritingEditions
+  // https://github.com/soundxyz/sound-protocol/blob/0c29ae2f5ce2f27f3823cacf66b5180906070805/contracts/core/SoundEditionV1_2.sol#L274
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "quantity",
+        "type": "uint256"
+      }
+    ],
+    "name": "mint",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "fromTokenId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  }, // Legacy SoundEditionV1_2
 ]
