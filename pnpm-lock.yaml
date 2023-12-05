@@ -101,8 +101,8 @@ importers:
   packages/balancer:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.27
-        version: 2.0.0-alpha.27(typescript@5.3.2)
+        specifier: 2.0.0-alpha.28
+        version: 2.0.0-alpha.28(typescript@5.3.2)
       viem:
         specifier: ^1.2.15
         version: 1.19.11(typescript@5.3.2)
@@ -598,6 +598,9 @@ importers:
       '@rabbitholegg/questdk-plugin-uniswap':
         specifier: workspace:*
         version: link:../uniswap
+      '@rabbitholegg/questdk-plugin-zora':
+        specifier: workspace:*
+        version: link:../zora
       viem:
         specifier: ^1.16.6
         version: 1.19.11(typescript@5.3.2)
@@ -2628,24 +2631,6 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
-
-  /@rabbitholegg/questdk@2.0.0-alpha.27(typescript@5.3.2):
-    resolution: {integrity: sha512-9QXBLWqJWsCSLCRTjzuG0TdSqBq987IjoSpPooUEJ2Jiqnx7rM88KMM9EBNu+4ra7O9amFCnYNrUz8xiFfU3ng==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.10(typescript@5.3.2)
-      rimraf: 5.0.5
-      typescript: 5.3.2
-      viem: 1.19.11(typescript@5.3.2)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
 
   /@rabbitholegg/questdk@2.0.0-alpha.28(typescript@5.1.6):
     resolution: {integrity: sha512-YNjry2FcWHRtNuUj+OIsoLeEhmQ0mNidhLC2BWjhQgEUcIwmTzkuSw/QczjZoDZojTOe8DKgVpLOSIs9qoDoXw==}
@@ -6148,7 +6133,6 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
-    dev: true
 
   /global@4.4.0:
     resolution: {integrity: sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==}
@@ -8947,7 +8931,7 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
     dev: false
 
   /rimraf@3.0.2:
