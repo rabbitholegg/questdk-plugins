@@ -11,7 +11,6 @@ export const passingTestCases = [
   createTestCase(MINT_WITH_REWARDS_1155, 'Minting with rewards 1155'),
 ]
 
-
 export const failingTestCases = [
   createTestCase(BASIC_PURCHASE, 'when chainId is incorrect', {
     chainId: 1,
@@ -28,5 +27,4 @@ export const failingTestCases = [
   createTestCase(MINT_WITH_REWARDS_1155, 'when amount is incorrect', {
     amount: '72',
   }),
-
 ]

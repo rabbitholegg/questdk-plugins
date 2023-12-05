@@ -7,7 +7,6 @@ import { ZORA_MINTER_ABI } from './abi'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
-
     test('should return a valid action filter', async () => {
       const { params } = BASIC_PURCHASE
       const filter = await mint(params)
@@ -26,10 +25,10 @@ describe('Given the zora plugin', () => {
                   tokenRecipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
                 },
               ],
-            }
+            },
           ],
         },
-    })
+      })
     })
 
     describe('should pass filter with valid transactions', () => {
@@ -51,6 +50,5 @@ describe('Given the zora plugin', () => {
         })
       })
     })
-
   })
 })
