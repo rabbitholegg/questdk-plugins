@@ -43,7 +43,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.27",
+    "@rabbitholegg/questdk": "2.0.0-alpha.28",
     "@rabbitholegg/questdk-plugin-across": "workspace:*",
     "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
     "@rabbitholegg/questdk-plugin-basepaint": "workspace:*",
@@ -63,6 +63,7 @@
     "@rabbitholegg/questdk-plugin-okutrade": "workspace:*",
     "@rabbitholegg/questdk-plugin-balancer": "workspace:*",
     "@rabbitholegg/questdk-plugin-traderjoe": "workspace:*",
+    "@rabbitholegg/questdk-plugin-zora": "workspace:*",
     "viem": "^1.16.6"
   }
 }
