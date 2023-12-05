@@ -9,11 +9,11 @@ import { BASE_CHAIN_ID, CONTRACT_ADDRESS, MINT_ABI } from './constants'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { address, tokenId, amount } = mint
+  const { contractAddress, tokenId, amount } = mint
 
   return compressJson({
     chainId: BASE_CHAIN_ID,
-    to: address, // mint contract address
+    to: contractAddress, // mint contract address
     input: {
       $abi: MINT_ABI,
       day: tokenId,

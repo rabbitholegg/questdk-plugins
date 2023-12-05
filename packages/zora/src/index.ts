@@ -1,5 +1,5 @@
 // This file is standard for more projects.
-// The main degree of nuance is in the 
+// The main degree of nuance is in the
 
 import {
   type IActionPlugin,
@@ -19,5 +19,5 @@ export const Zora: IActionPlugin = {
   getSupportedChainIds,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
-  mint
+  mint,
 }

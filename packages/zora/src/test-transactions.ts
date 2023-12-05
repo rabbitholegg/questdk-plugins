@@ -1,6 +1,4 @@
-import {
-  type MintActionParams,
-} from '@rabbitholegg/questdk'
+import { type MintActionParams } from '@rabbitholegg/questdk'
 import { type TestParams } from './utils'
 import { Chains } from './utils'
 import type { Address } from 'viem'
@@ -17,11 +15,12 @@ export const BASIC_PURCHASE: TestParams<MintActionParams> = {
   },
   params: {
     chainId: Chains.OPTIMISM,
-    contractAddress: '0xfff631ef40557f8705e89053af794a1dcfa0a90b'.toLowerCase() as Address,
-    recipient: '0x628D4C61d81Ac4F286B1778a063ED2F8810Bc367'.toLowerCase() as Address,
-  }
+    contractAddress:
+      '0xfff631ef40557f8705e89053af794a1dcfa0a90b'.toLowerCase() as Address,
+    recipient:
+      '0x628D4C61d81Ac4F286B1778a063ED2F8810Bc367'.toLowerCase() as Address,
+  },
 }
-
 
 export const MINT_WITH_REWARDS: TestParams<MintActionParams> = {
   transaction: {
@@ -35,11 +34,11 @@ export const MINT_WITH_REWARDS: TestParams<MintActionParams> = {
   },
   params: {
     chainId: Chains.ETHEREUM,
-    contractAddress: '0x4f330940159fB3368F5b06b34212C0cDB4e2C032'.toLowerCase() as Address,
+    contractAddress:
+      '0x4f330940159fB3368F5b06b34212C0cDB4e2C032'.toLowerCase() as Address,
     amount: '1',
-  }
+  },
 }
-
 
 export const MINT_WITH_REWARDS_1155: TestParams<MintActionParams> = {
   transaction: {
@@ -53,8 +52,9 @@ export const MINT_WITH_REWARDS_1155: TestParams<MintActionParams> = {
   },
   params: {
     chainId: Chains.ZORA,
-    contractAddress: '0x4c0c2DD31d2661E8BCeC60a42e803dCc6F81Baad'.toLowerCase() as Address,
+    contractAddress:
+      '0x4c0c2DD31d2661E8BCeC60a42e803dCc6F81Baad'.toLowerCase() as Address,
     amount: '1',
     tokenId: 25,
-  }
+  },
 }
