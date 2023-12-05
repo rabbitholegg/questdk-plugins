@@ -24,6 +24,9 @@ describe('Given the zora plugin', () => {
                 {
                   tokenRecipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
                 },
+                {
+                  to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                },
               ],
             },
           ],
