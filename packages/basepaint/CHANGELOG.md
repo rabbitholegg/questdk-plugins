@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-basepaint
 
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- [#119](https://github.com/rabbitholegg/questdk-plugins/pull/119) [`a10cfc219df1bee34f080c74503a31434c088e41`](https://github.com/rabbitholegg/questdk-plugins/commit/a10cfc219df1bee34f080c74503a31434c088e41) Thanks [@mmackz](https://github.com/mmackz)! - update mint action params
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes
