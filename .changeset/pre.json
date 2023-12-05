@@ -4,6 +4,7 @@
   "changesets": [
     "angry-ants-return",
     "brown-points-smile",
+    "curly-jeans-dress",
     "cyan-llamas-burn",
     "dirty-falcons-impress",
     "dirty-plums-refuse",
@@ -22,6 +23,7 @@
     "neat-teachers-complain",
     "new-ears-study",
     "nine-waves-lie",
+    "perfect-cameras-clap",
     "pink-horses-change",
     "pink-moons-tickle",
     "poor-ducks-share",
@@ -30,6 +32,7 @@
     "quick-otters-deliver",
     "rotten-monkeys-attack",
     "selfish-beers-check",
+    "selfish-candles-boil",
     "sharp-candles-live",
     "shiny-pets-brush",
     "short-sloths-talk",
@@ -53,7 +56,9 @@
     "unlucky-impalas-shake",
     "wet-toes-prove",
     "wicked-readers-clean",
-    "wild-cobras-help"
+    "wicked-spoons-leave",
+    "wild-cobras-help",
+    "witty-zoos-destroy"
   ],
   "initialVersions": {
     "@rabbitholegg/questdk-plugin-connext": "1.0.0-alpha.0",
@@ -76,6 +81,9 @@
     "@rabbitholegg/questdk-plugin-hyphen": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-symbiosis": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-rabbithole": "1.0.0-alpha.1",
-    "@rabbitholegg/questdk-plugin-okutrade": "1.0.0-alpha.7"
+    "@rabbitholegg/questdk-plugin-okutrade": "1.0.0-alpha.7",
+    "@rabbitholegg/questdk-plugin-balancer": "1.0.0-alpha.4",
+    "@rabbitholegg/questdk-plugin-traderjoe": "1.0.0-alpha.6",
+    "@rabbitholegg/questdk-plugin-zora": "1.0.0-alpha.1"
   }
 }
