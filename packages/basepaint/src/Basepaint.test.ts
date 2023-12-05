@@ -7,7 +7,8 @@ describe('Given the basepaint plugin', () => {
   describe('When handling the mint filter', () => {
     test('should return a valid action filter', async () => {
       const filter = await mint({
-        address: CONTRACT_ADDRESS,
+        chainId: 8453,
+        contractAddress: CONTRACT_ADDRESS,
         tokenId: 69,
         amount: GreaterThanOrEqual(1),
       })
@@ -27,7 +28,8 @@ describe('Given the basepaint plugin', () => {
     test('should pass filter with valid transactions', async () => {
       const transaction = TEST_TRANSACTIONS[0]
       const filter = await mint({
-        address: CONTRACT_ADDRESS,
+        chainId: 8453,
+        contractAddress: CONTRACT_ADDRESS,
         tokenId: 52,
         amount: GreaterThanOrEqual(1),
       })
@@ -37,7 +39,8 @@ describe('Given the basepaint plugin', () => {
     test('should fail filter with invalid tokenId', async () => {
       const transaction = TEST_TRANSACTIONS[1]
       const filter = await mint({
-        address: CONTRACT_ADDRESS,
+        chainId: 8453,
+        contractAddress: CONTRACT_ADDRESS,
         tokenId: 52, // valid tokenId is 62
         amount: GreaterThanOrEqual(1),
       })
@@ -47,7 +50,8 @@ describe('Given the basepaint plugin', () => {
     test('should fail filter with invalid amount', async () => {
       const transaction = TEST_TRANSACTIONS[0]
       const filter = await mint({
-        address: CONTRACT_ADDRESS,
+        chainId: 8453,
+        contractAddress: CONTRACT_ADDRESS,
         tokenId: 52,
         amount: GreaterThanOrEqual(2),
       })
