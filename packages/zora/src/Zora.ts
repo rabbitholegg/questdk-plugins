@@ -12,7 +12,7 @@ export const mint = async (
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
-  let andArray = []
+  const andArray = []
   if (recipient) {
     andArray.push({
       $or: [{ recipient }, { tokenRecipient: recipient }],
