@@ -58,7 +58,7 @@ export const SYNAPSE_CCTP_ROUTER: Record<any, string> = {
 
 export function getContractAddress(chainId: any): `0x${string}` | undefined {
   const address = SynapseCCTPContract[chainId]
-  if (address && address.startsWith('0x')) {
+  if (address?.startsWith('0x')) {
     return address as `0x${string}`
   }
   return undefined

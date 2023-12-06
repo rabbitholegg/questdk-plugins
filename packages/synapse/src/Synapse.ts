@@ -81,7 +81,7 @@ export const getSupportedTokenAddresses = async (
   chainId: number,
 ): Promise<Address[]> => {
   const supportedTokens = allTokens.filter((token) =>
-    token.addresses.hasOwnProperty(chainId),
+    Object.prototype.hasOwnProperty.call(token.addresses, chainId),
   )
   return supportedTokens.map((token) => token.addresses[chainId]) as Address[]
 }
