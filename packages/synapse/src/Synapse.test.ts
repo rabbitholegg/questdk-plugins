@@ -1,6 +1,6 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Synapse.js'
+import { bridge, getSupportedTokenAddresses } from './Synapse.js'
 import {
   DEPOSIT_ETH,
   WITHDRAW_ERC20,
@@ -9,7 +9,12 @@ import {
   DEPOSIT_CCTP,
   WITHDRAW_CCTP,
 } from './test-transactions.js'
-import { ARBITRUM_CHAIN_ID, ETH_CHAIN_ID, BSC_CHAIN_ID } from './chain-ids.js'
+import {
+  ARBITRUM_CHAIN_ID,
+  ETH_CHAIN_ID,
+  BSC_CHAIN_ID,
+  CHAIN_ID_ARRAY,
+} from './chain-ids.js'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi.js'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 import {
@@ -245,6 +250,27 @@ describe('When given the Synapse plugin', () => {
         contractAddress: '0xd359bc471554504f683fbd4f6e36848612349ddf',
       })
       expect(apply(transaction, filter)).to.be.true
+    })
+  })
+
+  describe('should return a valid list of tokens for each supported chain', () => {
+    CHAIN_ID_ARRAY.forEach((chainId) => {
+      // chain 5395 DFK_CHAIN has no tokens at the moment
+      if (chainId !== 5395) {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(chainId)
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.greaterThan(1)
+          expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach((token) => {
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
+          })
+        })
+      }
     })
   })
 })
