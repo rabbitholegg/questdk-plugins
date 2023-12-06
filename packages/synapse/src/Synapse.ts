@@ -3,7 +3,7 @@ import {
   type BridgeActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { zeroAddress, type Address } from 'viem'
 import { SYNAPSE_CCTP_ROUTER, CHAIN_TO_ROUTER } from './contract-addresses'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
@@ -28,7 +28,10 @@ export const bridge = async (
   const inputObject = {
     amount: amount,
     chainId: destinationChainId,
-    token: tokenAddress,
+    token:
+      tokenAddress === zeroAddress
+        ? '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+        : tokenAddress,
   }
 
   const contractTarget = contractAddress
