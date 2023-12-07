@@ -1,7 +1,7 @@
 import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
 import { Chains } from './utils'
 
-export const CHAIN_TO_ROUTER: { [chainId: number]: Address } = {
+export const CHAIN_TO_ROUTER: { [chainId: number]: Address | undefined } = {
   [Chains.ETHEREUM]: '0x044c08639bD59BEB4F6ec52c0da6CD47283534E8',
   [Chains.OPTIMISM]: '0xEAf1Ac8E89EA0aE13E0f03634A4FF23502527024',
   [Chains.POLYGON_POS]: '0x817Eb46D60762442Da3D931Ff51a30334CA39B74',

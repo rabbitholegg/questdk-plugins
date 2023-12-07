@@ -3,7 +3,9 @@ import {
   type SwapActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, zeroAddress } from 'viem'
+import { SWAP_ABI } from './abi'
+import { CHAIN_TO_ROUTER } from './contract-addresses'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -18,10 +20,36 @@ export const swap = async (
     recipient,
   } = swap
 
+  const swapContract = contractAddress ?? CHAIN_TO_ROUTER[chainId]
+
+  if (swapContract === undefined) {
+    throw new Error('contract address is not valid')
+  }
+
+  const fromToken =
+    tokenIn === zeroAddress
+      ? '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+      : tokenIn
+  const toToken =
+    tokenOut === zeroAddress
+      ? '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+      : tokenOut
+
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to: 0x0, // The contract address of the bridge
-    input: {}, // The input object is where we'll put the ABI and the parameters
+    chainId,
+    to: swapContract,
+    input: {
+      $abi: SWAP_ABI,
+      $or: [
+        {
+          fromToken,
+          toToken,
+          fromAmount: amountIn,
+          minToAmount: amountOut,
+          to: recipient,
+        },
+      ],
+    },
   })
 }
 
