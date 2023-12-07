@@ -1,14 +1,34 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { swap, getSupportedTokenAddresses } from './WooFi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { passingTestCases, failingTestCases } from './test-transactions'
+import { SWAP_ABI } from './abi'
 
-// Replace *project* with the name of the project
 describe('Given the WooFi plugin', () => {
   describe('When handling the swap action', () => {
-    describe('should return a valid action filter', () => {})
-
+    describe('should return a valid action filter', () => {
+      test('when swapping on woofi', async () => {
+        const { params } = passingTestCases[0]
+        const filter = await swap(params)
+        expect(filter).to.deep.equal({
+          chainId: 42161,
+          to: '0x9aEd3A8896A85FE9a8CAc52C9B402D092B629a30',
+          input: {
+            $abi: SWAP_ABI,
+            fromToken: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+            toToken: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+            fromAmount: {
+              $gte: '222000000000000000',
+            },
+            minToAmount: {
+              $gte: '500000000',
+            },
+            to: '0x9a67df384ec63f6cf960ef7e33287ea61491e415',
+          },
+        })
+      })
+    })
     describe('should pass filter with valid transactions', () => {
       passingTestCases.forEach((testCase) => {
         const { description, transaction, params } = testCase
