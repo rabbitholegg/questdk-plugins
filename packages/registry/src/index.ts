@@ -32,6 +32,7 @@ import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
 import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
+import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -55,6 +56,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Zora.pluginId]: Zora,
   [Balancer.pluginId]: Balancer,
   [TraderJoe.pluginId]: TraderJoe,
+  [WooFi.pluginId]: WooFi,
 }
 
 export const getPlugin = (pluginId: string) => {
