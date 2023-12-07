@@ -35,6 +35,7 @@ export const CHAIN_TO_TOKENS: { [_chainId: number]: Address[] } = {
   [Chains.ZKSYNC_ERA]: [
     NATIVE_TOKEN, // ETH
     '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4', // USDC
+    '0x493257fD37EDB34451f62EDf8D2a0C418852bA4C', // USDT
   ],
   [Chains.BASE]: [
     NATIVE_TOKEN, // ETH
