@@ -5,7 +5,8 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address, zeroAddress } from 'viem'
 import { SWAP_ABI } from './abi'
-import { CHAIN_TO_ROUTER } from './contract-addresses'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { CHAIN_TO_TOKENS, CHAIN_TO_ROUTER } from './contract-addresses'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -40,15 +41,11 @@ export const swap = async (
     to: swapContract,
     input: {
       $abi: SWAP_ABI,
-      $or: [
-        {
-          fromToken,
-          toToken,
-          fromAmount: amountIn,
-          minToAmount: amountOut,
-          to: recipient,
-        },
-      ],
+      fromToken,
+      toToken,
+      fromAmount: amountIn,
+      minToAmount: amountOut,
+      to: recipient,
     },
   })
 }
@@ -56,9 +53,9 @@ export const swap = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
+  return CHAIN_ID_ARRAY
 }
