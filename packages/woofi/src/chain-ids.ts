@@ -1,4 +1,4 @@
-import { Chains } from "./utils";
+import { Chains } from './utils'
 
 export const CHAIN_ID_ARRAY = [
   Chains.ETHEREUM,
