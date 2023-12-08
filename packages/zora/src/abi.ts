@@ -334,4 +334,15 @@ export const ZORA_MINTER_ABI = [
     stateMutability: 'payable',
     type: 'function',
   }, // Legacy SoundEditionV1_2
+  {
+    inputs: [
+      { internalType: 'address[]', name: '_targets', type: 'address[]' },
+      { internalType: 'bytes[]', name: '_calldatas', type: 'bytes[]' },
+      { internalType: 'uint256[]', name: '_values', type: 'uint256[]' },
+    ],
+    name: 'mintBatchWithoutFees',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  }, // universal batch mint
 ]
