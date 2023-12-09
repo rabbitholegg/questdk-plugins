@@ -3,9 +3,11 @@ import {
   type MintActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
+import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { ZORA_MINTER_ABI } from './abi'
+import type { Chains } from './utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -25,11 +27,19 @@ export const mint = async (
     })
   }
 
+  const universalMinter = zoraUniversalMinterAddress[
+    chainId as Chains
+  ].toLowerCase() as Address
+
+  if (!universalMinter) {
+    throw new Error(`no universal minter contract found for ${chainId}`)
+  }
+
   return compressJson({
     chainId,
-    to: contractAddress,
+    to: { $or: [contractAddress, universalMinter] },
     input: {
-      $abi: ZORA_MINTER_ABI,
+      $abiAbstract: ZORA_MINTER_ABI,
       $and: andArray,
     },
   })
