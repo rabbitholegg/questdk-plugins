@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.38",
+  "version": "1.0.0-alpha.39",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -64,6 +64,7 @@
     "@rabbitholegg/questdk-plugin-balancer": "workspace:*",
     "@rabbitholegg/questdk-plugin-traderjoe": "workspace:*",
     "@rabbitholegg/questdk-plugin-zora": "workspace:*",
+    "@rabbitholegg/questdk-plugin-synapse": "workspace:*",
     "viem": "^1.16.6"
   }
 }
