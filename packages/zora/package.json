@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.28",
+    "@zoralabs/universal-minter": "^0.2.12",
     "viem": "^1.16.6"
   }
 }
