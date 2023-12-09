@@ -1,5 +1,19 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.39
+
+### Minor Changes
+
+- [#121](https://github.com/rabbitholegg/questdk-plugins/pull/121) [`eb123f69d04a8ea673d23259e98935aea04cbe87`](https://github.com/rabbitholegg/questdk-plugins/commit/eb123f69d04a8ea673d23259e98935aea04cbe87) Thanks [@Quazia](https://github.com/Quazia)! - remove only-allow from balancer
+
+- [#118](https://github.com/rabbitholegg/questdk-plugins/pull/118) [`9c7169e90f7b731ba05661cabaeff8a468fcc7fa`](https://github.com/rabbitholegg/questdk-plugins/commit/9c7169e90f7b731ba05661cabaeff8a468fcc7fa) Thanks [@Quazia](https://github.com/Quazia)! - Release Synapse Bridge
+
+### Patch Changes
+
+- Updated dependencies [[`eb123f69d04a8ea673d23259e98935aea04cbe87`](https://github.com/rabbitholegg/questdk-plugins/commit/eb123f69d04a8ea673d23259e98935aea04cbe87), [`9c7169e90f7b731ba05661cabaeff8a468fcc7fa`](https://github.com/rabbitholegg/questdk-plugins/commit/9c7169e90f7b731ba05661cabaeff8a468fcc7fa)]:
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.2
+
 ## 1.0.0-alpha.38
 
 ### Minor Changes
