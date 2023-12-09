@@ -14,6 +14,14 @@ export const mint = async (
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
+  const universalMinter = zoraUniversalMinterAddress[
+    chainId as Chains
+  ].toLowerCase() as Address
+  
+  if (!universalMinter) {
+    throw new Error(`no universal minter contract found for ${chainId}`)
+  }
+
   const andArray = []
   if (recipient) {
     andArray.push({
@@ -25,14 +33,6 @@ export const mint = async (
       quantity: amount,
       tokenId,
     })
-  }
-
-  const universalMinter = zoraUniversalMinterAddress[
-    chainId as Chains
-  ].toLowerCase() as Address
-
-  if (!universalMinter) {
-    throw new Error(`no universal minter contract found for ${chainId}`)
   }
 
   return compressJson({
