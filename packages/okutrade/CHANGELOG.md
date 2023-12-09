@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- [#125](https://github.com/rabbitholegg/questdk-plugins/pull/125) [`d6082a2df064e3aa463e4f5fa366db7f8f51e1d3`](https://github.com/rabbitholegg/questdk-plugins/commit/d6082a2df064e3aa463e4f5fa366db7f8f51e1d3) Thanks [@mmackz](https://github.com/mmackz)! - fix casing issue with token addresses
+
 ## 1.0.0-alpha.9
 
 ### Patch Changes
