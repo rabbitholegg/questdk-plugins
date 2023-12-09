@@ -1,5 +1,39 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.39
+
+### Minor Changes
+
+- [#121](https://github.com/rabbitholegg/questdk-plugins/pull/121) [`eb123f69d04a8ea673d23259e98935aea04cbe87`](https://github.com/rabbitholegg/questdk-plugins/commit/eb123f69d04a8ea673d23259e98935aea04cbe87) Thanks [@Quazia](https://github.com/Quazia)! - remove only-allow from balancer
+
+- [#118](https://github.com/rabbitholegg/questdk-plugins/pull/118) [`9c7169e90f7b731ba05661cabaeff8a468fcc7fa`](https://github.com/rabbitholegg/questdk-plugins/commit/9c7169e90f7b731ba05661cabaeff8a468fcc7fa) Thanks [@Quazia](https://github.com/Quazia)! - Release Synapse Bridge
+
+### Patch Changes
+
+- Updated dependencies [[`eb123f69d04a8ea673d23259e98935aea04cbe87`](https://github.com/rabbitholegg/questdk-plugins/commit/eb123f69d04a8ea673d23259e98935aea04cbe87), [`9c7169e90f7b731ba05661cabaeff8a468fcc7fa`](https://github.com/rabbitholegg/questdk-plugins/commit/9c7169e90f7b731ba05661cabaeff8a468fcc7fa)]:
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.2
+
+## 1.0.0-alpha.38
+
+### Minor Changes
+
+- [#114](https://github.com/rabbitholegg/questdk-plugins/pull/114) [`d536c5c20b4e6c097e2fcf9398265c4327292405`](https://github.com/rabbitholegg/questdk-plugins/commit/d536c5c20b4e6c097e2fcf9398265c4327292405) Thanks [@mmackz](https://github.com/mmackz)! - add swap support for balancer
+
+- [#109](https://github.com/rabbitholegg/questdk-plugins/pull/109) [`be0b06afcf98af37765de59f4db76fee5751641c`](https://github.com/rabbitholegg/questdk-plugins/commit/be0b06afcf98af37765de59f4db76fee5751641c) Thanks [@mmackz](https://github.com/mmackz)! - implement swap plugin for traderjoe
+
+### Patch Changes
+
+- [#117](https://github.com/rabbitholegg/questdk-plugins/pull/117) [`5d7fc891897394eb90ecfd9a2eb5501871dccee7`](https://github.com/rabbitholegg/questdk-plugins/commit/5d7fc891897394eb90ecfd9a2eb5501871dccee7) Thanks [@Quazia](https://github.com/Quazia)! - Release Zora plugin
+
+- Updated dependencies [[`d536c5c20b4e6c097e2fcf9398265c4327292405`](https://github.com/rabbitholegg/questdk-plugins/commit/d536c5c20b4e6c097e2fcf9398265c4327292405), [`be0b06afcf98af37765de59f4db76fee5751641c`](https://github.com/rabbitholegg/questdk-plugins/commit/be0b06afcf98af37765de59f4db76fee5751641c), [`8bca684416675c190a47bc79c37aed874cc8ee03`](https://github.com/rabbitholegg/questdk-plugins/commit/8bca684416675c190a47bc79c37aed874cc8ee03), [`5d7fc891897394eb90ecfd9a2eb5501871dccee7`](https://github.com/rabbitholegg/questdk-plugins/commit/5d7fc891897394eb90ecfd9a2eb5501871dccee7), [`a10cfc219df1bee34f080c74503a31434c088e41`](https://github.com/rabbitholegg/questdk-plugins/commit/a10cfc219df1bee34f080c74503a31434c088e41)]:
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.10
+
 ## 1.0.0-alpha.37
 
 ### Patch Changes

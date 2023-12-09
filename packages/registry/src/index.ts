@@ -29,26 +29,34 @@ import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
 import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
+import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
+import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
+import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
   [Uniswap.pluginId]: Uniswap,
   [Stargate.pluginId]: Stargate,
+  [Across.pluginId]: Across,
   [Polygon.pluginId]: Polygon,
+  [Optimism.pluginId]: Optimism,
   [Hop.pluginId]: Hop,
   [Arbitrum.pluginId]: Arbitrum,
-  [Across.pluginId]: Across,
-  [Optimism.pluginId]: Optimism,
   [GMX.pluginId]: GMX,
-  [Tally.pluginId]: Tally,
   [Camelot.pluginId]: Camelot,
+  [Tally.pluginId]: Tally,
   [BasePaint.pluginId]: BasePaint,
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
   [Rabbithole.pluginId]: Rabbithole,
   [Symbiosis.pluginId]: Symbiosis,
   [OkuTrade.pluginId]: OkuTrade,
+  [Zora.pluginId]: Zora,
+  [Balancer.pluginId]: Balancer,
+  [TraderJoe.pluginId]: TraderJoe,
+  [Synapse.pluginId]: Synapse,
 }
 
 export const getPlugin = (pluginId: string) => {
