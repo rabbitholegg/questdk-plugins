@@ -18,6 +18,8 @@
     "late-scissors-wonder",
     "little-llamas-rescue",
     "lovely-buses-tan",
+    "lucky-boxes-give",
+    "modern-days-change",
     "modern-pumpkins-kiss",
     "moody-students-flash",
     "neat-teachers-complain",
@@ -33,6 +35,7 @@
     "rotten-monkeys-attack",
     "selfish-beers-check",
     "selfish-candles-boil",
+    "serious-paws-sniff",
     "sharp-candles-live",
     "shiny-pets-brush",
     "short-sloths-talk",
@@ -84,6 +87,7 @@
     "@rabbitholegg/questdk-plugin-okutrade": "1.0.0-alpha.7",
     "@rabbitholegg/questdk-plugin-balancer": "1.0.0-alpha.4",
     "@rabbitholegg/questdk-plugin-traderjoe": "1.0.0-alpha.6",
-    "@rabbitholegg/questdk-plugin-zora": "1.0.0-alpha.1"
+    "@rabbitholegg/questdk-plugin-zora": "1.0.0-alpha.1",
+    "@rabbitholegg/questdk-plugin-synapse": "1.0.0-alpha.1"
   }
 }

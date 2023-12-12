@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-balancer
 
+## 1.0.0-alpha.6
+
+### Minor Changes
+
+- [#121](https://github.com/rabbitholegg/questdk-plugins/pull/121) [`eb123f69d04a8ea673d23259e98935aea04cbe87`](https://github.com/rabbitholegg/questdk-plugins/commit/eb123f69d04a8ea673d23259e98935aea04cbe87) Thanks [@Quazia](https://github.com/Quazia)! - remove only-allow from balancer
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes
