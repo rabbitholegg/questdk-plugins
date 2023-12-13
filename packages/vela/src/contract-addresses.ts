@@ -1,5 +1,5 @@
-import { type Address, zeroAddress } from "viem"
-import { Chains } from "./utils"
+import { type Address, zeroAddress } from 'viem'
+import { Chains } from './utils'
 
 // Tokens
 const ETHER = zeroAddress
@@ -12,9 +12,9 @@ export const VAULT_CONTRACT = '0xc4abade3a15064f9e3596943c699032748b13352'
 
 export const TOKEN_TO_ID: { [token: string]: number } = {
   ETHER: 2, // ETH
-  ARBITRUM_BTC: 1,  // wBTC
-  ARBITRUM_ARB: 7,  // ARB
-  ARBITRUM_CRV: 36, // CRV 
+  ARBITRUM_BTC: 1, // wBTC
+  ARBITRUM_ARB: 7, // ARB
+  ARBITRUM_CRV: 36, // CRV
   ARBITRUM_LINK: 39, // LINK
 }
 
@@ -24,6 +24,6 @@ export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] } = {
     ARBITRUM_ARB,
     ARBITRUM_BTC,
     ARBITRUM_CRV,
-    ARBITRUM_LINK
-  ]
+    ARBITRUM_LINK,
+  ],
 }

@@ -1,8 +1,13 @@
-
-import { type TransactionFilter, type SwapActionParams, compressJson } from '@rabbitholegg/questdk'
+import {
+  type TransactionFilter,
+  type SwapActionParams,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 
-export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> => {
+export const swap = async (
+  swap: SwapActionParams,
+): Promise<TransactionFilter> => {
   const {
     chainId,
     contractAddress,
@@ -15,16 +20,17 @@ export const swap = async (swap: SwapActionParams): Promise<TransactionFilter> =
 
   return compressJson({
     chainId: 0, // The chainId of the source chain
-    to:  0x0,   // The contract address of the bridge
-    input: {},  // The input object is where we'll put the ABI and the parameters
+    to: 0x0, // The contract address of the bridge
+    input: {}, // The input object is where we'll put the ABI and the parameters
   })
 }
 
-export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
+export const getSupportedTokenAddresses = async (
+  _chainId: number,
+): Promise<Address[]> => {
   return []
 }
 
-
 export const getSupportedChainIds = async (): Promise<number[]> => {
- return []
+  return []
 }
