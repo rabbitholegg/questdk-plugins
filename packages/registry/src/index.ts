@@ -34,6 +34,7 @@ import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
 import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
 import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
+import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -59,6 +60,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [TraderJoe.pluginId]: TraderJoe,
   [Synapse.pluginId]: Synapse,
   [WooFi.pluginId]: WooFi,
+  [Vela.pluginId]: Vela,
 }
 
 export const getPlugin = (pluginId: string) => {
