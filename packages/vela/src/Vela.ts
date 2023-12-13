@@ -2,8 +2,20 @@ import {
   type TransactionFilter,
   type SwapActionParams,
   compressJson,
+  type FilterOperator,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { TOKEN_TO_ID, VAULT_CONTRACT } from './contract-addresses'
+import { VAULT_ABI } from './abi'
+
+function getTokenPacked(token: Address | undefined): FilterOperator | undefined {
+  if (!token) return undefined;
+  const tokenPacked = TOKEN_TO_ID[token.toLowerCase()];
+  if (!tokenPacked) {
+    throw new Error('No tokenId found for the provided token address');
+  }
+  return tokenPacked;
+}
 
 export const swap = async (
   swap: SwapActionParams,
@@ -12,16 +24,17 @@ export const swap = async (
     chainId,
     contractAddress,
     tokenIn,
-    tokenOut,
     amountIn,
-    amountOut,
     recipient,
   } = swap
 
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to: 0x0, // The contract address of the bridge
-    input: {}, // The input object is where we'll put the ABI and the parameters
+    chainId,
+    to: contractAddress ?? VAULT_CONTRACT,
+    input: {
+      $abi: VAULT_ABI,
+      a: getTokenPacked(tokenIn)
+    },
   })
 }
 
