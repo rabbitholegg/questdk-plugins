@@ -18,9 +18,9 @@ export const mint = async (
     chainId as Chains
   ].toLowerCase() as Address
 
-  if (!universalMinter) {
-    throw new Error(`no universal minter contract found for ${chainId}`)
-  }
+  const mintContract = universalMinter
+    ? { $or: [contractAddress, universalMinter] }
+    : contractAddress
 
   const andArray = []
   if (recipient) {
@@ -37,7 +37,7 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: { $or: [contractAddress, universalMinter] },
+    to: mintContract,
     input: {
       $abiAbstract: ZORA_MINTER_ABI,
       $and: andArray,
