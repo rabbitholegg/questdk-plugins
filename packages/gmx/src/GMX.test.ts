@@ -33,9 +33,7 @@ describe('Given the gmx plugin', () => {
         expect(filter).to.deep.equal({
           chainId: ARB_ONE_CHAIN_ID,
           to: {
-            $or: [
-              GMX_ROUTERV2_ADDRESS.toLowerCase(),
-            ],
+            $or: [GMX_ROUTERV2_ADDRESS.toLowerCase()],
           },
           input: {
             $or: [
