@@ -1,5 +1,19 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.41
+
+### Minor Changes
+
+- [#120](https://github.com/rabbitholegg/questdk-plugins/pull/120) [`4d6d5111971fcf4e29e7d88d2bf041d79beee18b`](https://github.com/rabbitholegg/questdk-plugins/commit/4d6d5111971fcf4e29e7d88d2bf041d79beee18b) Thanks [@mmackz](https://github.com/mmackz)! - add woofi swap action plugin support
+
+### Patch Changes
+
+- Updated dependencies [[`4fcb4f8407c7f7968b981c4eb31b5bdd546c96e6`](https://github.com/rabbitholegg/questdk-plugins/commit/4fcb4f8407c7f7968b981c4eb31b5bdd546c96e6), [`afc1d1fab12208f170b0849e924468ef369598ce`](https://github.com/rabbitholegg/questdk-plugins/commit/afc1d1fab12208f170b0849e924468ef369598ce), [`424937ff0fb7f087dd04ef55c7d7e478c5906ade`](https://github.com/rabbitholegg/questdk-plugins/commit/424937ff0fb7f087dd04ef55c7d7e478c5906ade), [`4d6d5111971fcf4e29e7d88d2bf041d79beee18b`](https://github.com/rabbitholegg/questdk-plugins/commit/4d6d5111971fcf4e29e7d88d2bf041d79beee18b)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.8
+
 ## 1.0.0-alpha.40
 
 ### Patch Changes
