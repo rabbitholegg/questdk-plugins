@@ -8,10 +8,7 @@ import {
   DEFAULT_TOKEN_LIST,
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
-import {
-  passingTestCasesV2,
-  failingTestCasesV2,
-} from './test-setup.js'
+import { passingTestCasesV2, failingTestCasesV2 } from './test-setup.js'
 
 describe('Given the gmx plugin', () => {
   describe('When handling the swap', () => {
