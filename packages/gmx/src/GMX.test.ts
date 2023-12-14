@@ -22,7 +22,7 @@ describe('Given the gmx plugin', () => {
       test('when swapping tokens', async () => {
         const filter = await swap({
           chainId: ARB_ONE_CHAIN_ID,
-          contractAddress: GMX_ROUTERV1_ADDRESS,
+          contractAddress: GMX_ROUTERV2_ADDRESS,
           tokenIn: Tokens.USDCe,
           tokenOut: Tokens.USDT,
           amountIn: GreaterThanOrEqual(100000n),
@@ -34,7 +34,6 @@ describe('Given the gmx plugin', () => {
           chainId: ARB_ONE_CHAIN_ID,
           to: {
             $or: [
-              GMX_ROUTERV1_ADDRESS.toLowerCase(),
               GMX_ROUTERV2_ADDRESS.toLowerCase(),
             ],
           },

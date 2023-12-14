@@ -10,7 +10,6 @@ import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
   DEFAULT_TOKEN_LIST,
-  GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
   ETH_ADDRESS,
   MARKET_TOKENS,
@@ -46,7 +45,6 @@ export const swap = async (
     value: ETH_USED ? amountIn : undefined,
     to: {
       $or: [
-        GMX_ROUTERV1_ADDRESS.toLowerCase(),
         GMX_ROUTERV2_ADDRESS.toLowerCase(),
       ],
     },
