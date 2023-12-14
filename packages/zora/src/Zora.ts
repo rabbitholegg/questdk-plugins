@@ -3,14 +3,24 @@ import {
   type MintActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
+import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { ZORA_MINTER_ABI } from './abi'
+import type { Chains } from './utils'
 
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
+
+  const universalMinter = zoraUniversalMinterAddress[
+    chainId as Chains
+  ].toLowerCase() as Address
+
+  const mintContract = universalMinter
+    ? { $or: [contractAddress, universalMinter] }
+    : contractAddress
 
   const andArray = []
   if (recipient) {
@@ -27,9 +37,9 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: contractAddress,
+    to: mintContract,
     input: {
-      $abi: ZORA_MINTER_ABI,
+      $abiAbstract: ZORA_MINTER_ABI,
       $and: andArray,
     },
   })

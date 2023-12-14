@@ -12,9 +12,14 @@ describe('Given the zora plugin', () => {
       const filter = await mint(params)
       expect(filter).to.deep.equal({
         chainId: 10,
-        to: '0xfff631ef40557f8705e89053af794a1dcfa0a90b',
+        to: {
+          $or: [
+            '0xfff631ef40557f8705e89053af794a1dcfa0a90b',
+            '0x97eb05b8db496b12244bccf17cf377d00a99b67a',
+          ],
+        },
         input: {
-          $abi: ZORA_MINTER_ABI,
+          $abiAbstract: ZORA_MINTER_ABI,
           $and: [
             {
               $or: [
