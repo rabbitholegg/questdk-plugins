@@ -1,5 +1,6 @@
-import type { ActionParams } from '@rabbitholegg/questdk'
+import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
 import type { Address, Hash } from 'viem'
+import { TOKEN_TO_ID } from './contract-addresses'
 
 export enum Chains {
   ARBITRUM_ONE = 42161,
@@ -48,5 +49,35 @@ export function createTestCase<T extends ActionParams>(
     transaction: testParams.transaction,
     params: { ...testParams.params, ...overrides },
     description,
+  }
+}
+
+type Amount = FilterOperator | BigInt | number | string | undefined
+
+export function getTokenPacked(token: Address | undefined): FilterOperator | undefined {
+  if (!token) return undefined;
+  const tokenPacked = TOKEN_TO_ID[token.toLowerCase()];
+  if (!tokenPacked) {
+    throw new Error('No tokenId found for the provided token address');
+  }
+  return tokenPacked;
+}
+
+export function getAmountPacked(amount: Amount): FilterOperator | undefined {
+  if (amount === undefined) return undefined
+
+  const multiplier = BigInt(2 ** 128) * BigInt(10 ** 12)
+  if (typeof amount === 'object') {
+    const [operator, value] = Object.entries(amount)[0]
+    return {
+      [operator]: BigInt(value) * multiplier
+    }
+  }
+  return {
+    // range to determine exact amount (percision tested up to 18 decimal places)
+    $and: [
+      {$gte: BigInt(amount) * multiplier - BigInt(10 ** 33)},
+      {$lt: BigInt(amount) * multiplier + BigInt(10 ** 33)}
+    ]
   }
 }
