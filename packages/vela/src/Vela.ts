@@ -12,13 +12,7 @@ import { VAULT_ABI } from './abi'
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    chainId,
-    contractAddress,
-    tokenIn,
-    amountIn,
-    recipient,
-  } = swap
+  const { chainId, contractAddress, tokenIn, amountIn, recipient } = swap
 
   return compressJson({
     chainId,
@@ -27,7 +21,7 @@ export const swap = async (
     input: {
       $abi: VAULT_ABI,
       a: getTokenPacked(tokenIn),
-      c: getAmountPacked(amountIn)
+      c: getAmountPacked(amountIn),
     },
   })
 }

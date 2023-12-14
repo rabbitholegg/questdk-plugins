@@ -54,13 +54,15 @@ export function createTestCase<T extends ActionParams>(
 
 type Amount = FilterOperator | BigInt | number | string | undefined
 
-export function getTokenPacked(token: Address | undefined): FilterOperator | undefined {
-  if (!token) return undefined;
-  const tokenPacked = TOKEN_TO_ID[token.toLowerCase()];
+export function getTokenPacked(
+  token: Address | undefined,
+): FilterOperator | undefined {
+  if (!token) return undefined
+  const tokenPacked = TOKEN_TO_ID[token.toLowerCase()]
   if (!tokenPacked) {
-    throw new Error('No tokenId found for the provided token address');
+    throw new Error('No tokenId found for the provided token address')
   }
-  return tokenPacked;
+  return tokenPacked
 }
 
 export function getAmountPacked(amount: Amount): FilterOperator | undefined {
@@ -70,14 +72,14 @@ export function getAmountPacked(amount: Amount): FilterOperator | undefined {
   if (typeof amount === 'object') {
     const [operator, value] = Object.entries(amount)[0]
     return {
-      [operator]: BigInt(value) * multiplier
+      [operator]: BigInt(value) * multiplier,
     }
   }
   return {
     // range to determine exact amount (percision tested up to 18 decimal places)
     $and: [
-      {$gte: BigInt(amount) * multiplier - BigInt(10 ** 33)},
-      {$lt: BigInt(amount) * multiplier + BigInt(10 ** 33)}
-    ]
+      { $gte: BigInt(amount) * multiplier - BigInt(10 ** 33) },
+      { $lt: BigInt(amount) * multiplier + BigInt(10 ** 33) },
+    ],
   }
 }
