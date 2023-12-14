@@ -1,20 +1,14 @@
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import { getAddress, type Address, type Hash } from 'viem'
+import type { Address, Hash } from 'viem'
 
 export enum Chains {
   ETHEREUM = 1,
   OPTIMISM = 10,
-  BINANCE_SMART_CHAIN = 56,
-  GNOSIS = 100,
   POLYGON_POS = 137,
-  ZK_SYNC_ERA = 324,
-  POLYGON_ZK = 1101,
-  MANTLE = 5000,
+  ZKSYNC_ERA = 324,
   BASE = 8453,
   ARBITRUM_ONE = 42161,
   AVALANCHE = 43114,
-  LINEA = 59144,
-  SCROLL = 534352,
 }
 
 interface Transaction {
@@ -62,35 +56,16 @@ export function createTestCase<T extends ActionParams>(
   }
 }
 
-export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
-  // v3 paths are formatted as 0x<token><fee><token>
-
-  const conditions: FilterOperator[] = []
-
-  if (tokenIn) {
-    conditions.push({ $regex: `^${tokenIn.toLowerCase()}` })
-  }
-
-  if (tokenOut) {
-    // Chop the 0x prefix before comparing
-    conditions.push({ $regex: `${tokenOut.toLowerCase().slice(2)}$` })
-  }
-
-  return {
-    $and: conditions,
-  }
-}
-
-export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
+export const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v2 paths are formatted as [<token>, <token>]
   const conditions: FilterOperator[] = []
 
   if (tokenIn) {
-    conditions.push({ $first: getAddress(tokenIn) })
+    conditions.push({ $first: tokenIn })
   }
 
   if (tokenOut) {
-    conditions.push({ $last: getAddress(tokenOut) })
+    conditions.push({ $last: tokenOut })
   }
 
   return {
