@@ -4,7 +4,8 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { VAULT_CONTRACT } from './contract-addresses'
+import { VAULT_CONTRACT, CHAIN_TO_TOKENS } from './contract-addresses'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import { getTokenPacked, getAmountPacked } from './utils'
 import { VAULT_ABI } from './abi'
 
@@ -34,9 +35,9 @@ export const swap = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return CHAIN_ID_ARRAY
 }
