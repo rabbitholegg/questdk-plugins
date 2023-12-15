@@ -56,6 +56,7 @@ export const mint = async (
           $and: andArray1155.length !== 0 ? andArray1155 : undefined,
         },
       ],
+    },
   })
 }
 
