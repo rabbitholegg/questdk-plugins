@@ -16,10 +16,10 @@ export const mint = async (
 
   const universalMinter = zoraUniversalMinterAddress[
     chainId as Chains
-  ].toLowerCase() as Address
+  ]
 
   const mintContract = universalMinter
-    ? { $or: [contractAddress.toLowerCase(), universalMinter] }
+    ? { $or: [contractAddress.toLowerCase(), universalMinter.toLowerCase()] }
     : contractAddress
 
   const andArray = []
