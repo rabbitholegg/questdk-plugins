@@ -14,9 +14,7 @@ export const mint = async (
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
-  const universalMinter = zoraUniversalMinterAddress[
-    chainId as Chains
-  ]
+  const universalMinter = zoraUniversalMinterAddress[chainId as Chains]
 
   const mintContract = universalMinter
     ? { $or: [contractAddress.toLowerCase(), universalMinter.toLowerCase()] }
