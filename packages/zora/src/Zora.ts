@@ -19,7 +19,7 @@ export const mint = async (
   ].toLowerCase() as Address
 
   const mintContract = universalMinter
-    ? { $or: [contractAddress, universalMinter] }
+    ? { $or: [contractAddress.toLowerCase(), universalMinter] }
     : contractAddress
 
   const andArray = []
