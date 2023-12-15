@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- [#131](https://github.com/rabbitholegg/questdk-plugins/pull/131) [`b189ebe62edc99e85360a851b785458d28f0079f`](https://github.com/rabbitholegg/questdk-plugins/commit/b189ebe62edc99e85360a851b785458d28f0079f) Thanks [@mmackz](https://github.com/mmackz)! - fix casing issue with contract address
+
 ## 1.0.0-alpha.3
 
 ### Patch Changes
