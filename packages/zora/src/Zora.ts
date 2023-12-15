@@ -35,10 +35,10 @@ export const mint = async (
   if (tokenId || amount) {
     andArray721.push({
       quantity: amount,
-      tokenId,
     })
     andArray1155.push({
       quantity: amount,
+      tokenId,
     })
   }
 
