@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { BASIC_PURCHASE } from './test-transactions'
 import { mint } from './Zora'
-import { ZORA_MINTER_ABI } from './abi'
+import { ZORA_MINTER_ABI_1155, ZORA_MINTER_ABI_721 } from './abi'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
@@ -19,18 +19,42 @@ describe('Given the zora plugin', () => {
           ],
         },
         input: {
-          $abiAbstract: ZORA_MINTER_ABI,
-          $and: [
+          $or: [
             {
-              $or: [
+              $abiAbstract: ZORA_MINTER_ABI_721,
+              $and: [
                 {
-                  recipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                  $or: [
+                    {
+                      recipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                    },
+                    {
+                      tokenRecipient:
+                        '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                    },
+                    {
+                      to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                    },
+                  ],
                 },
+              ],
+            },
+            {
+              $abiAbstract: ZORA_MINTER_ABI_1155,
+              $and: [
                 {
-                  tokenRecipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
-                },
-                {
-                  to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                  $or: [
+                    {
+                      recipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                    },
+                    {
+                      tokenRecipient:
+                        '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                    },
+                    {
+                      to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                    },
+                  ],
                 },
               ],
             },
