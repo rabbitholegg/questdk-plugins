@@ -1,7 +1,7 @@
-import type { Address } from "viem";
-import { Chains } from "./utils";
+import type { Address } from 'viem'
+import { Chains } from './utils'
 
-export const CHAIN_TO_CONTRACTS: {[_chainId: number]: Address[]} = {
+export const CHAIN_TO_CONTRACTS: { [_chainId: number]: Address[] } = {
   [Chains.ETHEREUM]: [
     '0x5550D13389bB70F45fCeF58f19f6b6e87F6e747d', // RouteProcessor3_2
     '0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F', // V2Router02
