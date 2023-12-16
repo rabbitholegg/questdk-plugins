@@ -4,7 +4,10 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
-import { CHAIN_TO_CONTRACTS, INTERNAL_ETHER_ADDRESS } from './contract-addresses'
+import {
+  CHAIN_TO_CONTRACTS,
+  INTERNAL_ETHER_ADDRESS,
+} from './contract-addresses'
 import { PROCESS_ROUTE_ABI, ROUTER_ABI } from './abi'
 import { WNATIVE_ADDRESS } from '@sushiswap/core-sdk'
 import { buildV2PathQuery } from './utils'
@@ -45,7 +48,7 @@ export const swap = async (
           tokenIn: nativeIn ? INTERNAL_ETHER_ADDRESS : tokenIn,
           tokenOut: nativeOut ? INTERNAL_ETHER_ADDRESS : tokenOut,
           amountIn: amountIn,
-          amountOutMin: amountOut
+          amountOutMin: amountOut,
         },
         {
           // V2 Router
