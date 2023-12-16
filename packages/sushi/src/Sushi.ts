@@ -8,9 +8,11 @@ import {
   CHAIN_TO_CONTRACTS,
   INTERNAL_ETHER_ADDRESS,
 } from './contract-addresses'
+import { CHAIN_TO_TOKENS } from './token-addresses'
 import { PROCESS_ROUTE_ABI, ROUTER_ABI } from './abi'
 import { WNATIVE_ADDRESS } from '@sushiswap/core-sdk'
 import { buildV2PathQuery } from './utils'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -80,9 +82,9 @@ export const swap = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return CHAIN_ID_ARRAY
 }
