@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.5
+
+### Minor Changes
+
+- [#134](https://github.com/rabbitholegg/questdk-plugins/pull/134) [`39dce24500f84e3a2a38deb8d18250ca5d05b694`](https://github.com/rabbitholegg/questdk-plugins/commit/39dce24500f84e3a2a38deb8d18250ca5d05b694) Thanks [@Quazia](https://github.com/Quazia)! - Fix issues with 721 vs 1155 collections and empty $and array
+
 ## 1.0.0-alpha.4
 
 ### Patch Changes
