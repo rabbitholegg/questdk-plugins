@@ -29,6 +29,7 @@ const optimismTokenAddresses: Address[] = [
 ]
 
 const polygonTokenAddresses: Address[] = [
+  ETH_ADDRESS, // MATIC
   '0x9a71012B13CA4d3D0Cdc72A177DF3ef03b0E76A3', // BAL
   '0x8505b9d2254A7Ae468c0E9dd10Ccea3A837aef5c', // COMP
   '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', // DAI
