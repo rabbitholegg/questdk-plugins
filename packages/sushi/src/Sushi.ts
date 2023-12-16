@@ -4,8 +4,8 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
-import { CHAIN_TO_CONTRACTS } from './contract-addresses'
-import { ROUTER_ABI } from './abi'
+import { CHAIN_TO_CONTRACTS, INTERNAL_ETHER_ADDRESS } from './contract-addresses'
+import { PROCESS_ROUTE_ABI, ROUTER_ABI } from './abi'
 import { WNATIVE_ADDRESS } from '@sushiswap/core-sdk'
 import { buildV2PathQuery } from './utils'
 
@@ -37,22 +37,36 @@ export const swap = async (
     to,
     value: nativeIn ? amountIn : undefined,
     input: {
-      $abi: ROUTER_ABI,
-      $and: [
+      $or: [
         {
+          //  RouteProcessor
+          $abi: PROCESS_ROUTE_ABI,
           to: recipient,
-          path: buildV2PathQuery(
-            nativeIn ? WNATIVE_ADDRESS[chainId] : tokenIn,
-            nativeOut ? WNATIVE_ADDRESS[chainId] : tokenOut,
-          ),
+          tokenIn: nativeIn ? INTERNAL_ETHER_ADDRESS : tokenIn,
+          tokenOut: nativeOut ? INTERNAL_ETHER_ADDRESS : tokenOut,
+          amountIn: amountIn,
+          amountOutMin: amountOut
         },
         {
-          $or: [
+          // V2 Router
+          $abi: ROUTER_ABI,
+          $and: [
             {
-              amountIn: nativeIn ? undefined : amountIn,
-              amountOutMin: amountOut,
+              to: recipient,
+              path: buildV2PathQuery(
+                nativeIn ? WNATIVE_ADDRESS[chainId] : tokenIn,
+                nativeOut ? WNATIVE_ADDRESS[chainId] : tokenOut,
+              ),
             },
-            { amountOut: amountOut },
+            {
+              $or: [
+                {
+                  amountIn: nativeIn ? undefined : amountIn,
+                  amountOutMin: amountOut,
+                },
+                { amountOut: amountOut },
+              ],
+            },
           ],
         },
       ],
