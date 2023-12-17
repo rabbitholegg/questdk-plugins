@@ -4,6 +4,8 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { Chains } from './utils'
+import { MAGICSWAP_TOKENS } from './constants'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -29,9 +31,9 @@ export const swap = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return _chainId === Chains.ARBITRUM_ONE ? MAGICSWAP_TOKENS : []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return [Chains.ARBITRUM_ONE]
 }
