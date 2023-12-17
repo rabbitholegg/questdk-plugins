@@ -64,14 +64,18 @@ export const failingTestCases = [
   createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when contractAddress is incorrect', {
     contractAddress: '0xdef171fe48cf0115b1d80b88dc8eab59176fee57',
   }),
-  createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when contractAddress is another uniswap V2 fork', {
-    contractAddress: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
-    tokenIn: undefined,
-    tokenOut: undefined,
-    amountIn: undefined,
-    amountOut: undefined,
-    recipient: undefined,
-  }),
+  createTestCase(
+    EXACT_TOKENS_FOR_TOKENS,
+    'when contractAddress is another uniswap V2 fork',
+    {
+      contractAddress: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+      recipient: undefined,
+    },
+  ),
   createTestCase(TOKENS_FOR_EXACT_TOKENS, 'when tokenIn is incorrect', {
     tokenIn: GFLY,
   }),
