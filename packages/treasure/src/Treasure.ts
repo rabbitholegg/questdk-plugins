@@ -4,8 +4,9 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { Chains } from './utils'
-import { MAGICSWAP_TOKENS } from './constants'
+import { MAGICSWAP_TOKENS, V2_ROUTER } from './constants'
+import { V2_ROUTER_ABI } from './abi'
+import { Chains, buildV2PathQuery } from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -20,14 +21,26 @@ export const swap = async (
     recipient,
   } = swap
 
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to: 0x0, // The contract address of the bridge
-    input: {}, // The input object is where we'll put the ABI and the parameters
+    chainId,
+    to: contractAddress ?? V2_ROUTER,
+    input: {
+      $abi: V2_ROUTER_ABI,
+      $and: [
+        {
+          to: recipient,
+          path: buildV2PathQuery(tokenIn, tokenOut),
+        },
+        {
+          $or: [
+            { amountIn, amountOutMin: amountOut }, //exactTokensForTokens
+            { amountInMax: amountIn, amountOut: amountOut }, // tokensForExactTokens
+          ],
+        },
+      ],
+    },
   })
 }
-
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
