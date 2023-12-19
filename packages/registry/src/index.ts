@@ -35,7 +35,7 @@ import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
 import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
-
+import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -62,6 +62,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Synapse.pluginId]: Synapse,
   [WooFi.pluginId]: WooFi,
   [Sushi.pluginId]: Sushi,
+  [Treasure.pluginId]: Treasure,
 }
 
 export const getPlugin = (pluginId: string) => {
