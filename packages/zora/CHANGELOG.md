@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.6
+
+### Patch Changes
+
+- [#133](https://github.com/rabbitholegg/questdk-plugins/pull/133) [`c1faac492bcf1aaec7b7288b05d1b47dfed84355`](https://github.com/rabbitholegg/questdk-plugins/commit/c1faac492bcf1aaec7b7288b05d1b47dfed84355) Thanks [@mmackz](https://github.com/mmackz)! - assure universal minter address is defined before using string methods
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes

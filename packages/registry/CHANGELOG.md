@@ -1,5 +1,20 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.44
+
+### Minor Changes
+
+- [#136](https://github.com/rabbitholegg/questdk-plugins/pull/136) [`c1ec43eeba370216994fbf40f1053e6f9d929af0`](https://github.com/rabbitholegg/questdk-plugins/commit/c1ec43eeba370216994fbf40f1053e6f9d929af0) Thanks [@mmackz](https://github.com/mmackz)! - add support for sushi swap plugin
+
+- [#137](https://github.com/rabbitholegg/questdk-plugins/pull/137) [`f53c96b899b73d42f441c8ade2699f9a8734eeda`](https://github.com/rabbitholegg/questdk-plugins/commit/f53c96b899b73d42f441c8ade2699f9a8734eeda) Thanks [@mmackz](https://github.com/mmackz)! - add support for treasure swap (magicswap)
+
+### Patch Changes
+
+- Updated dependencies [[`c1ec43eeba370216994fbf40f1053e6f9d929af0`](https://github.com/rabbitholegg/questdk-plugins/commit/c1ec43eeba370216994fbf40f1053e6f9d929af0), [`f53c96b899b73d42f441c8ade2699f9a8734eeda`](https://github.com/rabbitholegg/questdk-plugins/commit/f53c96b899b73d42f441c8ade2699f9a8734eeda), [`c1faac492bcf1aaec7b7288b05d1b47dfed84355`](https://github.com/rabbitholegg/questdk-plugins/commit/c1faac492bcf1aaec7b7288b05d1b47dfed84355)]:
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.6
+
 ## 1.0.0-alpha.43
 
 ### Patch Changes
