@@ -6,6 +6,7 @@
     "brown-points-smile",
     "calm-tigers-rescue",
     "curly-jeans-dress",
+    "curly-needles-chew",
     "cyan-birds-melt",
     "cyan-llamas-burn",
     "dirty-falcons-impress",
@@ -14,6 +15,7 @@
     "dull-cows-call",
     "eight-plants-visit",
     "five-kids-search",
+    "flat-adults-wash",
     "fluffy-adults-invite",
     "giant-clouds-mix",
     "healthy-bugs-enjoy",
@@ -50,6 +52,7 @@
     "slow-vans-mate",
     "small-baboons-sneeze",
     "soft-apples-hang",
+    "soft-mice-film",
     "soft-starfishes-draw",
     "sour-boxes-reflect",
     "spicy-dancers-attend",
@@ -95,6 +98,8 @@
     "@rabbitholegg/questdk-plugin-traderjoe": "1.0.0-alpha.6",
     "@rabbitholegg/questdk-plugin-zora": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-synapse": "1.0.0-alpha.1",
-    "@rabbitholegg/questdk-plugin-woofi": "1.0.0-alpha.7"
+    "@rabbitholegg/questdk-plugin-woofi": "1.0.0-alpha.7",
+    "@rabbitholegg/questdk-plugin-sushi": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-treasure": "1.0.0-alpha.0"
   }
 }
