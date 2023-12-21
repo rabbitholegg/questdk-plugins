@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.45
+
+### Patch Changes
+
+- Updated dependencies [[`eaad761e0491f5be789e33fe4e72a88ccf7fa3db`](https://github.com/rabbitholegg/questdk-plugins/commit/eaad761e0491f5be789e33fe4e72a88ccf7fa3db)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.8
+
 ## 1.0.0-alpha.44
 
 ### Minor Changes

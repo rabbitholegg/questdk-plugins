@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-camelot
 
+## 1.0.0-alpha.8
+
+### Minor Changes
+
+- [#139](https://github.com/rabbitholegg/questdk-plugins/pull/139) [`eaad761e0491f5be789e33fe4e72a88ccf7fa3db`](https://github.com/rabbitholegg/questdk-plugins/commit/eaad761e0491f5be789e33fe4e72a88ccf7fa3db) Thanks [@Quazia](https://github.com/Quazia)! - Add Size
+
 ## 1.0.0-alpha.7
 
 ### Minor Changes
