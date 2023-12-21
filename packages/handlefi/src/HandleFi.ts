@@ -4,24 +4,21 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { ARBITRUM_ONE, SWAP_CONTRACTS } from './constants'
+import { getParaSwapFilter } from './input-filters'
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    chainId,
-    contractAddress,
-    tokenIn,
-    tokenOut,
-    amountIn,
-    amountOut,
-    recipient,
-  } = swap
 
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to: 0x0, // The contract address of the bridge
-    input: {}, // The input object is where we'll put the ABI and the parameters
+    chainId: ARBITRUM_ONE,
+    to: {
+      $or: SWAP_CONTRACTS.map((address) => address.toLowerCase()),
+    },
+    input: {
+      $or: [getParaSwapFilter(swap)],
+    },
   })
 }
 
