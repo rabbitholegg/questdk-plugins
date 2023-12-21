@@ -13,6 +13,7 @@ export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.MIM, // '0xFEa7a6a0B346362BF88A9e4A88416B77a57D6c2A' - MIM
   Tokens.WBTC, // '0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f' - WBTC
   Tokens.WETH, // '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1' - WETH
+  Tokens.SIZE, // '0x939727d85d99d0ac339bf1b76dfe30ca27c19067' - SIZE
 ]
 
 export const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
