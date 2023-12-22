@@ -4,7 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { zeroAddress, type Address } from 'viem'
-import { ARBITRUM_ONE, SWAP_CONTRACTS } from './constants'
+import { ARBITRUM_ONE, SWAP_CONTRACTS, TOKEN_ADDRESSES } from './constants'
 import {
   getParaSwapFilter,
   getV2RouterFilter,
@@ -41,9 +41,9 @@ export const swap = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return _chainId === ARBITRUM_ONE ? TOKEN_ADDRESSES : []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return [ARBITRUM_ONE]
 }
