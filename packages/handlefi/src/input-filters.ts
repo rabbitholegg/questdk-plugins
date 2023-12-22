@@ -168,7 +168,7 @@ export function getCurveV2FactoryFilter(params: SwapActionParams) {
 
   const j = !tokenOut
     ? undefined
-    : tokenOut.toLowerCase() === '0x17fc002b466eec40dae837fc4be5c67993ddbd6f' 
+    : tokenOut.toLowerCase() === '0x17fc002b466eec40dae837fc4be5c67993ddbd6f'
     ? 1 // FRAX
     : tokenOut.toLowerCase() === '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
     ? 2 // USDC.e
