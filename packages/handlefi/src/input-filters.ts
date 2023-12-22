@@ -1,7 +1,8 @@
 import { type SwapActionParams } from '@rabbitholegg/questdk'
 import { zeroAddress } from 'viem'
-import { buildV2PathQuery } from './utils'
-import { PARASWAP_ABI } from './abi'
+import { buildV2PathQueryWithCase } from './utils'
+import { PARASWAP_ABI, V2_ROUTER_ABI } from './abi'
+import { WETH } from './constants'
 
 export function getParaSwapFilter(params: SwapActionParams) {
   const { tokenIn, tokenOut, amountIn, amountOut } = params
@@ -57,7 +58,7 @@ export function getParaSwapFilter(params: SwapActionParams) {
       {
         // directBalancerV2
         data: {
-          assets: buildV2PathQuery(tokenIn, tokenOut),
+          assets: buildV2PathQueryWithCase('lower', tokenIn, tokenOut),
           fromAmount: amountIn,
           toAmount: amountOut,
           partner: '0xFa2c1bE677BE4BEc8851D1577B343F7060B51E3A',
@@ -65,5 +66,18 @@ export function getParaSwapFilter(params: SwapActionParams) {
       },
     ],
   } as const
+}
 
+export function getV2RouterFilter(params: SwapActionParams) {
+  const { tokenIn, tokenOut, amountIn, amountOut, recipient } = params
+  const ethIn = tokenIn === zeroAddress
+  const tokenInUsed = tokenIn === zeroAddress ? WETH : tokenIn
+  const tokenOutUsed = tokenOut === zeroAddress ? WETH : tokenOut
+  return {
+    $abi: V2_ROUTER_ABI,
+    _path: buildV2PathQueryWithCase('checksum', tokenInUsed, tokenOutUsed),
+    _amountIn: ethIn ? undefined : amountIn,
+    _minOut: amountOut,
+    _receiver: recipient,
+  } as const
 }
