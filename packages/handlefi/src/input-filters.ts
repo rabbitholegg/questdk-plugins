@@ -1,7 +1,7 @@
 import { type SwapActionParams } from '@rabbitholegg/questdk'
-import { zeroAddress } from 'viem'
+import { getAddress, zeroAddress } from 'viem'
 import { buildV2PathQueryWithCase } from './utils'
-import { PARASWAP_ABI, V2_ROUTER_ABI } from './abi'
+import { PARASWAP_ABI, V2_ROUTER_ABI, HPSM2_ABI } from './abi'
 import { WETH } from './constants'
 
 export function getParaSwapFilter(params: SwapActionParams) {
@@ -79,5 +79,31 @@ export function getV2RouterFilter(params: SwapActionParams) {
     _amountIn: ethIn ? undefined : amountIn,
     _minOut: amountOut,
     _receiver: recipient,
+  } as const
+}
+
+export function getHPSM2Filter(params: SwapActionParams) {
+  // Not using amount here since it is not possible to tell if the amount is amountIn or amountOut
+  const { tokenIn, tokenOut } = params
+  const tokenInAddress = tokenIn ? getAddress(tokenIn) : undefined
+  const tokenOutAddress = tokenOut ? getAddress(tokenOut) : undefined
+
+  let inputs = {}
+
+  if (tokenIn && tokenOut) {
+    inputs = {
+      fxTokenAddress: { $or: [tokenInAddress, tokenOutAddress] },
+      peggedTokenAddress: { $or: [tokenInAddress, tokenOutAddress] },
+    }
+  } else if (tokenIn || tokenOut) {
+    const address = tokenInAddress || tokenOutAddress
+    inputs = {
+      $or: [{ fxTokenAddress: address }, { peggedTokenAddress: address }],
+    }
+  }
+
+  return {
+    $abi: HPSM2_ABI,
+    ...inputs,
   } as const
 }

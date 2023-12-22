@@ -118,12 +118,49 @@ export const V2_ROUTER_TOKENS_ETH: TestParams<SwapActionParams> = {
   }
 } 
 
+// HPSM2 
+export const HPSM2_WITHDRAW: TestParams<SwapActionParams> = {
+  transaction: {
+    chainId: 42161,
+    from: '0x33e2bd5957c0236e88d750b12bbf32bfb8bb92fb',
+    to: '0x0f330a53874cea3e5a0dee5d291c49275fdc3260',
+    hash: '0x0a720d80933a2110a07be10186b4ab55db12bdda4a100b282f455bf07eb580a0',
+    input: '0xd9caed120000000000000000000000008616e8ea83f048ab9a5ec513c9412dd2993bce3f000000000000000000000000ff970a61a04b1ca14834a43f5de4533ebddb5cc80000000000000000000000000000000000000000000000692dcf0f3ed5fc5825',
+    value: '0',
+  },
+  params: {
+    chainId: ARBITRUM_ONE,
+    tokenIn: '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f', // fxUSD
+    tokenOut: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
+    recipient: '0x33e2bd5957c0236e88d750b12bbf32bfb8bb92fb',
+  }
+} 
+
+export const HPSM2_DEPOSIT: TestParams<SwapActionParams> = {
+  transaction: {
+    chainId: 42161,
+    from: '0x0ffad609d35c4bef104ee245a9c4c891d463aa2a',
+    to: '0x0f330a53874cea3e5a0dee5d291c49275fdc3260',
+    hash: '0x8b880dd0805ed4767a9a770149bbe9402d44ae334374f2afef8bb5fd257585a8',
+    input: '0x8340f5490000000000000000000000008616e8ea83f048ab9a5ec513c9412dd2993bce3f000000000000000000000000ff970a61a04b1ca14834a43f5de4533ebddb5cc8000000000000000000000000000000000000000000000000000000003b9aca00',
+    value: '0',
+  },
+  params: {
+    chainId: ARBITRUM_ONE,
+    tokenIn: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
+    tokenOut: '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f', // fxUSD
+    recipient: '0x33e2bd5957c0236e88d750b12bbf32bfb8bb92fb',
+  }
+} 
+
 export const passingTestCases = [
   createTestCase(PARASWAP_SIMPLESWAP, 'when routed through paraswap (simpleswap)'),
   createTestCase(PARASWAP_MULTISWAP, 'when routed through paraswap (multiswap)'),
   createTestCase(PARASWAP_UNI_V3, 'when routed through paraswap (uniV3Swap)'),
   createTestCase(V2_ROUTER_ETH_TOKENS, 'when routed through V2 router (ETH To Tokens)'),
   createTestCase(V2_ROUTER_TOKENS_ETH, 'when routed through V2 router (Tokens To ETH)'),
+  createTestCase(HPSM2_WITHDRAW, 'when routed through HSPM2 contract (withdraw)'),
+  createTestCase(HPSM2_DEPOSIT, 'when routed through HSPM2 contract (deposit)'),
 ]
 
 export const failingTestCases = [

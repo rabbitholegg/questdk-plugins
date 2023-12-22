@@ -5,12 +5,15 @@ import {
 } from '@rabbitholegg/questdk'
 import { zeroAddress, type Address } from 'viem'
 import { ARBITRUM_ONE, SWAP_CONTRACTS } from './constants'
-import { getParaSwapFilter, getV2RouterFilter } from './input-filters'
+import {
+  getParaSwapFilter,
+  getV2RouterFilter,
+  getHPSM2Filter,
+} from './input-filters'
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-
   console.log(swap.amountIn)
   return compressJson({
     chainId: ARBITRUM_ONE,
@@ -19,7 +22,11 @@ export const swap = async (
       $or: SWAP_CONTRACTS.map((address) => address.toLowerCase()),
     },
     input: {
-      $or: [getParaSwapFilter(swap), getV2RouterFilter(swap)],
+      $or: [
+        getParaSwapFilter(swap),
+        getV2RouterFilter(swap),
+        getHPSM2Filter(swap),
+      ],
     },
   })
 }
