@@ -630,6 +630,59 @@ export const HPSM2_ABI = [
 
 export const HLP_CURVE_V2_ABI = [
   {
+    inputs: [
+      { internalType: 'address', name: 'hlpCurveToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'metapoolFactory', type: 'address' },
+      { internalType: 'address', name: 'pool', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapEthToCurveToken',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'hlpToken', type: 'address' },
+      { internalType: 'address', name: 'hlpCurveToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'metapoolFactory', type: 'address' },
+      { internalType: 'address', name: 'pool', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapHlpTokenToCurveToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'peggedToken', type: 'address' },
+      { internalType: 'address', name: 'fxToken', type: 'address' },
+      { internalType: 'address', name: 'hlpToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'metapoolFactory', type: 'address' },
+      { internalType: 'address', name: 'pool', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapPeggedTokenToCurveToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
+export const CURVE_FACTORY_ABI = [
+  {
     stateMutability: 'nonpayable',
     type: 'function',
     name: 'exchange_underlying',

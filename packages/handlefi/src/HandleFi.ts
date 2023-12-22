@@ -9,12 +9,12 @@ import {
   getParaSwapFilter,
   getV2RouterFilter,
   getHPSM2Filter,
+  getHlpCurveV2Filter,
 } from './input-filters'
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  console.log(swap.amountIn)
   return compressJson({
     chainId: ARBITRUM_ONE,
     value: swap.tokenIn === zeroAddress ? swap.amountIn : undefined,
@@ -26,6 +26,7 @@ export const swap = async (
         getParaSwapFilter(swap),
         getV2RouterFilter(swap),
         getHPSM2Filter(swap),
+        getHlpCurveV2Filter(swap),
       ],
     },
   })
