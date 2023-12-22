@@ -1,3 +1,5 @@
+import type { Address } from "viem"
+
 // Chains
 export const ARBITRUM_ONE = 42161
 
@@ -27,4 +29,4 @@ const FOREX = '0xdb298285fe4c5410b05390ca80e8fbe9de1f259b'
 const ARB = '0x912CE59144191C1204E64559FE8253a0e49E6548'
 const USDC = '0xaf88d065e77c8cC2239327C5EDb3A432268e5831'
 
-export const TOKEN_ADDRESSES = [FX_USD, FOREX, ARB, USDC, WETH]
+export const TOKEN_ADDRESSES = [FX_USD, FOREX, ARB, USDC, WETH] as Address[]
