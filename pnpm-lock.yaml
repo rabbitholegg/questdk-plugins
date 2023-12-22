@@ -206,7 +206,6 @@ importers:
 
   packages/handlefi:
     specifiers:
-      '@curvefi/api': ^2.53.5
       '@rabbitholegg/questdk': 2.0.0-alpha.28
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
@@ -218,7 +217,6 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@curvefi/api': 2.53.5
       '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.2
       viem: 1.19.11_typescript@5.3.2
     devDependencies:
@@ -1110,20 +1108,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
-
-  /@curvefi/api/2.53.5:
-    resolution: {integrity: sha512-HEKZBrx+METfCJ4cz+Zg/Gs0LFxlwtPS+PewU6qhBZyBbrTetYZ4avQbYPPdnyXUfVQ9xWYPLR6G86QcJB47Pg==}
-    dependencies:
-      axios: 0.21.4
-      bignumber.js: 9.1.2
-      ethcall: 6.0.2_ethers@6.9.0
-      ethers: 6.9.0
-      memoizee: 0.4.15
-    transitivePeerDependencies:
-      - bufferutil
-      - debug
-      - utf-8-validate
-    dev: false
 
   /@esbuild/android-arm/0.16.17:
     resolution: {integrity: sha512-N9x1CMXVhtWEAMS7pNNONyA14f71VPQN9Cnavj1XQh6T7bskqiLLrSca4O0Vr8Wdcga943eThxnVp3JLnBMYtw==}
@@ -3280,14 +3264,6 @@ packages:
       - zod
     dev: false
 
-  /abi-coder/5.0.0_ethers@6.9.0:
-    resolution: {integrity: sha512-Kpyv/AhAaIaVJiJ6S/xqoTsiJrfSMc3QsBCiRDqic3o1CZNKGR3CIeT1K/1VZ7Wk5uSwsOAxQcke1TVUEz+usg==}
-    peerDependencies:
-      ethers: ^6.0.0
-    dependencies:
-      ethers: 6.9.0
-    dev: false
-
   /abitype/0.8.11_typescript@5.1.6:
     resolution: {integrity: sha512-bM4v2dKvX08sZ9IU38IN5BKmN+ZkOSd2oI4a9f0ejHYZQYV6cDr7j+d95ga0z2XHG36Y4jzoG5Z7qDqxp7fi/A==}
     peerDependencies:
@@ -3713,14 +3689,6 @@ packages:
 
   /aws4/1.12.0:
     resolution: {integrity: sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==}
-    dev: false
-
-  /axios/0.21.4:
-    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
-    dependencies:
-      follow-redirects: 1.15.3
-    transitivePeerDependencies:
-      - debug
     dev: false
 
   /axios/0.26.1:
@@ -5084,15 +5052,6 @@ packages:
       ext: 1.7.0
     dev: false
 
-  /es6-weak-map/2.0.3:
-    resolution: {integrity: sha512-p5um32HOTO1kP+w7PRnB+5lQ43Z6muuMuIMffvDN8ZB4GcnjLBV6zGStpbASIMk4DCAvEaamhe2zhyCb/QXXsA==}
-    dependencies:
-      d: 1.0.1
-      es5-ext: 0.10.62
-      es6-iterator: 2.0.3
-      es6-symbol: 3.1.3
-    dev: false
-
   /esbuild/0.16.17:
     resolution: {integrity: sha512-G8LEkV0XzDMNwXKgM0Jwu3nY3lSTwSGY6XbxM9cr9+s0T/qSV1q1JVPBGzm3dcjhCic9+emZDmMffkwgPeOeLg==}
     engines: {node: '>=12'}
@@ -5332,16 +5291,6 @@ packages:
       xhr-request-promise: 0.1.3
     dev: false
 
-  /ethcall/6.0.2_ethers@6.9.0:
-    resolution: {integrity: sha512-FyaKLlxtaVt+kRmhzDG3YfW4VxqasxZE2CDSfylMVp8kCxsBikzFE1BO90yAMGdjdwaX0kHlvjWSxKRpiEcI4w==}
-    peerDependencies:
-      ethers: ^6.0.0
-    dependencies:
-      '@types/node': 20.10.3
-      abi-coder: 5.0.0_ethers@6.9.0
-      ethers: 6.9.0
-    dev: false
-
   /ethereum-block-by-date/1.4.9:
     resolution: {integrity: sha512-BsU2uwrfEpBZ+99j2Bk7OjoLi4BhTQ2IpEw2xaGyzqdfL/ibO8YJj7+oLBsdjJL11V7uhSxF+miAE7voI9dUOA==}
     dependencies:
@@ -5492,13 +5441,6 @@ packages:
     dependencies:
       bn.js: 4.11.6
       number-to-bn: 1.7.0
-    dev: false
-
-  /event-emitter/0.3.5:
-    resolution: {integrity: sha512-D9rRn9y7kLPnJ+hMq7S/nhvoKwwvVJahBi2BPmx3bvbsEdK3W9ii8cBSGjP+72/LnM4n6fo3+dkCX5FeTQruXA==}
-    dependencies:
-      d: 1.0.1
-      es5-ext: 0.10.62
     dev: false
 
   /event-target-shim/5.0.1:
@@ -6620,10 +6562,6 @@ packages:
     resolution: {integrity: sha512-yvkRyxmFKEOQ4pNXCmJG5AEQNlXJS5LaONXo5/cLdTZdWvsZ1ioJEonLGAosKlMWE8lwUy/bJzMjcw8az73+Fg==}
     engines: {node: '>=0.10.0'}
 
-  /is-promise/2.2.2:
-    resolution: {integrity: sha512-+lP4/6lKUBfQjZ2pdxThZvLUAafmZb8OAxFb8XXtiQmS35INgr85hdOGoEs124ez1FCnZJt6jau/T+alh58QFQ==}
-    dev: false
-
   /is-regex/1.1.4:
     resolution: {integrity: sha512-kvRdxDsxZjhzUX07ZnLydzS1TU/TJlTUHHY4YLL87e37oUA49DfkLqgy+VjFocowy29cKvcSiu+kIv728jTTVg==}
     engines: {node: '>= 0.4'}
@@ -7155,12 +7093,6 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /lru-queue/0.1.0:
-    resolution: {integrity: sha512-BpdYkt9EvGl8OfWHDQPISVpcl5xZthb+XPsbELj5AQXxIC8IriDZIQYjBJPEm5rS420sjZ0TLEzRcq5KdBhYrQ==}
-    dependencies:
-      es5-ext: 0.10.62
-    dev: false
-
   /ltgt/2.2.1:
     resolution: {integrity: sha512-AI2r85+4MquTw9ZYqabu4nMwy9Oftlfa/e/52t9IjtfG+mGBbTNdAoZ3RQKLHR6r0wQnwZnPIEh/Ya6XTWAKNA==}
     dev: false
@@ -7229,19 +7161,6 @@ packages:
       inherits: 2.0.4
       ltgt: 2.2.1
       safe-buffer: 5.2.1
-    dev: false
-
-  /memoizee/0.4.15:
-    resolution: {integrity: sha512-UBWmJpLZd5STPm7PMUlOw/TSy972M+z8gcyQ5veOnSDRREz/0bmpyTfKt3/51DhEBqCZQn1udM/5flcSPYhkdQ==}
-    dependencies:
-      d: 1.0.1
-      es5-ext: 0.10.62
-      es6-weak-map: 2.0.3
-      event-emitter: 0.3.5
-      is-promise: 2.2.2
-      lru-queue: 0.1.0
-      next-tick: 1.1.0
-      timers-ext: 0.1.7
     dev: false
 
   /meow/6.1.1:
@@ -9497,13 +9416,6 @@ packages:
   /timed-out/4.0.1:
     resolution: {integrity: sha512-G7r3AhovYtr5YKOWQkta8RKAPb+J9IsO4uVmzjl8AZwfhs8UcUwTiD6gcJYSgOtzyjvQKrKYn41syHbUWMkafA==}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /timers-ext/0.1.7:
-    resolution: {integrity: sha512-b85NUNzTSdodShTIbky6ZF02e8STtVVfD+fu4aXXShEELpozH+bCpJLYMPZbsABN2wDH7fJpqIoXxJpzbf0NqQ==}
-    dependencies:
-      es5-ext: 0.10.62
-      next-tick: 1.1.0
     dev: false
 
   /tiny-invariant/1.3.1:
