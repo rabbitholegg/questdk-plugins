@@ -170,8 +170,9 @@ export function getCurveV2FactoryFilter(params: SwapActionParams) {
     ? undefined
     : tokenOut.toLowerCase() === '0x17fc002b466eec40dae837fc4be5c67993ddbd6f'
     ? 1 // FRAX
-    : tokenOut.toLowerCase() === '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
-    ? 2 // USDC.e
+    : tokenOut.toLowerCase() === '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8' ||
+      tokenOut.toLowerCase() === '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9'
+    ? 2 // USDC.e || USDT
     : null
 
   return {

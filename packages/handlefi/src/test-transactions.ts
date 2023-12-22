@@ -156,7 +156,7 @@ export const HPSM2_DEPOSIT: TestParams<SwapActionParams> = {
     chainId: ARBITRUM_ONE,
     tokenIn: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
     tokenOut: '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f', // fxUSD
-    recipient: '0x33e2bd5957c0236e88d750b12bbf32bfb8bb92fb',
+    recipient: '0x0ffad609d35c4bef104ee245a9c4c891d463aa2a',
   },
 }
 
@@ -281,6 +281,26 @@ export const CURVE_FACTORY_V2: TestParams<SwapActionParams> = {
   },
 }
 
+export const CURVE_FACTORY_2POOL: TestParams<SwapActionParams> = {
+  transaction: {
+    chainId: 42161,
+    from: '0x0b8b2a4996627f9bf106e7b6d9540f1266841957',
+    to: '0xd0dd5d76cf0fc06dabc48632735566dca241a35e',
+    hash: '0xa7f8d500da701b028d037740a5f74a73eaaff7d344526484812e96ef354cae26',
+    input:
+      '0xa6417ed6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000008c1c0e211a8d8000000000000000000000000000000000000000000000000000000000000096c973',
+    value: '0',
+  },
+  params: {
+    chainId: ARBITRUM_ONE,
+    tokenIn: '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f', // fxUSD
+    tokenOut: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9', // USDT
+    amountIn: GreaterThanOrEqual(parseUnits('10', 18)),
+    amountOut: GreaterThanOrEqual(parseUnits('9.65', 6)),
+    recipient: '0x0b8b2a4996627f9bf106e7b6d9540f1266841957',
+  },
+}
+
 export const passingTestCases = [
   createTestCase(
     PARASWAP_SIMPLESWAP,
@@ -328,6 +348,7 @@ export const passingTestCases = [
     CURVE_FACTORY_V2,
     'when routed through curve factory v2 contract',
   ),
+  createTestCase(CURVE_FACTORY_2POOL, 'when routed through curve 2pool'),
 ]
 
 export const failingTestCases = [
