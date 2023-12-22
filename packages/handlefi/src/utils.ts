@@ -1,5 +1,5 @@
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import type { Address, Hash } from 'viem'
+import { getAddress, type Address, type Hash } from 'viem'
 
 export enum Chains {
   ARBITRUM_ONE = 42161,
@@ -51,16 +51,26 @@ export function createTestCase<T extends ActionParams>(
   }
 }
 
-export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
+export const buildV2PathQueryWithCase = (
+  addressCase: 'lower' | 'checksum',
+  tokenIn?: string,
+  tokenOut?: string,
+) => {
   // v2 paths are formatted as [<token>, <token>]
   const conditions: FilterOperator[] = []
 
   if (tokenIn) {
-    conditions.push({ $first: tokenIn })
+    conditions.push({
+      $first:
+        addressCase === 'lower' ? tokenIn.toLowerCase() : getAddress(tokenIn),
+    })
   }
 
   if (tokenOut) {
-    conditions.push({ $last: tokenOut })
+    conditions.push({
+      $last:
+        addressCase === 'lower' ? tokenOut.toLowerCase() : getAddress(tokenOut),
+    })
   }
 
   return {
