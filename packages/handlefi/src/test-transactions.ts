@@ -241,7 +241,7 @@ export const HLP_BALANCER_TOKENS_ETH: TestParams<SwapActionParams> = {
   },
 }
 
-export const  HLP_BALANCER_ETH_TOKENS: TestParams<SwapActionParams> = {
+export const HLP_BALANCER_ETH_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0xac91c1a921f352d9fdee51320d7b91001c2b21c7',
@@ -284,11 +284,26 @@ export const passingTestCases = [
     'when routed through HSPM2 contract (withdraw)',
   ),
   createTestCase(HPSM2_DEPOSIT, 'when routed through HSPM2 contract (deposit)'),
-  createTestCase(HLP_CURVE_V2_ETH_TO_CURVE, 'when routed through HLPcurveV2 contract (ETH to tokens)'),
-  createTestCase(HLP_CURVE_V2_PEGGED_TO_CURVE, 'when routed through HLPcurveV2 contract (Pegged to Curve)'),
-  createTestCase(HLP_CURVE_V2_TOKEN_TO_CURVE, 'when routed through HLPcurveV2 contract (Token to Curve)'),
-  createTestCase(HLP_BALANCER_ETH_TOKENS, 'when routed through HLPBalancer contract (ETH to tokens)'),
-  createTestCase(HLP_BALANCER_TOKENS_ETH, 'when routed through HLPBalancer contract (Tokens to ETH)'),
+  createTestCase(
+    HLP_CURVE_V2_ETH_TO_CURVE,
+    'when routed through HLPcurveV2 contract (ETH to tokens)',
+  ),
+  createTestCase(
+    HLP_CURVE_V2_PEGGED_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Pegged to Curve)',
+  ),
+  createTestCase(
+    HLP_CURVE_V2_TOKEN_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Token to Curve)',
+  ),
+  createTestCase(
+    HLP_BALANCER_ETH_TOKENS,
+    'when routed through HLPBalancer contract (ETH to tokens)',
+  ),
+  createTestCase(
+    HLP_BALANCER_TOKENS_ETH,
+    'when routed through HLPBalancer contract (Tokens to ETH)',
+  ),
 ]
 
 export const failingTestCases = [
