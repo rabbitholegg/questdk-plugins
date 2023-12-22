@@ -7,6 +7,7 @@ import {
   HPSM2_ABI,
   HLP_CURVE_V2_ABI,
   HLP_BALANCER_ABI,
+  CURVE_FACTORY_ABI,
 } from './abi'
 import { WETH } from './constants'
 
@@ -153,5 +154,31 @@ export function getHlpBalancerFilter(params: SwapActionParams) {
     amountIn: tokenIn && !ethUsedIn ? amountIn : undefined,
     receiver: recipient,
     ...tokenInput,
+  }
+}
+
+export function getCurveV2FactoryFilter(params: SwapActionParams) {
+  const { tokenIn, tokenOut, amountIn, amountOut } = params
+
+  const i = !tokenIn
+    ? undefined
+    : tokenIn.toLowerCase() === '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f'
+    ? 0 // fxUSD
+    : null
+
+  const j = !tokenOut
+    ? undefined
+    : tokenOut.toLowerCase() === '0x17fc002b466eec40dae837fc4be5c67993ddbd6f' 
+    ? 1 // FRAX
+    : tokenOut.toLowerCase() === '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
+    ? 2 // USDC.e
+    : null
+
+  return {
+    $abi: CURVE_FACTORY_ABI,
+    i,
+    j,
+    _dx: amountIn,
+    _min_dy: amountOut,
   }
 }

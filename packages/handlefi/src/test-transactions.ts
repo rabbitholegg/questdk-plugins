@@ -261,6 +261,26 @@ export const HLP_BALANCER_ETH_TOKENS: TestParams<SwapActionParams> = {
   },
 }
 
+export const CURVE_FACTORY_V2: TestParams<SwapActionParams> = {
+  transaction: {
+    chainId: 42161,
+    from: '0x86d55a7c9e70ba692b9b9b8460f354034f9ec896',
+    to: '0xab174ffa530c888649c44c4d21c849bbaabc723f',
+    hash: '0x77bd0b3159930e1b11aa5fcbcad5bb90f0e8693ea3873219ec6eb8f6d9ee524d',
+    input:
+      '0xa6417ed6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000008f64fe4909d7f9a300000000000000000000000000000000000000000000000000000000009a80bd',
+    value: '0',
+  },
+  params: {
+    chainId: ARBITRUM_ONE,
+    tokenIn: '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f', // fxUSD
+    tokenOut: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
+    amountIn: GreaterThanOrEqual(parseUnits('10', 18)),
+    amountOut: GreaterThanOrEqual(parseUnits('10', 6)),
+    recipient: '0x86d55a7c9e70ba692b9b9b8460f354034f9ec896',
+  },
+}
+
 export const passingTestCases = [
   createTestCase(
     PARASWAP_SIMPLESWAP,
@@ -303,6 +323,10 @@ export const passingTestCases = [
   createTestCase(
     HLP_BALANCER_TOKENS_ETH,
     'when routed through HLPBalancer contract (Tokens to ETH)',
+  ),
+  createTestCase(
+    CURVE_FACTORY_V2,
+    'when routed through curve factory v2 contract',
   ),
 ]
 

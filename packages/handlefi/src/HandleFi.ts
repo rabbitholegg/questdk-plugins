@@ -11,14 +11,17 @@ import {
   getHPSM2Filter,
   getHlpCurveV2Filter,
   getHlpBalancerFilter,
+  getCurveV2FactoryFilter,
 } from './input-filters'
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
+  const { tokenIn, amountIn, recipient } = swap
   return compressJson({
     chainId: ARBITRUM_ONE,
-    value: swap.tokenIn === zeroAddress ? swap.amountIn : undefined,
+    value: tokenIn === zeroAddress ? amountIn : undefined,
+    from: recipient,
     to: {
       $or: SWAP_CONTRACTS.map((address) => address.toLowerCase()),
     },
@@ -29,6 +32,7 @@ export const swap = async (
         getHPSM2Filter(swap),
         getHlpCurveV2Filter(swap),
         getHlpBalancerFilter(swap),
+        getCurveV2FactoryFilter(swap),
       ],
     },
   })
