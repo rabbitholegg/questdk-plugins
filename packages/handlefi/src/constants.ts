@@ -1,4 +1,4 @@
-import type { Address } from "viem"
+import type { Address } from 'viem'
 
 // Chains
 export const ARBITRUM_ONE = 42161
