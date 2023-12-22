@@ -10,6 +10,7 @@ import {
   getV2RouterFilter,
   getHPSM2Filter,
   getHlpCurveV2Filter,
+  getHlpBalancerFilter,
 } from './input-filters'
 
 export const swap = async (
@@ -27,6 +28,7 @@ export const swap = async (
         getV2RouterFilter(swap),
         getHPSM2Filter(swap),
         getHlpCurveV2Filter(swap),
+        getHlpBalancerFilter(swap),
       ],
     },
   })

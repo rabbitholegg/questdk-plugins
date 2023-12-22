@@ -1,7 +1,7 @@
 import { type SwapActionParams } from '@rabbitholegg/questdk'
 import { getAddress, zeroAddress } from 'viem'
 import { buildV2PathQueryWithCase } from './utils'
-import { PARASWAP_ABI, V2_ROUTER_ABI, HPSM2_ABI, HLP_CURVE_V2_ABI } from './abi'
+import { PARASWAP_ABI, V2_ROUTER_ABI, HPSM2_ABI, HLP_CURVE_V2_ABI, HLP_BALANCER_ABI } from './abi'
 import { WETH } from './constants'
 
 export function getParaSwapFilter(params: SwapActionParams) {
@@ -133,5 +133,19 @@ export function getHlpCurveV2Filter(params: SwapActionParams) {
         hlpToken: tokenIn,
       },
     ],
+  }
+}
+
+export function getHlpBalancerFilter(params: SwapActionParams) {
+  const { tokenIn, tokenOut, amountIn, amountOut, recipient } = params
+  const minOut = tokenOut ? amountOut : undefined
+  const ethUsedIn = tokenIn === zeroAddress
+  const tokenInput = ethUsedIn ? { tokenOut } : { tokenIn }
+  return {
+    $abi: HLP_BALANCER_ABI,
+    minOut,
+    amountIn: tokenIn && !ethUsedIn ? amountIn : undefined,
+    receiver: recipient,
+    ...tokenInput,
   }
 }

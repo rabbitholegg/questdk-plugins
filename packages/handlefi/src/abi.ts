@@ -681,6 +681,38 @@ export const HLP_CURVE_V2_ABI = [
   },
 ]
 
+export const HLP_BALANCER_ABI = [
+  {
+    inputs: [
+      { internalType: 'address', name: 'tokenIn', type: 'address' },
+      { internalType: 'address', name: 'hlpBalancerToken', type: 'address' },
+      { internalType: 'bytes32', name: 'poolId', type: 'bytes32' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapBalancerToEth',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'hlpBalancerToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'bytes32', name: 'poolId', type: 'bytes32' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapEthToBalancer',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
+
 export const CURVE_FACTORY_ABI = [
   {
     stateMutability: 'nonpayable',
