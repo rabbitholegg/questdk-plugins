@@ -4,7 +4,8 @@ import { buildV2PathQueryWithCase } from './utils'
 import {
   PARASWAP_ABI,
   V2_ROUTER_ABI,
-  HPSM2_ABI,
+  HPSM2_DEPOSIT_ABI,
+  HPSM2_WITHDRAW_ABI,
   HLP_CURVE_V2_ABI,
   HLP_BALANCER_ABI,
   CURVE_FACTORY_ABI,
@@ -91,7 +92,7 @@ export function getV2RouterFilter(params: SwapActionParams) {
 
 export function getHPSM2Filter(params: SwapActionParams) {
   // Not using amount here since it is not possible to tell if the amount is amountIn or amountOut
-  const { tokenIn, tokenOut } = params
+  const { tokenIn, tokenOut, amountIn, amountOut } = params
   const tokenInAddress = tokenIn ? getAddress(tokenIn) : undefined
   const tokenOutAddress = tokenOut ? getAddress(tokenOut) : undefined
 
@@ -110,8 +111,18 @@ export function getHPSM2Filter(params: SwapActionParams) {
   }
 
   return {
-    $abi: HPSM2_ABI,
-    ...inputs,
+    $or: [
+      {
+        $abi: HPSM2_DEPOSIT_ABI,
+        amount: amountIn,
+        ...inputs
+      },
+      {
+        $abi: HPSM2_WITHDRAW_ABI,
+        amount: amountOut,
+        ...inputs
+      },
+    ]
   } as const
 }
 
