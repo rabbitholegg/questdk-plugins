@@ -2,7 +2,13 @@ import {
   type SwapActionParams,
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
-import { parseEther, parseUnits, zeroAddress, getAddress, type Address } from 'viem'
+import {
+  parseEther,
+  parseUnits,
+  zeroAddress,
+  getAddress,
+  type Address,
+} from 'viem'
 import { createTestCase, type TestParams } from './utils'
 import { ARBITRUM_ONE } from './constants'
 
@@ -552,23 +558,33 @@ export const passingTestCases = [
     'when routed through HLPcurveV2 contract (ETH to tokens) using checksummed token addresses',
     {
       tokenIn: getAddress(HLP_CURVE_V2_ETH_TO_CURVE.params.tokenIn as Address),
-      tokenOut: getAddress(HLP_CURVE_V2_ETH_TO_CURVE.params.tokenOut as Address),
+      tokenOut: getAddress(
+        HLP_CURVE_V2_ETH_TO_CURVE.params.tokenOut as Address,
+      ),
     },
   ),
   createTestCase(
     HLP_CURVE_V2_PEGGED_TO_CURVE,
     'when routed through HLPcurveV2 contract (Pegged to Curve) using checksummed token addresses',
     {
-      tokenIn: getAddress(HLP_CURVE_V2_PEGGED_TO_CURVE.params.tokenIn as Address),
-      tokenOut: getAddress(HLP_CURVE_V2_PEGGED_TO_CURVE.params.tokenOut as Address),
+      tokenIn: getAddress(
+        HLP_CURVE_V2_PEGGED_TO_CURVE.params.tokenIn as Address,
+      ),
+      tokenOut: getAddress(
+        HLP_CURVE_V2_PEGGED_TO_CURVE.params.tokenOut as Address,
+      ),
     },
   ),
   createTestCase(
     HLP_CURVE_V2_TOKEN_TO_CURVE,
     'when routed through HLPcurveV2 contract (Token to Curve) using checksummed token addresses',
     {
-      tokenIn: getAddress(HLP_CURVE_V2_TOKEN_TO_CURVE.params.tokenIn as Address),
-      tokenOut: getAddress(HLP_CURVE_V2_TOKEN_TO_CURVE.params.tokenOut as Address),
+      tokenIn: getAddress(
+        HLP_CURVE_V2_TOKEN_TO_CURVE.params.tokenIn as Address,
+      ),
+      tokenOut: getAddress(
+        HLP_CURVE_V2_TOKEN_TO_CURVE.params.tokenOut as Address,
+      ),
     },
   ),
   createTestCase(
@@ -597,7 +613,7 @@ export const passingTestCases = [
   ),
   createTestCase(
     CURVE_FACTORY_2POOL,
-    'when routed through curve 2pool using any token',
+    'when routed through curve 2pool using checksummed token addresses',
     {
       tokenIn: getAddress(CURVE_FACTORY_2POOL.params.tokenIn as Address),
       tokenOut: getAddress(CURVE_FACTORY_2POOL.params.tokenOut as Address),
@@ -918,14 +934,14 @@ export const failingTestCases = [
     HPSM2_WITHDRAW,
     'when routed through HSPM2 contract (withdraw) and amountIn is not sufficient',
     {
-      amountIn: GreaterThanOrEqual(parseEther('1000000'))
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
     },
   ),
   createTestCase(
     HPSM2_DEPOSIT,
     'when routed through HSPM2 contract (deposit) and amountIn is not sufficient',
     {
-      amountIn: GreaterThanOrEqual(parseEther('1000000'))
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
     },
   ),
   createTestCase(
