@@ -138,6 +138,7 @@ const HPSM2_WITHDRAW: TestParams<SwapActionParams> = {
     chainId: ARBITRUM_ONE,
     tokenIn: '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f', // fxUSD
     tokenOut: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
+    amountIn: GreaterThanOrEqual(parseUnits('1940', 18)),
     recipient: '0x33e2bd5957c0236e88d750b12bbf32bfb8bb92fb',
   },
 }
@@ -156,6 +157,7 @@ const HPSM2_DEPOSIT: TestParams<SwapActionParams> = {
     chainId: ARBITRUM_ONE,
     tokenIn: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
     tokenOut: '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f', // fxUSD
+    amountIn: GreaterThanOrEqual(parseUnits('1000', 6)),
     recipient: '0x0ffad609d35c4bef104ee245a9c4c891d463aa2a',
   },
 }
@@ -910,6 +912,20 @@ export const failingTestCases = [
     'when routed through V2 router (Tokens To ETH) and amountIn is not sufficient',
     {
       amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HPSM2_WITHDRAW,
+    'when routed through HSPM2 contract (withdraw) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000'))
+    },
+  ),
+  createTestCase(
+    HPSM2_DEPOSIT,
+    'when routed through HSPM2 contract (deposit) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000'))
     },
   ),
   createTestCase(

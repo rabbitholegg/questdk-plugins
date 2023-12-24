@@ -603,7 +603,7 @@ export const PARASWAP_ABI = [
   },
 ]
 
-export const HPSM2_DEPOSIT_ABI = [
+export const HPSM2_ABI = [
   {
     inputs: [
       { internalType: 'address', name: 'fxTokenAddress', type: 'address' },
@@ -615,9 +615,6 @@ export const HPSM2_DEPOSIT_ABI = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-]
-
-export const HPSM2_WITHDRAW_ABI = [
   {
     inputs: [
       { internalType: 'address', name: 'fxTokenAddress', type: 'address' },

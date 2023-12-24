@@ -6,8 +6,7 @@ import { ARBITRUM_ONE } from './constants'
 import {
   PARASWAP_ABI,
   V2_ROUTER_ABI,
-  HPSM2_DEPOSIT_ABI,
-  HPSM2_WITHDRAW_ABI,
+  HPSM2_ABI,
   HLP_BALANCER_ABI,
   HLP_CURVE_V2_ABI,
   CURVE_FACTORY_ABI,
@@ -134,44 +133,22 @@ describe('Given the handlefi plugin', () => {
                 _receiver: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
               },
               {
-                $or: [
-                  {
-                    $abi: HPSM2_DEPOSIT_ABI,
-                    amount: {
-                      $gte: '1000000000000000000',
-                    },
-                    fxTokenAddress: {
-                      $or: [
-                        '0x912CE59144191C1204E64559FE8253a0e49E6548',
-                        '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
-                      ],
-                    },
-                    peggedTokenAddress: {
-                      $or: [
-                        '0x912CE59144191C1204E64559FE8253a0e49E6548',
-                        '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
-                      ],
-                    },
-                  },
-                  {
-                    $abi: HPSM2_WITHDRAW_ABI,
-                    amount: {
-                      $gte: '1110000',
-                    },
-                    fxTokenAddress: {
-                      $or: [
-                        '0x912CE59144191C1204E64559FE8253a0e49E6548',
-                        '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
-                      ],
-                    },
-                    peggedTokenAddress: {
-                      $or: [
-                        '0x912CE59144191C1204E64559FE8253a0e49E6548',
-                        '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
-                      ],
-                    },
-                  },
-                ],
+                $abi: HPSM2_ABI,
+                amount: {
+                  $gte: '1000000000000000000',
+                },
+                fxTokenAddress: {
+                  $or: [
+                    '0x912CE59144191C1204E64559FE8253a0e49E6548',
+                    '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+                  ],
+                },
+                peggedTokenAddress: {
+                  $or: [
+                    '0x912CE59144191C1204E64559FE8253a0e49E6548',
+                    '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+                  ],
+                },
               },
               {
                 $abi: HLP_CURVE_V2_ABI,
