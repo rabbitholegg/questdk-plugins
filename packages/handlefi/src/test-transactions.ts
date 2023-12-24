@@ -7,7 +7,7 @@ import { createTestCase, type TestParams } from './utils'
 import { ARBITRUM_ONE } from './constants'
 
 // Paraswap Test Txs
-export const PARASWAP_SIMPLESWAP: TestParams<SwapActionParams> = {
+const PARASWAP_SIMPLESWAP: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
@@ -27,7 +27,7 @@ export const PARASWAP_SIMPLESWAP: TestParams<SwapActionParams> = {
   },
 }
 
-export const PARASWAP_MULTISWAP: TestParams<SwapActionParams> = {
+const PARASWAP_MULTISWAP: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
@@ -47,7 +47,7 @@ export const PARASWAP_MULTISWAP: TestParams<SwapActionParams> = {
   },
 }
 
-export const PARASWAP_UNI_V3: TestParams<SwapActionParams> = {
+const PARASWAP_UNI_V3: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
@@ -67,7 +67,7 @@ export const PARASWAP_UNI_V3: TestParams<SwapActionParams> = {
   },
 }
 
-export const PARASWAP_FAIL: TestParams<SwapActionParams> = {
+const PARASWAP_FAIL: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x9a1385dded2c1c00b8ac11e6597e86f3879a3403',
@@ -83,7 +83,7 @@ export const PARASWAP_FAIL: TestParams<SwapActionParams> = {
 }
 
 // V2 router
-export const V2_ROUTER_ETH_TOKENS: TestParams<SwapActionParams> = {
+const V2_ROUTER_ETH_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
@@ -103,7 +103,7 @@ export const V2_ROUTER_ETH_TOKENS: TestParams<SwapActionParams> = {
   },
 }
 
-export const V2_ROUTER_TOKENS_ETH: TestParams<SwapActionParams> = {
+const V2_ROUTER_TOKENS_ETH: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x4806032267387c9e6aab509b497a765d0aca7f61',
@@ -124,7 +124,7 @@ export const V2_ROUTER_TOKENS_ETH: TestParams<SwapActionParams> = {
 }
 
 // HPSM2
-export const HPSM2_WITHDRAW: TestParams<SwapActionParams> = {
+const HPSM2_WITHDRAW: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x33e2bd5957c0236e88d750b12bbf32bfb8bb92fb',
@@ -142,7 +142,7 @@ export const HPSM2_WITHDRAW: TestParams<SwapActionParams> = {
   },
 }
 
-export const HPSM2_DEPOSIT: TestParams<SwapActionParams> = {
+const HPSM2_DEPOSIT: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x0ffad609d35c4bef104ee245a9c4c891d463aa2a',
@@ -161,7 +161,7 @@ export const HPSM2_DEPOSIT: TestParams<SwapActionParams> = {
 }
 
 // HlpCurveV2
-export const HLP_CURVE_V2_ETH_TO_CURVE: TestParams<SwapActionParams> = {
+const HLP_CURVE_V2_ETH_TO_CURVE: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x29d7e0c5839715a2fe6670a248f471427104b266',
@@ -181,7 +181,7 @@ export const HLP_CURVE_V2_ETH_TO_CURVE: TestParams<SwapActionParams> = {
   },
 }
 
-export const HLP_CURVE_V2_PEGGED_TO_CURVE: TestParams<SwapActionParams> = {
+const HLP_CURVE_V2_PEGGED_TO_CURVE: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x29d7e0c5839715a2fe6670a248f471427104b266',
@@ -201,7 +201,7 @@ export const HLP_CURVE_V2_PEGGED_TO_CURVE: TestParams<SwapActionParams> = {
   },
 }
 
-export const HLP_CURVE_V2_TOKEN_TO_CURVE: TestParams<SwapActionParams> = {
+const HLP_CURVE_V2_TOKEN_TO_CURVE: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x49908e05de9e1d559499b08042d1123a1daae6b4',
@@ -221,7 +221,7 @@ export const HLP_CURVE_V2_TOKEN_TO_CURVE: TestParams<SwapActionParams> = {
   },
 }
 
-export const HLP_BALANCER_TOKENS_ETH: TestParams<SwapActionParams> = {
+const HLP_BALANCER_TOKENS_ETH: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0xba216e52be5a93e8ba380a761811f3802fa6ed89',
@@ -241,7 +241,7 @@ export const HLP_BALANCER_TOKENS_ETH: TestParams<SwapActionParams> = {
   },
 }
 
-export const HLP_BALANCER_ETH_TOKENS: TestParams<SwapActionParams> = {
+const HLP_BALANCER_ETH_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0xac91c1a921f352d9fdee51320d7b91001c2b21c7',
@@ -261,7 +261,7 @@ export const HLP_BALANCER_ETH_TOKENS: TestParams<SwapActionParams> = {
   },
 }
 
-export const CURVE_FACTORY_V2: TestParams<SwapActionParams> = {
+const CURVE_FACTORY_V2: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x86d55a7c9e70ba692b9b9b8460f354034f9ec896',
@@ -281,7 +281,7 @@ export const CURVE_FACTORY_V2: TestParams<SwapActionParams> = {
   },
 }
 
-export const CURVE_FACTORY_2POOL: TestParams<SwapActionParams> = {
+const CURVE_FACTORY_2POOL: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x0b8b2a4996627f9bf106e7b6d9540f1266841957',
@@ -349,6 +349,146 @@ export const passingTestCases = [
     'when routed through curve factory v2 contract',
   ),
   createTestCase(CURVE_FACTORY_2POOL, 'when routed through curve 2pool'),
+  createTestCase(
+    PARASWAP_SIMPLESWAP,
+    'when routed through paraswap (simpleswap) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    PARASWAP_MULTISWAP,
+    'when routed through paraswap (multiswap) using any',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    PARASWAP_UNI_V3,
+    'when routed through paraswap (uniV3Swap) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_ETH_TOKENS,
+    'when routed through V2 router (ETH To Tokens) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_TOKENS_ETH,
+    'when routed through V2 router (Tokens To ETH) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    HPSM2_WITHDRAW,
+    'when routed through HSPM2 contract (withdraw) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    HPSM2_DEPOSIT,
+    'when routed through HSPM2 contract (deposit) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_ETH_TO_CURVE,
+    'when routed through HLPcurveV2 contract (ETH to tokens) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_PEGGED_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Pegged to Curve) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_TOKEN_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Token to Curve) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_ETH_TOKENS,
+    'when routed through HLPBalancer contract (ETH to tokens) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_TOKENS_ETH,
+    'when routed through HLPBalancer contract (Tokens to ETH) using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_V2,
+    'when routed through curve factory v2 contract using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_2POOL,
+    'when routed through curve 2pool using any token',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
+  ),
 ]
 
 export const failingTestCases = [
@@ -356,23 +496,350 @@ export const failingTestCases = [
     PARASWAP_FAIL,
     'when using paraswap route not referred by handlefi',
   ),
+  createTestCase(V2_ROUTER_TOKENS_ETH, 'when chainId is incorrect', {
+    chainId: 324,
+  }),
+  createTestCase(
+    PARASWAP_SIMPLESWAP,
+    'when routed through paraswap (simpleswap) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    PARASWAP_MULTISWAP,
+    'when routed through paraswap (multiswap)',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    PARASWAP_UNI_V3,
+    'when routed through paraswap (uniV3Swap) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_ETH_TOKENS,
+    'when routed through V2 router (ETH To Tokens) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_TOKENS_ETH,
+    'when routed through V2 router (Tokens To ETH) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HPSM2_WITHDRAW,
+    'when routed through HSPM2 contract (withdraw) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HPSM2_DEPOSIT,
+    'when routed through HSPM2 contract (deposit) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_ETH_TO_CURVE,
+    'when routed through HLPcurveV2 contract (ETH to tokens) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_PEGGED_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Pegged to Curve) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_TOKEN_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Token to Curve) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_ETH_TOKENS,
+    'when routed through HLPBalancer contract (ETH to tokens) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_TOKENS_ETH,
+    'when routed through HLPBalancer contract (Tokens to ETH) and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_V2,
+    'when routed through curve factory v2 contract and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_2POOL,
+    'when routed through curve 2pool and tokenIn is not correct',
+    {
+      tokenIn: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    PARASWAP_SIMPLESWAP,
+    'when routed through paraswap (simpleswap) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    PARASWAP_MULTISWAP,
+    'when routed through paraswap (multiswap) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    PARASWAP_UNI_V3,
+    'when routed through paraswap (uniV3Swap) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_ETH_TOKENS,
+    'when routed through V2 router (ETH To Tokens) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_TOKENS_ETH,
+    'when routed through V2 router (Tokens To ETH) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HPSM2_WITHDRAW,
+    'when routed through HSPM2 contract (withdraw) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HPSM2_DEPOSIT,
+    'when routed through HSPM2 contract (deposit) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_ETH_TO_CURVE,
+    'when routed through HLPcurveV2 contract (ETH to tokens) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_PEGGED_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Pegged to Curve) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_TOKEN_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Token to Curve) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_ETH_TOKENS,
+    'when routed through HLPBalancer contract (ETH to tokens) and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_V2,
+    'when routed through curve factory v2 contract and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_2POOL,
+    'when routed through curve 2pool and tokenOut is not correct',
+    {
+      tokenOut: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+    },
+  ),
+  createTestCase(
+    PARASWAP_SIMPLESWAP,
+    'when routed through paraswap (simpleswap) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    PARASWAP_MULTISWAP,
+    'when routed through paraswap (multiswap) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    PARASWAP_UNI_V3,
+    'when routed through paraswap (uniV3Swap) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_ETH_TOKENS,
+    'when routed through V2 router (ETH To Tokens) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_TOKENS_ETH,
+    'when routed through V2 router (Tokens To ETH) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_ETH_TO_CURVE,
+    'when routed through HLPcurveV2 contract (ETH to tokens) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_PEGGED_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Pegged to Curve) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_TOKEN_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Token to Curve) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_ETH_TOKENS,
+    'when routed through HLPBalancer contract (ETH to tokens) and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_V2,
+    'when routed through curve factory v2 contract and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_2POOL,
+    'when routed through curve 2pool and amountOut is not sufficient',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    PARASWAP_SIMPLESWAP,
+    'when routed through paraswap (simpleswap) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    PARASWAP_MULTISWAP,
+    'when routed through paraswap (multiswap) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    PARASWAP_UNI_V3,
+    'when routed through paraswap (uniV3Swap) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_ETH_TOKENS,
+    'when routed through V2 router (ETH To Tokens) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_TOKENS_ETH,
+    'when routed through V2 router (Tokens To ETH) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_ETH_TO_CURVE,
+    'when routed through HLPcurveV2 contract (ETH to tokens) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_PEGGED_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Pegged to Curve) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_TOKEN_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Token to Curve) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_ETH_TOKENS,
+    'when routed through HLPBalancer contract (ETH to tokens) and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_V2,
+    'when routed through curve factory v2 contract and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_2POOL,
+    'when routed through curve 2pool and amountIn is not sufficient',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000000')),
+    },
+  ),
 ]
-
-/* 
-  transaction: {
-    chainId: 42161,
-    from: '',
-    to: '',
-    hash: '',
-    input: '',
-    amount: '',
-  },
-  params: {
-    chainId: 42161,
-    tokenIn: '',
-    tokenOut: '',
-    amountIn: GreaterThanOrEqual(parseUnits('', 18)),
-    amountOut: GreaterThanOrEqual(parseUnits('', 18)),
-    recipient: '',
-  }
-*/
