@@ -2,7 +2,7 @@ import {
   type SwapActionParams,
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
-import { parseEther, parseUnits, zeroAddress } from 'viem'
+import { parseEther, parseUnits, zeroAddress, getAddress, type Address } from 'viem'
 import { createTestCase, type TestParams } from './utils'
 import { ARBITRUM_ONE } from './constants'
 
@@ -361,7 +361,7 @@ export const passingTestCases = [
   ),
   createTestCase(
     PARASWAP_MULTISWAP,
-    'when routed through paraswap (multiswap) using any',
+    'when routed through paraswap (multiswap) using any token',
     {
       tokenIn: undefined,
       tokenOut: undefined,
@@ -487,6 +487,118 @@ export const passingTestCases = [
       tokenOut: undefined,
       amountIn: undefined,
       amountOut: undefined,
+    },
+  ),
+  createTestCase(
+    PARASWAP_SIMPLESWAP,
+    'when routed through paraswap (simpleswap) using checksummed token addresses',
+    {
+      tokenIn: getAddress(PARASWAP_SIMPLESWAP.params.tokenIn as Address),
+      tokenOut: getAddress(PARASWAP_SIMPLESWAP.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    PARASWAP_MULTISWAP,
+    'when routed through paraswap (multiswap) using checksummed token addresses',
+    {
+      tokenIn: getAddress(PARASWAP_MULTISWAP.params.tokenIn as Address),
+      tokenOut: getAddress(PARASWAP_MULTISWAP.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    PARASWAP_UNI_V3,
+    'when routed through paraswap (uniV3Swap) using checksummed token addresses',
+    {
+      tokenIn: getAddress(PARASWAP_UNI_V3.params.tokenIn as Address),
+      tokenOut: getAddress(PARASWAP_UNI_V3.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_ETH_TOKENS,
+    'when routed through V2 router (ETH To Tokens) using checksummed token addresses',
+    {
+      tokenIn: getAddress(V2_ROUTER_ETH_TOKENS.params.tokenIn as Address),
+      tokenOut: getAddress(V2_ROUTER_ETH_TOKENS.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    V2_ROUTER_TOKENS_ETH,
+    'when routed through V2 router (Tokens To ETH) using checksummed token addresses',
+    {
+      tokenIn: getAddress(V2_ROUTER_TOKENS_ETH.params.tokenIn as Address),
+      tokenOut: getAddress(V2_ROUTER_TOKENS_ETH.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    HPSM2_WITHDRAW,
+    'when routed through HSPM2 contract (withdraw) using checksummed token addresses',
+    {
+      tokenIn: getAddress(HPSM2_WITHDRAW.params.tokenIn as Address),
+      tokenOut: getAddress(HPSM2_WITHDRAW.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    HPSM2_DEPOSIT,
+    'when routed through HSPM2 contract (deposit) using checksummed token addresses',
+    {
+      tokenIn: getAddress(HPSM2_DEPOSIT.params.tokenIn as Address),
+      tokenOut: getAddress(HPSM2_DEPOSIT.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_ETH_TO_CURVE,
+    'when routed through HLPcurveV2 contract (ETH to tokens) using checksummed token addresses',
+    {
+      tokenIn: getAddress(HLP_CURVE_V2_ETH_TO_CURVE.params.tokenIn as Address),
+      tokenOut: getAddress(HLP_CURVE_V2_ETH_TO_CURVE.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_PEGGED_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Pegged to Curve) using checksummed token addresses',
+    {
+      tokenIn: getAddress(HLP_CURVE_V2_PEGGED_TO_CURVE.params.tokenIn as Address),
+      tokenOut: getAddress(HLP_CURVE_V2_PEGGED_TO_CURVE.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    HLP_CURVE_V2_TOKEN_TO_CURVE,
+    'when routed through HLPcurveV2 contract (Token to Curve) using checksummed token addresses',
+    {
+      tokenIn: getAddress(HLP_CURVE_V2_TOKEN_TO_CURVE.params.tokenIn as Address),
+      tokenOut: getAddress(HLP_CURVE_V2_TOKEN_TO_CURVE.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_ETH_TOKENS,
+    'when routed through HLPBalancer contract (ETH to tokens) using checksummed token addresses',
+    {
+      tokenIn: getAddress(HLP_BALANCER_ETH_TOKENS.params.tokenIn as Address),
+      tokenOut: getAddress(HLP_BALANCER_ETH_TOKENS.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    HLP_BALANCER_TOKENS_ETH,
+    'when routed through HLPBalancer contract (Tokens to ETH) using checksummed token addresses',
+    {
+      tokenIn: getAddress(HLP_BALANCER_TOKENS_ETH.params.tokenIn as Address),
+      tokenOut: getAddress(HLP_BALANCER_TOKENS_ETH.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_V2,
+    'when routed through curve factory v2 contract using checksummed token addresses',
+    {
+      tokenIn: getAddress(CURVE_FACTORY_V2.params.tokenIn as Address),
+      tokenOut: getAddress(CURVE_FACTORY_V2.params.tokenOut as Address),
+    },
+  ),
+  createTestCase(
+    CURVE_FACTORY_2POOL,
+    'when routed through curve 2pool using any token',
+    {
+      tokenIn: getAddress(CURVE_FACTORY_2POOL.params.tokenIn as Address),
+      tokenOut: getAddress(CURVE_FACTORY_2POOL.params.tokenOut as Address),
     },
   ),
 ]
