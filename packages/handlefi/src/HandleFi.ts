@@ -17,9 +17,9 @@ import {
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const { tokenIn, amountIn, recipient } = swap
+  const { chainId, tokenIn, amountIn, recipient } = swap
   return compressJson({
-    chainId: ARBITRUM_ONE,
+    chainId,
     value: tokenIn === zeroAddress ? amountIn : undefined,
     from: recipient,
     to: {
