@@ -160,6 +160,10 @@ export function getHlpBalancerFilter(params: SwapActionParams) {
 export function getCurveV2FactoryFilter(params: SwapActionParams) {
   const { tokenIn, tokenOut, amountIn, amountOut } = params
 
+  // There isnt really a good way to tell which pool you are in without knowing the contract address of the pool
+  // i will always be fxUSD (0)
+  // j can either be FRAX, USDC.e, or USDT (may get false posiitves here)
+
   const i = !tokenIn
     ? undefined
     : tokenIn.toLowerCase() === '0x8616e8ea83f048ab9a5ec513c9412dd2993bce3f'
