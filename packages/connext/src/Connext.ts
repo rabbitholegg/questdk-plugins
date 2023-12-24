@@ -11,13 +11,13 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, zeroAddress } from 'viem'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
 import { ConnextContract } from './contract-addresses.js'
 
 let _chainDataCache: Map<string, ChainData> | null = null
 
-const ETH_TOKEN_ADDRESS = '0x0000000000000000000000000000000000000000'
+const ETH_TOKEN_ADDRESS = zeroAddress
 
 const _getChainData = async () => {
   if (!_chainDataCache) {
@@ -26,22 +26,6 @@ const _getChainData = async () => {
   }
 
   return _chainDataCache
-}
-
-export const getWETHAddress = async (chainId: number) => {
-  const chains = await _getChainData()
-  const domainId = chainIdToDomain(chainId)
-  const chainData = chains?.get(String(domainId))
-  const assets = Object.keys(chainData?.assetId || {})
-
-  let wethAddress
-  for (const address of assets) {
-    if (chainData?.assetId[address].symbol === 'WETH') {
-      wethAddress = address
-      break
-    }
-  }
-  return wethAddress
 }
 
 export const bridge = async (
@@ -57,7 +41,9 @@ export const bridge = async (
   } = bridge
 
   const defaultContractAddress = ConnextContract[sourceChainId]
-  const destinationDomain = chainIdToDomain(destinationChainId)
+  const destinationDomain = destinationChainId
+    ? chainIdToDomain(destinationChainId)
+    : undefined
   const requiresWrapperMultisend = tokenAddress === ETH_TOKEN_ADDRESS
 
   /* 
@@ -76,21 +62,12 @@ export const bridge = async (
       )
     }
 
-    const wethAddress = await getWETHAddress(sourceChainId)
-
-    if (!wethAddress) {
-      throw new Error(`No WETH address found on chain ${sourceChainId}`)
-    }
-
     return compressJson({
       chainId: sourceChainId,
       to: multiSendContract.address,
       value: amount,
       input: {
         $abi: MultisendAbi,
-        transactions: {
-          $regex: wethAddress.slice(2),
-        },
       },
     })
   }
@@ -100,10 +77,10 @@ export const bridge = async (
     to: contractAddress || defaultContractAddress,
     input: {
       $abi: XCALL_ABI_FRAGMENTS,
-      _destination: Number(destinationDomain),
+      _destination: destinationDomain ? Number(destinationDomain) : undefined,
       _asset: tokenAddress,
       _amount: amount,
-      _to: recipient,
+      _delegate: recipient,
     },
   })
 }
