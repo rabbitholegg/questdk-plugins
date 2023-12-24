@@ -15,9 +15,8 @@ The swap plugin tragets handlefis [convert feature](https://app.handle.fi/conver
 
 ##### Limitations
 - amountOut may not be accurate due to some methods using `amountOutMin` which takes into account the amount of slippage set.
-- amountOut will not be considered in the swap is routed through the HPSM2 contract. 
+- amountOut will not be considered if the swap is routed through the HPSM2 contract. 
 - trades routed through curve V2 factory may have some false positives. Since there is not a really good way to tell what pool it is without having the contract address passed in as an argument. A false positive can occur if the tokenOut is selected as USDT and USDC.e is traded, and vice-versa.
-- There should be no limitations with the current swap plugin. Everything should work as expected.
 
 ##### Sample Transactions
 - [Paraswap](https://dashboard.tenderly.co/tx/arbitrum/0xdc4f726560293b41a0ee72048e2d94970a45a046d88447444dab8bc54cb25a94)
