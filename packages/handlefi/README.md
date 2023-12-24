@@ -7,7 +7,7 @@ Limitations
 # HandleFi Plugin
 
 ## Overview
-HandleFi is a decentralised multi currency stablecoin protocol based on Arbitrum. They offer sevearl products including perpetual swaps, convert, staking, and fxTokens.
+HandleFi is a decentralised multi currency stablecoin protocol based on Arbitrum. They offer several products including perpetual swaps, convert, staking, and fxTokens.
 
 ### Swap Plugin
 
