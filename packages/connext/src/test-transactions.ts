@@ -1,7 +1,7 @@
 import type { BridgeActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import { createTestCase, type TestParams } from './utils'
-import { parseEther, zeroAddress } from 'viem'
+import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const DAI_OP_GNOSIS: TestParams<BridgeActionParams> = {
   transaction: {
@@ -75,5 +75,30 @@ export const passingTestCases = [
   createTestCase(ETH_OP_ARBITRUM, 'when bridging ETH to arbitrum', {
     tokenAddress: undefined,
     amount: undefined,
+  }),
+]
+
+export const failingTestCases = [
+  createTestCase(DAI_OP_GNOSIS, 'when sourceChainId is not correct', {
+    sourceChainId: 42161,
+  }),
+  createTestCase(DAI_OP_GNOSIS, 'when destinationChainId is not correct', {
+    destinationChainId: 42161,
+  }),
+  createTestCase(DAI_OP_GNOSIS, 'when tokenAddress is not correct', {
+    tokenAddress: '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
+  }),
+  createTestCase(
+    ETH_OP_POLYGON,
+    'when bridging ETH and amount is insufficient',
+    { amount: GreaterThanOrEqual(parseEther('1000')) },
+  ),
+  createTestCase(
+    DAI_OP_GNOSIS,
+    'when bridging tokens and amount is insufficient',
+    { amount: GreaterThanOrEqual(parseUnits('10000', 18)) },
+  ),
+  createTestCase(ETH_OP_ARBITRUM, 'when recipient is not correct', {
+    recipient: '0xa4c8bb4658bc44bac430699c8b7b13dab28e0f4e',
   }),
 ]
