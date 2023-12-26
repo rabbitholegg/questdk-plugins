@@ -34,53 +34,44 @@ export const bridge = async (
   const {
     sourceChainId,
     destinationChainId,
-    contractAddress,
     tokenAddress,
     amount,
     recipient,
   } = bridge
 
-  const defaultContractAddress = ConnextContract[sourceChainId]
+  const xcallContractAddress = ConnextContract[sourceChainId]
   const destinationDomain = destinationChainId
     ? chainIdToDomain(destinationChainId)
     : undefined
-  const requiresWrapperMultisend = tokenAddress === ETH_TOKEN_ADDRESS
+  const multiSendContractAddress = getDeployedMultisendContract(sourceChainId)?.address
+  const ethUsedIn = tokenAddress === ETH_TOKEN_ADDRESS
 
-  /* 
-    Connext uses a MultiSend to wrap when briding ETH.
-    https://github.com/connext/monorepo/issues/2905
-    https://github.com/connext/monorepo/issues/4218
-    Contract addresses: https://github.com/search?q=repo%3Aconnext%2Fmonorepo%20MultiSend.json&type=code
-  */
+  if (!xcallContractAddress) {
+    throw new Error(`No xcall contract deployed on chain ${sourceChainId}`)
+  }
 
-  if (requiresWrapperMultisend) {
-    const multiSendContract = getDeployedMultisendContract(sourceChainId)
-
-    if (!multiSendContract) {
-      throw new Error(
-        `No multisend contract deployed on chain ${sourceChainId}`,
-      )
-    }
-
-    return compressJson({
-      chainId: sourceChainId,
-      to: multiSendContract.address,
-      value: amount,
-      input: {
-        $abi: MultisendAbi,
-      },
-    })
+  if (!multiSendContractAddress) {
+    throw new Error(`No multisend contract deployed on chain ${sourceChainId}`)
   }
 
   return compressJson({
     chainId: sourceChainId,
-    to: contractAddress || defaultContractAddress,
+    to: {
+      $or: [xcallContractAddress.toLowerCase(), multiSendContractAddress.toLowerCase()]
+    },
+    value: ethUsedIn ? amount : undefined,
     input: {
-      $abi: XCALL_ABI_FRAGMENTS,
-      _destination: destinationDomain ? Number(destinationDomain) : undefined,
-      _asset: tokenAddress,
-      _amount: amount,
-      _delegate: recipient,
+      $or: [
+        { $abi: MultisendAbi },
+        {
+          $abi: XCALL_ABI_FRAGMENTS,
+          _destination: destinationDomain ? Number(destinationDomain) : undefined,
+          _asset: tokenAddress,
+          _amount: amount,
+          _delegate: recipient,
+        }
+      ]
+
     },
   })
 }
