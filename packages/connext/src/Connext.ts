@@ -31,19 +31,15 @@ const _getChainData = async () => {
 export const bridge = async (
   bridge: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    sourceChainId,
-    destinationChainId,
-    tokenAddress,
-    amount,
-    recipient,
-  } = bridge
+  const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
+    bridge
 
   const xcallContractAddress = ConnextContract[sourceChainId]
   const destinationDomain = destinationChainId
     ? chainIdToDomain(destinationChainId)
     : undefined
-  const multiSendContractAddress = getDeployedMultisendContract(sourceChainId)?.address
+  const multiSendContractAddress =
+    getDeployedMultisendContract(sourceChainId)?.address
   const ethUsedIn = tokenAddress === ETH_TOKEN_ADDRESS
 
   if (!xcallContractAddress) {
@@ -57,21 +53,28 @@ export const bridge = async (
   return compressJson({
     chainId: sourceChainId,
     to: {
-      $or: [xcallContractAddress.toLowerCase(), multiSendContractAddress.toLowerCase()]
+      $or: [
+        xcallContractAddress.toLowerCase(),
+        multiSendContractAddress.toLowerCase(),
+      ],
     },
+    from: recipient,
     value: ethUsedIn ? amount : undefined,
     input: {
       $or: [
-        { $abi: MultisendAbi },
+        {
+          $abi: MultisendAbi,
+        },
         {
           $abi: XCALL_ABI_FRAGMENTS,
-          _destination: destinationDomain ? Number(destinationDomain) : undefined,
+          _destination: destinationDomain
+            ? Number(destinationDomain)
+            : undefined,
           _asset: tokenAddress,
           _amount: amount,
           _delegate: recipient,
-        }
-      ]
-
+        },
+      ],
     },
   })
 }
