@@ -1,6 +1,10 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { bridge, getSupportedChainIds, getSupportedTokenAddresses } from './Connext.js'
+import {
+  bridge,
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+} from './Connext.js'
 import { MultisendAbi } from '@connext/nxtp-utils'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
 import { passingTestCases, failingTestCases } from './test-transactions.js'
@@ -73,7 +77,6 @@ describe('Given the Connext plugin', () => {
           expect(tokens).to.have.length.greaterThan(0)
           expect(tokens).to.have.length.lessThan(100)
           tokens.forEach((token) => {
-            console.log(token)
             expect(token).to.match(
               addressRegex,
               `Token address ${token} is not a valid Ethereum address`,
