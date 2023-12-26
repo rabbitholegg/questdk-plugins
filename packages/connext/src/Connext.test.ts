@@ -1,76 +1,84 @@
-import { getDeployedMultisendContract } from '@connext/nxtp-txservice'
-import { MultisendAbi } from '@connext/nxtp-utils'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Connext.js'
+import { MultisendAbi } from '@connext/nxtp-utils'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
 import { passingTestCases, failingTestCases } from './test-transactions.js'
-import { zeroAddress as ETH } from 'viem'
 
-describe('Connext', () => {
-  describe('Bridge', () => {
-    const USDC = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
-
-    test('should return a valid bridge action filter', async () => {
-      const filter = await bridge({
-        sourceChainId: 10,
-        destinationChainId: 137,
-        tokenAddress: USDC,
-        amount: GreaterThanOrEqual(100000n),
-      })
-
-      expect(filter).to.deep.equal({
-        chainId: 10,
-        to: '0x8f7492DE823025b4CfaAB1D34c58963F2af5DEDA',
-        input: {
-          $abi: XCALL_ABI_FRAGMENTS,
-          _destination: 1886350457,
-          _asset: '0x7F5c764cBc14f9669B88837ca1490cCa17c31607',
-          _amount: {
-            $gte: '100000',
+describe('Given the Connext plugin', () => {
+  describe('When handling the bridge action', () => {
+    describe('should return a valid action filter', () => {
+      test('when doing a valid bridge action', async () => {
+        const { params } = passingTestCases[0]
+        const filter = await bridge(params)
+        expect(filter).to.deep.equal({
+          chainId: 10,
+          to: {
+            $or: [
+              '0x8f7492de823025b4cfaab1d34c58963f2af5deda',
+              '0xb0eef3e1de973d045c3858e072c540299585252d',
+            ],
           },
-        },
-      })
-    })
-  })
-
-  test('should use the WETH wrapper multisend contract when bridging ETH', async () => {
-    const filter = await bridge({
-      sourceChainId: 10,
-      destinationChainId: 137,
-      tokenAddress: ETH,
-      amount: GreaterThanOrEqual(100000n),
-    })
-
-    const multiSendContract = getDeployedMultisendContract(10)
-
-    expect(filter).to.deep.equal({
-      chainId: 10,
-      to: multiSendContract?.address,
-      value: {
-        $gte: '100000',
-      },
-      input: {
-        $abi: MultisendAbi,
-      },
-    })
-  })
-
-  describe('Apply filter', () => {
-    passingTestCases.forEach((testCase) => {
-      const { transaction, description, params } = testCase
-      test(description, async () => {
-        const filter = await bridge(params)
-        expect(apply(transaction, filter)).to.be.true
+          from: '0xd59a74e615c9d55422ed8c5ce64cb50fda0bb58d',
+          input: {
+            $or: [
+              {
+                $abi: MultisendAbi,
+                transactions: {
+                  $regex: 'd59a74e615c9d55422ed8c5ce64cb50fda0bb58d',
+                },
+              },
+              {
+                $abi: XCALL_ABI_FRAGMENTS,
+                _destination: 6778479,
+                _asset: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
+                _amount: {
+                  $gte: '2000000000000000000',
+                },
+                _delegate: '0xd59a74e615c9d55422ed8c5ce64cb50fda0bb58d',
+              },
+            ],
+          },
+        })
       })
     })
 
-    failingTestCases.forEach((testCase) => {
-      const { transaction, description, params } = testCase
-      test(description, async () => {
-        const filter = await bridge(params)
-        expect(apply(transaction, filter)).to.be.false
+    describe('should pass filter with valid transactions', () => {
+      passingTestCases.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await bridge(params)
+          expect(apply(transaction, filter)).to.be.true
+        })
       })
     })
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingTestCases.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await bridge(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+
+    // describe('should return a valid list of tokens for each supported chain', () => {
+    //   CHAIN_ID_ARRAY.forEach((chainId) => {
+    //     test(`for chainId: ${chainId}`, async () => {
+    //       const tokens = await getSupportedTokenAddresses(chainId)
+    //       const addressRegex = /^0x[a-fA-F0-9]{40}$/
+    //       expect(tokens).to.be.an('array')
+    //       expect(tokens).to.have.length.greaterThan(0)
+    //       expect(tokens).to.have.length.lessThan(100)
+    //       tokens.forEach((token) => {
+    //         expect(token).to.match(
+    //           addressRegex,
+    //           `Token address ${token} is not a valid Ethereum address`,
+    //         )
+    //       })
+    //     })
+    //   })
+    // })
   })
 })
