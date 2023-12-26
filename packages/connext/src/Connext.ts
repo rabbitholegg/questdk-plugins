@@ -11,7 +11,7 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address, zeroAddress } from 'viem'
+import { type Address, zeroAddress, getAddress } from 'viem'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
 import { ConnextContract } from './contract-addresses.js'
 
@@ -64,6 +64,9 @@ export const bridge = async (
       $or: [
         {
           $abi: MultisendAbi,
+          transactions: {
+            $regex: recipient?.toLowerCase().slice(2),
+          },
         },
         {
           $abi: XCALL_ABI_FRAGMENTS,
