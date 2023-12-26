@@ -4,7 +4,7 @@ import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Connext.js'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
-import { passingTestCases } from './test-transactions.js'
+import { passingTestCases, failingTestCases } from './test-transactions.js'
 import { zeroAddress as ETH } from 'viem'
 
 describe('Connext', () => {
@@ -62,6 +62,14 @@ describe('Connext', () => {
       test(description, async () => {
         const filter = await bridge(params)
         expect(apply(transaction, filter)).to.be.true
+      })
+    })
+
+    failingTestCases.forEach((testCase) => {
+      const { transaction, description, params } = testCase
+      test(description, async () => {
+        const filter = await bridge(params)
+        expect(apply(transaction, filter)).to.be.false
       })
     })
   })
