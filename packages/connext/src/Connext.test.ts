@@ -1,6 +1,6 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Connext.js'
+import { bridge, getSupportedChainIds, getSupportedTokenAddresses } from './Connext.js'
 import { MultisendAbi } from '@connext/nxtp-utils'
 import { XCALL_ABI_FRAGMENTS } from './abi.js'
 import { passingTestCases, failingTestCases } from './test-transactions.js'
@@ -63,22 +63,24 @@ describe('Given the Connext plugin', () => {
       })
     })
 
-    // describe('should return a valid list of tokens for each supported chain', () => {
-    //   CHAIN_ID_ARRAY.forEach((chainId) => {
-    //     test(`for chainId: ${chainId}`, async () => {
-    //       const tokens = await getSupportedTokenAddresses(chainId)
-    //       const addressRegex = /^0x[a-fA-F0-9]{40}$/
-    //       expect(tokens).to.be.an('array')
-    //       expect(tokens).to.have.length.greaterThan(0)
-    //       expect(tokens).to.have.length.lessThan(100)
-    //       tokens.forEach((token) => {
-    //         expect(token).to.match(
-    //           addressRegex,
-    //           `Token address ${token} is not a valid Ethereum address`,
-    //         )
-    //       })
-    //     })
-    //   })
-    // })
+    describe('should return a valid list of tokens for each supported chain', async () => {
+      const chainIdArray = await getSupportedChainIds()
+      chainIdArray.forEach((chainId) => {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(chainId)
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.greaterThan(0)
+          expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach((token) => {
+            console.log(token)
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
+          })
+        })
+      })
+    })
   })
 })
