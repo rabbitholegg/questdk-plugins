@@ -63,5 +63,17 @@ export const ETH_OP_ARBITRUM: TestParams<BridgeActionParams> = {
 export const passingTestCases = [
   createTestCase(DAI_OP_GNOSIS, 'when bridging tokens'),
   createTestCase(ETH_OP_POLYGON, 'when bridging ETH'),
-  createTestCase(ETH_OP_ARBITRUM, 'when bridging ETH to arbitrum')
+  createTestCase(ETH_OP_ARBITRUM, 'when bridging ETH to arbitrum'),
+  createTestCase(DAI_OP_GNOSIS, 'when bridging tokens', {
+    tokenAddress: undefined,
+    amount: undefined,
+  }),
+  createTestCase(ETH_OP_POLYGON, 'when bridging ETH', {
+    tokenAddress: undefined,
+    amount: undefined,
+  }),
+  createTestCase(ETH_OP_ARBITRUM, 'when bridging ETH to arbitrum', {
+    tokenAddress: undefined,
+    amount: undefined,
+  }),
 ]
