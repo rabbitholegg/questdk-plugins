@@ -524,7 +524,7 @@ importers:
       ethers: ^5.2.0
       rimraf: ^5.0.1
       rome: ^12.1.3
-      symbiosis-js-sdk: 3.0.9
+      symbiosis-js-sdk: 3.1.15
       ts-node: ^10.9.1
       tsconfig: workspace:*
       typescript: ^5.1.6
@@ -533,7 +533,7 @@ importers:
     dependencies:
       '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
       ethers: 5.7.2
-      symbiosis-js-sdk: 3.0.9_ethers@5.7.2
+      symbiosis-js-sdk: 3.1.15_ethers@5.7.2
       viem: 1.21.0_typescript@5.3.3
     devDependencies:
       '@types/node': 20.10.5
@@ -9259,8 +9259,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /symbiosis-js-sdk/3.0.9_ethers@5.7.2:
-    resolution: {integrity: sha512-jNdOiSiXHIAGgnhDI/KeRVeCNcr284+5ocPOR9ccnvb4ltBb8eA1O+fem2EVrPj/yHxk5weM16vTuparCVNljQ==}
+  /symbiosis-js-sdk/3.1.15_ethers@5.7.2:
+    resolution: {integrity: sha512-oxXLjPcEX3vB7jOv+YfKVqiYYwP7oUF1+yjG3InpFXEpg5orOcgevrK52U1cY3q526x646B9RRPKeVEFxD7GdQ==}
     engines: {node: '>=10'}
     peerDependencies:
       ethers: ^5.2.0
