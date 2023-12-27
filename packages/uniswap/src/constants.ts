@@ -52,6 +52,7 @@ const TESTNETS = [
   ChainId.CELO,
   ChainId.CELO_ALFAJORES,
   ChainId.BASE_GOERLI,
+  ChainId.OPTIMISM_SEPOLIA,
 ]
 
 export const CHAIN_ID_ARRAY = SUPPORTED_CHAINS.filter(
