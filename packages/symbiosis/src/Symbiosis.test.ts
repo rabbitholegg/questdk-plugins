@@ -2,7 +2,7 @@ import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
 import { metaBurnABI, metaRouteABI } from './abi'
-import { zeroAddress } from 'viem'
+import { zeroAddress, isAddress } from 'viem'
 import { Chains } from './utils'
 import {
   bridge,
@@ -63,15 +63,15 @@ describe('Given the symbiosis plugin', () => {
     chainIdArray.forEach((chainId) => {
       test(`for chainId: ${chainId}`, async () => {
         const tokens = await getSupportedTokenAddresses(chainId)
-        const addressRegex = /^0x[a-fA-F0-9]{40}$/
         expect(tokens).to.be.an('array')
         expect(tokens).to.have.length.greaterThan(0)
         expect(tokens).to.have.length.lessThan(100)
         tokens.forEach((token) => {
-          expect(token).to.match(
-            addressRegex,
-            `Token address ${token} is not a valid Ethereum address`,
-          )
+          const isValid = isAddress(token)
+          if (!isValid) {
+            console.error(`Token address ${token} is not a valid Ethereum address`)
+          }
+          expect(isValid).to.be.true
         })
       })
     })
