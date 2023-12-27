@@ -69,7 +69,9 @@ describe('Given the symbiosis plugin', () => {
         tokens.forEach((token) => {
           const isValid = isAddress(token)
           if (!isValid) {
-            console.error(`Token address ${token} is not a valid Ethereum address`)
+            console.error(
+              `Token address ${token} is not a valid Ethereum address`,
+            )
           }
           expect(isValid).to.be.true
         })
