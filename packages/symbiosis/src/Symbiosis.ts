@@ -3,7 +3,7 @@ import {
   type BridgeActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { type Address, getAddress } from 'viem'
 import { CHAIN_ID_ARRAY, CHAIN_TO_TOKENS } from './constants'
 import { metaBurnABI, metaRouteABI } from './abi'
 import { symbiosis } from './symbiosis-sdk'
@@ -29,7 +29,9 @@ export const bridge = async (
     input: {
       $abi: metaRouteABI,
       _metarouteTransaction: {
-        approvedTokens: tokenAddress ? [tokenAddress] : undefined, // if tokenAddress is undefined, any input token will pass filter
+        approvedTokens: tokenAddress
+          ? { $first: getAddress(tokenAddress) }
+          : undefined, // if tokenAddress is undefined, any input token will pass filter
         amount: amount,
         otherSideCalldata: {
           $abiAbstract: metaBurnABI,
