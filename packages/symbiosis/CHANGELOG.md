@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-symbiosis
 
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [#147](https://github.com/rabbitholegg/questdk-plugins/pull/147) [`0f2d0d5c4073d6befe2d1a1bd7fa48962010201f`](https://github.com/rabbitholegg/questdk-plugins/commit/0f2d0d5c4073d6befe2d1a1bd7fa48962010201f) Thanks [@mmackz](https://github.com/mmackz)! - pin sdk version
+
 ## 1.0.0-alpha.7
 
 ### Minor Changes
