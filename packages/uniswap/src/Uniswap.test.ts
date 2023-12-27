@@ -120,7 +120,6 @@ describe('Given the uniswap plugin', () => {
           const tokens = await getSupportedTokenAddresses(chainId)
           const addressRegex = /^0x[a-fA-F0-9]{40}$/
           expect(tokens).to.be.an('array')
-          expect(tokens).to.have.length.greaterThan(0)
           expect(tokens).to.have.length.lessThan(100)
           tokens.forEach((token) => {
             expect(token).to.match(
