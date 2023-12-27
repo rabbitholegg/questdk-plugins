@@ -20,7 +20,7 @@ describe('Given the symbiosis plugin', () => {
         input: {
           $abi: metaRouteABI,
           _metarouteTransaction: {
-            approvedTokens: [zeroAddress],
+            approvedTokens: { $first: zeroAddress },
             amount: {
               $gte: '7500000000000000',
             },
