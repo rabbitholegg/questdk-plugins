@@ -1,13 +1,14 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Symbiosis'
-import {
-  passingTestCases,
-  failingTestCases,
-} from './test-transactions'
+import { passingTestCases, failingTestCases } from './test-transactions'
 import { metaBurnABI, metaRouteABI } from './abi'
 import { zeroAddress } from 'viem'
 import { Chains } from './utils'
+import {
+  bridge,
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+} from './Symbiosis'
 
 describe('Given the symbiosis plugin', () => {
   describe('When handling the bridge', () => {
@@ -15,7 +16,7 @@ describe('Given the symbiosis plugin', () => {
       const { params } = passingTestCases[0]
       const filter = await bridge(params)
       expect(filter).to.deep.equal({
-        chainId:Chains.OPTIMISM,
+        chainId: Chains.OPTIMISM,
         to: '0x0f91052dc5B4baE53d0FeA5DAe561A117268f5d2',
         input: {
           $abi: metaRouteABI,
@@ -53,6 +54,25 @@ describe('Given the symbiosis plugin', () => {
       test(description, async () => {
         const filter = await bridge(params)
         expect(apply(transaction, filter)).to.be.false
+      })
+    })
+  })
+
+  describe('should return a valid list of tokens for each supported chain', async () => {
+    const chainIdArray = await getSupportedChainIds()
+    chainIdArray.forEach((chainId) => {
+      test(`for chainId: ${chainId}`, async () => {
+        const tokens = await getSupportedTokenAddresses(chainId)
+        const addressRegex = /^0x[a-fA-F0-9]{40}$/
+        expect(tokens).to.be.an('array')
+        expect(tokens).to.have.length.greaterThan(0)
+        expect(tokens).to.have.length.lessThan(100)
+        tokens.forEach((token) => {
+          expect(token).to.match(
+            addressRegex,
+            `Token address ${token} is not a valid Ethereum address`,
+          )
+        })
       })
     })
   })
