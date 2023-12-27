@@ -116,7 +116,7 @@ describe('Given the zora plugin', () => {
             },
           ],
         },
-      })      
+      })
     })
 
     describe('should pass filter with valid transactions', () => {
