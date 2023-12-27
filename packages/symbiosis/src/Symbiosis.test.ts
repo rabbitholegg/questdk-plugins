@@ -1,138 +1,59 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Symbiosis'
 import {
-  PASSING_TEST_TRANSACTIONS,
-  FAILING_TEST_TRANSACTIONS,
-  controlTransaction,
+  passingTestCases,
+  failingTestCases,
 } from './test-transactions'
 import { metaBurnABI, metaRouteABI } from './abi'
-import { ETH_CHAIN_ID, OPTIMISM_CHAIN_ID } from './constants'
-import { symbiosis } from './symbiosis-sdk'
-
-const TEST_USER = '0xB7e98B3F16CC915B9C7a321c1bd95fa406BDbabe'
-const OPTIMISM_USDCe_ADDRESS = '0x7F5c764cBc14f9669B88837ca1490cCa17c31607'
+import { zeroAddress } from 'viem'
+import { Chains } from './utils'
 
 describe('Given the symbiosis plugin', () => {
-  // describe('When handling the bridge', () => {
-  //   test('should return a valid action filter', async () => {
-  //     const filter = await bridge({
-  //       sourceChainId: OPTIMISM_CHAIN_ID,
-  //       destinationChainId: ETH_CHAIN_ID,
-  //       tokenAddress: OPTIMISM_USDCe_ADDRESS,
-  //       amount: GreaterThanOrEqual(100000n),
-  //       recipient: TEST_USER,
-  //     })
+  describe('When handling the bridge', () => {
+    test('should return a valid action filter', async () => {
+      const { params } = passingTestCases[0]
+      const filter = await bridge(params)
+      expect(filter).to.deep.equal({
+        chainId:Chains.OPTIMISM,
+        to: '0x0f91052dc5B4baE53d0FeA5DAe561A117268f5d2',
+        input: {
+          $abi: metaRouteABI,
+          _metarouteTransaction: {
+            approvedTokens: [zeroAddress],
+            amount: {
+              $gte: '7500000000000000',
+            },
+            otherSideCalldata: {
+              $abiAbstract: metaBurnABI,
+              _metaBurnTransaction: {
+                chainID: Chains.ARBITRUM_ONE,
+                chain2address: '0xa99f898530df1514a566f1a6562d62809e99557d',
+              },
+            },
+          },
+        },
+      })
+    })
+  })
 
-  //     expect(filter).to.deep.equal({
-  //       chainId: 10,
-  //       to: symbiosis.metaRouter(10).address,
-  //       input: {
-  //         $abi: metaRouteABI,
-  //         _metarouteTransaction: {
-  //           approvedTokens: [OPTIMISM_USDCe_ADDRESS],
-  //           amount: {
-  //             $gte: '100000',
-  //           },
-  //           otherSideCalldata: {
-  //             $abiAbstract: metaBurnABI,
-  //             _metaBurnTransaction: {
-  //               chainID: 1,
-  //               chain2address: TEST_USER,
-  //             },
-  //           },
-  //         },
-  //       },
-  //     })
-  //   })
-  // })
   describe('should pass filter with valid transactions', () => {
-    PASSING_TEST_TRANSACTIONS.forEach((testTransaction) => {
-      test(testTransaction.description, async () => {
-        const {
-          transaction,
-          destinationChainId,
-          tokenAddress,
-          amount,
-          recipient,
-        } = testTransaction
-
-        const filter = await bridge({
-          sourceChainId: transaction.chainId,
-          destinationChainId,
-          tokenAddress,
-          amount: amount ? GreaterThanOrEqual(amount) : amount,
-          recipient,
-        })
+    passingTestCases.forEach((testCase) => {
+      const { transaction, description, params } = testCase
+      test(description, async () => {
+        const filter = await bridge(params)
         expect(apply(transaction, filter)).to.be.true
       })
     })
   })
-  // describe('should not pass filter with invalid parameters', () => {
-  //   test('when sourceChainId is incorrect', async () => {
-  //     const { transaction, tokenAddress, recipient } = controlTransaction
 
-  //     const filter = await bridge({
-  //       sourceChainId: 1, // 42161
-  //       destinationChainId: 5000,
-  //       tokenAddress,
-  //       amount: GreaterThanOrEqual(10000n),
-  //       recipient,
-  //     })
-  //     expect(apply(transaction, filter)).to.be.false
-  //   })
-  //   test('when bridge contract address is incorrect', async () => {
-  //     const { transaction, tokenAddress, recipient } = controlTransaction
-
-  //     const filter = await bridge({
-  //       sourceChainId: 42161,
-  //       destinationChainId: 5000,
-  //       contractAddress: '0x1DCfbC3fA01b2a86bC3a3f43479cCe9E8D438Adc',
-  //       tokenAddress,
-  //       amount: GreaterThanOrEqual(10000n),
-  //       recipient,
-  //     })
-  //     expect(apply(transaction, filter)).to.be.false
-  //   })
-  //   FAILING_TEST_TRANSACTIONS.forEach((testTransaction) => {
-  //     test(testTransaction.description, async () => {
-  //       const {
-  //         transaction,
-  //         destinationChainId,
-  //         tokenAddress,
-  //         amount,
-  //         recipient,
-  //       } = testTransaction
-
-  //       const filter = await bridge({
-  //         sourceChainId: transaction.chainId,
-  //         destinationChainId,
-  //         tokenAddress,
-  //         amount: amount ? GreaterThanOrEqual(amount) : amount,
-  //         recipient,
-  //       })
-  //       expect(apply(transaction, filter)).to.be.false
-  //     })
-  //   })
-  // })
-  // describe('control transaction should pass filter', () => {
-  //   test(controlTransaction.description, async () => {
-  //     const {
-  //       transaction,
-  //       destinationChainId,
-  //       tokenAddress,
-  //       amount,
-  //       recipient,
-  //     } = controlTransaction
-
-  //     const filter = await bridge({
-  //       sourceChainId: transaction.chainId,
-  //       destinationChainId,
-  //       tokenAddress,
-  //       amount: GreaterThanOrEqual(amount),
-  //       recipient,
-  //     })
-  //     expect(apply(transaction, filter)).to.be.true
-  //   })
-  // })
+  describe('should not pass filter with invalid transactions', () => {
+    failingTestCases.forEach((testCase) => {
+      const { transaction, description, params } = testCase
+      test(description, async () => {
+        const filter = await bridge(params)
+        expect(apply(transaction, filter)).to.be.false
+      })
+    })
+  })
 })
