@@ -44,49 +44,33 @@ export const mint = async (
     })
   }
 
+  const ERC721_FILTER = {
+    $abi: ZORA_MINTER_ABI_721,
+    $and: andArray721.length !== 0 ? andArray721 : undefined,
+  }
+
+  const ERC1155_FILTER = {
+    $abi: ZORA_MINTER_ABI_1155,
+    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+  }
+
   return compressJson({
     chainId,
     to: mintContract,
     input: {
       $or: [
-
-
         {
+          // batchmint function
           $abiAbstract: UNIVERSAL_MINTER_ABI,
-
-          // This only works if the contractAddress is the only one in the array. 
-          // We need to find out if it is anywhere in the array.
-          // Tried using $some, but I couldnt get it to work.
-          _targets: [contractAddress],
-
-          // Not sure if this also needs to use an array operator. It is an array of calldata (mintWithRewards function)
-          _calldatas: [
-            {
-              $or: [
-                {
-                  $abiAbstract: ZORA_MINTER_ABI_1155,
-                  quantity: amount,
-                  tokenId
-                },
-                {
-                  $abiAbstract: ZORA_MINTER_ABI_721,
-                  quantity: amount,
-                }
-              ]
-            }
-
-          ]
+          _targets: { $some: getAddress(contractAddress) },
+          _calldatas: {
+            $some: {
+              $or: [ERC721_FILTER, ERC1155_FILTER],
+            },
+          },
         },
-
-
-        {
-          $abi: ZORA_MINTER_ABI_721,
-          $and: andArray721.length !== 0 ? andArray721 : undefined,
-        },
-        {
-          $abi: ZORA_MINTER_ABI_1155,
-          $and: andArray1155.length !== 0 ? andArray1155 : undefined,
-        },
+        ERC721_FILTER,
+        ERC1155_FILTER,
       ],
     },
   })
