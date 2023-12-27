@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.28",
-    "@uniswap/sdk-core": "4.0.9",
+    "@uniswap/sdk-core": "4.0.10",
     "@uniswap/universal-router-sdk": "2.0.2",
     "viem": "^1.16.6"
   }
