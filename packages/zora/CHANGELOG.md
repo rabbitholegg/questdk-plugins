@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- [#152](https://github.com/rabbitholegg/questdk-plugins/pull/152) [`c7161af13a9ae4d71c430910fc92069a2b9c331a`](https://github.com/rabbitholegg/questdk-plugins/commit/c7161af13a9ae4d71c430910fc92069a2b9c331a) Thanks [@mmackz](https://github.com/mmackz)! - fix overindexing issue with batchmint
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes
