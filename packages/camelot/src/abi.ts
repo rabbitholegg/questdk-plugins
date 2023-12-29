@@ -235,16 +235,6 @@ export const CAMELOT_V3_EXACT_OUTPUT_ABI = [
   },
 ]
 
-export const V3_MULTICALL_ABI = [
-  {
-    inputs: [{ internalType: 'bytes[]', name: 'data', type: 'bytes[]' }],
-    name: 'multicall',
-    outputs: [{ internalType: 'bytes[]', name: 'results', type: 'bytes[]' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-]
-
 export const PARASWAP_ABI = [
   {
     inputs: [
