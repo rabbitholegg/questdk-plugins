@@ -4,6 +4,7 @@ import { Tokens, createTestCase } from './utils'
 import {
   V2_SWAP_ETH,
   V2_SWAP_TOKENS,
+  V2_TOKENS_TO_ETH,
   V3_SWAP_ETH,
   V3_TOKEN_TO_ETH,
   PARASWAP_SIMPLESWAP,
@@ -18,6 +19,7 @@ import {
 export const passingTestCases = [
   createTestCase(V2_SWAP_ETH, 'when swapping ETH for tokens'),
   createTestCase(V2_SWAP_TOKENS, 'when swapping tokens for tokens'),
+  createTestCase(V2_TOKENS_TO_ETH, 'when swapping Tokens for ETH V2'),
   createTestCase(V3_SWAP_ETH, 'when swapping ETH for tokens V3'),
   createTestCase(V3_TOKEN_TO_ETH, 'when swapping Tokens for ETH V3'),
   createTestCase(PARASWAP_SIMPLESWAP, 'for simple swap'),
