@@ -1,5 +1,5 @@
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import type { Address, Hash } from 'viem'
+import { type Address, type Hash, getAddress } from 'viem'
 
 export enum Tokens {
   ARB = '0x912CE59144191C1204E64559FE8253a0e49E6548',
@@ -66,11 +66,11 @@ export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
   const conditions: FilterOperator[] = []
 
   if (tokenIn) {
-    conditions.push({ $first: tokenIn })
+    conditions.push({ $first: getAddress(tokenIn) })
   }
 
   if (tokenOut) {
-    conditions.push({ $last: tokenOut })
+    conditions.push({ $last: getAddress(tokenOut) })
   }
 
   return {
