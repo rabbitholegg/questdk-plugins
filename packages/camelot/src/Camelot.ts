@@ -65,7 +65,8 @@ export const swap = async (
                     tokenOut: tokenOutOrWeth,
                   },
                   {
-                    path: buildV3PathQuery(tokenInOrWeth, tokenOutOrWeth),
+                    // exact output has the reverse structure (tokenOut first) 
+                    path: buildV3PathQuery(tokenOutOrWeth, tokenInOrWeth),
                   },
                 ],
                 amountInMaximum: amountIn,
