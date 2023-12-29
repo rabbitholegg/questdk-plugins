@@ -33,8 +33,6 @@ export const swap = async (
   const tokenInOrWeth = ethUsedIn ? Tokens.WETH : tokenIn
   const tokenOutOrWeth = ethUsedOut ? Tokens.WETH : tokenOut
 
-  console.log(buildV3PathQuery(tokenInOrWeth, tokenOutOrWeth))
-
   return compressJson({
     chainId: chainId,
     from: recipient,
@@ -51,7 +49,7 @@ export const swap = async (
         {
           // camelotV2 swap
           $abi: CAMELOT_V2_ABI,
-          path: buildV2PathQuery(tokenInOrWeth, tokenOut),
+          path: buildV2PathQuery(tokenInOrWeth, tokenOutOrWeth),
           amountOutMin: amountOut,
           amountIn: ethUsedIn ? undefined : amountIn,
         },
