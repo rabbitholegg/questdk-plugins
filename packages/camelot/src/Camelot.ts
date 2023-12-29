@@ -61,8 +61,15 @@ export const swap = async (
             {
               $abiAbstract: CAMELOT_V3_EXACT_OUTPUT_ABI,
               params: {
-                tokenIn: tokenInOrWeth,
-                tokenOut: tokenOutOrWeth,
+                $or: [
+                  {
+                    tokenIn: tokenInOrWeth,
+                    tokenOut: tokenOutOrWeth,
+                  },
+                  {
+                    path: buildV3PathQuery(tokenInOrWeth, tokenOutOrWeth),
+                  },
+                ],
                 amountInMaximum: amountIn,
                 amountOut,
               },
