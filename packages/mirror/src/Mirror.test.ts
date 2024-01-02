@@ -14,7 +14,6 @@ describe('Given the mirror plugin', () => {
       test('when collecting a mirror entry', async () => {
         const { params } = OP_COLLECT_ENTRY
         const filter = await mint(params)
-        console.log(JSON.stringify(filter, null, 2))
         expect(filter).to.deep.equal({
           chainId: 10,
           to: '0x05b52003e4b3ce431f467de89a1d0b82b663fc6b',
