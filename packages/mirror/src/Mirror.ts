@@ -30,5 +30,5 @@ export const getSupportedTokenAddresses = async (
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return [Chains.OPTIMISM]
+  return [Chains.OPTIMISM, Chains.ZORA]
 }

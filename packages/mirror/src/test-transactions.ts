@@ -18,6 +18,23 @@ export const OP_COLLECT_ENTRY: TestParams<MintActionParams> = {
   },
 }
 
+export const ZORA_COLLECT_ENTRY: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 7777777,
+    from: '0xfFB3b6E273986C6adC31A1F0146b8ea69e3c306C',
+    to: '0x189950164e777796CDF8844E030c300A01e65d1c',
+    hash: '0xaffb3da18ce604a3886403047dcae5402697128384becdb02b00f510217b2412',
+    input:
+      '0x434dcfba000000000000000000000000ffb3b6e273986c6adc31a1f0146b8ea69e3c306c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    value: '690000000000000',
+  },
+  params: {
+    chainId: Chains.ZORA,
+    contractAddress: '0x189950164e777796CDF8844E030c300A01e65d1c',
+    recipient: '0xfFB3b6E273986C6adC31A1F0146b8ea69e3c306C',
+  },
+}
+
 export const passingTestCases = [
   createTestCase(
     OP_COLLECT_ENTRY,
@@ -27,7 +44,7 @@ export const passingTestCases = [
 
 export const failingTestCases = [
   createTestCase(OP_COLLECT_ENTRY, 'when the chainId is incorrect', {
-    chainId: 42161,
+    chainId: Chains.ZORA,
   }),
   createTestCase(OP_COLLECT_ENTRY, 'when the contractAddress is incorrect', {
     contractAddress: '0x2ae28ce3c3997925403c0b3757ec4f4cf6b6cab4',
