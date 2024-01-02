@@ -6,9 +6,9 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { VAULT_CONTRACT, CHAIN_TO_TOKENS, TOKENFARM_CONTRACT } from './contract-addresses'
+import { VAULT_CONTRACT, CHAIN_TO_TOKENS, TOKENFARM_CONTRACT, VLP_CONTRACT, VELA_CONTRACT } from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { TOKENFARM_ABI, VAULT_ABI } from './abi'
+import { TOKENFARM_ABI, TOKENFARM_ABI2, VAULT_ABI } from './abi'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -49,16 +49,27 @@ export const mint = async (
 export const stake = async (
   stake: StakeActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amountOne, amountTwo } = stake
+  const { chainId, contractAddress, tokenOne, amountOne } = stake
 
-  return compressJson({
-    chainId,
-    to: contractAddress ?? TOKENFARM_CONTRACT,
-    input: {
-      $abi: TOKENFARM_ABI,
-      _amount: amountOne,
-    },
-  })
+  if (tokenOne.toLowerCase() == VLP_CONTRACT) {
+    return compressJson({
+      chainId,
+      to: contractAddress ?? TOKENFARM_CONTRACT,
+      input: {
+        $abi: TOKENFARM_ABI,
+        _amount: amountOne,
+      },
+    })
+  } else {
+    return compressJson({
+      chainId,
+      to: contractAddress ?? TOKENFARM_CONTRACT,
+      input: {
+        $abi: TOKENFARM_ABI2,
+        _amount: amountOne,
+      },
+    })
+  }
 }
 
 export const getSupportedTokenAddresses = async (

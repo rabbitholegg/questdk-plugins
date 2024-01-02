@@ -46,6 +46,9 @@ export const TOKENFARM_ABI = [
     stateMutability: 'nonpayable',
     type: 'function'
   },
+]
+
+export const TOKENFARM_ABI2 = [
   {
     inputs: [
       { internalType: 'uint256', name: '_amount', type: 'uint256' }

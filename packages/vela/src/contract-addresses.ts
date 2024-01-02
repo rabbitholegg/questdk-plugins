@@ -10,6 +10,8 @@ const ARBITRUM_LINK = '0xf97f4df75117a78c1a5a0dbb814af92458539fb4'
 
 export const VAULT_CONTRACT = '0xc4abade3a15064f9e3596943c699032748b13352'
 export const TOKENFARM_CONTRACT = '0x60b8C145235A31f1949a831803768bF37d7Ab7AA'
+export const VLP_CONTRACT = '0xc5b2d9fda8a82e8dcecd5e9e6e99b78a9188eb05'
+export const VELA_CONTRACT = '0x088cd8f5ef3652623c22d48b1605dcfe860cd704'
 
 export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] } = {
   [Chains.ARBITRUM_ONE]: [
