@@ -4,6 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+import { COLLECT_ENTRY_ABI } from './abi'
 
 export const mint = async (
   mint: MintActionParams,
@@ -13,7 +14,10 @@ export const mint = async (
   return compressJson({
     chainId,
     to: contractAddress,
-    input: {},
+    input: {
+      $abi: COLLECT_ENTRY_ABI,
+      tokenRecipient: recipient
+    },
   })
 }
 
