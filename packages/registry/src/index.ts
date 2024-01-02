@@ -36,6 +36,7 @@ import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
 import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
+import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -63,6 +64,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [WooFi.pluginId]: WooFi,
   [Sushi.pluginId]: Sushi,
   [Treasure.pluginId]: Treasure,
+  [Soundxyz.pluginId]: Soundxyz,
 }
 
 export const getPlugin = (pluginId: string) => {
