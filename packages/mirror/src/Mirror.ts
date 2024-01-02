@@ -5,6 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { COLLECT_ENTRY_ABI } from './abi'
+import { Chains } from './utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -14,6 +15,7 @@ export const mint = async (
   return compressJson({
     chainId,
     to: contractAddress,
+    from: recipient,
     input: {
       $abi: COLLECT_ENTRY_ABI,
       tokenRecipient: recipient,
@@ -24,9 +26,9 @@ export const mint = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return [] // supported tokens don't apply for the mint action
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return [Chains.OPTIMISM]
 }
