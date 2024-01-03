@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-connext
 
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#145](https://github.com/rabbitholegg/questdk-plugins/pull/145) [`81942f38c4ce1234a68a8e19bacc6de8ffd1ed46`](https://github.com/rabbitholegg/questdk-plugins/commit/81942f38c4ce1234a68a8e19bacc6de8ffd1ed46) Thanks [@mmackz](https://github.com/mmackz)! - combine filters for xcall and multisend
+
 ## 1.0.0-alpha.8
 
 ### Minor Changes

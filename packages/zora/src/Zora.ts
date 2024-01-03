@@ -4,9 +4,13 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
-import { type Address } from 'viem'
+import { type Address, getAddress } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { ZORA_MINTER_ABI_1155, ZORA_MINTER_ABI_721 } from './abi'
+import {
+  UNIVERSAL_MINTER_ABI,
+  ZORA_MINTER_ABI_1155,
+  ZORA_MINTER_ABI_721,
+} from './abi'
 import type { Chains } from './utils'
 
 export const mint = async (
@@ -40,19 +44,33 @@ export const mint = async (
     })
   }
 
+  const ERC721_FILTER = {
+    $abi: ZORA_MINTER_ABI_721,
+    $and: andArray721.length !== 0 ? andArray721 : undefined,
+  }
+
+  const ERC1155_FILTER = {
+    $abi: ZORA_MINTER_ABI_1155,
+    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+  }
+
   return compressJson({
     chainId,
     to: mintContract,
     input: {
       $or: [
         {
-          $abiAbstract: ZORA_MINTER_ABI_721,
-          $and: andArray721.length !== 0 ? andArray721 : undefined,
+          // batchmint function
+          $abiAbstract: UNIVERSAL_MINTER_ABI,
+          _targets: { $some: getAddress(contractAddress) },
+          _calldatas: {
+            $some: {
+              $or: [ERC721_FILTER, ERC1155_FILTER],
+            },
+          },
         },
-        {
-          $abiAbstract: ZORA_MINTER_ABI_1155,
-          $and: andArray1155.length !== 0 ? andArray1155 : undefined,
-        },
+        ERC721_FILTER,
+        ERC1155_FILTER,
       ],
     },
   })

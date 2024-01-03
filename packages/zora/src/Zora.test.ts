@@ -3,7 +3,11 @@ import { describe, expect, test } from 'vitest'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { BASIC_PURCHASE } from './test-transactions'
 import { mint } from './Zora'
-import { ZORA_MINTER_ABI_1155, ZORA_MINTER_ABI_721 } from './abi'
+import {
+  ZORA_MINTER_ABI_1155,
+  ZORA_MINTER_ABI_721,
+  UNIVERSAL_MINTER_ABI,
+} from './abi'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
@@ -21,7 +25,59 @@ describe('Given the zora plugin', () => {
         input: {
           $or: [
             {
-              $abiAbstract: ZORA_MINTER_ABI_721,
+              $abiAbstract: UNIVERSAL_MINTER_ABI,
+              _targets: {
+                $some: '0xfFF631EF40557f8705e89053aF794a1DCFA0A90b',
+              },
+              _calldatas: {
+                $some: {
+                  $or: [
+                    {
+                      $abi: ZORA_MINTER_ABI_721,
+                      $and: [
+                        {
+                          $or: [
+                            {
+                              recipient:
+                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                            },
+                            {
+                              tokenRecipient:
+                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                            },
+                            {
+                              to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    {
+                      $abi: ZORA_MINTER_ABI_1155,
+                      $and: [
+                        {
+                          $or: [
+                            {
+                              recipient:
+                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                            },
+                            {
+                              tokenRecipient:
+                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                            },
+                            {
+                              to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              $abi: ZORA_MINTER_ABI_721,
               $and: [
                 {
                   $or: [
@@ -40,7 +96,7 @@ describe('Given the zora plugin', () => {
               ],
             },
             {
-              $abiAbstract: ZORA_MINTER_ABI_1155,
+              $abi: ZORA_MINTER_ABI_1155,
               $and: [
                 {
                   $or: [
