@@ -6,6 +6,7 @@ import {
 import { type Address } from 'viem'
 import { SUPERMINTER, SUPERMINTER_V2 } from './constants'
 import { SUPERMINTER_ABI } from './abi'
+import { Chains } from './utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -35,5 +36,5 @@ export const getSupportedTokenAddresses = async (
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return [Chains.ETHEREUM, Chains.OPTIMISM, Chains.BASE]
 }
