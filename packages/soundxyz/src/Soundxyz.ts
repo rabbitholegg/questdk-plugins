@@ -23,7 +23,7 @@ export const mint = async (
       p: {
         edition: contractAddress,
         quantity: amount,
-        to: recipient,
+        to: recipient, // Can be given as gift, so recipient will not always match sender
       },
     },
   })
