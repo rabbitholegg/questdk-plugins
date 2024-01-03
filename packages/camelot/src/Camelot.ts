@@ -5,7 +5,6 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
-import { DEFAULT_TOKEN_LIST } from './contract-addresses'
 import { buildV2PathQuery, buildV3PathQuery, Tokens } from './utils'
 import {
   CAMELOT_V2_ABI,
@@ -14,11 +13,14 @@ import {
   PARASWAP_ABI,
 } from './abi'
 import {
+  DEFAULT_TOKEN_LIST,
   CAMELOT_V2_ROUTER,
   CAMELOT_V3_ROUTER,
   PARASWAP_ROUTER,
   INTERNAL_ETH_ADDRESS,
 } from './contract-addresses'
+
+const PARASWAP_PARTNER = '0x353D2d14Bb674892910685520Ac040f560CcBC06'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -102,7 +104,7 @@ export const swap = async (
                 fromAmount: amountIn,
                 toAmount: amountOut,
                 toToken: tokenOutOrEth,
-                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: PARASWAP_PARTNER,
               },
             },
             {
@@ -116,7 +118,7 @@ export const swap = async (
                     to: tokenOutOrEth,
                   },
                 },
-                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: PARASWAP_PARTNER,
               },
             },
             {
@@ -134,7 +136,7 @@ export const swap = async (
                     },
                   },
                 },
-                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: PARASWAP_PARTNER,
               },
             },
             {
@@ -143,7 +145,7 @@ export const swap = async (
                 assets: buildV2PathQuery(tokenIn, tokenOut),
                 fromAmount: amountIn,
                 toAmount: amountOut,
-                partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
+                partner: PARASWAP_PARTNER,
               },
             },
           ],
