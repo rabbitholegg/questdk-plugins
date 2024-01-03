@@ -19,7 +19,7 @@ const OP_SUPERMINTER: TestParams<MintActionParams> = {
   },
 }
 
-const OP_SUPERMINTER_V2: TestParams<MintActionParams> = {
+export const OP_SUPERMINTER_V2: TestParams<MintActionParams> = {
   transaction: {
     chainId: 10,
     from: '0xe8b8679c248307a37a2bd35dd43d2278ba346138',
