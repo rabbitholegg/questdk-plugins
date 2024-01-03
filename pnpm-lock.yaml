@@ -204,6 +204,31 @@ importers:
       typescript: 5.1.6
       vitest: 0.33.0
 
+  packages/handlefi:
+    specifiers:
+      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@types/node': ^20.8.7
+      '@vitest/coverage-v8': ^0.33.0
+      rimraf: ^5.0.5
+      rome: ^12.1.3
+      ts-node: ^10.9.1
+      tsconfig: workspace:*
+      typescript: ^5.2.2
+      viem: ^1.16.6
+      vitest: ^0.33.0
+    dependencies:
+      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      viem: 1.21.0_typescript@5.3.3
+    devDependencies:
+      '@types/node': 20.10.5
+      '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
+      rimraf: 5.0.5
+      rome: 12.1.3
+      ts-node: 10.9.2_7ln3lwozyybesesf4lghtaucbi
+      tsconfig: link:../tsconfig
+      typescript: 5.3.3
+      vitest: 0.33.0
+
   packages/hop:
     specifiers:
       '@hop-protocol/core': 0.0.1-beta.182
@@ -401,6 +426,7 @@ importers:
       '@rabbitholegg/questdk-plugin-camelot': workspace:*
       '@rabbitholegg/questdk-plugin-connext': workspace:*
       '@rabbitholegg/questdk-plugin-gmx': workspace:*
+      '@rabbitholegg/questdk-plugin-handlefi': workspace:*
       '@rabbitholegg/questdk-plugin-hop': workspace:*
       '@rabbitholegg/questdk-plugin-hyphen': workspace:*
       '@rabbitholegg/questdk-plugin-okutrade': workspace:*
@@ -436,6 +462,7 @@ importers:
       '@rabbitholegg/questdk-plugin-camelot': link:../camelot
       '@rabbitholegg/questdk-plugin-connext': link:../connext
       '@rabbitholegg/questdk-plugin-gmx': link:../gmx
+      '@rabbitholegg/questdk-plugin-handlefi': link:../handlefi
       '@rabbitholegg/questdk-plugin-hop': link:../hop
       '@rabbitholegg/questdk-plugin-hyphen': link:../hyphen
       '@rabbitholegg/questdk-plugin-okutrade': link:../okutrade
@@ -2383,7 +2410,7 @@ packages:
         optional: true
     dependencies:
       abitype: 0.9.10_typescript@5.1.6
-      rimraf: 5.0.1
+      rimraf: 5.0.5
       typescript: 5.1.6
       viem: 1.21.0_typescript@5.1.6
     transitivePeerDependencies:
@@ -2401,7 +2428,7 @@ packages:
         optional: true
     dependencies:
       abitype: 0.9.10_typescript@5.3.3
-      rimraf: 5.0.1
+      rimraf: 5.0.5
       typescript: 5.3.3
       viem: 1.21.0_typescript@5.3.3
     transitivePeerDependencies:
@@ -2466,7 +2493,7 @@ packages:
     resolution: {integrity: sha512-bcKpo1oj54hGholplGLpqPHRbIsnbixFtc06nwuNM5/dwSXOq/AAYoIBRsBmnZJSdfeNW5rnff7NTAz3ZCqR9Q==}
     dependencies:
       '@noble/curves': 1.0.0
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.5
     dev: false
 
@@ -2489,7 +2516,7 @@ packages:
   /@scure/bip39/1.2.0:
     resolution: {integrity: sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==}
     dependencies:
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.5
     dev: false
 
@@ -2761,6 +2788,7 @@ packages:
 
   /@types/node/20.4.5:
     resolution: {integrity: sha512-rt40Nk13II9JwQBdeYqmbn2Q6IVTA5uPhvSO+JVqdXw/6/4glI6oR9ezty/A9Hg5u7JH4OmYmuQ+XvjKm0Datg==}
+    dev: true
 
   /@types/normalize-package-data/2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2821,7 +2849,7 @@ packages:
   /@types/ws/8.5.10:
     resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.10.5
     dev: false
 
   /@uniswap/lib/4.0.1-alpha:
@@ -8589,6 +8617,7 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
+    dev: true
 
   /rimraf/5.0.5:
     resolution: {integrity: sha512-CqDakW+hMe/Bz202FPEymy68P+G50RfMQK+Qo5YUqc9SPipvbGjCGKd0RSKEelbsfQuw3g5NZDSrlZZAJurH1A==}
@@ -8596,7 +8625,6 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
-    dev: true
 
   /ripemd160/2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
@@ -11105,7 +11133,7 @@ packages:
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
     dev: false
     optional: true
 
