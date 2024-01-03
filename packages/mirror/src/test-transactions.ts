@@ -40,6 +40,7 @@ export const passingTestCases = [
     OP_COLLECT_ENTRY,
     'when collecting a mirror entry on optimism',
   ),
+  createTestCase(ZORA_COLLECT_ENTRY, 'when collecting a mirror entry on zora'),
 ]
 
 export const failingTestCases = [
