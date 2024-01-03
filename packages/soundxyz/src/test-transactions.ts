@@ -1,6 +1,5 @@
-import type { MintActionParams } from '@rabbitholegg/questdk'
+import { GreaterThanOrEqual, type MintActionParams } from '@rabbitholegg/questdk'
 import { Chains, createTestCase, type TestParams } from './utils'
-import { SUPERMINTER, SUPERMINTER_V2 } from './constants'
 
 const OP_SUPERMINTER: TestParams<MintActionParams> = {
   transaction: {
@@ -14,8 +13,9 @@ const OP_SUPERMINTER: TestParams<MintActionParams> = {
   },
   params: {
     chainId: Chains.OPTIMISM,
-    contractAddress: SUPERMINTER,
+    contractAddress: '0x77570069ef75035b9d0a433c1627f7372b08939e',
     recipient: '0x6fdab5224d98f396eca460838a2ef1a219767bb7',
+    amount: GreaterThanOrEqual(1),
   },
 }
 
@@ -31,8 +31,9 @@ const OP_SUPERMINTER_V2: TestParams<MintActionParams> = {
   },
   params: {
     chainId: Chains.OPTIMISM,
-    contractAddress: SUPERMINTER_V2,
+    contractAddress: '0x6112f85c9a804b3aeebb71a82040461d55b4e0e3',
     recipient: '0xe8b8679c248307a37a2bd35dd43d2278ba346138',
+    amount: GreaterThanOrEqual(1),
   },
 }
 
@@ -47,5 +48,8 @@ export const failingTestCases = [
   }),
   createTestCase(OP_SUPERMINTER_V2, 'when contractAddress is not correct', {
     contractAddress: '0x6806411765Af15Bddd26f8f544A34cC40cb9838B',
+  }),
+  createTestCase(OP_SUPERMINTER_V2, 'when amount is insufficient', {
+    amount: GreaterThanOrEqual(10),
   }),
 ]
