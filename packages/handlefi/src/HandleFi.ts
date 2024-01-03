@@ -4,7 +4,12 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { zeroAddress, type Address } from 'viem'
-import { ARBITRUM_ONE, SWAP_CONTRACTS, TOKEN_ADDRESSES } from './constants'
+import {
+  ARBITRUM_ONE,
+  SWAP_CONTRACTS,
+  TOKEN_ADDRESSES,
+  PARASWAP_PARTNER,
+} from './constants'
 import {
   getParaSwapFilter,
   getV2RouterFilter,
@@ -27,7 +32,7 @@ export const swap = async (
     },
     input: {
       $or: [
-        getParaSwapFilter(swap),
+        getParaSwapFilter(swap, PARASWAP_PARTNER),
         getV2RouterFilter(swap),
         getHPSM2Filter(swap),
         getHlpCurveV2Filter(swap),

@@ -1,5 +1,5 @@
 import { type SwapActionParams } from '@rabbitholegg/questdk'
-import { getAddress, zeroAddress } from 'viem'
+import { getAddress, zeroAddress, type Address } from 'viem'
 import { buildV2PathQueryWithCase } from './utils'
 import {
   PARASWAP_ABI,
@@ -11,7 +11,10 @@ import {
 } from './abi'
 import { WETH } from './constants'
 
-export function getParaSwapFilter(params: SwapActionParams) {
+export function getParaSwapFilter(
+  params: SwapActionParams,
+  partner: Address | undefined,
+) {
   const { tokenIn, tokenOut, amountIn, amountOut } = params
   const internalEthAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
   const tokenInUsed = tokenIn === zeroAddress ? internalEthAddress : tokenIn
@@ -27,7 +30,7 @@ export function getParaSwapFilter(params: SwapActionParams) {
           fromAmount: amountIn,
           toAmount: amountOut,
           toToken: tokenOutUsed,
-          partner: '0xFa2c1bE677BE4BEc8851D1577B343F7060B51E3A',
+          partner,
         },
       },
       {
@@ -41,7 +44,7 @@ export function getParaSwapFilter(params: SwapActionParams) {
               to: tokenOutUsed,
             },
           },
-          partner: '0xFa2c1bE677BE4BEc8851D1577B343F7060B51E3A',
+          partner,
         },
       },
       {
@@ -59,7 +62,7 @@ export function getParaSwapFilter(params: SwapActionParams) {
               },
             },
           },
-          partner: '0xFa2c1bE677BE4BEc8851D1577B343F7060B51E3A',
+          partner,
         },
       },
       {
@@ -68,7 +71,7 @@ export function getParaSwapFilter(params: SwapActionParams) {
           assets: buildV2PathQueryWithCase('lower', tokenIn, tokenOut),
           fromAmount: amountIn,
           toAmount: amountOut,
-          partner: '0xFa2c1bE677BE4BEc8851D1577B343F7060B51E3A',
+          partner,
         },
       },
     ],
