@@ -42,9 +42,6 @@ export const SUPERMINTER_ABI = [
     stateMutability: 'payable',
     type: 'function',
   },
-]
-
-export const SUPERMINTER_V2_ABI = [
   {
     inputs: [
       {
