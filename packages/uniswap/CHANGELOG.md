@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- [#149](https://github.com/rabbitholegg/questdk-plugins/pull/149) [`025dfaab3b7d53353c17d2502e9d7b410cd506c1`](https://github.com/rabbitholegg/questdk-plugins/commit/025dfaab3b7d53353c17d2502e9d7b410cd506c1) Thanks [@mmackz](https://github.com/mmackz)! - add sepolia op testnet to excluded networks
+
+## 1.0.0-alpha.9
+
+### Patch Changes
+
+- [#127](https://github.com/rabbitholegg/questdk-plugins/pull/127) [`afc1d1fab12208f170b0849e924468ef369598ce`](https://github.com/rabbitholegg/questdk-plugins/commit/afc1d1fab12208f170b0849e924468ef369598ce) Thanks [@mmackz](https://github.com/mmackz)! - fix casing issue with token on V3 swaps
+
 ## 1.0.0-alpha.8
 
 ### Patch Changes

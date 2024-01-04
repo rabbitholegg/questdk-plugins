@@ -6,15 +6,9 @@ import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { Tokens } from './utils.js'
 import {
   DEFAULT_TOKEN_LIST,
-  GMX_ROUTERV1_ADDRESS,
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
-import {
-  passingTestCasesV1,
-  failingTestCasesV1,
-  passingTestCasesV2,
-  failingTestCasesV2,
-} from './test-setup.js'
+import { passingTestCasesV2, failingTestCasesV2 } from './test-setup.js'
 
 describe('Given the gmx plugin', () => {
   describe('When handling the swap', () => {
@@ -22,7 +16,7 @@ describe('Given the gmx plugin', () => {
       test('when swapping tokens', async () => {
         const filter = await swap({
           chainId: ARB_ONE_CHAIN_ID,
-          contractAddress: GMX_ROUTERV1_ADDRESS,
+          contractAddress: GMX_ROUTERV2_ADDRESS,
           tokenIn: Tokens.USDCe,
           tokenOut: Tokens.USDT,
           amountIn: GreaterThanOrEqual(100000n),
@@ -33,10 +27,7 @@ describe('Given the gmx plugin', () => {
         expect(filter).to.deep.equal({
           chainId: ARB_ONE_CHAIN_ID,
           to: {
-            $or: [
-              GMX_ROUTERV1_ADDRESS.toLowerCase(),
-              GMX_ROUTERV2_ADDRESS.toLowerCase(),
-            ],
+            $or: [GMX_ROUTERV2_ADDRESS.toLowerCase()],
           },
           input: {
             $or: [
@@ -80,26 +71,6 @@ describe('Given the gmx plugin', () => {
               },
             ],
           },
-        })
-      })
-    })
-
-    describe('should pass filter with valid V1 transactions', () => {
-      passingTestCasesV1.forEach((testCase) => {
-        const { transaction, params, description } = testCase
-        test(description, async () => {
-          const filter = await swap({ ...params })
-          expect(apply(transaction, filter)).to.be.true
-        })
-      })
-    })
-
-    describe('should not pass filter with invalid V1 transactions', () => {
-      failingTestCasesV1.forEach((testCase) => {
-        const { transaction, params, description } = testCase
-        test(description, async () => {
-          const filter = await swap({ ...params })
-          expect(apply(transaction, filter)).to.be.false
         })
       })
     })

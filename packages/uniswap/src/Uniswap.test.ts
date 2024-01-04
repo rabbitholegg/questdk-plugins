@@ -1,6 +1,7 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { getSupportedTokenAddresses, swap } from './Uniswap.js'
+import { getAddress, type Address } from 'viem'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
@@ -83,6 +84,24 @@ describe('Given the uniswap plugin', () => {
           expect(apply(transaction, filter)).to.be.true
         })
       })
+
+      test('when tokenIn is checksummed', async () => {
+        const { transaction, params } = passingTestCases[1]
+        const filter = await swap({
+          ...params,
+          tokenIn: getAddress(params.tokenIn as Address),
+        })
+        expect(apply(transaction, filter)).to.be.true
+      })
+
+      test('when tokenOut is checksummed', async () => {
+        const { transaction, params } = passingTestCases[0]
+        const filter = await swap({
+          ...params,
+          tokenOut: getAddress(params.tokenOut as Address),
+        })
+        expect(apply(transaction, filter)).to.be.true
+      })
     })
 
     describe('should not pass filter with invalid transactions', () => {
@@ -101,7 +120,6 @@ describe('Given the uniswap plugin', () => {
           const tokens = await getSupportedTokenAddresses(chainId)
           const addressRegex = /^0x[a-fA-F0-9]{40}$/
           expect(tokens).to.be.an('array')
-          expect(tokens).to.have.length.greaterThan(0)
           expect(tokens).to.have.length.lessThan(100)
           tokens.forEach((token) => {
             expect(token).to.match(

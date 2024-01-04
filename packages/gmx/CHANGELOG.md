@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.13
+
+### Minor Changes
+
+- [#130](https://github.com/rabbitholegg/questdk-plugins/pull/130) [`424937ff0fb7f087dd04ef55c7d7e478c5906ade`](https://github.com/rabbitholegg/questdk-plugins/commit/424937ff0fb7f087dd04ef55c7d7e478c5906ade) Thanks [@Quazia](https://github.com/Quazia)! - remove V1 from GMX plugin
+
 ## 1.0.0-alpha.12
 
 ### Minor Changes
