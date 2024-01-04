@@ -13,6 +13,7 @@ export type {
   StakeActionParams,
   BridgeActionParams,
   MintActionParams,
+  OptionsActionParams,
   DelegateActionParams,
   ActionParams,
   IActionPlugin,
