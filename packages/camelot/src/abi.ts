@@ -1,4 +1,4 @@
-export const CAMELOT_ABI = [
+export const CAMELOT_V2_ABI = [
   {
     inputs: [
       {
@@ -106,6 +106,131 @@ export const CAMELOT_ABI = [
     name: 'swapExactTokensForTokensSupportingFeeOnTransferTokens',
     outputs: [],
     stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
+export const CAMELOT_V3_EXACT_INPUT_ABI = [
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'bytes', name: 'path', type: 'bytes' },
+          { internalType: 'address', name: 'recipient', type: 'address' },
+          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'amountOutMinimum',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct ISwapRouter.ExactInputParams',
+        name: 'params',
+        type: 'tuple',
+      },
+    ],
+    name: 'exactInput',
+    outputs: [{ internalType: 'uint256', name: 'amountOut', type: 'uint256' }],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'address', name: 'tokenIn', type: 'address' },
+          { internalType: 'address', name: 'tokenOut', type: 'address' },
+          { internalType: 'address', name: 'recipient', type: 'address' },
+          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'amountOutMinimum',
+            type: 'uint256',
+          },
+          { internalType: 'uint160', name: 'limitSqrtPrice', type: 'uint160' },
+        ],
+        internalType: 'struct ISwapRouter.ExactInputSingleParams',
+        name: 'params',
+        type: 'tuple',
+      },
+    ],
+    name: 'exactInputSingle',
+    outputs: [{ internalType: 'uint256', name: 'amountOut', type: 'uint256' }],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'address', name: 'tokenIn', type: 'address' },
+          { internalType: 'address', name: 'tokenOut', type: 'address' },
+          { internalType: 'address', name: 'recipient', type: 'address' },
+          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'amountOutMinimum',
+            type: 'uint256',
+          },
+          { internalType: 'uint160', name: 'limitSqrtPrice', type: 'uint160' },
+        ],
+        internalType: 'struct ISwapRouter.ExactInputSingleParams',
+        name: 'params',
+        type: 'tuple',
+      },
+    ],
+    name: 'exactInputSingleSupportingFeeOnTransferTokens',
+    outputs: [{ internalType: 'uint256', name: 'amountOut', type: 'uint256' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
+export const CAMELOT_V3_EXACT_OUTPUT_ABI = [
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'bytes', name: 'path', type: 'bytes' },
+          { internalType: 'address', name: 'recipient', type: 'address' },
+          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountInMaximum', type: 'uint256' },
+        ],
+        internalType: 'struct ISwapRouter.ExactOutputParams',
+        name: 'params',
+        type: 'tuple',
+      },
+    ],
+    name: 'exactOutput',
+    outputs: [{ internalType: 'uint256', name: 'amountIn', type: 'uint256' }],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'address', name: 'tokenIn', type: 'address' },
+          { internalType: 'address', name: 'tokenOut', type: 'address' },
+          { internalType: 'uint24', name: 'fee', type: 'uint24' },
+          { internalType: 'address', name: 'recipient', type: 'address' },
+          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountInMaximum', type: 'uint256' },
+          { internalType: 'uint160', name: 'limitSqrtPrice', type: 'uint160' },
+        ],
+        internalType: 'struct ISwapRouter.ExactOutputSingleParams',
+        name: 'params',
+        type: 'tuple',
+      },
+    ],
+    name: 'exactOutputSingle',
+    outputs: [{ internalType: 'uint256', name: 'amountIn', type: 'uint256' }],
+    stateMutability: 'payable',
     type: 'function',
   },
 ]
