@@ -1,4 +1,7 @@
-import { GreaterThanOrEqual, type MintActionParams } from '@rabbitholegg/questdk'
+import {
+  GreaterThanOrEqual,
+  type MintActionParams,
+} from '@rabbitholegg/questdk'
 import { Chains, createTestCase, type TestParams } from './utils'
 
 const OP_SUPERMINTER: TestParams<MintActionParams> = {
