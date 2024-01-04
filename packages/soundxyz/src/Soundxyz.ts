@@ -4,8 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { SUPERMINTER, SUPERMINTER_V2 } from './constants'
-import { SUPERMINTER_ABI } from './abi'
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 import { Chains } from './utils'
 
 export const mint = async (

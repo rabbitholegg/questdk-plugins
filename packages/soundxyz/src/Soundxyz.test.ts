@@ -7,8 +7,7 @@ import {
   OP_SUPERMINTER_V2,
 } from './test-transactions'
 import { Chains } from './utils'
-import { SUPERMINTER, SUPERMINTER_V2 } from './constants'
-import { SUPERMINTER_ABI } from './abi'
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 
 describe('Given the soundxyz plugin', () => {
   describe('When handling the mint action', () => {
