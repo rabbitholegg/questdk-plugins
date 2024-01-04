@@ -13,6 +13,17 @@ export type SwapActionParams = {
   deadline?: bigint | FilterOperator
 }
 
+
+
+export type OptionsActionParams = {
+  chainId: number
+  contractAddress?: Address
+  token?: Address
+  amount?: bigint | FilterOperator
+  recipient?: Address
+  orderType?: OrderType
+}
+
 export type StakeActionParams = {
   chainId: number
   contractAddress?: Address
@@ -66,9 +77,8 @@ export type ActionParams =
   | BridgeActionParams
   | MintActionParams
   | DelegateActionParams
-  | MintActionParams
   | QuestActionParams
-
+  | OptionsActionParams
 export interface IActionPlugin {
   pluginId: string
   getSupportedChainIds: (task?: ActionType) => Promise<number[]>
@@ -97,6 +107,9 @@ export interface IActionPlugin {
   quest?: (
     params: QuestActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  options?: (
+    params: OptionsActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
 }
 
 export enum ActionType {
@@ -110,4 +123,10 @@ export enum ActionType {
   Delegate = 'delegate',
   Lend = 'lend',
   Other = 'other',
+  Options = 'options',
+}
+
+export enum OrderType {
+  Limit = 'limit',
+  Market = 'market',
 }

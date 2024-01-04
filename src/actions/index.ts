@@ -5,6 +5,7 @@ export type {
   MintActionParams,
   BurnActionParams,
   QuestActionParams,
+  OptionsActionParams,
   DelegateActionParams,
   ActionParams,
   IActionPlugin,
