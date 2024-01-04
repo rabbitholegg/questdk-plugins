@@ -41,8 +41,8 @@ export const OP_SUPERMINTER_V2: TestParams<MintActionParams> = {
 }
 
 export const passingTestCases = [
-  createTestCase(OP_SUPERMINTER, 'when mint uses superminter v1 contract'),
-  createTestCase(OP_SUPERMINTER_V2, 'when mint uses superminter v2 contract'),
+  createTestCase(OP_SUPERMINTER, 'when minting superminter v1 contract'),
+  createTestCase(OP_SUPERMINTER_V2, 'when minting superminter v2 contract'),
 ]
 
 export const failingTestCases = [
