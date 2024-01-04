@@ -37,6 +37,8 @@ import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
 import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
+import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
+
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -65,6 +67,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Sushi.pluginId]: Sushi,
   [Treasure.pluginId]: Treasure,
   [HandleFi.pluginId]: HandleFi,
+  [Mirror.pluginId]: Mirror,
 }
 
 export const getPlugin = (pluginId: string) => {
