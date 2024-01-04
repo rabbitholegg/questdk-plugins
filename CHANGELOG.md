@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.29
+
+### Minor Changes
+
+- [#59](https://github.com/rabbitholegg/questdk/pull/59) [`93b1878`](https://github.com/rabbitholegg/questdk/commit/93b18785224e133e5c16f2457dc6fdcc0903e300) Thanks [@Quazia](https://github.com/Quazia)! - Add Options Type
+
 ## 2.0.0-alpha.28
 
 ### Patch Changes
