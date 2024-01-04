@@ -1,6 +1,6 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.49",
+  "name": "@rabbitholegg/questdk-plugin-soundxyz",
+  "version": "1.0.0-alpha.0",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -44,33 +44,6 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.28",
-    "@rabbitholegg/questdk-plugin-across": "workspace:*",
-    "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
-    "@rabbitholegg/questdk-plugin-basepaint": "workspace:*",
-    "@rabbitholegg/questdk-plugin-camelot": "workspace:*",
-    "@rabbitholegg/questdk-plugin-connext": "workspace:*",
-    "@rabbitholegg/questdk-plugin-gmx": "workspace:*",
-    "@rabbitholegg/questdk-plugin-hop": "workspace:*",
-    "@rabbitholegg/questdk-plugin-hyphen": "workspace:*",
-    "@rabbitholegg/questdk-plugin-optimism": "workspace:*",
-    "@rabbitholegg/questdk-plugin-paraswap": "workspace:*",
-    "@rabbitholegg/questdk-plugin-polygon": "workspace:*",
-    "@rabbitholegg/questdk-plugin-stargate": "workspace:*",
-    "@rabbitholegg/questdk-plugin-symbiosis": "workspace:*",
-    "@rabbitholegg/questdk-plugin-tally": "workspace:*",
-    "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
-    "@rabbitholegg/questdk-plugin-rabbithole": "workspace:*",
-    "@rabbitholegg/questdk-plugin-okutrade": "workspace:*",
-    "@rabbitholegg/questdk-plugin-balancer": "workspace:*",
-    "@rabbitholegg/questdk-plugin-traderjoe": "workspace:*",
-    "@rabbitholegg/questdk-plugin-zora": "workspace:*",
-    "@rabbitholegg/questdk-plugin-synapse": "workspace:*",
-    "@rabbitholegg/questdk-plugin-woofi": "workspace:*",
-    "@rabbitholegg/questdk-plugin-sushi": "workspace:*",
-    "@rabbitholegg/questdk-plugin-treasure": "workspace:*",
-    "@rabbitholegg/questdk-plugin-handlefi": "workspace:*",
-    "@rabbitholegg/questdk-plugin-mirror": "workspace:*",
-    "@rabbitholegg/questdk-plugin-soundxyz": "workspace:*",
-    "viem": "^1.16.6"
+    "viem": "1.16.6"
   }
 }
