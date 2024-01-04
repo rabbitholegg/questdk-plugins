@@ -13,8 +13,6 @@ export type SwapActionParams = {
   deadline?: bigint | FilterOperator
 }
 
-
-
 export type OptionsActionParams = {
   chainId: number
   contractAddress?: Address
