@@ -1,236 +1,40 @@
-export const CAMELOT_V2_ABI = [
+export const V2_ROUTER_ABI = [
   {
     inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amountOutMin',
-        type: 'uint256',
-      },
-      {
-        internalType: 'address[]',
-        name: 'path',
-        type: 'address[]',
-      },
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: 'referrer',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'deadline',
-        type: 'uint256',
-      },
+      { internalType: 'address[]', name: '_path', type: 'address[]' },
+      { internalType: 'uint256', name: '_amountIn', type: 'uint256' },
+      { internalType: 'uint256', name: '_minOut', type: 'uint256' },
+      { internalType: 'address', name: '_receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
     ],
-    name: 'swapExactETHForTokensSupportingFeeOnTransferTokens',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amountIn',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'amountOutMin',
-        type: 'uint256',
-      },
-      {
-        internalType: 'address[]',
-        name: 'path',
-        type: 'address[]',
-      },
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: 'referrer',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'deadline',
-        type: 'uint256',
-      },
-    ],
-    name: 'swapExactTokensForETHSupportingFeeOnTransferTokens',
+    name: 'swap',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amountIn',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'amountOutMin',
-        type: 'uint256',
-      },
-      {
-        internalType: 'address[]',
-        name: 'path',
-        type: 'address[]',
-      },
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: 'referrer',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'deadline',
-        type: 'uint256',
-      },
+      { internalType: 'address[]', name: '_path', type: 'address[]' },
+      { internalType: 'uint256', name: '_minOut', type: 'uint256' },
+      { internalType: 'address', name: '_receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
     ],
-    name: 'swapExactTokensForTokensSupportingFeeOnTransferTokens',
+    name: 'swapETHToTokens',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address[]', name: '_path', type: 'address[]' },
+      { internalType: 'uint256', name: '_amountIn', type: 'uint256' },
+      { internalType: 'uint256', name: '_minOut', type: 'uint256' },
+      { internalType: 'address payable', name: '_receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapTokensToETH',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
-  },
-]
-
-export const CAMELOT_V3_EXACT_INPUT_ABI = [
-  {
-    inputs: [
-      {
-        components: [
-          { internalType: 'bytes', name: 'path', type: 'bytes' },
-          { internalType: 'address', name: 'recipient', type: 'address' },
-          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
-          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
-          {
-            internalType: 'uint256',
-            name: 'amountOutMinimum',
-            type: 'uint256',
-          },
-        ],
-        internalType: 'struct ISwapRouter.ExactInputParams',
-        name: 'params',
-        type: 'tuple',
-      },
-    ],
-    name: 'exactInput',
-    outputs: [{ internalType: 'uint256', name: 'amountOut', type: 'uint256' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        components: [
-          { internalType: 'address', name: 'tokenIn', type: 'address' },
-          { internalType: 'address', name: 'tokenOut', type: 'address' },
-          { internalType: 'address', name: 'recipient', type: 'address' },
-          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
-          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
-          {
-            internalType: 'uint256',
-            name: 'amountOutMinimum',
-            type: 'uint256',
-          },
-          { internalType: 'uint160', name: 'limitSqrtPrice', type: 'uint160' },
-        ],
-        internalType: 'struct ISwapRouter.ExactInputSingleParams',
-        name: 'params',
-        type: 'tuple',
-      },
-    ],
-    name: 'exactInputSingle',
-    outputs: [{ internalType: 'uint256', name: 'amountOut', type: 'uint256' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        components: [
-          { internalType: 'address', name: 'tokenIn', type: 'address' },
-          { internalType: 'address', name: 'tokenOut', type: 'address' },
-          { internalType: 'address', name: 'recipient', type: 'address' },
-          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
-          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
-          {
-            internalType: 'uint256',
-            name: 'amountOutMinimum',
-            type: 'uint256',
-          },
-          { internalType: 'uint160', name: 'limitSqrtPrice', type: 'uint160' },
-        ],
-        internalType: 'struct ISwapRouter.ExactInputSingleParams',
-        name: 'params',
-        type: 'tuple',
-      },
-    ],
-    name: 'exactInputSingleSupportingFeeOnTransferTokens',
-    outputs: [{ internalType: 'uint256', name: 'amountOut', type: 'uint256' }],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-]
-
-export const CAMELOT_V3_EXACT_OUTPUT_ABI = [
-  {
-    inputs: [
-      {
-        components: [
-          { internalType: 'bytes', name: 'path', type: 'bytes' },
-          { internalType: 'address', name: 'recipient', type: 'address' },
-          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
-          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
-          { internalType: 'uint256', name: 'amountInMaximum', type: 'uint256' },
-        ],
-        internalType: 'struct ISwapRouter.ExactOutputParams',
-        name: 'params',
-        type: 'tuple',
-      },
-    ],
-    name: 'exactOutput',
-    outputs: [{ internalType: 'uint256', name: 'amountIn', type: 'uint256' }],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        components: [
-          { internalType: 'address', name: 'tokenIn', type: 'address' },
-          { internalType: 'address', name: 'tokenOut', type: 'address' },
-          { internalType: 'uint24', name: 'fee', type: 'uint24' },
-          { internalType: 'address', name: 'recipient', type: 'address' },
-          { internalType: 'uint256', name: 'deadline', type: 'uint256' },
-          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
-          { internalType: 'uint256', name: 'amountInMaximum', type: 'uint256' },
-          { internalType: 'uint160', name: 'limitSqrtPrice', type: 'uint160' },
-        ],
-        internalType: 'struct ISwapRouter.ExactOutputSingleParams',
-        name: 'params',
-        type: 'tuple',
-      },
-    ],
-    name: 'exactOutputSingle',
-    outputs: [{ internalType: 'uint256', name: 'amountIn', type: 'uint256' }],
-    stateMutability: 'payable',
     type: 'function',
   },
 ]
@@ -796,5 +600,131 @@ export const PARASWAP_ABI = [
     outputs: [],
     stateMutability: 'payable',
     type: 'function',
+  },
+]
+
+export const HPSM2_ABI = [
+  {
+    inputs: [
+      { internalType: 'address', name: 'fxTokenAddress', type: 'address' },
+      { internalType: 'address', name: 'peggedTokenAddress', type: 'address' },
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
+    ],
+    name: 'deposit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'fxTokenAddress', type: 'address' },
+      { internalType: 'address', name: 'peggedTokenAddress', type: 'address' },
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
+    ],
+    name: 'withdraw',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
+export const HLP_CURVE_V2_ABI = [
+  {
+    inputs: [
+      { internalType: 'address', name: 'hlpCurveToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'metapoolFactory', type: 'address' },
+      { internalType: 'address', name: 'pool', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapEthToCurveToken',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'hlpToken', type: 'address' },
+      { internalType: 'address', name: 'hlpCurveToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'metapoolFactory', type: 'address' },
+      { internalType: 'address', name: 'pool', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapHlpTokenToCurveToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'peggedToken', type: 'address' },
+      { internalType: 'address', name: 'fxToken', type: 'address' },
+      { internalType: 'address', name: 'hlpToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'metapoolFactory', type: 'address' },
+      { internalType: 'address', name: 'pool', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapPeggedTokenToCurveToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
+export const HLP_BALANCER_ABI = [
+  {
+    inputs: [
+      { internalType: 'address', name: 'tokenIn', type: 'address' },
+      { internalType: 'address', name: 'hlpBalancerToken', type: 'address' },
+      { internalType: 'bytes32', name: 'poolId', type: 'bytes32' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapBalancerToEth',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'hlpBalancerToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'bytes32', name: 'poolId', type: 'bytes32' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapEthToBalancer',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
+
+export const CURVE_FACTORY_ABI = [
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    name: 'exchange_underlying',
+    inputs: [
+      { name: 'i', type: 'int128' },
+      { name: 'j', type: 'int128' },
+      { name: '_dx', type: 'uint256' },
+      { name: '_min_dy', type: 'uint256' },
+    ],
+    outputs: [{ name: '', type: 'uint256' }],
+    gas: 1323223,
   },
 ]
