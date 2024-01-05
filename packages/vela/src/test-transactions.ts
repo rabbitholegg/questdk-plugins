@@ -65,9 +65,13 @@ export const failingTestCases = [
   createTestCase(ARB_NEW_POSITION_2, 'when exact amount is off by 1 wei', {
     amount: parseUnits('34.824740000000000001', 18),
   }),
-  createTestCase(ARB_NEW_POSITION_2, 'when using $lte operator and off by 1 wei', {
-    amount: LessThanOrEqual(parseUnits('34.824739999999999999', 18)),
-  }),
+  createTestCase(
+    ARB_NEW_POSITION_2,
+    'when using $lte operator and off by 1 wei',
+    {
+      amount: LessThanOrEqual(parseUnits('34.824739999999999999', 18)),
+    },
+  ),
   createTestCase(ARB_NEW_POSITION, 'when recipient is not correct', {
     recipient: '0x512daa85f8d2c863d0cfc8f65ab7842629d409f6',
   }),

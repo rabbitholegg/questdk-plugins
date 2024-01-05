@@ -79,7 +79,7 @@ export function getAmountPacked(amount: Amount): FilterOperator | undefined {
   if (typeof amount === 'object') {
     const [operator, value] = Object.entries(amount)[0]
     if (operator === '$lte' || operator === '$lt') {
-      return  (BigInt(value) + 1n) * multiplier
+      return (BigInt(value) + 1n) * multiplier
     }
     return { [operator]: BigInt(value) * multiplier }
   }
