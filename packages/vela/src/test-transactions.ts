@@ -1,11 +1,11 @@
 import {
-  type SwapActionParams,
+  type OptionsActionParams,
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
 import { parseUnits } from 'viem'
 import { type TestParams, createTestCase, Chains } from './utils'
 
-const ARB_NEW_POSITION: TestParams<SwapActionParams> = {
+const ARB_NEW_POSITION: TestParams<OptionsActionParams> = {
   transaction: {
     chainId: 42161,
     to: '0xc4abade3a15064f9e3596943c699032748b13352',
@@ -16,8 +16,8 @@ const ARB_NEW_POSITION: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: Chains.ARBITRUM_ONE,
-    tokenIn: '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB (7)
-    amountIn: GreaterThanOrEqual(parseUnits('21.88', 18)),
+    token: '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB (7)
+    amount: GreaterThanOrEqual(parseUnits('21.88', 18)),
     recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
   },
 }
@@ -30,11 +30,11 @@ export const failingTestCases = [
   createTestCase(ARB_NEW_POSITION, 'when chainId is not correct', {
     chainId: 10,
   }),
-  createTestCase(ARB_NEW_POSITION, 'when tokenIn is not correct', {
-    tokenIn: '0x11cDb42B0EB46D95f990BeDD4695A6e3fA034978',
+  createTestCase(ARB_NEW_POSITION, 'when token is not correct', {
+    token: '0x11cDb42B0EB46D95f990BeDD4695A6e3fA034978',
   }),
-  createTestCase(ARB_NEW_POSITION, 'when amountIn is not sufficient', {
-    amountIn: GreaterThanOrEqual(parseUnits('1000', 18)),
+  createTestCase(ARB_NEW_POSITION, 'when amount is not sufficient', {
+    amount: GreaterThanOrEqual(parseUnits('1000', 18)),
   }),
   createTestCase(ARB_NEW_POSITION, 'when recipient is not correct', {
     recipient: '0x512daa85f8d2c863d0cfc8f65ab7842629d409f6',

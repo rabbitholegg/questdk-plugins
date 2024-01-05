@@ -1,6 +1,6 @@
 import {
   type TransactionFilter,
-  type SwapActionParams,
+  type OptionsActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
@@ -9,10 +9,10 @@ import { CHAIN_ID_ARRAY } from './chain-ids'
 import { getTokenPacked, getAmountPacked } from './utils'
 import { VAULT_ABI } from './abi'
 
-export const swap = async (
-  swap: SwapActionParams,
+export const trade = async (
+  trade: OptionsActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenIn, amountIn, recipient } = swap
+  const { chainId, contractAddress, token, amount, recipient } = trade
 
   return compressJson({
     chainId,
@@ -20,8 +20,8 @@ export const swap = async (
     from: recipient,
     input: {
       $abi: VAULT_ABI,
-      a: getTokenPacked(tokenIn),
-      c: getAmountPacked(amountIn),
+      a: getTokenPacked(token),
+      c: getAmountPacked(amount),
     },
   })
 }
