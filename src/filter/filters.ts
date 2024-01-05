@@ -2,6 +2,7 @@ import type {
   AbiFilter,
   AbiParamFilter,
   AbstractAbiFilter,
+  BitmaskFilter,
   Filter,
   FilterObject,
   TransactionFilter,
@@ -176,10 +177,7 @@ export const handleRegex = (context: any, filter: string): boolean => {
  */
 export const handleBitmask = (
   context: any,
-  filter: {
-    bitmask: bigint | number | string
-    value: bigint | number | string
-  },
+  filter: BitmaskFilter,
 ): boolean => {
   const maskedContext = BigInt(context) & BigInt(filter.bitmask)
   return maskedContext === BigInt(filter.value)
@@ -375,7 +373,7 @@ export function apply(
       // Handle the operator cases with a switch to enforce casing
       // and type safety
 
-      if (!operator(context, filter as Filter[] & string & TransactionFilter)) {
+      if (!operator(context, filter as Filter[] & string & TransactionFilter & BitmaskFilter)) {
         return false
       }
       continue
