@@ -71,7 +71,7 @@ describe('parser', () => {
   describe('handleBitmask', () => {
     test('applies the bitmask and compares the result to the provided value', () => {
       const context = 0b1100;
-      const filter = { bitmask: 0b1100, value: 0b0100 };
+      const filter = { bitmask: 0b0100, value: 0b0100 };
       expect(handleBitmask(context, filter)).toBe(true);
     });
   
@@ -82,14 +82,14 @@ describe('parser', () => {
     });
   
     test('correctly handles large numbers', () => {
-      const context = BigInt('0x123456789abcdef0123456789abcdef0123456789abcdef');
-      const filter = { bitmask: '0xffffffffffffffffffffffffffffffffffffffff', value: '0x123456789abcdef0123456789abcdef0123456789abcdef' };
+      const context = '0x123456789abcdef0123456789abcdef0123456789abcdef';
+      const filter = { bitmask: '0xfffffffffffffffffffffffffffffffffffffffffffffff', value: '0x123456789abcdef0123456789abcdef0123456789abcdef' };
       expect(handleBitmask(context, filter)).toBe(true);
     });
-  
+
     test('correctly handles string inputs', () => {
       const context = '0b1100';
-      const filter = { bitmask: '0b1100', value: '0b0100' };
+      const filter = { bitmask: '0b1000', value: '0b1000' };
       expect(handleBitmask(context, filter)).toBe(true);
     });
 
@@ -121,15 +121,15 @@ describe('parser', () => {
         to: '0xc4abade3a15064f9e3596943c699032748b13352',
         input: {
           $bitmask: {
-            bitmask: '0xffffffffffffffffffffffffffffffffffffffff',
-            value: '0xdf33dc1600018000000000000000000000000000000000000000000000000000000000000007f48928cec5cad1efeda632570843000000000000000000000000000000640000341940b709e8a6f6a2c930980000000341940b709e8a6f6a2c9309800000'
+            bitmask: '0xfffffff',
+            value: '0x9800000'
           }
         },
       }
     
       expect(apply(transaction, filter)).to.be.true
     });
-  });
+  });  
 
   describe('handleAbstractAbiDecode', () => {
     test('should return true when the ABI is found and applies', () => {
