@@ -92,3 +92,16 @@ export function getAmountPacked(amount: Amount): FilterOperator | undefined {
     ],
   }
 }
+
+export function getOrderTypePacked(
+  orderType: 'market' | 'limit' | undefined,
+): FilterOperator | undefined {
+  if (!orderType) return undefined
+  const base = BigInt(2 ** 232)
+  const multiplier = orderType === 'market' ? 0 : 1
+  const min = base * BigInt(multiplier)
+  const max = base * BigInt(multiplier + 1)
+  return {
+    $and: [{ $gte: min }, { $lt: max }],
+  }
+}

@@ -38,6 +38,7 @@ const ARB_NEW_POSITION_2: TestParams<OptionsActionParams> = {
     token: '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB (7)
     amount: GreaterThanOrEqual(parseUnits('34.82474', 18)),
     recipient: '0x21fa21343d58d37d3d1856921279726a32e5fdb3',
+    orderType: 'market'
   },
 }
 
