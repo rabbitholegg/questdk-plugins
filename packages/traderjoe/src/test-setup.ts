@@ -81,5 +81,8 @@ export const failingTestCases: TestCase<SwapActionParams>[] = [
   createTestCase(EXACT_NATIVE_FOR_TOKENS, 'when recipient in incorrect', {
     recipient: '0x7a227272e5B583c2B51B04fF5cA4FDe498368b44',
   }),
-  createTestCase(WETH_AMOUNT_IN, 'when using WETH and amount is not sufficient')
+  createTestCase(
+    WETH_AMOUNT_IN,
+    'when using WETH and amount is not sufficient',
+  ),
 ]
