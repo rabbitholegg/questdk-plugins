@@ -169,6 +169,20 @@ export const handleRegex = (context: any, filter: string): boolean => {
 }
 
 /**
+ * Applies a bitmask to the context and compares the result to a value.
+ * @param context - The context to apply the bitmask to.
+ * @param filter - An object containing the bitmask and the value to compare against.
+ * @returns True if the masked context is equal to the value, false otherwise.
+ */
+export const handleBitmask = (
+  context: any,
+  filter: { bitmask: bigint | number | string, value: bigint | number | string },
+): boolean => {
+  const maskedContext = BigInt(context) & BigInt(filter.bitmask);
+  return maskedContext === BigInt(filter.value);
+}
+
+/**
  * Decodes ABI from the context using the filter.
  * @param context - The context to decode.
  * @param filter - The filter containing the ABI.
@@ -289,6 +303,9 @@ const operators = {
   $gte: handleGreaterThanOrEqual,
   $gt: handleGreaterThan,
   $regex: handleRegex,
+
+  // Bitmask operator
+  $bitmask: handleBitmask,
 }
 
 /**
