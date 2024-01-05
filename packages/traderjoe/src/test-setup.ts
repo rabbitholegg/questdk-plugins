@@ -15,6 +15,7 @@ import {
   NATIVE_FOR_EXACT_TOKENS,
   TOKENS_FOR_EXACT_NATIVE,
   TOKENS_FOR_EXACT_TOKENS,
+  WETH_AMOUNT_IN,
 } from './test-transactions'
 
 export const passingTestCases: TestCase<SwapActionParams>[] = [
@@ -46,6 +47,16 @@ export const passingTestCases: TestCase<SwapActionParams>[] = [
     tokenIn: undefined,
     tokenOut: undefined,
   }),
+  createTestCase(EXACT_NATIVE_FOR_TOKENS, 'when tokenIn is set to "any"', {
+    tokenIn: undefined,
+  }),
+  createTestCase(EXACT_NATIVE_FOR_TOKENS, 'when tokenOut is set to "any"', {
+    tokenOut: undefined,
+  }),
+  createTestCase(EXACT_NATIVE_FOR_TOKENS, 'when tokens are set to "any/any"', {
+    tokenIn: undefined,
+    tokenOut: undefined,
+  }),
 ]
 
 export const failingTestCases: TestCase<SwapActionParams>[] = [
@@ -70,4 +81,5 @@ export const failingTestCases: TestCase<SwapActionParams>[] = [
   createTestCase(EXACT_NATIVE_FOR_TOKENS, 'when recipient in incorrect', {
     recipient: '0x7a227272e5B583c2B51B04fF5cA4FDe498368b44',
   }),
+  createTestCase(WETH_AMOUNT_IN, 'when using WETH and amount is not sufficient')
 ]
