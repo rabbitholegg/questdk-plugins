@@ -11,4 +11,4 @@ export type {
   IActionPlugin,
 } from './types.js'
 
-export { ActionType } from './types.js'
+export { ActionType, OrderType } from './types.js'
