@@ -176,10 +176,13 @@ export const handleRegex = (context: any, filter: string): boolean => {
  */
 export const handleBitmask = (
   context: any,
-  filter: { bitmask: bigint | number | string, value: bigint | number | string },
+  filter: {
+    bitmask: bigint | number | string
+    value: bigint | number | string
+  },
 ): boolean => {
-  const maskedContext = BigInt(context) & BigInt(filter.bitmask);
-  return maskedContext === BigInt(filter.value);
+  const maskedContext = BigInt(context) & BigInt(filter.bitmask)
+  return maskedContext === BigInt(filter.value)
 }
 
 /**
