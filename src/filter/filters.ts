@@ -175,10 +175,7 @@ export const handleRegex = (context: any, filter: string): boolean => {
  * @param filter - An object containing the bitmask and the value to compare against.
  * @returns True if the masked context is equal to the value, false otherwise.
  */
-export const handleBitmask = (
-  context: any,
-  filter: BitmaskFilter,
-): boolean => {
+export const handleBitmask = (context: any, filter: BitmaskFilter): boolean => {
   const maskedContext = BigInt(context) & BigInt(filter.bitmask)
   return maskedContext === BigInt(filter.value)
 }
@@ -373,7 +370,12 @@ export function apply(
       // Handle the operator cases with a switch to enforce casing
       // and type safety
 
-      if (!operator(context, filter as Filter[] & string & TransactionFilter & BitmaskFilter)) {
+      if (
+        !operator(
+          context,
+          filter as Filter[] & string & TransactionFilter & BitmaskFilter,
+        )
+      ) {
         return false
       }
       continue
