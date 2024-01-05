@@ -65,21 +65,30 @@ export function getTokenPacked(
   return tokenPacked
 }
 
+/**
+ * This function repacks the given amount to match the format of the input data. Due to precision loss when packing the amount,
+ * a range is added to the filter to account for this loss when using exact amounts.
+ *
+ * @param {Amount} amount - The amount to be converted. This can be a number or an object with a comparison operator.
+ * @returns {FilterOperator | undefined} A filter operator object suitable for database queries or undefined if the input is invalid.
+ */
 export function getAmountPacked(amount: Amount): FilterOperator | undefined {
   if (amount === undefined) return undefined
-
   const multiplier = BigInt(2 ** 128) * BigInt(10 ** 12)
+
   if (typeof amount === 'object') {
     const [operator, value] = Object.entries(amount)[0]
-    return {
-      [operator]: BigInt(value) * multiplier,
+    if (operator === '$lte' || operator === '$lt') {
+      return  (BigInt(value) + 1n) * multiplier
     }
+    return { [operator]: BigInt(value) * multiplier }
   }
+  // When the amount is an exact number, create a range to handle precision loss.
+  // 10 ** 48 is arbitrary. It was chosen as it provides th right amount of presicion for the current use case. (18 decimal places)
   return {
-    // range to determine exact amount (percision tested up to 18 decimal places)
     $and: [
-      { $gte: BigInt(amount) * multiplier - BigInt(10 ** 33) },
-      { $lt: BigInt(amount) * multiplier + BigInt(10 ** 33) },
+      { $gte: BigInt(amount) * multiplier - BigInt(10 ** 48) },
+      { $lt: BigInt(amount) * multiplier + BigInt(10 ** 48) },
     ],
   }
 }

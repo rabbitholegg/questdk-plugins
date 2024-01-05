@@ -15,6 +15,11 @@ const ARBITRUM_LINK = '0xf97f4df75117a78c1a5a0dbb814af92458539fb4'
 
 export const VAULT_CONTRACT = '0xc4abade3a15064f9e3596943c699032748b13352'
 
+/* 
+  A list of token ids can be found here: https://docs.vela.exchange/vela-knowledge-base/developers/asset-pairs-and-velaid
+  Multiplying the tokenId by 2^240 will give you the lower bound of what the packed value will be. 
+  Thus we check if the value is greater than or equal to the lower bound and less than the lower bound of the next tokenId.
+*/
 const tokenIdMultiplier = BigInt(2 ** 240)
 
 export const TOKEN_TO_ID: { [token: string]: FilterOperator } = {
