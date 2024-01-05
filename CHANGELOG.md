@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.30
+
+### Patch Changes
+
+- [#61](https://github.com/rabbitholegg/questdk/pull/61) [`d7c99f3`](https://github.com/rabbitholegg/questdk/commit/d7c99f33297104c4dd6d0acbfc8a78554522c851) Thanks [@Quazia](https://github.com/Quazia)! - Export Order Types
+
 ## 2.0.0-alpha.29
 
 ### Minor Changes
