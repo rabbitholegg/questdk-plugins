@@ -4,7 +4,7 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  swap,
+  options,
   getSupportedChainIds,
   getSupportedTokenAddresses,
 } from './Vela.js'
@@ -13,7 +13,8 @@ export const Vela: IActionPlugin = {
   pluginId: 'vela',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  swap,
+  options,
+  swap: async () => new PluginActionNotImplementedError(),
   bridge: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
 }

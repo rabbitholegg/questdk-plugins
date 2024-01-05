@@ -38,7 +38,6 @@ import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
 import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
-
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { ENTRYPOINT } from './contract-addresses'

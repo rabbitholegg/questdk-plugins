@@ -1,16 +1,16 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { trade, getSupportedTokenAddresses } from './Vela'
+import { options, getSupportedTokenAddresses } from './Vela'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { VAULT_ABI } from './abi'
 import { passingTestCases, failingTestCases } from './test-transactions'
 
 describe('Given the vela plugin', () => {
-  describe('When handling the trade action', () => {
+  describe('When handling the options action', () => {
     describe('should return a valid action filter', () => {
-      test('when making a trade action', async () => {
+      test('when making a options action', async () => {
         const [testCase] = passingTestCases
-        const filter = await trade(testCase.params)
+        const filter = await options(testCase.params)
         expect(filter).to.deep.equal({
           chainId: 42161,
           to: '0xc4abade3a15064f9e3596943c699032748b13352',
@@ -39,7 +39,7 @@ describe('Given the vela plugin', () => {
       passingTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
-          const filter = await trade(params)
+          const filter = await options(params)
           expect(apply(transaction, filter)).to.be.true
         })
       })
@@ -49,7 +49,7 @@ describe('Given the vela plugin', () => {
       failingTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
-          const filter = await trade(params)
+          const filter = await options(params)
           expect(apply(transaction, filter)).to.be.false
         })
       })

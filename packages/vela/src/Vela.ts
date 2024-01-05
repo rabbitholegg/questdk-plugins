@@ -9,7 +9,7 @@ import { CHAIN_ID_ARRAY } from './chain-ids'
 import { getTokenPacked, getAmountPacked } from './utils'
 import { VAULT_ABI } from './abi'
 
-export const trade = async (
+export const options = async (
   trade: OptionsActionParams,
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, token, amount, recipient } = trade
