@@ -1,6 +1,7 @@
 import {
   apply,
   handleAnd,
+  handleBitmask,
   handleGreaterThanOrEqual,
   handleOr,
   handleRegex,
@@ -66,6 +67,69 @@ describe('parser', () => {
       expect(result).to.be.true
     })
   })
+
+  describe('handleBitmask', () => {
+    test('applies the bitmask and compares the result to the provided value', () => {
+      const context = 0b1100;
+      const filter = { bitmask: 0b1100, value: 0b0100 };
+      expect(handleBitmask(context, filter)).toBe(true);
+    });
+  
+    test('returns false when the masked context does not equal the provided value', () => {
+      const context = 0b1100;
+      const filter = { bitmask: 0b1100, value: 0b1000 };
+      expect(handleBitmask(context, filter)).toBe(false);
+    });
+  
+    test('correctly handles large numbers', () => {
+      const context = BigInt('0x123456789abcdef0123456789abcdef0123456789abcdef');
+      const filter = { bitmask: '0xffffffffffffffffffffffffffffffffffffffff', value: '0x123456789abcdef0123456789abcdef0123456789abcdef' };
+      expect(handleBitmask(context, filter)).toBe(true);
+    });
+  
+    test('correctly handles string inputs', () => {
+      const context = '0b1100';
+      const filter = { bitmask: '0b1100', value: '0b0100' };
+      expect(handleBitmask(context, filter)).toBe(true);
+    });
+
+    test('should correctly filter the given transaction', () => {
+      const transaction = {
+        blockHash: '0x2ed328c196cd31a299f51b8e7dc4dffef98184a37c0d8a1f40165f3fd9c668de',
+        blockNumber: '0x65715bb',
+        from: '0x4e187a21d8c49a175ee6ee9f2c2f3222f43d350e',
+        gas: '0x43707',
+        gasPrice: '0x777',
+        maxFeePerGas: '0x795',
+        maxPriorityFeePerGas: '0x735',
+        hash: '0xf175c933840e63013fbf77c7bab63d44f692003f5e07596e2dab8fedda55f8d3',
+        input: '0xdf33dc1600018000000000000000000000000000000000000000000000000000000000000007f48928cec5cad1efeda632570843000000000000000000000000000000640000341940b709e8a6f6a2c930980000000341940b709e8a6f6a2c9309800000',
+        nonce: '0xa8',
+        to: '0xc4abade3a15064f9e3596943c699032748b13352',
+        transactionIndex: '0x4',
+        value: '0x0',
+        type: '0x2',
+        accessList: [],
+        chainId: '0xa',
+        v: '0x0',
+        r: '0x1e1b9faa0b562914b5b4f58e2f4dc67115d8f036227a855bc6c5ec2c0be237f5',
+        s: '0x6d4c35b77da3a0d934f2e186944820498d12546ae57f014927b2497ae367b6fe',
+      }
+    
+      const filter = {
+        chainId: '0xa',
+        to: '0xc4abade3a15064f9e3596943c699032748b13352',
+        input: {
+          $bitmask: {
+            bitmask: '0xffffffffffffffffffffffffffffffffffffffff',
+            value: '0xdf33dc1600018000000000000000000000000000000000000000000000000000000000000007f48928cec5cad1efeda632570843000000000000000000000000000000640000341940b709e8a6f6a2c930980000000341940b709e8a6f6a2c9309800000'
+          }
+        },
+      }
+    
+      expect(apply(transaction, filter)).to.be.true
+    });
+  });
 
   describe('handleAbstractAbiDecode', () => {
     test('should return true when the ABI is found and applies', () => {
