@@ -19,7 +19,7 @@ export type {
   IActionPlugin,
 } from './actions/types.js'
 
-export { ActionType } from './actions/types.js'
+export { ActionType, OrderType } from './actions/types.js'
 
 export { apply } from './filter/filters.js'
 
