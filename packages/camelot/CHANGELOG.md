@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-camelot
 
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#154](https://github.com/rabbitholegg/questdk-plugins/pull/154) [`152b99cca2e9d2c5c434c5041bf2c9c55015cc86`](https://github.com/rabbitholegg/questdk-plugins/commit/152b99cca2e9d2c5c434c5041bf2c9c55015cc86) Thanks [@mmackz](https://github.com/mmackz)! - add support for swaps on camelot V3
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes

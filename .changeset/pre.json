@@ -6,6 +6,7 @@
     "bright-turtles-divide",
     "brown-points-smile",
     "calm-tigers-rescue",
+    "chilled-snakes-greet",
     "curly-jeans-dress",
     "curly-needles-chew",
     "cyan-birds-melt",
@@ -20,6 +21,7 @@
     "flat-adults-wash",
     "fluffy-adults-invite",
     "giant-clouds-mix",
+    "gold-socks-dream",
     "healthy-bugs-enjoy",
     "hungry-squids-drop",
     "late-scissors-wonder",
@@ -34,6 +36,7 @@
     "neat-teachers-complain",
     "new-ears-study",
     "nine-waves-lie",
+    "orange-pugs-vanish",
     "perfect-cameras-clap",
     "pink-horses-change",
     "pink-moons-tickle",
@@ -50,6 +53,7 @@
     "seven-bobcats-cover",
     "shaggy-lamps-leave",
     "sharp-candles-live",
+    "shiny-mirrors-sparkle",
     "shiny-pets-brush",
     "short-eagles-carry",
     "short-sloths-talk",
@@ -69,6 +73,7 @@
     "tender-parents-work",
     "tough-cooks-hammer",
     "twelve-kiwis-destroy",
+    "twelve-mice-sin",
     "twenty-pets-jump",
     "two-pandas-jump",
     "unlucky-dolphins-stare",
@@ -107,6 +112,9 @@
     "@rabbitholegg/questdk-plugin-synapse": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-woofi": "1.0.0-alpha.7",
     "@rabbitholegg/questdk-plugin-sushi": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-treasure": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-treasure": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-handlefi": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-mirror": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-soundxyz": "1.0.0-alpha.0"
   }
 }
