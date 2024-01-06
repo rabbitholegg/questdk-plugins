@@ -469,6 +469,7 @@ importers:
       '@rabbitholegg/questdk-plugin-traderjoe': workspace:*
       '@rabbitholegg/questdk-plugin-treasure': workspace:*
       '@rabbitholegg/questdk-plugin-uniswap': workspace:*
+      '@rabbitholegg/questdk-plugin-vela': workspace:*
       '@rabbitholegg/questdk-plugin-woofi': workspace:*
       '@rabbitholegg/questdk-plugin-zora': workspace:*
       '@types/node': ^20.8.7
@@ -507,6 +508,7 @@ importers:
       '@rabbitholegg/questdk-plugin-traderjoe': link:../traderjoe
       '@rabbitholegg/questdk-plugin-treasure': link:../treasure
       '@rabbitholegg/questdk-plugin-uniswap': link:../uniswap
+      '@rabbitholegg/questdk-plugin-vela': link:../vela
       '@rabbitholegg/questdk-plugin-woofi': link:../woofi
       '@rabbitholegg/questdk-plugin-zora': link:../zora
       viem: 1.21.4_typescript@5.3.3
@@ -777,6 +779,31 @@ importers:
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
+      tsconfig: link:../tsconfig
+      typescript: 5.3.3
+      vitest: 0.33.0
+
+  packages/vela:
+    specifiers:
+      '@rabbitholegg/questdk': 2.0.0-alpha.29
+      '@types/node': ^20.8.7
+      '@vitest/coverage-v8': ^0.33.0
+      rimraf: ^5.0.5
+      rome: ^12.1.3
+      ts-node: ^10.9.1
+      tsconfig: workspace:*
+      typescript: ^5.2.2
+      viem: ^1.16.6
+      vitest: ^0.33.0
+    dependencies:
+      '@rabbitholegg/questdk': 2.0.0-alpha.29_typescript@5.3.3
+      viem: 1.21.4_typescript@5.3.3
+    devDependencies:
+      '@types/node': 20.10.6
+      '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
+      rimraf: 5.0.5
+      rome: 12.1.3
+      ts-node: 10.9.2_guidcuijextr5nuigknvoilupu
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
@@ -2468,7 +2495,7 @@ packages:
         optional: true
     dependencies:
       abitype: 0.9.10_typescript@5.1.6
-      rimraf: 5.0.1
+      rimraf: 5.0.5
       typescript: 5.1.6
       viem: 1.21.4_typescript@5.1.6
     transitivePeerDependencies:
@@ -2486,7 +2513,25 @@ packages:
         optional: true
     dependencies:
       abitype: 0.9.10_typescript@5.3.3
-      rimraf: 5.0.1
+      rimraf: 5.0.5
+      typescript: 5.3.3
+      viem: 1.21.4_typescript@5.3.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@rabbitholegg/questdk/2.0.0-alpha.29_typescript@5.3.3:
+    resolution: {integrity: sha512-Bmkv/hljGhaED/Z0iKYtamYVGppgIuDlKzI63FgtlH5wwlxCpPn7zemlLEB649tiY8ALJbxG1bDEfRWYLHLpOw==}
+    peerDependencies:
+      typescript: '>=5.1.6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      abitype: 0.9.10_typescript@5.3.3
+      rimraf: 5.0.5
       typescript: 5.3.3
       viem: 1.21.4_typescript@5.3.3
     transitivePeerDependencies:
@@ -2551,7 +2596,7 @@ packages:
     resolution: {integrity: sha512-bcKpo1oj54hGholplGLpqPHRbIsnbixFtc06nwuNM5/dwSXOq/AAYoIBRsBmnZJSdfeNW5rnff7NTAz3ZCqR9Q==}
     dependencies:
       '@noble/curves': 1.0.0
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.5
     dev: false
 
@@ -2559,7 +2604,7 @@ packages:
     resolution: {integrity: sha512-osvveYtyzdEVbt3OfwwXFr4P2iVBL5u1Q3q4ONBfDY/UpOuXmOlbgwc1xECEboY8wIays8Yt6onaWMUdUbfl0A==}
     dependencies:
       '@noble/curves': 1.1.0
-      '@noble/hashes': 1.3.1
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.5
     dev: false
 
@@ -2574,7 +2619,7 @@ packages:
   /@scure/bip39/1.2.0:
     resolution: {integrity: sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==}
     dependencies:
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.5
     dev: false
 
@@ -2765,7 +2810,7 @@ packages:
   /@types/bn.js/5.1.5:
     resolution: {integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.10.6
     dev: false
 
   /@types/cacheable-request/6.0.3:
@@ -2773,7 +2818,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.4.5
+      '@types/node': 20.10.6
       '@types/responselike': 1.0.3
     dev: false
 
@@ -2810,7 +2855,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.10.6
     dev: false
 
   /@types/level-errors/3.0.2:
@@ -2846,6 +2891,7 @@ packages:
 
   /@types/node/20.4.5:
     resolution: {integrity: sha512-rt40Nk13II9JwQBdeYqmbn2Q6IVTA5uPhvSO+JVqdXw/6/4glI6oR9ezty/A9Hg5u7JH4OmYmuQ+XvjKm0Datg==}
+    dev: true
 
   /@types/normalize-package-data/2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2853,7 +2899,7 @@ packages:
   /@types/pbkdf2/3.1.2:
     resolution: {integrity: sha512-uRwJqmiXmh9++aSu1VNEn3iIxWOhd8AHXNSdlaLfdAAdSTY9jYVeGWnzejM3dvrkbqE3/hyQkQQ29IFATEGlew==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.10.6
     dev: false
 
   /@types/prop-types/15.7.11:
@@ -2877,7 +2923,7 @@ packages:
   /@types/responselike/1.0.3:
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.10.6
     dev: false
 
   /@types/scheduler/0.16.8:
@@ -2887,7 +2933,7 @@ packages:
   /@types/secp256k1/4.0.6:
     resolution: {integrity: sha512-hHxJU6PAEUn0TP4S/ZOzuTUvJWuZ6eIKeNKb5RBpODvSl6hp1Wrw4s7ATY50rklRCScUDpHzVA/DQdSjJ3UoYQ==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.10.6
     dev: false
 
   /@types/semver/7.5.6:
@@ -2906,7 +2952,7 @@ packages:
   /@types/ws/8.5.10:
     resolution: {integrity: sha512-vmQSUcfalpIq0R9q7uTo2lXs6eGIpt9wtnLdMv9LVpIjCA/+ufZRozlVoVelIYixx1ugCBKDhn89vnsEGOCx9A==}
     dependencies:
-      '@types/node': 20.4.5
+      '@types/node': 20.10.6
     dev: false
 
   /@uniswap/lib/4.0.1-alpha:
@@ -8674,6 +8720,7 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
+    dev: true
 
   /rimraf/5.0.5:
     resolution: {integrity: sha512-CqDakW+hMe/Bz202FPEymy68P+G50RfMQK+Qo5YUqc9SPipvbGjCGKd0RSKEelbsfQuw3g5NZDSrlZZAJurH1A==}
@@ -8681,7 +8728,6 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
-    dev: true
 
   /ripemd160/2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
