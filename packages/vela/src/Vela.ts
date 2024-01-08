@@ -6,13 +6,19 @@ import {
 import { type Address } from 'viem'
 import { VAULT_CONTRACT, CHAIN_TO_TOKENS } from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { getTokenPacked, getAmountPacked } from './utils'
+import { getTokenPacked, getAmountPacked, getOrderTypePacked } from './utils'
 import { VAULT_ABI } from './abi'
 
 export const options = async (
   trade: OptionsActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, token, amount, recipient } = trade
+  const { chainId, contractAddress, token, amount, recipient, orderType } =
+    trade
+
+  const a =
+    token && orderType
+      ? { $and: [getTokenPacked(token), getOrderTypePacked(orderType)] }
+      : getTokenPacked(token) || getOrderTypePacked(orderType)
 
   return compressJson({
     chainId,
@@ -20,7 +26,7 @@ export const options = async (
     from: recipient,
     input: {
       $abi: VAULT_ABI,
-      a: getTokenPacked(token),
+      a,
       c: getAmountPacked(amount),
     },
   })

@@ -8,7 +8,7 @@ import { passingTestCases, failingTestCases } from './test-transactions'
 describe('Given the vela plugin', () => {
   describe('When handling the options action', () => {
     describe('should return a valid action filter', () => {
-      test('when making a options action', async () => {
+      test('when making an options action', async () => {
         const [testCase] = passingTestCases
         const filter = await options(testCase.params)
         expect(filter).to.deep.equal({
@@ -20,10 +20,31 @@ describe('Given the vela plugin', () => {
             a: {
               $and: [
                 {
-                  $gte: '12367929453448690307083082505200429610792387278129332706851243409048338432',
+                  $bitmask: {
+                    bitmask:
+                      '0xFFFF000000000000000000000000000000000000000000000000000000000000',
+                    value:
+                      '12367929453448690307083082505200429610792387278129332706851243409048338432',
+                  },
                 },
                 {
-                  $lt: '14134776518227074636666380005943348126619871175004951664972849610340958208',
+                  $or: [
+                    {
+                      $bitmask: {
+                        bitmask:
+                          '0xFF000000000000000000000000000000000000000000000000000000000',
+                        value: '0',
+                      },
+                    },
+                    {
+                      $bitmask: {
+                        bitmask:
+                          '0xFF000000000000000000000000000000000000000000000000000000000',
+                        value:
+                          '13803492693581127574869511724554050904902217944340773110325048447598592',
+                      },
+                    },
+                  ],
                 },
               ],
             },
