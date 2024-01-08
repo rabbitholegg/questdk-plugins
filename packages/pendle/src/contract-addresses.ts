@@ -1,4 +1,4 @@
-import { SUPPORTED_CHAINS, type SupportedChainId } from './chain-id'
+import { SUPPORTED_CHAINS, type SupportedChainId } from './chain-ids'
 import { type Address } from 'viem'
 import ethereum from '@pendle/core-v2/deployments/1-core.json'
 import optimism from '@pendle/core-v2/deployments/10-core.json'

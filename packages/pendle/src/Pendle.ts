@@ -4,7 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { SUPPORTED_CHAINS_ARRAY, type SupportedChainId } from './chain-id'
+import { SUPPORTED_CHAINS_ARRAY, type SupportedChainId } from './chain-ids'
 import { getRouterAddress } from './contract-addresses'
 import { SwapYTV3_ABI } from './abi'
 

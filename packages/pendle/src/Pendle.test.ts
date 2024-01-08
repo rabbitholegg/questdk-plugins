@@ -9,6 +9,9 @@ import {
   SWAP_EXACT_YT_FOR_SY,
   SWAP_EXACT_YT_FOR_TOKEN,
 } from './test-transactions'
+import { getRouterAddress } from './contract-addresses.js'
+import { SUPPORTED_CHAINS } from './chain-ids.js'
+import { SwapYTV3_ABI } from './abi.js'
 
 describe('Given the Pendle plugin', () => {
   describe('When handling the swap', () => {
@@ -20,7 +23,19 @@ describe('Given the Pendle plugin', () => {
       SWAP_EXACT_PT_FOR_YT,
     ]
 
-    test('should return a valid action filter', async () => {})
+    test('should return a valid action filter', async () => {
+      const filter = await swap({
+        chainId: SUPPORTED_CHAINS.ETHEREUM,
+      })
+
+      expect(filter).to.deep.equal({
+        chainId: SUPPORTED_CHAINS.ETHEREUM,
+        to: getRouterAddress(SUPPORTED_CHAINS.ETHEREUM),
+        input: {
+          $abi: SwapYTV3_ABI,
+        },
+      })
+    })
 
     test.each(validTransactions)(
       'should pass filter with valid transactions',
