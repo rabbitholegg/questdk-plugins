@@ -11,7 +11,7 @@ import { SwapYTV3_ABI } from './abi'
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, recipient } = swap
+  const { chainId } = swap
 
   const to = SUPPORTED_CHAINS_ARRAY.includes(chainId)
     ? getRouterAddress(chainId as SupportedChainId)
@@ -20,7 +20,6 @@ export const swap = async (
   return compressJson({
     chainId,
     to,
-    from: recipient,
     input: {
       $abi: SwapYTV3_ABI,
     },
