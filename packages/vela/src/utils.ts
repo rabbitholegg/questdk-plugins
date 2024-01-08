@@ -1,7 +1,11 @@
-import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
+import {
+  type ActionParams,
+  type FilterOperator,
+  OrderType,
+} from '@rabbitholegg/questdk'
 import type { Address, Hash } from 'viem'
 import { TOKEN_TO_ID } from './contract-addresses'
-import type { BitmaskFilter } from './apply'
+import type { BitmaskFilter } from '@rabbitholegg/questdk/dist/types/filter/types'
 
 export enum Chains {
   ARBITRUM_ONE = 42161,
@@ -57,7 +61,7 @@ type Amount = FilterOperator | BigInt | number | string | undefined
 
 export function getTokenPacked(
   token: Address | undefined,
-): FilterOperator | undefined {
+): { $bitmask: BitmaskFilter } | undefined {
   if (!token) return undefined
   const tokenId = TOKEN_TO_ID[token.toLowerCase()]
   if (!tokenId) {
@@ -78,7 +82,9 @@ export function getTokenPacked(
  * @param {Amount} amount - The amount to be converted. This can be a number or an object with a comparison operator.
  * @returns {FilterOperator | undefined} A filter operator object or undefined if the input is invalid.
  */
-export function getAmountPacked(amount: Amount): FilterOperator | undefined {
+export function getAmountPacked(
+  amount: Amount,
+): FilterOperator | { $bitmask: BitmaskFilter } | undefined {
   if (amount === undefined) return undefined
   const multiplier = BigInt(2 ** 128) * BigInt(10 ** 12)
   if (typeof amount === 'object') {
@@ -98,23 +104,22 @@ export function getAmountPacked(amount: Amount): FilterOperator | undefined {
 }
 
 export function getOrderTypePacked(
-  orderType: 'market' | 'limit' | undefined,
-): FilterOperator | undefined {
-  if (!orderType) return undefined;
+  orderType: OrderType | undefined,
+): { $or: { $bitmask: BitmaskFilter }[] } | undefined {
+  if (!orderType) return undefined
   const bitmask =
-    '0xFF000000000000000000000000000000000000000000000000000000000';
+    '0xFF000000000000000000000000000000000000000000000000000000000'
   const orderTypeValues = {
-    'market': [0n, 2n], // market, stop-market
-    'limit': [1n, 3n]  // limit, stop-limit
-  };
+    [OrderType.Market]: [0n, 2n], // market, stop-market
+    [OrderType.Limit]: [1n, 3n], // limit, stop-limit
+  }
 
   return {
-    $or: orderTypeValues[orderType].map(value => ({
+    $or: orderTypeValues[orderType].map((value) => ({
       $bitmask: {
         bitmask,
-        value: value << 232n
-      }
-    }))
-  };
+        value: value << 232n,
+      },
+    })),
+  }
 }
-
