@@ -2,6 +2,7 @@ import {
   type OptionsActionParams,
   GreaterThanOrEqual,
   LessThanOrEqual,
+  OrderType,
 } from '@rabbitholegg/questdk'
 import { parseUnits } from 'viem'
 import { type TestParams, createTestCase, Chains } from './utils'
@@ -20,7 +21,7 @@ const ARB_NEW_POSITION: TestParams<OptionsActionParams> = {
     token: '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB (7)
     amount: GreaterThanOrEqual(parseUnits('21.88', 18)),
     recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
-    orderType: 'market'
+    orderType: OrderType.Market,
   },
 }
 
@@ -39,7 +40,7 @@ const ARB_MARKET_ORDER: TestParams<OptionsActionParams> = {
     token: '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB (7)
     amount: GreaterThanOrEqual(parseUnits('34.82474', 18)),
     recipient: '0x21fa21343d58d37d3d1856921279726a32e5fdb3',
-    orderType: 'market'
+    orderType: OrderType.Market,
   },
 }
 
@@ -57,7 +58,7 @@ const BTC_MARKET_ORDER: TestParams<OptionsActionParams> = {
     token: '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f', // ARB BTC (1)
     amount: GreaterThanOrEqual(parseUnits('20.315245', 18)),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-    orderType: 'limit'
+    orderType: OrderType.Limit,
   },
 }
 
@@ -83,9 +84,13 @@ export const failingTestCases = [
   createTestCase(ARB_NEW_POSITION, 'when amount is not sufficient', {
     amount: GreaterThanOrEqual(parseUnits('1000', 18)),
   }),
-  createTestCase(ARB_MARKET_ORDER, 'when using $gte and amount is off by 1 wei', {
-    amount: GreaterThanOrEqual(parseUnits('34.824740000000000001', 18)),
-  }),
+  createTestCase(
+    ARB_MARKET_ORDER,
+    'when using $gte and amount is off by 1 wei',
+    {
+      amount: GreaterThanOrEqual(parseUnits('34.824740000000000001', 18)),
+    },
+  ),
   createTestCase(ARB_MARKET_ORDER, 'when exact amount is off by 1 wei', {
     amount: parseUnits('34.824740000000000001', 18),
   }),
