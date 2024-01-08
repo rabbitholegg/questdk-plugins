@@ -163,5 +163,4 @@ export const failingTestCases = [
   createTestCase(ARB_NEW_POSITION, 'when orderType is not correct', {
     orderType: OrderType.Limit,
   }),
-  
 ]
