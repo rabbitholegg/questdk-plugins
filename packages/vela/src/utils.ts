@@ -77,10 +77,11 @@ export function getTokenPacked(
 }
 
 /**
- * This function repacks the given amount to match the format of the input data.
+ * This function repacks the given amount to match the format of the input data. Due to precision loss when packing the amount,
+ * a range is added to the filter to account for this loss when using exact amounts.
  *
  * @param {Amount} amount - The amount to be converted. This can be a number or an object with a comparison operator.
- * @returns {FilterOperator | undefined} A filter operator object or undefined if the input is invalid.
+ * @returns {FilterOperator | BitmaskFilter | undefined} A filter object, or undefined if the input is invalid.
  */
 export function getAmountPacked(
   amount: Amount,
