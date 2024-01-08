@@ -20,10 +20,11 @@ const ARB_NEW_POSITION: TestParams<OptionsActionParams> = {
     token: '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB (7)
     amount: GreaterThanOrEqual(parseUnits('21.88', 18)),
     recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
+    orderType: 'market'
   },
 }
 
-const ARB_NEW_POSITION_2: TestParams<OptionsActionParams> = {
+const ARB_MARKET_ORDER: TestParams<OptionsActionParams> = {
   transaction: {
     chainId: 42161,
     to: '0xc4abade3a15064f9e3596943c699032748b13352',
@@ -42,13 +43,32 @@ const ARB_NEW_POSITION_2: TestParams<OptionsActionParams> = {
   },
 }
 
+const BTC_MARKET_ORDER: TestParams<OptionsActionParams> = {
+  transaction: {
+    chainId: 42161,
+    to: '0xc4abade3a15064f9e3596943c699032748b13352',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    input:
+      '0xdf33dc16000181000000000000000000000000000000000000000000000000000000000000086ad48c0cb8d234a8a0783000000000000000000000000000000000000000000001006a18cda2c39a80a98d00000000000a0424f8085ba409069f82000000',
+    value: '250000000000000',
+  },
+  params: {
+    chainId: Chains.ARBITRUM_ONE,
+    token: '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f', // ARB BTC (1)
+    amount: GreaterThanOrEqual(parseUnits('20.315245', 18)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    orderType: 'limit'
+  },
+}
+
 export const passingTestCases = [
   createTestCase(ARB_NEW_POSITION, 'when opening a new position'),
-  createTestCase(ARB_NEW_POSITION_2, 'when opening a new position'),
-  createTestCase(ARB_NEW_POSITION_2, 'when amount is exact', {
+  createTestCase(ARB_MARKET_ORDER, 'when opening a new position'),
+  createTestCase(BTC_MARKET_ORDER, 'when opening a market order'),
+  createTestCase(ARB_MARKET_ORDER, 'when amount is exact', {
     amount: parseUnits('34.82474', 18),
   }),
-  createTestCase(ARB_NEW_POSITION_2, 'when using $lte operator', {
+  createTestCase(ARB_MARKET_ORDER, 'when using $lte operator', {
     amount: LessThanOrEqual(parseUnits('34.82474', 18)),
   }),
 ]
@@ -63,11 +83,14 @@ export const failingTestCases = [
   createTestCase(ARB_NEW_POSITION, 'when amount is not sufficient', {
     amount: GreaterThanOrEqual(parseUnits('1000', 18)),
   }),
-  createTestCase(ARB_NEW_POSITION_2, 'when exact amount is off by 1 wei', {
+  createTestCase(ARB_MARKET_ORDER, 'when using $gte and amount is off by 1 wei', {
+    amount: GreaterThanOrEqual(parseUnits('34.824740000000000001', 18)),
+  }),
+  createTestCase(ARB_MARKET_ORDER, 'when exact amount is off by 1 wei', {
     amount: parseUnits('34.824740000000000001', 18),
   }),
   createTestCase(
-    ARB_NEW_POSITION_2,
+    ARB_MARKET_ORDER,
     'when using $lte operator and off by 1 wei',
     {
       amount: LessThanOrEqual(parseUnits('34.824739999999999999', 18)),

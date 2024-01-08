@@ -1,4 +1,5 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+// import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from './apply'
 import { describe, expect, test } from 'vitest'
 import { options, getSupportedTokenAddresses } from './Vela'
 import { CHAIN_ID_ARRAY } from './chain-ids'

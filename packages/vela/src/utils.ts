@@ -1,6 +1,7 @@
 import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
 import type { Address, Hash } from 'viem'
 import { TOKEN_TO_ID } from './contract-addresses'
+import type { BitmaskFilter } from './apply'
 
 export enum Chains {
   ARBITRUM_ONE = 42161,
@@ -58,24 +59,28 @@ export function getTokenPacked(
   token: Address | undefined,
 ): FilterOperator | undefined {
   if (!token) return undefined
-  const tokenPacked = TOKEN_TO_ID[token.toLowerCase()]
-  if (!tokenPacked) {
+  const tokenId = TOKEN_TO_ID[token.toLowerCase()]
+  if (!tokenId) {
     throw new Error('No tokenId found for the provided token address')
   }
-  return tokenPacked
+  return {
+    $bitmask: {
+      bitmask:
+        '0xFFFF000000000000000000000000000000000000000000000000000000000000',
+      value: tokenId << 240n,
+    },
+  }
 }
 
 /**
- * This function repacks the given amount to match the format of the input data. Due to precision loss when packing the amount,
- * a range is added to the filter to account for this loss when using exact amounts.
+ * This function repacks the given amount to match the format of the input data.
  *
  * @param {Amount} amount - The amount to be converted. This can be a number or an object with a comparison operator.
- * @returns {FilterOperator | undefined} A filter operator object suitable for database queries or undefined if the input is invalid.
+ * @returns {FilterOperator | undefined} A filter operator object or undefined if the input is invalid.
  */
 export function getAmountPacked(amount: Amount): FilterOperator | undefined {
   if (amount === undefined) return undefined
   const multiplier = BigInt(2 ** 128) * BigInt(10 ** 12)
-
   if (typeof amount === 'object') {
     const [operator, value] = Object.entries(amount)[0]
     if (operator === '$lte' || operator === '$lt') {
@@ -83,25 +88,33 @@ export function getAmountPacked(amount: Amount): FilterOperator | undefined {
     }
     return { [operator]: BigInt(value) * multiplier }
   }
-  // When the amount is an exact number, create a range to handle precision loss.
-  // 10 ** 48 is arbitrary. It was chosen as it provides th right amount of presicion for the current use case. (18 decimal places)
   return {
-    $and: [
-      { $gte: BigInt(amount) * multiplier - BigInt(10 ** 48) },
-      { $lt: BigInt(amount) * multiplier + BigInt(10 ** 48) },
-    ],
+    $bitmask: {
+      bitmask:
+        '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000',
+      value: BigInt(amount) * multiplier,
+    },
   }
 }
 
 export function getOrderTypePacked(
   orderType: 'market' | 'limit' | undefined,
 ): FilterOperator | undefined {
-  if (!orderType) return undefined
-  const base = BigInt(2 ** 232)
-  const multiplier = orderType === 'market' ? 0 : 1
-  const min = base * BigInt(multiplier)
-  const max = base * BigInt(multiplier + 1)
+  if (!orderType) return undefined;
+  const bitmask =
+    '0xFF000000000000000000000000000000000000000000000000000000000';
+  const orderTypeValues = {
+    'market': [0n, 2n], // market, stop-market
+    'limit': [1n, 3n]  // limit, stop-limit
+  };
+
   return {
-    $and: [{ $gte: min }, { $lt: max }],
-  }
+    $or: orderTypeValues[orderType].map(value => ({
+      $bitmask: {
+        bitmask,
+        value: value << 232n
+      }
+    }))
+  };
 }
+
