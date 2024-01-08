@@ -54,6 +54,10 @@ type Primitive = string | number | boolean
 export type FilterObject = {
   [key: string]: Filter
 }
+export type BitmaskFilter = {
+  bitmask: bigint | number | string
+  value: bigint | number | string
+}
 export type Filter = Primitive | FilterObject | FilterArray | Abi
 export type FilterArray = Filter[]
 export interface AbiFilter extends FilterObject {
