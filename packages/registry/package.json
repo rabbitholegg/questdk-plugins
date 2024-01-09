@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.49",
+  "version": "1.0.0-alpha.50",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -69,6 +69,9 @@
     "@rabbitholegg/questdk-plugin-sushi": "workspace:*",
     "@rabbitholegg/questdk-plugin-treasure": "workspace:*",
     "@rabbitholegg/questdk-plugin-pendle": "workspace:*",
+    "@rabbitholegg/questdk-plugin-handlefi": "workspace:*",
+    "@rabbitholegg/questdk-plugin-mirror": "workspace:*",
+    "@rabbitholegg/questdk-plugin-soundxyz": "workspace:*",
     "viem": "^1.16.6"
   }
 }
