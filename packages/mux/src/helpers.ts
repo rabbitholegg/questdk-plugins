@@ -15,11 +15,12 @@ export const getMuxTokenId = async (
 ): Promise<string | undefined> => {
   if (!tokenAddress) return undefined
   const provider = CHAIN_ID_TO_PROVIDER[chainId]
-  if (!provider) return 'ff'
-
-  let assets: Asset[]
+  if (!provider) {
+    throw new Error(`No provider found for chain ${chainId}`)
+  }
 
   // cache assets for each chain to reduce api calls
+  let assets: Asset[]
   if (assetsCache.has(chainId)) {
     assets = assetsCache.get(chainId)
   } else {
@@ -37,6 +38,6 @@ export const getMuxTokenId = async (
         : getAddress(tokenAddress)),
   )?.id
 
-  if (!tokenId) return 'ff'
+  if (!tokenId) return 'ff' // this value doesnt exist, using instead of error
   return tokenId.toString(16).padStart(2, '0')
 }
