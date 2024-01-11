@@ -43,6 +43,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
+    "@mux-network/mux.js": "2.9.12",
     "@rabbitholegg/questdk": "2.0.0-alpha.31",
     "viem": "1.16.6"
   }
