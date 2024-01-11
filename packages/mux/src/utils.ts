@@ -1,4 +1,4 @@
-import type { ActionParams } from '@rabbitholegg/questdk'
+import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
 import { type Address, type Hash } from 'viem'
 
 export enum Chains {
@@ -59,5 +59,13 @@ export function createTestCase<T extends ActionParams>(
     transaction: testParams.transaction,
     params: { ...testParams.params, ...overrides },
     description,
+  }
+}
+
+export const buildPathQuery = (token?: string) => {
+  const conditions: FilterOperator[] = []
+
+  if (token) {
+    conditions.push({ $regex: `^${token.toLowerCase()}` })
   }
 }

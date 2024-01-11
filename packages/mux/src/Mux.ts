@@ -11,8 +11,10 @@ import {
   CHAIN_ID_TO_AGGREGATOR_FACTORY_ADDRESS,
   AggregatorProxyFactory__factory,
   PositionOrderFlags,
+  AggregatorGmxV2Adapter__factory,
 } from '@mux-network/mux.js'
 import { buildSubAccountIdQuery } from './helpers'
+import { buildPathQuery } from './utils'
 
 export const options = async (
   trade: OptionsActionParams,
@@ -50,6 +52,14 @@ export const options = async (
         }
       : undefined
 
+  const gmxV2OrderType =
+        // https://arbiscan.io/address/0xe1b50bba2255bbc60e4d4cdb4c77df61d1fddd8d#code (IOrder.sol)
+    orderType === OrderType.Market
+      ? 2 // MarketIncrease
+      : orderType === OrderType.Limit
+      ? 3 // LimitIncrease
+      : undefined
+
   return compressJson({
     chainId,
     to: {
@@ -68,7 +78,15 @@ export const options = async (
           args: {
             tokenIn: token,
             amountIn: amount,
-            flags: gmxV2OrderFlag
+            flags: gmxV2OrderFlag,
+          },
+        },
+        {
+          $abiAbstract: AggregatorGmxV2Adapter__factory.abi,
+          createParams: {
+            swapPath: buildPathQuery(token),
+            initialCollateralAmount: amount,
+            orderType: gmxV2OrderType,
           },
         },
       ],
