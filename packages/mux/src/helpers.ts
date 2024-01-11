@@ -1,4 +1,4 @@
-import { getReaderContract, getChainStorage } from '@mux-network/mux.js'
+import { getReaderContract, getChainStorage, type Asset } from '@mux-network/mux.js'
 import { CHAIN_ID_TO_PROVIDER } from './provider'
 import { type Address, zeroAddress, getAddress } from 'viem'
 
@@ -7,15 +7,28 @@ const chainToWeth: { [chainId: number]: Address } = {
   [10]: '0x4200000000000000000000000000000000000006',
 }
 
-// need to cache this
+const assetsCache = new Map()
 
-export const getMuxTokenId = async (chainId: number, tokenAddress: Address) => {
+export const getMuxTokenId = async (
+  chainId: number,
+  tokenAddress: Address,
+): Promise<string | undefined> => {
   if (!tokenAddress) return undefined
   const provider = CHAIN_ID_TO_PROVIDER[chainId]
-  if (!provider) return 'ff' // will fail since this value is not possible
-  const reader = await getReaderContract(provider as any)
-  const chainStorage = await getChainStorage(reader)
-  const assets = chainStorage.assets
+  if (!provider) return 'ff'
+
+  let assets: Asset[]
+
+  // cache assets for each chain to reduce api calls
+  if (assetsCache.has(chainId)) {
+    assets = assetsCache.get(chainId)
+  } else {
+    const reader = await getReaderContract(provider as any)
+    const chainStorage = await getChainStorage(reader)
+    assets = chainStorage.assets
+    assetsCache.set(chainId, assets)
+  }
+
   const tokenId = assets.find(
     (asset) =>
       asset.tokenAddress ===
@@ -23,6 +36,7 @@ export const getMuxTokenId = async (chainId: number, tokenAddress: Address) => {
         ? chainToWeth[chainId]
         : getAddress(tokenAddress)),
   )?.id
+
   if (!tokenId) return 'ff'
   return tokenId.toString(16).padStart(2, '0')
 }
