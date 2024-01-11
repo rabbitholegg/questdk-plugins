@@ -1,7 +1,7 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { options } from './Mux'
-import { passingTestCases } from './test-transactions'
+import { passingTestCases, failingTestCases } from './test-transactions'
 
 describe('Given the mux plugin', () => {
   describe('When handling the options action', () => {
@@ -16,7 +16,15 @@ describe('Given the mux plugin', () => {
         })
       })
 
-      describe('should not pass filter with invalid transactions', () => {})
+      describe('should not pass filter with invalid transactions', () => {
+        failingTestCases.forEach((testCase) => {
+          const { description, transaction, params } = testCase
+          test(description, async () => {
+            const filter = await options(params)
+            expect(apply(transaction, filter)).to.be.false
+          })
+        })
+      })
     })
   })
 })
