@@ -5,8 +5,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_TO_ORDER_BOOK_ADDRESS } from '@mux-network/mux.js'
-import { MUX_ORDERBOOK_ABI } from './abi'
+import { CHAIN_ID_TO_ORDER_BOOK_ADDRESS, OrderBook__factory } from '@mux-network/mux.js'
 import { buildSubAccountIdQuery } from './helpers'
 
 export const options = async (
@@ -29,7 +28,7 @@ export const options = async (
     input: {
       $or: [
         {
-          $abi: MUX_ORDERBOOK_ABI,
+          $abi: OrderBook__factory.abi,
           subAccountId: subAccountQuery,
           collateralAmount: amount,
           deadline: orderType === OrderType.Market ? 0 : { $gte: '0' },
