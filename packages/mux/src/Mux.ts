@@ -9,7 +9,8 @@ import {
   CHAIN_ID_TO_ORDER_BOOK_ADDRESS,
   OrderBook__factory,
   CHAIN_ID_TO_AGGREGATOR_FACTORY_ADDRESS,
-  AggregatorGmxV2Adapter__factory,
+  AggregatorProxyFactory__factory,
+  PositionOrderFlags,
 } from '@mux-network/mux.js'
 import { buildSubAccountIdQuery } from './helpers'
 
@@ -32,6 +33,23 @@ export const options = async (
       ? { $gt: '0' }
       : undefined
 
+  const gmxV2OrderFlag =
+    orderType === OrderType.Market
+      ? {
+          $bitmask: {
+            bitmask: '0x40', // 64
+            value: PositionOrderFlags.MarketOrder,
+          },
+        }
+      : orderType === OrderType.Limit
+      ? {
+          $bitmask: {
+            bitmask: '0x10', // 16
+            value: PositionOrderFlags.TriggerOrder,
+          },
+        }
+      : undefined
+
   return compressJson({
     chainId,
     to: {
@@ -46,7 +64,12 @@ export const options = async (
           deadline: muxDeadline,
         },
         {
-          $abi: AggregatorGmxV2Adapter__factory.abi,
+          $abi: AggregatorProxyFactory__factory.abi,
+          args: {
+            tokenIn: token,
+            amountIn: amount,
+            flags: gmxV2OrderFlag
+          },
         },
       ],
     },
