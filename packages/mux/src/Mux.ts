@@ -68,12 +68,14 @@ export const options = async (
     input: {
       $or: [
         {
+          // mux contract
           $abi: OrderBook__factory.abi,
           subAccountId: subAccountQuery,
           collateralAmount: amount,
           deadline: muxDeadline,
         },
         {
+          // aggregator contract gmx V2
           $abi: AggregatorProxyFactory__factory.abi,
           args: {
             tokenIn: token,
@@ -82,6 +84,7 @@ export const options = async (
           },
         },
         {
+          // aggregator contract gmx V2 multicall
           $abiAbstract: AggregatorGmxV2Adapter__factory.abi,
           createParams: {
             swapPath: buildPathQuery(token),
