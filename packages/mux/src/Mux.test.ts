@@ -4,7 +4,7 @@ import { options } from './Mux'
 import { passingTestCases } from './test-transactions'
 
 describe('Given the mux plugin', () => {
-  describe('When handling the options action', async () => {
+  describe('When handling the options action', () => {
     describe('should return a valid action filter', () => {})
 
     describe('should pass filter with valid transactions', () => {

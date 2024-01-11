@@ -4,7 +4,7 @@ import { Chains, createTestCase, type TestParams } from './utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const MUX_ETH_MARKET_LONG: TestParams<OptionsActionParams> = {
-  // 6932c3e3-8f9a-4a30-acc2-8959f1ae7554 
+  // 6932c3e3-8f9a-4a30-acc2-8959f1ae7554
   transaction: {
     chainId: 42161,
     to: '0xa19fd5ab6c8dcffa2a295f78a5bb4ac543aaf5e3',

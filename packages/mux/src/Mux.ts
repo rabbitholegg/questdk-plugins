@@ -12,11 +12,14 @@ import { buildSubAccountIdQuery } from './helpers'
 export const options = async (
   trade: OptionsActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, token, amount, recipient, orderType } =
-    trade
+  const { chainId, token, amount, recipient, orderType } = trade
 
   const muxContract = CHAIN_ID_TO_ORDER_BOOK_ADDRESS[chainId] ?? '0x0'
-  const subAccountQuery = await buildSubAccountIdQuery(recipient, token, chainId)
+  const subAccountQuery = await buildSubAccountIdQuery(
+    recipient,
+    token,
+    chainId,
+  )
 
   return compressJson({
     chainId,
