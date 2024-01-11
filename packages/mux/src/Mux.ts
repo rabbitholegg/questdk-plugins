@@ -7,7 +7,7 @@ import {
 import { type Address } from 'viem'
 import { CHAIN_ID_TO_ORDER_BOOK_ADDRESS } from '@mux-network/mux.js'
 import { MUX_ORDERBOOK_ABI } from './abi'
-import { buildSubAccountIdQuery } from './utils'
+import { buildSubAccountIdQuery } from './helpers'
 
 export const options = async (
   trade: OptionsActionParams,

@@ -1,6 +1,21 @@
-import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
+import type { ActionParams } from '@rabbitholegg/questdk'
 import { type Address, type Hash } from 'viem'
-import { getMuxTokenId } from './helpers'
+
+export enum Chains {
+  ETHEREUM = 1,
+  OPTIMISM = 10,
+  BINANCE_SMART_CHAIN = 56,
+  GNOSIS = 100,
+  POLYGON_POS = 137,
+  ZK_SYNC_ERA = 324,
+  POLYGON_ZK = 1101,
+  MANTLE = 5000,
+  BASE = 8453,
+  ARBITRUM_ONE = 42161,
+  AVALANCHE = 43114,
+  LINEA = 59144,
+  SCROLL = 534352,
+}
 
 interface Transaction {
   chainId: number
@@ -44,27 +59,5 @@ export function createTestCase<T extends ActionParams>(
     transaction: testParams.transaction,
     params: { ...testParams.params, ...overrides },
     description,
-  }
-}
-
-export const buildSubAccountIdQuery = async (
-  recipient: Address | undefined,
-  tokenAddress: Address | undefined,
-  chainId: number,
-) => {
-  const conditions: FilterOperator[] = []
-
-  if (recipient) {
-    conditions.push({ $regex: `^${recipient.toLowerCase()}` })
-  }
-
-  if (tokenAddress) {
-    const tokenId = await getMuxTokenId(chainId, tokenAddress)
-    const regexPattern = `0x[a-fA-F0-9]{40}${tokenId}`
-    conditions.push({ $regex: regexPattern })
-  }
-
-  return {
-    $and: conditions,
   }
 }

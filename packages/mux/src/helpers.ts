@@ -1,10 +1,12 @@
+import { type FilterOperator } from '@rabbitholegg/questdk'
 import { getReaderContract, getChainStorage, type Asset } from '@mux-network/mux.js'
 import { CHAIN_ID_TO_PROVIDER } from './provider'
 import { type Address, zeroAddress, getAddress } from 'viem'
+import { Chains } from './utils'
 
 const chainToWeth: { [chainId: number]: Address } = {
-  [42161]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
-  [10]: '0x4200000000000000000000000000000000000006',
+  [Chains.ARBITRUM_ONE]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
+  [Chains.OPTIMISM]: '0x4200000000000000000000000000000000000006',
 }
 
 const assetsCache = new Map()
@@ -40,4 +42,26 @@ export const getMuxTokenId = async (
 
   if (!tokenId) return 'ff' // this value doesnt exist, using instead of error
   return tokenId.toString(16).padStart(2, '0')
+}
+
+export const buildSubAccountIdQuery = async (
+  recipient: Address | undefined,
+  tokenAddress: Address | undefined,
+  chainId: number,
+) => {
+  const conditions: FilterOperator[] = []
+
+  if (recipient) {
+    conditions.push({ $regex: `^${recipient.toLowerCase()}` })
+  }
+
+  if (tokenAddress) {
+    const tokenId = await getMuxTokenId(chainId, tokenAddress)
+    const regexPattern = `0x[a-fA-F0-9]{40}${tokenId}`
+    conditions.push({ $regex: regexPattern })
+  }
+
+  return {
+    $and: conditions,
+  }
 }

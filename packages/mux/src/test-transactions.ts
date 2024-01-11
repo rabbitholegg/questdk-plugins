@@ -1,6 +1,6 @@
 import { type OptionsActionParams, OrderType } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { createTestCase, type TestParams } from './utils'
+import { Chains, createTestCase, type TestParams } from './utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const MUX_ETH_MARKET_LONG: TestParams<OptionsActionParams> = {
@@ -14,7 +14,7 @@ export const MUX_ETH_MARKET_LONG: TestParams<OptionsActionParams> = {
     value: '1000000000000000',
   },
   params: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     token: zeroAddress,
     amount: GreaterThanOrEqual(parseEther('0.001')),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
@@ -33,7 +33,7 @@ export const MUX_ARB_LIMIT_LONG: TestParams<OptionsActionParams> = {
     value: '0',
   },
   params: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     token: '0x912CE59144191C1204E64559FE8253a0e49E6548',
     amount: GreaterThanOrEqual(parseUnits('0.1', 18)),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
@@ -52,7 +52,7 @@ export const MUX_DAI_MARKET_SHORT: TestParams<OptionsActionParams> = {
     value: '0',
   },
   params: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     token: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
     amount: GreaterThanOrEqual(parseUnits('5.34', 18)),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
