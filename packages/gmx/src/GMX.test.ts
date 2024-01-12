@@ -160,9 +160,9 @@ describe('Given the gmx plugin', () => {
               ],
             },
           ],
-        };
+        }
 
-        expect(filter).toEqual(expectedFilter);
+        expect(filter).toEqual(expectedFilter)
       })
     })
     describe('should not pass filter with invalid V2 transactions', () => {

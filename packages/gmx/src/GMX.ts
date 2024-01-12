@@ -95,7 +95,7 @@ export const swap = async (
 export const options = async (
   options: OptionsActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, token, amount, recipient, orderType } = options;
+  const { chainId, token, amount, recipient, orderType } = options
   return compressJson({
     chainId: chainId,
     to: GMX_ROUTERV2_ADDRESS.toLowerCase(),
@@ -126,8 +126,8 @@ export const options = async (
         ],
       },
     ],
-  });
-};
+  })
+}
 
 export const getOrderType = (orderType: BoostOrderType | undefined) => {
   switch (orderType) {

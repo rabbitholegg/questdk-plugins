@@ -112,7 +112,10 @@ export const failingTestCasesV2 = [
 export const passingOptionsTestCases = [
   createTestCase(MARKET_SHORT_ETH_ORDER_V2, 'when using a market order'),
   createTestCase(LIMIT_LONG_ARB_ORDER_V2, 'when using a limit order'),
-  createTestCase(MARKET_LONG_ARB_WITH_USDC_ORDER_V2, 'when using a market order and token collateral'),
+  createTestCase(
+    MARKET_LONG_ARB_WITH_USDC_ORDER_V2,
+    'when using a market order and token collateral',
+  ),
   createTestCase(
     MARKET_SHORT_ETH_ORDER_V2,
     'when using a market order but the order type is undefined',
@@ -199,5 +202,5 @@ export const failingOptionsTestCases = [
     {
       token: Tokens.UNI,
     },
-  )
+  ),
 ]
