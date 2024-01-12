@@ -4,7 +4,7 @@ import { Chains, createTestCase, type TestParams } from './utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const MUX_ETH_MARKET_LONG: TestParams<OptionsActionParams> = {
-  // 6932c3e3-8f9a-4a30-acc2-8959f1ae7554
+  // https://www.tdly.co/shared/simulation/6932c3e3-8f9a-4a30-acc2-8959f1ae7554
   transaction: {
     chainId: 42161,
     to: '0xa19fd5ab6c8dcffa2a295f78a5bb4ac543aaf5e3',
@@ -23,7 +23,7 @@ export const MUX_ETH_MARKET_LONG: TestParams<OptionsActionParams> = {
 }
 
 export const MUX_ARB_LIMIT_LONG: TestParams<OptionsActionParams> = {
-  // 86b65c63-b6ca-4384-b21d-9dbe87034c24
+  // https://www.tdly.co/shared/simulation/86b65c63-b6ca-4384-b21d-9dbe87034c24
   transaction: {
     chainId: 42161,
     to: '0xa19fd5ab6c8dcffa2a295f78a5bb4ac543aaf5e3',
@@ -42,7 +42,7 @@ export const MUX_ARB_LIMIT_LONG: TestParams<OptionsActionParams> = {
 }
 
 export const MUX_DAI_MARKET_SHORT: TestParams<OptionsActionParams> = {
-  // a64188ca-0feb-4ee2-b192-ed017e043727
+  // https://www.tdly.co/shared/simulation/a64188ca-0feb-4ee2-b192-ed017e043727
   transaction: {
     chainId: 42161,
     to: '0xa19fd5ab6c8dcffa2a295f78a5bb4ac543aaf5e3',
@@ -61,7 +61,7 @@ export const MUX_DAI_MARKET_SHORT: TestParams<OptionsActionParams> = {
 }
 
 export const GMX_V2_MARKET_USDCE_LONG: TestParams<OptionsActionParams> = {
-  // db0b23d1-a67a-472c-bd3c-4f872964e043
+  // https://www.tdly.co/shared/simulation/db0b23d1-a67a-472c-bd3c-4f872964e043
   transaction: {
     chainId: 42161,
     to: '0x2ff2f1d9826ae2410979ae19b88c361073ab0918',
@@ -80,6 +80,7 @@ export const GMX_V2_MARKET_USDCE_LONG: TestParams<OptionsActionParams> = {
 }
 
 export const GMX_V2_LIMIT_WBTC_LONG: TestParams<OptionsActionParams> = {
+  // https://arbiscan.io/tx/0x9fb4a0394ff01c7a5ed180272970b50fddee509baced24d6667fb8e944a6790b
   transaction: {
     chainId: 42161,
     to: '0x2ff2f1d9826ae2410979ae19b88c361073ab0918',
@@ -99,6 +100,7 @@ export const GMX_V2_LIMIT_WBTC_LONG: TestParams<OptionsActionParams> = {
 }
 
 export const GMX_V2_MULTICALL_USDCE_LIMIT: TestParams<OptionsActionParams> = {
+  // https://www.tdly.co/shared/simulation/c5e11752-691e-4e40-805a-cb60133db283
   transaction: {
     chainId: 42161,
     to: '0x2ff2f1d9826ae2410979ae19b88c361073ab0918',
@@ -116,6 +118,7 @@ export const GMX_V2_MULTICALL_USDCE_LIMIT: TestParams<OptionsActionParams> = {
 }
 
 export const GNS_MARKET_LONG: TestParams<OptionsActionParams> = {
+  // https://www.tdly.co/shared/simulation/a77b2ad9-36d1-44ef-a718-73080d8c0c97
   transaction: {
     chainId: 42161,
     to: '0x2c7e82641f03fa077f88833213210a86027f15dc',
@@ -128,7 +131,27 @@ export const GNS_MARKET_LONG: TestParams<OptionsActionParams> = {
     chainId: Chains.ARBITRUM_ONE,
     token: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1', // DAI
     amount: GreaterThanOrEqual(parseUnits('50.78', 18)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
     orderType: OrderType.Market,
+  }
+}
+
+export const GNS_LIMIT_SHORT: TestParams<OptionsActionParams> = {
+  // https://www.tdly.co/shared/simulation/4f1ddbbd-ee59-4859-a3b3-a25346149689
+  transaction: {
+    chainId: 42161,
+    to: '0x2c7e82641f03fa077f88833213210a86027f15dc',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    input:
+      '0xfb4b71bb000000000000000000000000865c301c46d64de5c9b124ec1a97ef1efc1bcbd1000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002c0b6ccf4be560000000000000000000000000000000000000000000000000000000017c1895250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009600000000000000000000000000000000000000000000000000001654a4ec18000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000002540be40000000000000000000000000010c2cbfe29f4f5e4c24d54d36c8f283a61eb0c2f',
+    value: '0',
+  },
+  params: {
+    chainId: Chains.ARBITRUM_ONE,
+    token: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1', // DAI
+    amount: GreaterThanOrEqual(parseUnits('50.78', 18)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    orderType: OrderType.Limit,
   }
 }
 
@@ -205,6 +228,7 @@ export const passingTestCases = [
     },
   ),
   createTestCase(GNS_MARKET_LONG, 'when market long DAI on GNS'),
+  createTestCase(GNS_LIMIT_SHORT, 'when limit short DAI on GNS'),
   createTestCase(GNS_MARKET_LONG, 'when token is "any" on GNS', {
     token: undefined,
   }),
