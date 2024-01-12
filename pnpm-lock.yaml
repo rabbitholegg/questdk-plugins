@@ -391,7 +391,6 @@ importers:
 
   packages/pendle:
     specifiers:
-      '@pendle/core-v2': 4.0.0
       '@rabbitholegg/questdk': 2.0.0-alpha.28
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
@@ -404,7 +403,6 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@pendle/core-v2': 4.0.0
       '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
       axios: 1.5.0
       viem: 1.21.4_typescript@5.3.3
@@ -933,19 +931,6 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
-
-  /@chainlink/contracts/0.8.0:
-    resolution: {integrity: sha512-nUv1Uxw5Mn92wgLs2bgPYmo8hpdQ3s9jB/lcbdU0LmNOVu0hbfmouVnqwRLa28Ll50q6GczUA+eO0ikNIKLZsA==}
-    dependencies:
-      '@eth-optimism/contracts': 0.5.40
-      '@openzeppelin/contracts': 4.3.3
-      '@openzeppelin/contracts-upgradeable-4.7.3': /@openzeppelin/contracts-upgradeable/4.7.3
-      '@openzeppelin/contracts-v0.7': /@openzeppelin/contracts/3.4.2
-    transitivePeerDependencies:
-      - bufferutil
-      - ethers
-      - utf-8-validate
-    dev: false
 
   /@changesets/apply-release-plan/7.0.0:
     resolution: {integrity: sha512-vfi69JR416qC9hWmFGSxj7N6wA5J222XNBmezSVATPWDVPIF7gkd4d8CpbEbXmRWbVrkoli3oerGS6dcL/BGsQ==}
@@ -1646,19 +1631,6 @@ packages:
       '@ethersproject/abstract-signer': 5.7.0
       '@ethersproject/hardware-wallets': 5.7.0
       ethers: 5.7.1
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: false
-
-  /@eth-optimism/contracts/0.5.40:
-    resolution: {integrity: sha512-MrzV0nvsymfO/fursTB7m/KunkPsCndltVgfdHaT1Aj5Vi6R/doKIGGkOofHX+8B6VMZpuZosKCMQ5lQuqjt8w==}
-    peerDependencies:
-      ethers: ^5
-    dependencies:
-      '@eth-optimism/core-utils': 0.12.0
-      '@ethersproject/abstract-provider': 5.7.0
-      '@ethersproject/abstract-signer': 5.7.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -2463,24 +2435,12 @@ packages:
     resolution: {integrity: sha512-+wuegAMaLcZnLCJIvrVUDzA9z/Wp93f0Dla/4jJvIhijRrPabjQbZe6fWiECLaJyfn5ci9fqf9vTw3xpQOad2A==}
     dev: false
 
-  /@openzeppelin/contracts-upgradeable/4.9.3:
-    resolution: {integrity: sha512-jjaHAVRMrE4UuZNfDwjlLGDxTHWIOwTJS2ldnc278a0gevfXfPr8hxKEVBGFBE96kl2G3VHDZhUimw/+G3TG2A==}
-    dev: false
-
   /@openzeppelin/contracts/3.4.1-solc-0.7-2:
     resolution: {integrity: sha512-tAG9LWg8+M2CMu7hIsqHPaTyG4uDzjr6mhvH96LvOpLZZj6tgzTluBt+LsCf1/QaYrlis6pITvpIaIhE+iZB+Q==}
     dev: false
 
-  /@openzeppelin/contracts/3.4.2:
-    resolution: {integrity: sha512-z0zMCjyhhp4y7XKAcDAi3Vgms4T2PstwBdahiO0+9NaGICQKjynK3wduSRplTgk4LXmoO1yfDGO5RbjKYxtuxA==}
-    dev: false
-
   /@openzeppelin/contracts/3.4.2-solc-0.7:
     resolution: {integrity: sha512-W6QmqgkADuFcTLzHL8vVoNBtkwjvQRpYIAom7KiUNoLKghyx3FgH0GBjt8NRvigV1ZmMOBllvE1By1C+bi8WpA==}
-    dev: false
-
-  /@openzeppelin/contracts/4.3.3:
-    resolution: {integrity: sha512-tDBopO1c98Yk7Cv/PZlHqrvtVjlgK5R4J6jxLwoO7qxK4xqOiZG+zSkIvGFpPZ0ikc3QOED3plgdqjgNTnBc7g==}
     dev: false
 
   /@openzeppelin/contracts/4.7.0:
@@ -2493,10 +2453,6 @@ packages:
 
   /@openzeppelin/contracts/4.9.2:
     resolution: {integrity: sha512-mO+y6JaqXjWeMh9glYVzVu8HYPGknAAnWyxTRhGeckOruyXQMNnlcW6w/Dx9ftLeIQk6N+ZJFuVmTwF7lEIFrg==}
-    dev: false
-
-  /@openzeppelin/contracts/4.9.3:
-    resolution: {integrity: sha512-He3LieZ1pP2TNt5JbkPA4PNT9WC3gOTOlDcFGJW4Le4QKqwmiNJCRt44APfxMxvq7OugU/cqYuPcSBzOw38DAg==}
     dev: false
 
   /@paraswap/core/1.1.0:
@@ -2524,19 +2480,6 @@ packages:
       ts-essentials: 9.4.1_typescript@5.3.3
     transitivePeerDependencies:
       - typescript
-    dev: false
-
-  /@pendle/core-v2/4.0.0:
-    resolution: {integrity: sha512-T+9iAArjcryShyvCJyNgcw4bjjNQNBA6MMTiZzPyHNrvCf34lv+LWJqkuhgWraweBsuBnFRS0V7+c8T55KTLKA==}
-    engines: {node: '>=10'}
-    dependencies:
-      '@chainlink/contracts': 0.8.0
-      '@openzeppelin/contracts': 4.9.3
-      '@openzeppelin/contracts-upgradeable': 4.9.3
-    transitivePeerDependencies:
-      - bufferutil
-      - ethers
-      - utf-8-validate
     dev: false
 
   /@pkgjs/parseargs/0.11.0:
