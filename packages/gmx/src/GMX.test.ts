@@ -1,14 +1,24 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
-import { getOrderType, getSupportedTokenAddresses, options, swap } from './GMX.js'
+import {
+  getOrderType,
+  getSupportedTokenAddresses,
+  options,
+  swap,
+} from './GMX.js'
 import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 import { Tokens } from './utils.js'
 import {
   DEFAULT_TOKEN_LIST,
   GMX_ROUTERV2_ADDRESS,
 } from './contract-addresses.js'
-import { passingTestCasesV2, failingTestCasesV2, failingOptionsTestCases, passingOptionsTestCases } from './test-setup.js'
+import {
+  passingTestCasesV2,
+  failingTestCasesV2,
+  failingOptionsTestCases,
+  passingOptionsTestCases,
+} from './test-setup.js'
 import { OrderType, type OptionsActionParams } from '@rabbitholegg/questdk'
 import { parseUnits } from 'viem'
 
@@ -106,16 +116,16 @@ describe('Given the gmx plugin', () => {
     describe('should return a valid action filter', () => {
       test('when handling options', async () => {
         const optionsParams: OptionsActionParams = {
-          chainId: 42161, 
-          contractAddress: '0x7c68c7866a64fa2160f78eeae12217ffbf871fa8', 
-          token: '0x1d2107fa8bcb78826ce30c9bbc05e97b114cf6d1', 
-          amount: GreaterThanOrEqual(parseUnits('0.0019', 18)), 
-          recipient: '0x1d2107fa8bcb78826ce30c9bbc05e97b114cf6d1', 
-          orderType: OrderType.Limit, 
-        };
-    
-        const filter = await options(optionsParams);
-    
+          chainId: 42161,
+          contractAddress: '0x7c68c7866a64fa2160f78eeae12217ffbf871fa8',
+          token: '0x1d2107fa8bcb78826ce30c9bbc05e97b114cf6d1',
+          amount: GreaterThanOrEqual(parseUnits('0.0019', 18)),
+          recipient: '0x1d2107fa8bcb78826ce30c9bbc05e97b114cf6d1',
+          orderType: OrderType.Limit,
+        }
+
+        const filter = await options(optionsParams)
+
         expect(filter).toEqual({
           chainId: optionsParams.chainId,
           to: GMX_ROUTERV2_ADDRESS.toLowerCase(),
@@ -134,9 +144,9 @@ describe('Given the gmx plugin', () => {
               },
             },
           },
-        });
-      });
-    });
+        })
+      })
+    })
     describe('should not pass filter with invalid V2 transactions', () => {
       failingOptionsTestCases.forEach((testCase) => {
         const { transaction, params, description } = testCase

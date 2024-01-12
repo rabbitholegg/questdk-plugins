@@ -119,19 +119,19 @@ export const getOrderType = (orderType: BoostOrderType | undefined) => {
   switch (orderType) {
     case BoostOrderType.Market:
       return {
-          $or: [
-          {orderType: OrderType.MarketSwap},
-          {orderType: OrderType.MarketIncrease},
-          {orderType: OrderType.MarketDecrease},
-        ]
+        $or: [
+          { orderType: OrderType.MarketSwap },
+          { orderType: OrderType.MarketIncrease },
+          { orderType: OrderType.MarketDecrease },
+        ],
       }
     case BoostOrderType.Limit:
       return {
         $or: [
-          {orderType: OrderType.LimitSwap},
-          {orderType: OrderType.LimitIncrease},
-          {orderType: OrderType.LimitDecrease},
-        ]
+          { orderType: OrderType.LimitSwap },
+          { orderType: OrderType.LimitIncrease },
+          { orderType: OrderType.LimitDecrease },
+        ],
       }
     default:
       return undefined
