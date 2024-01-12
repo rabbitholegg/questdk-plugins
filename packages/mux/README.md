@@ -11,7 +11,7 @@ The dapp is mainly on Arbitrum, but also available on other networks.
 ## Limitations
 - When routing through GMX, the recipient parameter is not available in the inputs. Trades routed this way will treat recipient as if it was undefined.
 - Only DAI is allowed for trades routed through GAINS, so there is no tokenIn parameter in the inputs. If the rest of the inputs match, it should be implied that they used DAI.
-- There may be other ways a V1 GMX trade can be routed. From my own experience, it uses the same aggregator contract that gmx V2 trades are routed through, and uses the same function signatures. 
+- There may be other ways a V1 GMX trade can be routed. From my own experience, it uses the same aggregator contract that gmx V2 trades are routed through, and uses the same function signatures.
 
 ## Sample Transactions
 - [GMX V2 Trade](https://arbiscan.io/tx/0x9fb4a0394ff01c7a5ed180272970b50fddee509baced24d6667fb8e944a6790b)
