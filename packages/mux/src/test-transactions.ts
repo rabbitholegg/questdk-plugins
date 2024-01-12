@@ -22,7 +22,7 @@ export const MUX_ETH_MARKET_LONG: TestParams<OptionsActionParams> = {
   },
 }
 
-export const MUX_ARB_LIMIT_LONG: TestParams<OptionsActionParams> = {
+const MUX_ARB_LIMIT_LONG: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/86b65c63-b6ca-4384-b21d-9dbe87034c24
   transaction: {
     chainId: 42161,
@@ -41,7 +41,7 @@ export const MUX_ARB_LIMIT_LONG: TestParams<OptionsActionParams> = {
   },
 }
 
-export const MUX_DAI_MARKET_SHORT: TestParams<OptionsActionParams> = {
+const MUX_DAI_MARKET_SHORT: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/a64188ca-0feb-4ee2-b192-ed017e043727
   transaction: {
     chainId: 42161,
@@ -60,7 +60,7 @@ export const MUX_DAI_MARKET_SHORT: TestParams<OptionsActionParams> = {
   },
 }
 
-export const GMX_V1_MARKET_ETH_LONG: TestParams<OptionsActionParams> = {
+const GMX_V1_MARKET_ETH_LONG: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/db0b23d1-a67a-472c-bd3c-4f872964e043
   transaction: {
     chainId: 42161,
@@ -79,7 +79,7 @@ export const GMX_V1_MARKET_ETH_LONG: TestParams<OptionsActionParams> = {
   },
 }
 
-export const GMX_V2_MARKET_USDCE_LONG: TestParams<OptionsActionParams> = {
+const GMX_V2_MARKET_USDCE_LONG: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/db0b23d1-a67a-472c-bd3c-4f872964e043
   transaction: {
     chainId: 42161,
@@ -98,7 +98,7 @@ export const GMX_V2_MARKET_USDCE_LONG: TestParams<OptionsActionParams> = {
   },
 }
 
-export const GMX_V2_LIMIT_WBTC_LONG: TestParams<OptionsActionParams> = {
+const GMX_V2_LIMIT_WBTC_LONG: TestParams<OptionsActionParams> = {
   // https://arbiscan.io/tx/0x9fb4a0394ff01c7a5ed180272970b50fddee509baced24d6667fb8e944a6790b
   transaction: {
     chainId: 42161,
@@ -118,7 +118,7 @@ export const GMX_V2_LIMIT_WBTC_LONG: TestParams<OptionsActionParams> = {
   },
 }
 
-export const GMX_V2_MULTICALL_USDCE_MARKET: TestParams<OptionsActionParams> = {
+const GMX_V2_MULTICALL_USDCE_MARKET: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/e6715cc8-6242-4dc8-aed7-587ab8088e52
   transaction: {
     chainId: 42161,
@@ -136,7 +136,7 @@ export const GMX_V2_MULTICALL_USDCE_MARKET: TestParams<OptionsActionParams> = {
   },
 }
 
-export const GMX_V2_MULTICALL_USDCE_LIMIT: TestParams<OptionsActionParams> = {
+const GMX_V2_MULTICALL_USDCE_LIMIT: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/c5e11752-691e-4e40-805a-cb60133db283
   transaction: {
     chainId: 42161,
@@ -154,7 +154,7 @@ export const GMX_V2_MULTICALL_USDCE_LIMIT: TestParams<OptionsActionParams> = {
   },
 }
 
-export const GNS_MARKET_LONG: TestParams<OptionsActionParams> = {
+const GNS_MARKET_LONG: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/a77b2ad9-36d1-44ef-a718-73080d8c0c97
   transaction: {
     chainId: 42161,
@@ -170,10 +170,10 @@ export const GNS_MARKET_LONG: TestParams<OptionsActionParams> = {
     amount: GreaterThanOrEqual(parseUnits('50.78', 18)),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
     orderType: OrderType.Market,
-  }
+  },
 }
 
-export const GNS_LIMIT_SHORT: TestParams<OptionsActionParams> = {
+const GNS_LIMIT_SHORT: TestParams<OptionsActionParams> = {
   // https://www.tdly.co/shared/simulation/4f1ddbbd-ee59-4859-a3b3-a25346149689
   transaction: {
     chainId: 42161,
@@ -189,7 +189,7 @@ export const GNS_LIMIT_SHORT: TestParams<OptionsActionParams> = {
     amount: GreaterThanOrEqual(parseUnits('50.78', 18)),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
     orderType: OrderType.Limit,
-  }
+  },
 }
 
 export const passingTestCases = [
@@ -297,12 +297,36 @@ export const failingTestCases = [
   createTestCase(MUX_ETH_MARKET_LONG, 'when OrderType is wrong using mux', {
     orderType: OrderType.Limit,
   }),
-  createTestCase(GMX_V2_MARKET_USDCE_LONG, 'when token is wrong using GMXv2', { token: '0x912CE59144191C1204E64559FE8253a0e49E6548' }),
-  createTestCase(GMX_V2_MARKET_USDCE_LONG, 'when amount is wrong using GMXv2', { amount: GreaterThanOrEqual(parseUnits('100', 6)) }),
-  createTestCase(GMX_V2_LIMIT_WBTC_LONG, 'when OrderType is wrong using GMXv2', { orderType: OrderType.Market }),
-  createTestCase(GMX_V2_MULTICALL_USDCE_LIMIT, 'when token is wrong using GMXv2 with multicall', { token: '0x812CE59144191C1204E64559FE8253a0e49E6548' }),
-  createTestCase(GMX_V2_MULTICALL_USDCE_LIMIT, 'when amount is wrong using GMXv2 with multicall', { amount: GreaterThanOrEqual(parseUnits('100', 6)) }),
-  createTestCase(GMX_V2_MULTICALL_USDCE_LIMIT, 'when OrderType is wrong using GMXv2 with multicall', { orderType: OrderType.Market }),
-  createTestCase(GNS_MARKET_LONG, 'when amount is wrong using GNS', { amount: GreaterThanOrEqual(parseUnits('100', 18)) }),
-  createTestCase(GNS_LIMIT_SHORT, 'when OrderType is wrong using GNS', { orderType: OrderType.Market }),
+  createTestCase(GMX_V2_MARKET_USDCE_LONG, 'when token is wrong using GMXv2', {
+    token: '0x912CE59144191C1204E64559FE8253a0e49E6548',
+  }),
+  createTestCase(GMX_V2_MARKET_USDCE_LONG, 'when amount is wrong using GMXv2', {
+    amount: GreaterThanOrEqual(parseUnits('100', 6)),
+  }),
+  createTestCase(
+    GMX_V2_LIMIT_WBTC_LONG,
+    'when OrderType is wrong using GMXv2',
+    { orderType: OrderType.Market },
+  ),
+  createTestCase(
+    GMX_V2_MULTICALL_USDCE_LIMIT,
+    'when token is wrong using GMXv2 with multicall',
+    { token: '0x812CE59144191C1204E64559FE8253a0e49E6548' },
+  ),
+  createTestCase(
+    GMX_V2_MULTICALL_USDCE_LIMIT,
+    'when amount is wrong using GMXv2 with multicall',
+    { amount: GreaterThanOrEqual(parseUnits('100', 6)) },
+  ),
+  createTestCase(
+    GMX_V2_MULTICALL_USDCE_LIMIT,
+    'when OrderType is wrong using GMXv2 with multicall',
+    { orderType: OrderType.Market },
+  ),
+  createTestCase(GNS_MARKET_LONG, 'when amount is wrong using GNS', {
+    amount: GreaterThanOrEqual(parseUnits('100', 18)),
+  }),
+  createTestCase(GNS_LIMIT_SHORT, 'when OrderType is wrong using GNS', {
+    orderType: OrderType.Market,
+  }),
 ]
