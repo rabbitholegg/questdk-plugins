@@ -1,8 +1,10 @@
 import {
   type SwapActionParams,
+  type OptionsActionParams,
   type TransactionFilter,
   compressJson,
   type FilterOperator,
+  OrderType as BoostOrderType,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { OrderType, Tokens, buildPathQuery } from './utils.js'
@@ -88,6 +90,52 @@ export const swap = async (
       ],
     },
   })
+}
+
+export const options = async (
+  options: OptionsActionParams,
+): Promise<TransactionFilter> => {
+  const { chainId, token, amount, recipient, orderType } = options
+  return compressJson({
+    chainId: chainId,
+    to: GMX_ROUTERV2_ADDRESS.toLowerCase(),
+    input: {
+      $abiAbstract: GMX_SWAPV2_ABI,
+      params: {
+        numbers: {
+          acceptablePrice: amount,
+        },
+        ...getOrderType(orderType),
+        addresses: {
+          initialCollateralToken: token,
+          receiver: recipient,
+        },
+      },
+    },
+  })
+}
+
+export const getOrderType = (orderType: BoostOrderType | undefined) => {
+  switch (orderType) {
+    case BoostOrderType.Market:
+      return {
+          $or: [
+          {orderType: OrderType.MarketSwap},
+          {orderType: OrderType.MarketIncrease},
+          {orderType: OrderType.MarketDecrease},
+        ]
+      }
+    case BoostOrderType.Limit:
+      return {
+        $or: [
+          {orderType: OrderType.LimitSwap},
+          {orderType: OrderType.LimitIncrease},
+          {orderType: OrderType.LimitDecrease},
+        ]
+      }
+    default:
+      return undefined
+  }
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
