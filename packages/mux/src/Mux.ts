@@ -14,9 +14,9 @@ import {
   AggregatorGmxV2Adapter__factory,
 } from '@mux-network/mux.js'
 import { GNS_ABI } from './abi'
-import { GNS_CONTRACT, GNS_REF_ADDRESS } from './constants'
+import { CHAIN_ID_TO_TOKENS, GNS_CONTRACT, GNS_REF_ADDRESS } from './constants'
 import { buildSubAccountIdQuery, chainToWeth } from './helpers'
-import { buildPathQuery } from './utils'
+import { Chains, buildPathQuery } from './utils'
 
 export const options = async (
   trade: OptionsActionParams,
@@ -124,9 +124,9 @@ export const options = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return CHAIN_ID_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return []
+  return [Chains.ARBITRUM_ONE]
 }
