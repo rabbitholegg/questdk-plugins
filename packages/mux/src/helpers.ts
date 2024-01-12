@@ -8,7 +8,7 @@ import { CHAIN_ID_TO_PROVIDER } from './provider'
 import { type Address, zeroAddress, getAddress } from 'viem'
 import { Chains } from './utils'
 
-const chainToWeth: { [chainId: number]: Address } = {
+export const chainToWeth: { [chainId: number]: Address } = {
   [Chains.ARBITRUM_ONE]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
   [Chains.OPTIMISM]: '0x4200000000000000000000000000000000000006',
 }

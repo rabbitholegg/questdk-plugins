@@ -4,7 +4,7 @@ import {
   OrderType,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { zeroAddress, type Address } from 'viem'
 import {
   CHAIN_ID_TO_ORDER_BOOK_ADDRESS,
   OrderBook__factory,
@@ -15,7 +15,7 @@ import {
 } from '@mux-network/mux.js'
 import { GNS_ABI } from './abi'
 import { GNS_CONTRACT, GNS_REF_ADDRESS } from './constants'
-import { buildSubAccountIdQuery } from './helpers'
+import { buildSubAccountIdQuery, chainToWeth } from './helpers'
 import { buildPathQuery } from './utils'
 
 export const options = async (
@@ -30,6 +30,13 @@ export const options = async (
     token,
     chainId,
   )
+
+  const tokenIn = token
+    ? token === zeroAddress
+      ? chainToWeth[chainId]
+      : token
+    : undefined
+
   const getOrderType =
     orderType === OrderType.Market
       ? 0
@@ -84,7 +91,7 @@ export const options = async (
           // aggregator contract gmx V2
           $abi: AggregatorProxyFactory__factory.abi,
           args: {
-            tokenIn: token,
+            tokenIn: tokenIn,
             amountIn: amount,
             flags: gmxV2OrderFlag,
           },
@@ -93,7 +100,7 @@ export const options = async (
           // aggregator contract gmx V2 multicall
           $abiAbstract: AggregatorGmxV2Adapter__factory.abi,
           createParams: {
-            swapPath: buildPathQuery(token),
+            swapPath: buildPathQuery(tokenIn),
             initialCollateralAmount: amount,
             orderType: gmxV2OrderType,
           },
