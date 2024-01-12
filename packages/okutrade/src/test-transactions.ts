@@ -80,14 +80,17 @@ export const BASE_V3_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
     amountIn: GreaterThanOrEqual(parseUnits('5.220726', 6)),
     amountOut: GreaterThanOrEqual(parseEther('0.001985290664')),
     recipient: '0xa0a9d6fdb5190adc0aa448d821739400246816fc',
-  }
+  },
 }
 
 export const passingTestCases = [
   createTestCase(V3_NATIVE_TO_TOKENS, 'swapping native to tokens on V3'),
   createTestCase(V3_TOKENS_TO_NATIVE, 'swapping tokens to native on V3'),
   createTestCase(V3_TOKENS_TO_TOKENS, 'swapping tokens to tokens on V3'),
-  createTestCase(BASE_V3_TOKENS_TO_TOKENS, 'swapping tokens to tokens on V3 (base)'),
+  createTestCase(
+    BASE_V3_TOKENS_TO_TOKENS,
+    'swapping tokens to tokens on V3 (base)',
+  ),
   createTestCase(
     V3_NATIVE_TO_TOKENS,
     'swapping tokenIn is set to "any" (using ETH)',
