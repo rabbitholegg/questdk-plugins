@@ -115,6 +115,23 @@ export const GMX_V2_MULTICALL_USDCE_LIMIT: TestParams<OptionsActionParams> = {
   },
 }
 
+export const GNS_MARKET_LONG: TestParams<OptionsActionParams> = {
+  transaction: {
+    chainId: 42161,
+    to: '0x2c7e82641f03fa077f88833213210a86027f15dc',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    input:
+      '0xfb4b71bb000000000000000000000000865c301c46d64de5c9b124ec1a97ef1efc1bcbd1000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002c0b6ccf4be560000000000000000000000000000000000000000000000000000000017c2b31879e0000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000960000000000000000000000000000000000000000000000000000192d156281c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002540be40000000000000000000000000010c2cbfe29f4f5e4c24d54d36c8f283a61eb0c2f',
+    value: '0',
+  },
+  params: {
+    chainId: Chains.ARBITRUM_ONE,
+    token: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1', // DAI
+    amount: GreaterThanOrEqual(parseUnits('50.78', 18)),
+    orderType: OrderType.Market,
+  }
+}
+
 export const passingTestCases = [
   createTestCase(MUX_ETH_MARKET_LONG, 'when market long ETH on mux'),
   createTestCase(MUX_ARB_LIMIT_LONG, 'when limit long ARB on mux'),
@@ -187,6 +204,21 @@ export const passingTestCases = [
       orderType: undefined,
     },
   ),
+  createTestCase(GNS_MARKET_LONG, 'when market long DAI on GNS'),
+  createTestCase(GNS_MARKET_LONG, 'when token is "any" on GNS', {
+    token: undefined,
+  }),
+  createTestCase(GNS_MARKET_LONG, 'when amount is "any" on GNS', {
+    amount: undefined,
+  }),
+  createTestCase(GNS_MARKET_LONG, 'when orderType is "any" on GNS', {
+    orderType: undefined,
+  }),
+  createTestCase(GNS_MARKET_LONG, 'when all are "any" on GNS', {
+    token: undefined,
+    amount: undefined,
+    orderType: undefined,
+  }),
 ]
 
 export const failingTestCases = [
