@@ -1,6 +1,10 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { options, getSupportedChainIds, getSupportedTokenAddresses } from './Mux'
+import {
+  options,
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+} from './Mux'
 import { GNS_ABI } from './abi'
 import {
   AggregatorProxyFactory__factory,
@@ -132,6 +136,5 @@ describe('Given the mux plugin', () => {
         })
       })
     })
-
   })
 })
