@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-traderjoe
 
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [#159](https://github.com/rabbitholegg/questdk-plugins/pull/159) [`01ae21bae2f79756fefe8070e9e5d7329904c004`](https://github.com/rabbitholegg/questdk-plugins/commit/01ae21bae2f79756fefe8070e9e5d7329904c004) Thanks [@mmackz](https://github.com/mmackz)! - fix issue with amount not working correctly when WETH is chosen as tokenIn
+
 ## 1.0.0-alpha.7
 
 ### Minor Changes
