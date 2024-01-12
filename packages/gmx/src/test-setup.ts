@@ -18,6 +18,7 @@ import {
   ALT_ETHOUT_V2,
   MARKET_SHORT_ETH_ORDER_V2,
   LIMIT_LONG_ARB_ORDER_V2,
+  MARKET_LONG_ARB_WITH_USDC_ORDER_V2,
 } from './test-transactions'
 
 export const passingTestCasesV1 = [
@@ -111,6 +112,49 @@ export const failingTestCasesV2 = [
 export const passingOptionsTestCases = [
   createTestCase(MARKET_SHORT_ETH_ORDER_V2, 'when using a market order'),
   createTestCase(LIMIT_LONG_ARB_ORDER_V2, 'when using a limit order'),
+  createTestCase(MARKET_LONG_ARB_WITH_USDC_ORDER_V2, 'when using a market order and token collateral'),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the order type is undefined',
+    {
+      orderType: undefined,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the order type is undefined',
+    {
+      orderType: undefined,
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the amount is undefined',
+    {
+      amount: undefined,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the amount is undefined',
+    {
+      amount: undefined,
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the token is undefined',
+    {
+      token: undefined,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the token is undefined',
+    {
+      token: undefined,
+    },
+  ),
 ]
 
 export const failingOptionsTestCases = [
@@ -155,5 +199,5 @@ export const failingOptionsTestCases = [
     {
       token: Tokens.UNI,
     },
-  ),
+  )
 ]

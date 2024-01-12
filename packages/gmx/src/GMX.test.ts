@@ -1,6 +1,6 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
+import { GMX_SEND_TOKENS_ABI, GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
   getOrderType,
   getSupportedTokenAddresses,
@@ -126,25 +126,43 @@ describe('Given the gmx plugin', () => {
 
         const filter = await options(optionsParams)
 
-        expect(filter).toEqual({
+        const expectedFilter = {
           chainId: optionsParams.chainId,
           to: GMX_ROUTERV2_ADDRESS.toLowerCase(),
-          input: {
-            $abiAbstract: GMX_SWAPV2_ABI,
-            params: {
-              numbers: {
-                acceptablePrice: {
-                  $gte: '1900000000000000',
+          $and: [
+            {
+              input: {
+                $abiAbstract: GMX_SWAPV2_ABI,
+                params: {
+                  ...getOrderType(optionsParams.orderType),
+                  addresses: {
+                    initialCollateralToken: optionsParams.token,
+                    receiver: optionsParams.recipient,
+                  },
                 },
               },
-              ...getOrderType(optionsParams.orderType),
-              addresses: {
-                initialCollateralToken: optionsParams.token,
-                receiver: optionsParams.recipient,
-              },
             },
-          },
-        })
+            {
+              $or: [
+                {
+                  input: {
+                    $abiAbstract: GMX_SEND_TOKENS_ABI,
+                    amount: {
+                      $gte: '1900000000000000',
+                    },
+                  },
+                },
+                {
+                  value: {
+                    $gte: '1900000000000000',
+                  },
+                },
+              ],
+            },
+          ],
+        };
+
+        expect(filter).toEqual(expectedFilter);
       })
     })
     describe('should not pass filter with invalid V2 transactions', () => {
