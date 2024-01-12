@@ -1,6 +1,6 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { options } from './Mux'
+import { options, getSupportedChainIds, getSupportedTokenAddresses } from './Mux'
 import { GNS_ABI } from './abi'
 import {
   AggregatorProxyFactory__factory,
@@ -104,6 +104,7 @@ describe('Given the mux plugin', () => {
         })
       })
     })
+
     describe('should not pass filter with invalid transactions', () => {
       failingTestCases.forEach((testCase) => {
         const { description, transaction, params } = testCase
@@ -113,5 +114,24 @@ describe('Given the mux plugin', () => {
         })
       })
     })
+
+    describe('should return a valid list of tokens for each supported chain', async () => {
+      const CHAIN_ID_ARRAY = await getSupportedChainIds()
+      CHAIN_ID_ARRAY.forEach((chainId) => {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(chainId)
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach((token) => {
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
+          })
+        })
+      })
+    })
+
   })
 })
