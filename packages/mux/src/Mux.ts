@@ -30,7 +30,7 @@ export const options = async (
     token,
     chainId,
   )
-  const muxDeadline =
+  const getOrderType =
     orderType === OrderType.Market
       ? 0
       : orderType === OrderType.Limit
@@ -78,7 +78,7 @@ export const options = async (
           $abi: OrderBook__factory.abi,
           subAccountId: subAccountQuery,
           collateralAmount: amount,
-          deadline: muxDeadline,
+          deadline: getOrderType,
         },
         {
           // aggregator contract gmx V2
@@ -106,7 +106,7 @@ export const options = async (
             trader: recipient,
             positionSizeDai: amount,
           },
-          orderType: muxDeadline,
+          orderType: getOrderType,
           referrer: GNS_REF_ADDRESS,
         },
       ],
