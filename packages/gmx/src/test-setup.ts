@@ -114,22 +114,46 @@ export const passingOptionsTestCases = [
 ]
 
 export const failingOptionsTestCases = [
-  createTestCase(MARKET_SHORT_ETH_ORDER_V2, 'when using a market order but the order type is wrong', {
-    orderType: OrderType.Limit,
-  }),
-  createTestCase(LIMIT_LONG_ARB_ORDER_V2, 'when using a limit order but the order type is wrong', {
-    orderType: OrderType.Market,
-  }),
-  createTestCase(MARKET_SHORT_ETH_ORDER_V2, 'when using a market order but the amount is wrong', {
-    amount: parseEther('0.0001'),
-  }),
-  createTestCase(LIMIT_LONG_ARB_ORDER_V2, 'when using a limit order but the amount is wrong', {
-    amount: parseEther('0.0001'),
-  }),
-  createTestCase(MARKET_SHORT_ETH_ORDER_V2, 'when using a market order but the token is wrong', {
-    token: Tokens.UNI,
-  }),
-  createTestCase(LIMIT_LONG_ARB_ORDER_V2, 'when using a limit order but the token is wrong', {
-    token: Tokens.UNI,
-  }),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the order type is wrong',
+    {
+      orderType: OrderType.Limit,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the order type is wrong',
+    {
+      orderType: OrderType.Market,
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the amount is wrong',
+    {
+      amount: parseEther('0.0001'),
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the amount is wrong',
+    {
+      amount: parseEther('0.0001'),
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the token is wrong',
+    {
+      token: Tokens.UNI,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the token is wrong',
+    {
+      token: Tokens.UNI,
+    },
+  ),
 ]
