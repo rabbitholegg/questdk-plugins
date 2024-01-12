@@ -1,4 +1,4 @@
-import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
+import { GreaterThanOrEqual, OrderType } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
 import { createTestCase, Tokens } from './utils'
 import {
@@ -16,6 +16,9 @@ import {
   USDCe_FOR_WETH_V2,
   REDUCE_ORDER_V2,
   ALT_ETHOUT_V2,
+  MARKET_SHORT_ETH_ORDER_V2,
+  LIMIT_LONG_ARB_ORDER_V2,
+  MARKET_LONG_ARB_WITH_USDC_ORDER_V2,
 } from './test-transactions'
 
 export const passingTestCasesV1 = [
@@ -104,4 +107,100 @@ export const failingTestCasesV2 = [
     amountOut: GreaterThanOrEqual(parseUnits('0.00055', 8)),
   }),
   createTestCase(REDUCE_ORDER_V2, 'when wrong OrderType is used'),
+]
+
+export const passingOptionsTestCases = [
+  createTestCase(MARKET_SHORT_ETH_ORDER_V2, 'when using a market order'),
+  createTestCase(LIMIT_LONG_ARB_ORDER_V2, 'when using a limit order'),
+  createTestCase(
+    MARKET_LONG_ARB_WITH_USDC_ORDER_V2,
+    'when using a market order and token collateral',
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the order type is undefined',
+    {
+      orderType: undefined,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the order type is undefined',
+    {
+      orderType: undefined,
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the amount is undefined',
+    {
+      amount: undefined,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the amount is undefined',
+    {
+      amount: undefined,
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the token is undefined',
+    {
+      token: undefined,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the token is undefined',
+    {
+      token: undefined,
+    },
+  ),
+]
+
+export const failingOptionsTestCases = [
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the order type is wrong',
+    {
+      orderType: OrderType.Limit,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the order type is wrong',
+    {
+      orderType: OrderType.Market,
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the amount is wrong',
+    {
+      amount: parseEther('0.0001'),
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the amount is wrong',
+    {
+      amount: parseEther('0.0001'),
+    },
+  ),
+  createTestCase(
+    MARKET_SHORT_ETH_ORDER_V2,
+    'when using a market order but the token is wrong',
+    {
+      token: Tokens.UNI,
+    },
+  ),
+  createTestCase(
+    LIMIT_LONG_ARB_ORDER_V2,
+    'when using a limit order but the token is wrong',
+    {
+      token: Tokens.UNI,
+    },
+  ),
 ]
