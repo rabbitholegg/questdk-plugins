@@ -13,6 +13,8 @@ import {
   PositionOrderFlags,
   AggregatorGmxV2Adapter__factory,
 } from '@mux-network/mux.js'
+import { GNS_ABI } from './abi'
+import { GNS_CONTRACT, GNS_REF_ADDRESS } from './constants'
 import { buildSubAccountIdQuery } from './helpers'
 import { buildPathQuery } from './utils'
 
@@ -53,7 +55,7 @@ export const options = async (
       : undefined
 
   const gmxV2OrderType =
-        // https://arbiscan.io/address/0xe1b50bba2255bbc60e4d4cdb4c77df61d1fddd8d#code (IOrder.sol)
+    // https://arbiscan.io/address/0xe1b50bba2255bbc60e4d4cdb4c77df61d1fddd8d#code (IOrder.sol)
     orderType === OrderType.Market
       ? 2 // MarketIncrease
       : orderType === OrderType.Limit
@@ -63,7 +65,11 @@ export const options = async (
   return compressJson({
     chainId,
     to: {
-      $or: [muxContract.toLowerCase(), aggregatorContract.toLowerCase()],
+      $or: [
+        muxContract.toLowerCase(),
+        aggregatorContract.toLowerCase(),
+        GNS_CONTRACT.toLowerCase(),
+      ],
     },
     input: {
       $or: [
@@ -91,6 +97,17 @@ export const options = async (
             initialCollateralAmount: amount,
             orderType: gmxV2OrderType,
           },
+        },
+        {
+          // gns contract
+          $abi: GNS_ABI,
+          t: {
+            // only DAI is used as collateral
+            trader: recipient,
+            positionSizeDai: amount,
+          },
+          orderType: muxDeadline,
+          referrer: GNS_REF_ADDRESS,
         },
       ],
     },
