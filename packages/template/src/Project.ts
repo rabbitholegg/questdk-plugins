@@ -21,7 +21,7 @@ export const bridge = async (
   const {
     sourceChainId,
     destinationChainId,
-    contractAddress,  
+    contractAddress,
     tokenAddress,
     amount,
     recipient,
