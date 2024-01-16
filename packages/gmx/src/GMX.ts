@@ -65,7 +65,7 @@ export const swap = async (
                 numbers: {
                   minOutputAmount: amountOut,
                 },
-                orderType: OrderType.MarketSwap,
+                orderType: { $lte: OrderType.LimitSwap },
                 addresses: {
                   initialCollateralToken: ETH_USED ? Tokens.WETH : tokenIn,
                   receiver: recipient,

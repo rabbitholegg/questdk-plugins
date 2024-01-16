@@ -64,7 +64,7 @@ describe('Given the gmx plugin', () => {
                     $abiAbstract: GMX_SWAPV2_ABI,
                     params: {
                       numbers: { minOutputAmount: { $gte: '100000' } },
-                      orderType: 0,
+                      orderType: { $lte: 1 },
                       addresses: {
                         initialCollateralToken: Tokens.USDCe,
                         receiver: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619',

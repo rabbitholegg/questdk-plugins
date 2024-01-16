@@ -16,6 +16,7 @@ import {
   USDCe_FOR_WETH_V2,
   REDUCE_ORDER_V2,
   ALT_ETHOUT_V2,
+  LIMIT_SWAP,
   MARKET_SHORT_ETH_ORDER_V2,
   LIMIT_LONG_ARB_ORDER_V2,
   MARKET_LONG_ARB_WITH_USDC_ORDER_V2,
@@ -72,6 +73,7 @@ export const passingTestCasesV2 = [
   createTestCase(USDCe_FOR_WETH_V2, 'when swapping USDC.e to WETH'),
   createTestCase(ALT_ETHOUT_V2, 'when swapping USDC.e to ETH'),
   createTestCase(SWAP_TOKENS_V2, 'when all parameters are correct'),
+  createTestCase(LIMIT_SWAP, 'when making a limit swap'),
   createTestCase(TOKENS_FOR_TOKENS_V2, 'when tokenIn is set to "any', {
     tokenIn: undefined,
   }),
