@@ -1,5 +1,3 @@
-// This file is standard for more projects.
-// The main degree of nuance is in the
 
 import {
   type IActionPlugin,
@@ -8,6 +6,7 @@ import {
 
 import {
   swap,
+  options,
   getSupportedChainIds,
   getSupportedTokenAddresses,
 } from './GMX.js'
@@ -20,4 +19,5 @@ export const GMX: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap,
   mint: async () => new PluginActionNotImplementedError(),
+  options,
 }
