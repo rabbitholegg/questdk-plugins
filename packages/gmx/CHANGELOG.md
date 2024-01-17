@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.15
+
+### Minor Changes
+
+- [#166](https://github.com/rabbitholegg/questdk-plugins/pull/166) [`455a7b8ba6da2d32234a6bd84ffc2a12d308a12a`](https://github.com/rabbitholegg/questdk-plugins/commit/455a7b8ba6da2d32234a6bd84ffc2a12d308a12a) Thanks [@mmackz](https://github.com/mmackz)! - add support for limit swap ordertype to gmx swap plugin
+
+- [#169](https://github.com/rabbitholegg/questdk-plugins/pull/169) [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d) Thanks [@Quazia](https://github.com/Quazia)! - Bump SDK version to Alpha 31
+
 ## 1.0.0-alpha.14
 
 ### Minor Changes
