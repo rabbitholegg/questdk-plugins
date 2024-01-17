@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.14
+
+### Minor Changes
+
+- [#164](https://github.com/rabbitholegg/questdk-plugins/pull/164) [`3e373825044b283df73407074268caf1d1653708`](https://github.com/rabbitholegg/questdk-plugins/commit/3e373825044b283df73407074268caf1d1653708) Thanks [@Quazia](https://github.com/Quazia)! - Add Options to GMX
+
 ## 1.0.0-alpha.13
 
 ### Minor Changes
