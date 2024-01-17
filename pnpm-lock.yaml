@@ -16,14 +16,14 @@ importers:
     devDependencies:
       '@changesets/changelog-github': 0.4.8
       '@changesets/cli': 2.27.1
-      '@turbo/gen': 1.11.3_mw5f442eimnzytsagb76vztts4
+      '@turbo/gen': 1.11.3_ftlp33mgdtbyy6jzidtkcdcoca
       eslint: 7.32.0
       prettier: 2.8.8
       turbo: 1.11.3
 
   packages/across:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -34,7 +34,7 @@ importers:
       viem: 1.2.15
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -48,7 +48,7 @@ importers:
 
   packages/arbitrum:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -59,7 +59,7 @@ importers:
       viem: 1.2.15
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -73,7 +73,7 @@ importers:
 
   packages/balancer:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.4.5
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.1
@@ -84,21 +84,21 @@ importers:
       viem: ^1.2.15
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/basepaint:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -109,21 +109,21 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/camelot:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -134,7 +134,7 @@ importers:
       viem: 1.2.15
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -151,7 +151,7 @@ importers:
       '@connext/nxtp-txservice': ^2.0.0
       '@connext/nxtp-utils': ^2.0.4
       '@connext/smart-contracts': ^2.0.0
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -165,14 +165,14 @@ importers:
       '@connext/nxtp-txservice': 2.0.0_sinon@17.0.1
       '@connext/nxtp-utils': 2.0.4_sinon@17.0.1
       '@connext/smart-contracts': 2.0.0_ethers@5.7.2
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
@@ -206,7 +206,7 @@ importers:
 
   packages/handlefi:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -217,14 +217,14 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
@@ -233,7 +233,7 @@ importers:
     specifiers:
       '@hop-protocol/core': 0.0.1-beta.182
       '@hop-protocol/sdk': 0.0.1-beta.535
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -246,7 +246,7 @@ importers:
     dependencies:
       '@hop-protocol/core': 0.0.1-beta.182
       '@hop-protocol/sdk': 0.0.1-beta.535
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -260,7 +260,7 @@ importers:
 
   packages/hyphen:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.4.5
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.1
@@ -271,21 +271,21 @@ importers:
       viem: ^1.2.15
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/mirror:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -296,21 +296,21 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/okutrade:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -321,14 +321,14 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
@@ -336,7 +336,7 @@ importers:
   packages/optimism:
     specifiers:
       '@eth-optimism/contracts-ts': 0.15.0
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -348,7 +348,7 @@ importers:
       vitest: 0.33.0
     dependencies:
       '@eth-optimism/contracts-ts': 0.15.0_typescript@5.1.6
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -363,7 +363,7 @@ importers:
   packages/paraswap:
     specifiers:
       '@paraswap/sdk': ^6.2.4
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       axios: 1.5.0
@@ -376,15 +376,15 @@ importers:
       vitest: ^0.33.0
     dependencies:
       '@paraswap/sdk': 6.3.0_mnqngwuc7bnukdb6a5vweuj77m
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       axios: 1.5.0
       viem: 1.2.15_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
@@ -392,7 +392,7 @@ importers:
   packages/polygon:
     specifiers:
       '@maticnetwork/pos-portal': 1.5.2
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -404,7 +404,7 @@ importers:
       vitest: 0.33.0
     dependencies:
       '@maticnetwork/pos-portal': 1.5.2
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.1.6
       viem: 1.2.15_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -418,7 +418,7 @@ importers:
 
   packages/rabbithole:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -429,21 +429,21 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/registry:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@rabbitholegg/questdk-plugin-across': workspace:*
       '@rabbitholegg/questdk-plugin-arbitrum': workspace:*
       '@rabbitholegg/questdk-plugin-balancer': workspace:*
@@ -481,7 +481,7 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       '@rabbitholegg/questdk-plugin-across': link:../across
       '@rabbitholegg/questdk-plugin-arbitrum': link:../arbitrum
       '@rabbitholegg/questdk-plugin-balancer': link:../balancer
@@ -511,18 +511,18 @@ importers:
       '@rabbitholegg/questdk-plugin-zora': link:../zora
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/soundxyz:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -533,21 +533,21 @@ importers:
       viem: 1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.16.6_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/stargate:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': 20.4.5
       '@vitest/coverage-v8': 0.33.0
       rimraf: 5.0.1
@@ -558,7 +558,7 @@ importers:
       viem: 1.6.7
       vitest: 0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.1.6
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.1.6
       viem: 1.6.7_typescript@5.1.6
     devDependencies:
       '@types/node': 20.4.5
@@ -572,7 +572,7 @@ importers:
 
   packages/sushi:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@sushiswap/core-sdk': 1.0.0-canary.34
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
@@ -584,22 +584,22 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       '@sushiswap/core-sdk': 1.0.0-canary.34
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/symbiosis:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.4.5
       '@vitest/coverage-v8': ^0.33.0
       ethers: ^5.2.0
@@ -612,23 +612,23 @@ importers:
       viem: ^1.2.15
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       ethers: 5.7.2
       symbiosis-js-sdk: 3.1.15_ethers@5.7.2
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/synapse:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -639,21 +639,21 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/tally:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -664,21 +664,21 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/template:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -689,21 +689,21 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/traderjoe:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@traderjoe-xyz/sdk-v2': ^2.1.8
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
@@ -715,22 +715,22 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       '@traderjoe-xyz/sdk-v2': 2.1.8_viem@1.21.4
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/treasure:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -741,14 +741,14 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
@@ -758,7 +758,7 @@ importers:
 
   packages/uniswap:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@uniswap/sdk-core': 4.0.10
       '@uniswap/universal-router-sdk': 2.0.2
       '@vitest/coverage-v8': ^0.33.0
@@ -769,7 +769,7 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       '@uniswap/sdk-core': 4.0.10
       '@uniswap/universal-router-sdk': 2.0.2_hardhat@2.19.4
       viem: 1.21.4_typescript@5.3.3
@@ -783,7 +783,7 @@ importers:
 
   packages/woofi:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       rimraf: ^5.0.5
@@ -794,21 +794,21 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
 
   packages/zora:
     specifiers:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28
+      '@rabbitholegg/questdk': 2.0.0-alpha.31
       '@types/node': ^20.8.7
       '@vitest/coverage-v8': ^0.33.0
       '@zoralabs/universal-minter': 0.2.12
@@ -820,15 +820,15 @@ importers:
       viem: ^1.16.6
       vitest: ^0.33.0
     dependencies:
-      '@rabbitholegg/questdk': 2.0.0-alpha.28_typescript@5.3.3
-      '@zoralabs/universal-minter': 0.2.12_4phgmhj6xcpv62xhrfhwqnzasi
+      '@rabbitholegg/questdk': 2.0.0-alpha.31_typescript@5.3.3
+      '@zoralabs/universal-minter': 0.2.12_f6om6yrurd3c3ggbbkmmn3332a
       viem: 1.21.4_typescript@5.3.3
     devDependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/coverage-v8': 0.33.0_vitest@0.33.0
       rimraf: 5.0.5
       rome: 12.1.3
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       tsconfig: link:../tsconfig
       typescript: 5.3.3
       vitest: 0.33.0
@@ -2739,42 +2739,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@rabbitholegg/questdk/2.0.0-alpha.28_typescript@5.1.6:
-    resolution: {integrity: sha512-YNjry2FcWHRtNuUj+OIsoLeEhmQ0mNidhLC2BWjhQgEUcIwmTzkuSw/QczjZoDZojTOe8DKgVpLOSIs9qoDoXw==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.10_typescript@5.1.6
-      rimraf: 5.0.1
-      typescript: 5.1.6
-      viem: 1.21.4_typescript@5.1.6
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
-  /@rabbitholegg/questdk/2.0.0-alpha.28_typescript@5.3.3:
-    resolution: {integrity: sha512-YNjry2FcWHRtNuUj+OIsoLeEhmQ0mNidhLC2BWjhQgEUcIwmTzkuSw/QczjZoDZojTOe8DKgVpLOSIs9qoDoXw==}
-    peerDependencies:
-      typescript: '>=5.1.6'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      abitype: 0.9.10_typescript@5.3.3
-      rimraf: 5.0.1
-      typescript: 5.3.3
-      viem: 1.21.4_typescript@5.3.3
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
-
   /@rabbitholegg/questdk/2.0.0-alpha.31_typescript@5.1.6:
     resolution: {integrity: sha512-CGoq2tgziplhx4QBtKHou1EzIIx4jWi/bC61ZRqDQCxvZ4+yqwKFtE2PKJw73hT6cRwiIkUNNrFgrTMiapEcKA==}
     peerDependencies:
@@ -2787,6 +2751,24 @@ packages:
       rimraf: 5.0.1
       typescript: 5.1.6
       viem: 1.21.4_typescript@5.1.6
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /@rabbitholegg/questdk/2.0.0-alpha.31_typescript@5.3.3:
+    resolution: {integrity: sha512-CGoq2tgziplhx4QBtKHou1EzIIx4jWi/bC61ZRqDQCxvZ4+yqwKFtE2PKJw73hT6cRwiIkUNNrFgrTMiapEcKA==}
+    peerDependencies:
+      typescript: '>=5.1.6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      abitype: 0.9.10_typescript@5.3.3
+      rimraf: 5.0.1
+      typescript: 5.3.3
+      viem: 1.21.4_typescript@5.3.3
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3126,7 +3108,7 @@ packages:
   /@tsconfig/node16/1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
-  /@turbo/gen/1.11.3_mw5f442eimnzytsagb76vztts4:
+  /@turbo/gen/1.11.3_ftlp33mgdtbyy6jzidtkcdcoca:
     resolution: {integrity: sha512-cHGRj7Jn7Hw1cA7NuwWYfYdhEliQX4LuSfEB9L1m8ifGkHalU3bbYXcehzLThmckpGpUQGnXYx0UtVudbQ42HA==}
     hasBin: true
     dependencies:
@@ -3138,7 +3120,7 @@ packages:
       minimatch: 9.0.3
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -3178,13 +3160,13 @@ packages:
   /@types/bn.js/4.11.6:
     resolution: {integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==}
     dependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
     dev: false
 
   /@types/bn.js/5.1.5:
     resolution: {integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==}
     dependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
     dev: false
 
   /@types/cacheable-request/6.0.3:
@@ -3208,7 +3190,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
     dev: true
 
   /@types/http-cache-semantics/4.0.4:
@@ -3262,8 +3244,8 @@ packages:
     resolution: {integrity: sha512-N+0kuo9KgrUQ1Sn/ifDXsvg0TTleP7rIy4zOBGECxAljqvqfqpTfzx0Q1NUedOixRMBfe2Whhb056a42cWs26Q==}
     dev: false
 
-  /@types/node/20.11.0:
-    resolution: {integrity: sha512-o9bjXmDNcF7GbM4CNQpmi+TutCgap/K3w1JyKgxAjqx41zp9qlIAVFi0IhCNsJcXolEqLWhbFbEeL0PvYm4pcQ==}
+  /@types/node/20.11.4:
+    resolution: {integrity: sha512-6I0fMH8Aoy2lOejL3s4LhyIYX34DPwY8bl5xlNjBvUEk8OHrcuzsFt+Ied4LvJihbtXPM+8zUqdydfIti86v9g==}
     dependencies:
       undici-types: 5.26.5
 
@@ -3286,11 +3268,11 @@ packages:
   /@types/react-dom/18.2.18:
     resolution: {integrity: sha512-TJxDm6OfAX2KJWJdMEVTwWke5Sc/E/RlnPGvGfS0W7+6ocy2xhDVQVh/KvC2Uf7kACs+gDytdusDSdWfWkaNzw==}
     dependencies:
-      '@types/react': 18.2.47
+      '@types/react': 18.2.48
     dev: false
 
-  /@types/react/18.2.47:
-    resolution: {integrity: sha512-xquNkkOirwyCgoClNk85BjP+aqnIS+ckAJ8i37gAbDs14jfW/J23f2GItAf33oiUPQnqNMALiFeoM9Y5mbjpVQ==}
+  /@types/react/18.2.48:
+    resolution: {integrity: sha512-qboRCl6Ie70DQQG9hhNREz81jqC1cs9EVNcjQ1AU+jH6NFfSAhVVbrrY/+nSF+Bsk4AOwm9Qa61InvMCyV+H3w==}
     dependencies:
       '@types/prop-types': 15.7.11
       '@types/scheduler': 0.16.8
@@ -3300,7 +3282,7 @@ packages:
   /@types/readable-stream/2.3.15:
     resolution: {integrity: sha512-oM5JSKQCcICF1wvGgmecmHldZ48OZamtMxcGGVICOJA8o8cahXC1zEVAif8iwoc5j8etxFaRFnf095+CDsuoFQ==}
     dependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       safe-buffer: 5.1.2
     dev: false
 
@@ -3326,7 +3308,7 @@ packages:
   /@types/through/0.0.33:
     resolution: {integrity: sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==}
     dependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
     dev: true
 
   /@types/tinycolor2/1.4.6:
@@ -3666,10 +3648,10 @@ packages:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/universal-minter/0.2.12_4phgmhj6xcpv62xhrfhwqnzasi:
+  /@zoralabs/universal-minter/0.2.12_f6om6yrurd3c3ggbbkmmn3332a:
     resolution: {integrity: sha512-tPeUh85OQrCOc454TaXy0MbHfU79XwaU1Mrhj1DAxY077v3ztXl2Vg7wJbQduVg8c6H8/hShCSI+scO2NYcHZg==}
     dependencies:
-      '@zoralabs/zora-1155-contracts': 1.6.1_ubbqfxowxpg5edlww4i4uvalpa
+      '@zoralabs/zora-1155-contracts': 1.6.1_fmk6qo7es45eyvgfljxu7pxaai
       abitype: 0.9.10_typescript@5.3.3
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -3699,7 +3681,7 @@ packages:
       - zod
     dev: false
 
-  /@zoralabs/zora-1155-contracts/1.6.1_ubbqfxowxpg5edlww4i4uvalpa:
+  /@zoralabs/zora-1155-contracts/1.6.1_fmk6qo7es45eyvgfljxu7pxaai:
     resolution: {integrity: sha512-8b872/BOfaW5D8UhFOW2NIrCIXsPvTVoxPZGRs8BNXLEhgQD5nWGoWq11+9fVYxpAMAEtr6/OyvYbT4XtNHTfQ==}
     dependencies:
       '@changesets/cli': 2.27.1
@@ -3720,7 +3702,7 @@ packages:
       tsx: 3.14.0
       typescript: 5.3.3
       viem: 1.21.4_typescript@5.3.3
-      vite: 4.5.1_@types+node@20.11.0
+      vite: 4.5.1_@types+node@20.11.4
       vitest: 0.30.1
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -4584,7 +4566,7 @@ packages:
     dependencies:
       function-bind: 1.1.2
       get-intrinsic: 1.2.2
-      set-function-length: 1.1.1
+      set-function-length: 1.2.0
 
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -5586,7 +5568,7 @@ packages:
       object-keys: 1.1.1
       object.assign: 4.1.5
       regexp.prototype.flags: 1.5.1
-      safe-array-concat: 1.0.1
+      safe-array-concat: 1.1.0
       safe-regex-test: 1.0.2
       string.prototype.trim: 1.2.8
       string.prototype.trimend: 1.0.7
@@ -6060,8 +6042,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /ethers/6.9.2:
-    resolution: {integrity: sha512-YpkrtILnMQz5jSEsJQRTpduaGT/CXuLnUIuOYzHA0v/7c8IX91m2J48wSKjzGL5L9J/Us3tLoUdb+OwE3U+FFQ==}
+  /ethers/6.10.0:
+    resolution: {integrity: sha512-nMNwYHzs6V1FR3Y4cdfxSQmNgZsRj1RiTU25JwvnJLmyzw9z3SKxNc2XKDuiXXo/v9ds5Mp9m6HBabgYQQ26tA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@adraffy/ens-normalize': 1.10.0
@@ -6126,7 +6108,7 @@ packages:
     dependencies:
       minimal-polyfills: 2.2.3
       run-exclusive: 2.2.19
-      tsafe: 1.6.5
+      tsafe: 1.6.6
     dev: false
 
   /execa/5.1.1:
@@ -9085,7 +9067,7 @@ packages:
         optional: true
     dependencies:
       lilconfig: 3.0.0
-      ts-node: 10.9.2_mw5f442eimnzytsagb76vztts4
+      ts-node: 10.9.2_ftlp33mgdtbyy6jzidtkcdcoca
       yaml: 2.3.4
     dev: false
 
@@ -9692,8 +9674,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /safe-array-concat/1.0.1:
-    resolution: {integrity: sha512-6XbUAseYE2KtOuGueyeobCySj9L4+66Tn6KQMOPQJrAJEowYKW/YR/MGJZl7FdydUdaFu4LYyDZjxf4/Nmo23Q==}
+  /safe-array-concat/1.1.0:
+    resolution: {integrity: sha512-ZdQ0Jeb9Ofti4hbt5lX3T2JcAamT9hfzYU1MNB+z/jaEbB6wfFfPIR/zEORmZqobkCCJhSjodobH6WHNmJ97dg==}
     engines: {node: '>=0.4'}
     dependencies:
       call-bind: 1.0.5
@@ -9835,11 +9817,12 @@ packages:
   /set-blocking/2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
 
-  /set-function-length/1.1.1:
-    resolution: {integrity: sha512-VoaqjbBJKiWtg4yRcKBQ7g7wnGnLV3M8oLvVWwOk2PdYY6PEFegR1vezXR0tw6fZGF9csVakIRjrJiy2veSBFQ==}
+  /set-function-length/1.2.0:
+    resolution: {integrity: sha512-4DBHDoyHlM1IRPGYcoxexgh67y4ueR53FKV1yyxwFMY7aCqcN/38M1+SwZ/qJQ8iLv7+ck385ot4CcisOAPT9w==}
     engines: {node: '>= 0.4'}
     dependencies:
       define-data-property: 1.1.1
+      function-bind: 1.1.2
       get-intrinsic: 1.2.2
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
@@ -10473,8 +10456,8 @@ packages:
     resolution: {integrity: sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==}
     dev: false
 
-  /tinybench/2.5.1:
-    resolution: {integrity: sha512-65NKvSuAVDP/n4CqH+a9w2kTlLReS9vhsAP06MWx+/89nMinJyB2icyl58RIcqCmIggpojIGeuJGhjU1aGMBSg==}
+  /tinybench/2.6.0:
+    resolution: {integrity: sha512-N8hW3PG/3aOoZAN5V/NSAEDz0ZixDSSt5b/a05iqtpgfLWMSVuCo7w0k2vVvEjdrIoeGqZzweX2WlyioNIHchA==}
 
   /tinycolor2/1.6.0:
     resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
@@ -10569,7 +10552,7 @@ packages:
       axios: 0.26.1
       bignumber.js: 9.1.2
       ethereum-cryptography: 2.1.2
-      ethers: 6.9.2
+      ethers: 6.10.0
       eventemitter3: 3.1.2
       injectpromise: 1.0.0
       lodash: 4.17.21
@@ -10628,7 +10611,7 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-node/10.9.2_mw5f442eimnzytsagb76vztts4:
+  /ts-node/10.9.2_ftlp33mgdtbyy6jzidtkcdcoca:
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
     hasBin: true
     peerDependencies:
@@ -10647,7 +10630,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
@@ -10658,8 +10641,8 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
-  /tsafe/1.6.5:
-    resolution: {integrity: sha512-895zss8xqqHKTc28sHGIfZKnt3C5jrstB1DyPr/h3/flK0zojsZUMQL1/W4ytdDW6KI4Oth62nb9rrxmA3s3Iw==}
+  /tsafe/1.6.6:
+    resolution: {integrity: sha512-gzkapsdbMNwBnTIjgO758GujLCj031IgHK/PKr2mrmkCSJMhSOR5FeOuSxKLMUoYc0vAA4RGEYYbjt/v6afD3g==}
     dev: false
 
   /tslib/1.14.1:
@@ -11292,7 +11275,7 @@ packages:
       - zod
     dev: false
 
-  /vite-node/0.30.1_@types+node@20.11.0:
+  /vite-node/0.30.1_@types+node@20.11.4:
     resolution: {integrity: sha512-vTikpU/J7e6LU/8iM3dzBo8ZhEiKZEKRznEMm+mJh95XhWaPrJQraT/QsT2NWmuEf+zgAoMe64PKT7hfZ1Njmg==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -11302,7 +11285,7 @@ packages:
       mlly: 1.5.0
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 4.5.1_@types+node@20.11.0
+      vite: 4.5.1_@types+node@20.11.4
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -11336,7 +11319,7 @@ packages:
       - terser
     dev: true
 
-  /vite/4.5.1_@types+node@20.11.0:
+  /vite/4.5.1_@types+node@20.11.4:
     resolution: {integrity: sha512-AXXFaAJ8yebyqzoNB9fu2pHoo/nWX+xZlaRwoeYUxEqBO+Zj4msE5G+BhGBll9lYEKv9Hfks52PAF2X7qDYXQA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -11364,7 +11347,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       esbuild: 0.18.20
       postcss: 8.4.33
       rollup: 3.29.4
@@ -11441,7 +11424,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.11
       '@types/chai-subset': 1.3.5
-      '@types/node': 20.11.0
+      '@types/node': 20.11.4
       '@vitest/expect': 0.30.1
       '@vitest/runner': 0.30.1
       '@vitest/snapshot': 0.30.1
@@ -11460,10 +11443,10 @@ packages:
       source-map: 0.6.1
       std-env: 3.7.0
       strip-literal: 1.3.0
-      tinybench: 2.5.1
+      tinybench: 2.6.0
       tinypool: 0.4.0
-      vite: 4.5.1_@types+node@20.11.0
-      vite-node: 0.30.1_@types+node@20.11.0
+      vite: 4.5.1_@types+node@20.11.4
+      vite-node: 0.30.1_@types+node@20.11.4
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
@@ -11525,7 +11508,7 @@ packages:
       picocolors: 1.0.0
       std-env: 3.7.0
       strip-literal: 1.3.0
-      tinybench: 2.5.1
+      tinybench: 2.6.0
       tinypool: 0.6.0
       vite: 4.5.1_@types+node@20.4.5
       vite-node: 0.33.0_@types+node@20.4.5
