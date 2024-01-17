@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.16
+
+### Minor Changes
+
+- [#170](https://github.com/rabbitholegg/questdk-plugins/pull/170) [`6792112cc4153525bb4278d4951631fab3781bd0`](https://github.com/rabbitholegg/questdk-plugins/commit/6792112cc4153525bb4278d4951631fab3781bd0) Thanks [@Quazia](https://github.com/Quazia)! - Small fix to options function export
+
 ## 1.0.0-alpha.15
 
 ### Minor Changes
