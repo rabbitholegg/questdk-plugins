@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.16
+
+### Minor Changes
+
+- [#170](https://github.com/rabbitholegg/questdk-plugins/pull/170) [`6792112cc4153525bb4278d4951631fab3781bd0`](https://github.com/rabbitholegg/questdk-plugins/commit/6792112cc4153525bb4278d4951631fab3781bd0) Thanks [@Quazia](https://github.com/Quazia)! - Small fix to options function export
+
+## 1.0.0-alpha.15
+
+### Minor Changes
+
+- [#166](https://github.com/rabbitholegg/questdk-plugins/pull/166) [`455a7b8ba6da2d32234a6bd84ffc2a12d308a12a`](https://github.com/rabbitholegg/questdk-plugins/commit/455a7b8ba6da2d32234a6bd84ffc2a12d308a12a) Thanks [@mmackz](https://github.com/mmackz)! - add support for limit swap ordertype to gmx swap plugin
+
+- [#169](https://github.com/rabbitholegg/questdk-plugins/pull/169) [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d) Thanks [@Quazia](https://github.com/Quazia)! - Bump SDK version to Alpha 31
+
+## 1.0.0-alpha.14
+
+### Minor Changes
+
+- [#164](https://github.com/rabbitholegg/questdk-plugins/pull/164) [`3e373825044b283df73407074268caf1d1653708`](https://github.com/rabbitholegg/questdk-plugins/commit/3e373825044b283df73407074268caf1d1653708) Thanks [@Quazia](https://github.com/Quazia)! - Add Options to GMX
+
 ## 1.0.0-alpha.13
 
 ### Minor Changes

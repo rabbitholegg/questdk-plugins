@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-hop",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -45,7 +45,7 @@
   "dependencies": {
     "@hop-protocol/core": "0.0.1-beta.182",
     "@hop-protocol/sdk": "0.0.1-beta.535",
-    "@rabbitholegg/questdk": "2.0.0-alpha.28",
+    "@rabbitholegg/questdk": "2.0.0-alpha.31",
     "viem": "1.2.15"
   }
 }

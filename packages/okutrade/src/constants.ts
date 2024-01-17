@@ -6,6 +6,7 @@ export const CHAIN_ID_ARRAY = [
   Chains.ARBITRUM,
   Chains.POLYGON,
   Chains.ZKSYNC_ERA,
+  Chains.BASE,
 ] as number[]
 
 /* 
