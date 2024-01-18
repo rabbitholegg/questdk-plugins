@@ -1,26 +1,26 @@
-import type { Address, Hash } from "viem"
+import type { Address, Hash } from 'viem'
 
 import type { ActionParams } from '@rabbitholegg/questdk'
 
 interface Transaction {
-    chainId: number
-    from: Address
-    hash?: Hash
-    input: string
-    to: Address
-    value: string
-  }
-  
-  export interface TestCase<T extends ActionParams> {
-    transaction: Transaction
-    params: T
-    description: string
-  }
-  
-  export type TestParams<T extends ActionParams> = {
-    transaction: Transaction
-    params: T
-  }
+  chainId: number
+  from: Address
+  hash?: Hash
+  input: string
+  to: Address
+  value: string
+}
+
+export interface TestCase<T extends ActionParams> {
+  transaction: Transaction
+  params: T
+  description: string
+}
+
+export type TestParams<T extends ActionParams> = {
+  transaction: Transaction
+  params: T
+}
 
 /**
  * Creates a test case object for a given action and transaction.
@@ -36,13 +36,13 @@ interface Transaction {
  * @returns {TestCase<T>} A test case object with the transaction, params, and description.
  */
 export function createTestCase<T extends ActionParams>(
-    testParams: TestParams<T>,
-    description: string,
-    overrides: Partial<T> = {},
-  ): TestCase<T> {
-    return {
-      transaction: testParams.transaction,
-      params: { ...testParams.params, ...overrides },
-      description,
-    }
+  testParams: TestParams<T>,
+  description: string,
+  overrides: Partial<T> = {},
+): TestCase<T> {
+  return {
+    transaction: testParams.transaction,
+    params: { ...testParams.params, ...overrides },
+    description,
   }
+}
