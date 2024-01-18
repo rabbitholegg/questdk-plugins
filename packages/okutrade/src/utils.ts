@@ -7,6 +7,7 @@ export enum Chains {
   POLYGON = 137,
   ZKSYNC_ERA = 324,
   ARBITRUM = 42161,
+  BASE = 8453,
 }
 
 interface Transaction {
@@ -60,12 +61,12 @@ export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   const conditions: FilterOperator[] = []
 
   if (tokenIn) {
-    conditions.push({ $regex: `^${tokenIn}` })
+    conditions.push({ $regex: `^${tokenIn.toLowerCase()}` })
   }
 
   if (tokenOut) {
     // Chop the 0x prefix before comparing
-    conditions.push({ $regex: `${tokenOut.slice(2)}$` })
+    conditions.push({ $regex: `${tokenOut.toLowerCase().slice(2)}$` })
   }
 
   return {
@@ -96,6 +97,7 @@ const chainToContract: Record<number, Address> = {
   [Chains.POLYGON]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
   [Chains.ZKSYNC_ERA]: '0x28731BCC616B5f51dD52CF2e4dF0E78dD1136C06',
   [Chains.ARBITRUM]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
+  [Chains.BASE]: '0x198EF79F1F515F02dFE9e3115eD9fC07183f02fC',
 }
 
 const chainToWETH: Record<number, Address> = {
@@ -104,6 +106,7 @@ const chainToWETH: Record<number, Address> = {
   [Chains.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1',
   [Chains.POLYGON]: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
   [Chains.ZKSYNC_ERA]: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
+  [Chains.BASE]: '0x4200000000000000000000000000000000000006',
 }
 
 export function getUniversalRouter(chainId: number): Address {

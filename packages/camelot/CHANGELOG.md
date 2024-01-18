@@ -1,5 +1,29 @@
 # @rabbitholegg/questdk-plugin-camelot
 
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#169](https://github.com/rabbitholegg/questdk-plugins/pull/169) [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d) Thanks [@Quazia](https://github.com/Quazia)! - Bump SDK version to Alpha 31
+
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#154](https://github.com/rabbitholegg/questdk-plugins/pull/154) [`152b99cca2e9d2c5c434c5041bf2c9c55015cc86`](https://github.com/rabbitholegg/questdk-plugins/commit/152b99cca2e9d2c5c434c5041bf2c9c55015cc86) Thanks [@mmackz](https://github.com/mmackz)! - add support for swaps on camelot V3
+
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#142](https://github.com/rabbitholegg/questdk-plugins/pull/142) [`6b70510aa328ea818a29962b1c27c798c3391977`](https://github.com/rabbitholegg/questdk-plugins/commit/6b70510aa328ea818a29962b1c27c798c3391977) Thanks [@Quazia](https://github.com/Quazia)! - Bump
+
+## 1.0.0-alpha.8
+
+### Minor Changes
+
+- [#139](https://github.com/rabbitholegg/questdk-plugins/pull/139) [`eaad761e0491f5be789e33fe4e72a88ccf7fa3db`](https://github.com/rabbitholegg/questdk-plugins/commit/eaad761e0491f5be789e33fe4e72a88ccf7fa3db) Thanks [@Quazia](https://github.com/Quazia)! - Add Size
+
 ## 1.0.0-alpha.7
 
 ### Minor Changes

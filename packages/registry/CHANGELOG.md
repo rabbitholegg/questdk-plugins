@@ -1,5 +1,166 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.53
+
+### Patch Changes
+
+- Updated dependencies [[`6792112cc4153525bb4278d4951631fab3781bd0`](https://github.com/rabbitholegg/questdk-plugins/commit/6792112cc4153525bb4278d4951631fab3781bd0)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.16
+
+## 1.0.0-alpha.52
+
+### Minor Changes
+
+- [#169](https://github.com/rabbitholegg/questdk-plugins/pull/169) [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d) Thanks [@Quazia](https://github.com/Quazia)! - Bump SDK version to Alpha 31
+
+### Patch Changes
+
+- Updated dependencies [[`6f5e6575384b6c962368764d7528e976cfa8407d`](https://github.com/rabbitholegg/questdk-plugins/commit/6f5e6575384b6c962368764d7528e976cfa8407d), [`455a7b8ba6da2d32234a6bd84ffc2a12d308a12a`](https://github.com/rabbitholegg/questdk-plugins/commit/455a7b8ba6da2d32234a6bd84ffc2a12d308a12a), [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d)]:
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.9
+
+## 1.0.0-alpha.51
+
+### Patch Changes
+
+- Updated dependencies [[`3e373825044b283df73407074268caf1d1653708`](https://github.com/rabbitholegg/questdk-plugins/commit/3e373825044b283df73407074268caf1d1653708)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.14
+
+## 1.0.0-alpha.50
+
+### Minor Changes
+
+- [#144](https://github.com/rabbitholegg/questdk-plugins/pull/144) [`379e2aa813ef0592b23c67d34ef6f4d0eb90a88b`](https://github.com/rabbitholegg/questdk-plugins/commit/379e2aa813ef0592b23c67d34ef6f4d0eb90a88b) Thanks [@mmackz](https://github.com/mmackz)! - add support for handlefi swap plugin to questdk
+
+- [#155](https://github.com/rabbitholegg/questdk-plugins/pull/155) [`68e32320f0498d12d336e25d174e78240614b325`](https://github.com/rabbitholegg/questdk-plugins/commit/68e32320f0498d12d336e25d174e78240614b325) Thanks [@mmackz](https://github.com/mmackz)! - add support for mirror mint plugin to questdk
+
+- [#158](https://github.com/rabbitholegg/questdk-plugins/pull/158) [`0c8ae999461d56845aabe173923064a77f17faed`](https://github.com/rabbitholegg/questdk-plugins/commit/0c8ae999461d56845aabe173923064a77f17faed) Thanks [@mmackz](https://github.com/mmackz)! - add support for soundxyz mint plugin
+
+### Patch Changes
+
+- Updated dependencies [[`152b99cca2e9d2c5c434c5041bf2c9c55015cc86`](https://github.com/rabbitholegg/questdk-plugins/commit/152b99cca2e9d2c5c434c5041bf2c9c55015cc86), [`379e2aa813ef0592b23c67d34ef6f4d0eb90a88b`](https://github.com/rabbitholegg/questdk-plugins/commit/379e2aa813ef0592b23c67d34ef6f4d0eb90a88b), [`01ae21bae2f79756fefe8070e9e5d7329904c004`](https://github.com/rabbitholegg/questdk-plugins/commit/01ae21bae2f79756fefe8070e9e5d7329904c004), [`68e32320f0498d12d336e25d174e78240614b325`](https://github.com/rabbitholegg/questdk-plugins/commit/68e32320f0498d12d336e25d174e78240614b325), [`0c8ae999461d56845aabe173923064a77f17faed`](https://github.com/rabbitholegg/questdk-plugins/commit/0c8ae999461d56845aabe173923064a77f17faed)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.1
+
+## 1.0.0-alpha.49
+
+### Patch Changes
+
+- Updated dependencies [[`c7161af13a9ae4d71c430910fc92069a2b9c331a`](https://github.com/rabbitholegg/questdk-plugins/commit/c7161af13a9ae4d71c430910fc92069a2b9c331a)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.7
+
+## 1.0.0-alpha.48
+
+### Patch Changes
+
+- Updated dependencies [[`9430b81ef1ddabd7b9f66b9dd978b72a2ceac7ea`](https://github.com/rabbitholegg/questdk-plugins/commit/9430b81ef1ddabd7b9f66b9dd978b72a2ceac7ea)]:
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.9
+
+## 1.0.0-alpha.47
+
+### Patch Changes
+
+- Updated dependencies [[`025dfaab3b7d53353c17d2502e9d7b410cd506c1`](https://github.com/rabbitholegg/questdk-plugins/commit/025dfaab3b7d53353c17d2502e9d7b410cd506c1), [`0f2d0d5c4073d6befe2d1a1bd7fa48962010201f`](https://github.com/rabbitholegg/questdk-plugins/commit/0f2d0d5c4073d6befe2d1a1bd7fa48962010201f), [`81942f38c4ce1234a68a8e19bacc6de8ffd1ed46`](https://github.com/rabbitholegg/questdk-plugins/commit/81942f38c4ce1234a68a8e19bacc6de8ffd1ed46)]:
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.9
+
+## 1.0.0-alpha.46
+
+### Minor Changes
+
+- [#142](https://github.com/rabbitholegg/questdk-plugins/pull/142) [`6b70510aa328ea818a29962b1c27c798c3391977`](https://github.com/rabbitholegg/questdk-plugins/commit/6b70510aa328ea818a29962b1c27c798c3391977) Thanks [@Quazia](https://github.com/Quazia)! - Bump
+
+### Patch Changes
+
+- Updated dependencies [[`6b70510aa328ea818a29962b1c27c798c3391977`](https://github.com/rabbitholegg/questdk-plugins/commit/6b70510aa328ea818a29962b1c27c798c3391977)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.9
+
+## 1.0.0-alpha.45
+
+### Patch Changes
+
+- Updated dependencies [[`eaad761e0491f5be789e33fe4e72a88ccf7fa3db`](https://github.com/rabbitholegg/questdk-plugins/commit/eaad761e0491f5be789e33fe4e72a88ccf7fa3db)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.8
+
+## 1.0.0-alpha.44
+
+### Minor Changes
+
+- [#136](https://github.com/rabbitholegg/questdk-plugins/pull/136) [`c1ec43eeba370216994fbf40f1053e6f9d929af0`](https://github.com/rabbitholegg/questdk-plugins/commit/c1ec43eeba370216994fbf40f1053e6f9d929af0) Thanks [@mmackz](https://github.com/mmackz)! - add support for sushi swap plugin
+
+- [#137](https://github.com/rabbitholegg/questdk-plugins/pull/137) [`f53c96b899b73d42f441c8ade2699f9a8734eeda`](https://github.com/rabbitholegg/questdk-plugins/commit/f53c96b899b73d42f441c8ade2699f9a8734eeda) Thanks [@mmackz](https://github.com/mmackz)! - add support for treasure swap (magicswap)
+
+### Patch Changes
+
+- Updated dependencies [[`c1ec43eeba370216994fbf40f1053e6f9d929af0`](https://github.com/rabbitholegg/questdk-plugins/commit/c1ec43eeba370216994fbf40f1053e6f9d929af0), [`f53c96b899b73d42f441c8ade2699f9a8734eeda`](https://github.com/rabbitholegg/questdk-plugins/commit/f53c96b899b73d42f441c8ade2699f9a8734eeda), [`c1faac492bcf1aaec7b7288b05d1b47dfed84355`](https://github.com/rabbitholegg/questdk-plugins/commit/c1faac492bcf1aaec7b7288b05d1b47dfed84355)]:
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.6
+
+## 1.0.0-alpha.43
+
+### Patch Changes
+
+- Updated dependencies [[`39dce24500f84e3a2a38deb8d18250ca5d05b694`](https://github.com/rabbitholegg/questdk-plugins/commit/39dce24500f84e3a2a38deb8d18250ca5d05b694)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.5
+
+## 1.0.0-alpha.42
+
+### Patch Changes
+
+- Updated dependencies [[`b189ebe62edc99e85360a851b785458d28f0079f`](https://github.com/rabbitholegg/questdk-plugins/commit/b189ebe62edc99e85360a851b785458d28f0079f)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.4
+
+## 1.0.0-alpha.41
+
+### Minor Changes
+
+- [#120](https://github.com/rabbitholegg/questdk-plugins/pull/120) [`4d6d5111971fcf4e29e7d88d2bf041d79beee18b`](https://github.com/rabbitholegg/questdk-plugins/commit/4d6d5111971fcf4e29e7d88d2bf041d79beee18b) Thanks [@mmackz](https://github.com/mmackz)! - add woofi swap action plugin support
+
+### Patch Changes
+
+- Updated dependencies [[`4fcb4f8407c7f7968b981c4eb31b5bdd546c96e6`](https://github.com/rabbitholegg/questdk-plugins/commit/4fcb4f8407c7f7968b981c4eb31b5bdd546c96e6), [`afc1d1fab12208f170b0849e924468ef369598ce`](https://github.com/rabbitholegg/questdk-plugins/commit/afc1d1fab12208f170b0849e924468ef369598ce), [`424937ff0fb7f087dd04ef55c7d7e478c5906ade`](https://github.com/rabbitholegg/questdk-plugins/commit/424937ff0fb7f087dd04ef55c7d7e478c5906ade), [`4d6d5111971fcf4e29e7d88d2bf041d79beee18b`](https://github.com/rabbitholegg/questdk-plugins/commit/4d6d5111971fcf4e29e7d88d2bf041d79beee18b)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.8
+
+## 1.0.0-alpha.40
+
+### Patch Changes
+
+- Updated dependencies [[`d6082a2df064e3aa463e4f5fa366db7f8f51e1d3`](https://github.com/rabbitholegg/questdk-plugins/commit/d6082a2df064e3aa463e4f5fa366db7f8f51e1d3)]:
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.10
+
 ## 1.0.0-alpha.39
 
 ### Minor Changes

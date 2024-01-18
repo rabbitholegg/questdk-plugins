@@ -5,106 +5,150 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
-import { DEFAULT_TOKEN_LIST } from './contract-addresses'
-import { buildPathQuery, Tokens } from './utils'
-import { CAMELOT_ABI, PARASWAP_ABI } from './abi'
+import { buildV2PathQuery, buildV3PathQuery, Tokens } from './utils'
 import {
-  CAMELOT_ROUTER,
+  CAMELOT_V2_ABI,
+  CAMELOT_V3_EXACT_INPUT_ABI,
+  CAMELOT_V3_EXACT_OUTPUT_ABI,
+  PARASWAP_ABI,
+} from './abi'
+import {
+  DEFAULT_TOKEN_LIST,
+  CAMELOT_V2_ROUTER,
+  CAMELOT_V3_ROUTER,
   PARASWAP_ROUTER,
-  ETH_ADDRESS,
+  INTERNAL_ETH_ADDRESS,
 } from './contract-addresses'
 
-const isValidContractAddress = (address: Address) => {
-  return (
-    address?.toLowerCase() === CAMELOT_ROUTER.toLowerCase() ||
-    address?.toLowerCase() === PARASWAP_ROUTER.toLowerCase()
-  )
-}
+const PARASWAP_PARTNER = '0x353D2d14Bb674892910685520Ac040f560CcBC06'
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    chainId,
-    contractAddress,
-    tokenIn,
-    tokenOut,
-    amountIn,
-    amountOut,
-    recipient,
-  } = swap
+  const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
 
   const ethUsedIn = tokenIn === Tokens.ETH
   const ethUsedOut = tokenOut === Tokens.ETH
 
-  if (contractAddress && !isValidContractAddress(contractAddress)) {
-    throw new Error('Invalid Contract Address')
-  }
+  const tokenInOrEth = ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn
+  const tokenOutOrEth = ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut
+  const tokenInOrWeth = ethUsedIn ? Tokens.WETH : tokenIn
+  const tokenOutOrWeth = ethUsedOut ? Tokens.WETH : tokenOut
 
   return compressJson({
     chainId: chainId,
-    to: { $or: [CAMELOT_ROUTER.toLowerCase(), PARASWAP_ROUTER.toLowerCase()] },
+    from: recipient,
+    to: {
+      $or: [
+        CAMELOT_V2_ROUTER.toLowerCase(),
+        CAMELOT_V3_ROUTER.toLowerCase(),
+        PARASWAP_ROUTER.toLowerCase(),
+      ],
+    },
     value: ethUsedIn ? amountIn : undefined,
     input: {
-      $abi: [...CAMELOT_ABI, ...PARASWAP_ABI],
       $or: [
         {
           // camelotV2 swap
-          to: recipient,
-          path: buildPathQuery(ethUsedIn ? Tokens.WETH : tokenIn, tokenOut),
+          $abi: CAMELOT_V2_ABI,
+          path: buildV2PathQuery(tokenInOrWeth, tokenOutOrWeth),
           amountOutMin: amountOut,
           amountIn: ethUsedIn ? undefined : amountIn,
         },
         {
-          // simpleswap, directUniV3Swap, directCurveSwap
-          data: {
-            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
-            fromAmount: amountIn,
-            toAmount: amountOut,
-            toToken: ethUsedOut ? ETH_ADDRESS : tokenOut,
-            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-          },
-        },
-        {
-          // multiswap
-          data: {
-            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
-            fromAmount: amountIn,
-            toAmount: amountOut,
-            path: {
-              $last: {
-                to: ethUsedOut ? ETH_ADDRESS : tokenOut,
+          // camelotV3 swap
+          $or: [
+            {
+              $abiAbstract: CAMELOT_V3_EXACT_OUTPUT_ABI,
+              params: {
+                $or: [
+                  {
+                    tokenIn: tokenInOrWeth,
+                    tokenOut: tokenOutOrWeth,
+                  },
+                  {
+                    // exact output has the reverse structure (tokenOut first)
+                    path: buildV3PathQuery(tokenOutOrWeth, tokenInOrWeth),
+                  },
+                ],
+                amountInMaximum: amountIn,
+                amountOut,
               },
             },
-            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-          },
+            {
+              $abiAbstract: CAMELOT_V3_EXACT_INPUT_ABI,
+              params: {
+                $or: [
+                  {
+                    tokenIn: tokenInOrWeth,
+                    tokenOut: tokenOutOrWeth,
+                  },
+                  {
+                    path: buildV3PathQuery(tokenInOrWeth, tokenOutOrWeth),
+                  },
+                ],
+                amountIn,
+                amountOutMinimum: amountOut,
+              },
+            },
+          ],
         },
         {
-          // megaswap
-          data: {
-            fromToken: ethUsedIn ? ETH_ADDRESS : tokenIn,
-            fromAmount: amountIn,
-            toAmount: amountOut,
-            path: {
-              $last: {
+          // paraswap
+          $abi: PARASWAP_ABI,
+          $or: [
+            {
+              // simpleswap, directUniV3Swap, directCurveSwap
+              data: {
+                fromToken: tokenInOrEth,
+                fromAmount: amountIn,
+                toAmount: amountOut,
+                toToken: tokenOutOrEth,
+                partner: PARASWAP_PARTNER,
+              },
+            },
+            {
+              // multiswap
+              data: {
+                fromToken: tokenInOrEth,
+                fromAmount: amountIn,
+                toAmount: amountOut,
                 path: {
                   $last: {
-                    to: ethUsedOut ? ETH_ADDRESS : tokenOut,
+                    to: tokenOutOrEth,
                   },
                 },
+                partner: PARASWAP_PARTNER,
               },
             },
-            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-          },
-        },
-        {
-          // directBalancerV2
-          data: {
-            assets: buildPathQuery(tokenIn, tokenOut),
-            fromAmount: amountIn,
-            toAmount: amountOut,
-            partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-          },
+            {
+              // megaswap
+              data: {
+                fromToken: tokenInOrEth,
+                fromAmount: amountIn,
+                toAmount: amountOut,
+                path: {
+                  $last: {
+                    path: {
+                      $last: {
+                        to: tokenOutOrEth,
+                      },
+                    },
+                  },
+                },
+                partner: PARASWAP_PARTNER,
+              },
+            },
+            {
+              // directBalancerV2
+              data: {
+                assets: buildV2PathQuery(tokenIn, tokenOut),
+                fromAmount: amountIn,
+                toAmount: amountOut,
+                partner: PARASWAP_PARTNER,
+              },
+            },
+          ],
         },
       ],
     },

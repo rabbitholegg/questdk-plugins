@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-project
 
+## 1.0.0-alpha.8
+
+### Minor Changes
+
+- [#167](https://github.com/rabbitholegg/questdk-plugins/pull/167) [`9d31132d46ff5aea77db5037c8023b0a130899d0`](https://github.com/rabbitholegg/questdk-plugins/commit/9d31132d46ff5aea77db5037c8023b0a130899d0) Thanks [@mmackz](https://github.com/mmackz)! - refactor template and provide description of how to use filter function
+
+- [#169](https://github.com/rabbitholegg/questdk-plugins/pull/169) [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d) Thanks [@Quazia](https://github.com/Quazia)! - Bump SDK version to Alpha 31
+
 ## 1.0.0-alpha.7
 
 ### Minor Changes

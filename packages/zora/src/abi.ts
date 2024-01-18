@@ -1,4 +1,4 @@
-export const ZORA_MINTER_ABI = [
+export const ZORA_MINTER_ABI_721 = [
   // https://github.com/ourzora/zora-721-contracts/blob/main/src/ERC721Drop.sol#L384
   {
     inputs: [
@@ -224,6 +224,9 @@ export const ZORA_MINTER_ABI = [
     type: 'function',
   }, // ERC721Drop
   // https://github.com/ourzora/zora-protocol/blob/8d1fe9bdd79a552a8f74b4712451185f6aebf9a0/packages/1155-contracts/src/nft/ZoraCreator1155Impl.sol#L427
+]
+
+export const ZORA_MINTER_ABI_1155 = [
   {
     inputs: [
       {
@@ -335,3 +338,17 @@ export const ZORA_MINTER_ABI = [
     type: 'function',
   }, // Legacy SoundEditionV1_2
 ]
+
+export const UNIVERSAL_MINTER_ABI = [
+  {
+    inputs: [
+      { internalType: 'address[]', name: '_targets', type: 'address[]' },
+      { internalType: 'bytes[]', name: '_calldatas', type: 'bytes[]' },
+      { internalType: 'uint256[]', name: '_values', type: 'uint256[]' },
+    ],
+    name: 'mintBatchWithoutFees',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+] // universal batch mint

@@ -10,6 +10,7 @@ coverage
 dist
 node_modules
 tsconfig*.tsbuildinfo
+~
 
 .env
 .env.local
@@ -17,4 +18,4 @@ tsconfig*.tsbuildinfo
 .env.test.local
 .env.production.local
 .envrc
-~/Library/
+~

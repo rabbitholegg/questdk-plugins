@@ -68,12 +68,12 @@ export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   const conditions: FilterOperator[] = []
 
   if (tokenIn) {
-    conditions.push({ $regex: `^${tokenIn}` })
+    conditions.push({ $regex: `^${tokenIn.toLowerCase()}` })
   }
 
   if (tokenOut) {
     // Chop the 0x prefix before comparing
-    conditions.push({ $regex: `${tokenOut.slice(2)}$` })
+    conditions.push({ $regex: `${tokenOut.toLowerCase().slice(2)}$` })
   }
 
   return {

@@ -5,6 +5,7 @@ import {
   type IActionPlugin,
   PluginActionNotImplementedError,
   type MintActionParams,
+  type OptionsActionParams,
   type SwapActionParams,
   type QuestActionParams,
   type DelegateActionParams,
@@ -33,6 +34,13 @@ import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
 import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
 import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
+import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
+import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
+import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
+import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
+import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
+
+import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -57,6 +65,12 @@ export const plugins: Record<string, IActionPlugin> = {
   [Balancer.pluginId]: Balancer,
   [TraderJoe.pluginId]: TraderJoe,
   [Synapse.pluginId]: Synapse,
+  [WooFi.pluginId]: WooFi,
+  [Sushi.pluginId]: Sushi,
+  [Treasure.pluginId]: Treasure,
+  [HandleFi.pluginId]: HandleFi,
+  [Mirror.pluginId]: Mirror,
+  [Soundxyz.pluginId]: Soundxyz,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -93,6 +107,11 @@ export const executePlugin = (
       if (plugin.stake === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.stake(params as unknown as StakeActionParams)
+    }
+    case ActionType.Options: {
+      if (plugin.options === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.options(params as unknown as OptionsActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)

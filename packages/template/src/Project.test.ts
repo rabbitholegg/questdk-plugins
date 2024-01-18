@@ -3,11 +3,19 @@ import { describe, expect, test } from 'vitest'
 
 // Replace *project* with the name of the project
 describe('Given the project plugin', () => {
-  describe('When handling the bridge', () => {
-    test('should return a valid action filter', () => {})
+  describe('When handling the {actionType} action', () => {
 
-    test('should pass filter with valid transactions', () => {})
+    describe('should return a valid action filter', () => {
+      
+    })
 
-    test('should not pass filter with invalid transactions', () => {})
+    describe('should pass filter with valid transactions',  () => {
+      
+    })
+    
+    describe('should not pass filter with invalid transactions',  () => {
+      
+    })
+
   })
 })
