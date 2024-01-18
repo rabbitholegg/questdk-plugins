@@ -31,5 +31,8 @@
   "author": "",
   "license": "ISC",
   "types": "./dist/types/index.d.ts",
-  "typings": "./dist/types/index.d.ts"
+  "typings": "./dist/types/index.d.ts",
+  "dependencies": {
+    "@zoralabs/universal-minter": "0.2.12"
+  }
 }
