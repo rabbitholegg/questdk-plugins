@@ -177,6 +177,9 @@ export const handleRegex = (context: any, filter: string): boolean => {
  */
 export const handleBitmask = (context: any, filter: BitmaskFilter): boolean => {
   const maskedContext = BigInt(context) & BigInt(filter.bitmask)
+  if (typeof filter.value === 'object') {
+    return apply(maskedContext as any, filter.value as FilterObject)
+  }
   return maskedContext === BigInt(filter.value)
 }
 
