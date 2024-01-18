@@ -180,6 +180,9 @@ export const handleBitmask = (
   filter: BitmaskFilter,
 ): boolean => {
   const maskedContext = BigInt(context) & BigInt(filter.bitmask)
+  if(typeof filter.value === 'object') {
+    return apply(maskedContext as any, filter.value as FilterObject)
+  }
   return maskedContext === BigInt(filter.value)
 }
 

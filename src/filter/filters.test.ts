@@ -81,6 +81,18 @@ describe('parser', () => {
       expect(handleBitmask(context, filter)).toBe(false)
     })
 
+    test('applies the bitmask and compares the result to the provided value with numerical operators', () => {
+      const context = 0b1100
+      const filter = { bitmask: 0b0100, value: { $gte: 0b0100n }}
+      expect(handleBitmask(context, filter)).toBe(true)
+    })
+
+    test('returns false when the masked context does not equal the provided value with numerical operators', () => {
+      const context = 0b1100
+      const filter = { bitmask: 0b1100, value: { $gte: 0b11100n }}
+      expect(handleBitmask(context, filter)).toBe(false)
+    })
+
     test('correctly handles large numbers', () => {
       const context = '0x123456789abcdef0123456789abcdef0123456789abcdef'
       const filter = {

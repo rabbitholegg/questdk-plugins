@@ -56,7 +56,7 @@ export type FilterObject = {
 }
 export type BitmaskFilter = {
   bitmask: bigint | number | string;
-  value: bigint | number | string;
+  value: bigint | number | string | NumericOperator;
 };
 export type Filter = Primitive | FilterObject | FilterArray | Abi
 export type FilterArray = Filter[]
