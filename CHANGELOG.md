@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.31
+
+### Minor Changes
+
+- [#63](https://github.com/rabbitholegg/questdk/pull/63) [`4e7a87d`](https://github.com/rabbitholegg/questdk/commit/4e7a87d7d4718533ab47a1d561d255553a83bdbb) Thanks [@Quazia](https://github.com/Quazia)! - Adds a $bitmask operator to filters
+
 ## 2.0.0-alpha.30
 
 ### Patch Changes
