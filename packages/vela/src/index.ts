@@ -5,6 +5,8 @@ import {
 
 import {
   options,
+  stake,
+  mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
 } from './Vela.js'
@@ -16,5 +18,6 @@ export const Vela: IActionPlugin = {
   options,
   swap: async () => new PluginActionNotImplementedError(),
   bridge: async () => new PluginActionNotImplementedError(),
-  mint: async () => new PluginActionNotImplementedError(),
+  mint: mint,
+  stake: stake,
 }
