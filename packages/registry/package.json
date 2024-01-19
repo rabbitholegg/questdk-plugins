@@ -71,6 +71,7 @@
     "@rabbitholegg/questdk-plugin-handlefi": "workspace:*",
     "@rabbitholegg/questdk-plugin-mirror": "workspace:*",
     "@rabbitholegg/questdk-plugin-soundxyz": "workspace:*",
+    "@rabbitholegg/questdk-plugin-vela": "workspace:*",
     "@rabbitholegg/questdk-plugin-mux": "workspace:*",
     "viem": "^1.16.6"
   }
