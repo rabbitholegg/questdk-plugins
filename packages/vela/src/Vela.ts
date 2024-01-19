@@ -1,6 +1,7 @@
 import {
   type TransactionFilter,
   type OptionsActionParams,
+  type StakeActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
@@ -51,28 +52,26 @@ export const mint = async (
 }
 
 export const stake = async (
-  stake: OptionsActionParams,
+  stake: StakeActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, token, amount, recipient } = stake
+  const { chainId, contractAddress, tokenOne, amountOne } = stake
 
-    if (token.toLowerCase() == VLP_CONTRACT) {
+    if (tokenOne.toLowerCase() == VLP_CONTRACT) {
       return compressJson({
         chainId,
         to: contractAddress ?? TOKENFARM_CONTRACT,
-        from: recipient,
         input: {
           $abi: TOKENFARM_ABI,
-          _amount: amount,
+          _amount: amountOne,
         },
       })
     } else {
       return compressJson({
         chainId,
         to: contractAddress ?? TOKENFARM_CONTRACT,
-        from: recipient,
         input: {
           $abi: TOKENFARM_ABI2,
-          _amount: amount,
+          _amount: amountOne,
         },
       })
     }

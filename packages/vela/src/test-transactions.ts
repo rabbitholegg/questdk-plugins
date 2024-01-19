@@ -1,5 +1,6 @@
 import {
   type OptionsActionParams,
+  type StakeActionParams,
   GreaterThanOrEqual,
   LessThanOrEqual,
   OrderType,
@@ -117,7 +118,7 @@ export const MINT_VLP: TestParams<OptionsActionParams> = {
   },
 }
 
-export const STAKE_VLP: TestParams<OptionsActionParams> = {
+export const STAKE_VLP: TestParams<StakeActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0x786b201f4e0dbfbadd2f0ba89d8240591d25b2c7',
@@ -129,12 +130,12 @@ export const STAKE_VLP: TestParams<OptionsActionParams> = {
   },
   params: {
     chainId: 42161,
-    token: VLP_CONTRACT,
-    amount: GreaterThanOrEqual(parseUnits('5.91271741228', 18)),
+    tokenOne: VLP_CONTRACT,
+    amountOne: GreaterThanOrEqual(parseUnits('5.91271741228', 18)),
   },
 }
 
-export const STAKE_VELA: TestParams<OptionsActionParams> = {
+export const STAKE_VELA: TestParams<StakeActionParams> = {
   transaction: {
     chainId: 42161,
     from: '0xf4019ee39c7b6e0702dbe7c6c54ce0606b3b0f8f',
@@ -146,8 +147,8 @@ export const STAKE_VELA: TestParams<OptionsActionParams> = {
   },
   params: {
     chainId: 42161,
-    token: VELA_CONTRACT,
-    amount: GreaterThanOrEqual(parseUnits('6.14073347984', 18)),
+    tokenOne: VELA_CONTRACT,
+    amountOne: GreaterThanOrEqual(parseUnits('6.14073347984', 18)),
   },
 }
 
