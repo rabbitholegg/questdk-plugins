@@ -3,6 +3,7 @@
   "tag": "alpha",
   "changesets": [
     "angry-ants-return",
+    "breezy-trees-carry",
     "bright-turtles-divide",
     "brown-points-smile",
     "calm-tigers-rescue",
@@ -23,9 +24,11 @@
     "fluffy-adults-invite",
     "giant-clouds-mix",
     "gold-socks-dream",
+    "great-ducks-greet",
     "healthy-bugs-enjoy",
     "hungry-squids-drop",
     "late-scissors-wonder",
+    "light-flies-fix",
     "little-llamas-rescue",
     "loud-readers-compete",
     "lovely-buses-tan",
@@ -121,6 +124,7 @@
     "@rabbitholegg/questdk-plugin-treasure": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-handlefi": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-mirror": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-soundxyz": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-soundxyz": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-vela": "1.0.0-alpha.0"
   }
 }

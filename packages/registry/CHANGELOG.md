@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.54
+
+### Minor Changes
+
+- [#129](https://github.com/rabbitholegg/questdk-plugins/pull/129) [`2679a39be7b7b3ed24efa16f9db8c16403c321e3`](https://github.com/rabbitholegg/questdk-plugins/commit/2679a39be7b7b3ed24efa16f9db8c16403c321e3) Thanks [@mmackz](https://github.com/mmackz)! - add plugin support for vela swap action
+
+### Patch Changes
+
+- Updated dependencies [[`dde625695b5cf5bed92260007bbe2f99b838cc1c`](https://github.com/rabbitholegg/questdk-plugins/commit/dde625695b5cf5bed92260007bbe2f99b838cc1c), [`2679a39be7b7b3ed24efa16f9db8c16403c321e3`](https://github.com/rabbitholegg/questdk-plugins/commit/2679a39be7b7b3ed24efa16f9db8c16403c321e3), [`18acc396d5b2e4749722092d5a1c916321851eac`](https://github.com/rabbitholegg/questdk-plugins/commit/18acc396d5b2e4749722092d5a1c916321851eac)]:
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.1
+
 ## 1.0.0-alpha.53
 
 ### Patch Changes
