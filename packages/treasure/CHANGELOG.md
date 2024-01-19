@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-treasure
 
+## 1.0.0-alpha.3
+
+### Minor Changes
+
+- [#172](https://github.com/rabbitholegg/questdk-plugins/pull/172) [`dde625695b5cf5bed92260007bbe2f99b838cc1c`](https://github.com/rabbitholegg/questdk-plugins/commit/dde625695b5cf5bed92260007bbe2f99b838cc1c) Thanks [@veganbeef](https://github.com/veganbeef)! - add mint support for TreasureTags
+
 ## 1.0.0-alpha.2
 
 ### Minor Changes
