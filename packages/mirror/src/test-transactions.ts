@@ -35,12 +35,33 @@ export const ZORA_COLLECT_ENTRY: TestParams<MintActionParams> = {
   },
 }
 
+const OP_LEGACY_COLLECT: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 10,
+    from: '0x8fa3232ff0a45de66f1810096189a0f6f4ea8724',
+    to: '0xfe3faef720b4a278eb2ae484c17063ae56fab10a',
+    hash: '0xf092b5c8e5a75c3b67c748484603f2491c6755ef0bb52178c03b58a946a978f9',
+    input:
+      '0x3a1b1d570000000000000000000000008fa3232ff0a45de66f1810096189a0f6f4ea872400000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000',
+    value: '0',
+  },
+  params: {
+    chainId: Chains.OPTIMISM,
+    contractAddress: '0xfe3faef720b4a278eb2ae484c17063ae56fab10a',
+    recipient: '0x8fa3232ff0a45de66f1810096189a0f6f4ea8724',
+  },
+}
+
 export const passingTestCases = [
   createTestCase(
     OP_COLLECT_ENTRY,
     'when collecting a mirror entry on optimism',
   ),
   createTestCase(ZORA_COLLECT_ENTRY, 'when collecting a mirror entry on zora'),
+  createTestCase(
+    OP_LEGACY_COLLECT,
+    'when collecting a legacy mirror entry on optimism',
+  ),
 ]
 
 export const failingTestCases = [
