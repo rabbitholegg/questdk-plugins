@@ -2,19 +2,66 @@ import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { getAddress } from 'viem'
 import { Chains } from './utils'
-import { swap, getSupportedTokenAddresses } from './Treasure'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { V2_ROUTER_ABI } from './abi'
-import { MAGIC, ANIMA, V2_ROUTER } from './constants'
+import { mint, swap, getSupportedTokenAddresses } from './Treasure'
+import {
+  passingSwapTestCases,
+  failingSwapTestCases,
+  MINT_TREASURE_TAG,
+  passingMintTestCases,
+  failingMintTestCases
+} from './test-transactions'
+import {MINT_TREASURE_TAG_ABI, V2_ROUTER_ABI} from './abi'
+import {MAGIC, ANIMA, V2_ROUTER} from './constants'
 
-describe('Given the tresure plugin', () => {
+describe('Given the treasure plugin', () => {
+  describe('when handling the mint action', () => {
+    describe('should return a valid action filter', () => {
+      const { params } = MINT_TREASURE_TAG
+      test('when minting a Treasure Tag through the proxy contract', async () => {
+        const filter = await mint(params)
+        expect(filter).to.deep.equal({
+          chainId: Chains.ARBITRUM_ONE,
+          to: params.contractAddress,
+          from: params.recipient,
+          input: {
+            $abi: MINT_TREASURE_TAG_ABI,
+            _registerArgs: {
+              owner: params.recipient,
+            }
+          }
+        })
+      })
+    })
+
+    describe('should pass filter with valid transactions', () => {
+      passingMintTestCases.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await mint(params)
+          const result = apply(transaction, filter)
+          expect(result).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingMintTestCases.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await mint(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+  })
+
   describe('When handling the swap action', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid swap', async () => {
-        const { params } = passingTestCases[0]
+        const { params } = passingSwapTestCases[0]
         const filter = await swap(params)
         expect(filter).to.deep.equal({
-          chainId: 42161,
+          chainId: Chains.ARBITRUM_ONE,
           to: V2_ROUTER,
           input: {
             $abi: V2_ROUTER_ABI,
@@ -59,7 +106,7 @@ describe('Given the tresure plugin', () => {
     })
 
     describe('should pass filter with valid transactions', () => {
-      passingTestCases.forEach((testCase) => {
+      passingSwapTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await swap(params)
@@ -69,7 +116,7 @@ describe('Given the tresure plugin', () => {
     })
 
     describe('should not pass filter with invalid transactions', () => {
-      failingTestCases.forEach((testCase) => {
+      failingSwapTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await swap(params)

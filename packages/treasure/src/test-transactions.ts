@@ -1,10 +1,26 @@
 import {
   type SwapActionParams,
-  GreaterThanOrEqual,
+  GreaterThanOrEqual, type MintActionParams,
 } from '@rabbitholegg/questdk'
 import { parseUnits } from 'viem'
-import { ANIMA, GFLY, MAGIC } from './constants'
+import {ANIMA, GFLY, MAGIC, TREASURE_TAGS_PROXY} from './constants'
 import { type TestParams, Chains, createTestCase } from './utils'
+
+export const MINT_TREASURE_TAG: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 42161,
+    from: '0x702c99051255ff9c621eddf5a752afef2f1ac14c',
+    hash: '0x375e98904e78bbdde0e59cf7bb0158aa2c63a4f321182f43ada05d4839837a2e',
+    input: '0x95f38e770000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000016000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000702c99051255ff9c621eddf5a752afef2f1ac14c000000000000000000000000ecdff76f3d9e130f795a68e50cdde5a11ec5542c00000000000000000000000000000000000000000e8a81453c23f19faf749b06000000000000000000000000000000000000000000000000000000000000000a63616666656d6f63686100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000434323836000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000041b86733784462d0b6a679d1bd498b1a62b8250e1db37af0690c031959052dee64478635e23cfd305d8c4878fe6b19e20b124dfc46c44499971a839e9bf56af7b31b00000000000000000000000000000000000000000000000000000000000000',
+    to: TREASURE_TAGS_PROXY,
+    value: '0',
+  },
+  params: {
+    chainId: Chains.ARBITRUM_ONE,
+    contractAddress: TREASURE_TAGS_PROXY,
+    recipient: '0x702c99051255ff9c621eddf5a752afef2f1ac14c',
+  }
+}
 
 export const EXACT_TOKENS_FOR_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
@@ -46,7 +62,7 @@ export const TOKENS_FOR_EXACT_TOKENS: TestParams<SwapActionParams> = {
   },
 }
 
-export const passingTestCases = [
+export const passingSwapTestCases = [
   createTestCase(
     EXACT_TOKENS_FOR_TOKENS,
     'when swapping exact tokens for tokens',
@@ -57,7 +73,14 @@ export const passingTestCases = [
   ),
 ]
 
-export const failingTestCases = [
+export const passingMintTestCases = [
+  createTestCase(
+    MINT_TREASURE_TAG,
+    'when minting a TreasureTag',
+  ),
+]
+
+export const failingSwapTestCases = [
   createTestCase(TOKENS_FOR_EXACT_TOKENS, 'when chainId is incorrect', {
     chainId: 10,
   }),
@@ -90,5 +113,17 @@ export const failingTestCases = [
   }),
   createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when recipient in incorrect', {
     recipient: '0x7a227272e5B583c2B51B04fF5cA4FDe498368b44',
+  }),
+]
+
+export const failingMintTestCases = [
+  createTestCase(MINT_TREASURE_TAG, 'when the chainId is incorrect', {
+    chainId: Chains.ETHEREUM,
+  }),
+  createTestCase(MINT_TREASURE_TAG, 'when the contractAddress is incorrect', {
+    contractAddress: MAGIC,
+  }),
+  createTestCase(MINT_TREASURE_TAG, 'when the recipient is incorrect', {
+    recipient: '0x0A4066534E21dF54331EDcb65A2F41151eD20912',
   }),
 ]

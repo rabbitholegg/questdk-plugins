@@ -1,5 +1,8 @@
 import { type Address } from 'viem'
 
+// TreasureTags proxy contract
+export const TREASURE_TAGS_PROXY = '0x072b65f891b1a389539e921bdb9427af41a7b1f7'
+
 // Router Contract
 export const V2_ROUTER = '0x23805449f91bb2d2054d9ba288fdc8f09b5eac79'
 
