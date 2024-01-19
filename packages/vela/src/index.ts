@@ -4,17 +4,17 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  mint,
-  swap,
+  options,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Treasure.js'
+} from './Vela.js'
 
-export const Treasure: IActionPlugin = {
-  pluginId: 'treasure',
+export const Vela: IActionPlugin = {
+  pluginId: 'vela',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  mint,
-  swap,
+  options,
+  swap: async () => new PluginActionNotImplementedError(),
   bridge: async () => new PluginActionNotImplementedError(),
+  mint: async () => new PluginActionNotImplementedError(),
 }

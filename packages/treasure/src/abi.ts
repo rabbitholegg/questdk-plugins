@@ -1,3 +1,51 @@
+export const MINT_TREASURE_TAG_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'struct IMagicDomainRegistrarController.RegisterArgs',
+        name: '_registerArgs',
+        type: 'tuple',
+        components: [
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'discriminant',
+            type: 'string',
+          },
+          {
+            internalType: 'address',
+            name: 'owner',
+            type: 'address',
+          },
+          {
+            internalType: 'address',
+            name: 'resolver',
+            type: 'address',
+          },
+          {
+            internalType: 'uint96',
+            name: 'nonce',
+            type: 'uint96',
+          },
+        ],
+      },
+      {
+        internalType: 'bytes',
+        name: '_authoritySignature',
+        type: 'bytes',
+      },
+    ],
+    name: 'register',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
+
 export const V2_ROUTER_ABI = [
   {
     inputs: [
