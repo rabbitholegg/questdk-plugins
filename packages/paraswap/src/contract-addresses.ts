@@ -17,7 +17,7 @@ export const MAINNET_SEPSP2_ADDRESS =
 export const INTERNAL_ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 
 export const DEFAULT_SWAP_TOKEN_LIST: {
-  [chainId: number]: readonly Address[]
+  [swapChainId: number]: readonly Address[]
 } = {
   [ETH_CHAIN_ID]: [
     Tokens.ETH,
@@ -63,7 +63,7 @@ export const DEFAULT_SWAP_TOKEN_LIST: {
 } as const
 
 export const DEFAULT_STAKE_TOKEN_LIST: {
-  [chainId: number]: readonly Address[]
+  [stakeChainId: number]: readonly Address[]
 } = {
   [ETH_CHAIN_ID]: [
     '0xcafe001067cdef266afb7eb5a286dcfd277f3de5', //PSP

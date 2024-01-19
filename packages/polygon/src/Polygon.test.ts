@@ -1,7 +1,7 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { bridge } from './Polygon.js'
-import { POLYGON_CHAIN_ID, ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
+import { POLYGON_CHAIN_ID, ETH_CHAIN_ID } from './chain-ids.js'
 import { MAINNET_BRIDGE } from './contract-addresses.js'
 
 import { POLYGON_BRIDGE_ABI_FUNCS } from './abi.js'

@@ -5,7 +5,8 @@ import {
   OrderType,
 } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
-import { type TestParams, Tokens } from './utils'
+import { Tokens } from './utils'
+import { type TestParams } from '@rabbitholegg/questdk-plugin-utils/src/helpers'
 import { ETH_ADDRESS } from './contract-addresses'
 import { ARB_ONE_CHAIN_ID } from './chain-ids'
 
