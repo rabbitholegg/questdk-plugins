@@ -62,7 +62,7 @@ export function createTestCase<T extends ActionParams>(
   }
 }
 
-export const buildPathQuery = (token?: string) => {
+export const buildPathQuery = (token?: Address) => {
   if (!token) return undefined
   return { $regex: `^${token.toLowerCase()}` }
 }
