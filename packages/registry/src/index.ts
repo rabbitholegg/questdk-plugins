@@ -39,8 +39,8 @@ import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
 import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
-
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
+import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -71,6 +71,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [HandleFi.pluginId]: HandleFi,
   [Mirror.pluginId]: Mirror,
   [Soundxyz.pluginId]: Soundxyz,
+  [Vela.pluginId]: Vela,
 }
 
 export const getPlugin = (pluginId: string) => {
