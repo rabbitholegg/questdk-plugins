@@ -1,5 +1,75 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.53
+
+### Patch Changes
+
+- Updated dependencies [[`6792112cc4153525bb4278d4951631fab3781bd0`](https://github.com/rabbitholegg/questdk-plugins/commit/6792112cc4153525bb4278d4951631fab3781bd0)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.16
+
+## 1.0.0-alpha.52
+
+### Minor Changes
+
+- [#169](https://github.com/rabbitholegg/questdk-plugins/pull/169) [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d) Thanks [@Quazia](https://github.com/Quazia)! - Bump SDK version to Alpha 31
+
+### Patch Changes
+
+- Updated dependencies [[`6f5e6575384b6c962368764d7528e976cfa8407d`](https://github.com/rabbitholegg/questdk-plugins/commit/6f5e6575384b6c962368764d7528e976cfa8407d), [`455a7b8ba6da2d32234a6bd84ffc2a12d308a12a`](https://github.com/rabbitholegg/questdk-plugins/commit/455a7b8ba6da2d32234a6bd84ffc2a12d308a12a), [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d)]:
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.9
+
+## 1.0.0-alpha.51
+
+### Patch Changes
+
+- Updated dependencies [[`3e373825044b283df73407074268caf1d1653708`](https://github.com/rabbitholegg/questdk-plugins/commit/3e373825044b283df73407074268caf1d1653708)]:
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.14
+
+## 1.0.0-alpha.50
+
+### Minor Changes
+
+- [#144](https://github.com/rabbitholegg/questdk-plugins/pull/144) [`379e2aa813ef0592b23c67d34ef6f4d0eb90a88b`](https://github.com/rabbitholegg/questdk-plugins/commit/379e2aa813ef0592b23c67d34ef6f4d0eb90a88b) Thanks [@mmackz](https://github.com/mmackz)! - add support for handlefi swap plugin to questdk
+
+- [#155](https://github.com/rabbitholegg/questdk-plugins/pull/155) [`68e32320f0498d12d336e25d174e78240614b325`](https://github.com/rabbitholegg/questdk-plugins/commit/68e32320f0498d12d336e25d174e78240614b325) Thanks [@mmackz](https://github.com/mmackz)! - add support for mirror mint plugin to questdk
+
+- [#158](https://github.com/rabbitholegg/questdk-plugins/pull/158) [`0c8ae999461d56845aabe173923064a77f17faed`](https://github.com/rabbitholegg/questdk-plugins/commit/0c8ae999461d56845aabe173923064a77f17faed) Thanks [@mmackz](https://github.com/mmackz)! - add support for soundxyz mint plugin
+
+### Patch Changes
+
+- Updated dependencies [[`152b99cca2e9d2c5c434c5041bf2c9c55015cc86`](https://github.com/rabbitholegg/questdk-plugins/commit/152b99cca2e9d2c5c434c5041bf2c9c55015cc86), [`379e2aa813ef0592b23c67d34ef6f4d0eb90a88b`](https://github.com/rabbitholegg/questdk-plugins/commit/379e2aa813ef0592b23c67d34ef6f4d0eb90a88b), [`01ae21bae2f79756fefe8070e9e5d7329904c004`](https://github.com/rabbitholegg/questdk-plugins/commit/01ae21bae2f79756fefe8070e9e5d7329904c004), [`68e32320f0498d12d336e25d174e78240614b325`](https://github.com/rabbitholegg/questdk-plugins/commit/68e32320f0498d12d336e25d174e78240614b325), [`0c8ae999461d56845aabe173923064a77f17faed`](https://github.com/rabbitholegg/questdk-plugins/commit/0c8ae999461d56845aabe173923064a77f17faed)]:
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.1
+
 ## 1.0.0-alpha.49
 
 ### Patch Changes

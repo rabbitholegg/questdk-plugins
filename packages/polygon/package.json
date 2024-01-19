@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-polygon",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@maticnetwork/pos-portal": "1.5.2",
-    "@rabbitholegg/questdk": "2.0.0-alpha.28",
+    "@rabbitholegg/questdk": "2.0.0-alpha.31",
     "viem": "1.2.15"
   }
 }

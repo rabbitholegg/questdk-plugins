@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#163](https://github.com/rabbitholegg/questdk-plugins/pull/163) [`6f5e6575384b6c962368764d7528e976cfa8407d`](https://github.com/rabbitholegg/questdk-plugins/commit/6f5e6575384b6c962368764d7528e976cfa8407d) Thanks [@mmackz](https://github.com/mmackz)! - add for support for base network
+
+- [#169](https://github.com/rabbitholegg/questdk-plugins/pull/169) [`26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d`](https://github.com/rabbitholegg/questdk-plugins/commit/26f00a6d9ddbd9e5e87c6c426ab0e59f0940655d) Thanks [@Quazia](https://github.com/Quazia)! - Bump SDK version to Alpha 31
+
 ## 1.0.0-alpha.10
 
 ### Patch Changes

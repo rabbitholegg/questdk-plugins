@@ -152,3 +152,19 @@ export const GMX_SWAPV2_ABI = [
     type: 'function',
   },
 ]
+
+export const GMX_SEND_TOKENS_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'sendTokens',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
