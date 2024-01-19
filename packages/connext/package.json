@@ -32,6 +32,9 @@
   "license": "ISC",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  },
   "dependencies": {
     "@connext/nxtp-txservice": "^2.0.0",
     "@connext/nxtp-utils": "^2.0.4",

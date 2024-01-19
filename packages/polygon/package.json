@@ -32,6 +32,9 @@
   "license": "ISC",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  },
   "dependencies": {
     "@maticnetwork/pos-portal": "1.5.2",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*"

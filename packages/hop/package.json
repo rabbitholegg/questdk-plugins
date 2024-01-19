@@ -32,6 +32,9 @@
   "license": "ISC",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  },
   "dependencies": {
     "@hop-protocol/core": "0.0.1-beta.182",
     "@hop-protocol/sdk": "0.0.1-beta.535",

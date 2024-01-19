@@ -32,6 +32,9 @@
   "license": "ISC",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  },
   "dependencies": {
     "@zoralabs/universal-minter": "0.2.12"
   }

@@ -30,6 +30,9 @@
   "license": "ISC",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  },
   "dependencies": {
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@uniswap/sdk-core": "^4.0.9",
