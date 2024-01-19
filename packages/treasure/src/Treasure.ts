@@ -17,7 +17,6 @@ export const mint = async (
   return compressJson({
     chainId,
     to: contractAddress,
-    from: recipient,
     input: {
       $abi: MINT_TREASURE_TAG_ABI,
       _registerArgs: {

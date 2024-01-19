@@ -22,7 +22,6 @@ describe('Given the treasure plugin', () => {
         expect(filter).to.deep.equal({
           chainId: Chains.ARBITRUM_ONE,
           to: params.contractAddress,
-          from: params.recipient,
           input: {
             $abi: MINT_TREASURE_TAG_ABI,
             _registerArgs: {
