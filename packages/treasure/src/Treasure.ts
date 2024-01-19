@@ -1,19 +1,18 @@
 import {
   type TransactionFilter,
   type SwapActionParams,
-  compressJson, type MintActionParams,
+  compressJson,
+  type MintActionParams,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { MAGICSWAP_TOKENS, V2_ROUTER } from './constants'
 import { MINT_TREASURE_TAG_ABI, V2_ROUTER_ABI } from './abi'
 import { Chains, buildV2PathQuery } from './utils'
 
-export const mint = async (mint: MintActionParams): Promise<TransactionFilter> => {
-  const {
-    chainId,
-    contractAddress,
-    recipient,
-  } = mint;
+export const mint = async (
+  mint: MintActionParams,
+): Promise<TransactionFilter> => {
+  const { chainId, contractAddress, recipient } = mint
 
   return compressJson({
     chainId,
@@ -22,8 +21,8 @@ export const mint = async (mint: MintActionParams): Promise<TransactionFilter> =
     input: {
       $abi: MINT_TREASURE_TAG_ABI,
       _registerArgs: {
-        owner: recipient
-      }
+        owner: recipient,
+      },
     },
   })
 }

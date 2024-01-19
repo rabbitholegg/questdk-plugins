@@ -8,10 +8,10 @@ import {
   failingSwapTestCases,
   MINT_TREASURE_TAG,
   passingMintTestCases,
-  failingMintTestCases
+  failingMintTestCases,
 } from './test-transactions'
-import {MINT_TREASURE_TAG_ABI, V2_ROUTER_ABI} from './abi'
-import {MAGIC, ANIMA, V2_ROUTER} from './constants'
+import { MINT_TREASURE_TAG_ABI, V2_ROUTER_ABI } from './abi'
+import { MAGIC, ANIMA, V2_ROUTER } from './constants'
 
 describe('Given the treasure plugin', () => {
   describe('when handling the mint action', () => {
@@ -27,8 +27,8 @@ describe('Given the treasure plugin', () => {
             $abi: MINT_TREASURE_TAG_ABI,
             _registerArgs: {
               owner: params.recipient,
-            }
-          }
+            },
+          },
         })
       })
     })
