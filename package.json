@@ -6,7 +6,7 @@
     "lint:fix": "turbo run lint:fix --filter=!@rabbitholegg/questdk-plugin-project",
     "format": "turbo run format --filter=!@rabbitholegg/questdk-plugin-project",
     "clean": "turbo run clean --filter=!@rabbitholegg/questdk-plugin-project",
-    "test": "turbo run test --filter=!@rabbitholegg/questdk-plugin-project",
+    "test": "turbo run test --filter=!@rabbitholegg/questdk-plugin-project,!@rabbitholegg/questdk-plugin-utils",
     "test:ci": "turbo run test:ci --filter=!@rabbitholegg/questdk-plugin-project",
     "changeset": "changeset",
     "changeset:release": "turbo run build  --filter=!@rabbitholegg/questdk-plugin-project && changeset publish",
