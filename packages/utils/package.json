@@ -1,6 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-utils",
   "private": true,
+  "version": "1.0.0-alpha.1",
   "scripts": {
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",
