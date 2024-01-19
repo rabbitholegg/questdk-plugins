@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-camelot",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.11",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -43,7 +43,7 @@
     "vitest": "0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.28",
+    "@rabbitholegg/questdk": "2.0.0-alpha.31",
     "viem": "1.2.15"
   }
 }
