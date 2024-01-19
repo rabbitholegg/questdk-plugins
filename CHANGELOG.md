@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.32
+
+### Minor Changes
+
+- [#65](https://github.com/rabbitholegg/questdk/pull/65) [`87ab167`](https://github.com/rabbitholegg/questdk/commit/87ab167c94c46cf88345be99e0851a8abba41101) Thanks [@Quazia](https://github.com/Quazia)! - Adds numerical operator support to bitmask operator
+
 ## 2.0.0-alpha.31
 
 ### Minor Changes
