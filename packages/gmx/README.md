@@ -62,3 +62,6 @@ We want to confirm [orderType](https://github.com/gmx-io/gmx-synthetics/blob/77a
         Liquidation
     }
 ```
+
+
+Options Transaction Info

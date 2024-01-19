@@ -5,6 +5,7 @@ import {
   type IActionPlugin,
   PluginActionNotImplementedError,
   type MintActionParams,
+  type OptionsActionParams,
   type SwapActionParams,
   type QuestActionParams,
   type DelegateActionParams,
@@ -108,6 +109,11 @@ export const executePlugin = (
       if (plugin.stake === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.stake(params as unknown as StakeActionParams)
+    }
+    case ActionType.Options: {
+      if (plugin.options === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.options(params as unknown as OptionsActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
