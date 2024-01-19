@@ -1,21 +1,25 @@
 import {
   type TransactionFilter,
   type OptionsActionParams,
-  OrderType,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { zeroAddress, type Address } from 'viem'
+import { type Address } from 'viem'
 import {
   CHAIN_ID_TO_ORDER_BOOK_ADDRESS,
   OrderBook__factory,
   CHAIN_ID_TO_AGGREGATOR_FACTORY_ADDRESS,
   AggregatorProxyFactory__factory,
-  PositionOrderFlags,
   AggregatorGmxV2Adapter__factory,
 } from '@mux-network/mux.js'
 import { GNS_ABI } from './abi'
 import { CHAIN_ID_TO_TOKENS, GNS_CONTRACT, GNS_REF_ADDRESS } from './constants'
-import { buildSubAccountIdQuery, chainToWeth } from './helpers'
+import {
+  buildSubAccountIdQuery,
+  getTokenIn,
+  getOrderTypeValue,
+  getGmxV2OrderFlag,
+  getGmxV2OrderType,
+} from './helpers'
 import { Chains, buildPathQuery } from './utils'
 
 export const options = async (
@@ -31,43 +35,10 @@ export const options = async (
     chainId,
   )
 
-  const tokenIn = token
-    ? token === zeroAddress
-      ? chainToWeth[chainId]
-      : token
-    : undefined
-
-  const getOrderType =
-    orderType === OrderType.Market
-      ? 0
-      : orderType === OrderType.Limit
-      ? { $gt: '0' }
-      : undefined
-
-  const gmxV2OrderFlag =
-    orderType === OrderType.Market
-      ? {
-          $bitmask: {
-            bitmask: '0x40', // 64
-            value: PositionOrderFlags.MarketOrder,
-          },
-        }
-      : orderType === OrderType.Limit
-      ? {
-          $bitmask: {
-            bitmask: '0x10', // 16
-            value: PositionOrderFlags.TriggerOrder,
-          },
-        }
-      : undefined
-
-  const gmxV2OrderType =
-    // https://arbiscan.io/address/0xe1b50bba2255bbc60e4d4cdb4c77df61d1fddd8d#code (IOrder.sol)
-    orderType === OrderType.Market
-      ? 2 // MarketIncrease
-      : orderType === OrderType.Limit
-      ? 3 // LimitIncrease
-      : undefined
+  const tokenIn = getTokenIn(token, chainId)
+  const orderTypeValue = getOrderTypeValue(orderType)
+  const gmxV2OrderFlag = getGmxV2OrderFlag(orderType)
+  const gmxV2OrderType = getGmxV2OrderType(orderType)
 
   return compressJson({
     chainId,
@@ -85,7 +56,7 @@ export const options = async (
           $abi: OrderBook__factory.abi,
           subAccountId: subAccountQuery,
           collateralAmount: amount,
-          deadline: getOrderType,
+          deadline: orderTypeValue,
         },
         {
           // aggregator contract gmx V2
@@ -113,7 +84,7 @@ export const options = async (
             trader: recipient,
             positionSizeDai: amount,
           },
-          orderType: getOrderType,
+          orderType: orderTypeValue,
           referrer: GNS_REF_ADDRESS,
         },
       ],

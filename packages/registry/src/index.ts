@@ -40,8 +40,8 @@ import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
-import { Mux } from '@rabbitholegg/questdk-plugin-mux'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
+import { Mux } from '@rabbitholegg/questdk-plugin-mux'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {

@@ -1,7 +1,8 @@
-import { type FilterOperator } from '@rabbitholegg/questdk'
+import { type FilterOperator, OrderType } from '@rabbitholegg/questdk'
 import {
   getReaderContract,
   getChainStorage,
+  PositionOrderFlags,
   type Asset,
 } from '@mux-network/mux.js'
 import { CHAIN_ID_TO_PROVIDER } from './provider'
@@ -67,5 +68,53 @@ export const buildSubAccountIdQuery = async (
 
   return {
     $and: conditions,
+  }
+}
+
+export const getTokenIn = (token: Address | undefined, chainId: number) => {
+  if (!token) {
+    return undefined
+  }
+  return token === zeroAddress ? chainToWeth[chainId] : token
+}
+
+export function getOrderTypeValue(orderType: OrderType | undefined) {
+  if (orderType === OrderType.Market) {
+    return 0
+  } else if (orderType === OrderType.Limit) {
+    return { $gt: '0' }
+  } else {
+    return undefined
+  }
+}
+
+export function getGmxV2OrderFlag(orderType: OrderType | undefined) {
+  if (orderType === OrderType.Market) {
+    return {
+      $bitmask: {
+        bitmask: '0x40', // 64
+        value: PositionOrderFlags.MarketOrder,
+      },
+    }
+  } else if (orderType === OrderType.Limit) {
+    return {
+      $bitmask: {
+        bitmask: '0x10', // 16
+        value: PositionOrderFlags.TriggerOrder,
+      },
+    }
+  } else {
+    return undefined
+  }
+}
+
+export function getGmxV2OrderType(orderType: OrderType | undefined) {
+  // https://arbiscan.io/address/0xe1b50bba2255bbc60e4d4cdb4c77df61d1fddd8d#code (IOrder.sol)
+  if (orderType === OrderType.Market) {
+    return 2 // MarketIncrease
+  } else if (orderType === OrderType.Limit) {
+    return 3 // LimitIncrease
+  } else {
+    return undefined
   }
 }

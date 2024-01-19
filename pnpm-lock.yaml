@@ -2712,7 +2712,7 @@ packages:
       abitype: 0.9.10(typescript@5.3.3)
       rimraf: 5.0.5
       typescript: 5.3.3
-      viem: 1.16.6(typescript@5.3.3)
+      viem: 1.21.4(typescript@5.3.3)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
