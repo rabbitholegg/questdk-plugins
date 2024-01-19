@@ -41,6 +41,7 @@ import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { Mux } from '@rabbitholegg/questdk-plugin-mux'
+import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -72,6 +73,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Mirror.pluginId]: Mirror,
   [Soundxyz.pluginId]: Soundxyz,
   [Mux.pluginId]: Mux,
+  [Vela.pluginId]: Vela,
 }
 
 export const getPlugin = (pluginId: string) => {

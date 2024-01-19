@@ -1,0 +1,20 @@
+{
+  "name": "@rabbitholegg/questdk-plugin-utils",
+  "private": true,
+  "version": "1.0.0-alpha.1",
+  "scripts": {
+    "bench": "vitest bench",
+    "bench:ci": "CI=true vitest bench",
+    "clean": "rimraf dist",
+    "format": "rome format . --write",
+    "lint": "rome check .",
+    "lint:fix": "pnpm lint --apply",
+    "test": "vitest dev",
+    "test:cov": "vitest dev --coverage",
+    "test:ci": "CI=true vitest --coverage",
+    "test:ui": "vitest dev --ui"
+  },
+  "devDependencies": {
+    "tsconfig": "workspace:*"
+  }
+}
