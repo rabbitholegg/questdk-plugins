@@ -152,7 +152,7 @@ export const STAKE_VELA: TestParams<StakeActionParams> = {
   },
 }
 
-export const passingTestCases = [
+export const passingTestCasesOptions = [
   createTestCase(ARB_NEW_POSITION, 'when opening a new position'),
   createTestCase(ARB_MARKET_ORDER, 'when opening a market order'),
   createTestCase(LINK_STOP_MARKET, 'when opening a stop-market order'),
@@ -182,12 +182,14 @@ export const passingTestCases = [
     recipient: undefined,
     token: undefined,
   }),
-  createTestCase(MINT_VLP, 'when minting vlp'),
+]
+
+export const passingTestCasesStake = [
   createTestCase(STAKE_VLP, 'when staking vlp'),
   createTestCase(STAKE_VELA, 'when staking vela'),
 ]
 
-export const failingTestCases = [
+export const failingTestCasesOptions = [
   createTestCase(ARB_NEW_POSITION, 'when chainId is not correct', {
     chainId: 10,
   }),
@@ -219,5 +221,12 @@ export const failingTestCases = [
   }),
   createTestCase(ARB_NEW_POSITION, 'when orderType is not correct', {
     orderType: OrderType.Limit,
+  }),
+]
+
+export const failingTestCasesStake = [
+  createTestCase(STAKE_VLP, 'when token is wrong', { tokenOne: zeroAddress }),
+  createTestCase(STAKE_VELA, 'when amount is not enough', {
+    amountOne: GreaterThanOrEqual(parseUnits('10000', 18)),
   }),
 ]

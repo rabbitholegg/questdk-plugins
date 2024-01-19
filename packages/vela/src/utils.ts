@@ -5,6 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import type { Address, Hash } from 'viem'
 import { TOKEN_TO_ID } from './contract-addresses'
+import { TOKENFARM_ABI, TOKENFARM_ABI2 } from './abi'
 import type { BitmaskFilter } from '@rabbitholegg/questdk/dist/types/filter/types'
 
 export enum Chains {
@@ -123,4 +124,19 @@ export function getOrderTypePacked(
       },
     })),
   }
+}
+
+export function getStakeInputs(token?: Address, amount?: FilterOperator) {
+  if (!token)
+    return {
+      $or: [
+        { $abi: TOKENFARM_ABI, _amount: amount },
+        { $abi: TOKENFARM_ABI2, _amount: amount },
+      ],
+    }
+  if (token?.toLowerCase() === '0xc5b2d9fda8a82e8dcecd5e9e6e99b78a9188eb05')
+    return { $abi: TOKENFARM_ABI, _amount: amount }
+  if (token?.toLowerCase() === '0x088cd8f5ef3652623c22d48b1605dcfe860cd704')
+    return { $abi: TOKENFARM_ABI2, _amount: amount }
+  return { $abi: null } // fail case. It should never reach this unless an invalid token is used.
 }

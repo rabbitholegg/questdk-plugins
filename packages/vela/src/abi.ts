@@ -27,24 +27,20 @@ export const VAULT_ABI = [
 
 export const TOKENFARM_ABI = [
   {
-    inputs: [
-      { internalType: 'uint256', name: '_amount', type: 'uint256' }
-    ],
+    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
     name: 'depositVlp',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function'
+    type: 'function',
   },
 ]
 
 export const TOKENFARM_ABI2 = [
   {
-    inputs: [
-      { internalType: 'uint256', name: '_amount', type: 'uint256' }
-    ],
-    "name": "depositVela",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+    name: 'depositVela',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
   },
 ]
