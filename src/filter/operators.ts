@@ -1,5 +1,3 @@
-import type { FilterOperator } from './types.js'
-
 export const GreaterThan = (amount: bigint | number | string) => ({
   $gt: BigInt(amount),
 })
