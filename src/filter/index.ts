@@ -6,13 +6,6 @@ export {
   Equal,
   LessThanOrEqual,
   GreaterThanOrEqual,
-  Or,
-  Any,
-  And,
-  All,
-  Some,
-  First,
-  Last,
 } from './operators.js'
 
 export type {
