@@ -46,12 +46,5 @@ export {
   LessThan,
   LessThanOrEqual,
   GreaterThanOrEqual,
-  Or,
-  And,
-  Some,
-  First,
-  Last,
-  Any,
-  All,
   Equal,
 } from './filter/operators.js'

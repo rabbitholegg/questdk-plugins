@@ -1,4 +1,3 @@
-import { Any } from '../filter/operators.js'
 import type { LogicalOperator } from '../index.js'
 import { QUEST_FACTORY_ADDRESS } from './constants.js'
 import { deployQuest } from './deployQuest.js'
@@ -22,7 +21,7 @@ describe('deployQuest', () => {
       max: 5000,
     }
 
-    actions = Any([])
+    actions = { $or: [] }
   })
 
   test('should create a transaction with expected values', async () => {
