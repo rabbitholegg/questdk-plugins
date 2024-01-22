@@ -6,7 +6,12 @@ import {
   type StakeActionParams,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { MAGIC_STAKING, MAGICSWAP_TOKENS, TREASURE_TAGS_PROXY, V2_ROUTER } from './constants'
+import {
+  MAGIC_STAKING,
+  MAGICSWAP_TOKENS,
+  TREASURE_TAGS_PROXY,
+  V2_ROUTER,
+} from './constants'
 import { MINT_TREASURE_TAG_ABI, STAKE_MAGIC_ABI, V2_ROUTER_ABI } from './abi'
 import { Chains, buildV2PathQuery } from './utils'
 

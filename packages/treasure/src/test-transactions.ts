@@ -102,16 +102,24 @@ export const passingSwapTestCases = [
 
 export const passingMintTestCases = [
   createTestCase(MINT_TREASURE_TAG, 'when minting a TreasureTag'),
-  createTestCase(MINT_TREASURE_TAG, 'when minting a TreasureTag without contractAddress', {
-    contractAddress: undefined
-  }),
+  createTestCase(
+    MINT_TREASURE_TAG,
+    'when minting a TreasureTag without contractAddress',
+    {
+      contractAddress: undefined,
+    },
+  ),
 ]
 
 export const passingStakeTestCases = [
   createTestCase(STAKE_MAGIC, 'when staking magic in the governance contract'),
-  createTestCase(STAKE_MAGIC, 'when staking magic in the governance contract without contractAddress', {
-    contractAddress: undefined
-  }),
+  createTestCase(
+    STAKE_MAGIC,
+    'when staking magic in the governance contract without contractAddress',
+    {
+      contractAddress: undefined,
+    },
+  ),
 ]
 
 export const failingSwapTestCases = [
