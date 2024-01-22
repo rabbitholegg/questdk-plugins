@@ -1,6 +1,3 @@
-// This file is standard for more projects.
-// The main degree of nuance is in the 
-
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
@@ -13,7 +10,7 @@ import {
 } from './Project.js'
 
 // Replace *project* with the name of the project
-export const {Project}: IActionPlugin = {
+export const { Project }: IActionPlugin = {
   pluginId: 'project',
   getSupportedTokenAddresses,
   getSupportedChainIds,

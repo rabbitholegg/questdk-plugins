@@ -10,4 +10,14 @@ export const COLLECT_ENTRY_ABI = [
     stateMutability: 'payable',
     type: 'function',
   },
+  {
+    inputs: [
+      { internalType: 'address', name: 'tokenRecipient', type: 'address' },
+      { internalType: 'string', name: 'message', type: 'string' },
+    ],
+    name: 'purchase',
+    outputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
+    stateMutability: 'payable',
+    type: 'function',
+  },
 ]

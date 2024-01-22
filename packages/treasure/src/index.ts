@@ -4,6 +4,7 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
+  mint,
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
@@ -13,7 +14,7 @@ export const Treasure: IActionPlugin = {
   pluginId: 'treasure',
   getSupportedTokenAddresses,
   getSupportedChainIds,
+  mint,
   swap,
   bridge: async () => new PluginActionNotImplementedError(),
-  mint: async () => new PluginActionNotImplementedError(),
 }

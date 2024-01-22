@@ -84,7 +84,7 @@ export const getSupportedTokenAddresses = async (
   const chainSlug = utils.chainIdToSlug('mainnet', _chainId)
 
   // For each entry in bridge take the token address [ l1CanonicalToken or l2CanonicalToken ]
-  if (addresses && addresses.bridges) {
+  if (addresses?.bridges) {
     return Object.entries(addresses.bridges! as Bridges).map(
       ([, bridge]: [string, Bridge]) => {
         // Find the bridge element whose key matches the chainSlug and return the token address

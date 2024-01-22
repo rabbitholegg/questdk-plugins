@@ -30,7 +30,7 @@ export const getTokenFromPool = async (
   })
   // Get the pool from the factory
   const pool = await client.readContract({
-    address: factory,
+    address: factory as Address,
     abi: [
       {
         inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
@@ -45,7 +45,7 @@ export const getTokenFromPool = async (
   })
   // Get the token from the pool
   return await client.readContract({
-    address: pool,
+    address: pool as Address,
     abi: [
       {
         inputs: [],
