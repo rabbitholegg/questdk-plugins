@@ -14,6 +14,7 @@ const ethereumTokenAddresses: Address[] = [
   '0x6810e776880C02933D47DB1b9fc05908e5386b96', // GNO
   '0x6De037ef9aD2725EB40118Bb1702EBb27e4Aeb24', // RNDR
   '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', // UNI
+  '0xD69a0A9682F679f50e34dE40105A93BEbB2fF43d', // MACKE
 ]
 
 const optimismTokenAddresses: Address[] = [
