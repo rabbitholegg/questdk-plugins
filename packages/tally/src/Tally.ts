@@ -1,7 +1,7 @@
 import { type DelegateActionParams, compressJson } from '@rabbitholegg/questdk'
 import { TALLY_ABI } from './abi.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
-import { TALLY_TOKENS } from './token-addresses.js'
+import { TALLY_GOVERNORS, TALLY_TOKENS } from './token-addresses.js'
 
 export const delegate = async (delegateParams: DelegateActionParams) => {
   // This is the information we'll use to compose the Transaction object
@@ -28,9 +28,30 @@ export const delegate = async (delegateParams: DelegateActionParams) => {
   })
 }
 
+export const vote = async (voteParams: VoteActionParams) => {
+  // This is the information we'll use to compose the Transaction object
+  const { chainId, project, vote, reason } = voteParams
+
+  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  return compressJson({
+    chainId: chainId, // The chainId of the source chain
+    to: project, // The contract address of the governance platform
+    input: {
+      $abi: TALLY_ABI, // The ABI of the contract
+      vote: vote, // The vote value
+      reason: reason, // The reason for the vote
+    }, // The input object is where we'll put the ABI and the parameters
+  })
+}
+
 export const getSupportedTokenAddresses = async (_chainId: number) => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
   return TALLY_TOKENS[_chainId]
+}
+
+export const getSupportedGovernorAddresses = async (_chainId: number) => {
+  // Given a specific chain we would expect this function to return a list of supported governor addresses
+  return TALLY_GOVERNORS[_chainId]
 }
 
 export const getSupportedChainIds = async () => {
