@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-mirror
 
+## 1.0.0-alpha.3
+
+### Minor Changes
+
+- [#124](https://github.com/rabbitholegg/questdk-plugins/pull/124) [`1e63d48`](https://github.com/rabbitholegg/questdk-plugins/commit/1e63d4890d8e501d2d471f275db797f4bb3ce65b) Thanks [@Quazia](https://github.com/Quazia)! - Major refactor of package structure and addition of bare-bones utils package
+
+- [#175](https://github.com/rabbitholegg/questdk-plugins/pull/175) [`0612a24`](https://github.com/rabbitholegg/questdk-plugins/commit/0612a24e04503293dbefbea70cd4cadb68d7a39e) Thanks [@mmackz](https://github.com/mmackz)! - add support for legacy mints
+
 ## 1.0.0-alpha.2
 
 ### Minor Changes
