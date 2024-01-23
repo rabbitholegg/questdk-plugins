@@ -51,7 +51,7 @@ export const STAKE_MAGIC: TestParams<StakeActionParams> = {
 
 export const EXACT_TOKENS_FOR_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     from: '0x4c0ccf331fb23ca8bd5139b886cc821ede7b4204',
     hash: '0x8bf8405112a727937c67236c4972ca40e0c0f69d6eeadd60ce0e36649689096f',
     to: '0x23805449f91bb2d2054d9ba288fdc8f09b5eac79',
@@ -71,7 +71,7 @@ export const EXACT_TOKENS_FOR_TOKENS: TestParams<SwapActionParams> = {
 
 export const TOKENS_FOR_EXACT_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     from: '0x76753c6b5c21dfa659a50fbd1cf385746b28515b',
     hash: '0xf72f2e47c9bc589d6bbc8824906fcece0ab244f266f758e2aa11bbea0326c080',
     to: '0x23805449f91bb2d2054d9ba288fdc8f09b5eac79',
