@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-traderjoe
 
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#124](https://github.com/rabbitholegg/questdk-plugins/pull/124) [`1e63d48`](https://github.com/rabbitholegg/questdk-plugins/commit/1e63d4890d8e501d2d471f275db797f4bb3ce65b) Thanks [@Quazia](https://github.com/Quazia)! - Major refactor of package structure and addition of bare-bones utils package
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes
