@@ -1,5 +1,30 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.57
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.6
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.14
+
 ## 1.0.0-alpha.56
 
 ### Patch Changes

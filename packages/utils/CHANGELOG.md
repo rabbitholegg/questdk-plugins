@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.3
+
+### Minor Changes
+
+- [#188](https://github.com/rabbitholegg/questdk-plugins/pull/188) [`e189ec9`](https://github.com/rabbitholegg/questdk-plugins/commit/e189ec91f7ee185097f9cb95585580d32d046b29) Thanks [@Quazia](https://github.com/Quazia)! - First public release
+
 ## 1.0.0-alpha.2
 
 ### Patch Changes
