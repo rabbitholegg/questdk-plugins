@@ -13,12 +13,12 @@ describe('createTestCase', () => {
         to: '0x1',
         value: '1',
       },
-      params: { 
+      params: {
         chainId: 1,
         contractAddress: '0x2' as Address,
         tokenIn: '0x3' as Address,
         amountIn: '10',
-      }
+      },
     }
 
     const description = 'Test case 1'
@@ -29,7 +29,7 @@ describe('createTestCase', () => {
     expect(testCase).toEqual({
       transaction: testParams.transaction,
       params: { ...testParams.params, ...overrides },
-      description
+      description,
     })
   })
 })
