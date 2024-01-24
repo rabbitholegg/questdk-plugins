@@ -1,7 +1,7 @@
 import { GreaterThanOrEqual, OrderType } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
 import { Tokens } from './utils'
-import { createTestCase } from '@rabbitholegg/questdk-plugin-utils/src/helpers'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
   TOKENS_FOR_TOKENS_V1,
   ETH_FOR_TOKENS_V1,
