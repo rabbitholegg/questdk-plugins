@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-project
 
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- Updated dependencies [[`64266a7`](https://github.com/rabbitholegg/questdk-plugins/commit/64266a795b7f51b137a199887be8b9551076732b)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.2
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes
