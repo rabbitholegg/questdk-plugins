@@ -6,7 +6,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
 import { Tokens } from './utils'
-import { type TestParams } from '@rabbitholegg/questdk-plugin-utils/src/helpers'
+import { type TestParams } from '@rabbitholegg/questdk-plugin-utils'
 import { ETH_ADDRESS } from './contract-addresses'
 import { ARB_ONE_CHAIN_ID } from './chain-ids'
 
