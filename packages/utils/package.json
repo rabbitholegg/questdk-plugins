@@ -1,8 +1,22 @@
 {
   "name": "@rabbitholegg/questdk-plugin-utils",
-  "private": true,
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.3",
+  "type": "module",
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/esm/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "packageManager": "pnpm@8.3.1",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "scripts": {
+    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
+    "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
+    "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm && echo > ./dist/esm/package.json '{\"type\":\"module\",\"sideEffects\":false}'",
+    "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",
     "clean": "rimraf dist",
@@ -13,6 +27,9 @@
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
     "test:ui": "vitest dev --ui"
+  },
+  "dependencies": {
+    "tslib": "2.3.1"
   },
   "devDependencies": {
     "tsconfig": "workspace:*"
