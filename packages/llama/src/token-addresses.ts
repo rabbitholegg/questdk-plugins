@@ -1,7 +1,7 @@
 import { type Address } from 'viem'
-import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
+import { OPTIMISM_CHAIN_ID } from './chain-ids.js'
 
-// This is just the Arbitrum token address since we only support that token right now
-export const TALLY_TOKENS: Record<number, Address[]> = {
-  [ARB_ONE_CHAIN_ID]: ['0xc4ed0a9ea70d5bcc69f748547650d32cc219d882'],
+export const LLAMA_TOKENS: Record<number, Address[]> = {
+  // TODO arguably we should support any token here?  it's a governance token right that's arbitrary
+  [OPTIMISM_CHAIN_ID]: ['0xeccb99806ce0738918f20253f304a373ff197cdd'],
 }
