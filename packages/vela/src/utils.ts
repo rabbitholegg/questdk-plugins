@@ -141,9 +141,7 @@ export function getOrderType(
   return orderTypeValues[orderType]
 }
 
-export function getAmount(
-  amount: Amount,
-): FilterOperator | undefined {
+export function getAmount(amount: Amount): FilterOperator | undefined {
   if (amount === undefined) return undefined
   const multiplier = BigInt(10 ** 12)
   if (typeof amount === 'object') {
