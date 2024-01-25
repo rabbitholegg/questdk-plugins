@@ -124,3 +124,34 @@ export function getOrderTypePacked(
     })),
   }
 }
+
+export function getOrderType(
+  orderType: OrderType | undefined,
+): { _orderType: undefined } | { $or: { _orderType: number }[] } | undefined {
+  if (!orderType) return { _orderType: undefined }
+  const orderTypeValues = {
+    [OrderType.Market]: {
+      $or: [{ _orderType: 0 }, { _orderType: 2 }],
+    },
+
+    [OrderType.Limit]: {
+      $or: [{ _orderType: 1 }, { _orderType: 3 }],
+    },
+  }
+  return orderTypeValues[orderType]
+}
+
+export function getAmount(
+  amount: Amount,
+): FilterOperator | undefined {
+  if (amount === undefined) return undefined
+  const multiplier = BigInt(10 ** 12)
+  if (typeof amount === 'object') {
+    const [operator, value] = Object.entries(amount)[0]
+    if (operator === '$lte' || operator === '$lt') {
+      return { [operator]: (BigInt(value) + 1n) * multiplier }
+    }
+    return { [operator]: BigInt(value) * multiplier }
+  }
+  return BigInt(amount) * multiplier
+}
