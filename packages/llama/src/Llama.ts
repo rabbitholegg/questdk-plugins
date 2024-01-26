@@ -3,14 +3,6 @@ import { LLAMA_ABI_CAST_APPROVE, LLAMA_ABI_CAST_DISAPPROVE } from './abi.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import { LLAMA_TOKENS } from './token-addresses.js'
 
-// export type VoteActionParams = {
-//   chainId: number;
-//   project: Address | string;
-//   contractAddress: Address;
-//   proposalId?: bigint | FilterOperator;
-//   support?: boolean | FilterOperator;
-// };
-
 export const vote = async (voteParams: VoteActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const { chainId, project, proposalId, support } = voteParams
@@ -47,5 +39,4 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
 
 export const getSupportedChainIds = async () => {
   // This should return all of the ChainIds that are supported by the Project we're integrating
-  return CHAIN_ID_ARRAY // only supporting ARB right now
-}
+  return CHAIN_ID_ARRAY
