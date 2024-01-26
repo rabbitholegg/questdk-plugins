@@ -2,7 +2,6 @@ import {
   type TransactionFilter,
   type OptionsActionParams,
   compressJson,
-  GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import {
@@ -31,10 +30,6 @@ export const options = async (
       ? { $and: [getTokenPacked(token), getOrderTypePacked(orderType)] }
       : getTokenPacked(token) || getOrderTypePacked(orderType)
 
-  const amountTpslOrder = amount
-    ? [GreaterThanOrEqual(0), GreaterThanOrEqual(0), getAmount(amount)] // needs $nth operator
-    : undefined
-
   return compressJson({
     chainId,
     to: contractAddress ?? VAULT_CONTRACT,
@@ -50,7 +45,9 @@ export const options = async (
           $abi: TPSL_ORDER_ABI,
           _tokenId: token ? TOKEN_TO_ID[token.toLowerCase()] : undefined,
           ...getOrderType(orderType),
-          _params: amountTpslOrder,
+          _params: amount
+            ? { $nth: { index: 2, value: getAmount(amount) } }
+            : undefined,
         },
       ],
     },

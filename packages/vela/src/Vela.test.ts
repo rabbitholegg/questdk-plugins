@@ -1,4 +1,4 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { options, getSupportedTokenAddresses } from './Vela'
 import { CHAIN_ID_ARRAY } from './chain-ids'
@@ -65,17 +65,12 @@ describe('Given the vela plugin', () => {
                     _orderType: 2,
                   },
                 ],
-                _params: [
-                  {
-                    $gte: '0',
+                _params: {
+                  $nth: {
+                    index: 2,
+                    value: { $gte: '21880000000000000000000000000000' },
                   },
-                  {
-                    $gte: '0',
-                  },
-                  {
-                    $gte: '21880000000000000000000000000000',
-                  },
-                ],
+                },
               },
             ],
           },
