@@ -7,7 +7,7 @@ import {
 
 export const BOOST_PASS_MINT: TestParams<MintActionParams> = {
   transaction: {
-    chainId: Chains.ARBITRUM_ONE,
+    chainId: 11155111, // sepolia testnet
     to: '0x9a618d6302f27cdbb97206ce269a31c1f7da3913',
     from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
     hash: '0x3358d3f4b241be3e1c714d478a722885611f644c538d3b607fb45ba4e4f7aa1c',
@@ -16,7 +16,7 @@ export const BOOST_PASS_MINT: TestParams<MintActionParams> = {
     value: '2000000000000000',
   },
   params: {
-    chainId: Chains.ARBITRUM_ONE,
+    chainId: 11155111, // sepolia testnet
     contractAddress: '0x9a618d6302f27cdbb97206ce269a31c1f7da3913',
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
   },
