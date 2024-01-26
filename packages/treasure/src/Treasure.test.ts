@@ -2,22 +2,25 @@ import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { getAddress } from 'viem'
 import { Chains } from './utils'
-import { mint, swap, getSupportedTokenAddresses } from './Treasure'
+import { mint, stake, swap, getSupportedTokenAddresses } from './Treasure'
 import {
   passingSwapTestCases,
   failingSwapTestCases,
   MINT_TREASURE_TAG,
   passingMintTestCases,
   failingMintTestCases,
+  STAKE_MAGIC,
+  passingStakeTestCases,
+  failingStakeTestCases,
 } from './test-transactions'
-import { MINT_TREASURE_TAG_ABI, V2_ROUTER_ABI } from './abi'
+import { MINT_TREASURE_TAG_ABI, STAKE_MAGIC_ABI, V2_ROUTER_ABI } from './abi'
 import { MAGIC, ANIMA, V2_ROUTER } from './constants'
 
 describe('Given the treasure plugin', () => {
   describe('when handling the mint action', () => {
     describe('should return a valid action filter', () => {
       const { params } = MINT_TREASURE_TAG
-      test('when minting a Treasure Tag through the proxy contract', async () => {
+      test('when making a valid Treasure Tag mint filter', async () => {
         const filter = await mint(params)
         expect(filter).to.deep.equal({
           chainId: Chains.ARBITRUM_ONE,
@@ -54,7 +57,45 @@ describe('Given the treasure plugin', () => {
     })
   })
 
-  describe('When handling the swap action', () => {
+  describe('when handling the stake action', () => {
+    describe('should return a valid action filter', () => {
+      const { params } = STAKE_MAGIC
+      test('when making a valid MAGIC stake filter', async () => {
+        const filter = await stake(params)
+        expect(filter).to.deep.equal({
+          chainId: Chains.ARBITRUM_ONE,
+          to: params.contractAddress,
+          input: {
+            $abi: STAKE_MAGIC_ABI,
+            _amount: params.amountOne,
+          },
+        })
+      })
+    })
+
+    describe('should pass filter with valid transactions', () => {
+      passingStakeTestCases.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await stake(params)
+          const result = apply(transaction, filter)
+          expect(result).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingStakeTestCases.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await stake(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+  })
+
+  describe('when handling the swap action', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid swap', async () => {
         const { params } = passingSwapTestCases[0]
