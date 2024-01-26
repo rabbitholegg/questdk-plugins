@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-symbiosis",
-  "version": "1.0.0-alpha.10",
+  "version": "1.0.0-alpha.13",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -39,5 +39,5 @@
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "ethers": "^5.2.0",
     "symbiosis-js-sdk": "^3.0.9"
-}
+  }
 }

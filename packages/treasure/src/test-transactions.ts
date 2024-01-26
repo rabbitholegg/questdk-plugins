@@ -2,14 +2,21 @@ import {
   type SwapActionParams,
   GreaterThanOrEqual,
   type MintActionParams,
+  type StakeActionParams,
 } from '@rabbitholegg/questdk'
 import { parseUnits } from 'viem'
-import { ANIMA, GFLY, MAGIC, TREASURE_TAGS_PROXY } from './constants'
+import {
+  ANIMA,
+  GFLY,
+  MAGIC,
+  MAGIC_STAKING,
+  TREASURE_TAGS_PROXY,
+} from './constants'
 import { type TestParams, Chains, createTestCase } from './utils'
 
 export const MINT_TREASURE_TAG: TestParams<MintActionParams> = {
   transaction: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     from: '0x702c99051255ff9c621eddf5a752afef2f1ac14c',
     hash: '0x375e98904e78bbdde0e59cf7bb0158aa2c63a4f321182f43ada05d4839837a2e',
     input:
@@ -24,9 +31,27 @@ export const MINT_TREASURE_TAG: TestParams<MintActionParams> = {
   },
 }
 
+export const STAKE_MAGIC: TestParams<StakeActionParams> = {
+  transaction: {
+    chainId: Chains.ARBITRUM_ONE,
+    from: '0x4ec63eefb25067d9ac0c54ca1d10f00930c599d9',
+    hash: '0xeb43c2bdfa3ac3a13061dde88b098f7acf121848cd8fb5a5f0c7e18b1fa76c48',
+    input:
+      '0xb6b55f250000000000000000000000000000000000000000000000001bc16d674ec80000',
+    to: MAGIC_STAKING,
+    value: '0',
+  },
+  params: {
+    chainId: Chains.ARBITRUM_ONE,
+    contractAddress: MAGIC_STAKING,
+    tokenOne: MAGIC,
+    amountOne: '2000000000000000000',
+  },
+}
+
 export const EXACT_TOKENS_FOR_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     from: '0x4c0ccf331fb23ca8bd5139b886cc821ede7b4204',
     hash: '0x8bf8405112a727937c67236c4972ca40e0c0f69d6eeadd60ce0e36649689096f',
     to: '0x23805449f91bb2d2054d9ba288fdc8f09b5eac79',
@@ -46,7 +71,7 @@ export const EXACT_TOKENS_FOR_TOKENS: TestParams<SwapActionParams> = {
 
 export const TOKENS_FOR_EXACT_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
-    chainId: 42161,
+    chainId: Chains.ARBITRUM_ONE,
     from: '0x76753c6b5c21dfa659a50fbd1cf385746b28515b',
     hash: '0xf72f2e47c9bc589d6bbc8824906fcece0ab244f266f758e2aa11bbea0326c080',
     to: '0x23805449f91bb2d2054d9ba288fdc8f09b5eac79',
@@ -77,6 +102,24 @@ export const passingSwapTestCases = [
 
 export const passingMintTestCases = [
   createTestCase(MINT_TREASURE_TAG, 'when minting a TreasureTag'),
+  createTestCase(
+    MINT_TREASURE_TAG,
+    'when minting a TreasureTag without contractAddress',
+    {
+      contractAddress: undefined,
+    },
+  ),
+]
+
+export const passingStakeTestCases = [
+  createTestCase(STAKE_MAGIC, 'when staking magic in the governance contract'),
+  createTestCase(
+    STAKE_MAGIC,
+    'when staking magic in the governance contract without contractAddress',
+    {
+      contractAddress: undefined,
+    },
+  ),
 ]
 
 export const failingSwapTestCases = [
@@ -105,6 +148,7 @@ export const failingSwapTestCases = [
     tokenOut: GFLY,
   }),
   createTestCase(EXACT_TOKENS_FOR_TOKENS, 'when amountIn is insufficient', {
+    // should these amounts be hard-coded as values lower than the filters in the test params above?
     amountIn: GreaterThanOrEqual(parseUnits('1000000', 18)),
   }),
   createTestCase(TOKENS_FOR_EXACT_TOKENS, 'when amountOut is insufficient', {
@@ -124,5 +168,20 @@ export const failingMintTestCases = [
   }),
   createTestCase(MINT_TREASURE_TAG, 'when the recipient is incorrect', {
     recipient: '0x0A4066534E21dF54331EDcb65A2F41151eD20912',
+  }),
+]
+
+export const failingStakeTestCases = [
+  createTestCase(STAKE_MAGIC, 'when the chainId is incorrect', {
+    chainId: Chains.ETHEREUM,
+  }),
+  createTestCase(STAKE_MAGIC, 'when the contractAddress is incorrect', {
+    contractAddress: MAGIC,
+  }),
+  createTestCase(STAKE_MAGIC, 'when amountOne is incorrect', {
+    amountOne: '1',
+  }),
+  createTestCase(STAKE_MAGIC, 'when amountOne is insufficient', {
+    amountOne: GreaterThanOrEqual(4000000000000000000n),
   }),
 ]

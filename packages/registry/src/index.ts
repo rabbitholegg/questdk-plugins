@@ -37,6 +37,7 @@ import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
 import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
+import { Pendle } from '@rabbitholegg/questdk-plugin-pendle'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
@@ -69,6 +70,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [WooFi.pluginId]: WooFi,
   [Sushi.pluginId]: Sushi,
   [Treasure.pluginId]: Treasure,
+  [Pendle.pluginId]: Pendle,
   [HandleFi.pluginId]: HandleFi,
   [Mirror.pluginId]: Mirror,
   [Soundxyz.pluginId]: Soundxyz,
