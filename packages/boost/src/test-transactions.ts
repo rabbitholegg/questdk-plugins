@@ -30,7 +30,6 @@ export const failingTestCases = [
   createTestCase(BOOST_PASS_MINT, 'when chainId is not correct', {
     chainId: Chains.OPTIMISM,
   }),
-  // when recipent worng
   createTestCase(BOOST_PASS_MINT, 'when recipient is not correct', {
     recipient: '0x0487bc0f676433e1e245450a94ce1052758bd182',
   }),
