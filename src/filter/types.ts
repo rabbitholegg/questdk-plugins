@@ -58,6 +58,10 @@ export type BitmaskFilter = {
   bitmask: bigint | number | string
   value: bigint | number | string | NumericOperator
 }
+export type NthFilter = {
+  n: number
+  value: TransactionFilter | FilterObject
+}
 export type Filter = Primitive | FilterObject | FilterArray | Abi
 export type FilterArray = Filter[]
 export interface AbiFilter extends FilterObject {

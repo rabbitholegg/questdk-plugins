@@ -3,6 +3,7 @@ import type {
   AbiParamFilter,
   AbstractAbiFilter,
   BitmaskFilter,
+  NthFilter,
   Filter,
   FilterObject,
   TransactionFilter,
@@ -159,6 +160,23 @@ export const handleLast = (
 }
 
 /**
+ * Checks if the value at the nth index meets the specified condition.
+ * @param context - The context to apply the check to.
+ * @param nthFilter - An object containing the index and the condition to check.
+ * @returns True if the value at the nth index meets the condition, false otherwise.
+ */
+export const handleNth = (
+  context: any,
+  nthFilter: NthFilter
+): boolean => {
+  const { n, value } = nthFilter;
+  if (n < 0 || n >= context.length) {
+    return false; // Index out of bounds
+  }
+  return apply(context[n], value);
+}
+
+/**
  * Checks if the context matches the regular expression filter.
  * @param context - The context to check.
  * @param filter - The regular expression to match against.
@@ -296,6 +314,7 @@ const operators = {
   $some: handleSome,
   $first: handleFirst,
   $last: handleLast,
+  $nth: handleNth,
 
   // Numeric operators
   $lte: handleLessThanOrEqual,
@@ -376,7 +395,7 @@ export function apply(
       if (
         !operator(
           context,
-          filter as Filter[] & string & TransactionFilter & BitmaskFilter,
+          filter as Filter[] & string & TransactionFilter & BitmaskFilter & NthFilter,
         )
       ) {
         return false
