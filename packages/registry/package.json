@@ -65,6 +65,7 @@
     "@rabbitholegg/questdk-plugin-mirror": "workspace:*",
     "@rabbitholegg/questdk-plugin-soundxyz": "workspace:*",
     "@rabbitholegg/questdk-plugin-vela": "workspace:*",
-    "@rabbitholegg/questdk-plugin-mux": "workspace:*"
+    "@rabbitholegg/questdk-plugin-mux": "workspace:*",
+    "@rabbitholegg/questdk-plugin-boost": "workspace:*"
   }
 }

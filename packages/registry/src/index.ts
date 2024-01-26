@@ -43,6 +43,7 @@ import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { Mux } from '@rabbitholegg/questdk-plugin-mux'
+import { Boost } from '@rabbitholegg/questdk-plugin-boost'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -76,6 +77,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Soundxyz.pluginId]: Soundxyz,
   [Mux.pluginId]: Mux,
   [Vela.pluginId]: Vela,
+  [Boost.pluginId]: Boost,
 }
 
 export const getPlugin = (pluginId: string) => {
