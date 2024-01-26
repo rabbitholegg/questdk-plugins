@@ -3,7 +3,6 @@ import type {
   AbiParamFilter,
   AbstractAbiFilter,
   BitmaskFilter,
-  NthFilter,
   Filter,
   FilterObject,
   TransactionFilter,
@@ -167,13 +166,13 @@ export const handleLast = (
  */
 export const handleNth = (
   context: any,
-  nthFilter: NthFilter
+  nthFilter: { n: number; value: TransactionFilter | FilterObject },
 ): boolean => {
-  const { n, value } = nthFilter;
+  const { n, value } = nthFilter
   if (n < 0 || n >= context.length) {
-    return false; // Index out of bounds
+    return false // Index out of bounds
   }
-  return apply(context[n], value);
+  return apply(context[n], value)
 }
 
 /**
@@ -395,7 +394,11 @@ export function apply(
       if (
         !operator(
           context,
-          filter as Filter[] & string & TransactionFilter & BitmaskFilter & NthFilter,
+          filter as Filter[] &
+            string &
+            TransactionFilter &
+            BitmaskFilter &
+            NthFilter,
         )
       ) {
         return false
