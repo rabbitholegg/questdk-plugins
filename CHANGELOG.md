@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.33
+
+### Minor Changes
+
+- [#70](https://github.com/rabbitholegg/questdk/pull/70) [`47abc87`](https://github.com/rabbitholegg/questdk/commit/47abc87c7c7837cbf28af4650534917198825903) Thanks [@gnomadic](https://github.com/gnomadic)! - Adding a Vote Action for on-chain governance
+
+- [#68](https://github.com/rabbitholegg/questdk/pull/68) [`ba54370`](https://github.com/rabbitholegg/questdk/commit/ba54370faf1a1a510779971e5285b497f9a6681f) Thanks [@mmackz](https://github.com/mmackz)! - remove references to unused filter functions
+
 ## 2.0.0-alpha.32
 
 ### Minor Changes
