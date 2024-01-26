@@ -10,6 +10,12 @@ export type ArrayOperator =
   | {
       $last?: FilterOperator
     }
+  | {
+      $nth?: {
+        index: number
+        value: FilterOperator
+      }
+    }
 
 export type LogicalOperator =
   | {
