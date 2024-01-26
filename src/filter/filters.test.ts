@@ -3,6 +3,7 @@ import {
   handleAnd,
   handleBitmask,
   handleGreaterThanOrEqual,
+  handleNth,
   handleOr,
   handleRegex,
   handleSome,
@@ -45,6 +46,35 @@ describe('parser', () => {
       const result = handleSome(context, filter)
       assertType<boolean>(result)
       expect(result).to.be.true
+    })
+  })
+
+  describe('nth', () => {
+    test('should return true if the nth item in the array meets the condition', () => {
+      const n = 1
+      const filter = { n, value: { $gte: '50' } }
+      const context = ['10', '100', '10', '60']
+      const result = handleNth(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.true
+    })
+
+    test('should return false if the nth item in the array does not meet the condition', () => {
+      const n = 2
+      const filter = { n, value: { $gte: '50' } }
+      const context = ['10', '100', '10', '60']
+      const result = handleNth(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.false
+    })
+
+    test('should return false if n overflows the array', () => {
+      const n = 4
+      const filter = { n, value: { $gte: '50' } }
+      const context = ['10', '100', '10', '60']
+      const result = handleNth(context, filter)
+      assertType<boolean>(result)
+      expect(result).to.be.false
     })
   })
 
