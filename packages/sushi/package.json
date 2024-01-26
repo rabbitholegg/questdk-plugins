@@ -36,8 +36,6 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.31",
-    "@sushiswap/core-sdk": "1.0.0-canary.34",
-    "viem": "^1.16.6"
+    "@sushiswap/core-sdk": "1.0.0-canary.34"
   }
 }
