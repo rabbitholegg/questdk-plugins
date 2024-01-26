@@ -397,8 +397,10 @@ export function apply(
           filter as Filter[] &
             string &
             TransactionFilter &
-            BitmaskFilter &
-            NthFilter,
+            BitmaskFilter & {
+              n: number
+              value: FilterObject | TransactionFilter
+            },
         )
       ) {
         return false
