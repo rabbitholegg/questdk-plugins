@@ -4,11 +4,10 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  vote,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  vote,
 } from './Llama.js'
-
 
 export const Llama: IActionPlugin = {
   pluginId: 'llama',
@@ -17,5 +16,5 @@ export const Llama: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-  vote
+  vote,
 }

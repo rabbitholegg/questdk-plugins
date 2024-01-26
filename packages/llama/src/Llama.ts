@@ -35,7 +35,6 @@ export const vote = async (voteParams: VoteActionParams) => {
     to: project, // The contract address of the governance platform
     input: {
       $abi: abi,
-      ...(support !== undefined && { support: support }),
       ...(proposalId !== undefined && { actionInfo: { id: proposalId } }),
     },
   })
@@ -48,5 +47,5 @@ export const getSupportedTokenAddresses = async (_chainId: number) => {
 
 export const getSupportedChainIds = async () => {
   // This should return all of the ChainIds that are supported by the Project we're integrating
-  return [CHAIN_ID_ARRAY] // only supporting ARB right now
+  return CHAIN_ID_ARRAY // only supporting ARB right now
 }
