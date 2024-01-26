@@ -34,9 +34,4 @@
   "typings": "./dist/types/index.d.ts",
   "devDependencies": {
     "tsconfig": "workspace:*"
-  },
-  "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.31",
-    "viem": "^1.16.6"
-  }
-}
+  }}
