@@ -161,14 +161,14 @@ export const handleLast = (
 /**
  * Checks if the value at the nth index meets the specified condition.
  * @param context - The context to apply the check to.
- * @param nthFilter - An object containing the index and the condition to check.
+ * @param filter - An object containing the index and the condition to check.
  * @returns True if the value at the nth index meets the condition, false otherwise.
  */
 export const handleNth = (
   context: any,
-  nthFilter: { n: number; value: TransactionFilter | FilterObject },
+  filter: { n: number; value: TransactionFilter | FilterObject },
 ): boolean => {
-  const { n, value } = nthFilter
+  const { n, value } = filter
   if (n < 0 || n >= context.length) {
     return false // Index out of bounds
   }
