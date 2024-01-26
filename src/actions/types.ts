@@ -70,6 +70,13 @@ export type DelegateActionParams = {
   delegator?: Address
 }
 
+export type VoteActionParams = {
+  chainId: number
+  project: Address | string
+  support?: bigint | boolean | FilterOperator
+  proposalId?: bigint | FilterOperator
+}
+
 export type ActionParams =
   | SwapActionParams
   | StakeActionParams
@@ -78,6 +85,7 @@ export type ActionParams =
   | DelegateActionParams
   | QuestActionParams
   | OptionsActionParams
+  | VoteActionParams
 export interface IActionPlugin {
   pluginId: string
   getSupportedChainIds: (task?: ActionType) => Promise<number[]>
@@ -109,6 +117,9 @@ export interface IActionPlugin {
   options?: (
     params: OptionsActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  vote?: (
+    params: VoteActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
 }
 
 export enum ActionType {
@@ -123,6 +134,7 @@ export enum ActionType {
   Lend = 'lend',
   Other = 'other',
   Options = 'options',
+  Vote = 'vote',
 }
 
 export enum OrderType {

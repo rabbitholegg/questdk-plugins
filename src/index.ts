@@ -15,6 +15,7 @@ export type {
   MintActionParams,
   OptionsActionParams,
   DelegateActionParams,
+  VoteActionParams,
   ActionParams,
   IActionPlugin,
 } from './actions/types.js'

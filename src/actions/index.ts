@@ -7,6 +7,7 @@ export type {
   QuestActionParams,
   OptionsActionParams,
   DelegateActionParams,
+  VoteActionParams,
   ActionParams,
   IActionPlugin,
 } from './types.js'
