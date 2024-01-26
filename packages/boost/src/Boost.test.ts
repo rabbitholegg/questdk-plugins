@@ -17,7 +17,7 @@ describe('Given the boost plugin', () => {
           input: {
             $abi: BOOST_PASS_ABI,
             data_: {
-              $abiParams: ['address recipient'],
+              $abiParams: ['address recipient', 'address referrer'],
               recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
             },
           },
