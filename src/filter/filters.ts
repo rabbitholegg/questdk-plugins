@@ -166,13 +166,13 @@ export const handleLast = (
  */
 export const handleNth = (
   context: any,
-  filter: { n: number; value: TransactionFilter | FilterObject },
+  filter: { index: number; value: TransactionFilter | FilterObject },
 ): boolean => {
-  const { n, value } = filter
-  if (n < 0 || n >= context.length) {
-    return false // Index out of bounds
+  const { index, value } = filter
+  if (index < 0 || index >= context.length) {
+    return false // index out of bounds
   }
-  return apply(context[n], value)
+  return apply(context[index], value)
 }
 
 /**
