@@ -13,6 +13,4 @@ export const BOOST_PASS_ABI = [
   },
 ]
 
-export const DATA_ABI_PARAMS = [
-  'address recipient',
-]
+export const DATA_ABI_PARAMS = ['address recipient']
