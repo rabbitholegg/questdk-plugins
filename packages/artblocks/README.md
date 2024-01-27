@@ -7,7 +7,7 @@
 The [Art Blocks Smart Contract ecosystem](https://github.com/ArtBlocks/artblocks-contracts/blob/main/packages/contracts/README.md) provides a [shared minter suite](https://github.com/ArtBlocks/artblocks-contracts/blob/main/packages/contracts/MINTER_SUITE.md) which can be utilized by the Art Blocks platform as well as any third-party controlled instances of the Art Blocks V3 contracts. These third-party controlled instances are known as "Engines".
 
 ## Plugin
-This plugin aims to provide support for all shared minter suite contracts that are [compatible with core V3 contracts]( 0xfdE58c821D1c226b4a45c22904de20b114EDe7E7). By targeting the latest V3 contracts we can ensure that all implementations of Art Blocks (including Engines) are supported.
+This plugin aims to provide support for all shared minter suite contracts that are [compatible and active flagship V3 contracts](https://github.com/ArtBlocks/artblocks-contracts/blob/main/packages/contracts/MINTER_SUITE.md#active-flagship-minting-contracts). By targeting the latest V3 contracts we can ensure that all current implementations of Art Blocks are supported.
 
 ### Chain Support
 Currently, only `mint` actions that take place on Ethereum mainnet are supported by this plugin.
@@ -21,7 +21,15 @@ The only currently supported action is the `mint` action. Below is a chart demon
 | input.projectId  | tokenId          |
 
 ### Sample Transactions
-- [purchase: MinterDAExpSettlementV3](https://etherscan.io/tx/0x99cb792e3f9f82768df82a8b89061ff32121f9d22a3f13fd527fbab604a5c500)
+- [purchase(): MinterDAExpSettlementV3](https://etherscan.io/tx/0x99cb792e3f9f82768df82a8b89061ff32121f9d22a3f13fd527fbab604a5c500)
 
 ### Notes
 - All minters in the [shared minter suite](https://github.com/ArtBlocks/artblocks-contracts/blob/main/packages/contracts/MINTER_SUITE.md) implement a `purchase` function which invokes the `purchaseTo` function to mint a new Art Blocks token. All `purchase` function signatures include the `projectId` input parameter which is required by this plugin to target specific generative art projects.
+  - [purchase()](
+      https://github.com/ArtBlocks/artblocks-contracts/blob/24cd7a91c12277a3c7b6dd32517f117f573cfb5b/packages/contracts/contracts/mock/DummySharedMinter.sol#L53
+    ) -> [purchaseTo()](
+        https://github.com/ArtBlocks/artblocks-contracts/blob/24cd7a91c12277a3c7b6dd32517f117f573cfb5b/packages/contracts/contracts/mock/DummySharedMinter.sol#L61
+      ) -> [mint_joo](
+          https://github.com/ArtBlocks/artblocks-contracts/blob/24cd7a91c12277a3c7b6dd32517f117f573cfb5b/packages/contracts/contracts/minter-suite/MinterFilter/MinterFilterV2.sol#L505
+        ) -> [mint_Ecf()](
+          https://github.com/ArtBlocks/artblocks-contracts/blob/24cd7a91c12277a3c7b6dd32517f117f573cfb5b/packages/contracts/contracts/GenArt721CoreV3.sol#L366)

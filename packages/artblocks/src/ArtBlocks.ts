@@ -9,6 +9,16 @@ import { Chains, Contracts, SHARED_MINTER_ABI } from './const'
 
 type InputSchema = { $abi: typeof SHARED_MINTER_ABI; projectId?: number }
 
+/**
+ * Mint transaction filter for shared minter suite contracts.
+ *
+ * @remarks
+ * Target "purchase" calls on V3 compatible flagship contracts.
+ * Use MintActionParams.tokenId as input.projectId.
+ *
+ * @param mint
+ * @returns TransactionFilter targeting "purchase" calls on Art Blocks V3 contracts
+ */
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
@@ -24,7 +34,7 @@ export const mint = async (
   return compressJson({
     chainId,
     to: {
-      // Match the supplied contract address and ensure it's a valid engine compatible contract
+      // Match the supplied contract address and ensure it's a V3 flagship contract
       $and: [{ $eq: contractAddress }, { $or: Object.values(Contracts) }],
     },
     input,
