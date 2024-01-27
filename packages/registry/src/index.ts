@@ -2,47 +2,48 @@ import {
   type ActionParams,
   ActionType,
   type BridgeActionParams,
+  type DelegateActionParams,
   type IActionPlugin,
-  PluginActionNotImplementedError,
   type MintActionParams,
   type OptionsActionParams,
-  type SwapActionParams,
+  PluginActionNotImplementedError,
   type QuestActionParams,
-  type DelegateActionParams,
-  type TransactionFilter,
   type StakeActionParams,
+  type SwapActionParams,
+  type TransactionFilter,
 } from '@rabbitholegg/questdk'
 
-import { Connext } from '@rabbitholegg/questdk-plugin-connext'
-import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
-import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
 import { Across } from '@rabbitholegg/questdk-plugin-across'
-import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
-import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
-import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
-import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
-import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
-import { Tally } from '@rabbitholegg/questdk-plugin-tally'
-import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
-import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
-import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
-import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
-import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
-import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
-import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { ArtBlocks } from '@rabbitholegg/questdk-plugin-artblocks'
 import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
-import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
-import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
-import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
-import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
-import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
-import { Pendle } from '@rabbitholegg/questdk-plugin-pendle'
+import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
+import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
+import { Connext } from '@rabbitholegg/questdk-plugin-connext'
+import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
+import { Hop } from '@rabbitholegg/questdk-plugin-hop'
+import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
-import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
-import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { Mux } from '@rabbitholegg/questdk-plugin-mux'
+import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
+import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
+import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
+import { Pendle } from '@rabbitholegg/questdk-plugin-pendle'
+import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
+import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
+import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
+import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
+import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
+import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
+import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
+import { Tally } from '@rabbitholegg/questdk-plugin-tally'
+import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
+import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
+import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
+import { Vela } from '@rabbitholegg/questdk-plugin-vela'
+import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
+import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -76,6 +77,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Soundxyz.pluginId]: Soundxyz,
   [Mux.pluginId]: Mux,
   [Vela.pluginId]: Vela,
+  [ArtBlocks.pluginId]: ArtBlocks,
 }
 
 export const getPlugin = (pluginId: string) => {
