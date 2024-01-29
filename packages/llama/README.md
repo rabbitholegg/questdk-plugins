@@ -1,25 +1,26 @@
-When First creating a template for a project we generally want to find at most 4 transactions. Some bridges don't have a sense of a source and target chain, but for bridges that do we need more information. Some bridges might use the same ABI and address for all 4 of these transaction types!
+# Llama 
 
-## ETH/BASE TOKEN
-When trying to bridge ETH or the base network token (Matic for Polygon for instance) sometimes the pattern is different.
-We want to find a transaction from the base chain and the target chain that shows transferring ETH from and to those chains.
-In general we refer to moving value from a base chain (mainnet) to a higher order chain a `deposit` and returning back to a base chain a `withdrawal`.
-In the case where it's a general purpose bridge this process is simply a `transfer`. In that case you only need to find 1 transaction, not 2.
+LLama is an on-chain governance platform.
 
-### Deposit ETH
-This handles the case where we have ETH that we want to bridge from Mainnet to L2. A lot of times this is handled differently. Often times this triggers a `payable` function and requires the `bridge` function to use the `value` param.
-
-### Withdraw ETH
-This handles the case where we have ETH that we want to bridge from an L2 to Mainnet. Depending on this chain this can also be a payable, but often times will just be a separate contract address.
-
-## ERC20
-ERC20 transactions are by far the most common for bridges.
-In some cases this might be the only transaction type you need to find, although most of the time ETH is handled different. If the protocol _always_ uses wrapped ETH, this may be the only transaction type.
-### Deposit ERC20
-Generally this is the same as moving from L2 to L1, but especially for native bridging sometimes there are precompiles for the withdraw process.
-### Withdraw ERC20 
+https://llama.xyz/
 
 
+The protocol uses `policies` to determine voting rights, which are non-transferrable NFTs.  The protocol is designed to be modular, allowing for the creation of new policies and voting mechanisms.  Voting mechanisms are implemented as `strategies`.
 
-You can use the following example code to pull down test transactions in the correct format easily:
-https://viem.sh/docs/actions/public/getTransaction.html#example
+When a user has permission to vote, they call the appropriate function on the `llamaCore` contract.  
+
+## Voting
+
+This plugin supports two functions currently:
+
+1.  Cast Approval
+2.  Cast Disapproval
+
+
+## Discovering deployments and transactions
+
+1.  the deployed llama contracts are defined [on their website](https://docs.llama.xyz/resources/contracts).
+2.  Visit a llama factory contract on your chain of choice, [like arbitrum](https://arbiscan.io/address/0xFf5d4E226D9A3496EECE31083a8F493edd79AbEB)
+3.  Look for a `Deploy` transaction and check the logs for a `LlamaInstanceCreated` event
+4.  The Data contains a `llamaCore` address, which is the address of the newly deployed Instance
+5.  Visiting that `llamaCore` will show the vote actions. 
