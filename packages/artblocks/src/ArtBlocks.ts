@@ -5,15 +5,15 @@ import {
 } from '@rabbitholegg/questdk'
 
 import { type Address } from 'viem'
-import { Chains, Contracts, SHARED_MINTER_ABI } from './const'
-
-type InputSchema = { $abi: typeof SHARED_MINTER_ABI; projectId?: number }
+import { PURCHASE_ABI, PURCHASE_TO_ABI } from './abi'
+import { Chains, NULL_ADDRESS } from './const'
+import { Contracts } from './contracts'
 
 /**
  * Mint transaction filter for shared minter suite contracts.
  *
  * @remarks
- * Target "purchase" calls on V3 compatible flagship contracts.
+ * Target "purchase" and "purchaseTo" calls on V3 compatible flagship contracts.
  * Use MintActionParams.tokenId as input.projectId.
  *
  * @param mint
@@ -22,22 +22,31 @@ type InputSchema = { $abi: typeof SHARED_MINTER_ABI; projectId?: number }
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, tokenId, contractAddress } = mint
-  const input: InputSchema = {
-    $abi: SHARED_MINTER_ABI,
+  const { chainId, tokenId, contractAddress, recipient } = mint
+  const filterBase = {
+    chainId,
+    to:
+      contractAddress === NULL_ADDRESS
+        ? contractAddress
+        : { $or: Object.values(Contracts) },
   }
 
-  if (tokenId) {
-    input.projectId = tokenId
+  const inputBase = {
+    ...(tokenId ? { projectId: tokenId } : {}),
   }
 
   return compressJson({
-    chainId,
-    to: {
-      // Match the supplied contract address and ensure it's a V3 flagship contract
-      $and: [{ $eq: contractAddress }, { $or: Object.values(Contracts) }],
-    },
-    input,
+    $or: [
+      {
+        ...filterBase,
+        from: recipient,
+        input: { $abi: PURCHASE_ABI, ...inputBase },
+      },
+      {
+        ...filterBase,
+        input: { $abi: PURCHASE_TO_ABI, to: recipient, ...inputBase },
+      },
+    ],
   })
 }
 
@@ -50,5 +59,5 @@ export const getSupportedTokenAddresses = async (
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   // This should return all of the ChainIds that are supported by the Project we're integrating
-  return [Chains.ETHEREUM]
+  return [Chains.ETHEREUM, Chains.ARBITRUM]
 }
