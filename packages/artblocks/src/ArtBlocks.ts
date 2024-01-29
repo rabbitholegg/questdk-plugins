@@ -5,9 +5,11 @@ import {
 } from '@rabbitholegg/questdk'
 
 import { type Address } from 'viem'
-import { PURCHASE_ABI, PURCHASE_TO_ABI } from './abi'
+import { purchaseABISet, purchaseToABISet } from './abi'
 import { Chains, NULL_ADDRESS } from './const'
-import { Contracts } from './contracts'
+import { Contracts, LEGACY_CONTRACT_SET } from './contracts'
+
+const legacyContracts = LEGACY_CONTRACT_SET.map((c) => c.toLowerCase())
 
 /**
  * Mint transaction filter for shared minter suite contracts.
@@ -28,24 +30,41 @@ export const mint = async (
     to:
       contractAddress === NULL_ADDRESS
         ? contractAddress
-        : { $or: Object.values(Contracts) },
+        : { $or: Object.values(Contracts).map((c) => c.toLowerCase()) },
   }
 
   const inputBase = {
-    ...(tokenId ? { projectId: tokenId } : {}),
+    ...(tokenId !== undefined
+      ? {
+          // Support legacy minting contract input keys
+          [legacyContracts.includes(contractAddress)
+            ? '_projectId'
+            : 'projectId']: tokenId,
+        }
+      : {}),
   }
 
   return compressJson({
     $or: [
-      {
-        ...filterBase,
-        from: recipient,
-        input: { $abi: PURCHASE_ABI, ...inputBase },
-      },
-      {
-        ...filterBase,
-        input: { $abi: PURCHASE_TO_ABI, to: recipient, ...inputBase },
-      },
+      ...purchaseABISet.map((abi) => {
+        return {
+          ...filterBase,
+          from: recipient,
+          input: { $abi: abi, ...inputBase },
+        }
+      }),
+      ...purchaseToABISet.map((abi) => {
+        return {
+          ...filterBase,
+          input: {
+            $abi: abi,
+            // Support legacy minting contract input keys
+            [legacyContracts.includes(contractAddress) ? '_to' : 'to']:
+              recipient,
+            ...inputBase,
+          },
+        }
+      }),
     ],
   })
 }
