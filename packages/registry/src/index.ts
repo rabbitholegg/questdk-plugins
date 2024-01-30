@@ -18,12 +18,14 @@ import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { ArtBlocks } from '@rabbitholegg/questdk-plugin-artblocks'
 import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
 import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
+import { Boost } from '@rabbitholegg/questdk-plugin-boost'
 import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
 import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
+import { Llama } from '@rabbitholegg/questdk-plugin-llama'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
 import { Mux } from '@rabbitholegg/questdk-plugin-mux'
 import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
@@ -78,6 +80,8 @@ export const plugins: Record<string, IActionPlugin> = {
   [Mux.pluginId]: Mux,
   [Vela.pluginId]: Vela,
   [ArtBlocks.pluginId]: ArtBlocks,
+  [Boost.pluginId]: Boost,
+  [Llama.pluginId]: Llama,
 }
 
 export const getPlugin = (pluginId: string) => {
