@@ -44,6 +44,7 @@ import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { Boost } from '@rabbitholegg/questdk-plugin-boost'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -77,6 +78,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Soundxyz.pluginId]: Soundxyz,
   [Mux.pluginId]: Mux,
   [Vela.pluginId]: Vela,
+  [Boost.pluginId]: Boost,
   [Llama.pluginId]: Llama,
 }
 
