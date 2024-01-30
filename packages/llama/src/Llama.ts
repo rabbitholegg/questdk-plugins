@@ -1,7 +1,6 @@
 import { type VoteActionParams, compressJson } from '@rabbitholegg/questdk'
 import { LLAMA_ABI_CAST_APPROVE, LLAMA_ABI_CAST_DISAPPROVE } from './abi.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
-import { LLAMA_TOKENS } from './token-addresses.js'
 
 export const vote = async (voteParams: VoteActionParams) => {
   // This is the information we'll use to compose the Transaction object
@@ -34,7 +33,7 @@ export const vote = async (voteParams: VoteActionParams) => {
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
-  return LLAMA_TOKENS[_chainId]
+  return []
 }
 
 export const getSupportedChainIds = async () => {
