@@ -57,6 +57,15 @@ importers:
     devDependencies:
       tsconfig: link:../tsconfig
 
+  packages/artblocks:
+    specifiers:
+      '@rabbitholegg/questdk-plugin-utils': workspace:*
+      tsconfig: workspace:*
+    dependencies:
+      '@rabbitholegg/questdk-plugin-utils': link:../utils
+    devDependencies:
+      tsconfig: link:../tsconfig
+
   packages/balancer:
     specifiers:
       '@rabbitholegg/questdk-plugin-utils': workspace:*
@@ -232,6 +241,7 @@ importers:
     specifiers:
       '@rabbitholegg/questdk-plugin-across': workspace:*
       '@rabbitholegg/questdk-plugin-arbitrum': workspace:*
+      '@rabbitholegg/questdk-plugin-artblocks': workspace:*
       '@rabbitholegg/questdk-plugin-balancer': workspace:*
       '@rabbitholegg/questdk-plugin-basepaint': workspace:*
       '@rabbitholegg/questdk-plugin-boost': workspace:*
@@ -266,6 +276,7 @@ importers:
     dependencies:
       '@rabbitholegg/questdk-plugin-across': link:../across
       '@rabbitholegg/questdk-plugin-arbitrum': link:../arbitrum
+      '@rabbitholegg/questdk-plugin-artblocks': link:../artblocks
       '@rabbitholegg/questdk-plugin-balancer': link:../balancer
       '@rabbitholegg/questdk-plugin-basepaint': link:../basepaint
       '@rabbitholegg/questdk-plugin-boost': link:../boost
