@@ -1,12 +1,7 @@
 import { apply } from '@rabbitholegg/questdk/filter'
-import { describe, expect, test } from 'vitest'
 import { LBRouterV21ABI } from '@traderjoe-xyz/sdk-v2'
-import { swap, getSupportedTokenAddresses } from './TraderJoe'
-import { Chains } from './utils'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import { Tokens } from './contract-addresses'
-import { TOKENS_FOR_EXACT_TOKENS } from './test-transactions'
-import { passingTestCases, failingTestCases } from './test-setup'
+import { describe, expect, test } from 'vitest'
+import { getSupportedTokenAddresses, swap } from './TraderJoe'
 import {
   EXACT_NATIVE_FOR_TOKENS_ABI,
   EXACT_TOKENS_FOR_NATIVE_ABI,
@@ -15,6 +10,11 @@ import {
   TOKENS_FOR_EXACT_NATIVE_ABI,
   TOKENS_FOR_EXACT_TOKENS_ABI,
 } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { Tokens } from './contract-addresses'
+import { failingTestCases, passingTestCases } from './test-setup'
+import { TOKENS_FOR_EXACT_TOKENS } from './test-transactions'
+import { Chains } from './utils'
 
 describe('Given the TraderJoe plugin', () => {
   describe('When handling the swap action', () => {
@@ -22,7 +22,6 @@ describe('Given the TraderJoe plugin', () => {
       test('when swapping tokens', async () => {
         const { params } = TOKENS_FOR_EXACT_TOKENS
         const filter = await swap(params)
-        console.log(JSON.stringify(filter, null, 2))
         expect(filter).to.deep.equal({
           chainId: 42161,
           to: '0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30',
