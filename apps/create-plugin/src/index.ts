@@ -33,6 +33,7 @@ const _chainArray = _chainValues
   })
 
 // structure available actiontypes into the format for prompts
+// and remove Deposit, Lend, and Other which are not currently supported
 const _actionValues = Object.values(ActionType)
 const _actionKeys = Object.keys(ActionType)
 const _actionArray = _actionValues
@@ -40,6 +41,9 @@ const _actionArray = _actionValues
   .map((value, index) => {
     return { value: _actionKeys[index], title: value }
   })
+  .filter((value) => value.title !== 'deposit')
+  .filter((value) => value.title !== 'lend')
+  .filter((value) => value.title !== 'other')
 
 // TODO if/when our state gets more complicated we might want to use conf or something like that
 const _pluginName = ''

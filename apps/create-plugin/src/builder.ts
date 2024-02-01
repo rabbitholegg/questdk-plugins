@@ -5,15 +5,18 @@ import { cyan, red } from 'picocolors'
 
 type BuilderParams = {
   projectName: string
-  chains: string
+  chains: string[]
   tx: string
-  actionTypes: string
+  actionTypes: string[]
 }
 
 const arrow = '=>'
 const logo = '✛' // not the logo but pretty close
 
 export async function createPlugin(params: BuilderParams) {
+  console.log(`--------------------------- ${logo} ${logo} ${logo} `)
+  console.log(params)
+  console.log(`--------------------------- ${logo} ${logo} ${logo} `)
   const result = await copyDirectory(params)
   if (!result) {
     return
@@ -189,10 +192,6 @@ async function replaceFileNames(params: BuilderParams) {
 async function setActionNames(params: BuilderParams) {
   // get the target directory location
   const dest = path.join(__dirname, `../../../packages/${params.projectName}`)
-
-  console.log('wtf')
-  console.log(params.actionTypes)
-  console.log('wtf')
 
   //replace the action names in the index
   const indexPath = path.join(dest, 'src/index.ts.t')
