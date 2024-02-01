@@ -28,8 +28,8 @@ const _chainValues = Object.values(Chains)
 const _chainKeys = Object.keys(Chains)
 const _chainArray = _chainValues
   .filter((value) => typeof value === 'string')
-  .map((value, index) => {
-    return { value: _chainKeys[index], title: value }
+  .map((value, _index) => {
+    return { value: value, title: value }
   })
 
 // structure available actiontypes into the format for prompts
@@ -105,7 +105,7 @@ const _questions = [
 async function run(): Promise<void> {
   console.log('\n\n\n')
 
-  console.log(figlet.textSync('BOOST'))
+  console.log(figlet.textSync('BOOSTDK'))
   console.log(figlet.textSync('PLUGIN BUILDER'))
   logBoostStars()
 
@@ -116,9 +116,9 @@ async function run(): Promise<void> {
   //   console.log(_response)
   createPlugin({
     projectName: _response.name,
-    chain: _response.chain,
+    chains: _response.chain,
     tx: _response.tx,
-    action: _response.action,
+    actionTypes: _response.action,
   })
 }
 

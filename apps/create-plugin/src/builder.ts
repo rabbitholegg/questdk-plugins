@@ -5,9 +5,9 @@ import { cyan, red } from 'picocolors'
 
 type BuilderParams = {
   projectName: string
-  chain: string
+  chains: string
   tx: string
-  action: string
+  actionTypes: string
 }
 
 const arrow = '=>'
@@ -18,7 +18,11 @@ export async function createPlugin(params: BuilderParams) {
   if (!result) {
     return
   }
+
+  registerHelpers()
   await replaceProjectName(params)
+  await setActionNames(params)
+  await setChainIds(params)
   await replaceFileNames(params)
   logBoostStars()
   console.log('Created a plugin for', cyan(`"${params.projectName}"`))
@@ -30,6 +34,15 @@ export function logBoostStars() {
   console.log(`--------------------------- ${logo} ${logo} ${logo} `)
   console.log(`--------------------------- ${logo} ${logo} ${logo}  `)
   console.log()
+}
+
+function registerHelpers() {
+  Handlebars.registerHelper('lowercase', function (aString) {
+    return aString.toLowerCase()
+  })
+  Handlebars.registerHelper('capitalize', function (aString) {
+    return aString.charAt(0).toUpperCase() + aString.slice(1)
+  })
 }
 
 /**
@@ -132,11 +145,8 @@ async function replaceProjectName(params: BuilderParams) {
 }
 
 /**
- * This function replaces multiple instances of the project name
+ * This function renames filenames to match the project name -and- it removes the .t(emplate) extension
  *
- * package.json
- * readme
- * changelog
  * src/project.ts
  * src/project.test.ts
  * index.ts
@@ -151,12 +161,12 @@ async function replaceFileNames(params: BuilderParams) {
   //rename index.ts
   const indexPath = path.join(dest, 'src/index.ts.t')
   await fs.rename(indexPath, path.join(dest, 'src/index.ts'))
-  console.log(`\t ${arrow} Created file ${cyan('index.ts')}!`)
+  console.log(`\t ${arrow} finalized file ${cyan('index.ts')}!`)
 
   //rename project.ts
   const projectPath = path.join(dest, 'src/Project.ts.t')
   await fs.rename(projectPath, path.join(dest, `src/${params.projectName}.ts`))
-  console.log(`\t ${arrow} Created file ${cyan(`${params.projectName}.ts`)}!`)
+  console.log(`\t ${arrow} finalized file ${cyan(`${params.projectName}.ts`)}!`)
 
   //rename project.test.ts
   const testPath = path.join(dest, 'src/Project.test.ts.t')
@@ -165,6 +175,44 @@ async function replaceFileNames(params: BuilderParams) {
     path.join(dest, `src/${params.projectName}.test.ts`),
   )
   console.log(
-    `\t ${arrow} Created file ${cyan(`${params.projectName}.test.ts`)}!`,
+    `\t ${arrow} finalized file ${cyan(`${params.projectName}.test.ts`)}!`,
   )
 }
+
+/**
+ * This function creates the code for the specified actions
+ *
+ *
+ * @param params
+ * @returns
+ */
+async function setActionNames(params: BuilderParams) {
+  // get the target directory location
+  const dest = path.join(__dirname, `../../../packages/${params.projectName}`)
+
+  console.log('wtf')
+  console.log(params.actionTypes)
+  console.log('wtf')
+
+  //replace the action names in the index
+  const indexPath = path.join(dest, 'src/index.ts.t')
+  const index = await fs.readFile(indexPath, 'utf8')
+  const indexTemplate = Handlebars.compile(index)
+  await fs.writeFile(indexPath, indexTemplate(params))
+  console.log(`\t ${arrow} created actions in file ${cyan('index.ts')}!`)
+
+  //replace the action names in the project file
+  const projectPath = path.join(dest, 'src/Project.ts.t')
+  const project = await fs.readFile(projectPath, 'utf8')
+  const projectTemplate = Handlebars.compile(project)
+  await fs.writeFile(projectPath, projectTemplate(params))
+  console.log(`\t ${arrow} created actions in file ${cyan('Project.ts')}!`)
+}
+
+/**
+ * This function sets the supported chain ids
+ *
+ * @param params
+ * @returns
+ */
+async function setChainIds(_params: BuilderParams) {}
