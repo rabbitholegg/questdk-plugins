@@ -3,6 +3,7 @@
   "scripts": {
     "build": "turbo run build --filter=!@rabbitholegg/questdk-plugin-project",
     "lint": "turbo run lint --filter=!@rabbitholegg/questdk-plugin-project",
+    "lint:fix": "turbo run lint:fix --filter=!@rabbitholegg/questdk-plugin-project",
     "format": "turbo run format --filter=!@rabbitholegg/questdk-plugin-project",
     "clean": "turbo run clean --filter=!@rabbitholegg/questdk-plugin-project",
     "test": "turbo run test --filter=!@rabbitholegg/questdk-plugin-project",
@@ -13,12 +14,24 @@
     "publish-packages": "turbo run build test:ci  --filter=!@rabbitholegg/questdk-plugin-project && pnpm changeset publish"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.2",
-    "@turbo/gen": "^1.10.16",
-    "eslint": "^7.32.0",
-    "prettier": "^2.8.8",
-    "turbo": "latest"
+    "@changesets/changelog-github": "0.4.8",
+    "@changesets/cli": "2.26.2",
+    "@turbo/gen": "1.10.16",
+    "eslint": "7.32.0",
+    "prettier": "2.8.8",
+    "turbo": "latest",
+    "@types/node": "20.4.5",
+    "@vitest/coverage-v8": "0.33.0",
+    "rimraf": "5.0.1",
+    "rome": "12.1.3",
+    "ts-node": "10.9.1",
+    "typescript": "5.3.3",
+    "vitest": "0.33.0"
+  },
+  "dependencies": {
+    "@rabbitholegg/questdk": "2.0.0-alpha.33",
+    "viem": "1.2.15",
+    "axios": "1.5.0"
   },
   "pnpm": {
     "overrides": {

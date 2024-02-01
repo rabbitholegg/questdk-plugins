@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-tally",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.11",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -33,17 +33,9 @@
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
   "devDependencies": {
-    "@types/node": "^20.8.7",
-    "@vitest/coverage-v8": "^0.33.0",
-    "rimraf": "^5.0.5",
-    "rome": "^12.1.3",
-    "ts-node": "^10.9.1",
-    "tsconfig": "workspace:*",
-    "typescript": "^5.2.2",
-    "vitest": "^0.33.0"
+    "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.31",
-    "viem": "^1.16.6"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   }
 }
