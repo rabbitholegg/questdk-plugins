@@ -100,24 +100,6 @@ const ETH_STOPLIMIT: TestParams<OptionsActionParams> = {
   },
 }
 
-export const MINT_VLP: TestParams<OptionsActionParams> = {
-  transaction: {
-    chainId: 42161,
-    from: '0x786b201f4e0dbfbadd2f0ba89d8240591d25b2c7',
-    hash: '0x0bd975155e6c0d9e46d8546462173805b3481969ea99a286897180483ea7f60f',
-    input:
-      '0xbf6eac2f000000000000000000000000786b201f4e0dbfbadd2f0ba89d8240591d25b2c7000000000000000000000000ff970a61a04b1ca14834a43f5de4533ebddb5cc800000000000000000000000000000000000000000000000000000000005d1fd2',
-    to: '0xc4abade3a15064f9e3596943c699032748b13352',
-    value: '0',
-  },
-  params: {
-    chainId: 42161,
-    token: VLP_CONTRACT,
-    amount: GreaterThanOrEqual(parseUnits('6.102994', 6)),
-    recipient: '0x786B201f4E0DBfBadd2F0BA89d8240591D25B2c7',
-  },
-}
-
 export const STAKE_VLP: TestParams<StakeActionParams> = {
   transaction: {
     chainId: 42161,

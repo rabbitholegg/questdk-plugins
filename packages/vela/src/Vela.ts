@@ -45,24 +45,6 @@ export const options = async (
   })
 }
 
-export const mint = async (
-  mint: OptionsActionParams,
-): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, token, amount, recipient } = mint
-
-  return compressJson({
-    chainId,
-    to: contractAddress ?? VAULT_CONTRACT,
-    from: recipient,
-    input: {
-      $abi: VAULT_ABI,
-      _account: recipient,
-      _token: token,
-      _amount: amount,
-    },
-  })
-}
-
 export const stake = async (
   stake: StakeActionParams,
 ): Promise<TransactionFilter> => {
