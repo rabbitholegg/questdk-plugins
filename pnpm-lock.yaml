@@ -170,15 +170,6 @@ importers:
     devDependencies:
       tsconfig: link:../tsconfig
 
-  packages/k:
-    specifiers:
-      '@rabbitholegg/questdk-plugin-utils': workspace:*
-      tsconfig: workspace:*
-    dependencies:
-      '@rabbitholegg/questdk-plugin-utils': link:../utils
-    devDependencies:
-      tsconfig: link:../tsconfig
-
   packages/llama:
     specifiers:
       '@rabbitholegg/questdk-plugin-utils': workspace:*
@@ -202,15 +193,6 @@ importers:
     dependencies:
       '@ethersproject/providers': 5.7.2
       '@mux-network/mux.js': 2.9.12
-    devDependencies:
-      tsconfig: link:../tsconfig
-
-  packages/my-test-plugin:
-    specifiers:
-      '@rabbitholegg/questdk-plugin-utils': workspace:*
-      tsconfig: workspace:*
-    dependencies:
-      '@rabbitholegg/questdk-plugin-utils': link:../utils
     devDependencies:
       tsconfig: link:../tsconfig
 
@@ -389,15 +371,6 @@ importers:
       tsconfig: link:../tsconfig
 
   packages/tally:
-    specifiers:
-      '@rabbitholegg/questdk-plugin-utils': workspace:*
-      tsconfig: workspace:*
-    dependencies:
-      '@rabbitholegg/questdk-plugin-utils': link:../utils
-    devDependencies:
-      tsconfig: link:../tsconfig
-
-  packages/test:
     specifiers:
       '@rabbitholegg/questdk-plugin-utils': workspace:*
       tsconfig: workspace:*
