@@ -4,6 +4,7 @@ import { buildV2PathQueryWithCase } from './utils'
 import {
   PARASWAP_ABI,
   V2_ROUTER_ABI,
+  HSPMHLP_ABI,
   HPSM2_ABI,
   HLP_CURVE_V2_ABI,
   HLP_BALANCER_ABI,
@@ -117,6 +118,20 @@ export function getHPSM2Filter(params: SwapActionParams) {
     amount: amountIn,
     ...inputs,
   } as const
+}
+
+export function getRouterHpsmHlpFilter(params: SwapActionParams) {
+  const { tokenIn, tokenOut, amountIn, amountOut, recipient } = params
+  const tokenOutUsed = tokenOut !== zeroAddress ? tokenOut : undefined
+
+  return {
+    $abi: HSPMHLP_ABI,
+    peggedToken: tokenIn,
+    tokenOut: tokenOutUsed,
+    amountIn,
+    minOut: amountOut,
+    receiver: recipient,
+  }
 }
 
 export function getHlpCurveV2Filter(params: SwapActionParams) {

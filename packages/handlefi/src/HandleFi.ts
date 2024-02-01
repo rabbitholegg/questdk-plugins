@@ -13,6 +13,7 @@ import {
 import {
   getParaSwapFilter,
   getV2RouterFilter,
+  getRouterHpsmHlpFilter,
   getHPSM2Filter,
   getHlpCurveV2Filter,
   getHlpBalancerFilter,
@@ -34,6 +35,7 @@ export const swap = async (
       $or: [
         getParaSwapFilter(swap, PARASWAP_PARTNER),
         getV2RouterFilter(swap),
+        getRouterHpsmHlpFilter(swap),
         getHPSM2Filter(swap),
         getHlpCurveV2Filter(swap),
         getHlpBalancerFilter(swap),
