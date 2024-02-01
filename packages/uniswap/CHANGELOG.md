@@ -1,5 +1,16 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.16
+
+### Minor Changes
+
+- [#180](https://github.com/rabbitholegg/questdk-plugins/pull/180) [`2d042c7`](https://github.com/rabbitholegg/questdk-plugins/commit/2d042c7f0f45665a631f16c3e7870eb76968c138) Thanks [@MackeDev](https://github.com/MackeDev)! - add swap support for macke
+
+### Patch Changes
+
+- Updated dependencies [[`30c9913`](https://github.com/rabbitholegg/questdk-plugins/commit/30c99133337b9986d28081baad40186285ae0559)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.5
+
 ## 1.0.0-alpha.15
 
 ### Patch Changes

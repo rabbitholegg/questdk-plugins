@@ -1,5 +1,16 @@
 # @rabbitholegg/questdk-plugin-project
 
+## 1.0.0-alpha.13
+
+### Minor Changes
+
+- [#196](https://github.com/rabbitholegg/questdk-plugins/pull/196) [`dda990e`](https://github.com/rabbitholegg/questdk-plugins/commit/dda990e4d804dfe54156cb5362446939792b0041) Thanks [@mmackz](https://github.com/mmackz)! - refactor template to introduce testing patterns and utilities
+
+### Patch Changes
+
+- Updated dependencies [[`30c9913`](https://github.com/rabbitholegg/questdk-plugins/commit/30c99133337b9986d28081baad40186285ae0559)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.5
+
 ## 1.0.0-alpha.12
 
 ### Patch Changes

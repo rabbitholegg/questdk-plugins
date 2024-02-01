@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-handlefi
 
+## 1.0.0-alpha.5
+
+### Minor Changes
+
+- [#205](https://github.com/rabbitholegg/questdk-plugins/pull/205) [`6a8bf0d`](https://github.com/rabbitholegg/questdk-plugins/commit/6a8bf0d629161c9da279c020370da4cdeeaf68d2) Thanks [@mmackz](https://github.com/mmackz)! - add support for swaps routed through RouterHpsmHlp contract
+
 ## 1.0.0-alpha.4
 
 ### Minor Changes
