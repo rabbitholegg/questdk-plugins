@@ -4,6 +4,7 @@ import { createPlugin, logBoostStars } from './builder'
 const _prompts = require('prompts')
 const figlet = require('figlet')
 // import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { ActionType } from '@rabbitholegg/questdk'
 
 export enum Chains {
   ETHEREUM = 1,
@@ -23,14 +24,24 @@ export enum Chains {
 }
 
 // structure available chains into the format for prompts
-const _valueArrayay = Object.values(Chains)
-const _keyArrayay = Object.keys(Chains)
-const _chainArray = _valueArrayay
+const _chainValues = Object.values(Chains)
+const _chainKeys = Object.keys(Chains)
+const _chainArray = _chainValues
   .filter((value) => typeof value === 'string')
   .map((value, index) => {
-    return { value: _keyArrayay[index], title: value }
+    return { value: _chainKeys[index], title: value }
   })
 
+// structure available actiontypes into the format for prompts
+const _actionValues = Object.values(ActionType)
+const _actionKeys = Object.keys(ActionType)
+const _actionArray = _actionValues
+  .filter((value) => typeof value === 'string')
+  .map((value, index) => {
+    return { value: _actionKeys[index], title: value }
+  })
+
+// TODO if/when our state gets more complicated we might want to use conf or something like that
 const _pluginName = ''
 
 const _program = new Command()
@@ -87,10 +98,7 @@ const _questions = [
     message:
       'How would you describe the actions you want the user to take? (multi-select)',
     initial: '',
-    choices: [
-      { title: 'mint', value: '1' },
-      { title: 'swap', value: '2' },
-    ],
+    choices: _actionArray,
   },
 ]
 
