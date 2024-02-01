@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.5
+
+### Minor Changes
+
+- [#193](https://github.com/rabbitholegg/questdk-plugins/pull/193) [`30c9913`](https://github.com/rabbitholegg/questdk-plugins/commit/30c99133337b9986d28081baad40186285ae0559) Thanks [@mmackz](https://github.com/mmackz)! - add default list of zkSync tokens
+
 ## 1.0.0-alpha.4
 
 ### Minor Changes
