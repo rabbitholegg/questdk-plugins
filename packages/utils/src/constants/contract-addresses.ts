@@ -65,10 +65,17 @@ export const arbitrumTokenAddresses: Address[] = [
   '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
 ]
 
+const zkSyncEraTokenAddresses: Address[] = [
+  ETH_ADDRESS, // ETH
+  '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4', // USDC
+  '0x493257fD37EDB34451f62EDf8D2a0C418852bA4C', // USDT
+]
+
 export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.ETHEREUM]: ethereumTokenAddresses,
   [Chains.OPTIMISM]: optimismTokenAddresses,
   [Chains.ARBITRUM_ONE]: arbitrumTokenAddresses,
   [Chains.POLYGON_POS]: polygonTokenAddresses,
   [Chains.BASE]: baseTokenAddresses,
+  [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
 }
