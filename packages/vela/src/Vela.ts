@@ -1,12 +1,25 @@
 import {
   type TransactionFilter,
   type OptionsActionParams,
+  type StakeActionParams,
+  ActionType,
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { VAULT_CONTRACT, CHAIN_TO_TOKENS } from './contract-addresses'
+import {
+  VAULT_CONTRACT,
+  CHAIN_TO_TOKENS,
+  TOKENFARM_CONTRACT,
+  VLP_CONTRACT,
+  VELA_CONTRACT,
+} from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { getTokenPacked, getAmountPacked, getOrderTypePacked } from './utils'
+import {
+  getTokenPacked,
+  getAmountPacked,
+  getOrderTypePacked,
+  getStakeInputs,
+} from './utils'
 import { VAULT_ABI } from './abi'
 
 export const options = async (
@@ -32,9 +45,26 @@ export const options = async (
   })
 }
 
+export const stake = async (
+  stake: StakeActionParams,
+): Promise<TransactionFilter> => {
+  const { chainId, contractAddress, tokenOne, amountOne } = stake
+
+  return compressJson({
+    chainId,
+    to: contractAddress ?? TOKENFARM_CONTRACT,
+    input: getStakeInputs(tokenOne, amountOne),
+  })
+}
+
 export const getSupportedTokenAddresses = async (
   _chainId: number,
+  actionType?: ActionType,
 ): Promise<Address[]> => {
+  if (actionType === undefined) return []
+  if (actionType === ActionType.Stake) {
+    return [VLP_CONTRACT, VELA_CONTRACT]
+  }
   return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 

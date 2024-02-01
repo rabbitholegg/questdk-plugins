@@ -1,15 +1,21 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { options, getSupportedTokenAddresses } from './Vela'
+import { options, stake, getSupportedTokenAddresses } from './Vela'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { VAULT_ABI } from './abi'
-import { passingTestCases, failingTestCases } from './test-transactions'
+import {
+  passingTestCasesOptions,
+  failingTestCasesOptions,
+  passingTestCasesStake,
+  failingTestCasesStake,
+} from './test-transactions'
+import { ActionType } from '@rabbitholegg/questdk'
 
 describe('Given the vela plugin', () => {
   describe('When handling the options action', () => {
     describe('should return a valid action filter', () => {
       test('when making an options action', async () => {
-        const [testCase] = passingTestCases
+        const [testCase] = passingTestCasesOptions
         const filter = await options(testCase.params)
         expect(filter).to.deep.equal({
           chainId: 42161,
@@ -57,7 +63,7 @@ describe('Given the vela plugin', () => {
     })
 
     describe('should pass filter with valid transactions', () => {
-      passingTestCases.forEach((testCase) => {
+      passingTestCasesOptions.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await options(params)
@@ -67,7 +73,7 @@ describe('Given the vela plugin', () => {
     })
 
     describe('should not pass filter with invalid transactions', () => {
-      failingTestCases.forEach((testCase) => {
+      failingTestCasesOptions.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await options(params)
@@ -79,7 +85,53 @@ describe('Given the vela plugin', () => {
     describe('should return a valid list of tokens for each supported chain', () => {
       CHAIN_ID_ARRAY.forEach((chainId) => {
         test(`for chainId: ${chainId}`, async () => {
-          const tokens = await getSupportedTokenAddresses(chainId)
+          const tokens = await getSupportedTokenAddresses(
+            chainId,
+            ActionType.Swap,
+          )
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.greaterThan(0)
+          expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach((token) => {
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
+          })
+        })
+      })
+    })
+  })
+
+  describe('When handling the stake action', () => {
+    describe('should pass filter with valid transactions', () => {
+      passingTestCasesStake.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await stake(params)
+          expect(apply(transaction, filter)).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingTestCasesStake.forEach((testCase) => {
+        const { transaction, description, params } = testCase
+        test(description, async () => {
+          const filter = await stake(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+
+    describe('should return a valid list of tokens for each supported chain', () => {
+      CHAIN_ID_ARRAY.forEach((chainId) => {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(
+            chainId,
+            ActionType.Stake,
+          )
           const addressRegex = /^0x[a-fA-F0-9]{40}$/
           expect(tokens).to.be.an('array')
           expect(tokens).to.have.length.greaterThan(0)

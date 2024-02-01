@@ -34,5 +34,8 @@
   "typings": "./dist/types/index.d.ts",
   "devDependencies": {
     "tsconfig": "workspace:*"
+  },
+  "dependencies": {
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   }
 }
