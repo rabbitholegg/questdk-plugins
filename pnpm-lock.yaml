@@ -407,7 +407,10 @@ importers:
 
   packages/vela:
     specifiers:
+      '@rabbitholegg/questdk-plugin-utils': workspace:*
       tsconfig: workspace:*
+    dependencies:
+      '@rabbitholegg/questdk-plugin-utils': link:../utils
     devDependencies:
       tsconfig: link:../tsconfig
 
