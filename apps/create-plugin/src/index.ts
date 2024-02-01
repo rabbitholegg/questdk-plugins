@@ -3,6 +3,33 @@ import packageJson from '../package.json'
 import { createPlugin, logBoostStars } from './builder'
 const _prompts = require('prompts')
 const figlet = require('figlet')
+// import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+
+export enum Chains {
+  ETHEREUM = 1,
+  OPTIMISM = 10,
+  BINANCE_SMART_CHAIN = 56,
+  GNOSIS = 100,
+  POLYGON_POS = 137,
+  ZK_SYNC_ERA = 324,
+  POLYGON_ZK = 1101,
+  MANTLE = 5000,
+  BASE = 8453,
+  ARBITRUM_ONE = 42161,
+  AVALANCHE = 43114,
+  LINEA = 59144,
+  SCROLL = 534352,
+  ZORA = 7777777,
+}
+
+// structure available chains into the format for prompts
+const _valueArrayay = Object.values(Chains)
+const _keyArrayay = Object.keys(Chains)
+const _chainArray = _valueArrayay
+  .filter((value) => typeof value === 'string')
+  .map((value, index) => {
+    return { value: _keyArrayay[index], title: value }
+  })
 
 const _pluginName = ''
 
@@ -44,11 +71,8 @@ const _questions = [
   {
     type: 'multiselect',
     name: 'chain',
-    message: 'What blockchain is the project on?',
-    choices: [
-      { title: 'ethereum', value: '1' },
-      { title: 'optimism', value: '2' },
-    ],
+    message: 'What blockchains ars the project on? (multi-select)',
+    choices: _chainArray,
   },
   {
     type: 'text',
@@ -60,7 +84,8 @@ const _questions = [
   {
     type: 'multiselect',
     name: 'action',
-    message: 'How would you describe the action you want the user to take?',
+    message:
+      'How would you describe the actions you want the user to take? (multi-select)',
     initial: '',
     choices: [
       { title: 'mint', value: '1' },

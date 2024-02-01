@@ -14,7 +14,10 @@ const arrow = '=>'
 const logo = '✛' // not the logo but pretty close
 
 export async function createPlugin(params: BuilderParams) {
-  await copyDirectory(params)
+  const result = await copyDirectory(params)
+  if (!result) {
+    return
+  }
   await replaceProjectName(params)
   await replaceFileNames(params)
   logBoostStars()
@@ -36,9 +39,9 @@ export function logBoostStars() {
  * @returns
  */
 async function copyDirectory(params: BuilderParams) {
-  if (params.projectName.length < 1) {
+  if (params.projectName === undefined) {
     console.log(` ${red('exiting')} `)
-    return
+    return false
   }
   // get the target directory location
   const dest = path.join(__dirname, `../../../packages/${params.projectName}`)
@@ -49,7 +52,7 @@ async function copyDirectory(params: BuilderParams) {
         `"${params.projectName}"`,
       )} because it already exists!`,
     )
-    return
+    return false
   }
   // create the directory
   try {
@@ -60,7 +63,7 @@ async function copyDirectory(params: BuilderParams) {
         `"${params.projectName}"`,
       )} because of ${_e}`,
     )
-    return
+    return false
   }
 
   // copy the template files to the new directory
@@ -70,13 +73,14 @@ async function copyDirectory(params: BuilderParams) {
     console.log(
       `\t ${arrow} Created directory for ${cyan(`"${params.projectName}"`)}!`,
     )
+    return true
   } catch (_e) {
     console.error(
       `Could not create a plugin called ${red(
         `"${params.projectName}"`,
       )} because of ${_e}`,
     )
-    return
+    return false
   }
 }
 

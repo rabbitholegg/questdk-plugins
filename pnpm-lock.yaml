@@ -44,6 +44,7 @@ importers:
 
   apps/create-plugin:
     specifiers:
+      '@rabbitholegg/questdk-plugin-utils': workspace:*
       '@types/node': 20.4.5
       '@types/prompt': ^1.1.8
       commander: ^11.1.0
@@ -57,6 +58,7 @@ importers:
       commander: 11.1.0
       figlet: 1.7.0
     devDependencies:
+      '@rabbitholegg/questdk-plugin-utils': link:../../packages/utils
       '@types/node': 20.4.5
       '@types/prompt': 1.1.8
       fs-extra: 11.2.0
@@ -168,6 +170,15 @@ importers:
     devDependencies:
       tsconfig: link:../tsconfig
 
+  packages/k:
+    specifiers:
+      '@rabbitholegg/questdk-plugin-utils': workspace:*
+      tsconfig: workspace:*
+    dependencies:
+      '@rabbitholegg/questdk-plugin-utils': link:../utils
+    devDependencies:
+      tsconfig: link:../tsconfig
+
   packages/llama:
     specifiers:
       '@rabbitholegg/questdk-plugin-utils': workspace:*
@@ -191,6 +202,15 @@ importers:
     dependencies:
       '@ethersproject/providers': 5.7.2
       '@mux-network/mux.js': 2.9.12
+    devDependencies:
+      tsconfig: link:../tsconfig
+
+  packages/my-test-plugin:
+    specifiers:
+      '@rabbitholegg/questdk-plugin-utils': workspace:*
+      tsconfig: workspace:*
+    dependencies:
+      '@rabbitholegg/questdk-plugin-utils': link:../utils
     devDependencies:
       tsconfig: link:../tsconfig
 
@@ -369,6 +389,15 @@ importers:
       tsconfig: link:../tsconfig
 
   packages/tally:
+    specifiers:
+      '@rabbitholegg/questdk-plugin-utils': workspace:*
+      tsconfig: workspace:*
+    dependencies:
+      '@rabbitholegg/questdk-plugin-utils': link:../utils
+    devDependencies:
+      tsconfig: link:../tsconfig
+
+  packages/test:
     specifiers:
       '@rabbitholegg/questdk-plugin-utils': workspace:*
       tsconfig: workspace:*

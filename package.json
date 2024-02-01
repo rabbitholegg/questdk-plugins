@@ -1,6 +1,7 @@
 {
   "name": "questdk-plugins",
   "scripts": {
+    "create": "turbo run build  --filter=!@rabbitholegg/questdk-plugin-project && turbo run dev --filter=@rabbitholegg/create-plugin",
     "build": "turbo run build --filter=!@rabbitholegg/questdk-plugin-project",
     "lint": "turbo run lint --filter=!@rabbitholegg/questdk-plugin-project",
     "lint:fix": "turbo run lint:fix --filter=!@rabbitholegg/questdk-plugin-project",
