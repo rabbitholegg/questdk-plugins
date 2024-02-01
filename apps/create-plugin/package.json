@@ -1,0 +1,25 @@
+{
+  "name": "@rabbitholegg/create-plugin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "pnpm run build && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "figlet": "^1.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.4.5",
+    "@types/prompt": "^1.1.8",
+    "picocolors": "^1.0.0",
+    "prompts": "^2.4.2",
+    "typescript": "5.3.3"
+  }
+}
