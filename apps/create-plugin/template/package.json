@@ -1,5 +1,5 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-project",
+  "name": "@rabbitholegg/questdk-plugin-{{projectName}}",
   "private": true,
   "version": "1.0.0-alpha.13",
   "type": "module",

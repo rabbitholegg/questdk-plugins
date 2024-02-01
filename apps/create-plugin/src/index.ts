@@ -1,10 +1,11 @@
 import { Command } from 'commander'
-// import prompts from 'prompts'
 import packageJson from '../package.json'
-
+import { createPlugin, logBoostStars } from './builder'
+const _prompts = require('prompts')
 const figlet = require('figlet')
 
-let pluginName = ''
+const _pluginName = ''
+
 const _program = new Command()
 _program
   .version(packageJson.version)
@@ -24,22 +25,71 @@ _program
 
 const _options = _program.opts()
 
-console.log('\n\n\n')
+const _questions = [
+  {
+    type: 'text',
+    name: 'name',
+    message: 'What is the name of the project you are creating a plugin for?',
+    validate: (name: string) => {
+      if (name.length < 1) {
+        return 'Please enter a name'
+      }
+      const invalidNameRegex = new RegExp('[~"#%&*:<>?/\\{|}]+')
+      if (invalidNameRegex.test(name)) {
+        return 'Please enter a name without special characters'
+      }
+      return true
+    },
+  },
+  {
+    type: 'multiselect',
+    name: 'chain',
+    message: 'What blockchain is the project on?',
+    choices: [
+      { title: 'ethereum', value: '1' },
+      { title: 'optimism', value: '2' },
+    ],
+  },
+  {
+    type: 'text',
+    name: 'tx',
+    message:
+      'Provide an example transaction hash for the action you want to create a plugin for',
+    initial: '',
+  },
+  {
+    type: 'multiselect',
+    name: 'action',
+    message: 'How would you describe the action you want the user to take?',
+    initial: '',
+    choices: [
+      { title: 'mint', value: '1' },
+      { title: 'swap', value: '2' },
+    ],
+  },
+]
 
-console.log(figlet.textSync('BOOST PLUGIN BUILDER'))
-console.log('--------------------------------------- +++')
-console.log('--------------------------- +++')
-console.log('--------------- +++')
-console.log()
+async function run(): Promise<void> {
+  console.log('\n\n\n')
 
-if (_options.name) {
-  pluginName = _options.name
-  console.log(`Creating a plugin for ${pluginName}`)
-} else {
-  console.log('Please provide a name for the plugin')
-  process.exit(1)
+  console.log(figlet.textSync('BOOST'))
+  console.log(figlet.textSync('PLUGIN BUILDER'))
+  logBoostStars()
+
+  const _response = await _prompts(_questions)
+
+  logBoostStars()
+  //   console.log('Creating a plugin for', pluginName)
+  //   console.log(_response)
+  createPlugin({
+    projectName: _response.name,
+    chain: _response.chain,
+    tx: _response.tx,
+    action: _response.action,
+  })
 }
 
+run()
 /**
  * so to create a plugin we need a transaction hash and a chain
  *  -> from this in theory we can automatically generate the test-transactions.ts file

@@ -7,11 +7,11 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Project.js'
+} from './{{projectName}}.js'
 
 // Replace *project* with the name of the project
-export const { Project }: IActionPlugin = {
-  pluginId: 'project',
+export const { {{projectName}} }: IActionPlugin = {
+  pluginId: "{{projectName}}",
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge,

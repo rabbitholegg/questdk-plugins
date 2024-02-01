@@ -10,5 +10,5 @@
       "moduleResolution": "node",
       "resolveJsonModule": true
     },
-    "exclude": ["templates", "dist"]
+    "exclude": ["template", "dist"]
   }
