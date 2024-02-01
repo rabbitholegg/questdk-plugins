@@ -12,4 +12,5 @@ export enum Chains {
   AVALANCHE = 43114,
   LINEA = 59144,
   SCROLL = 534352,
+  ZORA = 7777777,
 }

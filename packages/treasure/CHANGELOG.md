@@ -1,5 +1,19 @@
 # @rabbitholegg/questdk-plugin-treasure
 
+## 1.0.0-alpha.5
+
+### Minor Changes
+
+- [#181](https://github.com/rabbitholegg/questdk-plugins/pull/181) [`c144168`](https://github.com/rabbitholegg/questdk-plugins/commit/c14416849b02ca373fbf75e72b8e23301a98aa56) Thanks [@veganbeef](https://github.com/veganbeef)! - add support for treasure stake
+
+- [#199](https://github.com/rabbitholegg/questdk-plugins/pull/199) [`e934b2d`](https://github.com/rabbitholegg/questdk-plugins/commit/e934b2da5427e038268d803f482df9c52dd052fe) Thanks [@Quazia](https://github.com/Quazia)! - Move questdk dependencies to root
+
+## 1.0.0-alpha.4
+
+### Minor Changes
+
+- [#124](https://github.com/rabbitholegg/questdk-plugins/pull/124) [`1e63d48`](https://github.com/rabbitholegg/questdk-plugins/commit/1e63d4890d8e501d2d471f275db797f4bb3ce65b) Thanks [@Quazia](https://github.com/Quazia)! - Major refactor of package structure and addition of bare-bones utils package
+
 ## 1.0.0-alpha.3
 
 ### Minor Changes
