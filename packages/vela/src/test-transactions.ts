@@ -6,7 +6,7 @@ import {
   OrderType,
 } from '@rabbitholegg/questdk'
 import { parseUnits, zeroAddress } from 'viem'
-import { type TestParams, createTestCase, Chains } from './utils'
+import { type TestParams, createTestCase, Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { VELA_CONTRACT, VLP_CONTRACT } from './contract-addresses'
 
 const ARB_NEW_POSITION: TestParams<OptionsActionParams> = {

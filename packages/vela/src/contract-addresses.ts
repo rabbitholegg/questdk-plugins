@@ -1,5 +1,5 @@
 import { type Address, zeroAddress } from 'viem'
-import { Chains } from './utils'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 // Tokens
 const ETHER = zeroAddress
