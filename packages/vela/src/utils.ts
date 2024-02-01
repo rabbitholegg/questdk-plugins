@@ -1,7 +1,4 @@
-import {
-  type FilterOperator,
-  OrderType,
-} from '@rabbitholegg/questdk'
+import { type FilterOperator, OrderType } from '@rabbitholegg/questdk'
 import type { Address } from 'viem'
 import { TOKEN_TO_ID } from './contract-addresses'
 import { TOKENFARM_ABI, TOKENFARM_ABI2 } from './abi'
