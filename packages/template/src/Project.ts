@@ -1,6 +1,6 @@
 import {
   type TransactionFilter,
-  type BridgeActionParams,
+  type SwapActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
@@ -9,28 +9,21 @@ import { type Address } from 'viem'
  * Function template for handling various blockchain action types.
  * It's adaptable for actions defined in ActionParams: Bridge, Swap, Stake, Mint, Delegate, Quest, Etc.
  * Duplicate and customize for each specific action type.
- * If you wish to use a different action other than bridge, import one of the ActionParams types 
- * from @rabbitholegg/questdk (ie: SwapActionParams) and change the function below to use 
+ * If you wish to use a different action other than swap, import one of the ActionParams types
+ * from @rabbitholegg/questdk (ie: SwapActionParams) and change the function below to use
  * the action params you wish to use.
  */
 
-export const bridge = async (
-  bridge: BridgeActionParams,
+export const swap = async (
+  swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
-  const {
-    sourceChainId,
-    destinationChainId,
-    contractAddress,
-    tokenAddress,
-    amount,
-    recipient,
-  } = bridge
+  const { chainId, contractAddress, tokenIn } = swap
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: 0, // The chainId of the source chain
-    to: 0x0, // The contract address of the bridge
+    chainId, 
+    to: '0x0', // The to field is the address of the contract we're interacting with
     input: {}, // The input object is where we'll put the ABI and the parameters
   })
 }

@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-sushi",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -36,8 +36,6 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.31",
-    "@sushiswap/core-sdk": "1.0.0-canary.34",
-    "viem": "^1.16.6"
+    "@sushiswap/core-sdk": "1.0.0-canary.34"
   }
 }

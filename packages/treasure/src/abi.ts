@@ -46,6 +46,22 @@ export const MINT_TREASURE_TAG_ABI = [
   },
 ]
 
+export const STAKE_MAGIC_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'deposit',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
+
 export const V2_ROUTER_ABI = [
   {
     inputs: [
