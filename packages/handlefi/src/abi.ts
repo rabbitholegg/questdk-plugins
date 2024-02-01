@@ -603,6 +603,73 @@ export const PARASWAP_ABI = [
   },
 ]
 
+export const HSPMHLP_ABI = [
+  {
+    inputs: [
+      { internalType: 'address', name: 'fxToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapEthToPeggedToken',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'hlpToken', type: 'address' },
+      { internalType: 'address', name: 'fxToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapHlpTokenToPeggedToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'peggedToken', type: 'address' },
+      { internalType: 'address', name: 'fxToken', type: 'address' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address payable', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapPeggedTokenToEth',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'peggedToken', type: 'address' },
+      { internalType: 'address', name: 'fxToken', type: 'address' },
+      { internalType: 'address', name: 'tokenOut', type: 'address' },
+      { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+      { internalType: 'uint256', name: 'minOut', type: 'uint256' },
+      { internalType: 'address', name: 'receiver', type: 'address' },
+      { internalType: 'bytes', name: 'signedQuoteData', type: 'bytes' },
+    ],
+    name: 'swapPeggedTokenToHlpToken',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }],
+    name: 'transferOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
 export const HPSM2_ABI = [
   {
     inputs: [
