@@ -89,13 +89,13 @@ const _questions = [
     message: 'What blockchains ars the project on? (multi-select)',
     choices: _chainArray,
   },
-  {
-    type: 'text',
-    name: 'tx',
-    message:
-      'Provide an example transaction hash for the action you want to create a plugin for',
-    initial: '',
-  },
+  // {
+  //   type: 'text',
+  //   name: 'tx',
+  //   message:
+  //     'Provide an example transaction hash for the action you want to create a plugin for',
+  //   initial: '',
+  // },
   {
     type: 'multiselect',
     name: 'action',
@@ -110,7 +110,7 @@ async function run(): Promise<void> {
   console.log('\n\n\n')
 
   console.log(figlet.textSync('BOOSTDK'))
-  console.log(figlet.textSync('PLUGIN BUILDER'))
+  console.log(figlet.textSync('PLUGIN CREATOR'))
   logBoostStars()
 
   const _response = await _prompts(_questions)

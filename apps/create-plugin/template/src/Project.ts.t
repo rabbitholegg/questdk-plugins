@@ -20,6 +20,14 @@ import { Chains } from '@rabbitholegg/questdk-plugin-utils'
   {{#each actionTypes}}
   export const {{lowercase this}} = async(_params: {{capitalize this}}ActionParams): Promise<TransactionFilter> => {
 
+    // the ActionParams for this function are populated in the Boost Manager when the actual Boost is launched.
+    
+    // In this function you should load the ABI, and translate any ActionParams into the input object defined below 
+    // which should match the parameter names in the transaction
+
+    // You can also use the boostdk filter system to support operators on parameters, for example, greater than
+
+
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId, 

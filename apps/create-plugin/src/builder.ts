@@ -14,9 +14,6 @@ const arrow = '=>'
 const logo = '✛' // not the logo but pretty close
 
 export async function createPlugin(params: BuilderParams) {
-  console.log(`--------------------------- ${logo} ${logo} ${logo} `)
-  console.log(params)
-  console.log(`--------------------------- ${logo} ${logo} ${logo} `)
   const result = await copyDirectory(params)
   if (!result) {
     return
@@ -29,6 +26,18 @@ export async function createPlugin(params: BuilderParams) {
   await replaceFileNames(params)
   logBoostStars()
   console.log('Created a plugin for', cyan(`"${params.projectName}"`))
+  console.log()
+  console.log('run the following commands:')
+  console.log('cd ../..')
+  console.log('pnpm i')
+  console.log('pnpm run build')
+  console.log()
+  console.log(
+    'View your new plugin todo list in the README, located at',
+    cyan(`packages/${params.projectName}/README.md`),
+  )
+
+  console.log('\n\n\n')
 }
 
 export function logBoostStars() {
