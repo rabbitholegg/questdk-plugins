@@ -22,7 +22,6 @@ export async function createPlugin(params: BuilderParams) {
   registerHelpers()
   await replaceProjectName(params)
   await setActionNames(params)
-  await setChainIds(params)
   await replaceFileNames(params)
   logBoostStars()
   console.log('Created a plugin for', cyan(`"${params.projectName}"`))
@@ -216,11 +215,3 @@ async function setActionNames(params: BuilderParams) {
   await fs.writeFile(projectPath, projectTemplate(params))
   console.log(`\t ${arrow} created actions in file ${cyan('Project.ts')}!`)
 }
-
-/**
- * This function sets the supported chain ids
- *
- * @param params
- * @returns
- */
-async function setChainIds(_params: BuilderParams) {}

@@ -28,7 +28,7 @@ first `cd apps/create-plugin`
 
 The `src/index.ts` file is the entry point for the plugin creator. This file renders and parses the arguments from the CLI.
 
-The `src/builder.ts` file is the main logic for creating the plugin. It uses mustache templates and file operations to copy of the `/template` directory to the `/packages` directory and populate it appropriately.
+The `src/builder.ts` file is the main logic for creating the plugin. It uses mustache templates and file operations to copy the `/template` directory to the `../../packages` directory and populate it appropriately.
 
 so:
 
