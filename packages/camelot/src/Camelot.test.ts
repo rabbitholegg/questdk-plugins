@@ -12,7 +12,7 @@ import {
   CAMELOT_V3_EXACT_OUTPUT_ABI,
   PARASWAP_ABI,
 } from './abi'
-import { ARBITRUM_CHAIN_ID } from './chain-ids'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, getAddress } from 'viem'
 import { swap } from './Camelot'
 import { Tokens } from './utils'
@@ -22,7 +22,7 @@ describe('Given the camelot plugin', () => {
   describe('should return a valid action filter', () => {
     test('for a swap using ERC-20 token as tokenIn', async () => {
       const filter = await swap({
-        chainId: ARBITRUM_CHAIN_ID,
+        chainId: Chains.ARBITRUM_ONE,
         tokenIn: Tokens.USDT,
         tokenOut: Tokens.WETH,
         amountIn: GreaterThanOrEqual(1000000n),

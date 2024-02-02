@@ -1,6 +1,7 @@
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits } from 'viem'
-import { Tokens, createTestCase } from './utils'
+import { Tokens } from './utils'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
   V2_SWAP_ETH,
   V2_SWAP_TOKENS,
