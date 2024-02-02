@@ -15,6 +15,16 @@ then you can enter your plugins name, the supported chains, and the actions.
 The script will create a template for you in the packages directory structure.
 
 
+## Templates
+
+the following actions will be performed, assuming the tool is used to collect <project> name, <chain> ids, and <actions>:
+
+1.  Create a new directory in the packages directory with the name `@rabbitholegg/questdk-plugin-<project>`
+2.  Create index.ts, <project>.ts, <project>.test.ts, and test-transaction.ts files in the new directory as well as readme, package.json, etc with the <project> name
+3.  index.ts imports and interface definition is written based on selected <actions>
+4.  <project>.ts imports, a function declaration for each action, and `getSupportedChainIds` are populated
+
+
 ## Development
 
 the following command will both compile and run the plugin creator
