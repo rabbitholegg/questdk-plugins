@@ -8,7 +8,7 @@ import {
   handleRegex,
   handleSome,
 } from './filters.js'
-import type { Filter, FilterObject, FilterOperator } from './types.js'
+import type { Filter, FilterObject } from './types.js'
 import { assertType, describe, expect, test } from 'vitest'
 
 describe('parser', () => {
@@ -51,7 +51,7 @@ describe('parser', () => {
 
   describe('nth', () => {
     test('should return true if the nth item in the array meets the condition', () => {
-      const filter = { index: 1, value: { $gte: '50' } as FilterOperator }
+      const filter = { index: 1, value: { $gte: '50' } }
       const context = ['10', '100', '10', '60']
       const result = handleNth(context, filter)
       assertType<boolean>(result)
@@ -59,7 +59,7 @@ describe('parser', () => {
     })
 
     test('should return false if the nth item in the array does not meet the condition', () => {
-      const filter = { index: 2, value: { $gte: '50' } as FilterOperator }
+      const filter = { index: 2, value: { $gte: '50' } }
       const context = ['10', '100', '10', '60']
       const result = handleNth(context, filter)
       assertType<boolean>(result)
@@ -67,7 +67,7 @@ describe('parser', () => {
     })
 
     test('should return false if n overflows the array', () => {
-      const filter = { index: 4, value: { $gte: '50' } as FilterOperator }
+      const filter = { index: 4, value: { $gte: '50' } }
       const context = ['10', '100', '10', '60']
       const result = handleNth(context, filter)
       assertType<boolean>(result)
