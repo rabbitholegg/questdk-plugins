@@ -13,13 +13,13 @@ importers:
     dependencies:
       abitype:
         specifier: ^0.9.0
-        version: 0.9.10(typescript@5.3.3)
+        version: 0.9.10(typescript@5.1.6)
       rimraf:
         specifier: ^5.0.1
         version: 5.0.5
       viem:
         specifier: ^1.15.1
-        version: 1.21.4(typescript@5.3.3)
+        version: 1.21.4(typescript@5.1.6)
     devDependencies:
       '@actions/core':
         specifier: ^1.10.0
@@ -58,8 +58,8 @@ importers:
         specifier: ^8.2.6
         version: 8.2.6
       typescript:
-        specifier: ^5.1.6
-        version: 5.3.3
+        specifier: 5.1.6
+        version: 5.1.6
       vitest:
         specifier: ^0.33.0
         version: 0.33.0
@@ -1195,7 +1195,7 @@ packages:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
     dev: true
 
-  /abitype@0.9.10(typescript@5.3.3):
+  /abitype@0.9.10(typescript@5.1.6):
     resolution: {integrity: sha512-FIS7U4n7qwAT58KibwYig5iFG4K61rbhAqaQh/UWj8v1Y8mjX3F8TC9gd8cz9yT1TYel9f8nS5NO5kZp2RW0jQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -1206,10 +1206,10 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.1.6
     dev: false
 
-  /abitype@0.9.8(typescript@5.3.3):
+  /abitype@0.9.8(typescript@5.1.6):
     resolution: {integrity: sha512-puLifILdm+8sjyss4S+fsUN09obiT1g2YW6CtcQF+QDzxR0euzgEB29MZujC6zMk2a6SVmtttq1fc6+YFA7WYQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -1220,7 +1220,7 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.1.6
     dev: false
 
   /acorn-import-assertions@1.9.0(acorn@8.11.3):
@@ -3827,8 +3827,8 @@ packages:
       is-typed-array: 1.1.12
     dev: true
 
-  /typescript@5.3.3:
-    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+  /typescript@5.1.6:
+    resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -3919,7 +3919,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /viem@1.21.4(typescript@5.3.3):
+  /viem@1.21.4(typescript@5.1.6):
     resolution: {integrity: sha512-BNVYdSaUjeS2zKQgPs+49e5JKocfo60Ib2yiXOWBT6LuVxY1I/6fFX3waEtpXvL1Xn4qu+BVitVtMh9lyThyhQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -3932,9 +3932,9 @@ packages:
       '@noble/hashes': 1.3.2
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
-      abitype: 0.9.8(typescript@5.3.3)
+      abitype: 0.9.8(typescript@5.1.6)
       isows: 1.0.3(ws@8.13.0)
-      typescript: 5.3.3
+      typescript: 5.1.6
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
