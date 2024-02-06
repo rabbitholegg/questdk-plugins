@@ -11,10 +11,7 @@ export type ArrayOperator =
       $last?: FilterOperator
     }
   | {
-      $nth?: {
-        index: number
-        value: FilterOperator
-      }
+      $nth?: NthFilter
     }
 
 export type LogicalOperator =
@@ -63,6 +60,10 @@ export type FilterObject = {
 export type BitmaskFilter = {
   bitmask: bigint | number | string
   value: bigint | number | string | NumericOperator
+}
+export type NthFilter = {
+  index: bigint | number | string
+  value: TransactionFilter | FilterObject
 }
 export type Filter = Primitive | FilterObject | FilterArray | Abi
 export type FilterArray = Filter[]

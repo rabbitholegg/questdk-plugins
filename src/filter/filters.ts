@@ -5,7 +5,7 @@ import type {
   BitmaskFilter,
   Filter,
   FilterObject,
-  FilterOperator,
+  NthFilter,
   TransactionFilter,
 } from './types.js'
 import {
@@ -165,15 +165,13 @@ export const handleLast = (
  * @param filter - An object containing the index and the condition to check.
  * @returns True if the value at the nth index meets the condition, false otherwise.
  */
-export const handleNth = (
-  context: any,
-  filter: { index: number; value: TransactionFilter | FilterObject },
-): boolean => {
+export const handleNth = (context: any, filter: NthFilter): boolean => {
   const { index, value } = filter
-  if (index < 0 || index >= context.length) {
+
+  if (Number(index) < 0 || index >= context.length) {
     return false // index out of bounds
   }
-  return apply(context[index], value as FilterObject)
+  return apply(context[Number(index)], value as FilterObject)
 }
 
 /**
@@ -398,10 +396,8 @@ export function apply(
           filter as Filter[] &
             string &
             TransactionFilter &
-            BitmaskFilter & {
-              index: number
-              value: FilterOperator
-            },
+            BitmaskFilter &
+            NthFilter,
         )
       ) {
         return false
