@@ -1,11 +1,17 @@
 import {
   type OptionsActionParams,
+  type StakeActionParams,
   GreaterThanOrEqual,
   LessThanOrEqual,
   OrderType,
 } from '@rabbitholegg/questdk'
 import { parseUnits, zeroAddress } from 'viem'
-import { type TestParams, createTestCase, Chains } from './utils'
+import {
+  type TestParams,
+  createTestCase,
+  Chains,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { VELA_CONTRACT, VLP_CONTRACT } from './contract-addresses'
 
 const ARB_NEW_POSITION: TestParams<OptionsActionParams> = {
   transaction: {
@@ -98,6 +104,40 @@ const ETH_STOPLIMIT: TestParams<OptionsActionParams> = {
   },
 }
 
+export const STAKE_VLP: TestParams<StakeActionParams> = {
+  transaction: {
+    chainId: 42161,
+    from: '0x786b201f4e0dbfbadd2f0ba89d8240591d25b2c7',
+    hash: '0xb0fb54c8d145cdd5a49d64ce7f0e5547fa1a1cd618ae46d194e763a4a47592d0',
+    input:
+      '0x69a292bb000000000000000000000000000000000000000000000000520e3128d8375e00',
+    to: '0x60b8c145235a31f1949a831803768bf37d7ab7aa',
+    value: '0',
+  },
+  params: {
+    chainId: 42161,
+    tokenOne: VLP_CONTRACT,
+    amountOne: GreaterThanOrEqual(parseUnits('5.91271741228', 18)),
+  },
+}
+
+export const STAKE_VELA: TestParams<StakeActionParams> = {
+  transaction: {
+    chainId: 42161,
+    from: '0xf4019ee39c7b6e0702dbe7c6c54ce0606b3b0f8f',
+    hash: '0x05dc8fe5f5e000e395f89593d31745b00970c638127bbb79f339ab091de17b0d',
+    input:
+      '0x4159f57e000000000000000000000000000000000000000000000000553844909e362800',
+    to: '0x60b8c145235a31f1949a831803768bf37d7ab7aa',
+    value: '0',
+  },
+  params: {
+    chainId: 42161,
+    tokenOne: VELA_CONTRACT,
+    amountOne: GreaterThanOrEqual(parseUnits('6.14073347984', 18)),
+  },
+}
+
 const TPSL_ORDER: TestParams<OptionsActionParams> = {
   transaction: {
     chainId: 42161,
@@ -111,13 +151,13 @@ const TPSL_ORDER: TestParams<OptionsActionParams> = {
   params: {
     chainId: Chains.ARBITRUM_ONE,
     token: zeroAddress, // ETH (2)
-    amount: GreaterThanOrEqual(parseUnits('20', 18)),
+    amount: GreaterThanOrEqual(parseUnits('0.1', 1)),
     recipient: '0xe65c84603a376299410736c85e659fc2701bf4c3',
     orderType: OrderType.Market,
   },
 }
 
-export const passingTestCases = [
+export const passingTestCasesOptions = [
   createTestCase(ARB_NEW_POSITION, 'when opening a new position'),
   createTestCase(ARB_MARKET_ORDER, 'when opening a market order'),
   createTestCase(LINK_STOP_MARKET, 'when opening a stop-market order'),
@@ -150,7 +190,12 @@ export const passingTestCases = [
   }),
 ]
 
-export const failingTestCases = [
+export const passingTestCasesStake = [
+  createTestCase(STAKE_VLP, 'when staking vlp'),
+  createTestCase(STAKE_VELA, 'when staking vela'),
+]
+
+export const failingTestCasesOptions = [
   createTestCase(ARB_NEW_POSITION, 'when chainId is not correct', {
     chainId: 10,
   }),
@@ -191,5 +236,12 @@ export const failingTestCases = [
   }),
   createTestCase(TPSL_ORDER, 'when using TP/SL and orderType is not correct', {
     orderType: OrderType.Limit,
+  }),
+]
+
+export const failingTestCasesStake = [
+  createTestCase(STAKE_VLP, 'when token is wrong', { tokenOne: zeroAddress }),
+  createTestCase(STAKE_VELA, 'when amount is not enough', {
+    amountOne: GreaterThanOrEqual(parseUnits('10000', 18)),
   }),
 ]

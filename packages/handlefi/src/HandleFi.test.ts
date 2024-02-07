@@ -6,6 +6,7 @@ import { ARBITRUM_ONE } from './constants'
 import {
   PARASWAP_ABI,
   V2_ROUTER_ABI,
+  HSPMHLP_ABI,
   HPSM2_ABI,
   HLP_BALANCER_ABI,
   HLP_CURVE_V2_ABI,
@@ -25,6 +26,7 @@ describe('Given the handlefi plugin', () => {
             $or: [
               '0xdef171fe48cf0115b1d80b88dc8eab59176fee57',
               '0x434b5245f6fe54d0c9f881d55c2ba27fe7132d89',
+              '0x69328f23a090e57378e3120f622ed0697f0e7ecf',
               '0x0f330a53874cea3e5a0dee5d291c49275fdc3260',
               '0x559844b1df66e247f83ba58bc39fa488a1af1093',
               '0x9bdc4094860c97d9e5f1c18c4602a4a907d0a916',
@@ -131,6 +133,14 @@ describe('Given the handlefi plugin', () => {
                   $gte: '1110000',
                 },
                 _receiver: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+              },
+              {
+                $abi: HSPMHLP_ABI,
+                peggedToken: '0x912CE59144191C1204E64559FE8253a0e49E6548',
+                tokenOut: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+                receiver: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+                amountIn: { $gte: '1000000000000000000' },
+                minOut: { $gte: '1110000' },
               },
               {
                 $abi: HPSM2_ABI,

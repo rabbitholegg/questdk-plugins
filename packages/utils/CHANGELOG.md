@@ -1,5 +1,23 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.5
+
+### Minor Changes
+
+- [#193](https://github.com/rabbitholegg/questdk-plugins/pull/193) [`30c9913`](https://github.com/rabbitholegg/questdk-plugins/commit/30c99133337b9986d28081baad40186285ae0559) Thanks [@mmackz](https://github.com/mmackz)! - add default list of zkSync tokens
+
+## 1.0.0-alpha.4
+
+### Minor Changes
+
+- [#195](https://github.com/rabbitholegg/questdk-plugins/pull/195) [`9f081c7`](https://github.com/rabbitholegg/questdk-plugins/commit/9f081c7e89479aa8e29abd8d36908515dfc16e3b) Thanks [@mmackz](https://github.com/mmackz)! - export Chains enum from index.ts
+
+- [#200](https://github.com/rabbitholegg/questdk-plugins/pull/200) [`9fe746a`](https://github.com/rabbitholegg/questdk-plugins/commit/9fe746ad29ba042d40dc8ab610cd531c83a878c3) Thanks [@Quazia](https://github.com/Quazia)! - Adjust utils export to avoid \*
+
+### Patch Changes
+
+- [#194](https://github.com/rabbitholegg/questdk-plugins/pull/194) [`85c8cd8`](https://github.com/rabbitholegg/questdk-plugins/commit/85c8cd82070ba9a17f5181183533b4f1a5b117d7) Thanks [@mmackz](https://github.com/mmackz)! - add Zora Chain Id to Chains enum
+
 ## 1.0.0-alpha.3
 
 ### Minor Changes

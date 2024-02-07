@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-vela",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.3",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -34,5 +34,8 @@
   "typings": "./dist/types/index.d.ts",
   "devDependencies": {
     "tsconfig": "workspace:*"
+  },
+  "dependencies": {
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   }
 }

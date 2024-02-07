@@ -43,3 +43,23 @@ export const TPSL_ORDER_ABI = [
     type: 'function',
   },
 ]
+
+export const TOKENFARM_ABI = [
+  {
+    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+    name: 'depositVlp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
+export const TOKENFARM_ABI2 = [
+  {
+    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+    name: 'depositVela',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
