@@ -93,13 +93,13 @@ export interface IActionPlugin {
     chainId: number,
     task?: ActionType,
   ) => Promise<Address[]>
-  bridge: (
+  bridge?: (
     params: BridgeActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
-  swap: (
+  swap?: (
     params: SwapActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
-  mint: (
+  mint?: (
     params: MintActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   stake?: (
@@ -109,7 +109,7 @@ export interface IActionPlugin {
     params: DelegateActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   burn?: (
-    params: DelegateActionParams,
+    params: BurnActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   quest?: (
     params: QuestActionParams,
