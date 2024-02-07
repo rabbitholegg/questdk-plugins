@@ -92,13 +92,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run tests
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 20
           max_attempts: 3
           command: pnpm test:ci -- --shard=${{ matrix.shard }}/${{ matrix.total-shards }}
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4-beta
+        uses: codecov/codecov-action@v4.0.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
