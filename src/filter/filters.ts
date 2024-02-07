@@ -5,6 +5,7 @@ import type {
   BitmaskFilter,
   Filter,
   FilterObject,
+  NthFilter,
   TransactionFilter,
 } from './types.js'
 import {
@@ -159,6 +160,21 @@ export const handleLast = (
 }
 
 /**
+ * Checks if the value at the nth index meets the specified condition.
+ * @param context - The context to apply the check to.
+ * @param filter - An object containing the index and the condition to check.
+ * @returns True if the value at the nth index meets the condition, false otherwise.
+ */
+export const handleNth = (context: any, filter: NthFilter): boolean => {
+  const { index, value } = filter
+
+  if (Number(index) < 0 || index >= context.length) {
+    return false // index out of bounds
+  }
+  return apply(context[Number(index)], value as FilterObject)
+}
+
+/**
  * Checks if the context matches the regular expression filter.
  * @param context - The context to check.
  * @param filter - The regular expression to match against.
@@ -296,6 +312,7 @@ const operators = {
   $some: handleSome,
   $first: handleFirst,
   $last: handleLast,
+  $nth: handleNth,
 
   // Numeric operators
   $lte: handleLessThanOrEqual,
@@ -376,7 +393,11 @@ export function apply(
       if (
         !operator(
           context,
-          filter as Filter[] & string & TransactionFilter & BitmaskFilter,
+          filter as Filter[] &
+            string &
+            TransactionFilter &
+            BitmaskFilter &
+            NthFilter,
         )
       ) {
         return false
