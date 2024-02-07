@@ -84,13 +84,13 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: Run tests
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 20
           max_attempts: 3
           command: pnpm test:ci --shard=${{ matrix.shard }}/${{ matrix.total-shards }}
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
