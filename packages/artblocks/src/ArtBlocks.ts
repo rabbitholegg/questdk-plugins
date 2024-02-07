@@ -4,9 +4,9 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 
-import { type Address } from 'viem'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress } from 'viem'
 import { purchaseABISet, purchaseToABISet } from './abi'
-import { Chains, NULL_ADDRESS } from './const'
 import { Contracts, LEGACY_CONTRACT_SET } from './contracts'
 
 const legacyContracts = LEGACY_CONTRACT_SET.map((c) => c.toLowerCase())
@@ -28,7 +28,7 @@ export const mint = async (
   const filterBase = {
     chainId,
     to:
-      contractAddress === NULL_ADDRESS
+      contractAddress === zeroAddress
         ? contractAddress
         : { $or: Object.values(Contracts).map((c) => c.toLowerCase()) },
   }
@@ -78,5 +78,5 @@ export const getSupportedTokenAddresses = async (
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   // This should return all of the ChainIds that are supported by the Project we're integrating
-  return [Chains.ETHEREUM, Chains.ARBITRUM]
+  return [Chains.ETHEREUM, Chains.ARBITRUM_ONE]
 }

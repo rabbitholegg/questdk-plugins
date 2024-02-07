@@ -5,8 +5,7 @@ import {
   type TestParams,
   createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
-
-import { NULL_ADDRESS } from './const'
+import { zeroAddress } from 'viem'
 
 // https://etherscan.io/tx/0x758264e852e8a8fee84e62a67966a7688c9b73df2f8f18159f3a9316ba2d2d18
 export const PURCHASE_SET_PRICE_V5: TestParams<MintActionParams> = {
@@ -320,7 +319,7 @@ Object.entries(chainTxnMap).forEach(([chain, txnMap]) => {
         testTxn,
         `when minting via "${chainFn}" when recipient doesn\'t match on ${chain}`,
         {
-          recipient: NULL_ADDRESS,
+          recipient: zeroAddress,
         },
       ),
     )
