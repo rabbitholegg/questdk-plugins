@@ -86,7 +86,7 @@ const _questions = [
   {
     type: 'multiselect',
     name: 'chain',
-    message: 'What blockchains ars the project on? (multi-select)',
+    message: 'What blockchains are the project on? (multi-select)',
     choices: _chainArray,
   },
   // {

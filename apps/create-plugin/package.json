@@ -17,13 +17,11 @@
     "figlet": "^1.7.0"
   },
   "devDependencies": {
-    "@types/node": "20.4.5",
     "@types/prompt": "^1.1.8",
     "fs-extra": "^11.2.0",
     "handlebars": "^4.7.8",
     "picocolors": "^1.0.0",
     "prompts": "^2.4.2",
-    "typescript": "5.3.3",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   }
 }
