@@ -1,7 +1,7 @@
-import { ARBITRUM_CHAIN_ID } from './chain-ids'
+import { Chains, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
 import { CAMELOT_V2_ROUTER } from './contract-addresses'
 import { parseEther, parseUnits } from 'viem'
-import { Tokens, type TestParams } from './utils'
+import { Tokens } from './utils'
 import {
   GreaterThanOrEqual,
   type SwapActionParams,
@@ -18,7 +18,7 @@ export const V2_SWAP_ETH: TestParams<SwapActionParams> = {
     value: '550000000000000',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     contractAddress: CAMELOT_V2_ROUTER,
     tokenIn: Tokens.ETH,
     tokenOut: '0xBfbCFe8873fE28Dfa25f1099282b088D52bbAD9C', // EQB Token
@@ -38,7 +38,7 @@ export const V2_TOKENS_TO_ETH: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     tokenIn: '0x939727d85d99d0ac339bf1b76dfe30ca27c19067', // SIZE
     tokenOut: Tokens.ETH,
     amountIn: GreaterThanOrEqual(parseUnits('20000000', 18)),
@@ -57,7 +57,7 @@ export const V2_SWAP_TOKENS: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     tokenIn: '0x5190F06EaceFA2C552dc6BD5e763b81C73293293', // WOMBEX
     tokenOut: Tokens.USDT,
     amountIn: GreaterThanOrEqual(parseUnits('750', 18)),
@@ -77,7 +77,7 @@ export const V3_SWAP_ETH: TestParams<SwapActionParams> = {
     value: '1000000000000000',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     tokenIn: Tokens.ETH,
     tokenOut: Tokens.USDCE,
     amountIn: GreaterThanOrEqual(parseEther('0.001')),
@@ -97,7 +97,7 @@ export const V3_TOKEN_TO_ETH: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     tokenIn: Tokens.USDT,
     tokenOut: Tokens.ETH,
     amountIn: GreaterThanOrEqual(parseUnits('20', 6)),
@@ -117,7 +117,7 @@ export const V3_EXACT_OUTPUT_SINGLE: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     tokenIn: Tokens.ARB,
     tokenOut: Tokens.ETH,
     amountIn: GreaterThanOrEqual(parseUnits('2758', 18)),
@@ -137,7 +137,7 @@ export const V3_EXACT_OUTPUT: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     tokenIn: Tokens.USDCE,
     tokenOut: '0xf97f4df75117a78c1a5a0dbb814af92458539fb4',
     amountIn: GreaterThanOrEqual(parseUnits('4317', 6)),
@@ -196,7 +196,7 @@ export const PARASWAP_SIMPLESWAP: TestParams<SwapActionParams> = {
     value: '21000000000000000',
   },
   params: {
-    chainId: ARBITRUM_CHAIN_ID,
+    chainId: Chains.ARBITRUM_ONE,
     tokenIn: Tokens.ETH,
     tokenOut: Tokens.USDCE,
     amountIn: GreaterThanOrEqual(parseEther('0.021')),
