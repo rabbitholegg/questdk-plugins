@@ -76,7 +76,7 @@ const _questions = [
       if (name.length < 1) {
         return 'Please enter a name'
       }
-      const invalidNameRegex = new RegExp('[~"#%&*:<>?/\\{|}]+')
+      const invalidNameRegex = new RegExp('"^(?:(?:@(?:[a-z0-9-*~][a-z0-9-*._~]*)?/[a-z0-9-._~])|[a-z0-9-~])[a-z0-9-._~]*$"')
       if (invalidNameRegex.test(name)) {
         return 'Please enter a name without special characters'
       }
