@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.34
+
+### Minor Changes
+
+- [#71](https://github.com/rabbitholegg/questdk/pull/71) [`378f7b779908dab1bfa24023d8314f2e59bdc411`](https://github.com/rabbitholegg/questdk/commit/378f7b779908dab1bfa24023d8314f2e59bdc411) Thanks [@mmackz](https://github.com/mmackz)! - add $nth array operator
+
 ## 2.0.0-alpha.33
 
 ### Minor Changes
