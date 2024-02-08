@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- [#211](https://github.com/rabbitholegg/questdk-plugins/pull/211) [`22dc15b`](https://github.com/rabbitholegg/questdk-plugins/commit/22dc15b4fa8618da325011f433919a303fa9ca9d) Thanks [@Quazia](https://github.com/Quazia)! - Feat(uniswap): add degen
+
 ## 1.0.0-alpha.16
 
 ### Minor Changes
