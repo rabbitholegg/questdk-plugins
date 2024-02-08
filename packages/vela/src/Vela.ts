@@ -10,6 +10,7 @@ import {
   VAULT_CONTRACT,
   CHAIN_TO_TOKENS,
   TOKENFARM_CONTRACT,
+  TOKEN_TO_ID,
   VLP_CONTRACT,
   VELA_CONTRACT,
 } from './contract-addresses'
@@ -18,9 +19,11 @@ import {
   getTokenPacked,
   getAmountPacked,
   getOrderTypePacked,
+  getOrderType,
   getStakeInputs,
+  getAmount,
 } from './utils'
-import { VAULT_ABI } from './abi'
+import { ORDER_PACKED_ABI, TPSL_ORDER_ABI } from './abi'
 
 export const options = async (
   trade: OptionsActionParams,
@@ -38,9 +41,21 @@ export const options = async (
     to: contractAddress ?? VAULT_CONTRACT,
     from: recipient,
     input: {
-      $abi: VAULT_ABI,
-      a,
-      c: getAmountPacked(amount),
+      $or: [
+        {
+          $abi: ORDER_PACKED_ABI,
+          a,
+          c: getAmountPacked(amount),
+        },
+        {
+          $abi: TPSL_ORDER_ABI,
+          _tokenId: token ? TOKEN_TO_ID[token.toLowerCase()] : undefined,
+          ...getOrderType(orderType),
+          _params: amount
+            ? { $nth: { index: 2, value: getAmount(amount) } }
+            : undefined,
+        },
+      ],
     },
   })
 }
