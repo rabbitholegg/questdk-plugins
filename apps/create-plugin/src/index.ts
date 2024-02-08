@@ -3,25 +3,9 @@ import packageJson from '../package.json'
 import { createPlugin, logBoostStars } from './builder'
 const _prompts = require('prompts')
 const figlet = require('figlet')
-// import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { ActionType } from '@rabbitholegg/questdk'
 
-export enum Chains {
-  ETHEREUM = 1,
-  OPTIMISM = 10,
-  BINANCE_SMART_CHAIN = 56,
-  GNOSIS = 100,
-  POLYGON_POS = 137,
-  ZK_SYNC_ERA = 324,
-  POLYGON_ZK = 1101,
-  MANTLE = 5000,
-  BASE = 8453,
-  ARBITRUM_ONE = 42161,
-  AVALANCHE = 43114,
-  LINEA = 59144,
-  SCROLL = 534352,
-  ZORA = 7777777,
-}
 
 // structure available chains into the format for prompts
 const _chainValues = Object.values(Chains)
