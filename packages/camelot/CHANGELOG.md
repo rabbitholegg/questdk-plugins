@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-camelot
 
+## 1.0.0-alpha.17
+
+### Minor Changes
+
+- [#207](https://github.com/rabbitholegg/questdk-plugins/pull/207) [`415e400`](https://github.com/rabbitholegg/questdk-plugins/commit/415e400e0d612cfab5d52d7c9a31489c6e8694d2) Thanks [@mmackz](https://github.com/mmackz)! - use built-in utils
+
 ## 1.0.0-alpha.16
 
 ### Patch Changes

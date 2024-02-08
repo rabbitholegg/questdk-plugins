@@ -4,17 +4,21 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  bridge,
+  {{#each actionTypes}}
+  {{lowercase this}}, 
+  {{/each}}
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Project.js'
+} from './{{projectName}}.js'
 
 // Replace *project* with the name of the project
-export const { Project }: IActionPlugin = {
-  pluginId: 'project',
+export const {{projectName}} : IActionPlugin = {
+  pluginId: "{{projectName}}",
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  bridge,
-  swap: async () => new PluginActionNotImplementedError(),
-  mint: async () => new PluginActionNotImplementedError(),
+  {{#each actionTypes}}
+  {{lowercase this}}, 
+  {{/each}}
+
+
 }

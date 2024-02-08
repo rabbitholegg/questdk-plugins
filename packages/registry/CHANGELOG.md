@@ -1,5 +1,14 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.60
+
+### Patch Changes
+
+- Updated dependencies [[`5676053`](https://github.com/rabbitholegg/questdk-plugins/commit/5676053599e47b8888a243c2b5385b322ae206d1), [`415e400`](https://github.com/rabbitholegg/questdk-plugins/commit/415e400e0d612cfab5d52d7c9a31489c6e8694d2), [`22dc15b`](https://github.com/rabbitholegg/questdk-plugins/commit/22dc15b4fa8618da325011f433919a303fa9ca9d)]:
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.17
+
 ## 1.0.0-alpha.59
 
 ### Patch Changes
