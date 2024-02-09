@@ -21,6 +21,7 @@ import {
   MARKET_SHORT_ETH_ORDER_V2,
   LIMIT_LONG_ARB_ORDER_V2,
   MARKET_LONG_ARB_WITH_USDC_ORDER_V2,
+  MARKET_SWAP_OPTIONS_TYPE,
 } from './test-transactions'
 
 export const passingTestCasesV1 = [
@@ -206,4 +207,5 @@ export const failingOptionsTestCases = [
       token: Tokens.UNI,
     },
   ),
+  createTestCase(MARKET_SWAP_OPTIONS_TYPE, 'when using a "swap" ordertype')
 ]
