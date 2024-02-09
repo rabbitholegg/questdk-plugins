@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.61
+
+### Patch Changes
+
+- Updated dependencies [[`88d3496`](https://github.com/rabbitholegg/questdk-plugins/commit/88d349651a4aba3d75fd27371eb97878974df860), [`2341dd7`](https://github.com/rabbitholegg/questdk-plugins/commit/2341dd7c8cebc454ac0afc413c7fa123714ecdbd)]:
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.22
+
 ## 1.0.0-alpha.60
 
 ### Patch Changes
