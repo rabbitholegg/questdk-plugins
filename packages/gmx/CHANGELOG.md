@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.22
+
+### Minor Changes
+
+- [#214](https://github.com/rabbitholegg/questdk-plugins/pull/214) [`2341dd7`](https://github.com/rabbitholegg/questdk-plugins/commit/2341dd7c8cebc454ac0afc413c7fa123714ecdbd) Thanks [@mmackz](https://github.com/mmackz)! - remove swap ordertypes from getOrderType function
+
 ## 1.0.0-alpha.21
 
 ### Patch Changes

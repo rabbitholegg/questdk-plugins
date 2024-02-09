@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-vela
 
+## 1.0.0-alpha.4
+
+### Minor Changes
+
+- [#192](https://github.com/rabbitholegg/questdk-plugins/pull/192) [`88d3496`](https://github.com/rabbitholegg/questdk-plugins/commit/88d349651a4aba3d75fd27371eb97878974df860) Thanks [@mmackz](https://github.com/mmackz)! - add support for advanced TPSL orders
+
 ## 1.0.0-alpha.3
 
 ### Minor Changes
