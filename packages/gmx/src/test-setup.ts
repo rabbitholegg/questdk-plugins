@@ -207,5 +207,5 @@ export const failingOptionsTestCases = [
       token: Tokens.UNI,
     },
   ),
-  createTestCase(MARKET_SWAP_OPTIONS_TYPE, 'when using a "swap" ordertype')
+  createTestCase(MARKET_SWAP_OPTIONS_TYPE, 'when using a "swap" ordertype'),
 ]
