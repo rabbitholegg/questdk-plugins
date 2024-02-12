@@ -30,7 +30,7 @@ import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId, 
+    chainId: '0x0', 
     to: '0x0', // The to field is the address of the contract we're interacting with
     input: {}, // The input object is where we'll put the ABI and the parameters
   })
