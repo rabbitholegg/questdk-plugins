@@ -89,7 +89,6 @@ const _questions = [
     initial: '',
     choices: _actionArray,
   },
-  // need one for boolean asking if they are wanting to publish the plugin
   {
     type: 'confirm',
     name: 'publish',
