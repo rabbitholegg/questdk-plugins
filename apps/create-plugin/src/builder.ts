@@ -128,7 +128,8 @@ async function replaceProjectName(params: BuilderParams) {
   // replace the project name in the package.json
   const packageJsonPath = path.join(dest, 'package.json')
   const packageJson = await fs.readJson(packageJsonPath)
-  packageJson.name = params.projectName
+  packageJson.name = `@rabbitholegg/questdk-plugin-${params.projectName}`
+  packageJson.version = '1.0.0-alpha.0'
   packageJson.description = `Plugin for ${params.projectName}`
   await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 })
   console.log(`\t ${arrow} Updated file ${cyan('package.json')}!`)
