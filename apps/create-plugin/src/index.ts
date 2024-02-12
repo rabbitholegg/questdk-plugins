@@ -89,6 +89,13 @@ const _questions = [
     initial: '',
     choices: _actionArray,
   },
+  // need one for boolean asking if they are wanting to publish the plugin
+  {
+    type: 'confirm',
+    name: 'publish',
+    message: 'Do you want to make this package public? Answering "yes" will set the "private" field in your package.json to "false"',
+    initial: false,
+  },
 ]
 
 async function run(): Promise<void> {
@@ -108,6 +115,7 @@ async function run(): Promise<void> {
     chains: _response.chain,
     tx: _response.tx,
     actionTypes: _response.action,
+    publish: _response.publish,
   })
 }
 

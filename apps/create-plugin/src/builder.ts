@@ -8,6 +8,7 @@ type BuilderParams = {
   chains: string[]
   tx: string
   actionTypes: string[]
+  publish: boolean
 }
 
 const arrow = '=>'
@@ -130,6 +131,7 @@ async function replaceProjectName(params: BuilderParams) {
   const packageJson = await fs.readJson(packageJsonPath)
   packageJson.name = `@rabbitholegg/questdk-plugin-${params.projectName}`
   packageJson.version = '1.0.0-alpha.0'
+  packageJson.private = !params.publish
   packageJson.description = `Plugin for ${params.projectName}`
   await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 })
   console.log(`\t ${arrow} Updated file ${cyan('package.json')}!`)
