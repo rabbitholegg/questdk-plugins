@@ -48,12 +48,16 @@ export function logBoostStars() {
   console.log()
 }
 
+function capitalize(aString: string) {
+  return aString.charAt(0).toUpperCase() + aString.slice(1)
+}
+
 function registerHelpers() {
   Handlebars.registerHelper('lowercase', function (aString) {
     return aString.toLowerCase()
   })
   Handlebars.registerHelper('capitalize', function (aString) {
-    return aString.charAt(0).toUpperCase() + aString.slice(1)
+    return capitalize(aString)
   })
 }
 
@@ -179,17 +183,16 @@ async function replaceFileNames(params: BuilderParams) {
 
   //rename project.ts
   const projectPath = path.join(dest, 'src/Project.ts.t')
-  await fs.rename(projectPath, path.join(dest, `src/${params.projectName}.ts`))
-  console.log(`\t ${arrow} finalized file ${cyan(`${params.projectName}.ts`)}!`)
-
+  await fs.rename(projectPath, path.join(dest, `src/${capitalize(params.projectName)}.ts`))
+  console.log(`\t ${arrow} finalized file ${cyan(`${capitalize(params.projectName)}.ts`)}!`)
   //rename project.test.ts
   const testPath = path.join(dest, 'src/Project.test.ts.t')
   await fs.rename(
     testPath,
-    path.join(dest, `src/${params.projectName}.test.ts`),
+    path.join(dest, `src/${capitalize(params.projectName)}.test.ts`),
   )
   console.log(
-    `\t ${arrow} finalized file ${cyan(`${params.projectName}.test.ts`)}!`,
+    `\t ${arrow} finalized file ${cyan(`${capitalize(params.projectName)}.test.ts`)}!`,
   )
 }
 

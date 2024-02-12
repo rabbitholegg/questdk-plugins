@@ -6,7 +6,6 @@ const figlet = require('figlet')
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { ActionType } from '@rabbitholegg/questdk'
 
-
 // structure available chains into the format for prompts
 const _chainValues = Object.values(Chains)
 const _chainKeys = Object.keys(Chains)
