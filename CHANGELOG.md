@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.35
+
+### Minor Changes
+
+- [#74](https://github.com/rabbitholegg/questdk/pull/74) [`3d5a2ffd66003aae7adab998d2e7c59efbe8986f`](https://github.com/rabbitholegg/questdk/commit/3d5a2ffd66003aae7adab998d2e7c59efbe8986f) Thanks [@gnomadic](https://github.com/gnomadic)! - Standardizing ActionParams and no longer requiring some Actions in plugins
+
 ## 2.0.0-alpha.34
 
 ### Minor Changes
