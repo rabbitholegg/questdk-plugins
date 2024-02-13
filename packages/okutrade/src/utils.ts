@@ -97,7 +97,7 @@ const chainToContract: Record<number, Address> = {
   [Chains.POLYGON]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
   [Chains.ZKSYNC_ERA]: '0x28731BCC616B5f51dD52CF2e4dF0E78dD1136C06',
   [Chains.ARBITRUM]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
-  [Chains.BASE]: '0x198EF79F1F515F02dFE9e3115eD9fC07183f02fC',
+  [Chains.BASE]: '0xeC8B0F7Ffe3ae75d7FfAb09429e3675bb63503e4',
 }
 
 const chainToWETH: Record<number, Address> = {
