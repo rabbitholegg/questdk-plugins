@@ -118,7 +118,6 @@ async function copyDirectory(params: BuilderParams) {
  *
  * package.json
  * readme
- * changelog
  * src/project.ts
  * src/project.test.ts
  * index.ts
@@ -146,13 +145,6 @@ async function replaceProjectName(params: BuilderParams) {
   const readmeTemplate = Handlebars.compile(readme)
   await fs.writeFile(readmePath, readmeTemplate(params))
   console.log(`\t ${arrow} Updated file ${cyan('README.md')}!`)
-
-  //replace the project name in the changelog
-  const changelogPath = path.join(dest, 'CHANGELOG.md')
-  const changelog = await fs.readFile(changelogPath, 'utf8')
-  const changelogTemplate = Handlebars.compile(changelog)
-  await fs.writeFile(changelogPath, changelogTemplate(params))
-  console.log(`\t ${arrow} Updated file ${cyan('CHANGELOG.md')}!`)
 
   //replace the project name in index.ts.t
   const indexPath = path.join(dest, 'src/index.ts.t')
