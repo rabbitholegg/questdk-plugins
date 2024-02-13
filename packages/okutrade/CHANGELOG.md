@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- [#215](https://github.com/rabbitholegg/questdk-plugins/pull/215) [`14ab4a0`](https://github.com/rabbitholegg/questdk-plugins/commit/14ab4a0f536ab7a21f3502faf57a7ee2404b08e1) Thanks [@mmackz](https://github.com/mmackz)! - update universal router contract address for base
+
 ## 1.0.0-alpha.16
 
 ### Patch Changes
