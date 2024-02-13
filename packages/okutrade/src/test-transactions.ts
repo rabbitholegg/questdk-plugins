@@ -1,6 +1,9 @@
 import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { createTestCase, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  createTestCase,
+  type TestParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const V3_NATIVE_TO_TOKENS: TestParams<SwapActionParams> = {
