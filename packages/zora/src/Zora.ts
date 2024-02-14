@@ -4,7 +4,12 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
-import { type Address, getAddress } from 'viem'
+import {
+  type Address,
+  getAddress,
+  type TransactionRequest,
+  encodeFunctionData,
+} from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
   UNIVERSAL_MINTER_ABI,
@@ -74,6 +79,42 @@ export const mint = async (
       ],
     },
   })
+}
+
+export const getMintIntent = async (
+  mint: MintIntentParams,
+): Promise<TransactionRequest> => {
+  const { contractAddress, tokenId, amount, recipient } = mint
+  let data
+  if (tokenId != 0) {
+    const mintArgs = {
+      tokenRecipient: recipient,
+      quantity: amount,
+      message: '',
+    }
+    // Assume it's an 1155 mint
+    data = encodeFunctionData({
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'purchase',
+      args: [mintArgs],
+    })
+  } else {
+    const purchaseArgs = {
+      quantity: amount,
+    }
+    // Assume it's a 721 mint
+    data = encodeFunctionData({
+      abi: ZORA_MINTER_ABI_721,
+      functionName: 'purchase',
+      args: [purchaseArgs],
+    })
+  }
+
+  return {
+    from: recipient,
+    to: contractAddress,
+    data,
+  }
 }
 
 export const getSupportedTokenAddresses = async (
