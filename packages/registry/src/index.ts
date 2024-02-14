@@ -2,7 +2,6 @@ import {
   type ActionParams,
   ActionType,
   type BridgeActionParams,
-  type IActionPlugin,
   PluginActionNotImplementedError,
   type MintActionParams,
   type OptionsActionParams,
@@ -44,6 +43,7 @@ import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { Mux } from '@rabbitholegg/questdk-plugin-mux'
 import { ENTRYPOINT } from './contract-addresses'
+import type { IntentParams, MintIntentParams, IActionPlugin } from '../../utils/src/types/'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -84,6 +84,23 @@ export const getPlugin = (pluginId: string) => {
     throw new Error(`Unknown plugin "${pluginId}"`)
   }
   return plugin
+}
+
+export const getTxIntent = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: IntentParams
+) => {
+  switch (actionType) {
+    case ActionType.Mint:
+      if (plugin.getMintIntent !== undefined) {
+        return plugin.getMintIntent(params as unknown as MintIntentParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
 }
 
 export const executePlugin = (
