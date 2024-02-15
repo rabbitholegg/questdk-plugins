@@ -61,7 +61,7 @@ describe('Given the soundxyz plugin', () => {
 })
 
 
-describe.only('getMintIntent', () => {
+describe('getMintIntent', () => {
   const test_address = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb';
   test('returns a TransactionRequest with correct properties', async () => {
     const mint: MintIntentParams = {
