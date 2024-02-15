@@ -18,6 +18,7 @@ import {
   isAddress,
   parseAbiParameters,
   slice,
+  type AbiFunction,
 } from 'viem'
 type OperatorKey = keyof typeof operators
 
@@ -217,7 +218,7 @@ export const handleAbiDecode = (context: any, filter: AbiFilter) => {
       abi: filter.$abi,
       name: functionName,
       args,
-    })
+    }) as AbiFunction
 
     const namedArgs = [...abiItem.inputs].reduce(
       (acc: Record<string, any>, input, index) => {
