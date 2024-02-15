@@ -146,7 +146,7 @@ describe('Given the zora plugin', () => {
   })
 })
 
-describe.only('Given the getMintIntent function', () => {
+describe('Given the getMintIntent function', () => {
   // Define the constant for the contract address
   const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
   const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890' // replace with a real address
