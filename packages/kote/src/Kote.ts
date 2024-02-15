@@ -4,45 +4,32 @@ import {
   type MintActionParams,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-
-/*
- * Function template for handling various blockchain action types.
- * It's adaptable for actions defined in ActionParams: Bridge, Swap, Stake, Mint, Delegate, Quest, Etc.
- * Duplicate and customize for each specific action type.
- * If you wish to use a different action other than swap, import one of the ActionParams types
- * from @rabbitholegg/questdk (ie: SwapActionParams) and change the function below to use
- * the action params you wish to use.
- */
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { VILLAGER_MINT_ADDRESS, VILLAGER_MINT_ABI } from './constants'
 
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
-  const { chainId, contractAddress } = mint
+  const { chainId, contractAddress, recipient } = mint
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId,
-    to: contractAddress,
-    input: [{
-      "inputs": [],
-      "name": "mintNormal",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }],
+    from: recipient,
+    to: contractAddress ?? VILLAGER_MINT_ADDRESS,
+    input: {
+      $abi: VILLAGER_MINT_ABI,
+    },
   })
 }
-
-
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-
-  return ["0x292ff0f0c19373dd9c50fabba574aaaf6e1bc11b"]
+  return [] // not needed for mint plugin
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return [42161]
+  return [Chains.ARBITRUM_ONE]
 }
