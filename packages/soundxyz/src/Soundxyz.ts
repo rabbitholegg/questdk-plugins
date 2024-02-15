@@ -38,7 +38,7 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { contractAddress, amount, recipient } = mint
+  const { contractAddress, recipient } = mint
 
   const mintTo = {
     edition: contractAddress,

@@ -76,9 +76,9 @@ describe('getMintIntent', () => {
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA, 
-    });
-  });
+      data: EXPECTED_ENCODED_DATA,
+    })
+  })
 
   test('throws an error if required parameters are missing', async () => {
     const mint: Partial<MintIntentParams> = {

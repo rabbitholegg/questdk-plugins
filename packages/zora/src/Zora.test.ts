@@ -165,9 +165,9 @@ describe.only('Given the getMintIntent function', () => {
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_1155, 
-    });
-  });
+      data: EXPECTED_ENCODED_DATA_1155,
+    })
+  })
 
   test('returns a TransactionRequest with correct properties when tokenId is 0', async () => {
     const mint: MintIntentParams = {
@@ -183,9 +183,9 @@ describe.only('Given the getMintIntent function', () => {
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_721, 
-    });
-  });
+      data: EXPECTED_ENCODED_DATA_721,
+    })
+  })
 
   test('throws an error if required parameters are missing', async () => {
     const mint: Partial<MintIntentParams> = {
