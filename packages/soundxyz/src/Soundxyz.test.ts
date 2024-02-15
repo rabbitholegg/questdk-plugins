@@ -5,7 +5,7 @@ import {
   passingTestCases,
   failingTestCases,
   OP_SUPERMINTER_V2,
-  EXPECTED_ENCODED_DATA
+  EXPECTED_ENCODED_DATA,
 } from './test-transactions'
 import { Chains } from './utils'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
@@ -60,9 +60,8 @@ describe('Given the soundxyz plugin', () => {
   })
 })
 
-
 describe('getMintIntent', () => {
-  const test_address = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb';
+  const test_address = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
   test('returns a TransactionRequest with correct properties', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
@@ -70,24 +69,24 @@ describe('getMintIntent', () => {
       contractAddress: SUPERMINTER.toLowerCase() as Address,
       amount: BigInt('10'),
       recipient: test_address,
-    };
+    }
 
-    const result = await getMintIntent(mint);
+    const result = await getMintIntent(mint)
 
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
       data: EXPECTED_ENCODED_DATA, // replace with expected data if known
-    });
-  });
+    })
+  })
 
   test('throws an error if required parameters are missing', async () => {
     const mint: Partial<MintIntentParams> = {
       contractAddress: test_address,
       amount: BigInt('10'),
       // recipient is missing
-    };
+    }
 
-    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow();
-  });
-});
+    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+  })
+})

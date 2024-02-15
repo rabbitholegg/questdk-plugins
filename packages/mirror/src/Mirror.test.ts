@@ -50,9 +50,8 @@ describe('Given the mirror plugin', () => {
   })
 })
 
-
 describe.only('getMintIntent', () => {
-  const test_address = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb';
+  const test_address = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
   test('returns a TransactionRequest with correct properties', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
@@ -60,24 +59,24 @@ describe.only('getMintIntent', () => {
       contractAddress: '0x05b52003e4b3ce431f467de89a1d0b82b663fc6b',
       amount: BigInt('10'),
       recipient: test_address,
-    };
+    }
 
-    const result = await getMintIntent(mint);
+    const result = await getMintIntent(mint)
 
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
       data: EXPECTED_ENCODED_DATA, // replace with expected data if known
-    });
-  });
+    })
+  })
 
   test('throws an error if required parameters are missing', async () => {
     const mint: Partial<MintIntentParams> = {
       contractAddress: test_address,
       amount: BigInt('10'),
       // recipient is missing
-    };
+    }
 
-    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow();
-  });
-});
+    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+  })
+})
