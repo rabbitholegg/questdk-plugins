@@ -1,5 +1,29 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.62
+
+### Patch Changes
+
+- Updated dependencies [[`14ab4a0`](https://github.com/rabbitholegg/questdk-plugins/commit/14ab4a0f536ab7a21f3502faf57a7ee2404b08e1)]:
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.17
+
+## 1.0.0-alpha.61
+
+### Patch Changes
+
+- Updated dependencies [[`88d3496`](https://github.com/rabbitholegg/questdk-plugins/commit/88d349651a4aba3d75fd27371eb97878974df860), [`2341dd7`](https://github.com/rabbitholegg/questdk-plugins/commit/2341dd7c8cebc454ac0afc413c7fa123714ecdbd)]:
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.22
+
+## 1.0.0-alpha.60
+
+### Patch Changes
+
+- Updated dependencies [[`5676053`](https://github.com/rabbitholegg/questdk-plugins/commit/5676053599e47b8888a243c2b5385b322ae206d1), [`415e400`](https://github.com/rabbitholegg/questdk-plugins/commit/415e400e0d612cfab5d52d7c9a31489c6e8694d2), [`22dc15b`](https://github.com/rabbitholegg/questdk-plugins/commit/22dc15b4fa8618da325011f433919a303fa9ca9d)]:
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.17
+
 ## 1.0.0-alpha.59
 
 ### Patch Changes

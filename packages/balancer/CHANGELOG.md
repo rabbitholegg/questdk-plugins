@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-balancer
 
+## 1.0.0-alpha.13
+
+### Minor Changes
+
+- [#206](https://github.com/rabbitholegg/questdk-plugins/pull/206) [`5676053`](https://github.com/rabbitholegg/questdk-plugins/commit/5676053599e47b8888a243c2b5385b322ae206d1) Thanks [@mmackz](https://github.com/mmackz)! - use utils package
+
 ## 1.0.0-alpha.12
 
 ### Patch Changes

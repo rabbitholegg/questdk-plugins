@@ -25,6 +25,8 @@
     "dull-cows-call",
     "early-lies-clap",
     "eight-plants-visit",
+    "eight-taxis-report",
+    "five-jobs-pump",
     "five-kids-search",
     "flat-adults-wash",
     "fluffy-adults-invite",
@@ -32,6 +34,7 @@
     "gold-socks-dream",
     "good-zebras-jam",
     "great-ducks-greet",
+    "green-years-admire",
     "healthy-bugs-enjoy",
     "hip-mirrors-divide",
     "hungry-squids-drop",
@@ -90,6 +93,7 @@
     "sour-boxes-reflect",
     "spicy-dancers-attend",
     "spotty-apes-decide",
+    "spotty-squids-marry",
     "stale-needles-try",
     "strong-kiwis-crash",
     "tasty-bobcats-clean",
@@ -98,6 +102,7 @@
     "tender-grapes-taste",
     "tender-parents-work",
     "tough-cooks-hammer",
+    "tough-insects-know",
     "tricky-moons-hope",
     "twelve-kiwis-destroy",
     "twelve-mice-sin",
@@ -105,6 +110,8 @@
     "two-pandas-jump",
     "unlucky-dolphins-stare",
     "unlucky-impalas-shake",
+    "unlucky-tigers-deny",
+    "weak-monkeys-dance",
     "wet-toes-prove",
     "wicked-readers-clean",
     "wicked-spoons-leave",
@@ -148,6 +155,7 @@
     "@rabbitholegg/questdk-plugin-pendle": "1.0.0-alpha.7",
     "@rabbitholegg/questdk-plugin-utils": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-boost": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-llama": "1.0.0-alpha.8"
+    "@rabbitholegg/questdk-plugin-llama": "1.0.0-alpha.8",
+    "@rabbitholegg/create-plugin": "1.0.0"
   }
 }

@@ -11,6 +11,7 @@ import {
   type StakeActionParams,
   type SwapActionParams,
   type TransactionFilter,
+  type VoteActionParams,
 } from '@rabbitholegg/questdk'
 
 import { Across } from '@rabbitholegg/questdk-plugin-across'
@@ -99,11 +100,17 @@ export const executePlugin = (
 ): Promise<TransactionFilter | PluginActionNotImplementedError> => {
   switch (actionType) {
     case ActionType.Bridge:
-      return plugin.bridge(params as unknown as BridgeActionParams)
+      if (plugin.bridge === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.bridge(params as unknown as BridgeActionParams)
     case ActionType.Swap:
-      return plugin.swap(params as unknown as SwapActionParams)
+      if (plugin.swap === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.swap(params as unknown as SwapActionParams)
     case ActionType.Mint:
-      return plugin.mint(params as unknown as MintActionParams)
+      if (plugin.mint === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.mint(params as unknown as MintActionParams)
     case ActionType.Delegate: {
       if (plugin.delegate === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
@@ -123,6 +130,11 @@ export const executePlugin = (
       if (plugin.options === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.options(params as unknown as OptionsActionParams)
+    }
+    case ActionType.Vote: {
+      if (plugin.vote === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.vote(params as unknown as VoteActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
