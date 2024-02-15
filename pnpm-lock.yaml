@@ -219,6 +219,9 @@ importers:
 
   packages/mirror:
     devDependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
@@ -400,12 +403,18 @@ importers:
         specifier: workspace:*
         version: link:../zora
     devDependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
 
   packages/soundxyz:
     devDependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
@@ -535,6 +544,9 @@ importers:
         specifier: 0.2.12
         version: 0.2.12(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.3)
     devDependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
