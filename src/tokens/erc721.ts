@@ -1,6 +1,6 @@
+import fetchQuestActionParams from '../quests/fetchQuestData.js'
 import axios from 'axios'
 import { type Address, type PublicClient } from 'viem'
-import fetchQuestActionParams from '../quests/fetchQuestData.js'
 
 /**
  * Fetches ERC721 token metadata from a given contract.

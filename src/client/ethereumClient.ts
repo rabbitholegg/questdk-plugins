@@ -1,15 +1,14 @@
-import { createClient, http, type PublicClient } from 'viem'
-import {
-  fetchERC1155Media,
-  fetchERC1155Metadata,
-  fetchERC1155MetadataByUUID,
-} from '../tokens/erc1155.js'
 import {
   fetchERC721Media,
   fetchERC721Metadata,
   fetchERC721MetadataByUUID,
 } from '../tokens/erc721.js'
-
+import {
+  fetchERC1155Media,
+  fetchERC1155Metadata,
+  fetchERC1155MetadataByUUID,
+} from '../tokens/erc1155.js'
+import { type PublicClient, createClient, http } from 'viem'
 /**
  * Initializes an Ethereum client with the specified RPC URL and provides methods for ERC721 and ERC1155 token interactions.
  * @param {string} rpcUrl - The RPC URL for connecting to the Ethereum network.
