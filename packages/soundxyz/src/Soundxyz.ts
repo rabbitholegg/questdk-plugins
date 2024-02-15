@@ -3,7 +3,7 @@ import {
   type MintActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { encodeFunctionData, type Address, type TransactionRequest } from 'viem'
+import { encodeFunctionData, type Address, type TransactionRequest, zeroAddress, zeroHash } from 'viem'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 import { Chains } from './utils'
 import type { MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
@@ -40,22 +40,22 @@ export const getMintIntent = async (
     scheduleNum: 0,
     to: recipient,
     quantity: 1,
-    allowlisted: '0x0',
+    allowlisted: zeroAddress,
     allowlistedQuantity: 0,
-    allowlistProof: ['0x0'],
+    allowlistProof: [zeroHash],
     signedPrice: 0,
     signedQuantity: 0,
     signedClaimTicket: 0,
     signedDeadline: 0,
-    signature: '0x0',
-    affiliate: '0x0',
-    affiliateProof: ['0x0'],
+    signature: zeroHash,
+    affiliate: zeroAddress,
+    affiliateProof: [zeroHash],
     attributionId: 0,
   }
 
   const data = encodeFunctionData({
     abi: SUPERMINTER_ABI,
-    functionName: 'purchase',
+    functionName: 'mintTo',
     args: [mintTo],
   })
 
