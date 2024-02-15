@@ -1,5 +1,5 @@
 import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
-import { Chains } from './utils'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 const ethereumTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
@@ -84,8 +84,8 @@ const baseTokenAddresses: Address[] = [
 export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.ETHEREUM]: ethereumTokenAddresses,
   [Chains.OPTIMISM]: optimismTokenAddresses,
-  [Chains.ARBITRUM]: arbitrumTokenAddresses,
-  [Chains.POLYGON]: polygonTokenAddresses,
-  [Chains.ZKSYNC_ERA]: zkSyncEraTokenAddresses,
+  [Chains.ARBITRUM_ONE]: arbitrumTokenAddresses,
+  [Chains.POLYGON_POS]: polygonTokenAddresses,
+  [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
   [Chains.BASE]: baseTokenAddresses,
 }

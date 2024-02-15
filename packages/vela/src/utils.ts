@@ -1,61 +1,8 @@
-import {
-  type ActionParams,
-  type FilterOperator,
-  OrderType,
-} from '@rabbitholegg/questdk'
-import type { Address, Hash } from 'viem'
+import { type FilterOperator, OrderType } from '@rabbitholegg/questdk'
+import type { Address } from 'viem'
 import { TOKEN_TO_ID } from './contract-addresses'
+import { TOKENFARM_ABI, TOKENFARM_ABI2 } from './abi'
 import type { BitmaskFilter } from '@rabbitholegg/questdk/dist/types/filter/types'
-
-export enum Chains {
-  ARBITRUM_ONE = 42161,
-  BASE = 8453,
-}
-
-interface Transaction {
-  chainId: number
-  from: Address
-  hash?: Hash
-  input: string
-  to: Address
-  value: string
-}
-
-export interface TestCase<T extends ActionParams> {
-  transaction: Transaction
-  params: T
-  description: string
-}
-
-export type TestParams<T extends ActionParams> = {
-  transaction: Transaction
-  params: T
-}
-
-/**
- * Creates a test case object for a given action and transaction.
- *
- * This function takes a `TestParams` object that includes both a `Transaction` and
- * `ActionParams`, a description of the test case, and an optional set of overrides
- * for the action parameters. It returns a `TestCase` object that contains the transaction,
- * the combined action parameters with any overrides applied, and the description.
- *
- * @param {TestParams<T>} testParams - An object containing the transaction and action parameters.
- * @param {string} description - A brief description of the test case.
- * @param {Partial<T>} [overrides] - Optional overrides for the action parameters.
- * @returns {TestCase<T>} A test case object with the transaction, params, and description.
- */
-export function createTestCase<T extends ActionParams>(
-  testParams: TestParams<T>,
-  description: string,
-  overrides: Partial<T> = {},
-): TestCase<T> {
-  return {
-    transaction: testParams.transaction,
-    params: { ...testParams.params, ...overrides },
-    description,
-  }
-}
 
 type Amount = FilterOperator | BigInt | number | string | undefined
 
@@ -123,4 +70,48 @@ export function getOrderTypePacked(
       },
     })),
   }
+}
+
+export function getOrderType(
+  orderType: OrderType | undefined,
+): { _orderType: undefined } | { $or: { _orderType: number }[] } | undefined {
+  if (!orderType) return { _orderType: undefined }
+  const orderTypeValues = {
+    [OrderType.Market]: {
+      $or: [{ _orderType: 0 }, { _orderType: 2 }],
+    },
+
+    [OrderType.Limit]: {
+      $or: [{ _orderType: 1 }, { _orderType: 3 }],
+    },
+  }
+  return orderTypeValues[orderType]
+}
+
+export function getAmount(amount: Amount): FilterOperator | undefined {
+  if (amount === undefined) return undefined
+  const multiplier = BigInt(10 ** 12)
+  if (typeof amount === 'object') {
+    const [operator, value] = Object.entries(amount)[0]
+    if (operator === '$lte' || operator === '$lt') {
+      return { [operator]: (BigInt(value) + 1n) * multiplier }
+    }
+    return { [operator]: BigInt(value) * multiplier }
+  }
+  return BigInt(amount) * multiplier
+}
+
+export function getStakeInputs(token?: Address, amount?: FilterOperator) {
+  if (!token)
+    return {
+      $or: [
+        { $abi: TOKENFARM_ABI, _amount: amount },
+        { $abi: TOKENFARM_ABI2, _amount: amount },
+      ],
+    }
+  if (token?.toLowerCase() === '0xc5b2d9fda8a82e8dcecd5e9e6e99b78a9188eb05')
+    return { $abi: TOKENFARM_ABI, _amount: amount }
+  if (token?.toLowerCase() === '0x088cd8f5ef3652623c22d48b1605dcfe860cd704')
+    return { $abi: TOKENFARM_ABI2, _amount: amount }
+  return { $abi: null } // fail case. It should never reach this unless an invalid token is used.
 }

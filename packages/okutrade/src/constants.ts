@@ -1,11 +1,11 @@
-import { Chains } from './utils'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 export const CHAIN_ID_ARRAY = [
   Chains.ETHEREUM,
   Chains.OPTIMISM,
-  Chains.ARBITRUM,
-  Chains.POLYGON,
-  Chains.ZKSYNC_ERA,
+  Chains.ARBITRUM_ONE,
+  Chains.POLYGON_POS,
+  Chains.ZK_SYNC_ERA,
   Chains.BASE,
 ] as number[]
 

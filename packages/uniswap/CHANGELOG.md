@@ -1,5 +1,29 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- [#211](https://github.com/rabbitholegg/questdk-plugins/pull/211) [`22dc15b`](https://github.com/rabbitholegg/questdk-plugins/commit/22dc15b4fa8618da325011f433919a303fa9ca9d) Thanks [@Quazia](https://github.com/Quazia)! - Feat(uniswap): add degen
+
+## 1.0.0-alpha.16
+
+### Minor Changes
+
+- [#180](https://github.com/rabbitholegg/questdk-plugins/pull/180) [`2d042c7`](https://github.com/rabbitholegg/questdk-plugins/commit/2d042c7f0f45665a631f16c3e7870eb76968c138) Thanks [@MackeDev](https://github.com/MackeDev)! - add swap support for macke
+
+### Patch Changes
+
+- Updated dependencies [[`30c9913`](https://github.com/rabbitholegg/questdk-plugins/commit/30c99133337b9986d28081baad40186285ae0559)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.5
+
+## 1.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [[`9f081c7`](https://github.com/rabbitholegg/questdk-plugins/commit/9f081c7e89479aa8e29abd8d36908515dfc16e3b), [`85c8cd8`](https://github.com/rabbitholegg/questdk-plugins/commit/85c8cd82070ba9a17f5181183533b4f1a5b117d7), [`9fe746a`](https://github.com/rabbitholegg/questdk-plugins/commit/9fe746ad29ba042d40dc8ab610cd531c83a878c3)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.4
+
 ## 1.0.0-alpha.14
 
 ### Patch Changes

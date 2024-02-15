@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- [#215](https://github.com/rabbitholegg/questdk-plugins/pull/215) [`14ab4a0`](https://github.com/rabbitholegg/questdk-plugins/commit/14ab4a0f536ab7a21f3502faf57a7ee2404b08e1) Thanks [@mmackz](https://github.com/mmackz)! - update universal router contract address for base
+
+## 1.0.0-alpha.16
+
+### Patch Changes
+
+- Updated dependencies [[`30c9913`](https://github.com/rabbitholegg/questdk-plugins/commit/30c99133337b9986d28081baad40186285ae0559)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.5
+
+## 1.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [[`9f081c7`](https://github.com/rabbitholegg/questdk-plugins/commit/9f081c7e89479aa8e29abd8d36908515dfc16e3b), [`85c8cd8`](https://github.com/rabbitholegg/questdk-plugins/commit/85c8cd82070ba9a17f5181183533b4f1a5b117d7), [`9fe746a`](https://github.com/rabbitholegg/questdk-plugins/commit/9fe746ad29ba042d40dc8ab610cd531c83a878c3)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.4
+
 ## 1.0.0-alpha.14
 
 ### Patch Changes

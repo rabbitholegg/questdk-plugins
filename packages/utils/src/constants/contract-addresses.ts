@@ -1,7 +1,7 @@
 import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
 import { Chains } from './chain-ids'
 
-const ethereumTokenAddresses: Address[] = [
+export const ethereumTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
   '0x6B175474E89094C44Da98b954EedeAC495271d0F', // DAI
   '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // USDC
@@ -15,7 +15,7 @@ const ethereumTokenAddresses: Address[] = [
   '0xd4d42F0b6DEF4CE0383636770eF773390d85c61A', // SUSHI
 ]
 
-const optimismTokenAddresses: Address[] = [
+export const optimismTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
   '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1', // DAI
   '0xFdb794692724153d1488CcdBE0C56c252596735F', // LIDO
@@ -28,7 +28,7 @@ const optimismTokenAddresses: Address[] = [
   '0x4200000000000000000000000000000000000006', // WETH
 ]
 
-const polygonTokenAddresses: Address[] = [
+export const polygonTokenAddresses: Address[] = [
   ETH_ADDRESS, // MATIC
   '0x9a71012B13CA4d3D0Cdc72A177DF3ef03b0E76A3', // BAL
   '0x8505b9d2254A7Ae468c0E9dd10Ccea3A837aef5c', // COMP
@@ -43,7 +43,7 @@ const polygonTokenAddresses: Address[] = [
   '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', // WMATIC
 ]
 
-const baseTokenAddresses: Address[] = [
+export const baseTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
   '0x4158734D47Fc9692176B5085E0F52ee0Da5d47F1', // BAL
   '0x2Ae3F1Ec7F1F5012CFEab0185bfc7aa3cf0DEc22', // cbETH
@@ -53,7 +53,7 @@ const baseTokenAddresses: Address[] = [
   '0x4200000000000000000000000000000000000006', // WETH
 ]
 
-const arbitrumTokenAddresses: Address[] = [
+export const arbitrumTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
   '0x912CE59144191C1204E64559FE8253a0e49E6548', // ARB
   '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1', // DAI
@@ -65,10 +65,17 @@ const arbitrumTokenAddresses: Address[] = [
   '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
 ]
 
+const zkSyncEraTokenAddresses: Address[] = [
+  ETH_ADDRESS, // ETH
+  '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4', // USDC
+  '0x493257fD37EDB34451f62EDf8D2a0C418852bA4C', // USDT
+]
+
 export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.ETHEREUM]: ethereumTokenAddresses,
   [Chains.OPTIMISM]: optimismTokenAddresses,
   [Chains.ARBITRUM_ONE]: arbitrumTokenAddresses,
   [Chains.POLYGON_POS]: polygonTokenAddresses,
   [Chains.BASE]: baseTokenAddresses,
+  [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
 }

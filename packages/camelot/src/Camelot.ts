@@ -4,7 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY, ARBITRUM_CHAIN_ID } from './chain-ids'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import { buildV2PathQuery, buildV3PathQuery, Tokens } from './utils'
 import {
   CAMELOT_V2_ABI,
@@ -19,6 +19,7 @@ import {
   PARASWAP_ROUTER,
   INTERNAL_ETH_ADDRESS,
 } from './contract-addresses'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 const PARASWAP_PARTNER = '0x353D2d14Bb674892910685520Ac040f560CcBC06'
 
@@ -159,7 +160,7 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   // Only return supported tokens for ARBITRUM_CHAIN_ID
-  return _chainId === ARBITRUM_CHAIN_ID ? DEFAULT_TOKEN_LIST : []
+  return _chainId === Chains.ARBITRUM_ONE ? DEFAULT_TOKEN_LIST : []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {

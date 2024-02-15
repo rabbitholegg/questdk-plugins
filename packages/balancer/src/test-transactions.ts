@@ -3,7 +3,11 @@ import {
   GreaterThanOrEqual,
   type SwapActionParams,
 } from '@rabbitholegg/questdk'
-import { type TestParams, createTestCase, Chains } from './utils'
+import {
+  type TestParams,
+  createTestCase,
+  Chains,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { VAULT_CONTRACT } from './constants'
 
 export const POLYGON_SWAP: TestParams<SwapActionParams> = {
