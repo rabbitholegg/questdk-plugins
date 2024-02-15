@@ -9,16 +9,16 @@ import type {
   TransactionFilter,
 } from './types.js'
 import {
+  type AbiFunction,
   type Address,
   type TransactionEIP1559,
   decodeAbiParameters,
   decodeFunctionData,
   getAbiItem,
-  getFunctionSelector,
   isAddress,
   parseAbiParameters,
   slice,
-  type AbiFunction,
+  toFunctionSelector,
 } from 'viem'
 type OperatorKey = keyof typeof operators
 
@@ -254,7 +254,7 @@ export const handleAbstractAbiDecode = (
   for (let i = 0; i < elementCount; i++) {
     const abiItem = $abiAbstract![i]
     if (abiItem.type === 'function') {
-      const functionSelector = getFunctionSelector(abiItem)
+      const functionSelector = toFunctionSelector(abiItem)
       // We want to omit the leading 0x from the function selector
       const functionSelectorSubstring = functionSelector.substring(2)
       const index = contextMap.get(functionSelectorSubstring)
