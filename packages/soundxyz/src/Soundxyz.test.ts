@@ -78,13 +78,12 @@ describe('getMintIntent', () => {
       from: mint.recipient,
       to: mint.contractAddress,
       data: EXPECTED_ENCODED_DATA, // replace with expected data if known
-      value: mint.amount,
     });
   });
 
   test('throws an error if required parameters are missing', async () => {
     const mint: Partial<MintIntentParams> = {
-      contractAddress: '0x123',
+      contractAddress: test_address,
       amount: BigInt('10'),
       // recipient is missing
     };
