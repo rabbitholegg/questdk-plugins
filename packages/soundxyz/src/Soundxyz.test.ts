@@ -77,7 +77,7 @@ describe('getMintIntent', () => {
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA, // replace with expected data if known
+      data: EXPECTED_ENCODED_DATA, 
     });
   });
 

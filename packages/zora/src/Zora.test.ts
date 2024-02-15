@@ -161,7 +161,7 @@ describe.only('Given the getMintIntent function', () => {
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_1155, // replace with expected data if known
+      data: EXPECTED_ENCODED_DATA_1155, 
     });
   });
 
@@ -179,7 +179,7 @@ describe.only('Given the getMintIntent function', () => {
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_721, // replace with expected data if known
+      data: EXPECTED_ENCODED_DATA_721, 
     });
   });
 
