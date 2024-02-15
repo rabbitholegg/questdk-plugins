@@ -24,24 +24,25 @@ export const mint = async (
   })
 }
 
-export const getMintIntent = async (mint: MintIntentParams): Promise<TransactionRequest> => {
-  const { contractAddress, recipient } = mint;
+export const getMintIntent = async (
+  mint: MintIntentParams,
+): Promise<TransactionRequest> => {
+  const { contractAddress, recipient } = mint
 
   const data = encodeFunctionData({
     abi: COLLECT_ENTRY_ABI,
     functionName: 'purchase',
-    args: [recipient, mint.tokenId.toString(), recipient]
-  });
+    args: [recipient, mint.tokenId.toString(), recipient],
+  })
   // Note: Do we need to pass back value here?
   const transaction: TransactionRequest = {
     to: contractAddress,
     from: recipient,
     data,
-  };
-  
-  return transaction;
-}
+  }
 
+  return transaction
+}
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
