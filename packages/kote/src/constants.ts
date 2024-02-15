@@ -8,4 +8,5 @@ export const VILLAGER_MINT_ABI = [
   },
 ]
 
-export const VILLAGER_MINT_ADDRESS = '0x292Ff0F0c19373dd9c50faBba574Aaaf6E1BC11B'
+export const VILLAGER_MINT_ADDRESS =
+  '0x292Ff0F0c19373dd9c50faBba574Aaaf6E1BC11B'

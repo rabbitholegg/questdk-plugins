@@ -46,7 +46,7 @@ import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { Boost } from '@rabbitholegg/questdk-plugin-boost'
-import { Kote } from "@rabbitholegg/questdk-plugin-kote";
+import { Kote } from '@rabbitholegg/questdk-plugin-kote'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -82,7 +82,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Vela.pluginId]: Vela,
   [Boost.pluginId]: Boost,
   [Llama.pluginId]: Llama,
-  [Kote.pluginId]: Kote
+  [Kote.pluginId]: Kote,
 }
 
 export const getPlugin = (pluginId: string) => {

@@ -5,7 +5,6 @@ import { mint } from './Kote'
 
 describe('Given the boost plugin', () => {
   describe('When handling the mint action', () => {
-
     describe('should pass filter with valid transactions', () => {
       passingTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
