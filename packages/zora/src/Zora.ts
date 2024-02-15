@@ -9,6 +9,7 @@ import {
   getAddress,
   type TransactionRequest,
   encodeFunctionData,
+  zeroHash,
 } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
@@ -87,26 +88,24 @@ export const getMintIntent = async (
   const { contractAddress, tokenId, amount, recipient } = mint
   let data
   if (tokenId != 0) {
-    const mintArgs = {
-      tokenRecipient: recipient,
-      quantity: amount,
-      message: '',
-    }
+    const mintArgs = [
+      recipient,
+      tokenId,
+      amount,
+      zeroHash,
+    ]
     // Assume it's an 1155 mint
     data = encodeFunctionData({
       abi: ZORA_MINTER_ABI_1155,
-      functionName: 'purchase',
-      args: [mintArgs],
+      functionName: 'mint',
+      args: mintArgs,
     })
   } else {
-    const purchaseArgs = {
-      quantity: amount,
-    }
     // Assume it's a 721 mint
     data = encodeFunctionData({
       abi: ZORA_MINTER_ABI_721,
       functionName: 'purchase',
-      args: [purchaseArgs],
+      args: [amount],
     })
   }
 
