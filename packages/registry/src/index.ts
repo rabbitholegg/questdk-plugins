@@ -50,7 +50,7 @@ import type {
   IntentParams,
   MintIntentParams,
   IActionPlugin,
-} from '../../utils/src/types/'
+} from '@rabbitholegg/questdk-plugin-utils'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,

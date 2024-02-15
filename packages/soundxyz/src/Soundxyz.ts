@@ -63,7 +63,7 @@ export const getMintIntent = async (
     from: recipient,
     to: contractAddress,
     data,
-    value: amount.toString(),
+    value: amount,
   }
 }
 

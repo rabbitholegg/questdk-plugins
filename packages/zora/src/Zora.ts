@@ -17,7 +17,7 @@ import {
   ZORA_MINTER_ABI_721,
 } from './abi'
 import type { Chains } from './utils'
-
+import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
