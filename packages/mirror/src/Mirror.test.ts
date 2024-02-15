@@ -66,7 +66,7 @@ describe.only('getMintIntent', () => {
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA, 
+      data: EXPECTED_ENCODED_DATA,
     })
   })
 
