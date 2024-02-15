@@ -1,12 +1,14 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { mint } from './Mirror'
+import { getMintIntent, mint } from './Mirror'
 import {
   passingTestCases,
   failingTestCases,
   OP_COLLECT_ENTRY,
+  EXPECTED_ENCODED_DATA,
 } from './test-transactions'
 import { COLLECT_ENTRY_ABI } from './abi'
+import { MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the mirror plugin', () => {
   describe('When handling the mint action', () => {
@@ -47,3 +49,35 @@ describe('Given the mirror plugin', () => {
     })
   })
 })
+
+
+describe.only('getMintIntent', () => {
+  const test_address = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb';
+  test('returns a TransactionRequest with correct properties', async () => {
+    const mint: MintIntentParams = {
+      chainId: 1,
+      tokenId: 0,
+      contractAddress: '0x05b52003e4b3ce431f467de89a1d0b82b663fc6b',
+      amount: BigInt('10'),
+      recipient: test_address,
+    };
+
+    const result = await getMintIntent(mint);
+
+    expect(result).toEqual({
+      from: mint.recipient,
+      to: mint.contractAddress,
+      data: EXPECTED_ENCODED_DATA, // replace with expected data if known
+    });
+  });
+
+  test('throws an error if required parameters are missing', async () => {
+    const mint: Partial<MintIntentParams> = {
+      contractAddress: test_address,
+      amount: BigInt('10'),
+      // recipient is missing
+    };
+
+    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow();
+  });
+});
