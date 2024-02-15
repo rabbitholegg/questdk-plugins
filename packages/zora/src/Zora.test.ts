@@ -1,7 +1,11 @@
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 import { failingTestCases, passingTestCases } from './test-setup'
-import { BASIC_PURCHASE, EXPECTED_ENCODED_DATA_721, EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
+import {
+  BASIC_PURCHASE,
+  EXPECTED_ENCODED_DATA_721,
+  EXPECTED_ENCODED_DATA_1155,
+} from './test-transactions'
 import { getMintIntent, mint } from './Zora'
 import {
   ZORA_MINTER_ABI_1155,
@@ -144,8 +148,8 @@ describe('Given the zora plugin', () => {
 
 describe.only('Given the getMintIntent function', () => {
   // Define the constant for the contract address
-  const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb';
-  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'; // replace with a real address
+  const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890' // replace with a real address
 
   test('returns a TransactionRequest with correct properties when tokenId is not 0', async () => {
     const mint: MintIntentParams = {
@@ -154,9 +158,9 @@ describe.only('Given the getMintIntent function', () => {
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
-    };
+    }
 
-    const result = await getMintIntent(mint);
+    const result = await getMintIntent(mint)
 
     expect(result).toEqual({
       from: mint.recipient,
@@ -172,9 +176,9 @@ describe.only('Given the getMintIntent function', () => {
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
-    };
+    }
 
-    const result = await getMintIntent(mint);
+    const result = await getMintIntent(mint)
 
     expect(result).toEqual({
       from: mint.recipient,
@@ -188,8 +192,8 @@ describe.only('Given the getMintIntent function', () => {
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       // recipient is missing
-    };
+    }
 
-    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow();
-  });
-});
+    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+  })
+})

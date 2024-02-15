@@ -3,7 +3,13 @@ import {
   type MintActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { encodeFunctionData, type Address, type TransactionRequest, zeroAddress, zeroHash } from 'viem'
+import {
+  encodeFunctionData,
+  type Address,
+  type TransactionRequest,
+  zeroAddress,
+  zeroHash,
+} from 'viem'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 import { Chains } from './utils'
 import type { MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'

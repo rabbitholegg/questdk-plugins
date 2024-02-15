@@ -88,12 +88,7 @@ export const getMintIntent = async (
   const { contractAddress, tokenId, amount, recipient } = mint
   let data
   if (tokenId != 0) {
-    const mintArgs = [
-      recipient,
-      tokenId,
-      amount,
-      zeroHash,
-    ]
+    const mintArgs = [recipient, tokenId, amount, zeroHash]
     // Assume it's an 1155 mint
     data = encodeFunctionData({
       abi: ZORA_MINTER_ABI_1155,
