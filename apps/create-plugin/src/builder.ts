@@ -29,9 +29,8 @@ export async function createPlugin(params: BuilderParams) {
   console.log('Created a plugin for', cyan(`"${params.projectName}"`))
   console.log()
   console.log('run the following commands:')
-  console.log('cd ../..')
   console.log('pnpm i')
-  console.log('pnpm run build')
+  console.log('pnpm build')
   console.log()
   console.log(
     'View your new plugin todo list in the README, located at',
