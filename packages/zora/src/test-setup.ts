@@ -1,5 +1,5 @@
 import { getAddress } from 'viem'
-import { createTestCase } from './utils'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
   BASIC_PURCHASE,
   MINT_WITH_REWARDS,
