@@ -33,14 +33,7 @@ export type {
   TransactionFilter,
 } from './filter/types.js'
 
-export {
-  isRewardChainSupported,
-  getChainById,
-} from './utils/chains.js'
 export { compressJson } from './utils/compressJson.js'
-
-export { approveIfNeeded } from './quests/approveIfNeeded.js'
-export { QUEST_FACTORY_ADDRESS } from './quests/constants.js'
 
 export {
   GreaterThan,
