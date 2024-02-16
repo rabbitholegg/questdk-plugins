@@ -30,7 +30,7 @@
     "vitest": "0.33.0"
   },
   "dependencies": {
-    "@rabbitholegg/questdk": "2.0.0-alpha.34",
+    "@rabbitholegg/questdk": "2.0.0-alpha.35",
     "viem": "1.21.4",
     "axios": "1.5.0"
   },

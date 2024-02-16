@@ -13,8 +13,8 @@ importers:
   .:
     dependencies:
       '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.34
-        version: 2.0.0-alpha.34(typescript@5.3.3)
+        specifier: 2.0.0-alpha.35
+        version: 2.0.0-alpha.35(typescript@5.3.3)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -2647,8 +2647,8 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@rabbitholegg/questdk@2.0.0-alpha.34(typescript@5.3.3):
-    resolution: {integrity: sha512-MUajdp89TnBBpcIApubSoKJt+XV3UH3V1vr+TYLxgPXfZ3QCzbU2WVo5LUKs0dX1IUdS9KVLxtJW+EFwGWQl1Q==}
+  /@rabbitholegg/questdk@2.0.0-alpha.35(typescript@5.3.3):
+    resolution: {integrity: sha512-rkqHMhJHy6AmotlgOtzOYfw6m6NnRtJc0huR1uB+em/3hNmG7VuLQ3BWgeZOaYr56fXrFJZL1HLzZ4xDX3Lt3w==}
     peerDependencies:
       typescript: '>=5.1.6'
     peerDependenciesMeta:
