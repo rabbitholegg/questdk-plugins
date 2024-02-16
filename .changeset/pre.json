@@ -26,6 +26,7 @@
     "early-lies-clap",
     "eight-plants-visit",
     "eight-taxis-report",
+    "fifty-hounds-eat",
     "five-jobs-pump",
     "five-kids-search",
     "flat-adults-wash",
@@ -79,6 +80,7 @@
     "sharp-candles-live",
     "shiny-mirrors-sparkle",
     "shiny-pets-brush",
+    "shiny-toes-nail",
     "short-eagles-carry",
     "short-sloths-talk",
     "silent-rats-explode",
@@ -156,6 +158,7 @@
     "@rabbitholegg/questdk-plugin-utils": "1.0.0-alpha.1",
     "@rabbitholegg/questdk-plugin-boost": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-llama": "1.0.0-alpha.8",
-    "@rabbitholegg/create-plugin": "1.0.0"
+    "@rabbitholegg/create-plugin": "1.0.0",
+    "@rabbitholegg/questdk-plugin-kote": "1.0.0-alpha.0"
   }
 }
