@@ -7,7 +7,7 @@ type BuilderParams = {
   projectName: string
   chains: string[]
   tx: string
-  actionTypes: string[]
+  actionType: string
   publish: boolean
 }
 
@@ -21,8 +21,8 @@ export async function createPlugin(params: BuilderParams) {
   }
 
   registerHelpers()
-  await replaceProjectName(params)
   await setActionNames(params)
+  await replaceProjectName(params)
   await replaceFileNames(params)
   logBoostStars()
   console.log('Created a plugin for', cyan(`"${params.projectName}"`))
@@ -175,8 +175,15 @@ async function replaceFileNames(params: BuilderParams) {
 
   //rename project.ts
   const projectPath = path.join(dest, 'src/Project.ts.t')
-  await fs.rename(projectPath, path.join(dest, `src/${capitalize(params.projectName)}.ts`))
-  console.log(`\t ${arrow} finalized file ${cyan(`${capitalize(params.projectName)}.ts`)}!`)
+  await fs.rename(
+    projectPath,
+    path.join(dest, `src/${capitalize(params.projectName)}.ts`),
+  )
+  console.log(
+    `\t ${arrow} finalized file ${cyan(
+      `${capitalize(params.projectName)}.ts`,
+    )}!`,
+  )
   //rename project.test.ts
   const testPath = path.join(dest, 'src/Project.test.ts.t')
   await fs.rename(
@@ -184,7 +191,9 @@ async function replaceFileNames(params: BuilderParams) {
     path.join(dest, `src/${capitalize(params.projectName)}.test.ts`),
   )
   console.log(
-    `\t ${arrow} finalized file ${cyan(`${capitalize(params.projectName)}.test.ts`)}!`,
+    `\t ${arrow} finalized file ${cyan(
+      `${capitalize(params.projectName)}.test.ts`,
+    )}!`,
   )
 }
 
@@ -212,4 +221,11 @@ async function setActionNames(params: BuilderParams) {
   const projectTemplate = Handlebars.compile(project)
   await fs.writeFile(projectPath, projectTemplate(params))
   console.log(`\t ${arrow} created actions in file ${cyan('Project.ts')}!`)
+
+  //replace the action names in the project test file
+  const testPath = path.join(dest, 'src/Project.test.ts.t')
+  const testFile = await fs.readFile(testPath, 'utf8')
+  const testTemplate = Handlebars.compile(testFile)
+  await fs.writeFile(testPath, testTemplate(params))
+  console.log(`\t ${arrow} created actions in file ${cyan('Project.test.ts')}!`)
 }

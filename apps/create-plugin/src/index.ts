@@ -18,11 +18,10 @@ const _chainArray = _chainValues
 // structure available actiontypes into the format for prompts
 // and remove Deposit, Lend, and Other which are not currently supported
 const _actionValues = Object.values(ActionType)
-const _actionKeys = Object.keys(ActionType)
 const _actionArray = _actionValues
   .filter((value) => typeof value === 'string')
-  .map((value, index) => {
-    return { value: _actionKeys[index], title: value }
+  .map((value) => {
+    return { value, title: value }
   })
   .filter((value) => value.title !== 'deposit')
   .filter((value) => value.title !== 'lend')
@@ -81,10 +80,10 @@ const _questions = [
   //   initial: '',
   // },
   {
-    type: 'multiselect',
+    type: 'select',
     name: 'action',
     message:
-      'How would you describe the actions you want the user to take? (multi-select)',
+      'How would you describe the action you want the user to take?',
     initial: '',
     choices: _actionArray,
   },
@@ -112,7 +111,7 @@ async function run(): Promise<void> {
     projectName: _response.name,
     chains: _response.chain,
     tx: _response.tx,
-    actionTypes: _response.action,
+    actionType: _response.action,
     publish: _response.publish,
   })
 }

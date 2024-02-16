@@ -1,8 +1,6 @@
 import {
   type TransactionFilter,
-    {{#each actionTypes}}
-  type {{capitalize this}}ActionParams,
-  {{/each}}
+  type {{capitalize actionType}}ActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
@@ -17,8 +15,7 @@ import { Chains } from '@rabbitholegg/questdk-plugin-utils'
  * the action params you wish to use.
  */
 
-  {{#each actionTypes}}
-  export const {{lowercase this}} = async(_params: {{capitalize this}}ActionParams): Promise<TransactionFilter> => {
+  export const {{actionType}} = async(_params: {{capitalize actionType}}ActionParams): Promise<TransactionFilter> => {
 
     // the ActionParams for this function are populated in the Boost Manager when the actual Boost is launched.
     
@@ -36,9 +33,6 @@ import { Chains } from '@rabbitholegg/questdk-plugin-utils'
   })
 
   }
-
-  {{/each}}
-
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
