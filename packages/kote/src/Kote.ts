@@ -10,10 +10,8 @@ import { VILLAGER_MINT_ADDRESS, VILLAGER_MINT_ABI } from './constants'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  // This is the information we'll use to compose the Transaction object
   const { chainId, contractAddress, recipient } = mint
 
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
     chainId,
     from: recipient,

@@ -16,7 +16,7 @@ export const VILLAGER_MINT: TestParams<MintActionParams> = {
     value: '0',
   },
   params: {
-    chainId: Chains.ARBITRUM_ONE, // sepolia testnet
+    chainId: Chains.ARBITRUM_ONE,
     contractAddress: VILLAGER_MINT_ADDRESS,
     recipient: '0xa2dcb5b3a784f4772687e21b9395d4fb0213b252',
   },
