@@ -531,6 +531,9 @@ importers:
 
   packages/zora:
     dependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
       '@zoralabs/universal-minter':
         specifier: 0.2.12
         version: 0.2.12(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.3)

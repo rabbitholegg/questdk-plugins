@@ -11,14 +11,16 @@ import {
   ZORA_MINTER_ABI_1155,
   ZORA_MINTER_ABI_721,
 } from './abi'
-import type { Chains } from './utils'
 
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
-  const universalMinter = zoraUniversalMinterAddress[chainId as Chains]
+  const universalMinter =
+    zoraUniversalMinterAddress[
+      chainId as keyof typeof zoraUniversalMinterAddress
+    ]
 
   const mintContract = universalMinter
     ? { $or: [contractAddress.toLowerCase(), universalMinter.toLowerCase()] }
