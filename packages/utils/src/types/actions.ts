@@ -1,5 +1,9 @@
-import type { FilterOperator, TransactionFilter } from '@rabbitholegg/questdk-plugin-utils'
-import type { PluginActionNotImplementedError } from '../index.js'
+import type {
+  FilterOperator,
+  TransactionFilter,
+} from './filters'
+import type {
+    PluginActionNotImplementedError} from "../errors/"
 import { type Address } from 'viem'
 
 export type SwapActionParams = {
@@ -93,13 +97,13 @@ export interface IActionPlugin {
     chainId: number,
     task?: ActionType,
   ) => Promise<Address[]>
-  bridge?: (
+  bridge: (
     params: BridgeActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
-  swap?: (
+  swap: (
     params: SwapActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
-  mint?: (
+  mint: (
     params: MintActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   stake?: (
@@ -109,7 +113,7 @@ export interface IActionPlugin {
     params: DelegateActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   burn?: (
-    params: BurnActionParams,
+    params: DelegateActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   quest?: (
     params: QuestActionParams,
@@ -134,7 +138,6 @@ export enum ActionType {
   Lend = 'lend',
   Other = 'other',
   Options = 'options',
-  Vote = 'vote',
 }
 
 export enum OrderType {

@@ -1,6 +1,6 @@
 import type { Address, Hash } from 'viem'
 
-import type { ActionParams } from '@rabbitholegg/questdk'
+import type { ActionParams } from '../types'
 
 interface Transaction {
   chainId: number

@@ -2,7 +2,7 @@ import { type FilterOperator, OrderType } from '@rabbitholegg/questdk'
 import type { Address } from 'viem'
 import { TOKEN_TO_ID } from './contract-addresses'
 import { TOKENFARM_ABI, TOKENFARM_ABI2 } from './abi'
-import type { BitmaskFilter } from '@rabbitholegg/questdk/dist/types/filter/types'
+import type { BitmaskFilter } from '@rabbitholegg/questdk-plugin-utils'
 
 type Amount = FilterOperator | BigInt | number | string | undefined
 

@@ -4,7 +4,7 @@ export {
   type ChainMap,
 } from './constants.js'
 
-export { PluginActionNotImplementedError } from './errors/plugin.js'
+export { PluginActionNotImplementedError } from '@rabbitholegg/questdk-plugin-utils'
 
 export type {
   SwapActionParams,
@@ -31,7 +31,7 @@ export type {
   StringOperator,
   FilterOperator,
   TransactionFilter,
-} from './filter/types.js'
+} from '@rabbitholegg/questdk-plugin-utils'
 
 export { compressJson } from './utils/compressJson.js'
 

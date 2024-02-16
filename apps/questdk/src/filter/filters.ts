@@ -7,7 +7,7 @@ import type {
   FilterObject,
   NthFilter,
   TransactionFilter,
-} from './types.js'
+} from '@rabbitholegg/questdk-plugin-utils'
 import {
   type AbiFunction,
   type Address,

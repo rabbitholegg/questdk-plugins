@@ -15,4 +15,4 @@ export type {
   StringOperator,
   FilterOperator,
   TransactionFilter,
-} from './types.js'
+} from '@rabbitholegg/questdk-plugin-utils'
