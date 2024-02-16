@@ -30,7 +30,7 @@
     "vitest": "0.33.0"
   },
   "dependencies": {
-    "viem": "1.21.4",
+    "viem": "2.7.9",
     "axios": "1.5.0"
   },
   "pnpm": {
