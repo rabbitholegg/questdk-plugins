@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@paraswap/sdk": "^6.2.4",
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

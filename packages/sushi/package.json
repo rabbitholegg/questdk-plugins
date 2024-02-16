@@ -36,6 +36,9 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@sushiswap/core-sdk": "1.0.0-canary.34"
+    "@sushiswap/core-sdk": "1.0.0-canary.34",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
+  
   }
 }

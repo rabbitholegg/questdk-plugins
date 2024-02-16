@@ -37,6 +37,8 @@
   },
   "dependencies": {
     "@ethersproject/providers": "5.7.2",
-    "@mux-network/mux.js": "2.9.12"
+    "@mux-network/mux.js": "2.9.12",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

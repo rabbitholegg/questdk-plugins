@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@eth-optimism/contracts-ts": "0.15.0",
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }
