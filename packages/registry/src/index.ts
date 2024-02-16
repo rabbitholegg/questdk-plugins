@@ -18,7 +18,6 @@ import { Across } from '@rabbitholegg/questdk-plugin-across'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
 import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
 import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
-import { Boost } from '@rabbitholegg/questdk-plugin-boost'
 import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
@@ -46,6 +45,8 @@ import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { Boost } from '@rabbitholegg/questdk-plugin-boost'
+import { Kote } from '@rabbitholegg/questdk-plugin-kote'
 import { ENTRYPOINT } from './contract-addresses'
 
 export const plugins: Record<string, IActionPlugin> = {
@@ -81,6 +82,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Vela.pluginId]: Vela,
   [Boost.pluginId]: Boost,
   [Llama.pluginId]: Llama,
+  [Kote.pluginId]: Kote,
 }
 
 export const getPlugin = (pluginId: string) => {
