@@ -5,7 +5,8 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.codeActionsOnSave": {
     "quickfix.rome": "explicit",
-    "source.organizeImports.rome": "explicit"
+    "source.organizeImports.rome": "explicit",
+    "source.fixAll": "explicit"
   },
   "[json]": {
     "editor.defaultFormatter": "rome.rome"
