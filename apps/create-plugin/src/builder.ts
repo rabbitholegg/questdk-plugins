@@ -24,6 +24,7 @@ export async function createPlugin(params: BuilderParams) {
   await setActionNames(params)
   await replaceProjectName(params)
   await replaceFileNames(params)
+  await updateRegistry(params)
   logBoostStars()
   console.log('Created a plugin for', cyan(`"${params.projectName}"`))
   console.log()
@@ -228,4 +229,52 @@ async function setActionNames(params: BuilderParams) {
   const testTemplate = Handlebars.compile(testFile)
   await fs.writeFile(testPath, testTemplate(params))
   console.log(`\t ${arrow} created actions in file ${cyan('Project.test.ts')}!`)
+}
+
+export async function updateRegistry(params: BuilderParams) {
+  const filePath = path.join(
+    __dirname,
+    '../../../packages/',
+    'registry',
+    'src/index.ts',
+  )
+
+  const { projectName } = params
+
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const lines: string[] = data.split('\n');
+    const importIndex = lines.findIndex(line => line.includes('import { ENTRYPOINT } from \'./contract-addresses\''));
+    const newImport = `import { ${capitalize(projectName)} } from '@rabbitholegg/questdk-plugin-${projectName}';`;
+    lines.splice(importIndex, 0, newImport);
+    const pluginIndex = lines.findIndex(line => line.trim() === '}');
+    const newProperty = `  [${capitalize(projectName)}.pluginId]: ${capitalize(projectName)},`;
+    lines.splice(pluginIndex, 0, newProperty);
+
+    const newData = lines.join('\n');
+    fs.writeFileSync(filePath, newData, 'utf-8');
+  } catch (err) {
+    console.error(`Error updating index.ts: ${err}`);
+  }
+
+  // add plugin to registry package.json
+  const packagefilePath = path.join(
+    __dirname,
+    '../../../packages/',
+    'registry',
+    'package.json',
+  )
+  try {
+    const data = fs.readFileSync(packagefilePath, 'utf-8')
+    const json = JSON.parse(data)
+    const packages = json.dependencies
+    json.dependencies = {
+      ...packages,
+      [`@rabbitholegg/questdk-plugin-${params.projectName}`]: "workspace:*"
+    }
+    const newData = JSON.stringify(json, null, 2) + '\n'
+    fs.writeFileSync(packagefilePath, newData, 'utf-8')
+  } catch (err) {
+    console.error(`Error updating package.json: ${err}`)
+  }
 }
