@@ -1,5 +1,3 @@
-import { Command } from 'commander'
-import packageJson from '../package.json'
 import { createPlugin, logBoostStars } from './builder'
 const _prompts = require('prompts')
 const figlet = require('figlet')
@@ -8,7 +6,6 @@ import { ActionType } from '@rabbitholegg/questdk'
 
 // structure available chains into the format for prompts
 const _chainValues = Object.values(Chains)
-const _chainKeys = Object.keys(Chains)
 const _chainArray = _chainValues
   .filter((value) => typeof value === 'string')
   .map((value, _index) => {
@@ -26,28 +23,6 @@ const _actionArray = _actionValues
   .filter((value) => value.title !== 'deposit')
   .filter((value) => value.title !== 'lend')
   .filter((value) => value.title !== 'other')
-
-// TODO if/when our state gets more complicated we might want to use conf or something like that
-const _pluginName = ''
-
-const _program = new Command()
-_program
-  .version(packageJson.version)
-  .description('A CLI to create a new plugin for the Boost ecosystem')
-  .option('-n, --name  <value>', 'The name of the protocol or platform')
-  .option('-c, --chain  <value>', 'the name of the blockchain')
-  .option('-i, --id  <value>', 'the chain id')
-  .option(
-    '-t, --tx <value>',
-    'An example transaction hash of the action you want to create a plugin for',
-  )
-  .option(
-    '-a, --action <value>',
-    'List of actions to create a plugin for, this is used in the UI',
-  )
-  .parse(process.argv)
-
-const _options = _program.opts()
 
 const _questions = [
   {
@@ -74,13 +49,6 @@ const _questions = [
     message: 'What blockchains are the project on? (multi-select)',
     choices: _chainArray,
   },
-  // {
-  //   type: 'text',
-  //   name: 'tx',
-  //   message:
-  //     'Provide an example transaction hash for the action you want to create a plugin for',
-  //   initial: '',
-  // },
   {
     type: 'select',
     name: 'action',
