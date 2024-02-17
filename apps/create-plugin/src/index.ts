@@ -58,10 +58,12 @@ const _questions = [
       if (name.length < 1) {
         return 'Please enter a name'
       }
-      const invalidNameRegex = new RegExp('^(?:(?:@(?:[a-z0-9-*~][a-z0-9-*._~]*)?/[a-z0-9-._~])|[a-z0-9-~])[a-z0-9-._~]*$')
+      if (name.length >= 20) {
+        return 'Please enter a name less than 20 characters'
+      }
+      const invalidNameRegex = new RegExp(/^[a-zA-Z]+$/)
       if (!invalidNameRegex.test(name)) {
-        // See https://docs.npmjs.com/cli/v10/configuring-npm/package-json#name for name rules
-        return 'Please enter a valid node package name.'
+        return 'Please use PascalCase or camelCase with no spaces, numbers or special characters'
       }
       return true
     },

@@ -9,8 +9,8 @@ import {
 } from './{{capitalize projectName}}.js'
 
 export const {{capitalize projectName}} : IActionPlugin = {
-  pluginId: "{{projectName}}",
+  pluginId: "{{lowercase projectName}}",
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  {{lowercase actionType}}, 
+  {{actionType}}, 
 }

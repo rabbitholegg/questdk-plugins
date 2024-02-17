@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
 import { {{actionType}} } from './{{capitalize projectName}}'
 
-describe('Given the {{projectName}} plugin', () => {
+describe('Given the {{lowercase projectName}} plugin', () => {
   describe('When handling the {{actionType}} action', () => {
     describe('should return a valid action filter', () => {
       // test that a valid filter is returned, check the link for a specific example from the sound.xyz package

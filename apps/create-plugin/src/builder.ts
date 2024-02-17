@@ -73,7 +73,7 @@ async function copyDirectory(params: BuilderParams) {
     return false
   }
   // get the target directory location
-  const dest = path.join(__dirname, `../../../packages/${params.projectName}`)
+  const dest = path.join(__dirname, `../../../packages/${params.projectName.toLowerCase()}`)
   // if there is already a directory with the name throw an error
   if (await fs.pathExists(dest)) {
     console.error(
@@ -127,12 +127,12 @@ async function copyDirectory(params: BuilderParams) {
  */
 async function replaceProjectName(params: BuilderParams) {
   // get the target directory location
-  const dest = path.join(__dirname, `../../../packages/${params.projectName}`)
+  const dest = path.join(__dirname, `../../../packages/${params.projectName.toLowerCase()}`)
 
   // replace the project name in the package.json
   const packageJsonPath = path.join(dest, 'package.json')
   const packageJson = await fs.readJson(packageJsonPath)
-  packageJson.name = `@rabbitholegg/questdk-plugin-${params.projectName}`
+  packageJson.name = `@rabbitholegg/questdk-plugin-${params.projectName.toLowerCase()}`
   packageJson.version = '1.0.0-alpha.0'
   packageJson.private = !params.publish
   packageJson.description = `Plugin for ${params.projectName}`
@@ -166,7 +166,7 @@ async function replaceProjectName(params: BuilderParams) {
  */
 async function replaceFileNames(params: BuilderParams) {
   // get the target directory location
-  const dest = path.join(__dirname, `../../../packages/${params.projectName}`)
+  const dest = path.join(__dirname, `../../../packages/${params.projectName.toLowerCase()}`)
 
   //rename index.ts
   const indexPath = path.join(dest, 'src/index.ts.t')
@@ -206,7 +206,7 @@ async function replaceFileNames(params: BuilderParams) {
  */
 async function setActionNames(params: BuilderParams) {
   // get the target directory location
-  const dest = path.join(__dirname, `../../../packages/${params.projectName}`)
+  const dest = path.join(__dirname, `../../../packages/${params.projectName.toLowerCase()}`)
 
   //replace the action names in the index
   const indexPath = path.join(dest, 'src/index.ts.t')
@@ -244,7 +244,7 @@ export async function updateRegistry(params: BuilderParams) {
     const data = fs.readFileSync(filePath, 'utf-8');
     const lines: string[] = data.split('\n');
     const importIndex = lines.findIndex(line => line.includes('import { ENTRYPOINT } from \'./contract-addresses\''));
-    const newImport = `import { ${capitalize(projectName)} } from '@rabbitholegg/questdk-plugin-${projectName}';`;
+    const newImport = `import { ${capitalize(projectName)} } from '@rabbitholegg/questdk-plugin-${projectName.toLowerCase()}'`;
     lines.splice(importIndex, 0, newImport);
     const pluginIndex = lines.findIndex(line => line.trim() === '}');
     const newProperty = `  [${capitalize(projectName)}.pluginId]: ${capitalize(projectName)},`;
@@ -269,7 +269,7 @@ export async function updateRegistry(params: BuilderParams) {
     const packages = json.dependencies
     json.dependencies = {
       ...packages,
-      [`@rabbitholegg/questdk-plugin-${params.projectName}`]: "workspace:*"
+      [`@rabbitholegg/questdk-plugin-${params.projectName.toLowerCase()}`]: "workspace:*"
     }
     const newData = JSON.stringify(json, null, 2) + '\n'
     fs.writeFileSync(packagefilePath, newData, 'utf-8')
