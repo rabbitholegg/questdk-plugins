@@ -35,10 +35,12 @@ function getClient(chain: Chain): PublicClient {
 }
 
 export async function getTransaction(hash: Hash): Promise<Transaction | null>{
+  console.log('looking for transaction...')
   for (const chain of chainsArray) {
     const client = getClient(chain)
     try {
       const transaction = await client.getTransaction({ hash })
+      console.log('transaction found!')
       return {
         chainId: transaction.chainId,
         from: transaction.from.toLowerCase(),

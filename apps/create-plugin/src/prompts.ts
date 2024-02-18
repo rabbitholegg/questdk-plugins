@@ -70,6 +70,21 @@ export const mainQuestions = [
 //   message: 'What is the contract address? (Optional)',
 //   initial: '',
 // }
+const descriptionQuestion = {
+  type: 'text',
+  name: 'description',
+  message: 'How would you describe this transaction?',
+  initial: '',
+  validate: (description: string) => {
+    if (description.length < 1) {
+      return 'Please enter a description'
+    }
+    if (description.length >= 50) {
+      return 'Please enter a description less than 50 characters'
+    }
+    return true
+  },
+}
 
 // TODO - add questions for other action types
 
@@ -86,6 +101,7 @@ const mintQuestions = [
       return true
     },
   },
+  descriptionQuestion,
 ]
 
 // Define a type for the response object from the prompts
