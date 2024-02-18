@@ -2,6 +2,7 @@ import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { ActionType } from '@rabbitholegg/questdk'
 import { getTransaction } from './viem'
 import { type Hash } from 'viem'
+import { ActionParamKeys, Actions } from './params'
 const _prompts = require('prompts')
 // structure available chains into the format for prompts
 const _chainValues = Object.values(Chains)
@@ -21,6 +22,7 @@ export const _actionArray = _actionValues
   })
   .filter((value) => value.title !== 'deposit')
   .filter((value) => value.title !== 'lend')
+  .filter((value) => value.title !== 'quest')
   .filter((value) => value.title !== 'other')
 
 export const mainQuestions = [
@@ -104,22 +106,10 @@ const mintQuestions = [
   descriptionQuestion,
 ]
 
-// Define a type for the response object from the prompts
-type TransactionPromptResponse = {
-  hash?: string
-  tokenId?: number
-  addAnother?: boolean
-}
-
-// Assuming getTransaction is defined somewhere
-// async function getTransaction(hash: string): Promise<TransactionDetails | string> { ... }
-
 export async function askQuestions() {
   const response = await _prompts(mainQuestions)
 
-  const transactions: Array<
-    TransactionPromptResponse & { transactionDetails?: any }
-  > = []
+  const transactions = []
 
   let addAnotherTransaction = true
 
@@ -141,12 +131,13 @@ export async function askQuestions() {
     })
 
     if (hash) {
-      const transactionDetails = await getTransaction(hash)
+      const transaction = await getTransaction(hash)
 
-      if (transactionDetails) {
-        const additionalDetails: Partial<TransactionPromptResponse> =
-          await _prompts(mintQuestions)
-        transactions.push({ ...additionalDetails, transactionDetails })
+      if (transaction) {
+        const mintResponse = await _prompts(mintQuestions)
+        let params = getParams(response.action, mintResponse)
+        params = buildParams(response.action, transaction, params)
+        transactions.push({ ...mintResponse, transaction, params })
       } else {
         console.log('transaction not found')
       }
@@ -170,3 +161,33 @@ export async function askQuestions() {
     publish: response.publish,
   }
 }
+
+function buildParams(actionType: Actions, transaction: any, params: any): any {
+  switch (actionType) {
+    case 'mint':
+      return {
+        chainId: transaction.chainId,
+        contractAddress: `'${transaction.to}'`,
+        recipient: `'${transaction.from}'`,
+        ...params
+      }
+    default:
+      return {}
+  }
+}
+
+// Adjusted function to accept an actionType argument
+function getParams(actionType: Actions, response: any): any {
+  const params: any = {}; // Use a more specific type if possible
+  if (response && typeof response === 'object' && ActionParamKeys[actionType]) {
+    // Dynamically select the key set based on actionType
+    const keys = ActionParamKeys[actionType];
+    for (const key of keys) {
+      if (key in response) {
+        params[key] = response[key];
+      }
+    }
+  }
+  return params;
+}
+

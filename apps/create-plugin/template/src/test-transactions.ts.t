@@ -9,19 +9,17 @@ import {
 {{#each tx}}
 export const {{uppercase ../actionType}}_TEST_{{@index}}: TestParams<{{capitalize ../actionType}}ActionParams> = {
   transaction: {
-    chainId: {{this.transactionDetails.chainId}},
-    from: '{{this.transactionDetails.from}}',
-    hash: '{{this.transactionDetails.hash}}',
-    input: '{{this.transactionDetails.input}}',
-    to: '{{this.transactionDetails.to}}',
-    value: '{{this.transactionDetails.value}}',
+    chainId: {{this.transaction.chainId}},
+    from: '{{this.transaction.from}}',
+    hash: '{{this.transaction.hash}}',
+    input: '{{this.transaction.input}}',
+    to: '{{this.transaction.to}}',
+    value: '{{this.transaction.value}}',
   },
   params: {
-    chainId: {{this.transactionDetails.chainId}},
-    contractAddress: '{{this.transactionDetails.to}}',
-    recipient: '{{this.transactionDetails.from}}',
-    {{#if this.tokenId}}tokenId: {{this.tokenId}},{{/if}}
-    {{#if this.amount}}amount: {{this.amount}},{{/if}}
+    {{#each this.params}}
+    {{@key}}: {{{this}}},
+    {{/each}}
   },
 }
 {{/each}}
