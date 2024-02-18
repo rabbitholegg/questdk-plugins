@@ -6,7 +6,7 @@ import { cyan, red } from 'picocolors'
 type BuilderParams = {
   projectName: string
   chains: string[]
-  tx: string
+  tx: any[]
   actionType: string
   publish: boolean
 }
