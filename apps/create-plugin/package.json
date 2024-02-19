@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@types/prompt": "1.1.8",
+    "@types/prompts": "2.4.9",
     "fs-extra": "11.2.0",
     "handlebars": "4.7.8",
     "picocolors": "1.0.0",

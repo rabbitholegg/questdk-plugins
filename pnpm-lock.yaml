@@ -74,6 +74,9 @@ importers:
       '@types/prompt':
         specifier: 1.1.8
         version: 1.1.8
+      '@types/prompts':
+        specifier: 2.4.9
+        version: 2.4.9
       fs-extra:
         specifier: 11.2.0
         version: 11.2.0
@@ -86,6 +89,16 @@ importers:
       prompts:
         specifier: 2.4.2
         version: 2.4.2
+
+  packages/aaa:
+    dependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
 
   packages/across:
     dependencies:
@@ -3152,6 +3165,13 @@ packages:
     dependencies:
       '@types/node': 20.4.5
       '@types/revalidator': 0.3.12
+    dev: true
+
+  /@types/prompts@2.4.9:
+    resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
+    dependencies:
+      '@types/node': 20.4.5
+      kleur: 3.0.3
     dev: true
 
   /@types/prop-types@15.7.11:
