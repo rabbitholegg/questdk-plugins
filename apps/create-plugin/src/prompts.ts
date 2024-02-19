@@ -1,110 +1,9 @@
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { ActionType } from '@rabbitholegg/questdk'
 import { getTransaction } from './viem'
-import { type Hash } from 'viem'
+import { parseEther, type Hash } from 'viem'
 import { ActionParamKeys, Actions } from './params'
+import { mainQuestions, actionQuestions } from './questions'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 const _prompts = require('prompts')
-// structure available chains into the format for prompts
-const _chainValues = Object.values(Chains)
-export const _chainArray = _chainValues
-  .filter((value) => typeof value === 'string')
-  .map((value, _index) => {
-    return { value: value, title: value }
-  })
-
-// structure available actiontypes into the format for prompts
-// and remove Deposit, Lend, and Other which are not currently supported
-const _actionValues = Object.values(ActionType)
-export const _actionArray = _actionValues
-  .filter((value) => typeof value === 'string')
-  .map((value) => {
-    return { value, title: value }
-  })
-  .filter((value) => value.title !== 'deposit')
-  .filter((value) => value.title !== 'lend')
-  .filter((value) => value.title !== 'quest')
-  .filter((value) => value.title !== 'other')
-
-export const mainQuestions = [
-  {
-    type: 'text',
-    name: 'name',
-    message: 'What is the name of the project you are creating a plugin for?',
-    validate: (name: string) => {
-      if (name.length < 1) {
-        return 'Please enter a name'
-      }
-      if (name.length >= 20) {
-        return 'Please enter a name less than 20 characters'
-      }
-      const invalidNameRegex = new RegExp(/^[a-zA-Z]+$/)
-      if (!invalidNameRegex.test(name)) {
-        return 'Please use PascalCase or camelCase with no spaces, numbers or special characters'
-      }
-      return true
-    },
-  },
-  {
-    type: 'multiselect',
-    name: 'chain',
-    message: 'What blockchains are the project on? (multi-select)',
-    choices: _chainArray,
-  },
-  {
-    type: 'select',
-    name: 'action',
-    message: 'How would you describe the action you want the user to take?',
-    initial: '',
-    choices: _actionArray,
-  },
-  {
-    type: 'confirm',
-    name: 'publish',
-    message:
-      'Do you want to make this package public? Answering "yes" will set the "private" field in your package.json to "false"',
-    initial: false,
-  },
-]
-
-// const contractAddressQuestion = {
-//   type: 'text',
-//   name: 'contractAddress',
-//   message: 'What is the contract address? (Optional)',
-//   initial: '',
-// }
-const descriptionQuestion = {
-  type: 'text',
-  name: 'description',
-  message: 'How would you describe this transaction?',
-  initial: '',
-  validate: (description: string) => {
-    if (description.length < 1) {
-      return 'Please enter a description'
-    }
-    if (description.length >= 50) {
-      return 'Please enter a description less than 50 characters'
-    }
-    return true
-  },
-}
-
-// TODO - add questions for other action types
-
-const mintQuestions = [
-  {
-    type: 'text',
-    name: 'tokenId',
-    message: 'If mint is ERC-1155, please enter the tokenId (Optional)',
-    initial: '',
-    validate: (tokenId: string) => {
-      if (tokenId && !/^\d+$/.test(tokenId)) {
-        return 'Please enter a valid number for tokenId'
-      }
-      return true
-    },
-  },
-  descriptionQuestion,
-]
 
 export async function askQuestions() {
   const response = await _prompts(mainQuestions)
@@ -134,10 +33,12 @@ export async function askQuestions() {
       const transaction = await getTransaction(hash)
 
       if (transaction) {
-        const mintResponse = await _prompts(mintQuestions)
-        let params = getParams(response.action, mintResponse)
+        const actionResponse = await _prompts(
+          actionQuestions[response.action as Actions],
+        )
+        let params = getParams(response.action, actionResponse)
         params = buildParams(response.action, transaction, params)
-        transactions.push({ ...mintResponse, transaction, params })
+        transactions.push({ ...actionResponse, transaction, params })
       } else {
         console.log('transaction not found')
       }
@@ -164,12 +65,69 @@ export async function askQuestions() {
 
 function buildParams(actionType: Actions, transaction: any, params: any): any {
   switch (actionType) {
-    case 'mint':
+    case 'mint' || 'burn':
       return {
         chainId: transaction.chainId,
+        ...params,
         contractAddress: `'${transaction.to}'`,
         recipient: `'${transaction.from}'`,
-        ...params
+      }
+    case 'swap':
+      return {
+        chainId: transaction.chainId,
+        ...params,
+        amountIn: params.amountIn
+          ? `GreaterThanOrEqual(${parseEther(params.amountIn)})`
+          : undefined,
+        amountOut: 'GreaterThanOrEqual(1)',
+      }
+    case 'bridge':
+      return {
+        sourceChainId: transaction.chainId,
+        ...params,
+        destinationChainId: params.destinationChainId
+          ? Chains[params.destinationChainId]
+          : undefined,
+        amount: params.amount
+          ? `GreaterThanOrEqual(${parseEther(params.amount)})`
+          : undefined,
+        recipient: `'${transaction.from}'`,
+      }
+    case 'stake':
+      return {
+        chainId: transaction.chainId,
+        ...params,
+        amountOne: params.amountOne
+          ? `GreaterThanOrEqual(${parseEther(params.amountOne)})`
+          : undefined,
+        amountTwo: params.amountTwo
+          ? `GreaterThanOrEqual(${parseEther(params.amountTwo)})`
+          : undefined,
+      }
+    case 'vote':
+      return {
+        chainId: transaction.chainId,
+        ...params,
+        support: params.support === true,
+      }
+    case 'delegate':
+      return {
+        chainId: transaction.chainId,
+        ...params,
+        amount: params.amount
+          ? `GreaterThanOrEqual(${parseEther(params.amount)})`
+          : undefined,
+        delegator: `'${transaction.from}'`,
+      }
+    case 'options':
+      return {
+        chainId: transaction.chainId,
+        ...params,
+        orderType: params.orderType ? params.orderType === 'market' ? 'OrderType.Market' : 'OrderType.Limit' : undefined,
+        amount: params.amount
+          ? `GreaterThanOrEqual(${parseEther(params.amount)})`
+          : undefined,
+        recipient: `'${transaction.from}'`,
       }
     default:
       return {}
@@ -178,16 +136,15 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
 
 // Adjusted function to accept an actionType argument
 function getParams(actionType: Actions, response: any): any {
-  const params: any = {}; // Use a more specific type if possible
+  const params: any = {} // Use a more specific type if possible
   if (response && typeof response === 'object' && ActionParamKeys[actionType]) {
     // Dynamically select the key set based on actionType
-    const keys = ActionParamKeys[actionType];
+    const keys = ActionParamKeys[actionType]
     for (const key of keys) {
       if (key in response) {
-        params[key] = response[key];
+        params[key] = response[key]
       }
     }
   }
-  return params;
+  return params
 }
-
