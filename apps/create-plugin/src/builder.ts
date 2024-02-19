@@ -2,7 +2,6 @@ const fs = require('fs-extra')
 const path = require('path')
 import Handlebars from 'handlebars'
 import { cyan, red } from 'picocolors'
-import { isAddress } from 'viem'
 
 type BuilderParams = {
   projectName: string
@@ -65,13 +64,6 @@ function registerHelpers() {
   Handlebars.registerHelper('capitalize', function (aString) {
     return capitalize(aString)
   })
-  Handlebars.registerHelper('addressToString', function(value) {
-    if (typeof value === 'string' && isAddress(value)) {
-      return `'${value}'`
-    }
-    return value
-  });
-  
 }
 
 /**
