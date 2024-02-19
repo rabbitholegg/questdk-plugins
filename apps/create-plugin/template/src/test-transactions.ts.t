@@ -18,7 +18,7 @@ export const {{uppercase ../actionType}}_TEST_{{@index}}: TestParams<{{capitaliz
   },
   params: {
     {{#each this.params}}
-    {{@key}}: {{{this}}},
+    {{@key}}: {{{addressToString this}}},
     {{/each}}
   },
 }
