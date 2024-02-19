@@ -8,7 +8,7 @@ import {
   getSupportedTokenAddresses,
 } from './{{capitalize projectName}}.js'
 
-export const {{capitalize projectName}} : IActionPlugin = {
+export const {{capitalize projectName}}: IActionPlugin = {
   pluginId: "{{lowercase projectName}}",
   getSupportedTokenAddresses,
   getSupportedChainIds,
