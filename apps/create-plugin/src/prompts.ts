@@ -38,6 +38,7 @@ export async function askQuestions() {
         )
         let params = getParams(response.action, actionResponse)
         params = buildParams(response.action, transaction, params)
+        params = removeUndefinedParams(params)
         transactions.push({ ...actionResponse, transaction, params })
       } else {
         console.log('transaction not found')
@@ -65,7 +66,8 @@ export async function askQuestions() {
 
 function buildParams(actionType: Actions, transaction: any, params: any): any {
   switch (actionType) {
-    case 'mint' || 'burn':
+    case 'mint':
+    case 'burn':
       return {
         chainId: transaction.chainId,
         ...params,
@@ -78,7 +80,7 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
         ...params,
         amountIn: params.amountIn
           ? `GreaterThanOrEqual(${parseEther(params.amountIn)})`
-          : undefined,
+          : 'GreaterThanOrEqual(1)',
         amountOut: 'GreaterThanOrEqual(1)',
       }
     case 'bridge':
@@ -90,7 +92,7 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
           : undefined,
         amount: params.amount
           ? `GreaterThanOrEqual(${parseEther(params.amount)})`
-          : undefined,
+          : 'GreaterThanOrEqual(1)',
         recipient: `'${transaction.from}'`,
       }
     case 'stake':
@@ -123,7 +125,11 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
       return {
         chainId: transaction.chainId,
         ...params,
-        orderType: params.orderType ? params.orderType === 'market' ? 'OrderType.Market' : 'OrderType.Limit' : undefined,
+        orderType: params.orderType
+          ? params.orderType === 'market'
+            ? 'OrderType.Market'
+            : 'OrderType.Limit'
+          : undefined,
         amount: params.amount
           ? `GreaterThanOrEqual(${parseEther(params.amount)})`
           : undefined,
@@ -142,9 +148,20 @@ function getParams(actionType: Actions, response: any): any {
     const keys = ActionParamKeys[actionType]
     for (const key of keys) {
       if (key in response) {
-        params[key] = response[key]
+        if (response[key] !== '') {
+          params[key] = response[key]
+        }
       }
     }
   }
   return params
+}
+
+function removeUndefinedParams<T>(params: Record<string, T>): Record<string, T> {
+  return Object.entries(params).reduce<Record<string, T>>((acc, [key, value]) => {
+    if (value !== undefined) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
 }
