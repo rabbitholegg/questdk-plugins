@@ -81,14 +81,6 @@
         "default": "./dist/cjs/utils/index.js"
     }
     },
-    "peerDependencies": {
-    "typescript": ">=5.1.6"
-    },
-    "peerDependenciesMeta": {
-    "typescript": {
-        "optional": true
-    }
-    },
     "devDependencies": {
         "tsconfig": "workspace:*",
         "@rabbitholegg/questdk-plugin-utils": "workspace:*",

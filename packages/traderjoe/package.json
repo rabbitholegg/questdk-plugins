@@ -36,7 +36,7 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@traderjoe-xyz/sdk-v2": "^2.1.8",
+    "@traderjoe-xyz/sdk-v2": "2.1.8",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"
   }
