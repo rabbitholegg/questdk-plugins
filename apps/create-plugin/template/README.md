@@ -1,4 +1,4 @@
-## {{projectName}} Plugin for Boost
+## {{capitalize projectName}} Plugin for Boost
 
 ### New Plugin TODO list
 1.  Find an example of the transactions on a block explorer you want to reward with boost
