@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#218](https://github.com/rabbitholegg/questdk-plugins/pull/218) [`fef982c`](https://github.com/rabbitholegg/questdk-plugins/commit/fef982cdc0f568812e35b56cffb691584b06281e) Thanks [@mmackz](https://github.com/mmackz)! - add arbitrum support
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes
