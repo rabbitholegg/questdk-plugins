@@ -1,15 +1,15 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 
-import { mint, getSupportedChainIds, getSupportedTokenAddresses } from './Kote'
+import { mint, getSupportedChainIds, getSupportedTokenAddresses } from "./Kote";
 
 export const Kote: IActionPlugin = {
-  pluginId: 'kote',
+  pluginId: "kote",
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   mint,
-}
+};

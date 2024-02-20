@@ -1,1 +1,1 @@
-export { PluginActionNotImplementedError } from './plugin'
+export { PluginActionNotImplementedError } from "./plugin";

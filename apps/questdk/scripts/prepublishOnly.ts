@@ -1,18 +1,18 @@
-import { outputFileSync, readJsonSync, writeJsonSync } from 'fs-extra'
-import path from 'path'
+import { outputFileSync, readJsonSync, writeJsonSync } from "fs-extra";
+import path from "path";
 
 type Exports = {
-  [key: string]: string | { types?: string; import: string; default: string }
-}
+  [key: string]: string | { types?: string; import: string; default: string };
+};
 
-generatePackageJson()
+generatePackageJson();
 
 // Generates a package.json to be published to NPM with only the necessary fields.
 function generatePackageJson() {
-  const packageJsonPath = path.join(__dirname, '../package.json')
-  const tmpPackageJson = readJsonSync(packageJsonPath)
+  const packageJsonPath = path.join(__dirname, "../package.json");
+  const tmpPackageJson = readJsonSync(packageJsonPath);
 
-  writeJsonSync(`${packageJsonPath}.tmp`, tmpPackageJson, { spaces: 2 })
+  writeJsonSync(`${packageJsonPath}.tmp`, tmpPackageJson, { spaces: 2 });
 
   const {
     name,
@@ -35,15 +35,15 @@ function generatePackageJson() {
     license,
     repository,
     files,
-  } = tmpPackageJson
+  } = tmpPackageJson;
 
   // Generate proxy packages for each export.
-  const files_ = [...files]
+  const files_ = [...files];
   for (const [key, value] of Object.entries(exports_ as Exports)) {
-    if (typeof value === 'string') continue
-    if (key === '.') continue
+    if (typeof value === "string") continue;
+    if (key === ".") continue;
     if (!value.default || !value.import)
-      throw new Error('`default` and `import` are required.')
+      throw new Error("`default` and `import` are required.");
 
     outputFileSync(
       `${key}/package.json`,
@@ -51,17 +51,17 @@ function generatePackageJson() {
   ${Object.entries(value)
     .map(([k, v]) => {
       const key = (() => {
-        if (k === 'import') return 'module'
-        if (k === 'default') return 'main'
-        if (k === 'types') return 'types'
-        throw new Error('Invalid key')
-      })()
-      return `"${key}": "${v.replace('./', '../')}"`
+        if (k === "import") return "module";
+        if (k === "default") return "main";
+        if (k === "types") return "types";
+        throw new Error("Invalid key");
+      })();
+      return `"${key}": "${v.replace("./", "../")}"`;
     })
-    .join(',\n  ')}
+    .join(",\n  ")}
 }`,
-    )
-    files_.push(key.replace('./', ''))
+    );
+    files_.push(key.replace("./", ""));
   }
 
   writeJsonSync(
@@ -88,5 +88,5 @@ function generatePackageJson() {
       keywords,
     },
     { spaces: 2 },
-  )
+  );
 }

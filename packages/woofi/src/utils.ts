@@ -1,5 +1,5 @@
-import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import type { Address, Hash } from 'viem'
+import type { ActionParams, FilterOperator } from "@rabbitholegg/questdk";
+import type { Address, Hash } from "viem";
 
 export enum Chains {
   ETHEREUM = 1,
@@ -12,24 +12,24 @@ export enum Chains {
 }
 
 interface Transaction {
-  chainId: number
-  from: Address
-  hash?: Hash
-  input: string
-  to: Address
-  value: string
+  chainId: number;
+  from: Address;
+  hash?: Hash;
+  input: string;
+  to: Address;
+  value: string;
 }
 
 export interface TestCase<T extends ActionParams> {
-  transaction: Transaction
-  params: T
-  description: string
+  transaction: Transaction;
+  params: T;
+  description: string;
 }
 
 export type TestParams<T extends ActionParams> = {
-  transaction: Transaction
-  params: T
-}
+  transaction: Transaction;
+  params: T;
+};
 
 /**
  * Creates a test case object for a given action and transaction.
@@ -53,22 +53,22 @@ export function createTestCase<T extends ActionParams>(
     transaction: testParams.transaction,
     params: { ...testParams.params, ...overrides },
     description,
-  }
+  };
 }
 
 export const buildPathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v2 paths are formatted as [<token>, <token>]
-  const conditions: FilterOperator[] = []
+  const conditions: FilterOperator[] = [];
 
   if (tokenIn) {
-    conditions.push({ $first: tokenIn })
+    conditions.push({ $first: tokenIn });
   }
 
   if (tokenOut) {
-    conditions.push({ $last: tokenOut })
+    conditions.push({ $last: tokenOut });
   }
 
   return {
     $and: conditions,
-  }
-}
+  };
+};

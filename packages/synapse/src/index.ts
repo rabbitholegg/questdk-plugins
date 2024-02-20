@@ -4,20 +4,20 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 
 import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Synapse.js'
+} from "./Synapse.js";
 
 // Replace *project* with the name of the project
 export const Synapse: IActionPlugin = {
-  pluginId: 'synapse',
+  pluginId: "synapse",
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge,
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-}
+};

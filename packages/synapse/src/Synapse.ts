@@ -2,15 +2,15 @@ import {
   type TransactionFilter,
   type BridgeActionParams,
   compressJson,
-} from '@rabbitholegg/questdk'
-import { zeroAddress, type Address } from 'viem'
-import { SYNAPSE_CCTP_ROUTER, CHAIN_TO_ROUTER } from './contract-addresses'
-import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import { Token } from './Token'
-import * as tokens from './tokens'
+} from "@rabbitholegg/questdk";
+import { zeroAddress, type Address } from "viem";
+import { SYNAPSE_CCTP_ROUTER, CHAIN_TO_ROUTER } from "./contract-addresses";
+import { SYNAPSE_BRIDGE_FRAGMENTS } from "./abi";
+import { CHAIN_ID_ARRAY } from "./chain-ids";
+import { Token } from "./Token";
+import * as tokens from "./tokens";
 
-const allTokens: Token[] = Object.values(tokens)
+const allTokens: Token[] = Object.values(tokens);
 
 export const bridge = async (
   bridge: BridgeActionParams,
@@ -23,16 +23,16 @@ export const bridge = async (
     tokenAddress,
     amount,
     recipient,
-  } = bridge
+  } = bridge;
 
   const inputObject = {
     amount: amount,
     chainId: destinationChainId,
     token:
       tokenAddress === zeroAddress
-        ? '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+        ? "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
         : tokenAddress,
-  }
+  };
 
   const contractTarget = contractAddress
     ? contractAddress
@@ -41,7 +41,7 @@ export const bridge = async (
           CHAIN_TO_ROUTER[sourceChainId].toLowerCase(),
           SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase(),
         ],
-      }
+      };
 
   if (recipient !== undefined) {
     return compressJson({
@@ -63,7 +63,7 @@ export const bridge = async (
           },
         ],
       },
-    })
+    });
   }
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter (for non cctp)
@@ -74,18 +74,18 @@ export const bridge = async (
       $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
       ...inputObject,
     },
-  })
-}
+  });
+};
 
 export const getSupportedTokenAddresses = async (
   chainId: number,
 ): Promise<Address[]> => {
   const supportedTokens = allTokens.filter((token) =>
     Object.prototype.hasOwnProperty.call(token.addresses, chainId),
-  )
-  return supportedTokens.map((token) => token.addresses[chainId]) as Address[]
-}
+  );
+  return supportedTokens.map((token) => token.addresses[chainId]) as Address[];
+};
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return CHAIN_ID_ARRAY as number[]
-}
+  return CHAIN_ID_ARRAY as number[];
+};
