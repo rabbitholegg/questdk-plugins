@@ -76,7 +76,7 @@ export async function askQuestions() {
   }
 
   const shouldIncludeGreaterThanOrEqual =
-    ['swap', 'bridge'].includes(response.action) && transactions.length > 0
+    ['swap', 'bridge', 'stake'].includes(response.action) && transactions.length > 0
 
   return {
     projectName: response.name,

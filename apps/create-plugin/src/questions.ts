@@ -181,7 +181,7 @@ const stakeQuestions = [
   {
     type: 'text',
     name: 'tokenOne',
-    message: 'What is the contract address for tokenOne? (Optional)',
+    message: 'What is the contract address for tokenOne? Use 0x0000000000000000000000000000000000000000 for ETH or other native assets (Optional)',
     initial: '',
     validate: (tokenOne: string) =>
       tokenOne && !isAddress(tokenOne)
@@ -201,7 +201,7 @@ const stakeQuestions = [
   {
     type: 'text',
     name: 'tokenTwo',
-    message: 'What is the contract address for tokenTwo? (Optional)',
+    message: 'What is the contract address for tokenTwo? Use 0x0000000000000000000000000000000000000000 for ETH or other native assets (Optional)',
     initial: '',
     validate: (tokenTwo: string) =>
       tokenTwo && !isAddress(tokenTwo)
