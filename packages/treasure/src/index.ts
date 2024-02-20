@@ -1,7 +1,7 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 
 import {
   mint,
@@ -9,14 +9,14 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Treasure.js'
+} from "./Treasure.js";
 
 export const Treasure: IActionPlugin = {
-  pluginId: 'treasure',
+  pluginId: "treasure",
   getSupportedTokenAddresses,
   getSupportedChainIds,
   mint,
   stake,
   swap,
   bridge: async () => new PluginActionNotImplementedError(),
-}
+};

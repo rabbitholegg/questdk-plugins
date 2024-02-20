@@ -36,6 +36,7 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

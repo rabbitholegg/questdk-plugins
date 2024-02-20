@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@zoralabs/universal-minter": "0.2.12",
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

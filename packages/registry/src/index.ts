@@ -12,42 +12,42 @@ import {
   type SwapActionParams,
   type TransactionFilter,
   type VoteActionParams,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 
-import { Across } from '@rabbitholegg/questdk-plugin-across'
-import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
-import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
-import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
-import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
-import { Connext } from '@rabbitholegg/questdk-plugin-connext'
-import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
-import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
-import { Hop } from '@rabbitholegg/questdk-plugin-hop'
-import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
-import { Llama } from '@rabbitholegg/questdk-plugin-llama'
-import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
-import { Mux } from '@rabbitholegg/questdk-plugin-mux'
-import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
-import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
-import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
-import { Pendle } from '@rabbitholegg/questdk-plugin-pendle'
-import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
-import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
-import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
-import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
-import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
-import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
-import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
-import { Tally } from '@rabbitholegg/questdk-plugin-tally'
-import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
-import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
-import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
-import { Vela } from '@rabbitholegg/questdk-plugin-vela'
-import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
-import { Zora } from '@rabbitholegg/questdk-plugin-zora'
-import { Boost } from '@rabbitholegg/questdk-plugin-boost'
-import { Kote } from '@rabbitholegg/questdk-plugin-kote'
-import { ENTRYPOINT } from './contract-addresses'
+import { Across } from "@rabbitholegg/questdk-plugin-across";
+import { Arbitrum } from "@rabbitholegg/questdk-plugin-arbitrum";
+import { Balancer } from "@rabbitholegg/questdk-plugin-balancer";
+import { BasePaint } from "@rabbitholegg/questdk-plugin-basepaint";
+import { Camelot } from "@rabbitholegg/questdk-plugin-camelot";
+import { Connext } from "@rabbitholegg/questdk-plugin-connext";
+import { GMX } from "@rabbitholegg/questdk-plugin-gmx";
+import { HandleFi } from "@rabbitholegg/questdk-plugin-handlefi";
+import { Hop } from "@rabbitholegg/questdk-plugin-hop";
+import { Hyphen } from "@rabbitholegg/questdk-plugin-hyphen";
+import { Llama } from "@rabbitholegg/questdk-plugin-llama";
+import { Mirror } from "@rabbitholegg/questdk-plugin-mirror";
+import { Mux } from "@rabbitholegg/questdk-plugin-mux";
+import { OkuTrade } from "@rabbitholegg/questdk-plugin-okutrade";
+import { Optimism } from "@rabbitholegg/questdk-plugin-optimism";
+import { Paraswap } from "@rabbitholegg/questdk-plugin-paraswap";
+import { Pendle } from "@rabbitholegg/questdk-plugin-pendle";
+import { Polygon } from "@rabbitholegg/questdk-plugin-polygon";
+import { Rabbithole } from "@rabbitholegg/questdk-plugin-rabbithole";
+import { Soundxyz } from "@rabbitholegg/questdk-plugin-soundxyz";
+import { Stargate } from "@rabbitholegg/questdk-plugin-stargate";
+import { Sushi } from "@rabbitholegg/questdk-plugin-sushi";
+import { Symbiosis } from "@rabbitholegg/questdk-plugin-symbiosis";
+import { Synapse } from "@rabbitholegg/questdk-plugin-synapse";
+import { Tally } from "@rabbitholegg/questdk-plugin-tally";
+import { TraderJoe } from "@rabbitholegg/questdk-plugin-traderjoe";
+import { Treasure } from "@rabbitholegg/questdk-plugin-treasure";
+import { Uniswap } from "@rabbitholegg/questdk-plugin-uniswap";
+import { Vela } from "@rabbitholegg/questdk-plugin-vela";
+import { WooFi } from "@rabbitholegg/questdk-plugin-woofi";
+import { Zora } from "@rabbitholegg/questdk-plugin-zora";
+import { Boost } from "@rabbitholegg/questdk-plugin-boost";
+import { Kote } from "@rabbitholegg/questdk-plugin-kote";
+import { ENTRYPOINT } from "./contract-addresses";
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -83,15 +83,15 @@ export const plugins: Record<string, IActionPlugin> = {
   [Boost.pluginId]: Boost,
   [Llama.pluginId]: Llama,
   [Kote.pluginId]: Kote,
-}
+};
 
 export const getPlugin = (pluginId: string) => {
-  const plugin = plugins[pluginId]
+  const plugin = plugins[pluginId];
   if (!plugin) {
-    throw new Error(`Unknown plugin "${pluginId}"`)
+    throw new Error(`Unknown plugin "${pluginId}"`);
   }
-  return plugin
-}
+  return plugin;
+};
 
 export const executePlugin = (
   plugin: IActionPlugin,
@@ -101,46 +101,46 @@ export const executePlugin = (
   switch (actionType) {
     case ActionType.Bridge:
       if (plugin.bridge === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.bridge(params as unknown as BridgeActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.bridge(params as unknown as BridgeActionParams);
     case ActionType.Swap:
       if (plugin.swap === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.swap(params as unknown as SwapActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.swap(params as unknown as SwapActionParams);
     case ActionType.Mint:
       if (plugin.mint === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.mint(params as unknown as MintActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.mint(params as unknown as MintActionParams);
     case ActionType.Delegate: {
       if (plugin.delegate === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.delegate(params as unknown as DelegateActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.delegate(params as unknown as DelegateActionParams);
     }
     case ActionType.Quest: {
       if (plugin.quest === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.quest(params as unknown as QuestActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.quest(params as unknown as QuestActionParams);
     }
     case ActionType.Stake: {
       if (plugin.stake === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.stake(params as unknown as StakeActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.stake(params as unknown as StakeActionParams);
     }
     case ActionType.Options: {
       if (plugin.options === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.options(params as unknown as OptionsActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.options(params as unknown as OptionsActionParams);
     }
     case ActionType.Vote: {
       if (plugin.vote === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.vote(params as unknown as VoteActionParams)
+        return Promise.reject(new PluginActionNotImplementedError());
+      } else return plugin.vote(params as unknown as VoteActionParams);
     }
     default:
-      throw new Error(`Unknown action type "${actionType}"`)
+      throw new Error(`Unknown action type "${actionType}"`);
   }
-}
+};
 
 export const getIndexedContracts = (_chainId: number) => {
-  return [ENTRYPOINT]
-}
+  return [ENTRYPOINT];
+};

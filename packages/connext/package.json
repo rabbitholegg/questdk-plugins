@@ -39,6 +39,7 @@
     "@connext/nxtp-txservice": "^2.0.0",
     "@connext/nxtp-utils": "^2.0.4",
     "@connext/smart-contracts": "^2.0.0",
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

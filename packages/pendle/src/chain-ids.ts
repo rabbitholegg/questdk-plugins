@@ -3,9 +3,9 @@ export const SUPPORTED_CHAINS = {
   OPTIMISM: 10,
   BSC: 56,
   ARBITRUM: 42161,
-} as const
+} as const;
 
-export const SUPPORTED_CHAINS_ARRAY: number[] = Object.values(SUPPORTED_CHAINS)
+export const SUPPORTED_CHAINS_ARRAY: number[] = Object.values(SUPPORTED_CHAINS);
 
 export type SupportedChainId =
-  typeof SUPPORTED_CHAINS[keyof typeof SUPPORTED_CHAINS]
+  typeof SUPPORTED_CHAINS[keyof typeof SUPPORTED_CHAINS];

@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 
 import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Optimism.js'
+} from "./Optimism.js";
 
 export const Optimism: IActionPlugin = {
-  pluginId: 'optimism',
+  pluginId: "optimism",
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge,
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-}
+};

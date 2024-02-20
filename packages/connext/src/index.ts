@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 
 import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Connext.js'
+} from "./Connext.js";
 
 export const Connext: IActionPlugin = {
-  pluginId: 'connext',
+  pluginId: "connext",
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge,
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-}
+};

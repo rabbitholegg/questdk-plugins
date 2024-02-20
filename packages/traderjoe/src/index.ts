@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 
 import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './TraderJoe'
+} from "./TraderJoe";
 
 export const TraderJoe: IActionPlugin = {
-  pluginId: 'traderjoe',
+  pluginId: "traderjoe",
   getSupportedTokenAddresses,
   getSupportedChainIds,
   swap,
   bridge: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-}
+};
