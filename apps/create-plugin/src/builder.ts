@@ -28,8 +28,7 @@ export async function createPlugin(params: BuilderParams) {
   await setActionNames(params)
   await replaceProjectName(params)
   await replaceFileNames(params)
-  // TODO: re-enable this function
-  // await updateRegistry(params)
+  await updateRegistry(params)
   logBoostStars()
   console.log('Created a plugin for', cyan(`"${params.projectName}"`))
   console.log()
