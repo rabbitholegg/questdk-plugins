@@ -63,19 +63,10 @@ export async function getTransaction(hash: Hash): Promise<Transaction | null> {
   return null
 }
 
-const tokenAddressTypes = [
-  'tokenIn',
-  'tokenOut',
-  'token',
-  'tokenOne',
-  'tokenTwo',
-]
-
 export async function getDecimals(response: any, chain: number) {
-  console.log('getting token info...')
   const client = getClient(chains[chain])
   for (const key of Object.keys(response)) {
-    if (tokenAddressTypes.includes(key)) {
+    if (key.startsWith('token') && typeof response[key] === 'string') {
       const address = response[key]
       if (address === zeroAddress) {
         return 18
@@ -96,7 +87,8 @@ export async function getDecimals(response: any, chain: number) {
         })
         return decimals
       } catch {
-        console.log('token address not found')
+        console.log(`decimals for token ${address} not found... using default decimal value 18`)
+        return 18
       }
     }
   }
