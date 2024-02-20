@@ -13,6 +13,23 @@ export type {
   DelegateActionParams,
   ActionParams,
   IActionPlugin,
+  FilterObject,
+  BitmaskFilter,
+  NthFilter,
+  Filter,
+  FilterArray,
+  AbiFilter,
+  AbstractAbiFilter,
+  AbiParamFilter,
+  ArrayOperator,
+  LogicalOperator,
+  NumericOperator,
+  StringOperator,
+  FilterOperator,
+  TransactionFilter,
+} from "./types";
+
+export {
   ActionType,
   OrderType,
-} from './types'
+} from "./types";

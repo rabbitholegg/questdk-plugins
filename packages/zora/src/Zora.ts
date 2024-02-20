@@ -17,48 +17,50 @@ import {
   ZORA_MINTER_ABI_1155,
   ZORA_MINTER_ABI_721,
 } from './abi'
-import type { Chains } from './utils'
 import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint;
 
-  const universalMinter = zoraUniversalMinterAddress[chainId as Chains]
+  const universalMinter =
+    zoraUniversalMinterAddress[
+      chainId as keyof typeof zoraUniversalMinterAddress
+    ];
 
   const mintContract = universalMinter
     ? { $or: [contractAddress.toLowerCase(), universalMinter.toLowerCase()] }
-    : contractAddress
+    : contractAddress;
 
-  const andArray721 = []
-  const andArray1155 = []
+  const andArray721 = [];
+  const andArray1155 = [];
   if (recipient) {
     andArray721.push({
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
-    })
+    });
     andArray1155.push({
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
-    })
+    });
   }
   if (tokenId || amount) {
     andArray721.push({
       quantity: amount,
-    })
+    });
     andArray1155.push({
       quantity: amount,
       tokenId,
-    })
+    });
   }
 
   const ERC721_FILTER = {
     $abi: ZORA_MINTER_ABI_721,
     $and: andArray721.length !== 0 ? andArray721 : undefined,
-  }
+  };
 
   const ERC1155_FILTER = {
     $abi: ZORA_MINTER_ABI_1155,
     $and: andArray1155.length !== 0 ? andArray1155 : undefined,
-  }
+  };
 
   return compressJson({
     chainId,
@@ -79,8 +81,8 @@ export const mint = async (
         ERC1155_FILTER,
       ],
     },
-  })
-}
+  });
+};
 
 export const getMintIntent = async (
   mint: MintIntentParams,
@@ -114,9 +116,9 @@ export const getMintIntent = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return [] /// Supported tokens don't apply for the mint action
-}
+  return []; /// Supported tokens don't apply for the mint action
+};
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return CHAIN_ID_ARRAY as number[]
-}
+  return CHAIN_ID_ARRAY as number[];
+};

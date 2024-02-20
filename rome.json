@@ -26,6 +26,9 @@
       "a11y": {
         "useButtonType": "off"
       },
+      "complexity": {
+        "noExtraSemicolon": "on"
+      },
       "correctness": {
         "noUnusedVariables": "error"
       },
@@ -49,5 +52,8 @@
       "trailingComma": "all",
       "semicolons": "asNeeded"
     }
+  },
+  "organizeImports": {
+    "enabled": true
   }
 }

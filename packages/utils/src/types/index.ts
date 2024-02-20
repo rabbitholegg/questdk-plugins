@@ -12,4 +12,21 @@ export type {
   IActionPlugin,
   ActionType,
   OrderType,
-} from './actions'
+} from "./actions";
+
+export type {
+  FilterObject,
+  BitmaskFilter,
+  NthFilter,
+  Filter,
+  FilterArray,
+  AbiFilter,
+  AbstractAbiFilter,
+  AbiParamFilter,
+  ArrayOperator,
+  LogicalOperator,
+  NumericOperator,
+  StringOperator,
+  FilterOperator,
+  TransactionFilter,
+} from "./filters.js";

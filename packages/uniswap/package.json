@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*",
     "@uniswap/sdk-core": "^4.0.9",
     "@uniswap/universal-router-sdk": "^2.0.2"
   }

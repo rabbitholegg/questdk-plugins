@@ -3,8 +3,7 @@ import packageJson from '../package.json'
 import { createPlugin, logBoostStars } from './builder'
 const _prompts = require('prompts')
 const figlet = require('figlet')
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { ActionType } from '@rabbitholegg/questdk'
+import { Chains, ActionType } from '@rabbitholegg/questdk-plugin-utils'
 
 
 // structure available chains into the format for prompts

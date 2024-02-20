@@ -1,5 +1,5 @@
-import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import { type Address, type Hash, getAddress } from 'viem'
+import type { ActionParams, FilterOperator } from "@rabbitholegg/questdk";
+import { type Address, type Hash, getAddress } from "viem";
 
 export enum Chains {
   ETHEREUM = 1,
@@ -18,24 +18,24 @@ export enum Chains {
 }
 
 interface Transaction {
-  chainId: number
-  from: Address
-  hash?: Hash
-  input: string
-  to: Address
-  value: string
+  chainId: number;
+  from: Address;
+  hash?: Hash;
+  input: string;
+  to: Address;
+  value: string;
 }
 
 export interface TestCase<T extends ActionParams> {
-  transaction: Transaction
-  params: T
-  description: string
+  transaction: Transaction;
+  params: T;
+  description: string;
 }
 
 export type TestParams<T extends ActionParams> = {
-  transaction: Transaction
-  params: T
-}
+  transaction: Transaction;
+  params: T;
+};
 
 /**
  * Creates a test case object for a given action and transaction.
@@ -59,22 +59,22 @@ export function createTestCase<T extends ActionParams>(
     transaction: testParams.transaction,
     params: { ...testParams.params, ...overrides },
     description,
-  }
+  };
 }
 
 export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v2 paths are formatted as [<token>, <token>]
-  const conditions: FilterOperator[] = []
+  const conditions: FilterOperator[] = [];
 
   if (tokenIn) {
-    conditions.push({ $first: getAddress(tokenIn) })
+    conditions.push({ $first: getAddress(tokenIn) });
   }
 
   if (tokenOut) {
-    conditions.push({ $last: getAddress(tokenOut) })
+    conditions.push({ $last: getAddress(tokenOut) });
   }
 
   return {
     $and: conditions,
-  }
-}
+  };
+};

@@ -1,6 +1,6 @@
-import { apply } from '@rabbitholegg/questdk/filter'
-import { describe, expect, test } from 'vitest'
-import { mint } from './Soundxyz'
+import { apply } from "@rabbitholegg/questdk";
+import { describe, expect, test } from "vitest";
+import { mint } from "./Soundxyz";
 import {
   passingTestCases,
   failingTestCases,
@@ -13,12 +13,12 @@ import { getMintIntent } from './Soundxyz'
 import { type Address } from 'viem'
 import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 
-describe('Given the soundxyz plugin', () => {
-  describe('When handling the mint action', () => {
-    describe('should return a valid action filter', () => {
-      const { params } = OP_SUPERMINTER_V2
-      test('when minting a sound on the superminter contract', async () => {
-        const filter = await mint(params)
+describe("Given the soundxyz plugin", () => {
+  describe("When handling the mint action", () => {
+    describe("should return a valid action filter", () => {
+      const { params } = OP_SUPERMINTER_V2;
+      test("when minting a sound on the superminter contract", async () => {
+        const filter = await mint(params);
         expect(filter).to.deep.equal({
           chainId: Chains.OPTIMISM,
           to: {
@@ -29,28 +29,28 @@ describe('Given the soundxyz plugin', () => {
             p: {
               edition: params.contractAddress,
               quantity: {
-                $gte: '1',
+                $gte: "1",
               },
               to: params.recipient,
             },
           },
-        })
-      })
-    })
+        });
+      });
+    });
 
-    describe('should pass filter with valid transactions', () => {
+    describe("should pass filter with valid transactions", () => {
       passingTestCases.forEach((testCase) => {
-        const { description, params, transaction } = testCase
+        const { description, params, transaction } = testCase;
         test(description, async () => {
-          const filter = await mint(params)
-          expect(apply(transaction, filter)).to.be.true
-        })
-      })
-    })
+          const filter = await mint(params);
+          expect(apply(transaction, filter)).to.be.true;
+        });
+      });
+    });
 
-    describe('should not pass filter with invalid transactions', () => {
+    describe("should not pass filter with invalid transactions", () => {
       failingTestCases.forEach((testCase) => {
-        const { description, params, transaction } = testCase
+        const { description, params, transaction } = testCase;
         test(description, async () => {
           const filter = await mint(params)
           expect(apply(transaction, filter)).to.be.false

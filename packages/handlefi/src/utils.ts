@@ -1,25 +1,25 @@
-import type { ActionParams, FilterOperator } from '@rabbitholegg/questdk'
-import { getAddress, type Address, type Hash } from 'viem'
+import type { ActionParams, FilterOperator } from "@rabbitholegg/questdk";
+import { getAddress, type Address, type Hash } from "viem";
 
 interface Transaction {
-  chainId: number
-  from: Address
-  hash?: Hash
-  input: string
-  to: Address
-  value: string
+  chainId: number;
+  from: Address;
+  hash?: Hash;
+  input: string;
+  to: Address;
+  value: string;
 }
 
 export interface TestCase<T extends ActionParams> {
-  transaction: Transaction
-  params: T
-  description: string
+  transaction: Transaction;
+  params: T;
+  description: string;
 }
 
 export type TestParams<T extends ActionParams> = {
-  transaction: Transaction
-  params: T
-}
+  transaction: Transaction;
+  params: T;
+};
 
 /**
  * Creates a test case object for a given action and transaction.
@@ -43,32 +43,32 @@ export function createTestCase<T extends ActionParams>(
     transaction: testParams.transaction,
     params: { ...testParams.params, ...overrides },
     description,
-  }
+  };
 }
 
 export const buildV2PathQueryWithCase = (
-  addressCase: 'lower' | 'checksum',
+  addressCase: "lower" | "checksum",
   tokenIn?: string,
   tokenOut?: string,
 ) => {
   // v2 paths are formatted as [<token>, <token>]
-  const conditions: FilterOperator[] = []
+  const conditions: FilterOperator[] = [];
 
   if (tokenIn) {
     conditions.push({
       $first:
-        addressCase === 'lower' ? tokenIn.toLowerCase() : getAddress(tokenIn),
-    })
+        addressCase === "lower" ? tokenIn.toLowerCase() : getAddress(tokenIn),
+    });
   }
 
   if (tokenOut) {
     conditions.push({
       $last:
-        addressCase === 'lower' ? tokenOut.toLowerCase() : getAddress(tokenOut),
-    })
+        addressCase === "lower" ? tokenOut.toLowerCase() : getAddress(tokenOut),
+    });
   }
 
   return {
     $and: conditions,
-  }
-}
+  };
+};
