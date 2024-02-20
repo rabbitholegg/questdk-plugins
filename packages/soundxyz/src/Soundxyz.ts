@@ -2,17 +2,17 @@ import {
   type TransactionFilter,
   type MintActionParams,
   compressJson,
-} from '@rabbitholegg/questdk'
+} from "@rabbitholegg/questdk";
 import {
   encodeFunctionData,
   type Address,
   type TransactionRequest,
   zeroAddress,
   zeroHash,
-} from 'viem'
-import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
-import { Chains } from './utils'
-import type { MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+} from "viem";
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from "./constants";
+import { Chains } from "./utils";
+import type { MintIntentParams } from "@rabbitholegg/questdk-plugin-utils";
 
 export const mint = async (
   mint: MintActionParams,
@@ -38,7 +38,7 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { contractAddress, recipient } = mint
+  const { contractAddress, recipient } = mint;
 
   const mintTo = {
     edition: contractAddress,
@@ -57,20 +57,20 @@ export const getMintIntent = async (
     affiliate: zeroAddress,
     affiliateProof: [zeroHash],
     attributionId: 0,
-  }
+  };
 
   const data = encodeFunctionData({
     abi: SUPERMINTER_ABI,
-    functionName: 'mintTo',
+    functionName: "mintTo",
     args: [mintTo],
-  })
+  });
 
   return {
     from: recipient,
     to: contractAddress,
     data,
-  }
-}
+  };
+};
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
