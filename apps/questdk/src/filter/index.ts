@@ -15,4 +15,6 @@ export type {
   StringOperator,
   FilterOperator,
   TransactionFilter,
+  Filter,
+  FilterObject
 } from '@rabbitholegg/questdk-plugin-utils'
