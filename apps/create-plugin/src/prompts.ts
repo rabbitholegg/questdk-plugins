@@ -132,6 +132,7 @@ function buildParams(
         amountTwo: params.amountTwo
           ? `GreaterThanOrEqual(${parseUnits(params.amountTwo, tokenInfo.tokenTwo.decimals)})`
           : undefined,
+        duration: params.duration ? `GreaterThanOrEqual(${params.duration})` : undefined,
       }
     case 'vote':
       return {
