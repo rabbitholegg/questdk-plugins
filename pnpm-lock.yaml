@@ -17,7 +17,7 @@ importers:
         version: 1.5.0
       viem:
         specifier: 2.7.9
-        version: 2.7.9(typescript@5.3.3)
+        version: 2.7.9(typescript@5.3.2)
     devDependencies:
       '@changesets/changelog-github':
         specifier: 0.4.8
@@ -27,7 +27,7 @@ importers:
         version: 2.26.2
       '@turbo/gen':
         specifier: 1.10.16
-        version: 1.10.16(@types/node@20.4.5)(typescript@5.3.3)
+        version: 1.10.16(@types/node@20.4.5)(typescript@5.3.2)
       '@types/node':
         specifier: 20.4.5
         version: 20.4.5
@@ -48,13 +48,13 @@ importers:
         version: 12.1.3
       ts-node:
         specifier: 10.9.1
-        version: 10.9.1(@types/node@20.4.5)(typescript@5.3.3)
+        version: 10.9.1(@types/node@20.4.5)(typescript@5.3.2)
       turbo:
         specifier: 1.11.3
         version: 1.11.3
       typescript:
-        specifier: 5.3.3
-        version: 5.3.3
+        specifier: 5.3.2
+        version: 5.3.2
       vitest:
         specifier: 0.33.0
         version: 0.33.0
@@ -89,12 +89,11 @@ importers:
       prompts:
         specifier: 2.4.2
         version: 2.4.2
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
 
   apps/questdk:
-    dependencies:
-      typescript:
-        specifier: '>=5.1.6'
-        version: 5.3.3
     devDependencies:
       '@actions/core':
         specifier: 1.10.0
@@ -353,7 +352,7 @@ importers:
     dependencies:
       '@eth-optimism/contracts-ts':
         specifier: 0.15.0
-        version: 0.15.0(typescript@5.3.3)
+        version: 0.15.0(typescript@5.3.2)
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -369,7 +368,7 @@ importers:
     dependencies:
       '@paraswap/sdk':
         specifier: ^6.2.4
-        version: 6.3.0(axios@1.5.0)(typescript@5.3.3)
+        version: 6.3.0(axios@1.5.0)(typescript@5.3.2)
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -628,7 +627,7 @@ importers:
         specifier: workspace:*
         version: link:../utils
       '@traderjoe-xyz/sdk-v2':
-        specifier: ^2.1.8
+        specifier: 2.1.8
         version: 2.1.8(viem@1.21.4)
     devDependencies:
       tsconfig:
@@ -715,7 +714,7 @@ importers:
         version: link:../utils
       '@zoralabs/universal-minter':
         specifier: 0.2.12
-        version: 0.2.12(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.3)
+        version: 0.2.12(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)
     devDependencies:
       tsconfig:
         specifier: workspace:*
@@ -1493,7 +1492,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@eth-optimism/contracts-ts@0.15.0(typescript@5.3.3):
+  /@eth-optimism/contracts-ts@0.15.0(typescript@5.3.2):
     resolution: {integrity: sha512-qga3xsj+NhnxjY96TWktKAmc2DSYrdy0E+lVkS3NZ/b5w898IisoMj/Xvv3KoovBJmnk+/ENNnMX7kk+fwQdtA==}
     peerDependencies:
       '@wagmi/core': '>1.0.0'
@@ -1507,7 +1506,7 @@ packages:
       '@testing-library/react': 14.1.2(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      viem: 1.21.4(typescript@5.3.3)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.3.2)(zod@3.22.4)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -2708,7 +2707,7 @@ packages:
     resolution: {integrity: sha512-ecnX8ezlhYWFwolZxYEz+K+RfLr8xaxQqiJKlxJ8Yf00tXTGxDGn6/Acy00t4+9Kv0apewd7++J33eJt9yNfwg==}
     dev: false
 
-  /@paraswap/sdk@6.3.0(axios@1.5.0)(typescript@5.3.3):
+  /@paraswap/sdk@6.3.0(axios@1.5.0)(typescript@5.3.2):
     resolution: {integrity: sha512-hA4hrSADeBFAFSZpdOCcyKL9t+KwKl0sifawIR6bbNjnndJrwLOXrWyyGJwEtifixlJUnPm3Aakz5l0eRX7j+Q==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -2726,7 +2725,7 @@ packages:
       '@paraswap/core': 1.1.0
       axios: 1.5.0
       bignumber.js: 9.1.2
-      ts-essentials: 9.4.1(typescript@5.3.3)
+      ts-essentials: 9.4.1(typescript@5.3.2)
     transitivePeerDependencies:
       - typescript
     dev: false
@@ -3098,7 +3097,7 @@ packages:
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
       toformat: 2.0.0
-      viem: 1.21.4(typescript@5.3.3)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.3.2)(zod@3.22.4)
     dev: false
 
   /@traderjoe-xyz/sdk-v2@2.1.8(viem@1.21.4):
@@ -3114,7 +3113,7 @@ packages:
       tiny-invariant: 1.3.1
       tiny-warning: 1.0.3
       toformat: 2.0.0
-      viem: 1.21.4(typescript@5.3.3)(zod@3.22.4)
+      viem: 1.21.4(typescript@5.3.2)(zod@3.22.4)
     dev: false
 
   /@tronweb3/google-protobuf@3.21.2:
@@ -3133,7 +3132,7 @@ packages:
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
-  /@turbo/gen@1.10.16(@types/node@20.4.5)(typescript@5.3.3):
+  /@turbo/gen@1.10.16(@types/node@20.4.5)(typescript@5.3.2):
     resolution: {integrity: sha512-PzyluADjVuy5OcIi+/aRcD70OElQpRVRDdfZ9fH8G5Fv75lQcNrjd1bBGKmhjSw+g+eTEkXMGnY7s6gsCYjYTQ==}
     hasBin: true
     dependencies:
@@ -3145,7 +3144,7 @@ packages:
       minimatch: 9.0.3
       node-plop: 0.26.3
       proxy-agent: 6.3.1
-      ts-node: 10.9.1(@types/node@20.4.5)(typescript@5.3.3)
+      ts-node: 10.9.1(@types/node@20.4.5)(typescript@5.3.2)
       update-check: 1.5.4
       validate-npm-package-name: 5.0.0
     transitivePeerDependencies:
@@ -3652,7 +3651,7 @@ packages:
       pretty-format: 29.7.0
     dev: true
 
-  /@wagmi/cli@1.5.2(typescript@5.3.3):
+  /@wagmi/cli@1.5.2(typescript@5.3.2):
     resolution: {integrity: sha512-UfLMYhW6mQBCjR8A5s01Chf9GpHzdpcuuBuzJ36QGXcMSJAxylz5ImVZWfCRV0ct1UruydjKVSW1QSI6azNxRQ==}
     engines: {node: '>=14'}
     hasBin: true
@@ -3668,7 +3667,7 @@ packages:
       wagmi:
         optional: true
     dependencies:
-      abitype: 0.8.7(typescript@5.3.3)(zod@3.22.4)
+      abitype: 0.8.7(typescript@5.3.2)(zod@3.22.4)
       abort-controller: 3.0.0
       bundle-require: 3.1.2(esbuild@0.16.17)
       cac: 6.7.14
@@ -3688,8 +3687,8 @@ packages:
       pathe: 1.1.2
       picocolors: 1.0.0
       prettier: 2.8.8
-      typescript: 5.3.3
-      viem: 1.21.4(typescript@5.3.3)(zod@3.22.4)
+      typescript: 5.3.2
+      viem: 1.21.4(typescript@5.3.2)(zod@3.22.4)
       zod: 3.22.4
     transitivePeerDependencies:
       - bufferutil
@@ -3819,11 +3818,11 @@ packages:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/universal-minter@0.2.12(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.3):
+  /@zoralabs/universal-minter@0.2.12(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2):
     resolution: {integrity: sha512-tPeUh85OQrCOc454TaXy0MbHfU79XwaU1Mrhj1DAxY077v3ztXl2Vg7wJbQduVg8c6H8/hShCSI+scO2NYcHZg==}
     dependencies:
       '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)
-      abitype: 0.9.10(typescript@5.3.3)
+      abitype: 0.9.10(typescript@5.3.2)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@swc/core'
@@ -3857,10 +3856,10 @@ packages:
     dependencies:
       '@changesets/cli': 2.26.2
       '@openzeppelin/contracts': 4.9.2
-      '@wagmi/cli': 1.5.2(typescript@5.3.3)
+      '@wagmi/cli': 1.5.2(typescript@5.3.2)
       '@zoralabs/openzeppelin-contracts-upgradeable': 4.8.4
       '@zoralabs/protocol-rewards': 1.2.1
-      abitype: 0.8.11(typescript@5.3.3)
+      abitype: 0.8.11(typescript@5.3.2)
       ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
       es-main: 1.3.0
       forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
@@ -3869,10 +3868,10 @@ packages:
       prettier-plugin-solidity: 1.3.1(prettier@2.8.8)
       solady: 0.0.123
       solmate: 6.2.0
-      tsup: 7.2.0(ts-node@10.9.1)(typescript@5.3.3)
+      tsup: 7.2.0(ts-node@10.9.1)(typescript@5.3.2)
       tsx: 3.14.0
-      typescript: 5.3.3
-      viem: 1.21.4(typescript@5.3.3)(zod@3.22.4)
+      typescript: 5.3.2
+      viem: 1.21.4(typescript@5.3.2)(zod@3.22.4)
       vite: 4.5.2(@types/node@20.4.5)
       vitest: 0.30.1
     transitivePeerDependencies:
@@ -3902,7 +3901,7 @@ packages:
       - zod
     dev: false
 
-  /abitype@0.8.11(typescript@5.3.3):
+  /abitype@0.8.11(typescript@5.3.2):
     resolution: {integrity: sha512-bM4v2dKvX08sZ9IU38IN5BKmN+ZkOSd2oI4a9f0ejHYZQYV6cDr7j+d95ga0z2XHG36Y4jzoG5Z7qDqxp7fi/A==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -3911,10 +3910,10 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.3.2
     dev: false
 
-  /abitype@0.8.7(typescript@5.3.3)(zod@3.22.4):
+  /abitype@0.8.7(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-wQ7hV8Yg/yKmGyFpqrNZufCxbszDe5es4AZGYPBitocfSqXtjrTG9JMWFcc4N30ukl2ve48aBTwt7NJxVQdU3w==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -3923,11 +3922,11 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.3.2
       zod: 3.22.4
     dev: false
 
-  /abitype@0.9.10(typescript@5.3.3):
+  /abitype@0.9.10(typescript@5.3.2):
     resolution: {integrity: sha512-FIS7U4n7qwAT58KibwYig5iFG4K61rbhAqaQh/UWj8v1Y8mjX3F8TC9gd8cz9yT1TYel9f8nS5NO5kZp2RW0jQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -3938,10 +3937,10 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.3.2
     dev: false
 
-  /abitype@0.9.8(typescript@5.3.3)(zod@3.22.4):
+  /abitype@0.9.8(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-puLifILdm+8sjyss4S+fsUN09obiT1g2YW6CtcQF+QDzxR0euzgEB29MZujC6zMk2a6SVmtttq1fc6+YFA7WYQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -3952,11 +3951,11 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.3.2
       zod: 3.22.4
     dev: false
 
-  /abitype@1.0.0(typescript@5.3.3):
+  /abitype@1.0.0(typescript@5.3.2):
     resolution: {integrity: sha512-NMeMah//6bJ56H5XRj8QCV4AwuW6hB6zqz2LnhhLdcWVQOsXki6/Pn3APeqxCma62nXIcmZWdu1DlHWS74umVQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -3967,7 +3966,7 @@ packages:
       zod:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.3.2
     dev: false
 
   /abort-controller@3.0.0:
@@ -7048,10 +7047,10 @@ packages:
       hardhat: ^2.0.0
     dependencies:
       chokidar: 3.5.3
-      hardhat: 2.19.4(ts-node@10.9.1)(typescript@5.3.3)
+      hardhat: 2.19.4(ts-node@10.9.1)(typescript@5.3.2)
     dev: false
 
-  /hardhat@2.19.4(ts-node@10.9.1)(typescript@5.3.3):
+  /hardhat@2.19.4(ts-node@10.9.1)(typescript@5.3.2):
     resolution: {integrity: sha512-fTQJpqSt3Xo9Mn/WrdblNGAfcANM6XC3tAEi6YogB4s02DmTf93A8QsGb8uR0KR8TFcpcS8lgiW4ugAIYpnbrQ==}
     hasBin: true
     peerDependencies:
@@ -7107,9 +7106,9 @@ packages:
       solc: 0.7.3(debug@4.3.4)
       source-map-support: 0.5.21
       stacktrace-parser: 0.1.10
-      ts-node: 10.9.1(@types/node@20.4.5)(typescript@5.3.3)
+      ts-node: 10.9.1(@types/node@20.4.5)(typescript@5.3.2)
       tsort: 0.0.1
-      typescript: 5.3.3
+      typescript: 5.3.2
       undici: 5.28.2
       uuid: 8.3.2
       ws: 7.5.9
@@ -9388,7 +9387,7 @@ packages:
         optional: true
     dependencies:
       lilconfig: 3.0.0
-      ts-node: 10.9.1(@types/node@20.4.5)(typescript@5.3.3)
+      ts-node: 10.9.1(@types/node@20.4.5)(typescript@5.3.2)
       yaml: 2.3.4
     dev: false
 
@@ -10999,7 +10998,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /ts-essentials@9.4.1(typescript@5.3.3):
+  /ts-essentials@9.4.1(typescript@5.3.2):
     resolution: {integrity: sha512-oke0rI2EN9pzHsesdmrOrnqv1eQODmJpd/noJjwj2ZPC3Z4N2wbjrOEqnsEgmvlO2+4fBb0a794DCna2elEVIQ==}
     peerDependencies:
       typescript: '>=4.1.0'
@@ -11007,14 +11006,14 @@ packages:
       typescript:
         optional: true
     dependencies:
-      typescript: 5.3.3
+      typescript: 5.3.2
     dev: false
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: false
 
-  /ts-node@10.9.1(@types/node@20.4.5)(typescript@5.3.3):
+  /ts-node@10.9.1(@types/node@20.4.5)(typescript@5.3.2):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -11040,7 +11039,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.3.3
+      typescript: 5.3.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
@@ -11066,7 +11065,7 @@ packages:
     resolution: {integrity: sha512-Tyrf5mxF8Ofs1tNoxA13lFeZ2Zrbd6cKbuH3V+MQ5sb6DtBj5FjrXVsRWT8YvNAQTqNoz66dz1WsbigI22aEnw==}
     dev: false
 
-  /tsup@7.2.0(ts-node@10.9.1)(typescript@5.3.3):
+  /tsup@7.2.0(ts-node@10.9.1)(typescript@5.3.2):
     resolution: {integrity: sha512-vDHlczXbgUvY3rWvqFEbSqmC1L7woozbzngMqTtL2PGBODTtWlRwGDDawhvWzr5c1QjKe4OAKqJGfE1xeXUvtQ==}
     engines: {node: '>=16.14'}
     hasBin: true
@@ -11096,7 +11095,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.35.0
       tree-kill: 1.2.2
-      typescript: 5.3.3
+      typescript: 5.3.2
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -11302,8 +11301,8 @@ packages:
       is-typedarray: 1.0.0
     dev: false
 
-  /typescript@5.3.3:
-    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+  /typescript@5.3.2:
+    resolution: {integrity: sha512-6l+RyNy7oAHDfxC4FzSJcz9vnjTKxrLpDG5M2Vu4SHRVNg6xzqZp6LYSR9zjqQTu8DU/f5xwxUdADOkbrIX2gQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -11538,7 +11537,7 @@ packages:
       extsprintf: 1.3.0
     dev: false
 
-  /viem@1.21.4(typescript@5.3.3)(zod@3.22.4):
+  /viem@1.21.4(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-BNVYdSaUjeS2zKQgPs+49e5JKocfo60Ib2yiXOWBT6LuVxY1I/6fFX3waEtpXvL1Xn4qu+BVitVtMh9lyThyhQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -11551,9 +11550,9 @@ packages:
       '@noble/hashes': 1.3.2
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
-      abitype: 0.9.8(typescript@5.3.3)(zod@3.22.4)
+      abitype: 0.9.8(typescript@5.3.2)(zod@3.22.4)
       isows: 1.0.3(ws@8.13.0)
-      typescript: 5.3.3
+      typescript: 5.3.2
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
@@ -11561,7 +11560,7 @@ packages:
       - zod
     dev: false
 
-  /viem@2.7.9(typescript@5.3.3):
+  /viem@2.7.9(typescript@5.3.2):
     resolution: {integrity: sha512-iDfc8TwaZFp1K95zlsxYh6Cs0OWCt35Tqs8uYgXKSxtz7w075mZ0H5SJ8zSyJGoEaticVDhtdmRRX6TtcW9EeQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -11574,9 +11573,9 @@ packages:
       '@noble/hashes': 1.3.2
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
-      abitype: 1.0.0(typescript@5.3.3)
+      abitype: 1.0.0(typescript@5.3.2)
       isows: 1.0.3(ws@8.13.0)
-      typescript: 5.3.3
+      typescript: 5.3.2
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
