@@ -5,6 +5,7 @@ import {
   type PublicClient,
   type Address,
   type Chain,
+  zeroAddress,
 } from 'viem'
 import {
   mainnet,
@@ -25,7 +26,15 @@ interface Transaction {
   value: string
 }
 
-const chainsArray = [mainnet, base, optimism, arbitrum, polygon, zkSync, zora]
+const chains: Record<number, Chain> = {
+  1: mainnet,
+  10: optimism,
+  42161: arbitrum,
+  8453: base,
+  137: polygon,
+  324: zkSync,
+  7777777: zora,
+}
 
 function getClient(chain: Chain): PublicClient {
   return createPublicClient({
@@ -34,9 +43,9 @@ function getClient(chain: Chain): PublicClient {
   })
 }
 
-export async function getTransaction(hash: Hash): Promise<Transaction | null>{
+export async function getTransaction(hash: Hash): Promise<Transaction | null> {
   console.log('looking for transaction...')
-  for (const chain of chainsArray) {
+  for (const chain of Object.values(chains)) {
     const client = getClient(chain)
     try {
       const transaction = await client.getTransaction({ hash })
@@ -52,4 +61,44 @@ export async function getTransaction(hash: Hash): Promise<Transaction | null>{
     } catch {}
   }
   return null
+}
+
+const tokenAddressTypes = [
+  'tokenIn',
+  'tokenOut',
+  'token',
+  'tokenOne',
+  'tokenTwo',
+]
+
+export async function getDecimals(response: any, chain: number) {
+  console.log('getting token info...')
+  const client = getClient(chains[chain])
+  for (const key of Object.keys(response)) {
+    if (tokenAddressTypes.includes(key)) {
+      const address = response[key]
+      if (address === zeroAddress) {
+        return 18
+      }
+      try {
+        const decimals = await client.readContract({
+          address,
+          abi: [
+            {
+              inputs: [],
+              name: 'decimals',
+              outputs: [{ internalType: 'uint8', name: '', type: 'uint8' }],
+              stateMutability: 'view',
+              type: 'function',
+            },
+          ],
+          functionName: 'decimals',
+        })
+        return decimals
+      } catch {
+        console.log('token address not found')
+      }
+    }
+  }
+  return 18
 }

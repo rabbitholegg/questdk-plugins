@@ -1,5 +1,5 @@
-import { getTransaction } from './viem'
-import { parseEther, type Hash } from 'viem'
+import { getTransaction, getDecimals } from './viem'
+import { parseUnits, type Hash } from 'viem'
 import { ActionParamKeys, Actions } from './params'
 import { mainQuestions, actionQuestions } from './questions'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
@@ -36,10 +36,11 @@ export async function askQuestions() {
         const actionResponse = await _prompts(
           actionQuestions[response.action as Actions],
         )
+        const decimals = await getDecimals(actionResponse, transaction.chainId)
         let params = getParams(response.action, actionResponse)
-        params = buildParams(response.action, transaction, params)
+        params = buildParams(response.action, transaction, params, decimals)
         params = removeUndefinedParams(params)
-        transactions.push({ ...actionResponse, transaction, params })
+        transactions.push({ ...actionResponse, transaction, params, decimals })
       } else {
         console.log('transaction not found')
       }
@@ -55,16 +56,19 @@ export async function askQuestions() {
     addAnotherTransaction = addAnother
   }
 
+  const shouldIncludeGreaterThanOrEqual = ['swap', 'bridge'].includes(response.action) && transactions.length > 0;
+
   return {
     projectName: response.name,
     chains: response.chain,
     tx: transactions,
     actionType: response.action,
     publish: response.publish,
+    shouldIncludeGreaterThanOrEqual,
   }
 }
 
-function buildParams(actionType: Actions, transaction: any, params: any): any {
+function buildParams(actionType: Actions, transaction: any, params: any, decimals: number): any {
   switch (actionType) {
     case 'mint':
     case 'burn':
@@ -79,7 +83,7 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
         chainId: transaction.chainId,
         ...params,
         amountIn: params.amountIn
-          ? `GreaterThanOrEqual(${parseEther(params.amountIn)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amountIn, decimals)})`
           : 'GreaterThanOrEqual(1)',
         amountOut: 'GreaterThanOrEqual(1)',
       }
@@ -91,7 +95,7 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
           ? Chains[params.destinationChainId]
           : undefined,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseEther(params.amount)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amount, decimals)})`
           : 'GreaterThanOrEqual(1)',
         recipient: `'${transaction.from}'`,
       }
@@ -100,10 +104,10 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
         chainId: transaction.chainId,
         ...params,
         amountOne: params.amountOne
-          ? `GreaterThanOrEqual(${parseEther(params.amountOne)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amountOne, decimals)})`
           : undefined,
         amountTwo: params.amountTwo
-          ? `GreaterThanOrEqual(${parseEther(params.amountTwo)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amountTwo, decimals)})`
           : undefined,
       }
     case 'vote':
@@ -117,7 +121,7 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
         chainId: transaction.chainId,
         ...params,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseEther(params.amount)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amount, decimals)})`
           : undefined,
         delegator: `'${transaction.from}'`,
       }
@@ -131,7 +135,7 @@ function buildParams(actionType: Actions, transaction: any, params: any): any {
             : 'OrderType.Limit'
           : undefined,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseEther(params.amount)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amount, decimals)})`
           : undefined,
         recipient: `'${transaction.from}'`,
       }
