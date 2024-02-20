@@ -149,13 +149,13 @@ const bridgeQuestions = [
   {
     type: 'select',
     name: 'destinationChainId',
-    message: 'What is the destination chain? (Optional)',
+    message: 'What is the destination chain?',
     initial: null,
-    choices: [{ title: 'Skip', value: null }, ..._chainArray],
+    choices: _chainArray,
   },
   {
     type: 'text',
-    name: 'tokenOut',
+    name: 'tokenAddress',
     message:
       'What is the contract address for token being bridged? Use 0x0000000000000000000000000000000000000000 for ETH or other native assets (Optional)',
     initial: '',
