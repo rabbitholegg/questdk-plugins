@@ -31,13 +31,11 @@ export async function askQuestions() {
 
     if (hash) {
       const transaction = await getTransaction(hash)
-      const tokenInfo: Record<string, { symbol?: string; decimals: number }> = {}
+      const tokenInfo: Record<string, { symbol?: string; decimals: number }> =
+        {}
 
       if (transaction) {
-        const onSubmit = async (
-          prompt: PromptObject,
-          answer: string,
-        ) => {
+        const onSubmit = async (prompt: PromptObject, answer: string) => {
           if (
             typeof prompt.name === 'string' &&
             prompt.name.startsWith('token')
@@ -76,7 +74,8 @@ export async function askQuestions() {
   }
 
   const shouldIncludeGreaterThanOrEqual =
-    ['swap', 'bridge', 'stake'].includes(response.action) && transactions.length > 0
+    ['swap', 'bridge', 'stake'].includes(response.action) &&
+    transactions.length > 0
 
   return {
     projectName: response.name,
@@ -108,7 +107,10 @@ function buildParams(
         chainId: transaction.chainId,
         ...params,
         amountIn: params.amountIn
-          ? `GreaterThanOrEqual(${parseUnits(params.amountIn, tokenInfo.tokenIn.decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(
+              params.amountIn,
+              tokenInfo.tokenIn.decimals,
+            )})`
           : 'GreaterThanOrEqual(1)',
         amountOut: 'GreaterThanOrEqual(1)',
       }
@@ -118,7 +120,10 @@ function buildParams(
         ...params,
         destinationChainId: `Chains.${params.destinationChainId}`,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseUnits(params.amount, tokenInfo.tokenAddress.decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(
+              params.amount,
+              tokenInfo.tokenAddress.decimals,
+            )})`
           : 'GreaterThanOrEqual(1)',
         recipient: `'${transaction.from}'`,
       }
@@ -127,12 +132,17 @@ function buildParams(
         chainId: transaction.chainId,
         ...params,
         amountOne: params.amountOne
-          ? `GreaterThanOrEqual(${parseUnits(params.amountOne, tokenInfo.tokenOne.decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(
+              params.amountOne,
+              tokenInfo.tokenOne.decimals,
+            )})`
           : undefined,
         amountTwo: params.amountTwo
-          ? `GreaterThanOrEqual(${parseUnits(params.amountTwo, tokenInfo.tokenTwo.decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(
+              params.amountTwo,
+              tokenInfo.tokenTwo.decimals,
+            )})`
           : undefined,
-        duration: params.duration ? `GreaterThanOrEqual(${params.duration})` : undefined,
       }
     case 'vote':
       return {
@@ -159,7 +169,10 @@ function buildParams(
             : 'OrderType.Limit'
           : undefined,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseUnits(params.amount, tokenInfo.token.decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(
+              params.amount,
+              tokenInfo.token.decimals,
+            )})`
           : undefined,
         recipient: `'${transaction.from}'`,
       }

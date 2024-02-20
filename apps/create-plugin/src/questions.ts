@@ -218,16 +218,6 @@ const stakeQuestions = [
         ? 'Please enter a valid amount'
         : true,
   },
-  {
-    type: 'text',
-    name: 'duration',
-    message: 'What is the duration of the stake? (Optional)',
-    initial: '',
-    validate: (duration: string) =>
-      duration && !/^\d+$/.test(duration)
-        ? 'Please enter a valid number for duration'
-        : true,
-  },
   descriptionQuestion,
 ]
 
