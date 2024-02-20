@@ -181,11 +181,9 @@ function buildParams(
   }
 }
 
-// Adjusted function to accept an actionType argument
 function getParams(actionType: Actions, response: any): any {
-  const params: any = {} // Use a more specific type if possible
+  const params: any = {}
   if (response && typeof response === 'object' && ActionParamKeys[actionType]) {
-    // Dynamically select the key set based on actionType
     const keys = ActionParamKeys[actionType]
     for (const key of keys) {
       if (key in response) {

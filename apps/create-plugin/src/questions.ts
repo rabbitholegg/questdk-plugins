@@ -66,13 +66,6 @@ export const mainQuestions = [
   },
 ]
 
-// const contractAddressQuestion = {
-//   type: 'text',
-//   name: 'contractAddress',
-//   message: 'What is the contract address? (Optional)',
-//   initial: '',
-// }
-
 const descriptionQuestion: PromptObject = {
   type: 'text',
   name: 'description',
@@ -89,7 +82,6 @@ const descriptionQuestion: PromptObject = {
   },
 }
 
-// TODO - add questions for other action types
 const mintQuestions = [
   {
     type: 'text',
