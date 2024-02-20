@@ -21,6 +21,7 @@ export async function createPlugin(params: BuilderParams) {
     return
   }
 
+  // TODO: remove this
   console.log(JSON.stringify(params, null, 2))
 
   registerHelpers()
