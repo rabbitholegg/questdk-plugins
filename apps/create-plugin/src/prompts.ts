@@ -1,8 +1,8 @@
-import { getTransaction, getDecimals } from './viem'
-import { parseUnits, type Hash } from 'viem'
+import { getTransaction, getTokenInfo } from './viem'
+import { parseUnits, type Hash, Address } from 'viem'
 import { ActionParamKeys, Actions } from './params'
 import { mainQuestions, actionQuestions } from './questions'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { PromptObject } from 'prompts'
 const _prompts = require('prompts')
 
 export async function askQuestions() {
@@ -31,16 +31,35 @@ export async function askQuestions() {
 
     if (hash) {
       const transaction = await getTransaction(hash)
+      const tokenInfo: Record<string, { symbol?: string; decimals: number }> = {}
 
       if (transaction) {
+        const onSubmit = async (
+          prompt: PromptObject,
+          answer: string,
+        ) => {
+          if (
+            typeof prompt.name === 'string' &&
+            prompt.name.startsWith('token')
+          ) {
+            const info = await getTokenInfo(
+              answer as Address,
+              transaction.chainId,
+            )
+            tokenInfo[prompt.name] = info
+            if (info.symbol) {
+              console.log(`Token Found: ${info.symbol}`)
+            }
+          }
+        }
         const actionResponse = await _prompts(
           actionQuestions[response.action as Actions],
+          { onSubmit },
         )
-        const decimals = await getDecimals(actionResponse, transaction.chainId)
         let params = getParams(response.action, actionResponse)
-        params = buildParams(response.action, transaction, params, decimals)
+        params = buildParams(response.action, transaction, params, tokenInfo)
         params = removeUndefinedParams(params)
-        transactions.push({ ...actionResponse, transaction, params, decimals })
+        transactions.push({ ...actionResponse, transaction, params, tokenInfo })
       } else {
         console.log('transaction not found')
       }
@@ -56,7 +75,8 @@ export async function askQuestions() {
     addAnotherTransaction = addAnother
   }
 
-  const shouldIncludeGreaterThanOrEqual = ['swap', 'bridge'].includes(response.action) && transactions.length > 0;
+  const shouldIncludeGreaterThanOrEqual =
+    ['swap', 'bridge'].includes(response.action) && transactions.length > 0
 
   return {
     projectName: response.name,
@@ -68,7 +88,12 @@ export async function askQuestions() {
   }
 }
 
-function buildParams(actionType: Actions, transaction: any, params: any, decimals: number): any {
+function buildParams(
+  actionType: Actions,
+  transaction: any,
+  params: any,
+  tokenInfo: { [key: string]: { symbol?: string; decimals: number } },
+): any {
   switch (actionType) {
     case 'mint':
     case 'burn':
@@ -83,7 +108,7 @@ function buildParams(actionType: Actions, transaction: any, params: any, decimal
         chainId: transaction.chainId,
         ...params,
         amountIn: params.amountIn
-          ? `GreaterThanOrEqual(${parseUnits(params.amountIn, decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amountIn, tokenInfo.tokenIn.decimals)})`
           : 'GreaterThanOrEqual(1)',
         amountOut: 'GreaterThanOrEqual(1)',
       }
@@ -91,11 +116,9 @@ function buildParams(actionType: Actions, transaction: any, params: any, decimal
       return {
         sourceChainId: transaction.chainId,
         ...params,
-        destinationChainId: params.destinationChainId
-          ? Chains[params.destinationChainId]
-          : undefined,
+        destinationChainId: `Chains.${params.destinationChainId}`,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseUnits(params.amount, decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amount, tokenInfo.tokenAddress.decimals)})`
           : 'GreaterThanOrEqual(1)',
         recipient: `'${transaction.from}'`,
       }
@@ -104,10 +127,10 @@ function buildParams(actionType: Actions, transaction: any, params: any, decimal
         chainId: transaction.chainId,
         ...params,
         amountOne: params.amountOne
-          ? `GreaterThanOrEqual(${parseUnits(params.amountOne, decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amountOne, tokenInfo.tokenOne.decimals)})`
           : undefined,
         amountTwo: params.amountTwo
-          ? `GreaterThanOrEqual(${parseUnits(params.amountTwo, decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amountTwo, tokenInfo.tokenTwo.decimals)})`
           : undefined,
       }
     case 'vote':
@@ -121,7 +144,7 @@ function buildParams(actionType: Actions, transaction: any, params: any, decimal
         chainId: transaction.chainId,
         ...params,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseUnits(params.amount, decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amount, 18)})`
           : undefined,
         delegator: `'${transaction.from}'`,
       }
@@ -135,7 +158,7 @@ function buildParams(actionType: Actions, transaction: any, params: any, decimal
             : 'OrderType.Limit'
           : undefined,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseUnits(params.amount, decimals)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amount, tokenInfo.token.decimals)})`
           : undefined,
         recipient: `'${transaction.from}'`,
       }
@@ -161,11 +184,16 @@ function getParams(actionType: Actions, response: any): any {
   return params
 }
 
-function removeUndefinedParams<T>(params: Record<string, T>): Record<string, T> {
-  return Object.entries(params).reduce<Record<string, T>>((acc, [key, value]) => {
-    if (value !== undefined) {
-      acc[key] = value;
-    }
-    return acc;
-  }, {});
+function removeUndefinedParams<T>(
+  params: Record<string, T>,
+): Record<string, T> {
+  return Object.entries(params).reduce<Record<string, T>>(
+    (acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = value
+      }
+      return acc
+    },
+    {},
+  )
 }

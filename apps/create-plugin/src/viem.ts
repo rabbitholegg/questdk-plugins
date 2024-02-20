@@ -6,6 +6,7 @@ import {
   type Address,
   type Chain,
   zeroAddress,
+  isAddress,
 } from 'viem'
 import {
   mainnet,
@@ -63,34 +64,46 @@ export async function getTransaction(hash: Hash): Promise<Transaction | null> {
   return null
 }
 
-export async function getDecimals(response: any, chain: number) {
-  const client = getClient(chains[chain])
-  for (const key of Object.keys(response)) {
-    if (key.startsWith('token') && typeof response[key] === 'string') {
-      const address = response[key]
-      if (address === zeroAddress) {
-        return 18
-      }
-      try {
-        const decimals = await client.readContract({
-          address,
-          abi: [
-            {
-              inputs: [],
-              name: 'decimals',
-              outputs: [{ internalType: 'uint8', name: '', type: 'uint8' }],
-              stateMutability: 'view',
-              type: 'function',
-            },
-          ],
-          functionName: 'decimals',
-        })
-        return decimals
-      } catch {
-        console.log(`decimals for token ${address} not found... using default decimal value 18`)
-        return 18
-      }
+export async function getTokenInfo(address: Address, chain: number) {
+  if (isAddress(address)) {
+    const client = getClient(chains[chain])
+    if (address === zeroAddress) {
+      return { decimals: 18, symbol: 'ETH' }
+    }
+    try {
+      const decimals = await client.readContract({
+        address,
+        abi: [
+          {
+            inputs: [],
+            name: 'decimals',
+            outputs: [{ internalType: 'uint8', name: '', type: 'uint8' }],
+            stateMutability: 'view',
+            type: 'function',
+          },
+        ],
+        functionName: 'decimals',
+      })
+      const symbol = await client.readContract({
+        address,
+        abi: [
+          {
+            inputs: [],
+            name: 'symbol',
+            outputs: [{ internalType: 'string', name: '', type: 'string' }],
+            stateMutability: 'view',
+            type: 'function',
+          },
+        ],
+        functionName: 'symbol',
+      })
+      return { decimals, symbol }
+    } catch {
+      console.log(
+        `decimals for token ${address} not found... using default decimal value 18`,
+      )
+      return { decimals: 18 }
     }
   }
-  return 18
+  return { decimals: 18 }
 }
