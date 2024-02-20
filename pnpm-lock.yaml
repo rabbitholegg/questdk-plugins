@@ -89,9 +89,6 @@ importers:
       prompts:
         specifier: 2.4.2
         version: 2.4.2
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
 
   apps/questdk:
     devDependencies:
