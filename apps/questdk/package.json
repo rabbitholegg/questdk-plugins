@@ -20,7 +20,7 @@
         "format": "rome format . --write",
         "lint": "rome check .",
         "lint:fix": "pnpm lint --apply",
-        "prepublishOnly": "node scripts/prepublishOnly.ts",
+        "prepublishOnly": "node dist/cjs/scripts/prepublishOnly.js",
         "size": "size-limit",
         "test": "vitest dev",
         "test:cov": "vitest dev --coverage",
