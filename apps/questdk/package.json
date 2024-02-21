@@ -1,85 +1,85 @@
 {
     "name": "@rabbitholegg/questdk",
-    "version": "2.0.0-alpha.35",
+    "version": "2.0.0-alpha.36",
     "description": "",
     "type": "module",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
     "packageManager": "pnpm@8.3.1",
     "scripts": {
-    "bench": "vitest bench",
-    "bench:ci": "CI=true vitest bench",
-    "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
-    "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
-    "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm && echo > ./dist/esm/package.json '{\"type\":\"module\",\"sideEffects\":false}'",
-    "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
-    "changeset": "changeset",
-    "changeset:release": "pnpm build && changeset publish",
-    "changeset:version": "changeset version && pnpm install --lockfile-only && node scripts/updateVersion.ts",
-    "clean": "rimraf dist",
-    "format": "rome format . --write",
-    "lint": "rome check .",
-    "lint:fix": "pnpm lint --apply",
-    "prepublishOnly": "node scripts/prepublishOnly.ts",
-    "size": "size-limit",
-    "test": "vitest dev",
-    "test:cov": "vitest dev --coverage",
-    "test:ci": "CI=true vitest --coverage",
-    "test:typecheck": "SKIP_GLOBAL_SETUP=true vitest typecheck",
-    "test:ui": "vitest dev --ui",
-    "typecheck": "tsc --noEmit"
+        "bench": "vitest bench",
+        "bench:ci": "CI=true vitest bench",
+        "build": "pnpm run clean && pnpm run build:cjs && pnpm run build:esm && pnpm run build:types",
+        "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
+        "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm && echo > ./dist/esm/package.json '{\"type\":\"module\",\"sideEffects\":false}'",
+        "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
+        "changeset": "changeset",
+        "changeset:release": "pnpm build && changeset publish",
+        "changeset:version": "changeset version && pnpm install --lockfile-only && node scripts/updateVersion.ts",
+        "clean": "rimraf dist",
+        "format": "rome format . --write",
+        "lint": "rome check .",
+        "lint:fix": "pnpm lint --apply",
+        "prepublishOnly": "node scripts/prepublishOnly.ts",
+        "size": "size-limit",
+        "test": "vitest dev",
+        "test:cov": "vitest dev --coverage",
+        "test:ci": "CI=true vitest --coverage",
+        "test:typecheck": "SKIP_GLOBAL_SETUP=true vitest typecheck",
+        "test:ui": "vitest dev --ui",
+        "typecheck": "tsc --noEmit"
     },
     "keywords": [],
     "authors": [
-    "rabbitholegg"
+        "rabbitholegg"
     ],
     "license": "MIT",
     "types": "./dist/types/index.d.ts",
     "typings": "./dist/types/index.d.ts",
     "typesVersions": {
-    "*": {
-        "utils": [
-        "./dist/types/utils/index.d.ts"
-        ],
-        "actions": [
-        "./dist/types/actions/index.d.ts"
-        ],
-        "filter": [
-        "./dist/types/filter/index.d.ts"
-        ]
-    }
+        "*": {
+            "utils": [
+                "./dist/types/utils/index.d.ts"
+            ],
+            "actions": [
+                "./dist/types/actions/index.d.ts"
+            ],
+            "filter": [
+                "./dist/types/filter/index.d.ts"
+            ]
+        }
     },
     "sideEffects": false,
     "files": [
-    "dist",
-    "!dist/**/*.tsbuildinfo",
-    "src/**/*.ts",
-    "!src/**/*.test.ts",
-    "!src/**/*.test-d.ts",
-    "!src/**/*.bench.ts",
-    "!src/_test/**/*"
+        "dist",
+        "!dist/**/*.tsbuildinfo",
+        "src/**/*.ts",
+        "!src/**/*.test.ts",
+        "!src/**/*.test-d.ts",
+        "!src/**/*.bench.ts",
+        "!src/_test/**/*"
     ],
     "exports": {
-    ".": {
-        "types": "./dist/types/index.d.ts",
-        "import": "./dist/esm/index.js",
-        "default": "./dist/cjs/index.js"
-    },
-    "./actions": {
-        "types": "./dist/types/actions/index.d.ts",
-        "import": "./dist/esm/actions/index.js",
-        "default": "./dist/cjs/actions/index.js"
-    },
-    "./filter": {
-        "types": "./dist/types/filter/index.d.ts",
-        "import": "./dist/esm/filter/index.js",
-        "default": "./dist/cjs/filter/index.js"
-    },
-    "./utils": {
-        "types": "./dist/types/utils/index.d.ts",
-        "import": "./dist/esm/utils/index.js",
-        "default": "./dist/cjs/utils/index.js"
-    }
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/esm/index.js",
+            "default": "./dist/cjs/index.js"
+        },
+        "./actions": {
+            "types": "./dist/types/actions/index.d.ts",
+            "import": "./dist/esm/actions/index.js",
+            "default": "./dist/cjs/actions/index.js"
+        },
+        "./filter": {
+            "types": "./dist/types/filter/index.d.ts",
+            "import": "./dist/esm/filter/index.js",
+            "default": "./dist/cjs/filter/index.js"
+        },
+        "./utils": {
+            "types": "./dist/types/utils/index.d.ts",
+            "import": "./dist/esm/utils/index.js",
+            "default": "./dist/cjs/utils/index.js"
+        }
     },
     "devDependencies": {
         "tsconfig": "workspace:*",
@@ -94,11 +94,11 @@
     },
     "repository": "rabbitholegg/questdk",
     "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+        "registry": "https://registry.npmjs.org/"
     },
     "pnpm": {
-    "overrides": {
-        "questdk": "workspace:*"
-    }
+        "overrides": {
+            "questdk": "workspace:*"
+        }
     }
 }
