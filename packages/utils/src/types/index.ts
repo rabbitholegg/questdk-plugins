@@ -10,9 +10,9 @@ export type {
   DelegateActionParams,
   ActionParams,
   IActionPlugin,
-  ActionType,
-  OrderType,
 } from "./actions";
+
+export { ActionType, OrderType } from "./actions";
 
 export type {
   FilterObject,

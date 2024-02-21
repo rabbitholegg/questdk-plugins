@@ -26,10 +26,12 @@ export type {
   NumericOperator,
   StringOperator,
   FilterOperator,
-  TransactionFilter,
+  TransactionFilter
 } from "./types";
 
 export {
   ActionType,
   OrderType,
 } from "./types";
+
+export { PluginActionNotImplementedError } from './errors'

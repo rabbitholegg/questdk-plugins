@@ -2,7 +2,7 @@ import type {
   FilterOperator,
   TransactionFilter,
 } from "@rabbitholegg/questdk-plugin-utils";
-import type { PluginActionNotImplementedError } from "../index.js";
+import { PluginActionNotImplementedError } from "../index.js";
 import { type Address } from "viem";
 
 export type SwapActionParams = {
