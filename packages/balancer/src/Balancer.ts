@@ -2,12 +2,12 @@ import {
   type TransactionFilter,
   type SwapActionParams,
   compressJson,
-} from "@rabbitholegg/questdk";
-import { type Address } from "viem";
-import { BALANCER_ABI } from "./abi";
-import { CHAIN_ID_ARRAY, VAULT_CONTRACT, PATCH_CONTRACT } from "./constants";
-import { buildAmountQuery, buildPathQuery } from "./utils";
-import { CHAIN_TO_TOKENS } from "./token-addresses";
+} from '@rabbitholegg/questdk'
+import { type Address } from 'viem'
+import { BALANCER_ABI } from './abi'
+import { CHAIN_ID_ARRAY, VAULT_CONTRACT, PATCH_CONTRACT } from './constants'
+import { buildAmountQuery, buildPathQuery } from './utils'
+import { CHAIN_TO_TOKENS } from './token-addresses'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -20,7 +20,7 @@ export const swap = async (
     amountIn,
     amountOut,
     recipient,
-  } = swap;
+  } = swap
 
   return compressJson({
     chainId: chainId,
@@ -51,15 +51,15 @@ export const swap = async (
         },
       ],
     },
-  });
-};
+  })
+}
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return CHAIN_TO_TOKENS[_chainId] ?? [];
-};
+  return CHAIN_TO_TOKENS[_chainId] ?? []
+}
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return CHAIN_ID_ARRAY as number[];
-};
+  return CHAIN_ID_ARRAY as number[]
+}

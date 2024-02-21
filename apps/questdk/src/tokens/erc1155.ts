@@ -1,6 +1,6 @@
-import fetchQuestActionParams from "../quests/fetchQuestData.js";
-import axios from "axios";
-import { type Address, type PublicClient } from "viem";
+import fetchQuestActionParams from '../quests/fetchQuestData.js'
+import axios from 'axios'
+import { type Address, type PublicClient } from 'viem'
 
 /**
  * Fetches ERC1155 token metadata from a given contract.
@@ -18,14 +18,14 @@ export async function fetchERC1155Metadata(
   const tokenURI: string = await (client.readContract({
     address: contractAddress as Address,
     abi: [
-      "function uri(uint256 tokenId) external view returns (string memory)",
+      'function uri(uint256 tokenId) external view returns (string memory)',
     ],
-    functionName: "uri",
+    functionName: 'uri',
     args: [tokenId],
-  }) as Promise<string>);
+  }) as Promise<string>)
 
-  const response = await axios.get(tokenURI);
-  return response.data;
+  const response = await axios.get(tokenURI)
+  return response.data
 }
 
 /**
@@ -41,8 +41,8 @@ export async function fetchERC1155Media(
   contractAddress: string,
   tokenId: number,
 ): Promise<string | undefined> {
-  const metadata = await fetchERC1155Metadata(client, contractAddress, tokenId);
-  return metadata.image || metadata.animation_url;
+  const metadata = await fetchERC1155Metadata(client, contractAddress, tokenId)
+  return metadata.image || metadata.animation_url
 }
 
 /**
@@ -55,11 +55,11 @@ export async function fetchERC1155MetadataByUUID(
   client: PublicClient,
   uuid: string,
 ): Promise<any> {
-  const actionParams = await fetchQuestActionParams(uuid);
-  if (actionParams.type !== "mint") {
-    throw new Error("Quest action is not of type mint");
+  const actionParams = await fetchQuestActionParams(uuid)
+  if (actionParams.type !== 'mint') {
+    throw new Error('Quest action is not of type mint')
   }
-  const contractAddress = actionParams.data.contractAddress;
-  const tokenId = actionParams.data.tokenId;
-  return fetchERC1155Metadata(client, contractAddress, tokenId);
+  const contractAddress = actionParams.data.contractAddress
+  const tokenId = actionParams.data.tokenId
+  return fetchERC1155Metadata(client, contractAddress, tokenId)
 }

@@ -2,39 +2,39 @@ import {
   type TransactionFilter,
   type SwapActionParams,
   compressJson,
-} from "@rabbitholegg/questdk";
-import { type Address } from "viem";
-import { CHAIN_ID_ARRAY } from "./chain-ids";
-import { buildV2PathQuery, buildV3PathQuery, Tokens } from "./utils";
+} from '@rabbitholegg/questdk'
+import { type Address } from 'viem'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { buildV2PathQuery, buildV3PathQuery, Tokens } from './utils'
 import {
   CAMELOT_V2_ABI,
   CAMELOT_V3_EXACT_INPUT_ABI,
   CAMELOT_V3_EXACT_OUTPUT_ABI,
   PARASWAP_ABI,
-} from "./abi";
+} from './abi'
 import {
   DEFAULT_TOKEN_LIST,
   CAMELOT_V2_ROUTER,
   CAMELOT_V3_ROUTER,
   PARASWAP_ROUTER,
   INTERNAL_ETH_ADDRESS,
-} from "./contract-addresses";
-import { Chains } from "@rabbitholegg/questdk-plugin-utils";
+} from './contract-addresses'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
-const PARASWAP_PARTNER = "0x353D2d14Bb674892910685520Ac040f560CcBC06";
+const PARASWAP_PARTNER = '0x353D2d14Bb674892910685520Ac040f560CcBC06'
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap;
+  const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
 
-  const ethUsedIn = tokenIn === Tokens.ETH;
-  const ethUsedOut = tokenOut === Tokens.ETH;
+  const ethUsedIn = tokenIn === Tokens.ETH
+  const ethUsedOut = tokenOut === Tokens.ETH
 
-  const tokenInOrEth = ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn;
-  const tokenOutOrEth = ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut;
-  const tokenInOrWeth = ethUsedIn ? Tokens.WETH : tokenIn;
-  const tokenOutOrWeth = ethUsedOut ? Tokens.WETH : tokenOut;
+  const tokenInOrEth = ethUsedIn ? INTERNAL_ETH_ADDRESS : tokenIn
+  const tokenOutOrEth = ethUsedOut ? INTERNAL_ETH_ADDRESS : tokenOut
+  const tokenInOrWeth = ethUsedIn ? Tokens.WETH : tokenIn
+  const tokenOutOrWeth = ethUsedOut ? Tokens.WETH : tokenOut
 
   return compressJson({
     chainId: chainId,
@@ -153,16 +153,16 @@ export const swap = async (
         },
       ],
     },
-  });
-};
+  })
+}
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
   // Only return supported tokens for ARBITRUM_CHAIN_ID
-  return _chainId === Chains.ARBITRUM_ONE ? DEFAULT_TOKEN_LIST : [];
-};
+  return _chainId === Chains.ARBITRUM_ONE ? DEFAULT_TOKEN_LIST : []
+}
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return CHAIN_ID_ARRAY;
-};
+  return CHAIN_ID_ARRAY
+}
