@@ -1,5 +1,5 @@
 import type { Address } from 'viem'
-import { Chains } from './utils'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 export const CHAIN_TO_CONTRACTS: { [_chainId: number]: Address[] | undefined } =
   {

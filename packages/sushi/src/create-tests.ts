@@ -1,4 +1,4 @@
-import { createTestCase } from './utils'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
   PROCESS_ROUTE_ETH_TOKEN,
   PROCESS_ROUTE_TOKEN_ETH,

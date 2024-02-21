@@ -1,6 +1,6 @@
 import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { type TestParams, Chains } from './utils'
+import { type TestParams, Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const PROCESS_ROUTE_ETH_TOKEN: TestParams<SwapActionParams> = {
@@ -79,7 +79,7 @@ export const PROCESS_ROUTE_V4: TestParams<SwapActionParams> = {
     tokenOut: '0x7F5c764cBc14f9669B88837ca1490cCa17c31607', // USDC.e
     amountOut: GreaterThanOrEqual(parseUnits('1.1', 6)),
     recipient: '0x98c364a2678ede157939aec359788ef5c5441f98',
-  }
+  },
 }
 
 // Legacy AMM transactions
