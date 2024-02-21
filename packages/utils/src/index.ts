@@ -26,7 +26,7 @@ export type {
   NumericOperator,
   StringOperator,
   FilterOperator,
-  TransactionFilter
+  TransactionFilter,
 } from "./types";
 
 export {
@@ -34,4 +34,4 @@ export {
   OrderType,
 } from "./types";
 
-export { PluginActionNotImplementedError } from './errors'
+export { PluginActionNotImplementedError } from "./errors";
