@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.36
+
+### Minor Changes
+
+- [#222](https://github.com/rabbitholegg/questdk-plugins/pull/222) [`f8bc9b6`](https://github.com/rabbitholegg/questdk-plugins/commit/f8bc9b6b11e7c43041cf98e37dc31093c88834bc) Thanks [@Quazia](https://github.com/Quazia)! - Adds a client and helper functions for fetching metadata given either contract or boost information
+
+- [#222](https://github.com/rabbitholegg/questdk-plugins/pull/222) [`6253278`](https://github.com/rabbitholegg/questdk-plugins/commit/62532783c99034eb3b701dd9b9e7b768efc03874) Thanks [@Quazia](https://github.com/Quazia)! - Migrate questdk to shared monorepo
+
 ## 2.0.0-alpha.35
 
 ### Minor Changes
