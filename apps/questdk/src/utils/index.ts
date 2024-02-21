@@ -1,1 +1,1 @@
-export { compressJson } from "./compressJson.js";
+export { compressJson } from './compressJson.js'

@@ -1,79 +1,79 @@
-import type { Abi, Transaction } from "viem";
+import type { Abi, Transaction } from 'viem'
 
 export type ArrayOperator =
   | {
-      $some?: FilterOperator[];
+      $some?: FilterOperator[]
     }
   | {
-      $first?: FilterOperator;
+      $first?: FilterOperator
     }
   | {
-      $last?: FilterOperator;
+      $last?: FilterOperator
     }
   | {
-      $nth?: NthFilter;
-    };
+      $nth?: NthFilter
+    }
 
 export type LogicalOperator =
   | {
-      $and?: FilterOperator[];
+      $and?: FilterOperator[]
     }
   | {
-      $or?: FilterOperator[];
-    };
+      $or?: FilterOperator[]
+    }
 
 export type NumericOperator =
   | bigint
   | number
   | string
   | {
-      $gt?: bigint;
+      $gt?: bigint
     }
   | {
-      $gte?: bigint;
+      $gte?: bigint
     }
   | {
-      $lt?: bigint;
+      $lt?: bigint
     }
   | {
-      $lte?: bigint;
-    };
+      $lte?: bigint
+    }
 
 export type StringOperator = {
-  $regex?: string;
-};
+  $regex?: string
+}
 
 export type FilterOperator =
   | LogicalOperator
   | NumericOperator
   | ArrayOperator
-  | StringOperator;
+  | StringOperator
 
 export type TransactionFilter = {
-  [K in keyof Transaction]: FilterOperator;
-};
+  [K in keyof Transaction]: FilterOperator
+}
 
-type Primitive = string | number | boolean;
+type Primitive = string | number | boolean
 export type FilterObject = {
-  [key: string]: Filter;
-};
+  [key: string]: Filter
+}
 export type BitmaskFilter = {
-  bitmask: bigint | number | string;
-  value: bigint | number | string | NumericOperator;
-};
+  bitmask: bigint | number | string
+  value: bigint | number | string | NumericOperator
+}
 export type NthFilter = {
-  index: bigint | number | string;
-  value: TransactionFilter | FilterObject;
-};
-export type Filter = Primitive | FilterObject | FilterArray | Abi;
-export type FilterArray = Filter[];
+  index: bigint | number | string
+  value: TransactionFilter | FilterObject
+}
+export type Filter = Primitive | FilterObject | FilterArray | Abi
+export type FilterArray = Filter[]
 export interface AbiFilter extends FilterObject {
-  $abi: Abi;
+  $abi: Abi
 }
 
 export interface AbstractAbiFilter extends FilterObject {
-  $abiAbstract: Abi;
+  $abiAbstract: Abi
 }
 export interface AbiParamFilter extends FilterObject {
-  $abiParams: string[];
+  $abiParams: string[]
 }

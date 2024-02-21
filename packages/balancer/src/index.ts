@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 
 import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from "./Balancer.js";
+} from './Balancer.js'
 
 export const Balancer: IActionPlugin = {
-  pluginId: "balancer",
+  pluginId: 'balancer',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   swap,
   bridge: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-};
+}

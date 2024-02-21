@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 
 import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from "./OkuTrade.js";
+} from './OkuTrade.js'
 
 export const OkuTrade: IActionPlugin = {
-  pluginId: "okutrade",
+  pluginId: 'okutrade',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   swap,
   bridge: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-};
+}

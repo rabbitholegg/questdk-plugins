@@ -1,17 +1,17 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 
 import {
   options,
   stake,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from "./Vela.js";
+} from './Vela.js'
 
 export const Vela: IActionPlugin = {
-  pluginId: "vela",
+  pluginId: 'vela',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   options,
@@ -19,4 +19,4 @@ export const Vela: IActionPlugin = {
   swap: async () => new PluginActionNotImplementedError(),
   bridge: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-};
+}

@@ -27,7 +27,7 @@
         "useButtonType": "off"
       },
       "complexity": {
-        "noExtraSemicolon": "on"
+        "noExtraSemicolon": "error"
       },
       "correctness": {
         "noUnusedVariables": "error"

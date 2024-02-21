@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 
 import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from "./Hyphen.js";
+} from './Hyphen.js'
 
 export const Hyphen: IActionPlugin = {
-  pluginId: "hyphen",
+  pluginId: 'hyphen',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge,
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-};
+}

@@ -198,7 +198,7 @@
     "@rabbitholegg/questdk-plugin-boost": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-llama": "1.0.0-alpha.8",
     "@rabbitholegg/create-plugin": "1.0.0",
-    "@rabbitholegg/questdk": "1.0.0"
+    "@rabbitholegg/questdk": "1.0.0",
     "@rabbitholegg/questdk-plugin-kote": "1.0.0-alpha.0"
   }
 }
