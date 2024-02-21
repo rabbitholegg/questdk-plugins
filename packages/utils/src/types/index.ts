@@ -1,4 +1,4 @@
-export type { IntentParams, MintIntentParams } from './intents'
+export type { IntentParams, MintIntentParams } from "./intents";
 export type {
   SwapActionParams,
   OptionsActionParams,
