@@ -32,10 +32,6 @@ export const passingTestCases = [
     'when swapping ETH to tokens using V4 route processor',
   ),
   createTestCase(
-    PROCESS_ROUTE_V4,
-    'when swapping ETH to tokens using V4 route processor',
-  ),
-  createTestCase(
     ETH_FOR_EXACT_TOKENS,
     'when swapping ETH for exact tokens using V2 router',
   ),
