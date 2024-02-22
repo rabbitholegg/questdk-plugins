@@ -1,6 +1,7 @@
 import { getSupportedTokenAddresses, swap } from './Sushi'
 import { PROCESS_ROUTE_ABI, ROUTER_ABI } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
+import { CHAIN_TO_CONTRACTS } from './contract-addresses'
 import { failingTestCases, passingTestCases } from './create-tests'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
@@ -14,11 +15,7 @@ describe('Given the Sushi plugin', () => {
         expect(filter).to.deep.equal({
           chainId: 8453,
           to: {
-            $or: [
-              '0x9b3336186a38e1b6c21955d112dbb0343ee061ee',
-              '0x83ec81ae54dd8dca17c3dd4703141599090751d1',
-              '0x6bded42c6da8fbf0d2ba55b2fa120c5e0c8d7891',
-            ],
+            $or: CHAIN_TO_CONTRACTS[8453]?.map(token => token.toLowerCase()),
           },
           value: {
             $gte: '2100000000000000000',
