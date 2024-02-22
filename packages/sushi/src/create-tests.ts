@@ -1,4 +1,4 @@
-import { createTestCase } from "@rabbitholegg/questdk-plugin-utils";
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
   PROCESS_ROUTE_ETH_TOKEN,
   PROCESS_ROUTE_TOKEN_ETH,
@@ -33,7 +33,7 @@ export const passingTestCases = [
   ),
   createTestCase(
     PROCESS_ROUTE_V4,
-    "when swapping ETH to tokens using V4 route processor",
+    'when swapping ETH to tokens using V4 route processor',
   ),
   createTestCase(
     ETH_FOR_EXACT_TOKENS,

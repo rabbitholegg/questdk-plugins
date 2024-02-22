@@ -15,9 +15,9 @@ describe('Given the Sushi plugin', () => {
           chainId: 8453,
           to: {
             $or: [
-              "0x9b3336186a38e1b6c21955d112dbb0343ee061ee",
-              "0x83ec81ae54dd8dca17c3dd4703141599090751d1",
-              "0x6bded42c6da8fbf0d2ba55b2fa120c5e0c8d7891",
+              '0x9b3336186a38e1b6c21955d112dbb0343ee061ee',
+              '0x83ec81ae54dd8dca17c3dd4703141599090751d1',
+              '0x6bded42c6da8fbf0d2ba55b2fa120c5e0c8d7891',
             ],
           },
           value: {

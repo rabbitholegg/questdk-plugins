@@ -1,5 +1,5 @@
-import type { FilterOperator } from "@rabbitholegg/questdk";
-import { getAddress } from "viem";
+import type { FilterOperator } from '@rabbitholegg/questdk'
+import { getAddress } from 'viem'
 
 export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v2 paths are formatted as [<token>, <token>]
