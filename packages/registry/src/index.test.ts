@@ -3,7 +3,7 @@ import {
   type ActionParams,
   ActionType,
   type IActionPlugin,
-} from '@rabbitholegg/questdk'
+} from '@rabbitholegg/questdk-plugin-utils'
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { describe, expect, test, vi } from 'vitest'

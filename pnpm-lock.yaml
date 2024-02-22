@@ -421,9 +421,6 @@ importers:
 
   packages/registry:
     dependencies:
-      '@rabbitholegg/questdk':
-        specifier: workspace:*
-        version: link:../../apps/questdk
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
@@ -524,6 +521,9 @@ importers:
         specifier: workspace:*
         version: link:../zora
     devDependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig

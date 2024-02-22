@@ -1,6 +1,8 @@
+import { type TransactionRequest } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
-import type { PluginActionNotImplementedError } from '../errors/'
+import { PluginActionNotImplementedError } from '../errors'
 import { type Address } from 'viem'
+import type { MintIntentParams } from './intents'
 
 export type SwapActionParams = {
   chainId: number
@@ -93,13 +95,13 @@ export interface IActionPlugin {
     chainId: number,
     task?: ActionType,
   ) => Promise<Address[]>
-  bridge: (
+  bridge?: (
     params: BridgeActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
-  swap: (
+  swap?: (
     params: SwapActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
-  mint: (
+  mint?: (
     params: MintActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   stake?: (
@@ -109,7 +111,7 @@ export interface IActionPlugin {
     params: DelegateActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   burn?: (
-    params: DelegateActionParams,
+    params: BurnActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   quest?: (
     params: QuestActionParams,
@@ -120,6 +122,9 @@ export interface IActionPlugin {
   vote?: (
     params: VoteActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  getMintIntent?: (
+    mint: MintIntentParams,
+  ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
 }
 
 export enum ActionType {
@@ -134,6 +139,7 @@ export enum ActionType {
   Lend = 'lend',
   Other = 'other',
   Options = 'options',
+  Vote = 'vote',
 }
 
 export enum OrderType {

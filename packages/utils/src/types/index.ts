@@ -1,9 +1,11 @@
+export type { IntentParams, MintIntentParams } from './intents'
 export type {
   SwapActionParams,
   OptionsActionParams,
   StakeActionParams,
   BridgeActionParams,
   MintActionParams,
+  VoteActionParams,
   BurnActionParams,
   QuestActionParams,
   DelegateActionParams,
@@ -11,10 +13,7 @@ export type {
   IActionPlugin,
 } from './actions'
 
-export {
-  ActionType,
-  OrderType,
-} from './actions'
+export { ActionType, OrderType } from './actions'
 
 export type {
   FilterObject,
