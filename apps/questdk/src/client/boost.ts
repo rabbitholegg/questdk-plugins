@@ -35,4 +35,4 @@ function boost(rpcUrl: string) {
   }
 }
 
-export default boost;
+export default boost

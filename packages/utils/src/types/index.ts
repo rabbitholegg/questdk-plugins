@@ -1,4 +1,4 @@
-export type { IntentParams, MintIntentParams } from "./intents";
+export type { IntentParams, MintIntentParams } from './intents'
 export type {
   SwapActionParams,
   OptionsActionParams,
@@ -13,7 +13,7 @@ export type {
   IActionPlugin,
 } from './actions'
 
-export { ActionType, OrderType } from "./actions";
+export { ActionType, OrderType } from './actions'
 
 export type {
   FilterObject,

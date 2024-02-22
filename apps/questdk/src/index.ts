@@ -18,9 +18,9 @@ export type {
   VoteActionParams,
   ActionParams,
   IActionPlugin,
-} from "./actions";
+} from './actions'
 
-export { ActionType, OrderType } from "./actions";
+export { ActionType, OrderType } from './actions'
 
 export { apply } from './filter/filters.js'
 
