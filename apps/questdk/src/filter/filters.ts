@@ -7,7 +7,7 @@ import type {
   FilterObject,
   NthFilter,
   TransactionFilter,
-} from "@rabbitholegg/questdk-plugin-utils";
+} from '@rabbitholegg/questdk-plugin-utils'
 import {
   type AbiFunction,
   type Address,
@@ -19,8 +19,8 @@ import {
   parseAbiParameters,
   slice,
   toFunctionSelector,
-} from "viem";
-type OperatorKey = keyof typeof operators;
+} from 'viem'
+type OperatorKey = keyof typeof operators
 
 /**
  * Applies the AND operator to a set of filters.
@@ -31,11 +31,11 @@ type OperatorKey = keyof typeof operators;
 export const handleAnd = (context: any, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
     if (!apply(context, filter[i] as FilterObject)) {
-      return false;
+      return false
     }
   }
-  return true;
-};
+  return true
+}
 
 /**
  * Applies the OR operator to a set of filters.
@@ -46,11 +46,11 @@ export const handleAnd = (context: any, filter: Filter[]): boolean => {
 export const handleOr = (context: any, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
     if (apply(context, filter[i] as FilterObject)) {
-      return true;
+      return true
     }
   }
-  return false;
-};
+  return false
+}
 
 /**
  * Applies the SOME operator to a set of filters.
@@ -63,11 +63,11 @@ export const handleSome = (
   filter: TransactionFilter | FilterObject,
 ): boolean => {
   for (let i = 0; i < context.length; i++) {
-    const result = apply(context[i], filter);
-    if (result) return true;
+    const result = apply(context[i], filter)
+    if (result) return true
   }
-  return false;
-};
+  return false
+}
 
 /**
  * Checks if the context is less than the filter.
@@ -79,8 +79,8 @@ export const handleLessThan = (
   context: any,
   filter: bigint | number | string,
 ): boolean => {
-  return BigInt(context) < BigInt(filter);
-};
+  return BigInt(context) < BigInt(filter)
+}
 
 /**
  * Checks if the context is less than or equal to the filter.
@@ -92,8 +92,8 @@ export const handleLessThanOrEqual = (
   context: any,
   filter: bigint | number | string,
 ): boolean => {
-  return BigInt(context) <= BigInt(filter);
-};
+  return BigInt(context) <= BigInt(filter)
+}
 
 /**
  * Checks if the context is equal to the filter.
@@ -105,8 +105,8 @@ export const handleEqual = (
   context: any,
   filter: bigint | number | string,
 ): boolean => {
-  return BigInt(context) === BigInt(filter);
-};
+  return BigInt(context) === BigInt(filter)
+}
 
 /**
  * Checks if the context is greater than the filter.
@@ -118,8 +118,8 @@ export const handleGreaterThan = (
   context: any,
   filter: bigint | number | string,
 ): boolean => {
-  return BigInt(context) > BigInt(filter);
-};
+  return BigInt(context) > BigInt(filter)
+}
 
 /**
  * Checks if the context is greater than or equal to the filter.
@@ -131,8 +131,8 @@ export const handleGreaterThanOrEqual = (
   context: any,
   filter: bigint | number | string,
 ): boolean => {
-  return BigInt(context) >= BigInt(filter);
-};
+  return BigInt(context) >= BigInt(filter)
+}
 
 /**
  * Applies the filter to the first element of the context.
@@ -144,8 +144,8 @@ export const handleFirst = (
   context: any,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
-  return apply(context[0], filter);
-};
+  return apply(context[0], filter)
+}
 
 /**
  * Applies the filter to the last element of the context.
@@ -157,8 +157,8 @@ export const handleLast = (
   context: any,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
-  return apply(context[context.length - 1], filter);
-};
+  return apply(context[context.length - 1], filter)
+}
 
 /**
  * Checks if the value at the nth index meets the specified condition.
@@ -167,13 +167,13 @@ export const handleLast = (
  * @returns True if the value at the nth index meets the condition, false otherwise.
  */
 export const handleNth = (context: any, filter: NthFilter): boolean => {
-  const { index, value } = filter;
+  const { index, value } = filter
 
   if (Number(index) < 0 || index >= context.length) {
-    return false; // index out of bounds
+    return false // index out of bounds
   }
-  return apply(context[Number(index)], value as FilterObject);
-};
+  return apply(context[Number(index)], value as FilterObject)
+}
 
 /**
  * Checks if the context matches the regular expression filter.
@@ -182,9 +182,9 @@ export const handleNth = (context: any, filter: NthFilter): boolean => {
  * @returns True if the context matches the filter, false otherwise.
  */
 export const handleRegex = (context: any, filter: string): boolean => {
-  const re = new RegExp(filter);
-  return re.test(context);
-};
+  const re = new RegExp(filter)
+  return re.test(context)
+}
 
 /**
  * Applies a bitmask to the context and compares the result to a value.
@@ -193,12 +193,12 @@ export const handleRegex = (context: any, filter: string): boolean => {
  * @returns True if the masked context is equal to the value, false otherwise.
  */
 export const handleBitmask = (context: any, filter: BitmaskFilter): boolean => {
-  const maskedContext = BigInt(context) & BigInt(filter.bitmask);
-  if (typeof filter.value === "object") {
-    return apply(maskedContext as any, filter.value as FilterObject);
+  const maskedContext = BigInt(context) & BigInt(filter.bitmask)
+  if (typeof filter.value === 'object') {
+    return apply(maskedContext as any, filter.value as FilterObject)
   }
-  return maskedContext === BigInt(filter.value);
-};
+  return maskedContext === BigInt(filter.value)
+}
 
 /**
  * Decodes ABI from the context using the filter.
@@ -208,74 +208,74 @@ export const handleBitmask = (context: any, filter: BitmaskFilter): boolean => {
  */
 export const handleAbiDecode = (context: any, filter: AbiFilter) => {
   try {
-    const sighash = slice(context, 0, 4);
+    const sighash = slice(context, 0, 4)
     const { functionName, args = [] } = decodeFunctionData({
       abi: filter.$abi,
       data: context,
-    });
+    })
 
     const abiItem = getAbiItem({
       abi: filter.$abi,
       name: functionName,
       args,
-    }) as AbiFunction;
+    }) as AbiFunction
 
     const namedArgs = [...abiItem.inputs].reduce(
       (acc: Record<string, any>, input, index) => {
-        acc[`${input.name || index}`] = args[index];
-        return acc;
+        acc[`${input.name || index}`] = args[index]
+        return acc
       },
       {},
-    );
-    const { $abi: _, ...newFilter } = filter;
+    )
+    const { $abi: _, ...newFilter } = filter
     if (apply({ ...namedArgs, sighash, functionName }, newFilter)) {
-      return true;
+      return true
     }
-    return null;
+    return null
   } catch (_e) {
-    return null;
+    return null
   }
-};
+}
 
 export const handleAbstractAbiDecode = (
   context: any,
   filter: AbstractAbiFilter,
 ) => {
-  const decodedReturn: ReturnType<typeof handleAbiDecode>[] = [];
-  const elementCount = filter.$abiAbstract!.length;
-  const $abiAbstract = filter.$abiAbstract;
-  const { $abiAbstract: _, ...newFilter } = filter;
+  const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
+  const elementCount = filter.$abiAbstract!.length
+  const $abiAbstract = filter.$abiAbstract
+  const { $abiAbstract: _, ...newFilter } = filter
 
-  const contextMap = new Map<string, number>();
+  const contextMap = new Map<string, number>()
   // Function selectors are 4 bytes long - 8 characters
   for (let i = 2; i < context.length - 8; i++) {
-    contextMap.set(context.substring(i, i + 8), i);
+    contextMap.set(context.substring(i, i + 8), i)
   }
   for (let i = 0; i < elementCount; i++) {
-    const abiItem = $abiAbstract![i];
-    if (abiItem.type === "function") {
-      const functionSelector = toFunctionSelector(abiItem);
+    const abiItem = $abiAbstract![i]
+    if (abiItem.type === 'function') {
+      const functionSelector = toFunctionSelector(abiItem)
       // We want to omit the leading 0x from the function selector
-      const functionSelectorSubstring = functionSelector.substring(2);
-      const index = contextMap.get(functionSelectorSubstring);
+      const functionSelectorSubstring = functionSelector.substring(2)
+      const index = contextMap.get(functionSelectorSubstring)
       if (index !== undefined) {
         decodedReturn.push(
           handleAbiDecode(`0x${context.substring(index)}`, {
             ...newFilter,
             $abi: [abiItem],
           }),
-        );
+        )
       }
     }
   }
-  const decodedReturnLength = decodedReturn.length;
+  const decodedReturnLength = decodedReturn.length
   for (let i = 0; i < decodedReturnLength; i++) {
     if (decodedReturn[i]) {
-      return true;
+      return true
     }
   }
-  return null;
-};
+  return null
+}
 
 /**
  * Decodes ABI parameters from the context using the filter.
@@ -285,24 +285,24 @@ export const handleAbstractAbiDecode = (
  */
 export const handleAbiParamDecode = (context: any, filter: AbiParamFilter) => {
   try {
-    const params = parseAbiParameters(filter.$abiParams.join(", "));
-    const args = decodeAbiParameters(params, context);
+    const params = parseAbiParameters(filter.$abiParams.join(', '))
+    const args = decodeAbiParameters(params, context)
     const namedArgs = params.reduce(
       (acc: Record<string, any>, param, index) => {
-        acc[`${param.name || index}`] = args[index];
-        return acc;
+        acc[`${param.name || index}`] = args[index]
+        return acc
       },
       {},
-    );
-    const { $abiParams: _, ...newFilter } = filter;
+    )
+    const { $abiParams: _, ...newFilter } = filter
     if (apply(namedArgs, newFilter)) {
-      return true;
+      return true
     }
-    return null;
+    return null
   } catch (_e) {
-    return null;
+    return null
   }
-};
+}
 
 const operators = {
   // Logical operators
@@ -325,7 +325,7 @@ const operators = {
 
   // Bitmask operator
   $bitmask: handleBitmask,
-};
+}
 
 /**
  * Applies a set of filters to a context.
@@ -337,57 +337,57 @@ export function apply(
   originalContext: TransactionEIP1559 | Record<string, any>,
   filters: TransactionFilter | FilterObject,
 ): boolean {
-  let context: TransactionEIP1559 | Record<string, any> = originalContext;
-  if (typeof filters === "object") {
-    if ("$abi" in filters) {
-      const processedContext = handleAbiDecode(context, filters as AbiFilter);
+  let context: TransactionEIP1559 | Record<string, any> = originalContext
+  if (typeof filters === 'object') {
+    if ('$abi' in filters) {
+      const processedContext = handleAbiDecode(context, filters as AbiFilter)
       if (processedContext === true) {
-        return true;
+        return true
       }
       if (processedContext === null) {
-        return false;
+        return false
       }
-      context = processedContext;
+      context = processedContext
     }
 
-    if ("$abiAbstract" in filters) {
+    if ('$abiAbstract' in filters) {
       const processedContext = handleAbstractAbiDecode(
         context,
         filters as AbstractAbiFilter,
-      );
+      )
       if (processedContext === true) {
-        return true;
+        return true
       }
       if (processedContext === null) {
-        return false;
+        return false
       }
-      context = processedContext;
+      context = processedContext
     }
 
-    if ("$abiParams" in filters) {
+    if ('$abiParams' in filters) {
       const processedContext = handleAbiParamDecode(
         context,
         filters as AbiParamFilter,
-      );
+      )
       if (processedContext === true) {
-        return true;
+        return true
       }
       if (processedContext === null) {
-        return false;
+        return false
       }
-      context = processedContext;
+      context = processedContext
     }
   }
   for (const key in filters) {
     // If the key is not a property of the filters object, skip it.
-    if (!Object.hasOwnProperty.call(filters, key)) continue;
-    const filter = filters[key as keyof typeof filters];
+    if (!Object.hasOwnProperty.call(filters, key)) continue
+    const filter = filters[key as keyof typeof filters]
     if (filter === undefined) {
-      return false;
+      return false
     }
-    const _context = context[key as keyof typeof context];
+    const _context = context[key as keyof typeof context]
     if (key in operators) {
-      const operator = operators[key as OperatorKey];
+      const operator = operators[key as OperatorKey]
       // Handle the operator cases with a switch to enforce casing
       // and type safety
 
@@ -401,39 +401,39 @@ export function apply(
             NthFilter,
         )
       ) {
-        return false;
+        return false
       }
-      continue;
+      continue
     }
-    if (typeof filter === "object") {
+    if (typeof filter === 'object') {
       if (!(key in context)) {
-        return false;
+        return false
       }
       if (!apply(_context, filter as FilterObject | TransactionFilter)) {
-        return false;
+        return false
       }
     } else if (isAddress(_context as string)) {
       if (
-        typeof filter === "string" &&
+        typeof filter === 'string' &&
         (_context as Address).toLowerCase() !== filter.toLowerCase()
       ) {
-        return false;
+        return false
       }
     } else if (
-      typeof filter === "bigint" ||
-      typeof filter === "number" ||
-      typeof _context === "bigint" ||
-      typeof _context === "number"
+      typeof filter === 'bigint' ||
+      typeof filter === 'number' ||
+      typeof _context === 'bigint' ||
+      typeof _context === 'number'
     ) {
       if (
         _context === undefined ||
         BigInt(_context) !== BigInt(filter as bigint | number | string)
       ) {
-        return false;
+        return false
       }
     } else if (_context !== filter) {
-      return false;
+      return false
     }
   }
-  return true;
+  return true
 }

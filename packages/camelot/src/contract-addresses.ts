@@ -1,5 +1,5 @@
-import { type Address } from "viem";
-import { Tokens } from "./utils";
+import { type Address } from 'viem'
+import { Tokens } from './utils'
 
 export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.ETH, // '0x0000000000000000000000000000000000000000' - ETH
@@ -14,10 +14,9 @@ export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.WBTC, // '0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f' - WBTC
   Tokens.WETH, // '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1' - WETH
   Tokens.SIZE, // '0x939727d85d99d0ac339bf1b76dfe30ca27c19067' - SIZE
-];
+]
 
-export const INTERNAL_ETH_ADDRESS =
-  "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
-export const CAMELOT_V2_ROUTER = "0xc873fEcbd354f5A56E00E710B90EF4201db2448d";
-export const CAMELOT_V3_ROUTER = "0x1f721e2e82f6676fce4ea07a5958cf098d339e18";
-export const PARASWAP_ROUTER = "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57";
+export const INTERNAL_ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+export const CAMELOT_V2_ROUTER = '0xc873fEcbd354f5A56E00E710B90EF4201db2448d'
+export const CAMELOT_V3_ROUTER = '0x1f721e2e82f6676fce4ea07a5958cf098d339e18'
+export const PARASWAP_ROUTER = '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57'

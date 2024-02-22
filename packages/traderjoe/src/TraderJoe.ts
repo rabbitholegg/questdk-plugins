@@ -2,12 +2,12 @@ import {
   type TransactionFilter,
   type SwapActionParams,
   compressJson,
-} from "@rabbitholegg/questdk";
-import { type Address, zeroAddress as NATIVE_TOKEN } from "viem";
-import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from "@traderjoe-xyz/sdk-v2";
-import { DEFAULT_SWAP_TOKEN_LIST, Tokens } from "./contract-addresses";
-import { CHAIN_ID_ARRAY } from "./chain-ids";
-import { buildPathQuery, Chains } from "./utils";
+} from '@rabbitholegg/questdk'
+import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
+import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from '@traderjoe-xyz/sdk-v2'
+import { DEFAULT_SWAP_TOKEN_LIST, Tokens } from './contract-addresses'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { buildPathQuery, Chains } from './utils'
 import {
   EXACT_NATIVE_FOR_TOKENS_ABI,
   EXACT_TOKENS_FOR_NATIVE_ABI,
@@ -15,7 +15,7 @@ import {
   NATIVE_FOR_EXACT_TOKENS_ABI,
   TOKENS_FOR_EXACT_NATIVE_ABI,
   TOKENS_FOR_EXACT_TOKENS_ABI,
-} from "./abi";
+} from './abi'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -28,11 +28,11 @@ export const swap = async (
     amountIn,
     amountOut,
     recipient,
-  } = swap;
+  } = swap
 
-  const nativeIn = tokenIn === NATIVE_TOKEN;
-  const nativeOut = tokenOut === NATIVE_TOKEN;
-  const to = contractAddress ?? LB_ROUTER_V21_ADDRESS[chainId as Chains];
+  const nativeIn = tokenIn === NATIVE_TOKEN
+  const nativeOut = tokenOut === NATIVE_TOKEN
+  const to = contractAddress ?? LB_ROUTER_V21_ADDRESS[chainId as Chains]
 
   const input = {
     $abi: LBRouterV21ABI,
@@ -43,7 +43,7 @@ export const swap = async (
         nativeOut ? Tokens[chainId]?.WETH : tokenOut,
       ),
     },
-  };
+  }
 
   return compressJson({
     chainId,
@@ -85,15 +85,15 @@ export const swap = async (
         },
       ],
     },
-  });
-};
+  })
+}
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return (DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[]) ?? [];
-};
+  return (DEFAULT_SWAP_TOKEN_LIST[_chainId] as Address[]) ?? []
+}
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return CHAIN_ID_ARRAY;
-};
+  return CHAIN_ID_ARRAY
+}

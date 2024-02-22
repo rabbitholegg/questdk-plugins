@@ -5,17 +5,17 @@ import {
   compressJson,
   type FilterOperator,
   OrderType as BoostOrderType,
-} from "@rabbitholegg/questdk";
-import { type Address } from "viem";
-import { OrderType, Tokens, buildPathQuery } from "./utils.js";
-import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from "./chain-ids.js";
-import { GMX_SEND_TOKENS_ABI, GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from "./abi.js";
+} from '@rabbitholegg/questdk'
+import { type Address } from 'viem'
+import { OrderType, Tokens, buildPathQuery } from './utils.js'
+import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
+import { GMX_SEND_TOKENS_ABI, GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
 import {
   DEFAULT_TOKEN_LIST,
   GMX_ROUTERV2_ADDRESS,
   ETH_ADDRESS,
   MARKET_TOKENS,
-} from "./contract-addresses.js";
+} from './contract-addresses.js'
 
 function getMarketAddress(
   tokenIn: Address | undefined,
@@ -23,24 +23,24 @@ function getMarketAddress(
 ): Address | FilterOperator | undefined {
   // return undefined if tokenOut is not provided
   if (tokenOut === undefined) {
-    return tokenOut;
+    return tokenOut
   }
   // convert ETH to WETH address if present
-  const outboundToken = tokenOut === ETH_ADDRESS ? Tokens.WETH : tokenOut;
+  const outboundToken = tokenOut === ETH_ADDRESS ? Tokens.WETH : tokenOut
 
   // if tokenOut is USDC, use the marketToken for tokenIn
   if (outboundToken === Tokens.USDC) {
     // if tokenIn is "any"/undefined and tokenOut is USDC, any token will pass
-    return MARKET_TOKENS[tokenIn as Address];
+    return MARKET_TOKENS[tokenIn as Address]
   }
-  return MARKET_TOKENS[outboundToken];
+  return MARKET_TOKENS[outboundToken]
 }
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap;
-  const ETH_USED = tokenIn === ETH_ADDRESS;
+  const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = swap
+  const ETH_USED = tokenIn === ETH_ADDRESS
 
   return compressJson({
     chainId: chainId,
@@ -89,13 +89,13 @@ export const swap = async (
         },
       ],
     },
-  });
-};
+  })
+}
 
 export const options = async (
   options: OptionsActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, token, amount, recipient, orderType } = options;
+  const { chainId, token, amount, recipient, orderType } = options
   return compressJson({
     chainId: chainId,
     to: GMX_ROUTERV2_ADDRESS.toLowerCase(),
@@ -126,8 +126,8 @@ export const options = async (
         ],
       },
     ],
-  });
-};
+  })
+}
 
 export const getOrderType = (orderType: BoostOrderType | undefined) => {
   switch (orderType) {
@@ -137,14 +137,14 @@ export const getOrderType = (orderType: BoostOrderType | undefined) => {
           { orderType: OrderType.MarketIncrease },
           { orderType: OrderType.MarketDecrease },
         ],
-      };
+      }
     case BoostOrderType.Limit:
       return {
         $or: [
           { orderType: OrderType.LimitIncrease },
           { orderType: OrderType.LimitDecrease },
         ],
-      };
+      }
     default:
       return {
         $or: [
@@ -153,14 +153,14 @@ export const getOrderType = (orderType: BoostOrderType | undefined) => {
           { orderType: OrderType.MarketDecrease },
           { orderType: OrderType.LimitDecrease },
         ],
-      };
+      }
   }
-};
+}
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return _chainId === ARB_ONE_CHAIN_ID ? DEFAULT_TOKEN_LIST : [];
-};
+  return _chainId === ARB_ONE_CHAIN_ID ? DEFAULT_TOKEN_LIST : []
+}
 
 export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY;
-};
+  return CHAIN_ID_ARRAY
+}

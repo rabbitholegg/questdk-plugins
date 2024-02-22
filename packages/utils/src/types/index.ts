@@ -11,7 +11,7 @@ export type {
   DelegateActionParams,
   ActionParams,
   IActionPlugin,
-} from "./actions";
+} from './actions'
 
 export { ActionType, OrderType } from "./actions";
 
@@ -30,4 +30,4 @@ export type {
   StringOperator,
   FilterOperator,
   TransactionFilter,
-} from "./filters.js";
+} from './filters.js'

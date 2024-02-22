@@ -2,14 +2,14 @@ import {
   type TransactionFilter,
   type SwapActionParams,
   compressJson,
-} from "@rabbitholegg/questdk";
-import { zeroAddress, type Address } from "viem";
+} from '@rabbitholegg/questdk'
+import { zeroAddress, type Address } from 'viem'
 import {
   ARBITRUM_ONE,
   SWAP_CONTRACTS,
   TOKEN_ADDRESSES,
   PARASWAP_PARTNER,
-} from "./constants";
+} from './constants'
 import {
   getParaSwapFilter,
   getV2RouterFilter,
@@ -18,12 +18,12 @@ import {
   getHlpCurveV2Filter,
   getHlpBalancerFilter,
   getCurveV2FactoryFilter,
-} from "./input-filters";
+} from './input-filters'
 
 export const swap = async (
   swap: SwapActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, tokenIn, amountIn, recipient } = swap;
+  const { chainId, tokenIn, amountIn, recipient } = swap
   return compressJson({
     chainId,
     value: tokenIn === zeroAddress ? amountIn : undefined,
@@ -42,15 +42,15 @@ export const swap = async (
         getCurveV2FactoryFilter(swap),
       ],
     },
-  });
-};
+  })
+}
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return _chainId === ARBITRUM_ONE ? TOKEN_ADDRESSES : [];
-};
+  return _chainId === ARBITRUM_ONE ? TOKEN_ADDRESSES : []
+}
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return [ARBITRUM_ONE];
-};
+  return [ARBITRUM_ONE]
+}

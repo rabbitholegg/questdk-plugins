@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-treasure",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.7",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -39,5 +39,4 @@
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"
   }
-
 }

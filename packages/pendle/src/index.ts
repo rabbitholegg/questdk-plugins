@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 
 import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from "./Pendle.js";
+} from './Pendle.js'
 
 export const Pendle: IActionPlugin = {
-  pluginId: "pendle",
+  pluginId: 'pendle',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge: async () => new PluginActionNotImplementedError(),
   swap,
   mint: async () => new PluginActionNotImplementedError(),
-};
+}

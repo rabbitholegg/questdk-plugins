@@ -28,7 +28,7 @@ export type {
   StringOperator,
   FilterOperator,
   TransactionFilter,
-} from "./types";
+} from './types'
 
 export {
   ActionType,

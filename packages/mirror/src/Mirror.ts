@@ -15,7 +15,7 @@ import type { MintIntentParams } from "@rabbitholegg/questdk-plugin-utils";
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, recipient } = mint;
+  const { chainId, contractAddress, recipient } = mint
 
   return compressJson({
     chainId,
@@ -25,8 +25,8 @@ export const mint = async (
       $abi: COLLECT_ENTRY_ABI,
       tokenRecipient: recipient,
     },
-  });
-};
+  })
+}
 
 export const getMintIntent = async (
   mint: MintIntentParams,
@@ -51,9 +51,9 @@ export const getMintIntent = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []; // supported tokens don't apply for the mint action
-};
+  return [] // supported tokens don't apply for the mint action
+}
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return [Chains.OPTIMISM, Chains.ZORA, Chains.BASE, Chains.LINEA];
-};
+  return [Chains.OPTIMISM, Chains.ZORA, Chains.BASE, Chains.LINEA]
+}

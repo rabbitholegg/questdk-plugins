@@ -1,11 +1,11 @@
-import { GreaterThanOrEqual, apply } from "@rabbitholegg/questdk/filter";
-import { describe, expect, test } from "vitest";
-import { FAILING_TEST_TRANSACTIONS } from "./test-transactions";
-import { quest } from "./Rabbithole";
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { describe, expect, test } from 'vitest'
+import { FAILING_TEST_TRANSACTIONS } from './test-transactions'
+import { quest } from './Rabbithole'
 
-describe("Given the rabbithole plugin", () => {
-  describe("When handling the quest", () => {
-    test("should return a valid action filter", () => {});
+describe('Given the rabbithole plugin', () => {
+  describe('When handling the quest', () => {
+    test('should return a valid action filter', () => {})
 
     // describe('should pass filter with valid transactions', () => {
     //   PASSING_TEST_TRANSACTIONS.forEach((testTransaction) => {
@@ -33,7 +33,7 @@ describe("Given the rabbithole plugin", () => {
     //     })
     //   })
     // })
-    describe("should not pass filter with invalid parameters", () => {
+    describe('should not pass filter with invalid parameters', () => {
       FAILING_TEST_TRANSACTIONS.forEach((testTransaction) => {
         test(testTransaction.description, async () => {
           const {
@@ -43,7 +43,7 @@ describe("Given the rabbithole plugin", () => {
             startTime,
             endTime,
             totalParticipants,
-          } = testTransaction;
+          } = testTransaction
 
           const filter = await quest({
             chainId: transaction.chainId,
@@ -54,10 +54,10 @@ describe("Given the rabbithole plugin", () => {
             startTime: startTime,
             endTime: endTime,
             totalParticipants: totalParticipants,
-          });
-          expect(apply(transaction, filter)).to.be.false;
-        });
-      });
-    });
-  });
-});
+          })
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+  })
+})

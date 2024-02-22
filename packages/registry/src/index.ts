@@ -11,7 +11,7 @@ import {
   type SwapActionParams,
   type TransactionFilter,
   type VoteActionParams,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 
 import { Across } from "@rabbitholegg/questdk-plugin-across";
 import { Arbitrum } from "@rabbitholegg/questdk-plugin-arbitrum";
@@ -87,15 +87,15 @@ export const plugins: Record<string, IActionPlugin> = {
   [Boost.pluginId]: Boost,
   [Llama.pluginId]: Llama,
   [Kote.pluginId]: Kote,
-};
+}
 
 export const getPlugin = (pluginId: string) => {
-  const plugin = plugins[pluginId];
+  const plugin = plugins[pluginId]
   if (!plugin) {
-    throw new Error(`Unknown plugin "${pluginId}"`);
+    throw new Error(`Unknown plugin "${pluginId}"`)
   }
-  return plugin;
-};
+  return plugin
+}
 
 export const getTxIntent = (
   plugin: IActionPlugin,
@@ -122,46 +122,46 @@ export const executePlugin = (
   switch (actionType) {
     case ActionType.Bridge:
       if (plugin.bridge === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.bridge(params as unknown as BridgeActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.bridge(params as unknown as BridgeActionParams)
     case ActionType.Swap:
       if (plugin.swap === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.swap(params as unknown as SwapActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.swap(params as unknown as SwapActionParams)
     case ActionType.Mint:
       if (plugin.mint === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.mint(params as unknown as MintActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.mint(params as unknown as MintActionParams)
     case ActionType.Delegate: {
       if (plugin.delegate === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.delegate(params as unknown as DelegateActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.delegate(params as unknown as DelegateActionParams)
     }
     case ActionType.Quest: {
       if (plugin.quest === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.quest(params as unknown as QuestActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.quest(params as unknown as QuestActionParams)
     }
     case ActionType.Stake: {
       if (plugin.stake === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.stake(params as unknown as StakeActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.stake(params as unknown as StakeActionParams)
     }
     case ActionType.Options: {
       if (plugin.options === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.options(params as unknown as OptionsActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.options(params as unknown as OptionsActionParams)
     }
     case ActionType.Vote: {
       if (plugin.vote === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError());
-      } else return plugin.vote(params as unknown as VoteActionParams);
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.vote(params as unknown as VoteActionParams)
     }
     default:
-      throw new Error(`Unknown action type "${actionType}"`);
+      throw new Error(`Unknown action type "${actionType}"`)
   }
-};
+}
 
 export const getIndexedContracts = (_chainId: number) => {
-  return [ENTRYPOINT];
-};
+  return [ENTRYPOINT]
+}

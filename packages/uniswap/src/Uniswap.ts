@@ -2,20 +2,20 @@ import {
   compressJson,
   type SwapActionParams,
   type TransactionFilter,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 import {
   UNIVERSAL_ROUTER_ADDRESS,
   WETH_ADDRESS,
-} from "@uniswap/universal-router-sdk";
-import { zeroAddress as ETH_ADDRESS } from "viem";
+} from '@uniswap/universal-router-sdk'
+import { zeroAddress as ETH_ADDRESS } from 'viem'
 import {
   CHAIN_ID_ARRAY,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
   EXECUTE_ABI_FRAGMENTS,
-} from "./constants";
-import { CHAIN_TO_TOKENS } from "./token-addresses";
-import { buildV2PathQuery, buildV3PathQuery } from "./utils";
+} from './constants'
+import { CHAIN_TO_TOKENS } from './token-addresses'
+import { buildV2PathQuery, buildV3PathQuery } from './utils'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -28,12 +28,12 @@ export const swap = async (
     amountIn,
     amountOut,
     recipient,
-  } = swap;
+  } = swap
 
   const inputToken =
-    tokenIn === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenIn;
+    tokenIn === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenIn
   const outputToken =
-    tokenOut === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenOut;
+    tokenOut === ETH_ADDRESS ? WETH_ADDRESS(chainId).toLowerCase() : tokenOut
 
   return compressJson({
     chainId,
@@ -60,13 +60,13 @@ export const swap = async (
         },
       },
     },
-  });
-};
+  })
+}
 
 export const getSupportedChainIds = async () => {
-  return CHAIN_ID_ARRAY as number[];
-};
+  return CHAIN_ID_ARRAY as number[]
+}
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
-  return CHAIN_TO_TOKENS[_chainId] ?? [];
-};
+  return CHAIN_TO_TOKENS[_chainId] ?? []
+}

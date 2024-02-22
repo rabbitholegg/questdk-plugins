@@ -1,5 +1,30 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.13
+
+### Patch Changes
+
+- Updated dependencies [[`d9dc79b`](https://github.com/rabbitholegg/questdk-plugins/commit/d9dc79b6294b408452de60c9727d784b2a850eea)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.36
+
+## 1.0.0-alpha.12
+
+### Patch Changes
+
+- [#228](https://github.com/rabbitholegg/questdk-plugins/pull/228) [`121a949`](https://github.com/rabbitholegg/questdk-plugins/commit/121a949b9ba76727e1088b3825cc04df6acf6a6c) Thanks [@mmackz](https://github.com/mmackz)! - update universal minter package
+
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#222](https://github.com/rabbitholegg/questdk-plugins/pull/222) [`6253278`](https://github.com/rabbitholegg/questdk-plugins/commit/62532783c99034eb3b701dd9b9e7b768efc03874) Thanks [@Quazia](https://github.com/Quazia)! - Migrate questdk to shared monorepo
+
+### Patch Changes
+
+- Updated dependencies [[`f8bc9b6`](https://github.com/rabbitholegg/questdk-plugins/commit/f8bc9b6b11e7c43041cf98e37dc31093c88834bc), [`6253278`](https://github.com/rabbitholegg/questdk-plugins/commit/62532783c99034eb3b701dd9b9e7b768efc03874)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.36
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.6
+
 ## 1.0.0-alpha.10
 
 ### Minor Changes
