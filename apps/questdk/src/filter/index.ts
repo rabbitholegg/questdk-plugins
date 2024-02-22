@@ -1,4 +1,4 @@
-export { apply } from "./filters.js";
+export { apply } from './filters.js'
 
 export {
   GreaterThan,
@@ -6,7 +6,7 @@ export {
   Equal,
   LessThanOrEqual,
   GreaterThanOrEqual,
-} from "./operators.js";
+} from './operators.js'
 
 export type {
   ArrayOperator,
@@ -17,4 +17,4 @@ export type {
   TransactionFilter,
   Filter,
   FilterObject,
-} from "@rabbitholegg/questdk-plugin-utils";
+} from '@rabbitholegg/questdk-plugin-utils'

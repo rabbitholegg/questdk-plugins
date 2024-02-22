@@ -1,10 +1,10 @@
-import type { Address } from "viem";
+import type { Address } from 'viem'
 
 import {
   MAIN_SPOKE, // mainnet, polygon, avalanche
   LAYER2_SPOKE, // arbitrum, optimism
   BINANCE_SPOKE,
-} from "./contract-addresses.js";
+} from './contract-addresses.js'
 
 import {
   type ChainIds,
@@ -14,7 +14,7 @@ import {
   POLYGON_CHAIN_ID,
   ARBITRUM_CHAIN_ID,
   AVALANCHE_CHAIN_ID,
-} from "./chain-ids.js";
+} from './chain-ids.js'
 
 export const CHAIN_TO_CONTRACT: { [chainId in ChainIds]: Address } = {
   [ETH_CHAIN_ID]: MAIN_SPOKE,
@@ -23,4 +23,4 @@ export const CHAIN_TO_CONTRACT: { [chainId in ChainIds]: Address } = {
   [POLYGON_CHAIN_ID]: MAIN_SPOKE,
   [ARBITRUM_CHAIN_ID]: LAYER2_SPOKE,
   [AVALANCHE_CHAIN_ID]: MAIN_SPOKE,
-} as const;
+} as const

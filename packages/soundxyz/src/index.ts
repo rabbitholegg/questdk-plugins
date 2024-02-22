@@ -1,19 +1,19 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 
 import {
   mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from "./Soundxyz.js";
+} from './Soundxyz.js'
 
 export const Soundxyz: IActionPlugin = {
-  pluginId: "soundxyz",
+  pluginId: 'soundxyz',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   mint,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
-};
+}

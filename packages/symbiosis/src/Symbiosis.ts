@@ -2,11 +2,11 @@ import {
   type TransactionFilter,
   type BridgeActionParams,
   compressJson,
-} from "@rabbitholegg/questdk";
-import { type Address, getAddress } from "viem";
-import { CHAIN_ID_ARRAY, CHAIN_TO_TOKENS } from "./constants";
-import { metaBurnABI, metaRouteABI } from "./abi";
-import { symbiosis } from "./symbiosis-sdk";
+} from '@rabbitholegg/questdk'
+import { type Address, getAddress } from 'viem'
+import { CHAIN_ID_ARRAY, CHAIN_TO_TOKENS } from './constants'
+import { metaBurnABI, metaRouteABI } from './abi'
+import { symbiosis } from './symbiosis-sdk'
 
 export const bridge = async (
   bridge: BridgeActionParams,
@@ -18,10 +18,10 @@ export const bridge = async (
     tokenAddress,
     amount,
     recipient,
-  } = bridge;
+  } = bridge
 
   const bridgeContract: Address =
-    contractAddress ?? (symbiosis.metaRouter(sourceChainId).address as Address);
+    contractAddress ?? (symbiosis.metaRouter(sourceChainId).address as Address)
 
   return compressJson({
     chainId: sourceChainId,
@@ -42,15 +42,15 @@ export const bridge = async (
         },
       },
     },
-  });
-};
+  })
+}
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return CHAIN_TO_TOKENS[_chainId] ?? [];
-};
+  return CHAIN_TO_TOKENS[_chainId] ?? []
+}
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  return CHAIN_ID_ARRAY;
-};
+  return CHAIN_ID_ARRAY
+}

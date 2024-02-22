@@ -6,4 +6,4 @@ export const CHAIN_ID_ARRAY = [
   Chains.POLYGON_POS,
   Chains.BASE,
   Chains.ARBITRUM_ONE,
-];
+]

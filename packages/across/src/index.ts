@@ -1,17 +1,17 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from "@rabbitholegg/questdk";
+} from '@rabbitholegg/questdk'
 import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from "./Across.js";
+} from './Across.js'
 export const Across: IActionPlugin = {
-  pluginId: "across",
+  pluginId: 'across',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge,
   swap: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),
-};
+}

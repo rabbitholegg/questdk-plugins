@@ -1,33 +1,33 @@
-import { GreaterThanOrEqual, apply } from "@rabbitholegg/questdk/filter";
-import { describe, expect, test } from "vitest";
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { describe, expect, test } from 'vitest'
 import {
   CAMELOT_V2_ROUTER,
   CAMELOT_V3_ROUTER,
   DEFAULT_TOKEN_LIST,
   PARASWAP_ROUTER,
-} from "./contract-addresses";
+} from './contract-addresses'
 import {
   CAMELOT_V2_ABI,
   CAMELOT_V3_EXACT_INPUT_ABI,
   CAMELOT_V3_EXACT_OUTPUT_ABI,
   PARASWAP_ABI,
-} from "./abi";
-import { Chains } from "@rabbitholegg/questdk-plugin-utils";
-import { parseEther, getAddress } from "viem";
-import { swap } from "./Camelot";
-import { Tokens } from "./utils";
-import { failingTestCases, passingTestCases } from "./test-setup";
+} from './abi'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { parseEther, getAddress } from 'viem'
+import { swap } from './Camelot'
+import { Tokens } from './utils'
+import { failingTestCases, passingTestCases } from './test-setup'
 
-describe("Given the camelot plugin", () => {
-  describe("should return a valid action filter", () => {
-    test("for a swap using ERC-20 token as tokenIn", async () => {
+describe('Given the camelot plugin', () => {
+  describe('should return a valid action filter', () => {
+    test('for a swap using ERC-20 token as tokenIn', async () => {
       const filter = await swap({
         chainId: Chains.ARBITRUM_ONE,
         tokenIn: Tokens.USDT,
         tokenOut: Tokens.WETH,
         amountIn: GreaterThanOrEqual(1000000n),
-        amountOut: GreaterThanOrEqual(parseEther("0.0005")),
-      });
+        amountOut: GreaterThanOrEqual(parseEther('0.0005')),
+      })
 
       expect(filter).to.deep.equal({
         chainId: 42161,
@@ -53,10 +53,10 @@ describe("Given the camelot plugin", () => {
                 ],
               },
               amountOutMin: {
-                $gte: "500000000000000",
+                $gte: '500000000000000',
               },
               amountIn: {
-                $gte: "1000000",
+                $gte: '1000000',
               },
             },
             {
@@ -74,21 +74,21 @@ describe("Given the camelot plugin", () => {
                           $and: [
                             {
                               $regex:
-                                "^0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+                                '^0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
                             },
                             {
                               $regex:
-                                "fd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9$",
+                                'fd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9$',
                             },
                           ],
                         },
                       },
                     ],
                     amountInMaximum: {
-                      $gte: "1000000",
+                      $gte: '1000000',
                     },
                     amountOut: {
-                      $gte: "500000000000000",
+                      $gte: '500000000000000',
                     },
                   },
                 },
@@ -105,21 +105,21 @@ describe("Given the camelot plugin", () => {
                           $and: [
                             {
                               $regex:
-                                "^0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+                                '^0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
                             },
                             {
                               $regex:
-                                "82af49447d8a07e3bd95bd0d56f35241523fbab1$",
+                                '82af49447d8a07e3bd95bd0d56f35241523fbab1$',
                             },
                           ],
                         },
                       },
                     ],
                     amountIn: {
-                      $gte: "1000000",
+                      $gte: '1000000',
                     },
                     amountOutMinimum: {
-                      $gte: "500000000000000",
+                      $gte: '500000000000000',
                     },
                   },
                 },
@@ -132,40 +132,40 @@ describe("Given the camelot plugin", () => {
                   data: {
                     fromToken: Tokens.USDT,
                     fromAmount: {
-                      $gte: "1000000",
+                      $gte: '1000000',
                     },
                     toAmount: {
-                      $gte: "500000000000000",
+                      $gte: '500000000000000',
                     },
                     toToken: Tokens.WETH,
-                    partner: "0x353D2d14Bb674892910685520Ac040f560CcBC06",
+                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
                   },
                 },
                 {
                   data: {
                     fromToken: Tokens.USDT,
                     fromAmount: {
-                      $gte: "1000000",
+                      $gte: '1000000',
                     },
                     toAmount: {
-                      $gte: "500000000000000",
+                      $gte: '500000000000000',
                     },
                     path: {
                       $last: {
                         to: Tokens.WETH,
                       },
                     },
-                    partner: "0x353D2d14Bb674892910685520Ac040f560CcBC06",
+                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
                   },
                 },
                 {
                   data: {
                     fromToken: Tokens.USDT,
                     fromAmount: {
-                      $gte: "1000000",
+                      $gte: '1000000',
                     },
                     toAmount: {
-                      $gte: "500000000000000",
+                      $gte: '500000000000000',
                     },
                     path: {
                       $last: {
@@ -176,7 +176,7 @@ describe("Given the camelot plugin", () => {
                         },
                       },
                     },
-                    partner: "0x353D2d14Bb674892910685520Ac040f560CcBC06",
+                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
                   },
                 },
                 {
@@ -192,48 +192,48 @@ describe("Given the camelot plugin", () => {
                       ],
                     },
                     fromAmount: {
-                      $gte: "1000000",
+                      $gte: '1000000',
                     },
                     toAmount: {
-                      $gte: "500000000000000",
+                      $gte: '500000000000000',
                     },
-                    partner: "0x353D2d14Bb674892910685520Ac040f560CcBC06",
+                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
                   },
                 },
               ],
             },
           ],
         },
-      });
-    });
-  });
+      })
+    })
+  })
 
-  describe("should pass filter when all parameters are valid", () => {
+  describe('should pass filter when all parameters are valid', () => {
     passingTestCases.forEach((testCase) => {
-      const { transaction, params, description } = testCase;
+      const { transaction, params, description } = testCase
       test(description, async () => {
-        const filter = await swap({ ...params });
-        expect(apply(transaction, filter)).to.be.true;
-      });
-    });
-  });
+        const filter = await swap({ ...params })
+        expect(apply(transaction, filter)).to.be.true
+      })
+    })
+  })
 
-  describe("should not pass filter when parameters are invalid", () => {
+  describe('should not pass filter when parameters are invalid', () => {
     failingTestCases.forEach((testCase) => {
-      const { transaction, params, description } = testCase;
+      const { transaction, params, description } = testCase
       test(description, async () => {
-        const filter = await swap({ ...params });
-        expect(apply(transaction, filter)).to.be.false;
-      });
-    });
-  });
+        const filter = await swap({ ...params })
+        expect(apply(transaction, filter)).to.be.false
+      })
+    })
+  })
 
-  describe("all supported tokens addresses are properly checksummed", () => {
-    test("should have all addresses properly checksummed", () => {
+  describe('all supported tokens addresses are properly checksummed', () => {
+    test('should have all addresses properly checksummed', () => {
       const notChecksummed = DEFAULT_TOKEN_LIST.filter(
         (tokenAddress) => tokenAddress !== getAddress(tokenAddress),
-      );
-      expect(notChecksummed).to.be.empty;
-    });
-  });
-});
+      )
+      expect(notChecksummed).to.be.empty
+    })
+  })
+})

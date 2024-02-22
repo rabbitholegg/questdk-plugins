@@ -27,7 +27,7 @@ export const CHAIN_TO_CONTRACTS: { [_chainId: number]: Address[] | undefined } =
       "0x09bD2A33c47746fF03b86BCe4E885D03C74a8E8C", // RouteProcessor3_2
       "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506", // V2Router02
     ],
-  };
+  }
 
 export const INTERNAL_ETHER_ADDRESS =
-  "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+  '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'

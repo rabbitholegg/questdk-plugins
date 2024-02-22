@@ -1,26 +1,26 @@
-export const ETH_LAYER_ZERO_CHAIN_ID: number = 101;
-export const BNB_LAYER_ZERO_CHAIN_ID: number = 102;
-export const AVALANCHE_LAYER_ZERO_CHAIN_ID: number = 106;
-export const POLYGON_LAYER_ZERO_CHAIN_ID: number = 109;
-export const ARBITRUM_LAYER_ZERO_CHAIN_ID: number = 110;
-export const OPTIMISM_LAYER_ZERO_CHAIN_ID: number = 111;
-export const FANTOM_LAYER_ZERO_CHAIN_ID: number = 112;
-export const METIS_LAYER_ZERO_CHAIN_ID: number = 151;
-export const KAVA_LAYER_ZERO_CHAIN_ID: number = 177;
-export const LINEA_LAYER_ZERO_CHAIN_ID: number = 183;
-export const BASE_LAYER_ZERO_CHAIN_ID: number = 184;
+export const ETH_LAYER_ZERO_CHAIN_ID: number = 101
+export const BNB_LAYER_ZERO_CHAIN_ID: number = 102
+export const AVALANCHE_LAYER_ZERO_CHAIN_ID: number = 106
+export const POLYGON_LAYER_ZERO_CHAIN_ID: number = 109
+export const ARBITRUM_LAYER_ZERO_CHAIN_ID: number = 110
+export const OPTIMISM_LAYER_ZERO_CHAIN_ID: number = 111
+export const FANTOM_LAYER_ZERO_CHAIN_ID: number = 112
+export const METIS_LAYER_ZERO_CHAIN_ID: number = 151
+export const KAVA_LAYER_ZERO_CHAIN_ID: number = 177
+export const LINEA_LAYER_ZERO_CHAIN_ID: number = 183
+export const BASE_LAYER_ZERO_CHAIN_ID: number = 184
 
-export const ETH_CHAIN_ID: number = 1;
-export const BNB_CHAIN_ID: number = 56;
-export const AVALANCHE_CHAIN_ID: number = 43114;
-export const POLYGON_CHAIN_ID: number = 137;
-export const ARBITRUM_CHAIN_ID: number = 42161;
-export const OPTIMISM_CHAIN_ID: number = 10;
-export const FANTOM_CHAIN_ID: number = 250;
-export const METIS_CHAIN_ID: number = 1088;
-export const KAVA_CHAIN_ID: number = 2222;
-export const LINEA_CHAIN_ID: number = 59144;
-export const BASE_CHAIN_ID: number = 8453;
+export const ETH_CHAIN_ID: number = 1
+export const BNB_CHAIN_ID: number = 56
+export const AVALANCHE_CHAIN_ID: number = 43114
+export const POLYGON_CHAIN_ID: number = 137
+export const ARBITRUM_CHAIN_ID: number = 42161
+export const OPTIMISM_CHAIN_ID: number = 10
+export const FANTOM_CHAIN_ID: number = 250
+export const METIS_CHAIN_ID: number = 1088
+export const KAVA_CHAIN_ID: number = 2222
+export const LINEA_CHAIN_ID: number = 59144
+export const BASE_CHAIN_ID: number = 8453
 
 export const LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID: Record<number, number> = {
   [ETH_LAYER_ZERO_CHAIN_ID]: ETH_CHAIN_ID,
@@ -34,7 +34,7 @@ export const LAYER_ZERO_TO_LAYER_ONE_CHAIN_ID: Record<number, number> = {
   [KAVA_LAYER_ZERO_CHAIN_ID]: KAVA_CHAIN_ID,
   [LINEA_LAYER_ZERO_CHAIN_ID]: LINEA_CHAIN_ID,
   [BASE_LAYER_ZERO_CHAIN_ID]: BASE_CHAIN_ID,
-} as const;
+} as const
 
 export const LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID: Record<number, number> = {
   [ETH_CHAIN_ID]: ETH_LAYER_ZERO_CHAIN_ID,
@@ -48,7 +48,7 @@ export const LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID: Record<number, number> = {
   [KAVA_CHAIN_ID]: KAVA_LAYER_ZERO_CHAIN_ID,
   [LINEA_CHAIN_ID]: LINEA_LAYER_ZERO_CHAIN_ID,
   [BASE_CHAIN_ID]: BASE_LAYER_ZERO_CHAIN_ID,
-} as const;
+} as const
 
 export const LAYER_ZERO_CHAIN_ID_ARRAY = [
   ETH_LAYER_ZERO_CHAIN_ID,
@@ -62,7 +62,7 @@ export const LAYER_ZERO_CHAIN_ID_ARRAY = [
   KAVA_LAYER_ZERO_CHAIN_ID,
   LINEA_LAYER_ZERO_CHAIN_ID,
   BASE_LAYER_ZERO_CHAIN_ID,
-];
+]
 
 export const NATIVE_CHAIN_ID_ARRAY = [
   ETH_CHAIN_ID,
@@ -76,4 +76,4 @@ export const NATIVE_CHAIN_ID_ARRAY = [
   KAVA_CHAIN_ID,
   LINEA_CHAIN_ID,
   BASE_CHAIN_ID,
-];
+]

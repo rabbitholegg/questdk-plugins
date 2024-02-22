@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-soundxyz",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -38,5 +38,5 @@
   "dependencies": {
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"
-  }  
+  }
 }
