@@ -1,38 +1,38 @@
-import { Across } from "@rabbitholegg/questdk-plugin-across";
-import { Arbitrum } from "@rabbitholegg/questdk-plugin-arbitrum";
-import { Balancer } from "@rabbitholegg/questdk-plugin-balancer";
-import { BasePaint } from "@rabbitholegg/questdk-plugin-basepaint";
-import { Boost } from "@rabbitholegg/questdk-plugin-boost";
-import { Camelot } from "@rabbitholegg/questdk-plugin-camelot";
-import { Connext } from "@rabbitholegg/questdk-plugin-connext";
-import { GMX } from "@rabbitholegg/questdk-plugin-gmx";
-import { HandleFi } from "@rabbitholegg/questdk-plugin-handlefi";
-import { Hop } from "@rabbitholegg/questdk-plugin-hop";
-import { Hyphen } from "@rabbitholegg/questdk-plugin-hyphen";
-import { Kote } from "@rabbitholegg/questdk-plugin-kote";
-import { Llama } from "@rabbitholegg/questdk-plugin-llama";
-import { Mirror } from "@rabbitholegg/questdk-plugin-mirror";
-import { Mux } from "@rabbitholegg/questdk-plugin-mux";
-import { OkuTrade } from "@rabbitholegg/questdk-plugin-okutrade";
-import { Optimism } from "@rabbitholegg/questdk-plugin-optimism";
-import { Paraswap } from "@rabbitholegg/questdk-plugin-paraswap";
-import { Pendle } from "@rabbitholegg/questdk-plugin-pendle";
-import { Polygon } from "@rabbitholegg/questdk-plugin-polygon";
-import { Rabbithole } from "@rabbitholegg/questdk-plugin-rabbithole";
-import { Soundxyz } from "@rabbitholegg/questdk-plugin-soundxyz";
-import { Stargate } from "@rabbitholegg/questdk-plugin-stargate";
-import { Sushi } from "@rabbitholegg/questdk-plugin-sushi";
-import { Symbiosis } from "@rabbitholegg/questdk-plugin-symbiosis";
-import { Synapse } from "@rabbitholegg/questdk-plugin-synapse";
-import { Tally } from "@rabbitholegg/questdk-plugin-tally";
-import { TraderJoe } from "@rabbitholegg/questdk-plugin-traderjoe";
-import { Treasure } from "@rabbitholegg/questdk-plugin-treasure";
-import { Uniswap } from "@rabbitholegg/questdk-plugin-uniswap";
-import { Vela } from "@rabbitholegg/questdk-plugin-vela";
-import { WooFi } from "@rabbitholegg/questdk-plugin-woofi";
-import { Zora } from "@rabbitholegg/questdk-plugin-zora";
-import { ENTRYPOINT } from "./contract-addresses";
-import  {
+import { Across } from '@rabbitholegg/questdk-plugin-across'
+import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
+import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
+import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
+import { Boost } from '@rabbitholegg/questdk-plugin-boost'
+import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
+import { Connext } from '@rabbitholegg/questdk-plugin-connext'
+import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
+import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
+import { Hop } from '@rabbitholegg/questdk-plugin-hop'
+import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
+import { Kote } from '@rabbitholegg/questdk-plugin-kote'
+import { Llama } from '@rabbitholegg/questdk-plugin-llama'
+import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
+import { Mux } from '@rabbitholegg/questdk-plugin-mux'
+import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
+import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
+import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
+import { Pendle } from '@rabbitholegg/questdk-plugin-pendle'
+import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
+import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
+import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
+import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
+import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
+import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
+import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
+import { Tally } from '@rabbitholegg/questdk-plugin-tally'
+import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
+import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
+import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
+import { Vela } from '@rabbitholegg/questdk-plugin-vela'
+import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
+import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { ENTRYPOINT } from './contract-addresses'
+import {
   type IntentParams,
   type MintIntentParams,
   type IActionPlugin,
@@ -48,7 +48,7 @@ import  {
   type SwapActionParams,
   type TransactionFilter,
   type VoteActionParams,
-} from "@rabbitholegg/questdk-plugin-utils";
+} from '@rabbitholegg/questdk-plugin-utils'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -102,14 +102,14 @@ export const getTxIntent = (
   switch (actionType) {
     case ActionType.Mint:
       if (plugin.getMintIntent !== undefined) {
-        return plugin.getMintIntent(params as unknown as MintIntentParams);
+        return plugin.getMintIntent(params as unknown as MintIntentParams)
       } else {
-        throw new PluginActionNotImplementedError();
+        throw new PluginActionNotImplementedError()
       }
     default:
-      throw new Error(`Unknown action type "${actionType}"`);
+      throw new Error(`Unknown action type "${actionType}"`)
   }
-};
+}
 
 export const executePlugin = (
   plugin: IActionPlugin,

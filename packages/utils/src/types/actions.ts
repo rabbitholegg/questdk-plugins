@@ -1,8 +1,8 @@
-import { type TransactionRequest } from "viem";
-import type { FilterOperator, TransactionFilter } from "./filters";
-import { PluginActionNotImplementedError } from "../errors";
-import { type Address } from "viem";
-import type { MintIntentParams } from "./intents";
+import { type TransactionRequest } from 'viem'
+import type { FilterOperator, TransactionFilter } from './filters'
+import { PluginActionNotImplementedError } from '../errors'
+import { type Address } from 'viem'
+import type { MintIntentParams } from './intents'
 
 export type SwapActionParams = {
   chainId: number
@@ -94,13 +94,13 @@ export interface IActionPlugin {
   getSupportedTokenAddresses: (
     chainId: number,
     task?: ActionType,
-  ) => Promise<Address[]>;
+  ) => Promise<Address[]>
   bridge?: (
     params: BridgeActionParams,
-  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>;
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   swap?: (
     params: SwapActionParams,
-  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>;
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   mint?: (
     params: MintActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
@@ -112,7 +112,7 @@ export interface IActionPlugin {
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   burn?: (
     params: BurnActionParams,
-  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>;
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   quest?: (
     params: QuestActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
@@ -121,25 +121,25 @@ export interface IActionPlugin {
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   vote?: (
     params: VoteActionParams,
-  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>;
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   getMintIntent?: (
     mint: MintIntentParams,
-  ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>;
+  ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
 }
 
 export enum ActionType {
-  Bridge = "bridge",
-  Stake = "stake",
-  Swap = "swap",
-  Mint = "mint",
-  Burn = "burn",
-  Quest = "quest",
-  Deposit = "deposit",
-  Delegate = "delegate",
-  Lend = "lend",
-  Other = "other",
-  Options = "options",
-  Vote = "vote",
+  Bridge = 'bridge',
+  Stake = 'stake',
+  Swap = 'swap',
+  Mint = 'mint',
+  Burn = 'burn',
+  Quest = 'quest',
+  Deposit = 'deposit',
+  Delegate = 'delegate',
+  Lend = 'lend',
+  Other = 'other',
+  Options = 'options',
+  Vote = 'vote',
 }
 
 export enum OrderType {

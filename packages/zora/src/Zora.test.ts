@@ -1,18 +1,18 @@
-import { apply } from "@rabbitholegg/questdk/filter";
-import { describe, expect, test } from "vitest";
-import { failingTestCases, passingTestCases } from "./test-setup";
+import { apply } from '@rabbitholegg/questdk/filter'
+import { describe, expect, test } from 'vitest'
+import { failingTestCases, passingTestCases } from './test-setup'
 import {
   BASIC_PURCHASE,
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
-} from "./test-transactions";
-import { getMintIntent, mint } from "./Zora";
+} from './test-transactions'
+import { getMintIntent, mint } from './Zora'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
-} from "./abi";
-import { type MintIntentParams } from "@rabbitholegg/questdk-plugin-utils";
+} from './abi'
+import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
@@ -138,62 +138,62 @@ describe('Given the zora plugin', () => {
       failingTestCases.forEach((testCase) => {
         const { transaction, params, description } = testCase
         test(description, async () => {
-          const filter = await mint(params);
-          expect(apply(transaction, filter)).to.be.false;
-        });
-      });
-    });
-  });
-});
+          const filter = await mint(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+  })
+})
 
-describe("Given the getMintIntent function", () => {
+describe('Given the getMintIntent function', () => {
   // Define the constant for the contract address
-  const CONTRACT_ADDRESS = "0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb";
-  const RECIPIENT_ADDRESS = "0x1234567890123456789012345678901234567890"; // replace with a real address
+  const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890' // replace with a real address
 
-  test("returns a TransactionRequest with correct properties when tokenId is not 0", async () => {
+  test('returns a TransactionRequest with correct properties when tokenId is not 0', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
       tokenId: 1, // not 0
       contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt("10"),
+      amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
-    };
+    }
 
-    const result = await getMintIntent(mint);
+    const result = await getMintIntent(mint)
 
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
       data: EXPECTED_ENCODED_DATA_1155,
-    });
-  });
+    })
+  })
 
-  test("returns a TransactionRequest with correct properties when tokenId is 0", async () => {
+  test('returns a TransactionRequest with correct properties when tokenId is 0', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
       tokenId: 0,
       contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt("10"),
+      amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
-    };
+    }
 
-    const result = await getMintIntent(mint);
+    const result = await getMintIntent(mint)
 
     expect(result).toEqual({
       from: mint.recipient,
       to: mint.contractAddress,
       data: EXPECTED_ENCODED_DATA_721,
-    });
-  });
+    })
+  })
 
-  test("throws an error if required parameters are missing", async () => {
+  test('throws an error if required parameters are missing', async () => {
     const mint: Partial<MintIntentParams> = {
       contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt("10"),
+      amount: BigInt('10'),
       // recipient is missing
-    };
+    }
 
-    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow();
-  });
-});
+    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+  })
+})
