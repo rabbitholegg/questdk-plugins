@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-paraswap",
   "private": false,
-  "version": "1.0.0-alpha.20",
+  "version": "1.0.0-alpha.22",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@paraswap/sdk": "^6.2.4",
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

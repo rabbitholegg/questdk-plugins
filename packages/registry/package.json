@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.63",
+  "version": "1.0.0-alpha.66",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -68,6 +68,7 @@
     "@rabbitholegg/questdk-plugin-mux": "workspace:*",
     "@rabbitholegg/questdk-plugin-llama": "workspace:*",
     "@rabbitholegg/questdk-plugin-boost": "workspace:*",
-    "@rabbitholegg/questdk-plugin-kote": "workspace:*"
+    "@rabbitholegg/questdk-plugin-kote": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

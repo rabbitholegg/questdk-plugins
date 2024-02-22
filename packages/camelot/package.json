@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-camelot",
-  "version": "1.0.0-alpha.17",
+  "version": "1.0.0-alpha.19",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -36,6 +36,7 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

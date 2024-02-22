@@ -4,9 +4,9 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  mint,
 } from './Zora.js'
 
 export const Zora: IActionPlugin = {

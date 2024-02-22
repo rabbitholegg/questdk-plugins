@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-optimism",
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.16",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@eth-optimism/contracts-ts": "0.15.0",
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

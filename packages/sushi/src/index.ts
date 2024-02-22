@@ -4,9 +4,9 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  swap,
 } from './Sushi.js'
 
 export const Sushi: IActionPlugin = {
