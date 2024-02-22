@@ -1,5 +1,16 @@
 # @rabbitholegg/questdk-plugin-sushi
 
+## 1.0.0-alpha.6
+
+### Minor Changes
+
+- [#224](https://github.com/rabbitholegg/questdk-plugins/pull/224) [`5718806`](https://github.com/rabbitholegg/questdk-plugins/commit/5718806628528bbe79a36898396b10ac89c126c8) Thanks [@mmackz](https://github.com/mmackz)! - add support for swaps through routeProcessorV4 contracts
+
+### Patch Changes
+
+- Updated dependencies [[`d9dc79b`](https://github.com/rabbitholegg/questdk-plugins/commit/d9dc79b6294b408452de60c9727d784b2a850eea)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.36
+
 ## 1.0.0-alpha.5
 
 ### Minor Changes
