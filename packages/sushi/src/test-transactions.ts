@@ -1,6 +1,6 @@
 import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { type TestParams, Chains } from './utils'
+import { Chains, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const PROCESS_ROUTE_ETH_TOKEN: TestParams<SwapActionParams> = {
@@ -59,6 +59,26 @@ export const PROCESS_ROUTE_TOKEN_TOKEN: TestParams<SwapActionParams> = {
     amountIn: GreaterThanOrEqual(parseUnits('2', 18)),
     amountOut: GreaterThanOrEqual(parseUnits('1.70', 6)),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+  },
+}
+
+export const PROCESS_ROUTE_V4: TestParams<SwapActionParams> = {
+  transaction: {
+    chainId: 10,
+    from: '0x98c364a2678ede157939aec359788ef5c5441f98',
+    to: '0xcdbcd51a5e8728e0af4895ce5771b7d17ff71959',
+    hash: '0x231b7abba801c1cafe5db10f48ad087a83e48f96ef4446d9e04c91ee9bcdeff8',
+    input:
+      '0x2646478b000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee0000000000000000000000000000000000000000000000000001c6bf526340000000000000000000000000007f5c764cbc14f9669b88837ca1490cca17c31607000000000000000000000000000000000000000000000000000000000016a9e900000000000000000000000098c364a2678ede157939aec359788ef5c5441f9800000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000700301ffff0201cdbcd51a5e8728e0af4895ce5771b7d17ff71959420000000000000000000000000000000000000601420000000000000000000000000000000000000601ffff018b3c4271440bc98a085eb6b348243ed3679751a40198c364a2678ede157939aec359788ef5c5441f9800000000000000000000000000000000',
+    value: '500000000000000',
+  },
+  params: {
+    chainId: Chains.OPTIMISM,
+    tokenIn: zeroAddress, // ETH
+    amountIn: GreaterThanOrEqual(parseEther('0.0005')),
+    tokenOut: '0x7F5c764cBc14f9669B88837ca1490cCa17c31607', // USDC.e
+    amountOut: GreaterThanOrEqual(parseUnits('1.1', 6)),
+    recipient: '0x98c364a2678ede157939aec359788ef5c5441f98',
   },
 }
 
