@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.12
+
+### Patch Changes
+
+- [#228](https://github.com/rabbitholegg/questdk-plugins/pull/228) [`121a949`](https://github.com/rabbitholegg/questdk-plugins/commit/121a949b9ba76727e1088b3825cc04df6acf6a6c) Thanks [@mmackz](https://github.com/mmackz)! - update universal minter package
+
 ## 1.0.0-alpha.11
 
 ### Minor Changes
