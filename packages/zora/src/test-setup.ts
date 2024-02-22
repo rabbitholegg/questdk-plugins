@@ -5,6 +5,7 @@ import {
   MINT_WITH_REWARDS,
   MINT_WITH_REWARDS_1155,
   MINT_BATCH_WITHOUT_FEES,
+  BATCH_MINT_ARB,
 } from './test-transactions'
 
 export const passingTestCases = [
@@ -12,6 +13,7 @@ export const passingTestCases = [
   createTestCase(MINT_WITH_REWARDS, 'Minting with rewards'),
   createTestCase(MINT_WITH_REWARDS_1155, 'Minting with rewards 1155'),
   createTestCase(MINT_BATCH_WITHOUT_FEES, 'When using the batch mint function'),
+  createTestCase(BATCH_MINT_ARB, 'when using batch mint function on arbitrum'),
   createTestCase(MINT_WITH_REWARDS, 'when contractAddress is checksummed', {
     contractAddress: getAddress(MINT_WITH_REWARDS.params.contractAddress),
   }),
