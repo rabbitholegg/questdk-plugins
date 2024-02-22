@@ -1,12 +1,12 @@
-import { getAddress } from 'viem'
-import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
   BASIC_PURCHASE,
+  BATCH_MINT_ARB,
+  MINT_BATCH_WITHOUT_FEES,
   MINT_WITH_REWARDS,
   MINT_WITH_REWARDS_1155,
-  MINT_BATCH_WITHOUT_FEES,
-  BATCH_MINT_ARB,
 } from './test-transactions'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
+import { getAddress } from 'viem'
 
 export const passingTestCases = [
   createTestCase(BASIC_PURCHASE, 'when doing a basic purchase'),

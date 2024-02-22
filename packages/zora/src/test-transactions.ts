@@ -1,5 +1,5 @@
 import { type MintActionParams } from '@rabbitholegg/questdk'
-import { type TestParams, Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { Chains, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
 
 export const BASIC_PURCHASE: TestParams<MintActionParams> = {
   transaction: {
