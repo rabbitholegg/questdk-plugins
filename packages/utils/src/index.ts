@@ -7,6 +7,7 @@ export type {
   OptionsActionParams,
   StakeActionParams,
   BridgeActionParams,
+  VoteActionParams,
   MintActionParams,
   BurnActionParams,
   QuestActionParams,

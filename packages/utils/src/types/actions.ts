@@ -139,6 +139,7 @@ export enum ActionType {
   Lend = "lend",
   Other = "other",
   Options = "options",
+  Vote = "vote",
 }
 
 export enum OrderType {
