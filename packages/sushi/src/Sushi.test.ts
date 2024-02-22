@@ -15,7 +15,7 @@ describe('Given the Sushi plugin', () => {
         expect(filter).to.deep.equal({
           chainId: 8453,
           to: {
-            $or: CHAIN_TO_CONTRACTS[8453]?.map(token => token.toLowerCase()),
+            $or: CHAIN_TO_CONTRACTS[8453]?.map((token) => token.toLowerCase()),
           },
           value: {
             $gte: '2100000000000000000',
