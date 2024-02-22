@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-traderjoe
 
+## 1.0.0-alpha.16
+
+### Patch Changes
+
+- Updated dependencies [[`d9dc79b`](https://github.com/rabbitholegg/questdk-plugins/commit/d9dc79b6294b408452de60c9727d784b2a850eea)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.36
+
 ## 1.0.0-alpha.15
 
 ### Minor Changes
