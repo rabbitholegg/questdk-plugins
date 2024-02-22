@@ -1,6 +1,6 @@
 import type { SwapActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { type TestParams, Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { Chains, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 export const PROCESS_ROUTE_ETH_TOKEN: TestParams<SwapActionParams> = {

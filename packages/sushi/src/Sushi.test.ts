@@ -1,9 +1,9 @@
+import { getSupportedTokenAddresses, swap } from './Sushi'
+import { PROCESS_ROUTE_ABI, ROUTER_ABI } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { failingTestCases, passingTestCases } from './create-tests'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './create-tests'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import { swap, getSupportedTokenAddresses } from './Sushi'
-import { PROCESS_ROUTE_ABI, ROUTER_ABI } from './abi'
 
 describe('Given the Sushi plugin', () => {
   describe('When handling the swap action', () => {
