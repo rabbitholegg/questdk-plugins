@@ -421,9 +421,6 @@ importers:
 
   packages/registry:
     dependencies:
-      '@rabbitholegg/questdk':
-        specifier: workspace:*
-        version: link:../../apps/questdk
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
