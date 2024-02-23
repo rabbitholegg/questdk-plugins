@@ -2,11 +2,12 @@ import {
   type TransactionFilter,
   type MintActionParams,
   compressJson,
+  ActionType,
 } from '@rabbitholegg/questdk'
 import { type Address, encodeFunctionData, type TransactionRequest } from 'viem'
 import { COLLECT_ENTRY_ABI } from './abi'
 import { Chains } from './utils'
-import type { ActionParams, MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import type { MintIntentParams, DisctriminatedActionParams } from '@rabbitholegg/questdk-plugin-utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -54,6 +55,9 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.OPTIMISM, Chains.ZORA, Chains.BASE, Chains.LINEA]
 }
 
-export const getDynamicName = async (params: ActionParams): Promise<string> => {
-  return 'Mint'
+export const getDynamicName = async (params: DisctriminatedActionParams): Promise<string> => {
+  if (params.type === ActionType.Mint) {
+    return `Mint ${params.data.contractAddress}`
+  }
+  throw new Error(`Invalid action type "${params.type}"`)
 }

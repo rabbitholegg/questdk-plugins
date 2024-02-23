@@ -12,7 +12,7 @@ import {
 } from 'viem'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 import { Chains } from './utils'
-import type { MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import  { type DisctriminatedActionParams, ActionType, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -82,6 +82,10 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.ETHEREUM, Chains.OPTIMISM, Chains.BASE]
 }
 
-export const getDynamicName = async (params: ActionParams): Promise<string> => {
-  return 'Mint'
+
+export const getDynamicName = async (params: DisctriminatedActionParams): Promise<string> => {
+  if (params.type === ActionType.Mint) {
+    return `Mint ${params.data.contractAddress}`
+  }
+  throw new Error(`Invalid action type "${params.type}"`)
 }

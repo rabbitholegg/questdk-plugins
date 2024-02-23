@@ -32,7 +32,8 @@
   },
   "dependencies": {
     "viem": "2.7.9",
-    "axios": "1.5.0"
+    "axios": "1.5.0",
+    "zod": "3.21.4"
   },
   "pnpm": {
     "overrides": {
