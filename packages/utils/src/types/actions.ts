@@ -1,8 +1,9 @@
-import { type TransactionRequest } from 'viem'
+import { type TransactionRequest, type Address } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
-import { type Address } from 'viem'
 import type { MintIntentParams } from './intents'
+import { BridgeActionDetailSchema, DelegateActionDetailSchema, MintActionDetailSchema, OptionsActionDetailSchema, StakeActionDetailSchema, SwapActionDetailSchema, VoteActionDetailSchema } from './quests'
+import { z } from 'zod'
 
 export type SwapActionParams = {
   chainId: number
@@ -88,6 +89,27 @@ export type ActionParams =
   | QuestActionParams
   | OptionsActionParams
   | VoteActionParams
+
+  export type DisctriminatedActionParams = 
+  | { type: ActionType.Swap; data: SwapActionParams }
+  | { type: ActionType.Stake; data: StakeActionParams }
+  | { type: ActionType.Bridge; data: BridgeActionParams }
+  | { type: ActionType.Mint; data: MintActionParams }
+  | { type: ActionType.Delegate; data: DelegateActionParams }
+  | { type: ActionType.Quest; data: QuestActionParams }
+  | { type: ActionType.Options; data: OptionsActionParams }
+  | { type: ActionType.Vote; data: VoteActionParams };
+
+  export const QuestActionParamsSchema = z.discriminatedUnion('type', [
+    z.object({ type: z.literal('bridge'), data: BridgeActionDetailSchema }),
+    z.object({ type: z.literal('swap'), data: SwapActionDetailSchema }),
+    z.object({ type: z.literal('delegate'), data: DelegateActionDetailSchema }),
+    z.object({ type: z.literal('stake'), data: StakeActionDetailSchema }),
+    z.object({ type: z.literal('mint'), data: MintActionDetailSchema }),
+    z.object({ type: z.literal('options'), data: OptionsActionDetailSchema }),
+    z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
+  ]);
+
 export interface IActionPlugin {
   pluginId: string
   getSupportedChainIds: (task?: ActionType) => Promise<number[]>
@@ -125,7 +147,7 @@ export interface IActionPlugin {
   getMintIntent?: (
     mint: MintIntentParams,
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
-  getDynamicName?: (params: ActionParams) => Promise<string>
+  getDynamicName?: (params: DisctriminatedActionParams) => Promise<string>
 }
 
 export enum ActionType {

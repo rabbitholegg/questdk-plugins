@@ -28,6 +28,7 @@ export type {
   StringOperator,
   FilterOperator,
   TransactionFilter,
+  DisctriminatedActionParams,
 } from './types'
 
 export {

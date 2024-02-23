@@ -11,6 +11,7 @@ export type {
   DelegateActionParams,
   ActionParams,
   IActionPlugin,
+  DisctriminatedActionParams,
 } from './actions'
 
 export { ActionType, OrderType } from './actions'
