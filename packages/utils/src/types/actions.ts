@@ -2,7 +2,15 @@ import { type TransactionRequest, type Address } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import type { MintIntentParams } from './intents'
-import { BridgeActionDetailSchema, DelegateActionDetailSchema, MintActionDetailSchema, OptionsActionDetailSchema, StakeActionDetailSchema, SwapActionDetailSchema, VoteActionDetailSchema } from './quests'
+import {
+  BridgeActionDetailSchema,
+  DelegateActionDetailSchema,
+  MintActionDetailSchema,
+  OptionsActionDetailSchema,
+  StakeActionDetailSchema,
+  SwapActionDetailSchema,
+  VoteActionDetailSchema,
+} from './quests'
 import { z } from 'zod'
 
 export type SwapActionParams = {
@@ -90,7 +98,7 @@ export type ActionParams =
   | OptionsActionParams
   | VoteActionParams
 
-  export type DisctriminatedActionParams = 
+export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
   | { type: ActionType.Stake; data: StakeActionParams }
   | { type: ActionType.Bridge; data: BridgeActionParams }
@@ -98,17 +106,17 @@ export type ActionParams =
   | { type: ActionType.Delegate; data: DelegateActionParams }
   | { type: ActionType.Quest; data: QuestActionParams }
   | { type: ActionType.Options; data: OptionsActionParams }
-  | { type: ActionType.Vote; data: VoteActionParams };
+  | { type: ActionType.Vote; data: VoteActionParams }
 
-  export const QuestActionParamsSchema = z.discriminatedUnion('type', [
-    z.object({ type: z.literal('bridge'), data: BridgeActionDetailSchema }),
-    z.object({ type: z.literal('swap'), data: SwapActionDetailSchema }),
-    z.object({ type: z.literal('delegate'), data: DelegateActionDetailSchema }),
-    z.object({ type: z.literal('stake'), data: StakeActionDetailSchema }),
-    z.object({ type: z.literal('mint'), data: MintActionDetailSchema }),
-    z.object({ type: z.literal('options'), data: OptionsActionDetailSchema }),
-    z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
-  ]);
+export const QuestActionParamsSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('bridge'), data: BridgeActionDetailSchema }),
+  z.object({ type: z.literal('swap'), data: SwapActionDetailSchema }),
+  z.object({ type: z.literal('delegate'), data: DelegateActionDetailSchema }),
+  z.object({ type: z.literal('stake'), data: StakeActionDetailSchema }),
+  z.object({ type: z.literal('mint'), data: MintActionDetailSchema }),
+  z.object({ type: z.literal('options'), data: OptionsActionDetailSchema }),
+  z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
+])
 
 export interface IActionPlugin {
   pluginId: string

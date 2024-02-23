@@ -7,7 +7,10 @@ import {
 import { type Address, encodeFunctionData, type TransactionRequest } from 'viem'
 import { COLLECT_ENTRY_ABI } from './abi'
 import { Chains } from './utils'
-import type { MintIntentParams, DisctriminatedActionParams } from '@rabbitholegg/questdk-plugin-utils'
+import type {
+  MintIntentParams,
+  DisctriminatedActionParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -55,7 +58,9 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.OPTIMISM, Chains.ZORA, Chains.BASE, Chains.LINEA]
 }
 
-export const getDynamicName = async (params: DisctriminatedActionParams): Promise<string> => {
+export const getDynamicName = async (
+  params: DisctriminatedActionParams,
+): Promise<string> => {
   if (params.type === ActionType.Mint) {
     return `Mint ${params.data.contractAddress}`
   }
