@@ -81,3 +81,7 @@ export const getSupportedTokenAddresses = async (
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.ETHEREUM, Chains.OPTIMISM, Chains.BASE]
 }
+
+export const getDynamicName = async (params: ActionParams): Promise<string> => {
+  return 'Mint'
+}
