@@ -1,11 +1,13 @@
 export { CHAIN_TO_TOKENS, Chains } from './constants'
 export { createTestCase, type TestCase, type TestParams } from './helpers'
-export { PluginActionNotImplementedError } from './errors'
 export type {
+  IntentParams,
+  MintIntentParams,
   SwapActionParams,
   OptionsActionParams,
   StakeActionParams,
   BridgeActionParams,
+  VoteActionParams,
   MintActionParams,
   BurnActionParams,
   QuestActionParams,
@@ -32,3 +34,5 @@ export {
   ActionType,
   OrderType,
 } from './types'
+
+export { PluginActionNotImplementedError } from './errors'

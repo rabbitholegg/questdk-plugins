@@ -10,6 +10,6 @@ export type {
   VoteActionParams,
   ActionParams,
   IActionPlugin,
-} from './types.js'
+} from '@rabbitholegg/questdk-plugin-utils'
 
-export { ActionType, OrderType } from './types.js'
+export { ActionType, OrderType } from '@rabbitholegg/questdk-plugin-utils'

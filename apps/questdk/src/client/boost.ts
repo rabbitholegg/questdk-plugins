@@ -14,7 +14,7 @@ import { type PublicClient, createClient, http } from 'viem'
  * @param {string} rpcUrl - The RPC URL for connecting to the Ethereum network.
  * @returns An object with methods for fetching token metadata and media.
  */
-function createEthereumClient(rpcUrl: string) {
+function boost(rpcUrl: string) {
   const client = createClient({
     transport: http(rpcUrl),
   }) as PublicClient
@@ -35,4 +35,4 @@ function createEthereumClient(rpcUrl: string) {
   }
 }
 
-export default createEthereumClient
+export default boost

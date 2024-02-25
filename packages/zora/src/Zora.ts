@@ -1,17 +1,23 @@
 import {
+  type TransactionFilter,
+  type MintActionParams,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
+import {
+  type Address,
+  getAddress,
+  type TransactionRequest,
+  encodeFunctionData,
+  zeroHash,
+} from 'viem'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
 } from './abi'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import {
-  type MintActionParams,
-  type TransactionFilter,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
-import { type Address, getAddress } from 'viem'
-
+import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
@@ -76,6 +82,35 @@ export const mint = async (
       ],
     },
   })
+}
+
+export const getMintIntent = async (
+  mint: MintIntentParams,
+): Promise<TransactionRequest> => {
+  const { contractAddress, tokenId, amount, recipient } = mint
+  let data
+  if (tokenId !== 0) {
+    const mintArgs = [recipient, tokenId, amount, zeroHash]
+    // Assume it's an 1155 mint
+    data = encodeFunctionData({
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'mint',
+      args: mintArgs,
+    })
+  } else {
+    // Assume it's a 721 mint
+    data = encodeFunctionData({
+      abi: ZORA_MINTER_ABI_721,
+      functionName: 'purchase',
+      args: [amount],
+    })
+  }
+
+  return {
+    from: recipient,
+    to: contractAddress,
+    data,
+  }
 }
 
 export const getSupportedTokenAddresses = async (

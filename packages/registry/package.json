@@ -33,7 +33,8 @@
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
   "devDependencies": {
-    "tsconfig": "workspace:*"
+    "tsconfig": "workspace:*",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   },
   "dependencies": {
     "@rabbitholegg/questdk-plugin-across": "workspace:*",
@@ -68,7 +69,6 @@
     "@rabbitholegg/questdk-plugin-mux": "workspace:*",
     "@rabbitholegg/questdk-plugin-llama": "workspace:*",
     "@rabbitholegg/questdk-plugin-boost": "workspace:*",
-    "@rabbitholegg/questdk-plugin-kote": "workspace:*",
-    "@rabbitholegg/questdk": "workspace:*"
+    "@rabbitholegg/questdk-plugin-kote": "workspace:*"
   }
 }
