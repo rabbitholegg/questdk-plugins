@@ -1,14 +1,15 @@
-import { getTransaction, getTokenInfo } from './viem'
-import { parseUnits, type Hash, Address } from 'viem'
-import { ActionParamKeys, Actions } from './params'
-import { mainQuestions, actionQuestions } from './questions'
-import { PromptObject } from 'prompts'
+import { Answers, PromptObject } from 'prompts'
+import { Address, type Hash, parseUnits } from 'viem'
+import { actionQuestions, mainQuestions } from './questions'
+import { ActionParamKeys, Actions } from './types'
+import { getTokenInfo, getTransaction } from './viem'
+import type { ActionResponse, Params, Transaction, TransactionDetail } from './types'
 const _prompts = require('prompts')
 
 export async function askQuestions() {
   const response = await _prompts(mainQuestions)
 
-  const transactions = []
+  const transactions: TransactionDetail[] = []
 
   let addAnotherTransaction = true
 
@@ -50,14 +51,19 @@ export async function askQuestions() {
             }
           }
         }
-        const actionResponse = await _prompts(
+        const actionResponse: ActionResponse = await _prompts(
           actionQuestions[response.action as Actions],
           { onSubmit },
         )
         let params = getParams(response.action, actionResponse)
         params = buildParams(response.action, transaction, params, tokenInfo)
         params = removeUndefinedParams(params)
-        transactions.push({ ...actionResponse, transaction, params, tokenInfo })
+        transactions.push({
+          description: actionResponse.description,
+          transaction,
+          params,
+          tokenInfo,
+        })
       } else {
         console.log('transaction not found')
       }
@@ -89,10 +95,10 @@ export async function askQuestions() {
 
 function buildParams(
   actionType: Actions,
-  transaction: any,
-  params: any,
+  transaction: Transaction,
+  params: Params,
   tokenInfo: { [key: string]: { symbol?: string; decimals: number } },
-): any {
+): Params {
   switch (actionType) {
     case 'mint':
     case 'burn':
@@ -108,7 +114,7 @@ function buildParams(
         ...params,
         amountIn: params.amountIn
           ? `GreaterThanOrEqual(${parseUnits(
-              params.amountIn,
+              params.amountIn as string,
               tokenInfo.tokenIn.decimals,
             )})`
           : 'GreaterThanOrEqual(1)',
@@ -121,7 +127,7 @@ function buildParams(
         destinationChainId: `Chains.${params.destinationChainId}`,
         amount: params.amount
           ? `GreaterThanOrEqual(${parseUnits(
-              params.amount,
+              params.amount as string,
               tokenInfo.tokenAddress.decimals,
             )})`
           : 'GreaterThanOrEqual(1)',
@@ -133,13 +139,13 @@ function buildParams(
         ...params,
         amountOne: params.amountOne
           ? `GreaterThanOrEqual(${parseUnits(
-              params.amountOne,
+              params.amountOne as string,
               tokenInfo.tokenOne.decimals,
             )})`
           : undefined,
         amountTwo: params.amountTwo
           ? `GreaterThanOrEqual(${parseUnits(
-              params.amountTwo,
+              params.amountTwo as string,
               tokenInfo.tokenTwo.decimals,
             )})`
           : undefined,
@@ -148,14 +154,13 @@ function buildParams(
       return {
         chainId: transaction.chainId,
         ...params,
-        support: params.support === true,
       }
     case 'delegate':
       return {
         chainId: transaction.chainId,
         ...params,
         amount: params.amount
-          ? `GreaterThanOrEqual(${parseUnits(params.amount, 18)})`
+          ? `GreaterThanOrEqual(${parseUnits(params.amount as string, 18)})`
           : undefined,
         delegator: `'${transaction.from}'`,
       }
@@ -170,7 +175,7 @@ function buildParams(
           : undefined,
         amount: params.amount
           ? `GreaterThanOrEqual(${parseUnits(
-              params.amount,
+              params.amount as string,
               tokenInfo.token.decimals,
             )})`
           : undefined,
@@ -181,8 +186,8 @@ function buildParams(
   }
 }
 
-function getParams(actionType: Actions, response: any): any {
-  const params: any = {}
+function getParams(actionType: Actions, response: Answers<string>): Params {
+  const params: Params = {}
   if (response && typeof response === 'object' && ActionParamKeys[actionType]) {
     const keys = ActionParamKeys[actionType]
     for (const key of keys) {
@@ -196,16 +201,11 @@ function getParams(actionType: Actions, response: any): any {
   return params
 }
 
-function removeUndefinedParams<T>(
-  params: Record<string, T>,
-): Record<string, T> {
-  return Object.entries(params).reduce<Record<string, T>>(
-    (acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = value
-      }
-      return acc
-    },
-    {},
-  )
+function removeUndefinedParams(params: Params): Params {
+  return Object.entries(params).reduce<Params>((acc, [key, value]) => {
+    if (value !== undefined) {
+      acc[key] = value
+    }
+    return acc
+  }, {})
 }

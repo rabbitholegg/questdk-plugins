@@ -1,8 +1,8 @@
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { ActionType } from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { Choice, PromptObject } from 'prompts'
 import { isAddress } from 'viem'
-import { Actions } from './params'
-import { PromptObject } from 'prompts'
+import { Actions } from './types'
 
 // structure available chains into the format for prompts
 const _chainValues = Object.values(Chains)
@@ -25,7 +25,7 @@ const _actionArray = _actionValues
   .filter((value) => value.title !== 'quest')
   .filter((value) => value.title !== 'other')
 
-export const mainQuestions = [
+export const mainQuestions: PromptObject[] = [
   {
     type: 'text',
     name: 'name',
@@ -48,7 +48,7 @@ export const mainQuestions = [
     type: 'multiselect',
     name: 'chain',
     message: 'What blockchains are the project on? (multi-select)',
-    choices: _chainArray,
+    choices: _chainArray as Choice[],
   },
   {
     type: 'select',
@@ -82,7 +82,7 @@ const descriptionQuestion: PromptObject = {
   },
 }
 
-const mintQuestions = [
+const mintQuestions: PromptObject[] = [
   {
     type: 'text',
     name: 'tokenId',
@@ -98,10 +98,7 @@ const mintQuestions = [
   descriptionQuestion,
 ]
 
-const swapQuestions: (
-  | PromptObject<string>
-  | ((prev: string) => PromptObject<string> | null)
-)[] = [
+const swapQuestions: PromptObject[] = [
   {
     type: 'text',
     name: 'tokenIn',
@@ -137,13 +134,13 @@ const swapQuestions: (
   descriptionQuestion,
 ]
 
-const bridgeQuestions = [
+const bridgeQuestions: PromptObject[] = [
   {
     type: 'select',
     name: 'destinationChainId',
     message: 'What is the destination chain?',
-    initial: null,
-    choices: _chainArray,
+    initial: undefined,
+    choices: _chainArray as Choice[],
   },
   {
     type: 'text',
@@ -169,11 +166,12 @@ const bridgeQuestions = [
   descriptionQuestion,
 ]
 
-const stakeQuestions = [
+const stakeQuestions: PromptObject[] = [
   {
     type: 'text',
     name: 'tokenOne',
-    message: 'What is the contract address for tokenOne? Use 0x0000000000000000000000000000000000000000 for ETH or other native assets (Optional)',
+    message:
+      'What is the contract address for tokenOne? Use 0x0000000000000000000000000000000000000000 for ETH or other native assets (Optional)',
     initial: '',
     validate: (tokenOne: string) =>
       tokenOne && !isAddress(tokenOne)
@@ -193,7 +191,8 @@ const stakeQuestions = [
   {
     type: 'text',
     name: 'tokenTwo',
-    message: 'What is the contract address for tokenTwo? Use 0x0000000000000000000000000000000000000000 for ETH or other native assets (Optional)',
+    message:
+      'What is the contract address for tokenTwo? Use 0x0000000000000000000000000000000000000000 for ETH or other native assets (Optional)',
     initial: '',
     validate: (tokenTwo: string) =>
       tokenTwo && !isAddress(tokenTwo)
@@ -213,7 +212,7 @@ const stakeQuestions = [
   descriptionQuestion,
 ]
 
-const delegateQuestions = [
+const delegateQuestions: PromptObject[] = [
   {
     type: 'text',
     name: 'delegate',
@@ -227,11 +226,11 @@ const delegateQuestions = [
   {
     type: 'text',
     name: 'project',
-    message: 'What is the project? (Optional)',
+    message: 'What is the project address? (Optional)',
     initial: '',
     validate: (project: string) => {
-      if (project && !/^[a-zA-Z]+$/.test(project)) {
-        return 'Please enter a valid project name'
+      if (project && !isAddress(project)) {
+        return 'Please enter a valid project address'
       }
       return true
     },
@@ -259,7 +258,7 @@ const delegateQuestions = [
   descriptionQuestion,
 ]
 
-const optionsQuestions = [
+const optionsQuestions: PromptObject[] = [
   {
     type: 'text',
     name: 'token',
@@ -283,7 +282,7 @@ const optionsQuestions = [
     type: 'select',
     name: 'orderType',
     message: 'What is the order type? (Optional)',
-    initial: null,
+    initial: undefined,
     choices: [
       { title: 'Skip', value: null },
       { title: 'Market', value: 'market' },
@@ -293,15 +292,15 @@ const optionsQuestions = [
   descriptionQuestion,
 ]
 
-const voteQuestions = [
+const voteQuestions: PromptObject[] = [
   {
     type: 'text',
     name: 'project',
-    message: 'What is the project? (Optional)',
+    message: 'What is the project address?',
     initial: '',
     validate: (project: string) => {
-      if (project && !/^[a-zA-Z]+$/.test(project)) {
-        return 'Please enter a valid project name'
+      if (project && !isAddress(project)) {
+        return 'Please enter a valid project address'
       }
       return true
     },
@@ -309,8 +308,8 @@ const voteQuestions = [
   {
     type: 'select',
     name: 'support',
-    message: 'Do you support the proposal?',
-    initial: null,
+    message: 'Do you support the proposal?  (Optional)',
+    initial: undefined,
     choices: [
       { title: 'Skip', value: null },
       { title: 'Yes', value: true },
@@ -330,7 +329,7 @@ const voteQuestions = [
   descriptionQuestion,
 ]
 
-export const actionQuestions: { [key in Actions]: any | null } = {
+export const actionQuestions: { [key in Actions]: PromptObject[] } = {
   mint: mintQuestions,
   swap: swapQuestions,
   stake: stakeQuestions,

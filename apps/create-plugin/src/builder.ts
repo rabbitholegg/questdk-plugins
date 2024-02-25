@@ -3,14 +3,7 @@ const path = require('path')
 import Handlebars from 'handlebars'
 import { cyan, red } from 'picocolors'
 import { isAddress } from 'viem'
-
-type BuilderParams = {
-  projectName: string
-  chains: string[]
-  tx: any[]
-  actionType: string
-  publish: boolean
-}
+import { type BuilderParams } from './types'
 
 const arrow = '=>'
 const logo = '✛' // not the logo but pretty close
@@ -21,8 +14,7 @@ export async function createPlugin(params: BuilderParams) {
     return
   }
 
-  // TODO: remove this
-  console.log(JSON.stringify(params, null, 2))
+  // console.log(JSON.stringify(params, null, 2))
 
   registerHelpers()
   await setActionNames(params)
@@ -66,15 +58,18 @@ function registerHelpers() {
   Handlebars.registerHelper('capitalize', function (aString) {
     return capitalize(aString)
   })
-  Handlebars.registerHelper('addressToString', function(value) {
+  Handlebars.registerHelper('addressToString', function (value) {
     if (typeof value === 'string' && isAddress(value)) {
       return `'${value}'`
     }
     return value
   })
-  Handlebars.registerHelper('eq', function (this: unknown, arg1, arg2, options) {
-    return arg1 === arg2 ? options.fn(this) : options.inverse(this)
-  })
+  Handlebars.registerHelper(
+    'eq',
+    function (this: unknown, arg1, arg2, options) {
+      return arg1 === arg2 ? options.fn(this) : options.inverse(this)
+    },
+  )
 }
 
 /**

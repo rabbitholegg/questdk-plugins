@@ -1,4 +1,46 @@
+import { Address, Hash } from 'viem';
+
 export type Actions = 'mint' | 'swap' | 'stake' | 'bridge' | 'burn' | 'vote' | 'delegate' | 'options';
+
+export type BuilderParams = {
+  projectName: string
+  chains: string[]
+  tx: TransactionDetail[]
+  actionType: Actions
+  publish: boolean
+}
+
+export interface Transaction {
+  chainId: number
+  from: Address
+  hash?: Hash
+  input: string
+  to: Address
+  value: string
+}
+
+export type Params = Record<string, string | number | boolean | undefined>
+
+interface TokenInfo {
+  [key: string]: {
+    decimals: number
+    symbol?: string
+  }
+}
+
+export interface ActionResponse {
+  description: string
+  transaction: Transaction
+  params: Params
+  tokenInfo: TokenInfo
+  [key: string]: unknown
+}
+export interface TransactionDetail {
+  description: string
+  transaction: Transaction
+  params: Params
+  tokenInfo: { [key: string]: { symbol?: string; decimals: number } }
+}
 
 export const ActionParamKeys = {
   mint: ['chainId', 'contractAddress', 'amount', 'tokenId', 'recipient'],
