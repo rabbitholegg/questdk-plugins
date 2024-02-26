@@ -79,7 +79,10 @@ export {
   OptionsActionFormSchema,
   OptionsActionDetailSchema,
   ActionParamsFormSchema,
-  CreateQuestInputSchema
+  CreateQuestInputSchema,
+  EthAddressSchema,
+  QuestActionParamsSchema,
+  NetworkNameSchema,
 } from './types'
 
 export { PluginActionNotImplementedError } from './errors'
