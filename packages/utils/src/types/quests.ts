@@ -1,30 +1,30 @@
-import { z } from 'zod';
-import { EthAddressSchema, NetworkNameSchema } from './common';
+import { z } from 'zod'
+import { EthAddressSchema, NetworkNameSchema } from './common'
 import { parseEther } from 'viem'
-import { QuestActionParamsSchema } from './actions';
-import { RewardTypeSchema } from './rewards';
+import { QuestActionParamsSchema } from './actions'
+import { RewardTypeSchema } from './rewards'
 const NetworkSchema = z.object({
-    name: z.string(),
-    chainId: z.string(),
-  });
+  name: z.string(),
+  chainId: z.string(),
+})
 // Which one of these TaskSchema is the correct one?
 const TaskSchema = z.object({
-    name: z.string(),
-    description: z.string(),
-    link: z.string(),
-    iconOption: z.string(),
-    deprecated: z.boolean().nullish(),
-    timestamp: z.coerce.date().nullish(),
-    contractAddress: EthAddressSchema.nullable(),
-    eventName: z.string(),
-    status: z.string().nullish(),
-    webhookUrl: z.string(),
-    indexerStrategy: z.string(),
-    title: z.string(),
-    network: NetworkSchema,
-  });
+  name: z.string(),
+  description: z.string(),
+  link: z.string(),
+  iconOption: z.string(),
+  deprecated: z.boolean().nullish(),
+  timestamp: z.coerce.date().nullish(),
+  contractAddress: EthAddressSchema.nullable(),
+  eventName: z.string(),
+  status: z.string().nullish(),
+  webhookUrl: z.string(),
+  indexerStrategy: z.string(),
+  title: z.string(),
+  network: NetworkSchema,
+})
 
-  // I Think this one is outdated but need to double check
+// I Think this one is outdated but need to double check
 //   export const TaskSchema = z.object({
 //     name: z.string().nullish(),
 //     type: z.string(),
@@ -39,30 +39,30 @@ const TaskSchema = z.object({
 //     status: z.string().nullish(),
 //     network: NetworkWithChainIdSchema,
 //   });
-  
-  const QuestSchema = z.object({
-    id: z.string(),
-    appLink: z.string(),
-    iconOption: z.string(),
-    imagePath: z.string(),
-    name: z.string(),
-    questEnd: z.union([z.date(), z.string()]),
-    questStart: z.union([z.date(), z.string()]),
-    description: z.string(),
-    network: z.string(),
-    receiptsMinted: z.number(),
-    status: z.string(),
-    createdAt: z.union([z.date(), z.string()]),
-    contractAddress: EthAddressSchema.nullable(),
-    creatorAddress: EthAddressSchema,
-    tasks: z.array(TaskSchema),
-    actionParams: QuestActionParamsSchema.optional(),
-    tags: z.array(z.string()).optional(),
-  });
 
-  export type Quest = z.infer<typeof QuestSchema>;
+const QuestSchema = z.object({
+  id: z.string(),
+  appLink: z.string(),
+  iconOption: z.string(),
+  imagePath: z.string(),
+  name: z.string(),
+  questEnd: z.union([z.date(), z.string()]),
+  questStart: z.union([z.date(), z.string()]),
+  description: z.string(),
+  network: z.string(),
+  receiptsMinted: z.number(),
+  status: z.string(),
+  createdAt: z.union([z.date(), z.string()]),
+  contractAddress: EthAddressSchema.nullable(),
+  creatorAddress: EthAddressSchema,
+  tasks: z.array(TaskSchema),
+  actionParams: QuestActionParamsSchema.optional(),
+  tags: z.array(z.string()).optional(),
+})
 
-  // Which one of these is the correct one?
+export type Quest = z.infer<typeof QuestSchema>
+
+// Which one of these is the correct one?
 export const RewardSchema = z.object({
   amount: z.string(),
   totalAllocated: z.number(),
@@ -75,7 +75,7 @@ export const RewardSchema = z.object({
   tokenContractAddress: EthAddressSchema,
   decimals: z.number().nullish(),
   tokenId: z.string().nullish(),
-});
+})
 
 // This one looks more outdated
 // export const RewardSchema = z.object({
@@ -96,35 +96,31 @@ export const RewardSchema = z.object({
 //     score: z.number(),
 //     scoreModel: z.string(),
 //   });
-  
-  
 
-export type QuestReward = z.infer<typeof RewardSchema>;
+export type QuestReward = z.infer<typeof RewardSchema>
 
 const QuestRewardSchema = z.object({
   quest: QuestSchema,
   reward: RewardSchema,
-});
-export type QuestAndReward = z.infer<typeof QuestRewardSchema>;
+})
+export type QuestAndReward = z.infer<typeof QuestRewardSchema>
 
 export const GetQuestsResponseSchema = z.object({
   quests: z.array(QuestRewardSchema),
-});
+})
 
-export type RewardType = z.infer<typeof RewardTypeSchema>;
+export type RewardType = z.infer<typeof RewardTypeSchema>
 
 export const NetworkWithChainIdSchema = z.object({
   name: z.string(),
   chainId: z.string(),
-});
+})
 
-export type NetworkWithChainId = z.infer<typeof NetworkWithChainIdSchema>;
+export type NetworkWithChainId = z.infer<typeof NetworkWithChainIdSchema>
 
-export type Reward = z.infer<typeof RewardSchema>;
+export type Reward = z.infer<typeof RewardSchema>
 
-
-
-export type Task = z.infer<typeof TaskSchema>;
+export type Task = z.infer<typeof TaskSchema>
 
 export const QuestDetailsSchema = z
   .object({
@@ -188,9 +184,9 @@ export const QuestDetailsSchema = z
     isPublic: z.boolean().nullish(),
     actionParams: QuestActionParamsSchema.optional(),
   })
-  .strict();
+  .strict()
 
-export type QuestDetails = z.infer<typeof QuestDetailsSchema>;
+export type QuestDetails = z.infer<typeof QuestDetailsSchema>
 
 export const RewardWithClaimSchema = z.object({
   id: z.string(),
@@ -218,9 +214,9 @@ export const RewardWithClaimSchema = z.object({
     }),
   ),
   questAddress: z.string(),
-});
+})
 
-export type RewardWithClaim = z.infer<typeof RewardWithClaimSchema>;
+export type RewardWithClaim = z.infer<typeof RewardWithClaimSchema>
 
 export const QuestInputActionParamsAmountOperatorEnum = z.enum([
   'any',
@@ -229,14 +225,14 @@ export const QuestInputActionParamsAmountOperatorEnum = z.enum([
   'lt',
   'lte',
   'eq',
-]);
+])
 
 export const QuestInputActionParamsAmountOperatorWithoutAny =
-  QuestInputActionParamsAmountOperatorEnum.exclude(['any']);
+  QuestInputActionParamsAmountOperatorEnum.exclude(['any'])
 
 export type QuestInputActionParamsAmountOperator = z.infer<
   typeof QuestInputActionParamsAmountOperatorEnum
->;
+>
 
 export const BridgeActionDetailSchema = z.object({
   sourceChainId: z.number(),
@@ -244,9 +240,9 @@ export const BridgeActionDetailSchema = z.object({
   tokenAddress: z.string().optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-});
+})
 
-export type BridgeActionDetail = z.infer<typeof BridgeActionDetailSchema>;
+export type BridgeActionDetail = z.infer<typeof BridgeActionDetailSchema>
 
 export const SwapActionDetailSchema = z.object({
   sourceChainId: z.number().optional(),
@@ -255,21 +251,21 @@ export const SwapActionDetailSchema = z.object({
   targetTokenAddress: EthAddressSchema.optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-});
+})
 
-export type SwapActionDetail = z.infer<typeof SwapActionDetailSchema>;
+export type SwapActionDetail = z.infer<typeof SwapActionDetailSchema>
 
 export const DelegateActionFormSchema = z.object({
   delegate: EthAddressSchema.optional(),
-});
+})
 
 export const DelegateActionDetailSchema = z.object({
   chainId: z.number(),
   delegate: EthAddressSchema.optional(),
-});
+})
 
-export type DelegateActionDetail = z.infer<typeof DelegateActionDetailSchema>;
-export type DelegateActionForm = z.infer<typeof DelegateActionFormSchema>;
+export type DelegateActionDetail = z.infer<typeof DelegateActionDetailSchema>
+export type DelegateActionForm = z.infer<typeof DelegateActionFormSchema>
 
 export const StakeActionDetailSchema = z.object({
   chainId: z.number(),
@@ -279,9 +275,9 @@ export const StakeActionDetailSchema = z.object({
   amountTwo: z.string().optional(),
   amountOneOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
   amountTwoOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-});
+})
 
-export type StakeActionDetail = z.infer<typeof StakeActionDetailSchema>;
+export type StakeActionDetail = z.infer<typeof StakeActionDetailSchema>
 
 export const BridgeActionFormSchema = z.object({
   destinationNetworkId: z.string(),
@@ -289,7 +285,7 @@ export const BridgeActionFormSchema = z.object({
   tokenDecimals: z.number().optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-});
+})
 
 export const SwapActionFormSchema = z.object({
   sourceTokenAddress: EthAddressSchema.optional(),
@@ -297,7 +293,7 @@ export const SwapActionFormSchema = z.object({
   tokenDecimals: z.number().optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-});
+})
 
 export const BaseStakeActionFormaSchema = z.object({
   tokenOne: EthAddressSchema.optional(),
@@ -309,16 +305,16 @@ export const BaseStakeActionFormaSchema = z.object({
   amountTwo: z.string().optional(),
   amountTwoOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
   duration: z.number().optional(),
-});
+})
 
-export const StakeActionFormSchema = BaseStakeActionFormaSchema;
+export const StakeActionFormSchema = BaseStakeActionFormaSchema
 
 export const MintActionFormSchema = z.object({
   contractAddress: EthAddressSchema,
   tokenId: z.number().optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-});
+})
 
 export const MintActionDetailSchema = z.object({
   chainId: z.number(),
@@ -326,26 +322,26 @@ export const MintActionDetailSchema = z.object({
   tokenId: z.number().optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-});
+})
 
-export type MintActionDetail = z.infer<typeof MintActionDetailSchema>;
-export type MintActionForm = z.infer<typeof MintActionFormSchema>;
+export type MintActionDetail = z.infer<typeof MintActionDetailSchema>
+export type MintActionForm = z.infer<typeof MintActionFormSchema>
 
 export const VoteActionFormSchema = z.object({
   project: EthAddressSchema,
   proposalId: z.number().optional(),
   support: z.boolean().optional(),
-});
+})
 
 export const VoteActionDetailSchema = z.object({
   chainId: z.number(),
   project: EthAddressSchema,
   proposalId: z.number().optional(),
   support: z.boolean().optional(),
-});
+})
 
-export type VoteActionDetail = z.infer<typeof VoteActionDetailSchema>;
-export type VoteActionForm = z.infer<typeof VoteActionFormSchema>;
+export type VoteActionDetail = z.infer<typeof VoteActionDetailSchema>
+export type VoteActionForm = z.infer<typeof VoteActionFormSchema>
 
 export const OptionsActionFormSchema = z.object({
   contractAddress: EthAddressSchema.optional(),
@@ -354,7 +350,7 @@ export const OptionsActionFormSchema = z.object({
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
   recipient: EthAddressSchema.optional(),
   orderType: z.string().optional(),
-});
+})
 
 export const OptionsActionDetailSchema = z.object({
   chainId: z.number(),
@@ -364,10 +360,10 @@ export const OptionsActionDetailSchema = z.object({
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
   recipient: EthAddressSchema.optional(),
   orderType: z.string().optional(),
-});
+})
 
-export type OptionsActionDetail = z.infer<typeof OptionsActionDetailSchema>;
-export type OptionsActionForm = z.infer<typeof OptionsActionFormSchema>;
+export type OptionsActionDetail = z.infer<typeof OptionsActionDetailSchema>
+export type OptionsActionForm = z.infer<typeof OptionsActionFormSchema>
 
 export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('bridge'), data: BridgeActionFormSchema }),
@@ -377,9 +373,9 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('delegate'), data: DelegateActionFormSchema }),
   z.object({ type: z.literal('options'), data: OptionsActionFormSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionFormSchema }),
-]);
+])
 
-export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>;
+export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
 
 export const CreateQuestInputSchema = z.object({
   contractType: z.enum(['ERC20', 'ERC721']).optional(),
@@ -391,9 +387,9 @@ export const CreateQuestInputSchema = z.object({
   rewardTokenId: z.string(),
   rewardAmount: z.string().refine((value) => {
     try {
-      return parseEther(value) > 0;
+      return parseEther(value) > 0
     } catch {
-      return false;
+      return false
     }
   }),
   rewardDecimals: z.number(),
@@ -406,6 +402,6 @@ export const CreateQuestInputSchema = z.object({
       deny: z.array(z.string()).optional(),
     })
     .optional(),
-});
+})
 
-export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>;
+export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>
