@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [#237](https://github.com/rabbitholegg/questdk-plugins/pull/237) [`cf73f7d`](https://github.com/rabbitholegg/questdk-plugins/commit/cf73f7d2c69c644e9cf77033589a06faad1995e7) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Create projectFees for Zora and Mirror plugins
+
+- [#238](https://github.com/rabbitholegg/questdk-plugins/pull/238) [`65e701f`](https://github.com/rabbitholegg/questdk-plugins/commit/65e701f3b71aef7117444a0338f146261d3ac06d) Thanks [@Quazia](https://github.com/Quazia)! - Patch to bump viem override
+
 ## 1.0.0-alpha.7
 
 ### Minor Changes
