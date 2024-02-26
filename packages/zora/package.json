@@ -37,6 +37,7 @@
     "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   },
   "dependencies": {
+    "@zoralabs/protocol-sdk": "0.5.3",
     "@zoralabs/universal-minter": "0.2.15",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"

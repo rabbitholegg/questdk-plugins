@@ -1,14 +1,19 @@
-import { apply } from '@rabbitholegg/questdk/filter'
-import { describe, expect, test } from 'vitest'
-import { getMintIntent, mint } from './Mirror'
 import {
-  passingTestCases,
-  failingTestCases,
-  OP_COLLECT_ENTRY,
-  EXPECTED_ENCODED_DATA,
-} from './test-transactions'
+  Chains,
+  type MintActionParams,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { apply } from '@rabbitholegg/questdk/filter'
+import { type Address } from 'viem'
+import { describe, expect, test, vi } from 'vitest'
+import { getMintIntent, mint } from './Mirror'
 import { COLLECT_ENTRY_ABI } from './abi'
-import { MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  EXPECTED_ENCODED_DATA,
+  OP_COLLECT_ENTRY,
+  failingTestCases,
+  passingTestCases,
+} from './test-transactions'
 
 describe('Given the mirror plugin', () => {
   describe('When handling the mint action', () => {
@@ -78,5 +83,23 @@ describe('getMintIntent', () => {
     }
 
     await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+  })
+})
+
+describe('getProjectFees', () => {
+  test('should return the correct fee', async () => {
+    const contractAddress: Address =
+      '0x8F3227b2ff643BAE66e99981904A899361ffB83E'
+    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+
+    const mockFns = {
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('690000000000000'),
+    }
+
+    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
+    const fee = await mockFns.getProjectFees(mintParams)
+    expect(getProjectsFeeSpy).toHaveBeenCalledWith(mintParams)
+    expect(fee).toEqual(BigInt('690000000000000'))
   })
 })
