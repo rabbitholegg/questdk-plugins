@@ -711,7 +711,7 @@ importers:
         version: link:../utils
       '@zoralabs/protocol-sdk':
         specifier: 0.5.3
-        version: 0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@1.21.4)
+        version: 0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
         version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)
@@ -3884,14 +3884,14 @@ packages:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/protocol-sdk@0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@1.21.4):
+  /@zoralabs/protocol-sdk@0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9):
     resolution: {integrity: sha512-0qNTtggsXjRd7eaPhdDb4Yixl7jikmqeH8Ws1Q2XMVQewo7aQALe0wOvOoLT3aNJtxKxmOpQGSlQaWBP3WmjZQ==}
     peerDependencies:
-      viem: 1.21.4
+      viem: 2.7.9
     dependencies:
       '@zoralabs/protocol-deployments': 0.1.0(@types/node@20.4.5)(ts-node@10.9.1)
       abitype: 0.10.3(typescript@5.3.2)
-      viem: 1.21.4(typescript@5.3.2)(zod@3.22.4)
+      viem: 2.7.9(typescript@5.3.2)(zod@3.22.4)
       vite: 4.5.0(@types/node@20.4.5)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
