@@ -14,9 +14,7 @@ export type {
   DisctriminatedActionParams,
 } from './actions'
 
-export {
-  QuestActionParamsSchema,
-} from './actions'
+export { QuestActionParamsSchema } from './actions'
 
 export {
   EthAddressSchema,
@@ -65,8 +63,8 @@ export type {
   OptionsActionDetail,
   OptionsActionForm,
   ActionParamsForm,
-  CreateQuestInput
-} from './quests';
+  CreateQuestInput,
+} from './quests'
 
 export {
   GetQuestsResponseSchema,
@@ -91,5 +89,5 @@ export {
   OptionsActionFormSchema,
   OptionsActionDetailSchema,
   ActionParamsFormSchema,
-  CreateQuestInputSchema
-} from './quests';
+  CreateQuestInputSchema,
+} from './quests'
