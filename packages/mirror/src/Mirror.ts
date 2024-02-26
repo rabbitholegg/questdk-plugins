@@ -9,7 +9,13 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, type TransactionRequest, encodeFunctionData } from 'viem'
 import { http, createPublicClient } from 'viem'
-import { COLLECT_ENTRY_ABI, GET_TREASURY_CONFIGURATION_ABI, GET_FEE_CONFIGURATION_ABI, GET_PLATFORM_FEE_ABI, GET_PRICE_ABI } from './abi'
+import {
+  COLLECT_ENTRY_ABI,
+  GET_TREASURY_CONFIGURATION_ABI,
+  GET_FEE_CONFIGURATION_ABI,
+  GET_PLATFORM_FEE_ABI,
+  GET_PRICE_ABI,
+} from './abi'
 import { Chains } from './utils'
 
 export const mint = async (
