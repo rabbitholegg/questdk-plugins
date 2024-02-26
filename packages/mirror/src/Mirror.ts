@@ -9,7 +9,7 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, type TransactionRequest, encodeFunctionData } from 'viem'
 import { http, createPublicClient } from 'viem'
-import { COLLECT_ENTRY_ABI } from './abi'
+import { COLLECT_ENTRY_ABI, GET_TREASURY_CONFIGURATION_ABI, GET_FEE_CONFIGURATION_ABI, GET_PLATFORM_FEE_ABI, GET_PRICE_ABI } from './abi'
 import { Chains } from './utils'
 
 export const mint = async (
@@ -60,84 +60,28 @@ export const getProjectFees = async (
   // get treasuryConfiguration address
   const treasuryConfiguration = await client.readContract({
     address: contractAddress,
-    abi: [
-      {
-        inputs: [],
-        name: 'treasuryConfiguration',
-        outputs: [
-          {
-            internalType: 'address',
-            name: '',
-            type: 'address',
-          },
-        ],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ],
+    abi: GET_TREASURY_CONFIGURATION_ABI,
     functionName: 'treasuryConfiguration',
   })
 
   // get feeConfiguration address
   const feeConfiguration = await client.readContract({
     address: treasuryConfiguration,
-    abi: [
-      {
-        inputs: [],
-        name: 'feeConfiguration',
-        outputs: [
-          {
-            internalType: 'address',
-            name: '',
-            type: 'address',
-          },
-        ],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ],
+    abi: GET_FEE_CONFIGURATION_ABI,
     functionName: 'feeConfiguration',
   })
 
   // get platform fee
   const platformFee = await client.readContract({
     address: feeConfiguration,
-    abi: [
-      {
-        inputs: [],
-        name: 'flatFeeAmount',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256',
-          },
-        ],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ],
+    abi: GET_PLATFORM_FEE_ABI,
     functionName: 'flatFeeAmount',
   })
 
   // get nft price
   const nftPrice = await client.readContract({
     address: contractAddress,
-    abi: [
-      {
-        inputs: [],
-        name: 'price',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256',
-          },
-        ],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ],
+    abi: GET_PRICE_ABI,
     functionName: 'price',
   })
 
