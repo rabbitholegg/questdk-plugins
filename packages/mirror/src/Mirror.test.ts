@@ -1,4 +1,8 @@
-import { Chains, type MintActionParams, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintActionParams,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
@@ -84,11 +88,13 @@ describe('getMintIntent', () => {
 
 describe('getProjectFees', () => {
   test('should return the correct fee', async () => {
-    const contractAddress: Address = '0x8F3227b2ff643BAE66e99981904A899361ffB83E';
+    const contractAddress: Address =
+      '0x8F3227b2ff643BAE66e99981904A899361ffB83E'
     const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
 
     const mockFns = {
-      getProjectFees: async (_mint: MintActionParams) => BigInt('690000000000000'),
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('690000000000000'),
     }
 
     const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')

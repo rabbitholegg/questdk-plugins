@@ -125,9 +125,7 @@ export interface IActionPlugin {
   getMintIntent?: (
     mint: MintIntentParams,
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
-  getProjectFees?: (
-    params: ActionParams
-  ) => Promise<bigint>
+  getProjectFees?: (params: ActionParams) => Promise<bigint>
 }
 
 export enum ActionType {

@@ -1,4 +1,8 @@
-import { Chains, type MintActionParams, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintActionParams,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
@@ -201,11 +205,13 @@ describe('Given the getMintIntent function', () => {
 
 describe('Given the getProjectFee function', () => {
   test('should return the correct fee for a 721 mint', async () => {
-    const contractAddress: Address = '0x4f86113fc3e9783cf3ec9a552cbb566716a57628'
+    const contractAddress: Address =
+      '0x4f86113fc3e9783cf3ec9a552cbb566716a57628'
     const mintParams = { contractAddress, chainId: Chains.ZORA }
 
     const mockFns = {
-      getProjectFees: async (_mint: MintActionParams) => BigInt('777000000000000'),
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('777000000000000'),
     }
 
     const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
@@ -215,14 +221,21 @@ describe('Given the getProjectFee function', () => {
   })
 
   test('should return the correct fee for an 1155 mint', async () => {
-    const contractAddress: Address = '0x393c46fe7887697124a73f6028f39751aa1961a3'
+    const contractAddress: Address =
+      '0x393c46fe7887697124a73f6028f39751aa1961a3'
     const tokenId = 1
-    const mintParams = { contractAddress, tokenId, chainId: Chains.ZORA, amount: 2 }
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 2,
+    }
 
     const mockFns = {
-      getProjectFees: async (_mint: MintActionParams) => BigInt('1554000000000000'),
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('1554000000000000'),
     }
-  
+
     const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
     const fee = await mockFns.getProjectFees(mintParams)
     expect(getProjectsFeeSpy.mock.calls.length).toBe(1)

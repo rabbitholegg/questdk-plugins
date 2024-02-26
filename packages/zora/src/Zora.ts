@@ -115,21 +115,25 @@ export const getMintIntent = async (
   }
 }
 
-export const getProjectFees = async (mint: MintActionParams): Promise<bigint> => {
-  const { chainId, contractAddress, tokenId, amount } = mint;
-  const client = new MintAPIClient(chainId);
+export const getProjectFees = async (
+  mint: MintActionParams,
+): Promise<bigint> => {
+  const { chainId, contractAddress, tokenId, amount } = mint
+  const client = new MintAPIClient(chainId)
 
-  const args: {tokenAddress: Address, tokenId?: number } = { tokenAddress: contractAddress };
+  const args: { tokenAddress: Address; tokenId?: number } = {
+    tokenAddress: contractAddress,
+  }
 
   if (tokenId) {
-    args.tokenId = tokenId;
+    args.tokenId = tokenId
   }
 
   const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(args)
-  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1);
-  const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint });
+  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
 
-  return fee.totalCost;
+  return fee.totalCost
 }
 
 export const getSupportedTokenAddresses = async (

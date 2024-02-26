@@ -111,7 +111,11 @@ export const getTxIntent = (
   }
 }
 
-export const getProjectFees = (plugin: IActionPlugin, actionType: ActionType, params: ActionParams) => {
+export const getProjectFees = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: ActionParams,
+) => {
   switch (actionType) {
     case ActionType.Mint:
       if (plugin.mint && plugin.getProjectFees) {
