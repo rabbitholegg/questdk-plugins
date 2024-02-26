@@ -18,7 +18,7 @@ import {
   isAddress,
   parseAbiParameters,
   slice,
-  toFunctionSelector,
+  getFunctionSelector as toFunctionSelector,
 } from 'viem'
 type OperatorKey = keyof typeof operators
 
