@@ -192,8 +192,6 @@ export const QuestDetailsSchema = z
 
 export type QuestDetails = z.infer<typeof QuestDetailsSchema>;
 
-export const GetQuestsByIdResponseSchema = QuestDetailsSchema;
-
 export const RewardWithClaimSchema = z.object({
   id: z.string(),
   iconOption: z.string(),
