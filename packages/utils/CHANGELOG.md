@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.7
+
+### Minor Changes
+
+- [#217](https://github.com/rabbitholegg/questdk-plugins/pull/217) [`de34aad`](https://github.com/rabbitholegg/questdk-plugins/commit/de34aad0cf0e5ba4e451387b02002bba401c738a) Thanks [@Quazia](https://github.com/Quazia)! - Adds utils and mint intents to all mint plugins and registry
+
 ## 1.0.0-alpha.6
 
 ### Minor Changes
