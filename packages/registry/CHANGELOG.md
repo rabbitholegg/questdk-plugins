@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.71
+
+### Patch Changes
+
+- Updated dependencies [[`ccecf12a`](https://github.com/rabbitholegg/questdk-plugins/commit/ccecf12a6f907f597370203c4b8548ddded59cec), [`2dcfe65c`](https://github.com/rabbitholegg/questdk-plugins/commit/2dcfe65c861f2b730a46e35b0949050c2d41ac90)]:
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.18
+
 ## 1.0.0-alpha.70
 
 ### Patch Changes
