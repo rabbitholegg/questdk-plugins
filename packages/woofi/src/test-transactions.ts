@@ -3,7 +3,11 @@ import {
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits, zeroAddress as NATIVE_TOKEN } from 'viem'
-import { type TestParams, Chains, createTestCase } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  type TestParams,
+  Chains,
+  createTestCase,
+} from '@rabbitholegg/questdk-plugin-utils'
 
 const SWAP_NATIVE: TestParams<SwapActionParams> = {
   transaction: {
@@ -91,7 +95,8 @@ const WOO_ROUTER_V2_UPDATE: TestParams<SwapActionParams> = {
     from: '0x3efd1fa3d4e5784648adf7396c3478999ec90249',
     to: '0x4c4af8dbc524681930a27b2f1af5bcc8062e6fb7',
     hash: '0x188c91e8cc904443226450ba9569d5fadbed03ac139ffa9e9c4e41aad80ae045',
-    input: '0x7dc20382000000000000000000000000ff970a61a04b1ca14834a43f5de4533ebddb5cc8000000000000000000000000fd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9000000000000000000000000000000000000000000000000000000000bbfe31b000000000000000000000000000000000000000000000000000000000b9ec1c60000000000000000000000003efd1fa3d4e5784648adf7396c3478999ec902490000000000000000000000003efd1fa3d4e5784648adf7396c3478999ec90249',
+    input:
+      '0x7dc20382000000000000000000000000ff970a61a04b1ca14834a43f5de4533ebddb5cc8000000000000000000000000fd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9000000000000000000000000000000000000000000000000000000000bbfe31b000000000000000000000000000000000000000000000000000000000b9ec1c60000000000000000000000003efd1fa3d4e5784648adf7396c3478999ec902490000000000000000000000003efd1fa3d4e5784648adf7396c3478999ec90249',
     value: '0',
   },
   params: {
@@ -101,7 +106,7 @@ const WOO_ROUTER_V2_UPDATE: TestParams<SwapActionParams> = {
     amountIn: GreaterThanOrEqual(parseUnits('190', 6)),
     amountOut: GreaterThanOrEqual(parseUnits('190', 6)),
     recipient: '0x3efd1fa3d4e5784648adf7396c3478999ec90249',
-  }
+  },
 }
 
 export const passingTestCases = [
@@ -115,7 +120,10 @@ export const passingTestCases = [
     EXTERNAL_SWAP_ERC20,
     'when using the external swap method with ERC20 tokens',
   ),
-  createTestCase(WOO_ROUTER_V2_UPDATE, 'when using the WOO_ROUTER_V2_UPDATE method'),
+  createTestCase(
+    WOO_ROUTER_V2_UPDATE,
+    'when using the WOO_ROUTER_V2_UPDATE method',
+  ),
   createTestCase(SWAP_ERC20, 'when tokenIn is set to "any"', {
     tokenIn: undefined,
   }),
