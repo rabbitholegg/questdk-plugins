@@ -1,6 +1,8 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
+  ActionParams,
+  MintActionParams
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
@@ -18,6 +20,7 @@ export const Zora: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   mint,
-  getProjectFees,
+  getProjectFees: async (params: ActionParams) =>
+    getProjectFees(params as unknown as MintActionParams),
   getMintIntent,
 }
