@@ -11,8 +11,8 @@ import {
   type TestParams,{{#eq actionType 'bridge'}}
   Chains{{/eq}}
 } from '@rabbitholegg/questdk-plugin-utils'
-{{#unless tx.length}}
 
+{{#unless tx.length}}
 // values are placeholders, replace with actual values from your test transaction
 export const {{uppercase actionType}}_TEST: TestParams<{{capitalize actionType}}ActionParams> = {
   transaction: {
