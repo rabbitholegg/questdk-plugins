@@ -3,7 +3,7 @@ import {
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
 import { parseEther, parseUnits, zeroAddress as NATIVE_TOKEN } from 'viem'
-import { type TestParams, Chains, createTestCase } from './utils'
+import { type TestParams, Chains, createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 
 const SWAP_NATIVE: TestParams<SwapActionParams> = {
   transaction: {
@@ -76,7 +76,7 @@ const EXTERNAL_SWAP_ERC20: TestParams<SwapActionParams> = {
     value: '0',
   },
   params: {
-    chainId: Chains.ZKSYNC_ERA,
+    chainId: Chains.ZK_SYNC_ERA,
     tokenIn: '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4', // USDC
     tokenOut: '0x493257fD37EDB34451f62EDf8D2a0C418852bA4C', // USDT
     amountIn: GreaterThanOrEqual(parseUnits('111', 6)),
