@@ -18,7 +18,6 @@ import {
   ZORA_MINTER_ABI_1155,
 } from './abi'
 import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
-import { getMintCosts, MintAPIClient } from '@zoralabs/protocol-sdk'
 
 export const mint = async (
   mint: MintActionParams,
@@ -119,6 +118,9 @@ export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
   const { chainId, contractAddress, tokenId, amount } = mint
+
+  const { getMintCosts, MintAPIClient } = await import('@zoralabs/protocol-sdk')
+
   const client = new MintAPIClient(chainId)
 
   const args: { tokenAddress: Address; tokenId?: number } = {

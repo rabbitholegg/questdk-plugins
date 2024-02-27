@@ -12,9 +12,7 @@ runs:
       with:
         cache: pnpm
         node-version: 18
-
     - name: Install dependencies
       shell: bash
       run: |
-        export NPM_TOKEN=${{ env.GITHUB_TOKEN }}
         pnpm install --ignore-scripts

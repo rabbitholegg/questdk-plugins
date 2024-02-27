@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.38
+
+### Patch Changes
+
+- [#241](https://github.com/rabbitholegg/questdk-plugins/pull/241) [`d0a568a9`](https://github.com/rabbitholegg/questdk-plugins/commit/d0a568a9c0b029f3a4b3f5808b37663a560b5b09) Thanks [@Quazia](https://github.com/Quazia)! - Use deprecated viem getFunctionSelector
+
 ## 2.0.0-alpha.37
 
 ### Patch Changes
