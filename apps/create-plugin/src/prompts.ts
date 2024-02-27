@@ -1,6 +1,6 @@
 import { Answers, PromptObject } from 'prompts'
-import { Address, type Hash, parseUnits, isHash } from 'viem'
-import { actionQuestions, mainQuestions } from './questions'
+import { Address, type Hash, parseUnits } from 'viem'
+import { actionQuestions, mainQuestions, getTxHashQuestion } from './questions'
 import { ActionParamKeys, Actions } from './types'
 import { getTokenInfo, getTransaction } from './viem'
 import type {
@@ -19,19 +19,9 @@ export async function askQuestions() {
   let addAnotherTransaction = true
 
   while (addAnotherTransaction) {
-    const { hash }: { hash: Hash | undefined } = await _prompts({
-      type: 'text',
-      name: 'hash',
-      message: `Provide a transaction hash: ${
-        transactions.length === 0 ? '(Optional)' : ''
-      }`,
-      validate: (input: string) => {
-        if (!isHash(input)) {
-          return 'Please enter a valid transaction hash'
-        }
-        return true
-      },
-    })
+    const { hash }: { hash: Hash | undefined } = await _prompts(
+      getTxHashQuestion(transactions)
+    )
 
     if (hash) {
       const transaction = await getTransaction(hash)

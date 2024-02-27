@@ -1,8 +1,8 @@
 import { ActionType } from '@rabbitholegg/questdk'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { Choice, PromptObject } from 'prompts'
-import { isAddress } from 'viem'
-import { Actions } from './types'
+import { isAddress, isHash } from 'viem'
+import { Actions, TransactionDetail } from './types'
 
 // structure available chains into the format for prompts
 const _chainValues = Object.values(Chains)
@@ -80,6 +80,22 @@ const descriptionQuestion: PromptObject = {
     }
     return true
   },
+}
+
+export function getTxHashQuestion(transactions: TransactionDetail[]): PromptObject {
+  return {
+    type: 'text',
+    name: 'hash',
+    message: `Provide a transaction hash: ${
+      transactions.length === 0 ? '(Optional)' : ''
+    }`,
+    validate: (input: string) => {
+      if (!isHash(input)) {
+        return 'Please enter a valid transaction hash'
+      }
+      return true
+    },
+  }
 }
 
 const mintQuestions: PromptObject[] = [
