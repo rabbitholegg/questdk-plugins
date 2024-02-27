@@ -1,9 +1,14 @@
 import { Answers, PromptObject } from 'prompts'
-import { Address, type Hash, parseUnits } from 'viem'
+import { Address, type Hash, parseUnits, isHash } from 'viem'
 import { actionQuestions, mainQuestions } from './questions'
 import { ActionParamKeys, Actions } from './types'
 import { getTokenInfo, getTransaction } from './viem'
-import type { ActionResponse, Params, Transaction, TransactionDetail } from './types'
+import type {
+  ActionResponse,
+  Params,
+  Transaction,
+  TransactionDetail,
+} from './types'
 const _prompts = require('prompts')
 
 export async function askQuestions() {
@@ -14,7 +19,6 @@ export async function askQuestions() {
   let addAnotherTransaction = true
 
   while (addAnotherTransaction) {
-    // Explicitly type the response from prompts
     const { hash }: { hash: Hash | undefined } = await _prompts({
       type: 'text',
       name: 'hash',
@@ -22,8 +26,7 @@ export async function askQuestions() {
         transactions.length === 0 ? '(Optional)' : ''
       }`,
       validate: (input: string) => {
-        const regex = /^0x[a-fA-F0-9]{64}$/
-        if (input && !regex.test(input)) {
+        if (!isHash(input)) {
           return 'Please enter a valid transaction hash'
         }
         return true
@@ -55,13 +58,18 @@ export async function askQuestions() {
           actionQuestions[response.action as Actions],
           { onSubmit },
         )
-        let params = getParams(response.action, actionResponse)
-        params = buildParams(response.action, transaction, params, tokenInfo)
-        params = removeUndefinedParams(params)
+        const initialParams = getParams(response.action, actionResponse)
+        const builtParams = buildParams(
+          response.action,
+          transaction,
+          initialParams,
+          tokenInfo,
+        )
+        const finalParams = removeUndefinedParams(builtParams)
         transactions.push({
           description: actionResponse.description,
           transaction,
-          params,
+          params: finalParams,
           tokenInfo,
         })
       } else {

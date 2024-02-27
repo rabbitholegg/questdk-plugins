@@ -14,8 +14,6 @@ export async function createPlugin(params: BuilderParams) {
     return
   }
 
-  // console.log(JSON.stringify(params, null, 2))
-
   registerHelpers()
   await setActionNames(params)
   await replaceProjectName(params)
@@ -64,12 +62,9 @@ function registerHelpers() {
     }
     return value
   })
-  Handlebars.registerHelper(
-    'eq',
-    function (this: unknown, arg1, arg2, options) {
-      return arg1 === arg2 ? options.fn(this) : options.inverse(this)
-    },
-  )
+  Handlebars.registerHelper('eq', function (this: string, arg1, arg2, options) {
+    return arg1 === arg2 ? options.fn(this) : options.inverse(this)
+  })
 }
 
 /**
