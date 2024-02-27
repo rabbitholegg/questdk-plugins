@@ -2,7 +2,7 @@ import {
   type IActionPlugin,
   PluginActionNotImplementedError,
   ActionParams,
-  MintActionParams
+  MintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
@@ -21,6 +21,6 @@ export const Mirror: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   getProjectFees: async (params: ActionParams) =>
-  getProjectFees(params as unknown as MintActionParams),
+    getProjectFees(params as unknown as MintActionParams),
   getMintIntent,
 }

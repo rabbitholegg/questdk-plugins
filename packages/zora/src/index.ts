@@ -2,7 +2,7 @@ import {
   type IActionPlugin,
   PluginActionNotImplementedError,
   ActionParams,
-  MintActionParams
+  MintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
