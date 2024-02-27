@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.69
+
+### Patch Changes
+
+- Updated dependencies [[`1569f0a`](https://github.com/rabbitholegg/questdk-plugins/commit/1569f0afe0da95f85ce91cb68ade7fece6d18f99)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.16
+
 ## 1.0.0-alpha.68
 
 ### Patch Changes
