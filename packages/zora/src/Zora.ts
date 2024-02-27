@@ -119,8 +119,8 @@ export const getProjectFees = async (
 ): Promise<bigint> => {
   const { chainId, contractAddress, tokenId, amount } = mint
 
-  const { getMintCosts, MintAPIClient } = await import('@zoralabs/protocol-sdk');
-  
+  const { getMintCosts, MintAPIClient } = await import('@zoralabs/protocol-sdk')
+
   const client = new MintAPIClient(chainId)
 
   const args: { tokenAddress: Address; tokenId?: number } = {
