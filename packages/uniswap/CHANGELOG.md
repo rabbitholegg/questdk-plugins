@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- Updated dependencies [[`d0a568a9`](https://github.com/rabbitholegg/questdk-plugins/commit/d0a568a9c0b029f3a4b3f5808b37663a560b5b09)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.38
+
 ## 1.0.0-alpha.21
 
 ### Patch Changes
