@@ -17,5 +17,5 @@ export const Soundxyz: IActionPlugin = {
   mint,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
-  getMintIntent
+  getMintIntent,
 }
