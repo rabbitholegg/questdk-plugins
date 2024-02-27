@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.16
+
+### Patch Changes
+
+- [#243](https://github.com/rabbitholegg/questdk-plugins/pull/243) [`1569f0a`](https://github.com/rabbitholegg/questdk-plugins/commit/1569f0afe0da95f85ce91cb68ade7fece6d18f99) Thanks [@Quazia](https://github.com/Quazia)! - Use imports to resolve zora build issue
+
 ## 1.0.0-alpha.15
 
 ### Patch Changes
