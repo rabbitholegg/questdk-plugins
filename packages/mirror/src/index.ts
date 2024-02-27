@@ -11,7 +11,6 @@ import {
   getMintIntent,
 } from './Mirror.js'
 
-
 export const Mirror: IActionPlugin = {
   pluginId: 'mirror',
   getSupportedTokenAddresses,
