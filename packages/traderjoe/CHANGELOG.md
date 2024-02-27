@@ -1,5 +1,34 @@
 # @rabbitholegg/questdk-plugin-traderjoe
 
+## 1.0.0-alpha.19
+
+### Patch Changes
+
+- Updated dependencies [[`d0a568a9`](https://github.com/rabbitholegg/questdk-plugins/commit/d0a568a9c0b029f3a4b3f5808b37663a560b5b09)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.38
+
+## 1.0.0-alpha.18
+
+### Patch Changes
+
+- [#238](https://github.com/rabbitholegg/questdk-plugins/pull/238) [`65e701f`](https://github.com/rabbitholegg/questdk-plugins/commit/65e701f3b71aef7117444a0338f146261d3ac06d) Thanks [@Quazia](https://github.com/Quazia)! - Patch to bump viem override
+
+- Updated dependencies [[`cf73f7d`](https://github.com/rabbitholegg/questdk-plugins/commit/cf73f7d2c69c644e9cf77033589a06faad1995e7), [`65e701f`](https://github.com/rabbitholegg/questdk-plugins/commit/65e701f3b71aef7117444a0338f146261d3ac06d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.8
+  - @rabbitholegg/questdk@2.0.0-alpha.37
+
+## 1.0.0-alpha.17
+
+### Minor Changes
+
+- [#217](https://github.com/rabbitholegg/questdk-plugins/pull/217) [`de34aad`](https://github.com/rabbitholegg/questdk-plugins/commit/de34aad0cf0e5ba4e451387b02002bba401c738a) Thanks [@Quazia](https://github.com/Quazia)! - Adds utils and mint intents to all mint plugins and registry
+
+### Patch Changes
+
+- Updated dependencies [[`de34aad`](https://github.com/rabbitholegg/questdk-plugins/commit/de34aad0cf0e5ba4e451387b02002bba401c738a)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.7
+  - @rabbitholegg/questdk@2.0.0-alpha.36
+
 ## 1.0.0-alpha.16
 
 ### Patch Changes

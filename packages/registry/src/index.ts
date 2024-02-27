@@ -111,6 +111,23 @@ export const getTxIntent = (
   }
 }
 
+export const getProjectFees = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: ActionParams,
+) => {
+  switch (actionType) {
+    case ActionType.Mint:
+      if (plugin.mint && plugin.getProjectFees) {
+        return plugin.getProjectFees(params as unknown as MintActionParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
 export const executePlugin = (
   plugin: IActionPlugin,
   actionType: ActionType,

@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-zora",
-  "version": "1.0.0-alpha.13",
+  "version": "1.0.0-alpha.17",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -37,6 +37,7 @@
     "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   },
   "dependencies": {
+    "@zoralabs/protocol-sdk": "0.5.3",
     "@zoralabs/universal-minter": "0.2.15",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"
