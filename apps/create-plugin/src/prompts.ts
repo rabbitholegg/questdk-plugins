@@ -77,17 +77,12 @@ export async function askQuestions() {
     addAnotherTransaction = addAnother
   }
 
-  const shouldIncludeGreaterThanOrEqual =
-    ['swap', 'bridge', 'stake'].includes(response.action) &&
-    transactions.length > 0
-
   return {
     projectName: response.name,
     chains: response.chain,
     tx: transactions,
     actionType: response.action,
     publish: response.publish,
-    shouldIncludeGreaterThanOrEqual,
   }
 }
 

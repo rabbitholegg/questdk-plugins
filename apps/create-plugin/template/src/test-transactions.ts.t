@@ -1,11 +1,11 @@
-{{#if shouldIncludeGreaterThanOrEqual}}
+{{#hasAmountKey tx}}
 import { 
   type {{capitalize actionType}}ActionParams, 
   GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
 {{else}}
 import { type {{capitalize actionType}}ActionParams } from '@rabbitholegg/questdk'
-{{/if}}
+{{/hasAmountKey}}
 import {
   createTestCase,
   type TestParams,{{#eq actionType 'bridge'}}

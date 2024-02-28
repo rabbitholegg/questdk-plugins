@@ -65,6 +65,17 @@ function registerHelpers() {
   Handlebars.registerHelper('eq', function (this: string, arg1, arg2, options) {
     return arg1 === arg2 ? options.fn(this) : options.inverse(this)
   })
+  Handlebars.registerHelper('hasAmountKey', function(this: string, tx, options) {
+    // Logic to determine if any tx.params keys start with "amount"
+    for (const transaction of tx) {
+      for (const key of Object.keys(transaction.params)) {
+        if (key.startsWith("amount")) {
+          return options.fn(this)
+        }
+      }
+    }
+    return options.inverse(this)
+  })
 }
 
 /**
