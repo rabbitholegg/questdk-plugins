@@ -142,7 +142,7 @@ export const getDynamicNameParams = async (
     originCollection: '',  // NFT Collection
     originNetwork: data.chainId,
     projectImage: '',
-    project: 'Mirror',
+    project: 'Zora',
   };
   const messages = {
     en: {
