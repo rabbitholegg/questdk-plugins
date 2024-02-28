@@ -12,8 +12,17 @@ import {
   zeroAddress,
   zeroHash,
 } from 'viem'
-import { type MintIntentParams, chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
-import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI, MINT_INFO_LIST_ABI, TOTAL_PRICE_AND_FEES_ABI } from './constants'
+import {
+  type MintIntentParams,
+  chainIdToViemChain,
+} from '@rabbitholegg/questdk-plugin-utils'
+import {
+  SUPERMINTER,
+  SUPERMINTER_V2,
+  SUPERMINTER_ABI,
+  MINT_INFO_LIST_ABI,
+  TOTAL_PRICE_AND_FEES_ABI,
+} from './constants'
 import { Chains } from './utils'
 import type { MintInfoList, TotalPriceAndFees } from './types'
 
@@ -75,7 +84,9 @@ export const getMintIntent = async (
   }
 }
 
-export const getProjectFees = async (mint: MintActionParams): Promise<bigint> => {
+export const getProjectFees = async (
+  mint: MintActionParams,
+): Promise<bigint> => {
   const { chainId, contractAddress } = mint
 
   const client = createPublicClient({
@@ -90,7 +101,7 @@ export const getProjectFees = async (mint: MintActionParams): Promise<bigint> =>
     args: [contractAddress],
   })) as MintInfoList
 
-  const mintInfo = mintInfoList[0];
+  const mintInfo = mintInfoList[0]
 
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
@@ -99,7 +110,7 @@ export const getProjectFees = async (mint: MintActionParams): Promise<bigint> =>
     args: [contractAddress, mintInfo.tier, mintInfo.scheduleNum, 1, false], // assume quantity is 1 and hasValidAffiliate is false
   })) as TotalPriceAndFees
 
-  return totalPriceAndFees.total;
+  return totalPriceAndFees.total
 }
 
 export const getSupportedTokenAddresses = async (
