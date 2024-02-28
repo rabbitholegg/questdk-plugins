@@ -4,7 +4,9 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+{{#if chains.length}}
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+{{/if}}
 
 /*
  * Function templates for handling various blockchain action types.
