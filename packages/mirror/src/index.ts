@@ -7,7 +7,7 @@ import {
   mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-  getDynamicName,
+  getDynamicNameParams,
 } from './Mirror.js'
 
 export const Mirror: IActionPlugin = {
@@ -17,5 +17,5 @@ export const Mirror: IActionPlugin = {
   mint,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
-  getDynamicName,
+  getDynamicNameParams,
 }
