@@ -187,7 +187,7 @@ export const QuestDetailsSchema = z
   .strict()
 
 export type QuestDetails = z.infer<typeof QuestDetailsSchema>
-
+export type QuestActionParamsByType = z.infer<typeof QuestActionParamsSchema>
 export const RewardWithClaimSchema = z.object({
   id: z.string(),
   iconOption: z.string(),
@@ -405,3 +405,4 @@ export const CreateQuestInputSchema = z.object({
 })
 
 export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>
+

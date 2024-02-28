@@ -155,7 +155,9 @@ export interface IActionPlugin {
   getMintIntent?: (
     mint: MintIntentParams,
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
-  getDynamicName?: (params: DisctriminatedActionParams) => Promise<string>
+  getDynamicNameParams?: (
+    params: DisctriminatedActionParams,
+  ) => Promise<{ messages: Record<string, Record<string, string>>; values: Record<string, unknown>; }>;
 }
 
 export enum ActionType {

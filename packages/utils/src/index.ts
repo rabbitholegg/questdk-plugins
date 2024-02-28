@@ -52,6 +52,7 @@ export type {
   OptionsActionForm,
   ActionParamsForm,
   CreateQuestInput,
+  QuestActionParamsByType,
 } from './types'
 
 export {
