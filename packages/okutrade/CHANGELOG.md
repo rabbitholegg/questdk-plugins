@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.23
+
+### Minor Changes
+
+- [#248](https://github.com/rabbitholegg/questdk-plugins/pull/248) [`1490c25e`](https://github.com/rabbitholegg/questdk-plugins/commit/1490c25e5fb4e9634666f0b7b99a695809a5ad78) Thanks [@mmackz](https://github.com/mmackz)! - add DEGEN as an option for tokenIn and tokenOut
+
 ## 1.0.0-alpha.22
 
 ### Patch Changes
