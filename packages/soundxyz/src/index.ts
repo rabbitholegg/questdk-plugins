@@ -7,7 +7,7 @@ import {
   mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-  getDynamicName,
+  getDynamicNameParams,
 } from './Soundxyz.js'
 
 export const Soundxyz: IActionPlugin = {
@@ -17,5 +17,5 @@ export const Soundxyz: IActionPlugin = {
   mint,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
-  getDynamicName,
+  getDynamicNameParams,
 }
