@@ -17,7 +17,7 @@ import {
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
 } from './abi'
-import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import { ActionType, type DisctriminatedActionParams, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
@@ -121,4 +121,38 @@ export const getSupportedTokenAddresses = async (
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return CHAIN_ID_ARRAY as number[]
+}
+
+
+
+export const getDynamicNameParams = async (
+  params: DisctriminatedActionParams,
+): Promise<{ messages: Record<string, Record<string, string>>; values: Record<string, unknown>; }> => {
+  
+  if (params.type !== ActionType.Mint) {
+    throw new Error(`Invalid action type "${params.type}"`)
+  }
+  const data = params.data
+  const values: Record<string, unknown> = {
+    actionType: 'Mint',
+    originQuantity: data.amount ?? 1,
+    originTargetImage: '', // NFT Image
+    originTarget: '',      // NFT Name
+    originAuthor: '',      // NFT Author/Artist
+    originCollection: '',  // NFT Collection
+    originNetwork: data.chainId,
+    projectImage: '',
+    project: 'Mirror',
+  };
+  const messages = {
+    en: {
+      'boost.mint':
+        '{actionType} {originQuantity} {originTarget} {originCollection} {projectImage} {project} {originNetwork}',
+      'mint.from': 'from the {collection} collection',
+      'mint.anything': 'anything',
+      exactly: 'exactly {amount}',
+      'on.network': 'using {network}',
+    },
+  };
+  return { messages, values }
 }
