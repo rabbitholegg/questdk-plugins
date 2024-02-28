@@ -1,4 +1,5 @@
 import { Answers, PromptObject } from 'prompts'
+import { green, red } from 'picocolors'
 import { Address, type Hash, parseUnits } from 'viem'
 import { actionQuestions, mainQuestions, getTxHashQuestion } from './questions'
 import { ActionParamKeys, Actions } from './types'
@@ -40,7 +41,7 @@ export async function askQuestions() {
             )
             tokenInfo[prompt.name] = info
             if (info.symbol) {
-              console.log(`Token Found: ${info.symbol}`)
+              console.log(green(`Token Found: ${info.symbol}`))
             }
           }
         }
@@ -63,7 +64,7 @@ export async function askQuestions() {
           tokenInfo,
         })
       } else {
-        console.log('transaction not found')
+        console.log(red('transaction not found'))
       }
     }
 

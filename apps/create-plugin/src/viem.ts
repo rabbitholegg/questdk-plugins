@@ -17,6 +17,7 @@ import {
   zkSync,
   zora,
 } from 'viem/chains'
+import { green, yellow } from 'picocolors'
 
 interface Transaction {
   chainId: number
@@ -50,7 +51,7 @@ export async function getTransaction(hash: Hash): Promise<Transaction | null> {
     const client = getClient(chain)
     try {
       const transaction = await client.getTransaction({ hash })
-      console.log('transaction found!')
+      console.log(green('transaction found!'))
       return {
         chainId: transaction.chainId,
         from: transaction.from.toLowerCase(),
@@ -100,7 +101,7 @@ export async function getTokenInfo(address: Address, chain: number) {
       return { decimals, symbol }
     } catch {
       console.log(
-        `decimals for token ${address} not found... using default decimal value 18`,
+        yellow(`decimals for token ${address} not found... using default decimal value 18`),
       )
       return { decimals: 18 }
     }
