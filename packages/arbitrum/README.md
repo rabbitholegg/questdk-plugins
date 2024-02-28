@@ -1,15 +1,15 @@
 # Arbitrum Plugin
-This plugin allows for the decoding of Arbitrum transactions by way of action spec.
+This plugin allows for the decoding of Arbitrum transactions by way of action specification.
 
 ## Important Considerations
 - Ethereum must be either sourceChain, or destinationChain, otherwise the quest will not be passable. It is not possible to bridge between Arbitrum Nova and Arbitrum One.
-- Only tokens which are compatible with all three chains were added. USDT was considered, but there is issues with bridging USDT to Arbitrum Nova
-- If tokenAddress is set to any, then amount will also be set to any, regardless of what is input.
+- Only tokens that are compatible with all three chains were added. USDT was considered, but there is issues with bridging USDT to Arbitrum Nova
+- If tokenAddress is set to any, then the amount will also be set to any, regardless of what is input.
 
 ## General Overview
-Arbitrum's native token bridge is a general messaging bridge allowing for transfer of ETH, and any token.
+Arbitrum's native token bridge is a general messaging bridge that allows for the transfer of ETH, and any token.
 
-They support exchange to/from mainnet to their two main networks (One, and Nova).
+They support exchange to and from the mainnet to their two main networks (One, and Nova).
 
 Arbitrum uses different paths for ETH vs Tokens, and relies on precompiles when routing the base network currency (AEth) _from_ L2 _to_ L1.
 
@@ -19,7 +19,7 @@ For a given bridge action we generally have 4 types of transactions we want to e
 1. ETH from L2 to L1
 1. Tokens from L2 to L1
 
-In some cases there won't be a difference between L1/L2 leading to two types of transactions to parse, but in general this enumerates the upper bound of transactions a bridge action should be responsible for parsing. It's also possible for different tokens to route differently, this _would_ be the case with Arbitrum if they didn't pipe transactions through their router first.
+In some cases there won't be a difference between L1/L2 leading to two types of transactions to parse, but in general this enumerates the upper bound of transactions, and a bridge action should be responsible for parsing. It's also possible for different tokens to route differently, this _would_ be the case with Arbitrum if they didn't pipe transactions through their router first.
 
 ## Specific Examples
 
