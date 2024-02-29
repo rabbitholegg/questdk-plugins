@@ -123,7 +123,12 @@ export const getTxSimulation = (
   switch (actionType) {
     case ActionType.Mint:
       if (plugin.simulateMint !== undefined) {
-        return plugin.simulateMint(params as unknown as MintIntentParams, value, account, client)
+        return plugin.simulateMint(
+          params as unknown as MintIntentParams,
+          value,
+          account,
+          client,
+        )
       } else {
         throw new PluginActionNotImplementedError()
       }
