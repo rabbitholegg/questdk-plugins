@@ -10,6 +10,9 @@ import {
   type TransactionRequest,
   encodeFunctionData,
   zeroHash,
+  createPublicClient,
+  http,
+  type PublicClient,
 } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
@@ -17,7 +20,7 @@ import {
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
 } from './abi'
-import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import { type MintIntentParams, chainIdToViemChain, DEFAULT_ACCOUNT } from '@rabbitholegg/questdk-plugin-utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -112,6 +115,40 @@ export const getMintIntent = async (
     to: contractAddress,
     data,
   }
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<TransactionRequest> => {
+  const { contractAddress, tokenId, amount, recipient } = mint
+  const _client = client || createPublicClient({ chain: chainIdToViemChain(mint.chainId),   transport: http() })
+  if (tokenId !== 0) {
+    const mintArgs = [recipient, tokenId, amount, zeroHash]
+    const {result} = await _client.simulateContract({
+      address: contractAddress,
+      value,
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'mint',
+      args: mintArgs,
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  } else {
+    // Assume it's a 721 mint
+    const {result} = await _client.simulateContract({
+      address: contractAddress,
+      value,
+      abi: ZORA_MINTER_ABI_721,
+      functionName: 'purchase',
+      args: [amount],
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  }
+
 }
 
 export const getProjectFees = async (
