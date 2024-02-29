@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.40
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
 ## 2.0.0-alpha.39
 
 ### Minor Changes
