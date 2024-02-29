@@ -1,4 +1,4 @@
-import { type TransactionRequest } from 'viem'
+import { type PublicClient, type TransactionRequest } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import { type Address } from 'viem'
@@ -124,6 +124,12 @@ export interface IActionPlugin {
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   getMintIntent?: (
     mint: MintIntentParams,
+  ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
+  simulateMint?: (
+    mint: MintIntentParams,
+    value: bigint,
+    account?: Address,
+    client?: PublicClient,
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
   getProjectFees?: (params: ActionParams) => Promise<bigint>
 }
