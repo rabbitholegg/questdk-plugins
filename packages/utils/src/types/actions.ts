@@ -157,7 +157,7 @@ export interface IActionPlugin {
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
   getDynamicNameParams?: (
     params: DisctriminatedActionParams,
-  ) => Promise<{ messages: Record<string, Record<string, string>>; values: Record<string, unknown>; }>;
+  ) => Promise< Record<string, unknown>> ;
 }
 
 export enum ActionType {

@@ -89,7 +89,7 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
 
 export const getDynamicNameParams = async (
   params: DisctriminatedActionParams,
-): Promise<{ messages: Record<string, Record<string, string>>; values: Record<string, unknown>; }> => {
+): Promise< Record<string, unknown>> => {
   
   if (params.type !== ActionType.Mint) {
     throw new Error(`Invalid action type "${params.type}"`)
@@ -97,25 +97,26 @@ export const getDynamicNameParams = async (
   const data = params.data
   const values: Record<string, unknown> = {
     actionType: 'Mint',
-    originQuantity: data.amount ?? 1,
-    originTargetImage: '', // NFT Image
-    originAuthor: '',      // NFT Author/Artist
-    originCollection: '',  // NFT Collection
+    originQuantity: data.amount ?? '',
+    originTargetImage: 'https://raw.seadn.io/files/a13c1649910e13b12f0fee20ef037ee7.jpg', // NFT Image
+    originAuthor: 'by 33 Below',      // NFT Author/Artist [format: "by {artist}"]
+    originCollection: 'JUMPER',  // NFT Collection
     originNetwork: data.chainId,
-    projectImage: '',
+    projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
     project: 'Sound.XYZ',
   };
+  // I added {originAuthor} and {originTargetImage} to the values object; some of these will be empty for some protocols
   // Example Message: 
-  const messages = {
-    en: {
-      'boost.mint':
-        '{actionType} {originQuantity} {originTargetImage} {originCollection} {originAuthor} {projectImage} {project} {originNetwork}',
-      'mint.from': 'from the {collection} collection',
-      'mint.anything': 'anything',
-      exactly: 'exactly {amount}',
-      'on.network': 'using {network}',
-    },
-  };
-  return { messages, values }
+  // const messages = {
+  //   en: {
+  //     'boost.mint':
+  //       '{actionType} {originQuantity} {originTargetImage} {originTarget} {originCollection} {originAuthor} {projectImage} {project} {originNetwork}',
+  //     'mint.from': 'from the {collection} collection',
+  //     'mint.anything': 'anything',
+  //     exactly: 'exactly {amount}',
+  //     'on.network': 'using {network}',
+  //   },
+  // };
+  return values
 }
 

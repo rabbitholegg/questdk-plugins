@@ -124,10 +124,9 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
 }
 
 
-
 export const getDynamicNameParams = async (
   params: DisctriminatedActionParams,
-): Promise<{ messages: Record<string, Record<string, string>>; values: Record<string, unknown>; }> => {
+): Promise< Record<string, unknown>> => {
   
   if (params.type !== ActionType.Mint) {
     throw new Error(`Invalid action type "${params.type}"`)
@@ -135,24 +134,25 @@ export const getDynamicNameParams = async (
   const data = params.data
   const values: Record<string, unknown> = {
     actionType: 'Mint',
-    originQuantity: data.amount ?? 1,
-    originTargetImage: '', // NFT Image
-    originTarget: '',      // NFT Name
-    originAuthor: '',      // NFT Author/Artist
-    originCollection: '',  // NFT Collection
+    originQuantity: data.amount ?? '',
+    originTargetImage: 'https://remote-image.decentralized-content.com/image?url=https%3A%2F%2Fipfs.decentralized-content.com%2Fipfs%2Fbafybeif5ndcdebirlc5oxx633jz6jjujsnkxaksv54i6oujaxr5uiebdp4&w=1080&q=75', // NFT Image
+    originTarget: 'Choice Is Yours',  // NFT Name
+    originCollection: 'from Between the Layers',  // NFT Collection
     originNetwork: data.chainId,
-    projectImage: '',
+    projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
     project: 'Zora',
   };
-  const messages = {
-    en: {
-      'boost.mint':
-        '{actionType} {originQuantity} {originTarget} {originCollection} {projectImage} {project} {originNetwork}',
-      'mint.from': 'from the {collection} collection',
-      'mint.anything': 'anything',
-      exactly: 'exactly {amount}',
-      'on.network': 'using {network}',
-    },
-  };
-  return { messages, values }
+  // I added {originAuthor} and {originTargetImage} to the values object; some of these will be empty for some protocols
+  // Example Message: 
+  // const messages = {
+  //   en: {
+  //     'boost.mint':
+  //       '{actionType} {originQuantity} {originTargetImage} {originTarget} {originCollection} {originAuthor} {projectImage} {project} {originNetwork}',
+  //     'mint.from': 'from the {collection} collection',
+  //     'mint.anything': 'anything',
+  //     exactly: 'exactly {amount}',
+  //     'on.network': 'using {network}',
+  //   },
+  // };
+  return values
 }
