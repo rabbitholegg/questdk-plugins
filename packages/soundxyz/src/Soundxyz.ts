@@ -93,7 +93,12 @@ export const simulateMint = async (
   client?: PublicClient,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient } = mint
-  const _client = client || createPublicClient({ chain: chainIdToViemChain(mint.chainId), transport: http() })
+  const _client =
+    client ||
+    createPublicClient({
+      chain: chainIdToViemChain(mint.chainId),
+      transport: http(),
+    })
 
   const mintTo = {
     edition: contractAddress,
@@ -124,7 +129,6 @@ export const simulateMint = async (
 
   return result
 }
-  
 
 export const getProjectFees = async (
   mint: MintActionParams,
