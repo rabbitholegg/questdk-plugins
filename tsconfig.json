@@ -2,27 +2,11 @@
   "include": ["packages/**/*", "apps/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
   "compilerOptions": {
-    "incremental": true,
-    "strict": true,
-    "useDefineForClassFields": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "useUnknownInCatchVariables": true,
-    "noImplicitOverride": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "resolveJsonModule": true,
-    "allowJs": false,
-    "checkJs": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false,
-    "forceConsistentCasingInFileNames": true,
-    "verbatimModuleSyntax": true,
-    "importHelpers": true,
-    "moduleResolution": "node",
+    // Shared compiler options
     "target": "ES2021",
-    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true
   }
 }
