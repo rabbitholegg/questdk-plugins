@@ -8,7 +8,12 @@ import {
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, type TransactionRequest, encodeFunctionData, type PublicClient } from 'viem'
+import {
+  type Address,
+  type TransactionRequest,
+  encodeFunctionData,
+  type PublicClient,
+} from 'viem'
 import { http, createPublicClient } from 'viem'
 import {
   COLLECT_ENTRY_ABI,
@@ -62,8 +67,13 @@ export const simulateMint = async (
   client?: PublicClient,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient } = mint
-  const _client = client || createPublicClient({ chain: chainIdToViemChain(mint.chainId), transport: http() })
-  
+  const _client =
+    client ||
+    createPublicClient({
+      chain: chainIdToViemChain(mint.chainId),
+      transport: http(),
+    })
+
   const { result } = await _client.simulateContract({
     address: contractAddress,
     value,
