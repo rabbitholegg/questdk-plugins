@@ -2,6 +2,9 @@ name: Pull request
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
+    branches:
+      - main
+      - mmackz/test
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -20,15 +23,14 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
+          fetch-depth: 0
+
+      - name: Fetch target branch
+        run: git fetch origin main:main
 
       - name: Install dependencies
-        run: pnpm install
+        uses: ./.github/actions/install-dependencies
 
       - name: Run config file format verification script
-        run: npx ts-node ./scripts/verifyConfigFileFormat.ts
+        run: npx ts-node ./.github/scripts/verifyConfigFileFormat.ts
