@@ -5,7 +5,7 @@ import { assertType, describe, test } from 'vitest'
 
 // const mock = new MockAdapter(axios);
 const TEST_UUID = 'bdd71fd1-5b7f-4f6e-90f8-469b3d6ee67e';
-describe.only('fetchQuestActionParams.live', () => {
+describe('fetchQuestActionParams.live', () => {
 
   test('should fetch quest action parameters successfully with actual API call', async () => {
 

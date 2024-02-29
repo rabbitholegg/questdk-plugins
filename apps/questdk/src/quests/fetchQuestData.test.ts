@@ -1,12 +1,12 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import {fetchQuestActionParams, fetchQuestByUUID} from './fetchQuestData';
-import { QuestActionParamsByType, type QuestDetails } from '@rabbitholegg/questdk-plugin-utils';
-import { assertType, describe, expect, test, afterEach } from 'vitest'
+import { fetchQuestByUUID} from './fetchQuestData';
+import { type QuestDetails } from '@rabbitholegg/questdk-plugin-utils';
+import { describe, expect, test, afterEach } from 'vitest'
 
 const mock = new MockAdapter(axios);
 const TEST_UUID = 'bdd71fd1-5b7f-4f6e-90f8-469b3d6ee67e';
-describe.only('fetchQuestActionParams', () => {
+describe('fetchQuestActionParams', () => {
   afterEach(() => {
     mock.reset();
   });
