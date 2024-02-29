@@ -95,7 +95,6 @@ async function main() {
     const paths = await validateNewPackagePaths(newPackagesPaths);
     for (const path of paths) {
       await validateConfigFile(path);
-      console.log(`Validated config file at ${path}`);
     }
   } else {
     console.log("No new packages found.");
