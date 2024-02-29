@@ -95,10 +95,5 @@
     "repository": "rabbitholegg/questdk",
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
-    },
-    "pnpm": {
-        "overrides": {
-            "questdk": "workspace:*"
-        }
     }
 }
