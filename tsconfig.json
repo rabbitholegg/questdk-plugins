@@ -1,6 +1,8 @@
 {
-  "include": ["packages/**/*", "apps/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"],
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/ui" }
+  ],
   "compilerOptions": {
     // Shared compiler options
     "target": "ES2021",
