@@ -79,3 +79,5 @@ export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.BASE]: baseTokenAddresses,
   [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
 }
+
+export const DEFAULT_ACCOUNT = '0x017f8ad14a2e745ea0f756bd57cd4852400be78c'

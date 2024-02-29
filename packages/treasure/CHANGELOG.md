@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-treasure
 
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#256](https://github.com/rabbitholegg/questdk-plugins/pull/256) [`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db) Thanks [@Quazia](https://github.com/Quazia)! - Adds a simulateMint function to all mint plugins
+
+### Patch Changes
+
+- Updated dependencies [[`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.9
+  - @rabbitholegg/questdk@2.0.0-alpha.39
+
 ## 1.0.0-alpha.10
 
 ### Patch Changes

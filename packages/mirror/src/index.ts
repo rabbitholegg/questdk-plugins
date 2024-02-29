@@ -11,6 +11,7 @@ import {
   getSupportedTokenAddresses,
   getProjectFees,
   getMintIntent,
+  simulateMint,
 } from './Mirror.js'
 
 export const Mirror: IActionPlugin = {
@@ -23,4 +24,5 @@ export const Mirror: IActionPlugin = {
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
   getMintIntent,
+  simulateMint,
 }

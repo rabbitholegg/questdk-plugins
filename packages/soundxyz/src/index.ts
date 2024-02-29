@@ -11,6 +11,7 @@ import {
   getSupportedTokenAddresses,
   getMintIntent,
   getProjectFees,
+  simulateMint,
 } from './Soundxyz.js'
 
 export const Soundxyz: IActionPlugin = {
@@ -23,4 +24,5 @@ export const Soundxyz: IActionPlugin = {
   getMintIntent,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
+  simulateMint,
 }
