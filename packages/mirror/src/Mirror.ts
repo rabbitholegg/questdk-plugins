@@ -6,8 +6,9 @@ import {
 import {
   type MintIntentParams,
   chainIdToViemChain,
+  DEFAULT_ACCOUNT,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, type TransactionRequest, encodeFunctionData } from 'viem'
+import { type Address, type TransactionRequest, encodeFunctionData, type PublicClient } from 'viem'
 import { http, createPublicClient } from 'viem'
 import {
   COLLECT_ENTRY_ABI,
@@ -52,6 +53,27 @@ export const getMintIntent = async (
   }
 
   return transaction
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<TransactionRequest> => {
+  const { contractAddress, recipient } = mint
+  const _client = client || createPublicClient({ chain: chainIdToViemChain(mint.chainId), transport: http() })
+  
+  const { result } = await _client.simulateContract({
+    address: contractAddress,
+    value,
+    abi: COLLECT_ENTRY_ABI,
+    functionName: 'purchase',
+    args: [recipient],
+    account: account || DEFAULT_ACCOUNT,
+  })
+
+  return result
 }
 
 export const getProjectFees = async (
