@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-woofi
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- [#242](https://github.com/rabbitholegg/questdk-plugins/pull/242) [`ccecf12a`](https://github.com/rabbitholegg/questdk-plugins/commit/ccecf12a6f907f597370203c4b8548ddded59cec) Thanks [@mmackz](https://github.com/mmackz)! - update addresses for WooRouterV2 contracts
+
 ## 1.0.0-alpha.16
 
 ### Patch Changes

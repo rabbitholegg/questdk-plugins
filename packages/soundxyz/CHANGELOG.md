@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.11
+
+### Patch Changes
+
+- [#252](https://github.com/rabbitholegg/questdk-plugins/pull/252) [`b7677ea9`](https://github.com/rabbitholegg/questdk-plugins/commit/b7677ea9ca1c834f2d99d70fa1874d4aa74f466b) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Adds project fee for Sound.xyz
+
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- [#247](https://github.com/rabbitholegg/questdk-plugins/pull/247) [`2dcfe65c`](https://github.com/rabbitholegg/questdk-plugins/commit/2dcfe65c861f2b730a46e35b0949050c2d41ac90) Thanks [@Quazia](https://github.com/Quazia)! - Fix: getMintIntent export
+
 ## 1.0.0-alpha.9
 
 ### Patch Changes

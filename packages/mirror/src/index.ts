@@ -1,18 +1,17 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
+  type ActionParams,
+  type MintActionParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 
 import {
   mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
   getProjectFees,
+  getMintIntent,
 } from './Mirror.js'
-import type {
-  ActionParams,
-  MintActionParams,
-} from '@rabbitholegg/questdk-plugin-utils'
 
 export const Mirror: IActionPlugin = {
   pluginId: 'mirror',
@@ -23,4 +22,5 @@ export const Mirror: IActionPlugin = {
   swap: async () => new PluginActionNotImplementedError(),
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
+  getMintIntent,
 }

@@ -1,13 +1,12 @@
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
-import type {
-  ActionParams,
-  MintActionParams,
+  type ActionParams,
+  type MintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
+  getMintIntent,
   getSupportedChainIds,
   getSupportedTokenAddresses,
   mint,
@@ -23,4 +22,5 @@ export const Zora: IActionPlugin = {
   mint,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
+  getMintIntent,
 }
