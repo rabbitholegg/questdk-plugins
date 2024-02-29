@@ -16,7 +16,12 @@ export async function fetchQuestByUUID(uuid: string): Promise<QuestDetails> {
   const endpoint = `https://api.rabbithole.gg/v1.2/quest/public/${uuid}`
   console.log('Fetching quest data from:', endpoint)
   try {
-    const response = await axios.get(endpoint)
+    const response = await axios.get(endpoint, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
     return response.data
   } catch (error) {
     console.error('Error fetching quest data:', error)

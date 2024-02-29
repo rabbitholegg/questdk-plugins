@@ -5,24 +5,14 @@ import { QuestActionParamsByType, type QuestDetails } from '@rabbitholegg/questd
 import { assertType, describe, expect, test, afterEach } from 'vitest'
 
 const mock = new MockAdapter(axios);
-
-describe('fetchQuestActionParams', () => {
+const TEST_UUID = 'bdd71fd1-5b7f-4f6e-90f8-469b3d6ee67e';
+describe.only('fetchQuestActionParams', () => {
   afterEach(() => {
     mock.reset();
   });
 
-  test.only('should fetch quest action parameters successfully with actual API call', async () => {
-    const uuid = 'b5cd5e86-f1e7-447c-ae73-8c142204ffbc';
-
-    // No mock here, actual API call is made
-    const result = await fetchQuestActionParams(uuid);
-
-    // Check if result is of type QuestDetails
-    assertType<QuestActionParamsByType>(result);
-  });
 
   test('should fetch quest action parameters successfully with mock', async () => {
-    const uuid = 'b5cd5e86-f1e7-447c-ae73-8c142204ffbc';
     const mockResponse: QuestDetails =  {
       actionSpecId: null,
       allowlistEnabled: true,
@@ -59,17 +49,15 @@ describe('fetchQuestActionParams', () => {
       isPublic: null,
       actionParams: { } as any,// Fill with correct test data
     };
-    mock.onGet(`https://api.rabbithole.gg/quest/public/${uuid}`).reply(200, { mockResponse });
+    mock.onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`).reply(200, mockResponse);
 
-    const result = await fetchQuestByUUID(uuid);
+    const result = await fetchQuestByUUID(TEST_UUID);
 
     expect(result).toEqual(mockResponse);
   });
 
   test('should throw an error when the request fails', async () => {
-    const uuid = 'b5cd5e86-f1e7-447c-ae73-8c142204ffbc';
-    mock.onGet(`https://api.rabbithole.gg/quest/public/${uuid}`).reply(500);
-
-    await expect(fetchQuestByUUID(uuid)).rejects.toThrow('Failed to fetch quest data');
+    mock.onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`).reply(500);
+    await expect(fetchQuestByUUID(TEST_UUID)).rejects.toThrow('Failed to fetch quest data');
   });
 });
