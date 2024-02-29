@@ -7,7 +7,7 @@ project:
 task:
   # action specific name, this is what will show as the default title for your boosts
   name: {{capitalize actionType}} on {{capitalize projectName}}
-  # action specific link to your project. (ie: myapp.com/swap)
+  # action specific link to your project. (ie: myapp.com/{{lowercase actionType}})
   link: 
   iconOption: 
   actionPluginId: {{lowercase actionType}}
