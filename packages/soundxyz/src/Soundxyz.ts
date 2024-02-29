@@ -99,17 +99,17 @@ export const getDynamicNameParams = async (
     actionType: 'Mint',
     originQuantity: data.amount ?? 1,
     originTargetImage: '', // NFT Image
-    originTarget: '',      // NFT Name
     originAuthor: '',      // NFT Author/Artist
     originCollection: '',  // NFT Collection
     originNetwork: data.chainId,
     projectImage: '',
     project: 'Sound.XYZ',
   };
+  // Example Message: 
   const messages = {
     en: {
       'boost.mint':
-        '{actionType} {originQuantity} {originTarget} {originCollection} {projectImage} {project} {originNetwork}',
+        '{actionType} {originQuantity} {originTargetImage} {originCollection} {originAuthor} {projectImage} {project} {originNetwork}',
       'mint.from': 'from the {collection} collection',
       'mint.anything': 'anything',
       exactly: 'exactly {amount}',
