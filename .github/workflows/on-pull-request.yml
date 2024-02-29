@@ -25,4 +25,4 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: Run config file format verification script
-        run: npx ts-node ./scripts/verifyConfigFileFormat.ts
+        run: npx ts-node ./.github/scripts/verifyConfigFileFormat.ts
