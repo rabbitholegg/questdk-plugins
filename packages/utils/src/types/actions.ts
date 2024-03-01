@@ -1,4 +1,4 @@
-import { type PublicClient, type TransactionRequest } from 'viem'
+import { type PublicClient, type SimulateContractReturnType, type TransactionRequest } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import { type Address } from 'viem'
@@ -130,7 +130,7 @@ export interface IActionPlugin {
     value: bigint,
     account?: Address,
     client?: PublicClient,
-  ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
+  ) => Promise<SimulateContractReturnType>
   getProjectFees?: (params: ActionParams) => Promise<bigint>
 }
 

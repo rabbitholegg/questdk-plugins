@@ -9,11 +9,9 @@ import {
   getAddress,
   type TransactionRequest,
   encodeFunctionData,
-  zeroHash,
   createPublicClient,
   http,
   type PublicClient,
-  parseEther,
   type SimulateContractReturnType,
 } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
