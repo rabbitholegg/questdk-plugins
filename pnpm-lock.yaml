@@ -493,9 +493,6 @@ importers:
       '@rabbitholegg/questdk-plugin-sushi':
         specifier: workspace:*
         version: link:../sushi
-      '@rabbitholegg/questdk-plugin-symbiosis':
-        specifier: workspace:*
-        version: link:../symbiosis
       '@rabbitholegg/questdk-plugin-synapse':
         specifier: workspace:*
         version: link:../synapse
