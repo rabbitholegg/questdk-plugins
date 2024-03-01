@@ -177,7 +177,7 @@ describe('Given the getMintIntent function', () => {
   test('returns a TransactionRequest with correct properties when tokenId is null', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
-      tokenId: null,
+
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,

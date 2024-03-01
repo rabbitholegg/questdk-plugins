@@ -169,7 +169,7 @@ export const simulateMint = async (
         FIXED_PRICE_SALE_STRATS[mint.chainId],
         tokenId,
         amount,
-        msgArgs,
+        pad(recipient),
       ]
       const result = await _client.simulateContract({
         address: contractAddress,
