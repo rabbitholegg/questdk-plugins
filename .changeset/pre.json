@@ -6,6 +6,7 @@
     "angry-ants-return",
     "beige-geckos-approve",
     "big-gifts-retire",
+    "big-pants-own",
     "blue-bikes-sip",
     "breezy-trees-carry",
     "bright-turtles-divide",
@@ -54,6 +55,7 @@
     "good-zebras-jam",
     "gorgeous-cycles-protect",
     "great-ducks-greet",
+    "great-spies-film",
     "green-years-admire",
     "healthy-bugs-enjoy",
     "hip-mirrors-divide",
@@ -215,6 +217,7 @@
     "@rabbitholegg/questdk-plugin-llama": "1.0.0-alpha.8",
     "@rabbitholegg/create-plugin": "1.0.0",
     "@rabbitholegg/questdk": "1.0.1-alpha.0",
-    "@rabbitholegg/questdk-plugin-kote": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-kote": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-jojo": "1.0.0-alpha.0"
   }
 }
