@@ -1,5 +1,23 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#267](https://github.com/rabbitholegg/questdk-plugins/pull/267) [`0ba133e2`](https://github.com/rabbitholegg/questdk-plugins/commit/0ba133e2378c2f2be30986731cf4a793fc78ced1) Thanks [@Quazia](https://github.com/Quazia)! - Pin Symbiosis versions
+
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#261](https://github.com/rabbitholegg/questdk-plugins/pull/261) [`26202e50`](https://github.com/rabbitholegg/questdk-plugins/commit/26202e50247b34cc2417db3743914a26e013f7e6) Thanks [@Quazia](https://github.com/Quazia)! - Update zora mint simulation with new ABI
+
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes

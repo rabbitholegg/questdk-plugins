@@ -13,6 +13,7 @@ import {
   type TransactionRequest,
   encodeFunctionData,
   type PublicClient,
+  type SimulateContractReturnType,
 } from 'viem'
 import { http, createPublicClient } from 'viem'
 import {
@@ -65,7 +66,7 @@ export const simulateMint = async (
   value: bigint,
   account?: Address,
   client?: PublicClient,
-): Promise<TransactionRequest> => {
+): Promise<SimulateContractReturnType> => {
   const { contractAddress, recipient } = mint
   const _client =
     client ||
@@ -74,7 +75,7 @@ export const simulateMint = async (
       transport: http(),
     })
 
-  const { result } = await _client.simulateContract({
+  const result = await _client.simulateContract({
     address: contractAddress,
     value,
     abi: COLLECT_ENTRY_ABI,

@@ -12,6 +12,7 @@ import {
   zeroAddress,
   zeroHash,
   type PublicClient,
+  type SimulateContractReturnType,
 } from 'viem'
 import {
   type MintIntentParams,
@@ -91,7 +92,7 @@ export const simulateMint = async (
   value: bigint,
   account?: Address,
   client?: PublicClient,
-): Promise<TransactionRequest> => {
+): Promise<SimulateContractReturnType> => {
   const { contractAddress, recipient } = mint
   const _client =
     client ||
@@ -118,7 +119,7 @@ export const simulateMint = async (
     affiliateProof: [zeroHash],
     attributionId: 0,
   }
-  const { result } = await _client.simulateContract({
+  const result = await _client.simulateContract({
     abi: SUPERMINTER_ABI,
     functionName: 'mintTo',
     args: [mintTo],

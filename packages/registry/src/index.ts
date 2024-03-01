@@ -22,7 +22,6 @@ import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
 import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
-import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { Tally } from '@rabbitholegg/questdk-plugin-tally'
 import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
@@ -31,6 +30,7 @@ import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -49,6 +49,7 @@ import {
   type TransactionFilter,
   type VoteActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
+import type { Address, PublicClient } from 'viem'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -66,7 +67,6 @@ export const plugins: Record<string, IActionPlugin> = {
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
   [Rabbithole.pluginId]: Rabbithole,
-  [Symbiosis.pluginId]: Symbiosis,
   [OkuTrade.pluginId]: OkuTrade,
   [Zora.pluginId]: Zora,
   [Balancer.pluginId]: Balancer,
@@ -84,6 +84,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Boost.pluginId]: Boost,
   [Llama.pluginId]: Llama,
   [Kote.pluginId]: Kote,
+  [JOJO.pluginId]: JOJO,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -103,6 +104,31 @@ export const getTxIntent = (
     case ActionType.Mint:
       if (plugin.getMintIntent !== undefined) {
         return plugin.getMintIntent(params as unknown as MintIntentParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
+export const getTxSimulation = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: IntentParams,
+  value: bigint,
+  client?: PublicClient,
+  account?: Address,
+) => {
+  switch (actionType) {
+    case ActionType.Mint:
+      if (plugin.simulateMint !== undefined) {
+        return plugin.simulateMint(
+          params as unknown as MintIntentParams,
+          value,
+          account,
+          client,
+        )
       } else {
         throw new PluginActionNotImplementedError()
       }
