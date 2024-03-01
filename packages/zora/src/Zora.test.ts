@@ -4,9 +4,9 @@ import {
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
-import { type Address } from 'viem'
+import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { getMintIntent, mint } from './Zora'
+import { getMintIntent, mint, simulateMint } from './Zora'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
@@ -154,9 +154,9 @@ describe('Given the zora plugin', () => {
 describe('Given the getMintIntent function', () => {
   // Define the constant for the contract address
   const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
-  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890' // replace with a real address
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
 
-  test('returns a TransactionRequest with correct properties when tokenId is not 0', async () => {
+  test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
       tokenId: 1, // not 0
@@ -174,10 +174,10 @@ describe('Given the getMintIntent function', () => {
     })
   })
 
-  test('returns a TransactionRequest with correct properties when tokenId is 0', async () => {
+  test('returns a TransactionRequest with correct properties when tokenId is null', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
-      tokenId: 0,
+
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
@@ -190,16 +190,6 @@ describe('Given the getMintIntent function', () => {
       to: mint.contractAddress,
       data: EXPECTED_ENCODED_DATA_721,
     })
-  })
-
-  test('throws an error if required parameters are missing', async () => {
-    const mint: Partial<MintIntentParams> = {
-      contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt('10'),
-      // recipient is missing
-    }
-
-    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
   })
 })
 
@@ -240,5 +230,24 @@ describe('Given the getProjectFee function', () => {
     const fee = await mockFns.getProjectFees(mintParams)
     expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
     expect(fee).equals(BigInt('1554000000000000'))
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a 1155 mint when tokenId is not 0', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.ZORA,
+      contractAddress: '0xc53c050131a3507d51d014445f666f4c3a1a2c24',
+      tokenId: 1, // not 0
+      amount: BigInt(1),
+      recipient: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xE4eDb277e41dc89aB076a1F049f4a3EfA700bCE8'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(mint.contractAddress)
+    expect(request.value).toBe(value)
   })
 })

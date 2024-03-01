@@ -9,22 +9,26 @@ import {
   getAddress,
   type TransactionRequest,
   encodeFunctionData,
-  zeroHash,
   createPublicClient,
   http,
   type PublicClient,
+  type SimulateContractReturnType,
+  pad,
 } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
+  ZORA_MINTER_ABI_1155_LEGACY,
 } from './abi'
 import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
+  BOOST_TREASURY_ADDRESS,
 } from '@rabbitholegg/questdk-plugin-utils'
+import { FIXED_PRICE_SALE_STRATS } from './contract-addresses'
 
 export const mint = async (
   mint: MintActionParams,
@@ -97,8 +101,14 @@ export const getMintIntent = async (
 ): Promise<TransactionRequest> => {
   const { contractAddress, tokenId, amount, recipient } = mint
   let data
-  if (tokenId !== 0) {
-    const mintArgs = [recipient, tokenId, amount, zeroHash]
+  if (tokenId !== null && tokenId !== undefined) {
+    const mintArgs = [
+      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      tokenId,
+      amount,
+      [BOOST_TREASURY_ADDRESS],
+      pad(recipient),
+    ]
     // Assume it's an 1155 mint
     data = encodeFunctionData({
       abi: ZORA_MINTER_ABI_1155,
@@ -126,34 +136,65 @@ export const simulateMint = async (
   value: bigint,
   account?: Address,
   client?: PublicClient,
-): Promise<TransactionRequest> => {
+): Promise<SimulateContractReturnType> => {
   const { contractAddress, tokenId, amount, recipient } = mint
   const _client =
-    client ||
+    client ??
     createPublicClient({
       chain: chainIdToViemChain(mint.chainId),
       transport: http(),
     })
-  if (tokenId !== 0) {
-    const mintArgs = [recipient, tokenId, amount, zeroHash]
-    const { result } = await _client.simulateContract({
-      address: contractAddress,
-      value,
-      abi: ZORA_MINTER_ABI_1155,
-      functionName: 'mint',
-      args: mintArgs,
-      account: account || DEFAULT_ACCOUNT,
-    })
-    return result
+  const from = account ?? DEFAULT_ACCOUNT
+
+  if (tokenId !== null && tokenId !== undefined) {
+    try {
+      const mintArgs = [
+        FIXED_PRICE_SALE_STRATS[mint.chainId],
+        tokenId,
+        amount,
+        [BOOST_TREASURY_ADDRESS],
+        pad(recipient),
+      ]
+      const result = await _client.simulateContract({
+        address: contractAddress,
+        value,
+        abi: ZORA_MINTER_ABI_1155,
+        functionName: 'mint',
+        args: mintArgs,
+        account: from,
+      })
+      return result
+    } catch {
+      const mintArgs = [
+        FIXED_PRICE_SALE_STRATS[mint.chainId],
+        tokenId,
+        amount,
+        pad(recipient),
+      ]
+      const result = await _client.simulateContract({
+        address: contractAddress,
+        value,
+        abi: ZORA_MINTER_ABI_1155_LEGACY,
+        functionName: 'mint',
+        args: mintArgs,
+        account: from,
+        // TODO: There's a bug in Viem preventing this behavior; log issue with them
+        // stateOverride: [{
+        //   address: from,
+        //   balance: BigInt("0x56bc75e2d63100000")
+        // }],
+      })
+      return result
+    }
   } else {
     // Assume it's a 721 mint
-    const { result } = await _client.simulateContract({
+    const result = await _client.simulateContract({
       address: contractAddress,
       value,
       abi: ZORA_MINTER_ABI_721,
       functionName: 'purchase',
       args: [amount],
-      account: account || DEFAULT_ACCOUNT,
+      account: from,
     })
     return result
   }
