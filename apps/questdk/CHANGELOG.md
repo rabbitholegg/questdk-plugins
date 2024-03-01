@@ -1,5 +1,23 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.42
+
+### Patch Changes
+
+- [#262](https://github.com/rabbitholegg/questdk-plugins/pull/262) [`6d063707`](https://github.com/rabbitholegg/questdk-plugins/commit/6d0637072305c88236fb58d3d74f81e1e4407ea5) Thanks [@veganbeef](https://github.com/veganbeef)! - add tokens functions exports
+
+## 2.0.0-alpha.40
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
+## 2.0.0-alpha.39
+
+### Minor Changes
+
+- [#256](https://github.com/rabbitholegg/questdk-plugins/pull/256) [`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db) Thanks [@Quazia](https://github.com/Quazia)! - Adds a simulateMint function to all mint plugins
+
 ## 2.0.0-alpha.38
 
 ### Patch Changes

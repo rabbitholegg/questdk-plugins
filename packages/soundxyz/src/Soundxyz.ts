@@ -11,10 +11,13 @@ import {
   type TransactionRequest,
   zeroAddress,
   zeroHash,
+  type PublicClient,
+  type SimulateContractReturnType,
 } from 'viem'
 import {
   type MintIntentParams,
   chainIdToViemChain,
+  DEFAULT_ACCOUNT,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   SUPERMINTER,
@@ -82,6 +85,50 @@ export const getMintIntent = async (
     to: contractAddress,
     data,
   }
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { contractAddress, recipient } = mint
+  const _client =
+    client ||
+    createPublicClient({
+      chain: chainIdToViemChain(mint.chainId),
+      transport: http(),
+    })
+
+  const mintTo = {
+    edition: contractAddress,
+    tier: 0,
+    scheduleNum: 0,
+    to: recipient,
+    quantity: 1,
+    allowlisted: zeroAddress,
+    allowlistedQuantity: 0,
+    allowlistProof: [zeroHash],
+    signedPrice: 0,
+    signedQuantity: 0,
+    signedClaimTicket: 0,
+    signedDeadline: 0,
+    signature: zeroHash,
+    affiliate: zeroAddress,
+    affiliateProof: [zeroHash],
+    attributionId: 0,
+  }
+  const result = await _client.simulateContract({
+    abi: SUPERMINTER_ABI,
+    functionName: 'mintTo',
+    args: [mintTo],
+    address: contractAddress,
+    value,
+    account: account || DEFAULT_ACCOUNT,
+  })
+
+  return result
 }
 
 export const getProjectFees = async (

@@ -1,11 +1,10 @@
 {
     "name": "@rabbitholegg/questdk",
-    "version": "2.0.0-alpha.38",
+    "version": "2.0.0-alpha.42",
     "description": "",
     "type": "module",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
-    "packageManager": "pnpm@8.3.1",
     "scripts": {
         "bench": "vitest bench",
         "bench:ci": "CI=true vitest bench",
@@ -75,6 +74,11 @@
             "import": "./dist/esm/filter/index.js",
             "default": "./dist/cjs/filter/index.js"
         },
+        "./tokens": {
+            "types": "./dist/types/tokens/index.d.ts",
+            "import": "./dist/esm/tokens/index.js",
+            "default": "./dist/cjs/tokens/index.js"
+        },
         "./utils": {
             "types": "./dist/types/utils/index.d.ts",
             "import": "./dist/esm/utils/index.js",
@@ -95,10 +99,5 @@
     "repository": "rabbitholegg/questdk",
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
-    },
-    "pnpm": {
-        "overrides": {
-            "questdk": "workspace:*"
-        }
     }
 }
