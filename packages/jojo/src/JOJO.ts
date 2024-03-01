@@ -7,15 +7,6 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 
-/*
- * Function templates for handling various blockchain action types.
- * It's adaptable for actions defined in ActionParams: Bridge, Swap, Stake, Mint, Delegate, Quest, Etc.
- * Duplicate and customize for each specific action type.
- * If you wish to use a different action other than swap, import one of the ActionParams types
- * from @rabbitholegg/questdk (ie: SwapActionParams) and change the function below to use
- * the action params you wish to use.
- */
-
 export const stake = async (stake: StakeActionParams) => {
   const { chainId, amountOne } = stake
 

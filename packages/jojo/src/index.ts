@@ -6,7 +6,6 @@ import {
   stake,
 } from './JOJO.js'
 
-// Replace *project* with the name of the project
 export const JOJO: IActionPlugin = {
   pluginId: 'jojo',
   stake,
