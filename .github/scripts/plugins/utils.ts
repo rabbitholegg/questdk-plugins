@@ -1,5 +1,6 @@
 const path = require("path");
 const { execAsync } = require("../utils");
+const file = require("fs/promises");
 
 async function getNewPackages(): Promise<string[]> {
   const { stdout, stderr } = await execAsync(
@@ -40,7 +41,7 @@ async function validateNewPackagePaths(
   for (const packageDir of newPackageDirs) {
     const detailsPath = path.join(packageDir, "plugin-details.yml");
     try {
-      await fs.access(detailsPath);
+      await file.access(detailsPath);
       console.log(`Valid: ${detailsPath} exists.`);
       validDetailsPaths.push(detailsPath);
     } catch (error) {
