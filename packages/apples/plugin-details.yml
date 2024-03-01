@@ -1,0 +1,13 @@
+# Please fill in the details
+project:
+  name: Apples
+  iconOption: https://apples.com/icon.png
+  appLink: https://apples.com
+
+task:
+  # action specific name, this is what will show as the default title for your boosts
+  name: Mint on Apples
+  # action specific link to your project. (ie: myapp.com/swap)
+  link: https://apples.com/mint
+  iconOption: https://apples.com/icon.png
+  actionPluginId: mint

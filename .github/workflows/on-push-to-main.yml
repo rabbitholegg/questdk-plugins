@@ -62,12 +62,13 @@ jobs:
         run: pnpm install && pnpm install node-fetch
 
       - name: Call API to register new plugins with retry logic
-        run: |
-          for attempt in {1..3}; do
-            npx ts-node ./.github/scripts/registerNewPlugins.ts && break
-            echo "Attempt $attempt failed. Retrying in 5 seconds..."
-            sleep 5
-          done
+        run: npx ts-node ./.github/scripts/registerNewPlugins.ts
+        # run: |
+        #   for attempt in {1..3}; do
+        #     npx ts-node ./.github/scripts/registerNewPlugins.ts && break
+        #     echo "Attempt $attempt failed. Retrying in 5 seconds..."
+        #     sleep 5
+        #   done
 
   release:
     name: Release

@@ -31,6 +31,7 @@ import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { Apples } from '@rabbitholegg/questdk-plugin-apples'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -84,6 +85,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Boost.pluginId]: Boost,
   [Llama.pluginId]: Llama,
   [Kote.pluginId]: Kote,
+  [Apples.pluginId]: Apples,
 }
 
 export const getPlugin = (pluginId: string) => {

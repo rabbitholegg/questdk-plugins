@@ -2,6 +2,9 @@ name: Pull request
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
+    branches:
+      - main
+      - mmackz/test
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -20,6 +23,11 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch target branch
+        run: git fetch origin main:main
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies

@@ -14,7 +14,7 @@ importers:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: 2.0.0-alpha.35
-        version: 2.0.0-alpha.35(typescript@5.3.2)
+        version: 2.0.0-alpha.35(typescript@5.3.2)(zod@3.22.4)
       axios:
         specifier: 1.5.0
         version: 1.5.0
@@ -31,6 +31,9 @@ importers:
       '@turbo/gen':
         specifier: 1.10.16
         version: 1.10.16(@types/node@20.4.5)(typescript@5.3.2)
+      '@types/js-yaml':
+        specifier: 4.0.9
+        version: 4.0.9
       '@types/node':
         specifier: 20.4.5
         version: 20.4.5
@@ -40,6 +43,9 @@ importers:
       eslint:
         specifier: 7.32.0
         version: 7.32.0
+      js-yaml:
+        specifier: 4.1.0
+        version: 4.1.0
       prettier:
         specifier: 2.8.8
         version: 2.8.8
@@ -61,6 +67,9 @@ importers:
       vitest:
         specifier: 0.33.0
         version: 0.33.0
+      zod:
+        specifier: 3.22.4
+        version: 3.22.4
 
   apps/create-plugin:
     dependencies:
@@ -124,6 +133,19 @@ importers:
         version: link:../../packages/tsconfig
 
   packages/across:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/apples:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
@@ -352,7 +374,7 @@ importers:
     dependencies:
       '@eth-optimism/contracts-ts':
         specifier: 0.15.0
-        version: 0.15.0(typescript@5.3.2)
+        version: 0.15.0(typescript@5.3.2)(zod@3.22.4)
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -427,6 +449,9 @@ importers:
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
+      '@rabbitholegg/questdk-plugin-apples':
+        specifier: workspace:*
+        version: link:../apples
       '@rabbitholegg/questdk-plugin-arbitrum':
         specifier: workspace:*
         version: link:../arbitrum
@@ -714,10 +739,10 @@ importers:
         version: link:../utils
       '@zoralabs/protocol-sdk':
         specifier: 0.5.3
-        version: 0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)
+        version: 0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)(zod@3.22.4)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
-        version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)
+        version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.22.4)
     devDependencies:
       tsconfig:
         specifier: workspace:*
@@ -1495,7 +1520,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@eth-optimism/contracts-ts@0.15.0(typescript@5.3.2):
+  /@eth-optimism/contracts-ts@0.15.0(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-qga3xsj+NhnxjY96TWktKAmc2DSYrdy0E+lVkS3NZ/b5w898IisoMj/Xvv3KoovBJmnk+/ENNnMX7kk+fwQdtA==}
     peerDependencies:
       '@wagmi/core': '>1.0.0'
@@ -2739,7 +2764,7 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@rabbitholegg/questdk@2.0.0-alpha.35(typescript@5.3.2):
+  /@rabbitholegg/questdk@2.0.0-alpha.35(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-rkqHMhJHy6AmotlgOtzOYfw6m6NnRtJc0huR1uB+em/3hNmG7VuLQ3BWgeZOaYr56fXrFJZL1HLzZ4xDX3Lt3w==}
     peerDependencies:
       typescript: '>=5.1.6'
@@ -2747,7 +2772,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      abitype: 0.9.10(typescript@5.3.2)
+      abitype: 0.9.10(typescript@5.3.2)(zod@3.22.4)
       rimraf: 5.0.1
       typescript: 5.3.2
       viem: 2.7.9(typescript@5.3.2)(zod@3.22.4)
@@ -3281,6 +3306,10 @@ packages:
 
   /@types/istanbul-lib-coverage@2.0.6:
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
+    dev: true
+
+  /@types/js-yaml@4.0.9:
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
     dev: true
 
   /@types/json-schema@7.0.15:
@@ -3837,10 +3866,10 @@ packages:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
     dev: true
 
-  /@zoralabs/1155-deployments@0.0.13(@types/node@20.4.5)(ts-node@10.9.1):
+  /@zoralabs/1155-deployments@0.0.13(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4):
     resolution: {integrity: sha512-jC8nx3qQGbCGuE4ynBlYYV/VfyhrIAG+k3x0l2yCtEXIiW6oAECM6iZzzPLRcmIiIO3xoC4y70iwVddqzLR3QQ==}
     dependencies:
-      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)
+      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4)
       ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
       forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
       solmate: 6.1.0
@@ -3876,11 +3905,11 @@ packages:
     hasBin: true
     dev: false
 
-  /@zoralabs/protocol-deployments@0.1.0(@types/node@20.4.5)(ts-node@10.9.1):
+  /@zoralabs/protocol-deployments@0.1.0(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4):
     resolution: {integrity: sha512-BlTAxPvY3hXPtJW7+DVDyjjs0S1q4XFftDky0AZVp+q9wdJ6+ffradQ7E/UChsABNeFVjjArCqOUENdl0u+N6w==}
     dependencies:
-      '@zoralabs/1155-deployments': 0.0.13(@types/node@20.4.5)(ts-node@10.9.1)
-      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)
+      '@zoralabs/1155-deployments': 0.0.13(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4)
+      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@swc/core'
@@ -3912,13 +3941,13 @@ packages:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/protocol-sdk@0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9):
+  /@zoralabs/protocol-sdk@0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)(zod@3.22.4):
     resolution: {integrity: sha512-0qNTtggsXjRd7eaPhdDb4Yixl7jikmqeH8Ws1Q2XMVQewo7aQALe0wOvOoLT3aNJtxKxmOpQGSlQaWBP3WmjZQ==}
     peerDependencies:
       viem: 2.7.9
     dependencies:
-      '@zoralabs/protocol-deployments': 0.1.0(@types/node@20.4.5)(ts-node@10.9.1)
-      abitype: 0.10.3(typescript@5.3.2)
+      '@zoralabs/protocol-deployments': 0.1.0(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4)
+      abitype: 0.10.3(typescript@5.3.2)(zod@3.22.4)
       viem: 2.7.9(typescript@5.3.2)(zod@3.22.4)
       vite: 4.5.0(@types/node@20.4.5)
     transitivePeerDependencies:
@@ -3949,11 +3978,11 @@ packages:
       - zod
     dev: false
 
-  /@zoralabs/universal-minter@0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2):
+  /@zoralabs/universal-minter@0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-4ck2Rur7ltoBTV5EdQ0TtJtSyRTnNZtZyZSWhnrglfZ7574KOOAu0E/DJCgRXhNTo4RSNCbTXQh6+7WzjehagA==}
     dependencies:
-      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)
-      abitype: 0.9.10(typescript@5.3.2)
+      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4)
+      abitype: 0.9.10(typescript@5.3.2)(zod@3.22.4)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@swc/core'
@@ -3982,7 +4011,7 @@ packages:
       - zod
     dev: false
 
-  /@zoralabs/zora-1155-contracts@1.6.1(@types/node@20.4.5)(ts-node@10.9.1):
+  /@zoralabs/zora-1155-contracts@1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.22.4):
     resolution: {integrity: sha512-8b872/BOfaW5D8UhFOW2NIrCIXsPvTVoxPZGRs8BNXLEhgQD5nWGoWq11+9fVYxpAMAEtr6/OyvYbT4XtNHTfQ==}
     dependencies:
       '@changesets/cli': 2.26.2
@@ -3990,7 +4019,7 @@ packages:
       '@wagmi/cli': 1.5.2(typescript@5.3.2)
       '@zoralabs/openzeppelin-contracts-upgradeable': 4.8.4
       '@zoralabs/protocol-rewards': 1.2.1
-      abitype: 0.8.11(typescript@5.3.2)
+      abitype: 0.8.11(typescript@5.3.2)(zod@3.22.4)
       ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
       es-main: 1.3.0
       forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
@@ -4032,7 +4061,7 @@ packages:
       - zod
     dev: false
 
-  /abitype@0.10.3(typescript@5.3.2):
+  /abitype@0.10.3(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-tRN+7XIa7J9xugdbRzFv/95ka5ivR/sRe01eiWvM0HWWjHuigSZEACgKa0sj4wGuekTDtghCx+5Izk/cOi78pQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -4044,9 +4073,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
+      zod: 3.22.4
     dev: false
 
-  /abitype@0.8.11(typescript@5.3.2):
+  /abitype@0.8.11(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-bM4v2dKvX08sZ9IU38IN5BKmN+ZkOSd2oI4a9f0ejHYZQYV6cDr7j+d95ga0z2XHG36Y4jzoG5Z7qDqxp7fi/A==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -4056,6 +4086,7 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
+      zod: 3.22.4
     dev: false
 
   /abitype@0.8.7(typescript@5.3.2)(zod@3.22.4):
@@ -4071,7 +4102,7 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /abitype@0.9.10(typescript@5.3.2):
+  /abitype@0.9.10(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-FIS7U4n7qwAT58KibwYig5iFG4K61rbhAqaQh/UWj8v1Y8mjX3F8TC9gd8cz9yT1TYel9f8nS5NO5kZp2RW0jQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -4083,6 +4114,7 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
+      zod: 3.22.4
     dev: false
 
   /abitype@1.0.0(typescript@5.3.2)(zod@3.22.4):
@@ -12957,7 +12989,6 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
-    dev: false
 
   github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b:
     resolution: {tarball: https://codeload.github.com/dapphub/ds-test/tar.gz/cd98eff28324bfac652e63a239a60632a761790b}

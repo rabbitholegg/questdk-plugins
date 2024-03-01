@@ -69,6 +69,7 @@
     "@rabbitholegg/questdk-plugin-mux": "workspace:*",
     "@rabbitholegg/questdk-plugin-llama": "workspace:*",
     "@rabbitholegg/questdk-plugin-boost": "workspace:*",
-    "@rabbitholegg/questdk-plugin-kote": "workspace:*"
+    "@rabbitholegg/questdk-plugin-kote": "workspace:*",
+    "@rabbitholegg/questdk-plugin-apples": "workspace:*"
   }
 }
