@@ -1,6 +1,8 @@
 const path = require("path");
-const { execAsync } = require("../utils");
+const { exec } = require("child_process");
 const file = require("fs/promises");
+
+const execAsync = promisify(exec);
 
 async function getNewPackages(): Promise<string[]> {
   const { stdout, stderr } = await execAsync(
