@@ -58,9 +58,10 @@ jobs:
       - name: Call API to register new plugins with retry logic
         run: |
           for attempt in {1..3}; do
-            npx ts-node ./.github/scripts/registerNewPlugins.ts && break
-            echo "Attempt $attempt failed. Retrying in 5 seconds..."
-            sleep 5
+            npx ts-node ./.github/scripts/registerNewPlugins.ts && break || {
+              echo "Attempt $attempt failed. Retrying in 5 seconds..."
+              sleep 5
+            }
           done
           if [ $attempt -eq 3 ]; then
             echo "All attempts failed. Exiting..."
