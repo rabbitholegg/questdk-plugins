@@ -1,12 +1,12 @@
 import {
   type TransactionFilter,
-    {{#each actionTypes}}
-  type {{capitalize this}}ActionParams,
-  {{/each}}
+  type {{capitalize actionType}}ActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
+{{#if chains.length}}
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+{{/if}}
 
 /*
  * Function templates for handling various blockchain action types.
@@ -17,8 +17,7 @@ import { Chains } from '@rabbitholegg/questdk-plugin-utils'
  * the action params you wish to use.
  */
 
-  {{#each actionTypes}}
-  export const {{lowercase this}} = async(_params: {{capitalize this}}ActionParams): Promise<TransactionFilter> => {
+  export const {{actionType}} = async(_params: {{capitalize actionType}}ActionParams): Promise<TransactionFilter> => {
 
     // the ActionParams for this function are populated in the Boost Manager when the actual Boost is launched.
     
@@ -30,15 +29,12 @@ import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId, 
+    chainId: '0x0', 
     to: '0x0', // The to field is the address of the contract we're interacting with
     input: {}, // The input object is where we'll put the ABI and the parameters
   })
 
   }
-
-  {{/each}}
-
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
