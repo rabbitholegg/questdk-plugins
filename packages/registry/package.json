@@ -48,7 +48,6 @@
     "@rabbitholegg/questdk-plugin-paraswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-polygon": "workspace:*",
     "@rabbitholegg/questdk-plugin-stargate": "workspace:*",
-    "@rabbitholegg/questdk-plugin-symbiosis": "workspace:*",
     "@rabbitholegg/questdk-plugin-tally": "workspace:*",
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-rabbithole": "workspace:*",
