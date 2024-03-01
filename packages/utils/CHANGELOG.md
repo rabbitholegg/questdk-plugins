@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#261](https://github.com/rabbitholegg/questdk-plugins/pull/261) [`26202e50`](https://github.com/rabbitholegg/questdk-plugins/commit/26202e50247b34cc2417db3743914a26e013f7e6) Thanks [@Quazia](https://github.com/Quazia)! - Update zora mint simulation with new ABI
+
 ## 1.0.0-alpha.10
 
 ### Minor Changes
