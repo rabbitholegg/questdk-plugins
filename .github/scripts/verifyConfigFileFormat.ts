@@ -80,7 +80,7 @@ async function validateNewPackagePaths(
 async function validateConfigFile(filePath: string): Promise<void> {
   try {
     const configFileContent = await fs.readFile(filePath, "utf8");
-    const config = yaml.load(configFileContent); // Changed to use yaml.load for YAML content
+    const config = yaml.load(configFileContent);
     PluginConfigSchema.parse(config);
     console.log(`Config in ${filePath} is valid.`);
   } catch (error) {
