@@ -34,3 +34,5 @@ jobs:
 
       - name: Run config file format verification script
         run: npx ts-node ./.github/scripts/verifyConfigFileFormat.ts
+        env:
+          APP_URL: https://01e0-70-67-36-90.ngrok-free.app

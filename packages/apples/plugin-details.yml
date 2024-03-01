@@ -1,7 +1,7 @@
 # Please fill in the details
 project:
   name: Apples
-  iconOption: https://apples.com/icon.png
+  iconOption: https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029
   appLink: https://apples.com
 
 task:
@@ -9,5 +9,5 @@ task:
   name: Mint on Apples
   # action specific link to your project. (ie: myapp.com/swap)
   link: https://apples.com/mint
-  iconOption: https://apples.com/icon.png
+  iconOption: https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=029
   actionPluginId: mint
