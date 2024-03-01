@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.42
+
+### Patch Changes
+
+- [#262](https://github.com/rabbitholegg/questdk-plugins/pull/262) [`6d063707`](https://github.com/rabbitholegg/questdk-plugins/commit/6d0637072305c88236fb58d3d74f81e1e4407ea5) Thanks [@veganbeef](https://github.com/veganbeef)! - add tokens functions exports
+
 ## 2.0.0-alpha.40
 
 ### Minor Changes

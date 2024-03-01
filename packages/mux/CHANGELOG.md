@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-mux
 
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- Updated dependencies [[`6d063707`](https://github.com/rabbitholegg/questdk-plugins/commit/6d0637072305c88236fb58d3d74f81e1e4407ea5)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.42
+
 ## 1.0.0-alpha.9
 
 ### Minor Changes
