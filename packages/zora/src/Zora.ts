@@ -103,8 +103,14 @@ export const getMintIntent = async (
   const { contractAddress, tokenId, amount, recipient } = mint
   let data
   if (tokenId !== null && tokenId !== undefined) {
-    const msgArgs = '0x' + recipient.slice(2).padStart(64, '0');
-    const mintArgs = [FIXED_PRICE_SALE_STRATS[mint.chainId], tokenId, amount, [BOOST_TREASURY_ADDRESS], msgArgs]
+    const msgArgs = '0x' + recipient.slice(2).padStart(64, '0')
+    const mintArgs = [
+      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      tokenId,
+      amount,
+      [BOOST_TREASURY_ADDRESS],
+      msgArgs,
+    ]
     // Assume it's an 1155 mint
     data = encodeFunctionData({
       abi: ZORA_MINTER_ABI_1155,
@@ -140,15 +146,21 @@ export const simulateMint = async (
       chain: chainIdToViemChain(mint.chainId),
       transport: http(),
     })
-    const from = account ?? DEFAULT_ACCOUNT
+  const from = account ?? DEFAULT_ACCOUNT
 
-    if (tokenId !== null && tokenId !== undefined) {
+  if (tokenId !== null && tokenId !== undefined) {
     // The recipient argument is using a weird type so we need to pad out the zeros
-    const msgArgs = '0x' + recipient.slice(2).padStart(64, '0');
-    
+    const msgArgs = '0x' + recipient.slice(2).padStart(64, '0')
+
     try {
-      const mintArgs = [FIXED_PRICE_SALE_STRATS[mint.chainId], tokenId, amount, [BOOST_TREASURY_ADDRESS], msgArgs]
-      const result  = await _client.simulateContract({
+      const mintArgs = [
+        FIXED_PRICE_SALE_STRATS[mint.chainId],
+        tokenId,
+        amount,
+        [BOOST_TREASURY_ADDRESS],
+        msgArgs,
+      ]
+      const result = await _client.simulateContract({
         address: contractAddress,
         value,
         abi: ZORA_MINTER_ABI_1155,
@@ -158,8 +170,13 @@ export const simulateMint = async (
       })
       return result
     } catch {
-      const mintArgs = [FIXED_PRICE_SALE_STRATS[mint.chainId], tokenId, amount, msgArgs]
-      const result  = await _client.simulateContract({
+      const mintArgs = [
+        FIXED_PRICE_SALE_STRATS[mint.chainId],
+        tokenId,
+        amount,
+        msgArgs,
+      ]
+      const result = await _client.simulateContract({
         address: contractAddress,
         value,
         abi: ZORA_MINTER_ABI_1155_LEGACY,
@@ -182,7 +199,7 @@ export const simulateMint = async (
       abi: ZORA_MINTER_ABI_721,
       functionName: 'purchase',
       args: [amount],
-      account: from
+      account: from,
     })
     return result
   }
