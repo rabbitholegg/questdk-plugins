@@ -3,7 +3,6 @@ const fs = require("fs/promises");
 const zod = require("zod");
 const yaml = require("js-yaml");
 const utils = require("./utils");
-const { promisify } = require("util");
 const { z } = zod;
 
 // Define your Zod schemas as before
