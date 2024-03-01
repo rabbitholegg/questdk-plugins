@@ -37,7 +37,7 @@
   "dependencies": {
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*",
-    "ethers": "^5.2.0",
-    "symbiosis-js-sdk": "^3.0.9"
+    "ethers": "5.2.0",
+    "symbiosis-js-sdk": "3.1.30"
   }
 }
