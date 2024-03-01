@@ -22,7 +22,6 @@ import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
 import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
-import { Symbiosis } from '@rabbitholegg/questdk-plugin-symbiosis'
 import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { Tally } from '@rabbitholegg/questdk-plugin-tally'
 import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
@@ -67,7 +66,6 @@ export const plugins: Record<string, IActionPlugin> = {
   [Hyphen.pluginId]: Hyphen,
   [Paraswap.pluginId]: Paraswap,
   [Rabbithole.pluginId]: Rabbithole,
-  [Symbiosis.pluginId]: Symbiosis,
   [OkuTrade.pluginId]: OkuTrade,
   [Zora.pluginId]: Zora,
   [Balancer.pluginId]: Balancer,
