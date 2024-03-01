@@ -1,4 +1,9 @@
-export { CHAIN_TO_TOKENS, Chains } from './constants'
+export {
+  CHAIN_TO_TOKENS,
+  Chains,
+  DEFAULT_ACCOUNT,
+  BOOST_TREASURY_ADDRESS,
+} from './constants'
 export {
   createTestCase,
   type TestCase,

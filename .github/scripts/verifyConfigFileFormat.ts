@@ -1,3 +1,4 @@
+const axios = require("axios");
 const fs = require("fs/promises");
 const path = require("path");
 const zod = require("zod");
@@ -81,12 +82,30 @@ async function validateNewPackagePaths(
 async function validateConfigFile(filePath: string): Promise<void> {
   try {
     const configFileContent = await fs.readFile(filePath, "utf8");
-    const config = yaml.load(configFileContent); // Changed to use yaml.load for YAML content
+    const config = yaml.load(configFileContent);
     PluginConfigSchema.parse(config);
+    if (config.project.iconOption) {
+      await validateIcon(config.project.iconOption);
+    }
+    await validateIcon(config.task.iconOption);
     console.log(`Config in ${filePath} is valid.`);
   } catch (error) {
     console.error(`Error validating config in ${filePath}:`, error);
     process.exit(1);
+  }
+}
+
+async function validateIcon(iconUrl: string) {
+  const response = await axios.post(
+    "http://localhost:5000/plugins/validate-icon",
+    {
+      iconOption: iconUrl,
+    },
+  );
+  if (response.status === 200) {
+    console.log("Icon is valid:", iconUrl);
+  } else {
+    throw new Error(`Icon validation failed for ${iconUrl}`);
   }
 }
 

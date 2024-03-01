@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-kote",
   "private": false,
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.10",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

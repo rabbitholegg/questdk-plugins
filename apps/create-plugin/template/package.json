@@ -10,7 +10,6 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "packageManager": "pnpm@8.15.1",
   "description": "",
   "scripts": {
     "bench": "vitest bench",

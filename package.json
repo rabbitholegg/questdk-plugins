@@ -44,5 +44,5 @@
       "viem@<2.7.9": "2.7.9"
     }
   },
-  "packageManager": "pnpm@8.15.1"
+  "packageManager": "pnpm@8.15.3"
 }

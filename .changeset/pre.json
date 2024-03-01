@@ -6,9 +6,11 @@
     "angry-ants-return",
     "beige-geckos-approve",
     "big-gifts-retire",
+    "big-pants-own",
     "blue-bikes-sip",
     "breezy-trees-carry",
     "bright-turtles-divide",
+    "brown-bats-hope",
     "brown-points-smile",
     "calm-tigers-rescue",
     "chatty-news-boil",
@@ -53,6 +55,7 @@
     "good-zebras-jam",
     "gorgeous-cycles-protect",
     "great-ducks-greet",
+    "great-spies-film",
     "green-years-admire",
     "healthy-bugs-enjoy",
     "hip-mirrors-divide",
@@ -75,6 +78,7 @@
     "modern-pumpkins-kiss",
     "moody-bananas-fold",
     "moody-students-flash",
+    "neat-buses-rescue",
     "neat-teachers-chew",
     "neat-teachers-complain",
     "new-ears-study",
@@ -134,6 +138,7 @@
     "small-baboons-sneeze",
     "smart-tips-arrive",
     "soft-apples-hang",
+    "soft-ears-rest",
     "soft-mice-film",
     "soft-starfishes-draw",
     "sour-boxes-reflect",
@@ -213,6 +218,7 @@
     "@rabbitholegg/questdk-plugin-llama": "1.0.0-alpha.8",
     "@rabbitholegg/create-plugin": "1.0.0",
     "@rabbitholegg/questdk": "1.0.1-alpha.0",
-    "@rabbitholegg/questdk-plugin-kote": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-kote": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-jojo": "1.0.0-alpha.0"
   }
 }

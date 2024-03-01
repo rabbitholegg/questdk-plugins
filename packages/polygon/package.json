@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-polygon",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-alpha.23",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -9,7 +9,6 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "packageManager": "pnpm@8.15.1",
   "description": "",
   "scripts": {
     "bench": "vitest bench",

@@ -1,5 +1,44 @@
 # @rabbitholegg/questdk-plugin-polygon
 
+## 1.0.0-alpha.23
+
+### Patch Changes
+
+- Updated dependencies [[`26202e50`](https://github.com/rabbitholegg/questdk-plugins/commit/26202e50247b34cc2417db3743914a26e013f7e6)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.11
+  - @rabbitholegg/questdk@2.0.0-alpha.42
+
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- Updated dependencies [[`6d063707`](https://github.com/rabbitholegg/questdk-plugins/commit/6d0637072305c88236fb58d3d74f81e1e4407ea5)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.42
+
+## 1.0.0-alpha.21
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
+### Patch Changes
+
+- Updated dependencies [[`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.10
+  - @rabbitholegg/questdk@2.0.0-alpha.40
+
+## 1.0.0-alpha.20
+
+### Minor Changes
+
+- [#256](https://github.com/rabbitholegg/questdk-plugins/pull/256) [`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db) Thanks [@Quazia](https://github.com/Quazia)! - Adds a simulateMint function to all mint plugins
+
+### Patch Changes
+
+- Updated dependencies [[`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.9
+  - @rabbitholegg/questdk@2.0.0-alpha.39
+
 ## 1.0.0-alpha.19
 
 ### Patch Changes

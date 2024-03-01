@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-utils",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.11",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
@@ -8,7 +8,6 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "packageManager": "pnpm@8.15.1",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
   "scripts": {

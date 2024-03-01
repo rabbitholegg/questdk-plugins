@@ -1,13 +1,12 @@
 {
   "name": "@rabbitholegg/questdk-plugin-uniswap",
-  "version": "1.0.0-alpha.22",
+  "version": "1.0.0-alpha.26",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
     "types": "./dist/types/index.d.ts"
   },
-  "packageManager": "pnpm@8.15.1",
   "description": "",
   "scripts": {
     "bench": "vitest bench",

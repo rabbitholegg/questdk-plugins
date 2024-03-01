@@ -299,6 +299,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/jojo:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/kote:
     dependencies:
       '@rabbitholegg/questdk':
@@ -482,6 +495,9 @@ importers:
       '@rabbitholegg/questdk-plugin-hyphen':
         specifier: workspace:*
         version: link:../hyphen
+      '@rabbitholegg/questdk-plugin-jojo':
+        specifier: workspace:*
+        version: link:../jojo
       '@rabbitholegg/questdk-plugin-kote':
         specifier: workspace:*
         version: link:../kote
