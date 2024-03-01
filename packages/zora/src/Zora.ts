@@ -13,6 +13,7 @@ import {
   http,
   type PublicClient,
   type SimulateContractReturnType,
+  pad,
 } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
@@ -101,13 +102,12 @@ export const getMintIntent = async (
   const { contractAddress, tokenId, amount, recipient } = mint
   let data
   if (tokenId !== null && tokenId !== undefined) {
-    const msgArgs = '0x' + recipient.slice(2).padStart(64, '0')
     const mintArgs = [
       FIXED_PRICE_SALE_STRATS[mint.chainId],
       tokenId,
       amount,
       [BOOST_TREASURY_ADDRESS],
-      msgArgs,
+      pad(recipient),
     ]
     // Assume it's an 1155 mint
     data = encodeFunctionData({
@@ -147,16 +147,13 @@ export const simulateMint = async (
   const from = account ?? DEFAULT_ACCOUNT
 
   if (tokenId !== null && tokenId !== undefined) {
-    // The recipient argument is using a weird type so we need to pad out the zeros
-    const msgArgs = '0x' + recipient.slice(2).padStart(64, '0')
-
     try {
       const mintArgs = [
         FIXED_PRICE_SALE_STRATS[mint.chainId],
         tokenId,
         amount,
         [BOOST_TREASURY_ADDRESS],
-        msgArgs,
+        pad(recipient),
       ]
       const result = await _client.simulateContract({
         address: contractAddress,
