@@ -39,6 +39,6 @@ export const failingStakeTestCases = [
     amountOne: '1',
   }),
   createTestCase(STAKE_USDC, 'when amountOne is insufficient', {
-    amountOne: GreaterThanOrEqual(4000000000000000000n),
+    amountOne: GreaterThanOrEqual('4000000000000000000'),
   }),
 ]
