@@ -13,6 +13,8 @@
     "declarationDir": "./dist/types",
     "resolveJsonModule": true,
     "sourceMap": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
   }
 }

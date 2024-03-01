@@ -13,7 +13,7 @@ describe('Given the WooFi plugin', () => {
         const filter = await swap(params)
         expect(filter).to.deep.equal({
           chainId: 42161,
-          to: '0x9aEd3A8896A85FE9a8CAc52C9B402D092B629a30',
+          to: '0x4c4AF8DBc524681930a27b2F1Af5bcC8062E6fB7',
           input: {
             $abi: SWAP_ABI,
             fromToken: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',

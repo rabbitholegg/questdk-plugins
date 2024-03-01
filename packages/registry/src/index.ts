@@ -50,6 +50,7 @@ import {
   type TransactionFilter,
   type VoteActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
+import type { Address, PublicClient } from 'viem'
 
 export const plugins: Record<string, IActionPlugin> = {
   [Connext.pluginId]: Connext,
@@ -105,6 +106,48 @@ export const getTxIntent = (
     case ActionType.Mint:
       if (plugin.getMintIntent !== undefined) {
         return plugin.getMintIntent(params as unknown as MintIntentParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
+export const getTxSimulation = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: IntentParams,
+  value: bigint,
+  client?: PublicClient,
+  account?: Address,
+) => {
+  switch (actionType) {
+    case ActionType.Mint:
+      if (plugin.simulateMint !== undefined) {
+        return plugin.simulateMint(
+          params as unknown as MintIntentParams,
+          value,
+          account,
+          client,
+        )
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
+export const getProjectFees = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: ActionParams,
+) => {
+  switch (actionType) {
+    case ActionType.Mint:
+      if (plugin.mint && plugin.getProjectFees) {
+        return plugin.getProjectFees(params as unknown as MintActionParams)
       } else {
         throw new PluginActionNotImplementedError()
       }
