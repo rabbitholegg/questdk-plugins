@@ -154,7 +154,7 @@ describe('Given the zora plugin', () => {
 describe('Given the getMintIntent function', () => {
   // Define the constant for the contract address
   const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
-  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890' 
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
 
   test('returns a TransactionRequest with correct properties when tokenId is not 0', async () => {
     const mint: MintIntentParams = {
@@ -247,7 +247,7 @@ describe.only('simulateMint function', () => {
   test.only('should simulate a 1155 mint when tokenId is not 0', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.ZORA,
-      contractAddress: '0xc53c050131a3507d51d014445f666f4c3a1a2c24', 
+      contractAddress: '0xc53c050131a3507d51d014445f666f4c3a1a2c24',
       tokenId: 1, // not 0
       amount: BigInt(1),
       recipient: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
