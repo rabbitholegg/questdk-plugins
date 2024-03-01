@@ -36,10 +36,7 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
       projectId,
     });
   } catch (error) {
-    if (_axios.isAxiosError(error)) {
-      throw new Error(error.response.data.error);
-    }
-    throw new Error(error);
+    throw new Error(`Error sending plugin details to API: ${error}`);
   }
 }
 
