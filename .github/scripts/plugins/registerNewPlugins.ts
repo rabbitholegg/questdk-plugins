@@ -1,7 +1,7 @@
 const _axios = require("axios");
 const _fs = require("fs/promises");
 const _yaml = require("js-yaml");
-
+const _utils = require("./utils");
 
 async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
   try {
@@ -34,3 +34,18 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
     throw new Error(`Error sending plugin details to API: ${error}`);
   }
 }
+
+async function _main() {
+  try {
+    const newPackagesPaths = await _utils.getNewPackages();
+    const validDetailsPaths = await _utils.validateNewPackagePaths(newPackagesPaths);
+    for (const detailsPath of validDetailsPaths) {
+      await sendPluginDetailsToAPI(detailsPath);
+    }
+  } catch (error) {
+    console.error("Error registering new plugins:", error);
+    process.exit(1);
+  }
+}
+
+_main();
