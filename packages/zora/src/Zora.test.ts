@@ -4,7 +4,7 @@ import {
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
-import { type Address, parseEther, } from 'viem'
+import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 import { getMintIntent, mint, simulateMint } from './Zora'
 import {
@@ -252,7 +252,7 @@ describe.only('simulateMint function', () => {
       amount: BigInt(1),
       recipient: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
     }
-    const value = parseEther("0.000777")
+    const value = parseEther('0.000777')
     const account = '0xE4eDb277e41dc89aB076a1F049f4a3EfA700bCE8'
 
     const result = await simulateMint(mint, value, account)
@@ -261,5 +261,4 @@ describe.only('simulateMint function', () => {
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
   })
-
 })

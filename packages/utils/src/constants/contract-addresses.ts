@@ -83,4 +83,5 @@ export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
 export const DEFAULT_ACCOUNT = '0x017f8ad14a2e745ea0f756bd57cd4852400be78c'
 
 // This needs to exist and be set for every network with refer on
-export const BOOST_TREASURY_ADDRESS = '0x48E6a039bcF6d99806Ce4595fC59e4A7C0CaAB19'
+export const BOOST_TREASURY_ADDRESS =
+  '0x48E6a039bcF6d99806Ce4595fC59e4A7C0CaAB19'
