@@ -4,6 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
+import { getMintCosts, MintAPIClient } from '@zoralabs/protocol-sdk'
 import {
   type Address,
   getAddress,
@@ -204,8 +205,6 @@ export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
   const { chainId, contractAddress, tokenId, amount } = mint
-
-  const { getMintCosts, MintAPIClient } = await import('@zoralabs/protocol-sdk')
 
   const client = new MintAPIClient(chainId)
 
