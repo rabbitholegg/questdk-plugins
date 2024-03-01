@@ -246,7 +246,6 @@ describe('simulateMint function', () => {
     const account = '0xE4eDb277e41dc89aB076a1F049f4a3EfA700bCE8'
 
     const result = await simulateMint(mint, value, account)
-    console.log(result)
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
