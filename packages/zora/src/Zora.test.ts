@@ -243,8 +243,8 @@ describe('Given the getProjectFee function', () => {
   })
 })
 
-describe.only('simulateMint function', () => {
-  test.only('should simulate a 1155 mint when tokenId is not 0', async () => {
+describe('simulateMint function', () => {
+  test('should simulate a 1155 mint when tokenId is not 0', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.ZORA,
       contractAddress: '0xc53c050131a3507d51d014445f666f4c3a1a2c24',
