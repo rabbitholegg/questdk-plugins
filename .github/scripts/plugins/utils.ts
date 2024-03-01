@@ -1,7 +1,7 @@
 const path = require("path");
 const { exec } = require("child_process");
 const file = require("fs/promises");
-const promisify = require("util");
+const { promisify } = require("util");
 
 const execAsync = promisify(exec);
 
