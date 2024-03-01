@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#267](https://github.com/rabbitholegg/questdk-plugins/pull/267) [`0ba133e2`](https://github.com/rabbitholegg/questdk-plugins/commit/0ba133e2378c2f2be30986731cf4a793fc78ced1) Thanks [@Quazia](https://github.com/Quazia)! - Pin Symbiosis versions
+
 ## 1.0.0-alpha.11
 
 ### Minor Changes
