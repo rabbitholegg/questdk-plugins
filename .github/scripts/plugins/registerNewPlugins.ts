@@ -4,37 +4,51 @@ const _yaml = require("js-yaml");
 const _utils = require("./utils");
 
 async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
-  const fileContents = await _fs.readFile(detailsPath, "utf8");
-  const details = _yaml.load(fileContents);
+  try {
+    const fileContents = await _fs.readFile(detailsPath, "utf8");
+    const details = _yaml.load(fileContents);
 
+    const { project, task } = details;
 
-  const { project, task } = details;
+    // send details to staging API
+    const stagingApiUrl = process.env.STAGING_API_URL;
+    const { projectId: stagingProjectId } = await _axios.post(
+      `${stagingApiUrl}/plugins/add-project`,
+      {
+        ...project,
+        approvedForTerminal: true,
+      },
+    );
+    await _axios.post(`${stagingApiUrl}/plugins/add-task`, {
+      ...task,
+      projectId: stagingProjectId,
+      approvedForTerminal: true,
+    });
 
-  // send details to staging API
-  const stagingApiUrl = process.env.STAGING_API_URL;
-  const { projectId: stagingProjectId } = await _axios.post(`${stagingApiUrl}/plugins/add-project`, {
-    ...project,
-    approvedForTerminal: true,
-  });
-  await _axios.post(`${stagingApiUrl}/plugins/add-task`, { 
-    ...task,
-    projectId: stagingProjectId, 
-    approvedForTerminal: true 
-  });
-
-  // send details to production API
-  const productionApiUrl = process.env.PRODUCTION_API_URL;
-  const { projectId } = await _axios.post(`${productionApiUrl}/plugins/add-project`, project);
-  await _axios.post(`${productionApiUrl}/plugins/add-task`, { 
-    ...task,
-    projectId,
-  });
+    // send details to production API
+    const productionApiUrl = process.env.PRODUCTION_API_URL;
+    const { projectId } = await _axios.post(
+      `${productionApiUrl}/plugins/add-project`,
+      project,
+    );
+    await _axios.post(`${productionApiUrl}/plugins/add-task`, {
+      ...task,
+      projectId,
+    });
+  } catch (error) {
+    if (_axios.isAxiosError(error)) {
+      throw new Error(error.response.data.error);
+    }
+    throw new Error(error);
+  }
 }
 
 async function _main() {
   try {
     const newPackagesPaths = await _utils.getNewPackages();
-    const validDetailsPaths = await _utils.validateNewPackagePaths(newPackagesPaths);
+    const validDetailsPaths = await _utils.validateNewPackagePaths(
+      newPackagesPaths,
+    );
     for (const detailsPath of validDetailsPaths) {
       await sendPluginDetailsToAPI(detailsPath);
     }

@@ -32,7 +32,9 @@ async function validateConfigFile(filePath: string): Promise<void> {
     const { project, task } = config;
 
     // validate each unique icon option url
-    const uniqueIconOptions = new Set([project.iconOption, task.iconOption].filter(Boolean));
+    const uniqueIconOptions = new Set(
+      [project.iconOption, task.iconOption].filter(Boolean),
+    );
     for (const iconOption of uniqueIconOptions) {
       await validateIcon(iconOption);
     }

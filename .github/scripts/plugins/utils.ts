@@ -59,4 +59,4 @@ async function validateNewPackagePaths(
 module.exports = {
   getNewPackages,
   validateNewPackagePaths,
-}
+};
