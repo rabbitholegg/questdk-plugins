@@ -31,6 +31,7 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
       projectId,
     });
   } catch (error) {
+    console.error(error);
     throw new Error(`Error sending plugin details to API: ${error}`);
   }
 }
