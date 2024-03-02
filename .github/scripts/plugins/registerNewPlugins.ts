@@ -4,55 +4,47 @@ const _yaml = require("js-yaml");
 const _utils = require("./utils");
 
 async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
-  try {
-    const fileContents = await _fs.readFile(detailsPath, "utf8");
-    const details = _yaml.load(fileContents);
+  const fileContents = await _fs.readFile(detailsPath, "utf8");
+  const details = _yaml.load(fileContents);
+  const { project, task } = details;
 
-    const { project, task } = details;
-
-    // send details to staging API
-    const stagingApiUrl = process.env.STAGING_API_URL;
-    const { data: stagingData } = await _axios.post(
-      `${stagingApiUrl}/plugins/add-project`,      
-      {
-        ...project,
-        approvedForTerminal: true,
-      },
-    );
-    await _axios.post(`${stagingApiUrl}/plugins/add-task`, {
-      ...task,
-      projectId: stagingData.projectId,
+  // send details to staging API
+  const { data: stagingData } = await _axios.post(
+    `${process.env.STAGING_API_URL}/plugins/add-project`,
+    {
+      ...project,
       approvedForTerminal: true,
-    });
+    },
+  );
+  await _axios.post(`${process.env.STAGING_API_URL}/plugins/add-task`, {
+    ...task,
+    projectId: stagingData.projectId,
+    approvedForTerminal: true,
+  });
 
-    // send details to production API
-    const productionApiUrl = process.env.PRODUCTION_API_URL;
-    const { data } = await _axios.post(
-      `${productionApiUrl}/plugins/add-project`,
-      project,
-    );
-    await _axios.post(`${productionApiUrl}/plugins/add-task`, {
-      ...task,
-      projectId: data.projectId,
-    });
-  } catch (error) {
-    throw new Error(`Error sending plugin details to API: ${error}`);
-  }
+  // send details to production API
+  const { data } = await _axios.post(
+    `${process.env.PRODUCTION_API_URL}/plugins/add-project`,
+    project,
+  );
+  await _axios.post(`${process.env.PRODUCTION_API_URL}/plugins/add-task`, {
+    ...task,
+    projectId: data.projectId,
+  });
+
+  console.log(`Successfully registered plugin details for ${project.name}`);
 }
 
 async function _main() {
-  try {
-    const newPackagesPaths = await _utils.getNewPackages();
-    const validDetailsPaths = await _utils.validateNewPackagePaths(
-      newPackagesPaths,
-    );
-    for (const detailsPath of validDetailsPaths) {
-      await sendPluginDetailsToAPI(detailsPath);
-    }
-  } catch (error) {
-    console.error("Error registering new plugins:", error);
-    process.exit(1);
+  const newPackagesPaths = await _utils.getNewPackages();
+  const validDetailsPaths = await _utils.validateNewPackagePaths(
+    newPackagesPaths,
+  );
+  for (const detailsPath of validDetailsPaths) {
+    await sendPluginDetailsToAPI(detailsPath);
   }
 }
 
-_main();
+_main().catch((error) => {
+  throw new Error(`Error registering plugin details: ${error}`);
+});
