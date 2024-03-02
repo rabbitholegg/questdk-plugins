@@ -1,5 +1,11 @@
 # @rabbitholegg/create-plugin
 
+## 2.0.0-alpha.4
+
+### Minor Changes
+
+- [#221](https://github.com/rabbitholegg/questdk-plugins/pull/221) [`ee6bfd8d`](https://github.com/rabbitholegg/questdk-plugins/commit/ee6bfd8d4422e3f02458a47c781b044f5c4a39d0) Thanks [@mmackz](https://github.com/mmackz)! - adds dynamic questions based on actionType
+
 ## 2.0.0-alpha.3
 
 ### Patch Changes

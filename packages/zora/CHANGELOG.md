@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.24
+
+### Patch Changes
+
+- [#266](https://github.com/rabbitholegg/questdk-plugins/pull/266) [`f9fa05cf`](https://github.com/rabbitholegg/questdk-plugins/commit/f9fa05cf5f4b2fb2bbb97a297e33abbff524eb3e) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Update `@zoralabs/protocol-sdk` version
+
 ## 1.0.0-alpha.23
 
 ### Minor Changes
