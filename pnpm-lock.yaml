@@ -132,6 +132,19 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfig
 
+  packages/aaples:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/across:
     dependencies:
       '@rabbitholegg/questdk':
@@ -446,6 +459,9 @@ importers:
 
   packages/registry:
     dependencies:
+      '@rabbitholegg/questdk-plugin-aaples':
+        specifier: workspace:*
+        version: link:../aaples
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across

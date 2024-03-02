@@ -32,19 +32,11 @@ async function getNewPackages(): Promise<string[]> {
   return Array.from(newPackageDirs);
 }
 
-async function validateNewPackagePaths(
+async function validatePluginDetailsPaths(
   newPackagesPaths: string[],
 ): Promise<string[]> {
-  const newPackageDirs = newPackagesPaths.filter((path: string) =>
-    /packages\/[^\/]+\/?$/.test(path),
-  );
-
-  console.log("paths", newPackagesPaths);
-  console.log("dirs", newPackageDirs);
-
   const validDetailsPaths: string[] = [];
-
-  for (const packageDir of newPackageDirs) {
+  for (const packageDir of newPackagesPaths) {
     const detailsPath = path.join(packageDir, "plugin-details.yml");
     try {
       await file.access(detailsPath);
@@ -61,5 +53,5 @@ async function validateNewPackagePaths(
 
 module.exports = {
   getNewPackages,
-  validateNewPackagePaths,
+  validatePluginDetailsPaths,
 };
