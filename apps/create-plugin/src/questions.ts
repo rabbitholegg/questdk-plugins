@@ -84,7 +84,7 @@ export const detailsQuestions: PromptObject[] = [
     message: 'What is the project icon url? (Optional)',
     initial: '',
     validate: (name: string) => {
-    if (name !== '' && !/^(https?:\/\/.*\.(?:png|jpg|jpeg|svg))$/.test(name)) {
+    if (name !== '' && !/^(https?:\/\/.*\.(?:png|jpg|jpeg|svg)(\?.*)?)$/.test(name)) {
       return 'Please enter a valid image URL';
     }
     return true;
