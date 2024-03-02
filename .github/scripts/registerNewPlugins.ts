@@ -63,11 +63,15 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
 
 async function _main() {
   const newPackagesPaths = await _utils.getNewPackages();
-  const validDetailsPaths = await _utils.validateNewPackagePaths(
-    newPackagesPaths,
-  );
-  for (const detailsPath of validDetailsPaths) {
-    await sendPluginDetailsToAPI(detailsPath);
+  if (newPackagesPaths.length) {
+    const validDetailsPaths = await _utils.validateNewPackagePaths(
+      newPackagesPaths,
+    );
+    for (const detailsPath of validDetailsPaths) {
+      await sendPluginDetailsToAPI(detailsPath);
+    }
+  } else {
+    console.log("No new packages found.");
   }
 }
 
