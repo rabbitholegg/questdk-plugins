@@ -39,6 +39,9 @@ async function validateNewPackagePaths(
     /packages\/[^\/]+\/?$/.test(path),
   );
 
+  console.log("paths", newPackagesPaths);
+  console.log("dirs", newPackageDirs);
+
   const validDetailsPaths: string[] = [];
 
   for (const packageDir of newPackageDirs) {
