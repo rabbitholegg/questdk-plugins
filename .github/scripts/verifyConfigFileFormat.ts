@@ -5,7 +5,6 @@ const yaml = require("js-yaml");
 const utils = require("./utils");
 const { z } = zod;
 
-// Define your Zod schemas as before
 const ProjectConfigSchema = z.object({
   name: z.string(),
   iconOption: z.string().url().optional(),
