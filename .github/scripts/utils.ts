@@ -37,7 +37,7 @@ async function validateNewPackagePaths(
 ): Promise<string[]> {
   const newPackageDirs = newPackagesPaths.filter((path: string) =>
     /packages\/[^\/]+\/?$/.test(path),
-  ); // Adjust regex as needed
+  );
 
   const validDetailsPaths: string[] = [];
 
