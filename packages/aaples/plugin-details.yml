@@ -1,0 +1,13 @@
+# Please fill in the details
+project:
+  name: Aaples
+  iconOption: https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png
+  appLink: https://aaples.com
+
+task:
+  # action specific name, this is what will show as the default title for your boosts
+  name: Bridge on Aaples
+  # action specific link to your project. (ie: myapp.com/swap)
+  link: https://aaples.com
+  iconOption: https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png
+  actionPluginId: bridge

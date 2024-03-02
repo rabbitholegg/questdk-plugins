@@ -4,6 +4,8 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
     branches:
       - main
+      - mmackz/test
+
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -33,3 +35,5 @@ jobs:
 
       - name: Run config file format verification script
         run: npx ts-node ./.github/scripts/verifyConfigFileFormat.ts
+        env:
+          APP_URL: https://76a9-70-67-36-90.ngrok-free.app
