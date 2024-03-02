@@ -73,8 +73,8 @@ jobs:
             exit 1
           fi
         env:
-          STAGING_API_URL: https://30dd-70-67-36-90.ngrok-free.app
-          PRODUCTION_API_URL: https://30dd-70-67-36-90.ngrok-free.app
+          STAGING_API_URL: https://76a9-70-67-36-90.ngrok-free.app
+          PRODUCTION_API_URL: https://76a9-70-67-36-90.ngrok-free.app
 
   # release:
   #   name: Release
