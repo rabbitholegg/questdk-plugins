@@ -19,6 +19,7 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
         approvedForTerminal: true,
       },
     );
+    console.log("Project ID:", stagingProjectId);
     await _axios.post(`${stagingApiUrl}/plugins/add-task`, {
       ...task,
       projectId: stagingProjectId,
