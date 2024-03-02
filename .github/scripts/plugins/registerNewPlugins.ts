@@ -12,29 +12,28 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
 
     // send details to staging API
     const stagingApiUrl = process.env.STAGING_API_URL;
-    const { projectId: stagingProjectId } = await _axios.post(
-      `${stagingApiUrl}/plugins/add-project`,
+    const { data: stagingData } = await _axios.post(
+      `${stagingApiUrl}/plugins/add-project`,      
       {
         ...project,
         approvedForTerminal: true,
       },
     );
-    console.log("Project ID:", stagingProjectId);
     await _axios.post(`${stagingApiUrl}/plugins/add-task`, {
       ...task,
-      projectId: stagingProjectId,
+      projectId: stagingData.projectId,
       approvedForTerminal: true,
     });
 
     // send details to production API
     const productionApiUrl = process.env.PRODUCTION_API_URL;
-    const { projectId } = await _axios.post(
+    const { data } = await _axios.post(
       `${productionApiUrl}/plugins/add-project`,
       project,
     );
     await _axios.post(`${productionApiUrl}/plugins/add-task`, {
       ...task,
-      projectId,
+      projectId: data.projectId,
     });
   } catch (error) {
     throw new Error(`Error sending plugin details to API: ${error}`);
