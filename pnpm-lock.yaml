@@ -726,8 +726,8 @@ importers:
         specifier: workspace:*
         version: link:../utils
       '@zoralabs/protocol-sdk':
-        specifier: 0.5.3
-        version: 0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)
+        specifier: 0.5.6-exports.0
+        version: 0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
         version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)
@@ -4241,11 +4241,11 @@ packages:
     hasBin: true
     dev: false
 
-  /@zoralabs/protocol-deployments@0.1.0(@types/node@20.4.5)(ts-node@10.9.1):
-    resolution: {integrity: sha512-BlTAxPvY3hXPtJW7+DVDyjjs0S1q4XFftDky0AZVp+q9wdJ6+ffradQ7E/UChsABNeFVjjArCqOUENdl0u+N6w==}
+  /@zoralabs/protocol-deployments@0.1.2-exports.0(@types/node@20.4.5)(ts-node@10.9.1):
+    resolution: {integrity: sha512-p/NJovirBamdeFQ2DHHci4huKsJo0iwhA2arfnXV3jOWHTPGDIje0Df7dWIW3iBeqwaSZCMun0BfCCJCWXAD6Q==}
     dependencies:
       '@zoralabs/1155-deployments': 0.0.13(@types/node@20.4.5)(ts-node@10.9.1)
-      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)
+      '@zoralabs/zora-1155-contracts': 2.7.3-exports.0
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@swc/core'
@@ -4277,12 +4277,12 @@ packages:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/protocol-sdk@0.5.3(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9):
-    resolution: {integrity: sha512-0qNTtggsXjRd7eaPhdDb4Yixl7jikmqeH8Ws1Q2XMVQewo7aQALe0wOvOoLT3aNJtxKxmOpQGSlQaWBP3WmjZQ==}
+  /@zoralabs/protocol-sdk@0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9):
+    resolution: {integrity: sha512-YbQ4/a1vM0JN9Dz/qGkMqfOM6xI1Zi6/52KEQAmYY/kzSqBE8jkusN76Av/MYwKqnMIQ90kFAMebSPgyhWvUKA==}
     peerDependencies:
       viem: 2.7.9
     dependencies:
-      '@zoralabs/protocol-deployments': 0.1.0(@types/node@20.4.5)(ts-node@10.9.1)
+      '@zoralabs/protocol-deployments': 0.1.2-exports.0(@types/node@20.4.5)(ts-node@10.9.1)
       abitype: 0.10.3(typescript@5.3.2)
       viem: 2.7.9(typescript@5.3.2)(zod@3.22.4)
       vite: 4.5.0(@types/node@20.4.5)
@@ -4395,6 +4395,17 @@ packages:
       - wagmi
       - webdriverio
       - zod
+    dev: false
+
+  /@zoralabs/zora-1155-contracts@2.7.3-exports.0:
+    resolution: {integrity: sha512-9HSOmTws0ojtrjo+NLjL87xEdjtnyWqinbtvj0gYwpME0ZlZ5RxgBlZDDPr7eKi3TTgKvrX0mF8mJOvoc9jMDA==}
+    dependencies:
+      '@openzeppelin/contracts': 4.9.2
+      '@zoralabs/openzeppelin-contracts-upgradeable': 4.8.4
+      '@zoralabs/protocol-rewards': 1.2.1
+      ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
+      forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
+      solmate: 6.1.0
     dev: false
 
   /abitype@0.10.3(typescript@5.3.2):
