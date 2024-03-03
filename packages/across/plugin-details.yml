@@ -8,5 +8,5 @@ task:
   name: Mint on acrosstest
   # action specific link to your project. (ie: myapp.com/mint)
   link: https://acrosstest.org/mint
-  iconOption: https://upload.wikimedia.org/wikipedia/commons/3/3d/LARGE_elevation.jpg
+  iconOption: https://google.com
   actionPluginId: mint
