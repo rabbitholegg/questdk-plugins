@@ -37,6 +37,7 @@ async function getUpdatedPluginDetailsPaths(): Promise<string[]> {
   if (stderr) {
     throw new Error(`Error getting updated plugin details: ${stderr}`);
   }
+  console.log(`Updated plugin details paths: ${stdout}`);
   const detailsPaths = stdout
     .split("\n")
     .filter(
