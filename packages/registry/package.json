@@ -68,7 +68,6 @@
     "@rabbitholegg/questdk-plugin-llama": "workspace:*",
     "@rabbitholegg/questdk-plugin-boost": "workspace:*",
     "@rabbitholegg/questdk-plugin-kote": "workspace:*",
-    "@rabbitholegg/questdk-plugin-jojo": "workspace:*",
-    "@rabbitholegg/questdk-plugin-aaples": "workspace:*"
+    "@rabbitholegg/questdk-plugin-jojo": "workspace:*"
   }
 }
