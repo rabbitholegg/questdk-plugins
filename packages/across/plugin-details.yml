@@ -7,6 +7,6 @@ task:
   # action specific name, this is what will show as the default title for your boosts
   name: Mint on acrosstest
   # action specific link to your project. (ie: myapp.com/mint)
-  link: 
-  iconOption: https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661
+  link: https://acrosstest.org/mint
+  iconOption: https://upload.wikimedia.org/wikipedia/commons/3/3d/LARGE_elevation.jpg
   actionPluginId: mint
