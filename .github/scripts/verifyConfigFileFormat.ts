@@ -60,8 +60,12 @@ async function validateIcon(iconUrl: string) {
 
 async function main() {
   const newPackagesPaths = await utils.getNewPackages();
-  if (newPackagesPaths.length) {
-    const paths = await utils.validatePluginDetailsPaths(newPackagesPaths);
+  const updatedDetailsPaths = await utils.getUpdatedPluginDetailsPaths();
+  const uniqueDetailsPaths = Array.from(
+    new Set([...newPackagesPaths, ...updatedDetailsPaths]),
+  );
+  if (uniqueDetailsPaths.length) {
+    const paths = await utils.validatePluginDetailsPaths(uniqueDetailsPaths);
     for (const path of paths) {
       await validateConfigFile(path);
     }

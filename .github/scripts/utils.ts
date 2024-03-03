@@ -6,30 +6,45 @@ const { promisify } = require("util");
 const execAsync = promisify(exec);
 
 async function getNewPackages(): Promise<string[]> {
+  // Get list of all directories in packages/ on main
+  const { stdout: mainDirs } = await execAsync(
+    "git ls-tree -d --name-only main:packages/",
+  );
+  const mainPackagesSet = new Set(
+    mainDirs.split("\n").filter((name: string) => name.trim() !== ""),
+  );
+
+  // Get list of all directories in packages/ in the current HEAD
+  const { stdout: headDirs } = await execAsync(
+    "git ls-tree -d --name-only HEAD:packages/",
+  );
+  const headPackages = headDirs
+    .split("\n")
+    .filter((name: string) => name.trim() !== "");
+
+  // Filter out directories that are also present on main
+  const newPackageDirs = headPackages
+    .filter((pkg: string) => !mainPackagesSet.has(pkg))
+    .map((pkg: string) => path.join("packages", pkg));
+
+  return newPackageDirs;
+}
+
+async function getUpdatedPluginDetailsPaths(): Promise<string[]> {
   const { stdout, stderr } = await execAsync(
-    "git diff --diff-filter=A --name-only main...HEAD packages/",
+    "git diff --diff-filter=AM --name-only main...HEAD packages/",
   );
   if (stderr) {
-    throw new Error(`Error getting new packages: ${stderr}`);
+    throw new Error(`Error getting updated plugin details: ${stderr}`);
   }
 
-  // Split the output into lines, trim whitespace, and filter out empty lines
-  const changedFiles = stdout
+  // Filter for changes specifically in plugin-details.yml files and format paths
+  const updatedDetailsPaths = stdout
     .split("\n")
-    .filter((path: string) => path.trim() !== "")
-    .map((path: string) => path.trim());
+    .filter((path: string) => path.trim().endsWith("plugin-details.yml"))
+    .map((path: string) => path.replace("/plugin-details.yml", ""));
 
-  // Extract unique package directories
-  const newPackageDirs = new Set<string>();
-  changedFiles.forEach((file: string) => {
-    // This regex matches 'packages/PackageName/' from the file path
-    const match = file.match(/^(packages\/[^\/]+)\//);
-    if (match) {
-      newPackageDirs.add(match[1]);
-    }
-  });
-
-  return Array.from(newPackageDirs);
+  return updatedDetailsPaths;
 }
 
 async function validatePluginDetailsPaths(
@@ -44,9 +59,7 @@ async function validatePluginDetailsPaths(
       console.log(`Valid: ${detailsPath} exists.`);
       validDetailsPaths.push(detailsPath);
     } catch (error) {
-      throw new Error(
-        `Missing plugin-details.yml in new package: ${packageDir}`,
-      );
+      throw new Error(`Missing plugin-details.yml in package: ${packageDir}`);
     }
   }
   return validDetailsPaths;
@@ -54,5 +67,6 @@ async function validatePluginDetailsPaths(
 
 module.exports = {
   getNewPackages,
+  getUpdatedPluginDetailsPaths,
   validatePluginDetailsPaths,
 };
