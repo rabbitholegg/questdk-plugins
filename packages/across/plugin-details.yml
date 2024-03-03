@@ -1,7 +1,7 @@
 project:
   name: AcrossTest
   iconOption: https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661
-  appLink: https://acrosstest.org
+  appLink: foo
 
 task:
   # action specific name, this is what will show as the default title for your boosts
