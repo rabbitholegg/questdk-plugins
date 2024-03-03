@@ -1,0 +1,12 @@
+project:
+  name: FirstTest
+  iconOption: https://assets.coingecko.com/coins/images/6319/standard/usdc.png
+  appLink: https://firsttest.xyz
+
+task:
+  # action specific name, this is what will show as the default title for your boosts
+  name: Mint on FirstTest
+  # action specific link to your project. (ie: myapp.com/mint)
+  link: https://firsttest.xyz/mint
+  iconOption: https://assets.coingecko.com/coins/images/6319/standard/usdc.png
+  actionPluginId: mint
