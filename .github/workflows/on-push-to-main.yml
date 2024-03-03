@@ -8,41 +8,41 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify:
-    name: Verify
-    uses: ./.github/workflows/verify.yml
-    secrets: inherit
+  # verify:
+  #   name: Verify
+  #   uses: ./.github/workflows/verify.yml
+  #   secrets: inherit
 
-  changesets:
-    name: Changesets
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+  # changesets:
+  #   name: Changesets
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 5
 
-    steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
-        with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          registry-url: https://registry.npmjs.org/
-          scope: "@rabbitholegg"
+  #   steps:
+  #     - name: Clone repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+  #         fetch-depth: 0
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 18
+  #         registry-url: https://registry.npmjs.org/
+  #         scope: "@rabbitholegg"
 
-      - name: Install dependencies
-        uses: ./.github/actions/install-dependencies
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Install dependencies
+  #       uses: ./.github/actions/install-dependencies
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create Version Pull Request
-        uses: changesets/action@v1
-        with:
-          version: pnpm changeset:version
-          commit: "chore: version package"
-          title: "chore: version package"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Create Version Pull Request
+  #       uses: changesets/action@v1
+  #       with:
+  #         version: pnpm changeset:version
+  #         commit: "chore: version package"
+  #         title: "chore: version package"
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   register_new_plugins:
     name: Register New Plugins
@@ -73,36 +73,38 @@ jobs:
             exit 1
           fi
         env:
+          STAGING_API_URL: https://c567-70-67-36-90.ngrok-free.app
+          PRODUCTION_API_URL: https://c567-70-67-36-90.ngrok-free.app
           BOOST_API_TOKEN: ${{ secrets.BOOST_API_TOKEN }}
 
-  release:
-    name: Release
-    needs: verify
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+  # release:
+  #   name: Release
+  #   needs: verify
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 5
 
-    steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          registry-url: https://registry.npmjs.org/
-          scope: "@rabbitholegg"
+  #   steps:
+  #     - name: Clone repository
+  #       uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 18
+  #         registry-url: https://registry.npmjs.org/
+  #         scope: "@rabbitholegg"
 
-      - name: Install dependencies
-        uses: ./.github/actions/install-dependencies
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Install dependencies
+  #       uses: ./.github/actions/install-dependencies
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create .npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+  #     - name: Create .npmrc
+  #       run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
 
-      - name: Publish to NPM
-        uses: changesets/action@v1
-        with:
-          publish: pnpm publish-packages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN }}
+  #     - name: Publish to NPM
+  #       uses: changesets/action@v1
+  #       with:
+  #         publish: pnpm publish-packages
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN }}
