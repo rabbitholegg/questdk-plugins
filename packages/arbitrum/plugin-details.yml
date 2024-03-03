@@ -1,0 +1,12 @@
+project:
+  name: arbtest
+  iconOption: 
+  appLink: https://arbtest.org
+
+task:
+  # action specific name, this is what will show as the default title for your boosts
+  name: Mint on arbtest
+  # action specific link to your project. (ie: myapp.com/mint)
+  link: https://arbtest.org/mint
+  iconOption: 
+  actionPluginId: mint
