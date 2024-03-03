@@ -58,7 +58,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
 
       - name: Fetch target branch
-        run: git fetch origin main:main
+        run: git fetch origin
 
       - name: Call API to register new plugin details without retry logic
         run: |
