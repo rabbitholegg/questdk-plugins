@@ -175,6 +175,12 @@ async function replaceProjectName(params: BuilderParams) {
   const indexTemplate = Handlebars.compile(index)
   await fs.writeFile(indexPath, indexTemplate(params))
   console.log(`\t ${arrow} Updated file ${cyan('index.ts')}!`)
+
+  const configPath = path.join(dest, 'plugin-details.yml')
+  const config = await fs.readFile(configPath, 'utf8')
+  const configTemplate = Handlebars.compile(config)
+  await fs.writeFile(configPath, configTemplate(params))
+  console.log(`\t ${arrow} Updated file ${cyan('plugin-details.yml')}!`)
 }
 
 /**

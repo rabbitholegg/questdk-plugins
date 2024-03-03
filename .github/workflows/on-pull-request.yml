@@ -2,6 +2,8 @@ name: Pull request
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -13,43 +15,21 @@ jobs:
     uses: ./.github/workflows/verify.yml
     secrets: inherit
 
-  # bench:
-  #   if: false
-  #   name: Benchmark
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 5
+  verify-config-file-format:
+    name: Verify Config File Format
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Clone repository
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  #     - name: Install dependencies
-  #       uses: ./.github/actions/install-dependencies
+      - name: Fetch target branch
+        run: git fetch origin main:main
 
-  #     - name: Run benchmarks
-  #       run: pnpm bench:ci
-  #       env:
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
 
-  #     - name: Report benchmarks
-  #       run: pnpm bun ./.github/scripts/bench.ts
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # size:
-  #   name: Size
-  #   runs-on: ubuntu-latest
-  #   timeout-minutes: 5
-
-  #   steps:
-  #     - name: Clone repository
-  #       uses: actions/checkout@v3
-
-  #     - name: Install dependencies
-  #       uses: ./.github/actions/install-dependencies
-  #       env: 
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  #     - name: Report build size
-  #       uses: preactjs/compressed-size-action@v2
-  #       with:
-  #         repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run config file format verification script
+        run: npx ts-node ./.github/scripts/verifyConfigFileFormat.ts
