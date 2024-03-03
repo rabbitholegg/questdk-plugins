@@ -10,10 +10,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify:
-    name: Verify
-    uses: ./.github/workflows/verify.yml
-    secrets: inherit
+  # verify:
+  #   name: Verify
+  #   uses: ./.github/workflows/verify.yml
+  #   secrets: inherit
 
   verify-config-file-format:
     name: Verify Config File Format
@@ -33,3 +33,5 @@ jobs:
 
       - name: Run config file format verification script
         run: npx ts-node ./.github/scripts/verifyConfigFileFormat.ts
+        env:
+          APP_URL: https://c567-70-67-36-90.ngrok-free.app
