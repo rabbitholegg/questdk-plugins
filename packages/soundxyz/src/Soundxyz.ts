@@ -32,7 +32,7 @@ import type { MintInfoList, TotalPriceAndFees } from './types'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
 
   return compressJson({
     chainId,
@@ -44,6 +44,7 @@ export const mint = async (
       p: {
         edition: contractAddress,
         quantity: amount,
+        tier: tokenId,
         to: recipient, // Can be given as gift, so recipient will not always match sender
       },
     },
