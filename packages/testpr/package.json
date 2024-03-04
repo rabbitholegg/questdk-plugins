@@ -1,5 +1,5 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-noconfig",
+  "name": "@rabbitholegg/questdk-plugin-testpr",
   "private": true,
   "version": "1.0.0-alpha.0",
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "description": "Plugin for noconfig",
+  "description": "Plugin for TestPr",
   "scripts": {
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",

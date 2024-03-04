@@ -33,6 +33,7 @@ import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
 import { FirstTest } from '@rabbitholegg/questdk-plugin-firsttest'
 import { Noconfig } from '@rabbitholegg/questdk-plugin-noconfig'
+import { TestPr } from '@rabbitholegg/questdk-plugin-testpr'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -89,6 +90,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [JOJO.pluginId]: JOJO,
   [FirstTest.pluginId]: FirstTest,
   [Noconfig.pluginId]: Noconfig,
+  [TestPr.pluginId]: TestPr,
 }
 
 export const getPlugin = (pluginId: string) => {

@@ -3,14 +3,14 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  bridge,
+  mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Noconfig.js'
+} from './TestPr.js'
 
-export const Noconfig: IActionPlugin = {
-  pluginId: "noconfig",
+export const TestPr: IActionPlugin = {
+  pluginId: "testpr",
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  bridge, 
+  mint, 
 }
