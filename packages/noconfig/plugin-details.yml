@@ -1,0 +1,12 @@
+project:
+  name: testtwo
+  iconOption: https://assets.coingecko.com/coins/images/11939/standard/shiba.png?1696511800
+  appLink: https://testtwo.org
+
+task:
+  # action specific name, this is what will show as the default title for your boosts
+  name: Mint on testtwo
+  # action specific link to your project. (ie: myapp.com/mint)
+  link: https://testtwo.org/mint
+  iconOption: https://assets.coingecko.com/coins/images/11939/standard/shiba.png?1696511800
+  actionPluginId: mint

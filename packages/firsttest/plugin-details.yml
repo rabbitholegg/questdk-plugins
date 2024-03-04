@@ -1,0 +1,12 @@
+project:
+  name: FirstTest
+  iconOption: https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661
+  appLink: https://firsttest.org
+
+task:
+  # action specific name, this is what will show as the default title for your boosts
+  name: Mint on FirstTest
+  # action specific link to your project. (ie: myapp.com/mint)
+  link: https://firsttest.org/mint
+  iconOption: https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661
+  actionPluginId: mint

@@ -70,7 +70,6 @@
     "@rabbitholegg/questdk-plugin-kote": "workspace:*",
     "@rabbitholegg/questdk-plugin-jojo": "workspace:*",
     "@rabbitholegg/questdk-plugin-firsttest": "workspace:*",
-    "@rabbitholegg/questdk-plugin-noconfig": "workspace:*",
-    "@rabbitholegg/questdk-plugin-testpr": "workspace:*"
+    "@rabbitholegg/questdk-plugin-noconfig": "workspace:*"
   }
 }
