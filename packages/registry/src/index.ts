@@ -31,8 +31,6 @@ import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
-import { FirstTest } from '@rabbitholegg/questdk-plugin-firsttest'
-import { Noconfig } from '@rabbitholegg/questdk-plugin-noconfig'
 import { TestPr } from '@rabbitholegg/questdk-plugin-testpr'
 import { ENTRYPOINT } from './contract-addresses'
 import {
@@ -88,8 +86,6 @@ export const plugins: Record<string, IActionPlugin> = {
   [Llama.pluginId]: Llama,
   [Kote.pluginId]: Kote,
   [JOJO.pluginId]: JOJO,
-  [FirstTest.pluginId]: FirstTest,
-  [Noconfig.pluginId]: Noconfig,
   [TestPr.pluginId]: TestPr,
 }
 
