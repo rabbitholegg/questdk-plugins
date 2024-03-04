@@ -6,11 +6,11 @@ const _utils = require("./utils");
 async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
   const fileContents = await _fs.readFile(detailsPath, "utf8");
   const details = _yaml.load(fileContents);
-  const { project, task } = details;
+  const { project, tasks } = details;
 
-  // send details to staging API
+  // send project details to staging API
   const { data: stagingData } = await _axios.post(
-    `${process.env.STAGING_API_URL}/plugins/add-project`,
+    "https://api-staging.boost.xyz/plugins/add-project",
     {
       ...project,
       approvedForTerminal: true,
@@ -21,23 +21,10 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
       },
     },
   );
-  await _axios.post(
-    `${process.env.STAGING_API_URL}/plugins/add-task`,
-    {
-      ...task,
-      projectId: stagingData.projectId,
-      approvedForTerminal: true,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
-      },
-    },
-  );
 
-  // send details to production API
+  // send project details to production API
   const { data } = await _axios.post(
-    `${process.env.PRODUCTION_API_URL}/plugins/add-project`,
+    "https://api.boost.xyz/plugins/add-project",
     project,
     {
       headers: {
@@ -45,18 +32,37 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
       },
     },
   );
-  await _axios.post(
-    `${process.env.PRODUCTION_API_URL}/plugins/add-task`,
-    {
-      ...task,
-      projectId: data.projectId,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
+
+  for (const task of tasks) {
+    // send task details to staging API
+    await _axios.post(
+      "https://api-staging.boost.xyz/plugins/add-task",
+      {
+        ...task,
+        projectId: stagingData.projectId,
+        approvedForTerminal: true,
       },
-    },
-  );
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
+        },
+      },
+    );
+    
+    // send task details to production API
+    await _axios.post(
+      "https://api.boost.xyz/plugins/add-task",
+      {
+        ...task,
+        projectId: data.projectId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
+        },
+      },
+    );
+  }
 
   console.log(`Successfully registered plugin details for ${project.name}`);
 }

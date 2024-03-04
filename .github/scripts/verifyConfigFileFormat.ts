@@ -20,7 +20,7 @@ const TaskConfigSchema = z.object({
 
 const PluginConfigSchema = z.object({
   project: ProjectConfigSchema,
-  task: TaskConfigSchema,
+  tasks: z.array(TaskConfigSchema).nonempty(),
 });
 
 async function validateConfigFile(filePath: string): Promise<void> {
@@ -28,14 +28,16 @@ async function validateConfigFile(filePath: string): Promise<void> {
     const configFileContent = await fs.readFile(filePath, "utf8");
     const config = yaml.load(configFileContent);
     PluginConfigSchema.parse(config);
-    const { project, task } = config;
+    const { project, tasks } = config;
 
-    // validate each unique icon option url
-    const uniqueIconOptions = new Set(
-      [project.iconOption, task.iconOption].filter(Boolean),
-    );
-    for (const iconOption of uniqueIconOptions) {
-      await validateIcon(iconOption);
+    for (const task of tasks) {
+      // validate each unique icon option url
+      const uniqueIconOptions = new Set(
+        [project.iconOption, task.iconOption].filter(Boolean),
+      );
+      for (const iconOption of uniqueIconOptions) {
+        await validateIcon(iconOption);
+      }
     }
     console.log(`Config in ${filePath} is valid.`);
   } catch (error) {
@@ -46,7 +48,7 @@ async function validateConfigFile(filePath: string): Promise<void> {
 
 async function validateIcon(iconUrl: string) {
   const response = await axios.post(
-    `${process.env.APP_URL}/plugins/validate-icon`,
+    "https://api.boost.xyz/plugins/validate-icon",
     {
       iconOption: iconUrl,
     },
