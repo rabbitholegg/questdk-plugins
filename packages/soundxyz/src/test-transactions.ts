@@ -55,14 +55,14 @@ export const OP_LIMITED_MINT: TestParams<MintActionParams> = {
     contractAddress: '0xcc1ec4b54b67600a253c55f494a16b75a1f31e5a',
     recipient: '0xa99f898530df1514a566f1a6562d62809e99557d',
     amount: GreaterThanOrEqual(1),
-    tokenId: 1
+    tokenId: 1,
   },
 }
 
 export const passingTestCases = [
   createTestCase(OP_SUPERMINTER, 'when minting superminter v1 contract'),
   createTestCase(OP_SUPERMINTER_V2, 'when minting superminter v2 contract'),
-  createTestCase(OP_LIMITED_MINT, 'when minting limited edition')
+  createTestCase(OP_LIMITED_MINT, 'when minting limited edition'),
 ]
 
 export const failingTestCases = [
@@ -75,9 +75,13 @@ export const failingTestCases = [
   createTestCase(OP_SUPERMINTER_V2, 'when amount is insufficient', {
     amount: GreaterThanOrEqual(10),
   }),
-  createTestCase(OP_SUPERMINTER_V2, 'when mint is limited and free edition is minted', {
-    tokenId: 1,
-  }),
+  createTestCase(
+    OP_SUPERMINTER_V2,
+    'when mint is limited and free edition is minted',
+    {
+      tokenId: 1,
+    },
+  ),
 ]
 
 export const EXPECTED_ENCODED_DATA =
