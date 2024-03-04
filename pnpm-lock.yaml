@@ -219,6 +219,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/firsttest:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/gmx:
     dependencies:
       '@rabbitholegg/questdk':
@@ -348,6 +361,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/noconfig:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/okutrade:
     dependencies:
       '@rabbitholegg/questdk':
@@ -458,6 +484,9 @@ importers:
       '@rabbitholegg/questdk-plugin-connext':
         specifier: workspace:*
         version: link:../connext
+      '@rabbitholegg/questdk-plugin-firsttest':
+        specifier: workspace:*
+        version: link:../firsttest
       '@rabbitholegg/questdk-plugin-gmx':
         specifier: workspace:*
         version: link:../gmx
@@ -485,6 +514,9 @@ importers:
       '@rabbitholegg/questdk-plugin-mux':
         specifier: workspace:*
         version: link:../mux
+      '@rabbitholegg/questdk-plugin-noconfig':
+        specifier: workspace:*
+        version: link:../noconfig
       '@rabbitholegg/questdk-plugin-okutrade':
         specifier: workspace:*
         version: link:../okutrade

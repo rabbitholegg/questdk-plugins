@@ -1,0 +1,12 @@
+project:
+  name: AcrossTest
+  iconOption: https://assets.coingecko.com/coins/images/13397/standard/Graph_Token.png?1696513159
+  appLink: https://acrosstest.org
+
+task:
+  # action specific name, this is what will show as the default title for your boosts
+  name: Mint on acrosstest
+  # action specific link to your project. (ie: myapp.com/mint)
+  link: https://acrosstest.org/mint
+  iconOption: https://assets.coingecko.com/coins/images/13397/standard/Graph_Token.png?1696513159
+  actionPluginId: mint

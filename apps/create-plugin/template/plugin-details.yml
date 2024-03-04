@@ -1,0 +1,12 @@
+project:
+  name: {{capitalize projectName}}
+  iconOption: {{{details.iconUrl}}}
+  appLink: {{{details.projectUrl}}}
+  
+tasks:
+    # action specific name, this is what will show as the default title for your boosts
+  - name: {{capitalize actionType}} on {{capitalize projectName}}
+    # action specific link to your project. (ie: myapp.com/{{lowercase actionType}})
+    link: {{#if details.taskUrl}}{{{details.taskUrl}}}{{else}}{{{details.projectUrl}}}{{/if}}
+    iconOption: {{{details.iconUrl}}}
+    actionPluginId: {{lowercase actionType}}

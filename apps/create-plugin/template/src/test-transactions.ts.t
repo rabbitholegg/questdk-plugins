@@ -8,8 +8,8 @@ import { type {{capitalize actionType}}ActionParams } from '@rabbitholegg/questd
 {{/hasAmountKey}}
 import {
   createTestCase,
-  type TestParams,{{#eq actionType 'bridge'}}
-  Chains{{/eq}}
+  type TestParams,{{#eq actionType 'bridge'}}{{#if tx.length}}
+  Chains{{/if}}{{/eq}}
 } from '@rabbitholegg/questdk-plugin-utils'
 
 {{#unless tx.length}}
@@ -29,12 +29,12 @@ export const {{uppercase actionType}}_TEST: TestParams<{{capitalize actionType}}
     destinationChainId: 0,
   {{else}}
   {{#eq actionType 'mint'}}
-    tokenId: '0',
-    amount: '0',
+    chainId: 0,
+    contractAddress: '0x0',
   {{else}}
   {{#eq actionType 'burn'}}
-    tokenId: '0',
-    amount: '0',
+    chainId: 0,
+    contractAddress: '0x0',
   {{else}}
   {{#eq actionType 'delegate'}}
     chainId: 0,
