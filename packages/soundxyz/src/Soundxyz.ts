@@ -106,18 +106,6 @@ export const getDynamicNameParams = async (
     projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
     project: 'Sound.XYZ',
   };
-  // I added {originAuthor} and {originTargetImage} to the values object; some of these will be empty for some protocols
-  // Example Message: 
-  // const messages = {
-  //   en: {
-  //     'boost.mint':
-  //       '{actionType} {originQuantity} {originTargetImage} {originTarget} {originCollection} {originAuthor} {projectImage} {project} {originNetwork}',
-  //     'mint.from': 'from the {collection} collection',
-  //     'mint.anything': 'anything',
-  //     exactly: 'exactly {amount}',
-  //     'on.network': 'using {network}',
-  //   },
-  // };
   return values
 }
 
