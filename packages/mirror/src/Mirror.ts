@@ -8,7 +8,7 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
-  DisctriminatedActionParams,
+  type DisctriminatedActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
