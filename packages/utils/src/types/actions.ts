@@ -1,4 +1,9 @@
-import { type TransactionRequest, type Address } from 'viem'
+import {
+  type PublicClient,
+  type Address,
+  type SimulateContractReturnType,
+  type TransactionRequest,
+} from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import type { MintIntentParams } from './intents'
@@ -314,6 +319,13 @@ export interface IActionPlugin {
     params: DisctriminatedActionParams,
     metadata: Record<string, unknown>,
   ) => Promise< Record<string, unknown>> ;
+  simulateMint?: (
+    mint: MintIntentParams,
+    value: bigint,
+    account?: Address,
+    client?: PublicClient,
+  ) => Promise<SimulateContractReturnType>
+  getProjectFees?: (params: ActionParams) => Promise<bigint>
 }
 
 export enum ActionType {

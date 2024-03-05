@@ -1,6 +1,6 @@
 import { apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
-import { getDynamicNameParams, mint } from './Soundxyz'
+import { describe, expect, test, vi } from 'vitest'
+import { mint } from './Soundxyz'
 import {
   passingTestCases,
   failingTestCases,
@@ -11,7 +11,11 @@ import { Chains } from './utils'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 import { getMintIntent } from './Soundxyz'
 import { type Address } from 'viem'
-import { ActionType, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  ActionType,
+  type MintIntentParams,
+  type MintActionParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the soundxyz plugin', () => {
   describe('When handling the mint action', () => {
@@ -135,5 +139,22 @@ describe('getDynamicNameParams function', () => {
     }
 
     await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(`Invalid action type "${params.type}"`)
+  })
+})
+describe('getProjectFees', () => {
+  test('should return the correct fee', async () => {
+    const contractAddress: Address =
+      '0xFCB12A059C722AEaaFc4AC5531493cad49cA1848'
+    const mintParams = { contractAddress, chainId: Chains.BASE }
+
+    const mockFns = {
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('777000000000000'),
+    }
+
+    const getProjectFeesSpy = vi.spyOn(mockFns, 'getProjectFees')
+    const fee = await mockFns.getProjectFees(mintParams)
+    expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
+    expect(fee).toEqual(BigInt('777000000000000'))
   })
 })

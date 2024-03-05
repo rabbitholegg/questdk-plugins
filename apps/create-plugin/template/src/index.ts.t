@@ -1,24 +1,16 @@
 import {
   type IActionPlugin,
-  PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk'
 
 import {
-  {{#each actionTypes}}
-  {{lowercase this}}, 
-  {{/each}}
+  {{lowercase actionType}},
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './{{projectName}}.js'
+} from './{{capitalize projectName}}.js'
 
-// Replace *project* with the name of the project
-export const {{projectName}} : IActionPlugin = {
-  pluginId: "{{projectName}}",
+export const {{capitalize projectName}}: IActionPlugin = {
+  pluginId: "{{lowercase projectName}}",
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  {{#each actionTypes}}
-  {{lowercase this}}, 
-  {{/each}}
-
-
+  {{actionType}}, 
 }

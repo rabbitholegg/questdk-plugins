@@ -1,5 +1,43 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#267](https://github.com/rabbitholegg/questdk-plugins/pull/267) [`0ba133e2`](https://github.com/rabbitholegg/questdk-plugins/commit/0ba133e2378c2f2be30986731cf4a793fc78ced1) Thanks [@Quazia](https://github.com/Quazia)! - Pin Symbiosis versions
+
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#261](https://github.com/rabbitholegg/questdk-plugins/pull/261) [`26202e50`](https://github.com/rabbitholegg/questdk-plugins/commit/26202e50247b34cc2417db3743914a26e013f7e6) Thanks [@Quazia](https://github.com/Quazia)! - Update zora mint simulation with new ABI
+
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#256](https://github.com/rabbitholegg/questdk-plugins/pull/256) [`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db) Thanks [@Quazia](https://github.com/Quazia)! - Adds a simulateMint function to all mint plugins
+
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [#237](https://github.com/rabbitholegg/questdk-plugins/pull/237) [`cf73f7d`](https://github.com/rabbitholegg/questdk-plugins/commit/cf73f7d2c69c644e9cf77033589a06faad1995e7) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Create projectFees for Zora and Mirror plugins
+
+- [#238](https://github.com/rabbitholegg/questdk-plugins/pull/238) [`65e701f`](https://github.com/rabbitholegg/questdk-plugins/commit/65e701f3b71aef7117444a0338f146261d3ac06d) Thanks [@Quazia](https://github.com/Quazia)! - Patch to bump viem override
+
+## 1.0.0-alpha.7
+
+### Minor Changes
+
+- [#217](https://github.com/rabbitholegg/questdk-plugins/pull/217) [`de34aad`](https://github.com/rabbitholegg/questdk-plugins/commit/de34aad0cf0e5ba4e451387b02002bba401c738a) Thanks [@Quazia](https://github.com/Quazia)! - Adds utils and mint intents to all mint plugins and registry
+
 ## 1.0.0-alpha.6
 
 ### Minor Changes

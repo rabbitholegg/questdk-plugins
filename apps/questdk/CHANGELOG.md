@@ -1,5 +1,35 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.42
+
+### Patch Changes
+
+- [#262](https://github.com/rabbitholegg/questdk-plugins/pull/262) [`6d063707`](https://github.com/rabbitholegg/questdk-plugins/commit/6d0637072305c88236fb58d3d74f81e1e4407ea5) Thanks [@veganbeef](https://github.com/veganbeef)! - add tokens functions exports
+
+## 2.0.0-alpha.40
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
+## 2.0.0-alpha.39
+
+### Minor Changes
+
+- [#256](https://github.com/rabbitholegg/questdk-plugins/pull/256) [`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db) Thanks [@Quazia](https://github.com/Quazia)! - Adds a simulateMint function to all mint plugins
+
+## 2.0.0-alpha.38
+
+### Patch Changes
+
+- [#241](https://github.com/rabbitholegg/questdk-plugins/pull/241) [`d0a568a9`](https://github.com/rabbitholegg/questdk-plugins/commit/d0a568a9c0b029f3a4b3f5808b37663a560b5b09) Thanks [@Quazia](https://github.com/Quazia)! - Use deprecated viem getFunctionSelector
+
+## 2.0.0-alpha.37
+
+### Patch Changes
+
+- [#238](https://github.com/rabbitholegg/questdk-plugins/pull/238) [`65e701f`](https://github.com/rabbitholegg/questdk-plugins/commit/65e701f3b71aef7117444a0338f146261d3ac06d) Thanks [@Quazia](https://github.com/Quazia)! - Patch to bump viem override
+
 ## 2.0.0-alpha.36
 
 ### Minor Changes
