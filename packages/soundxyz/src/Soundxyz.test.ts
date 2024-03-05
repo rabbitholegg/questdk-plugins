@@ -1,6 +1,6 @@
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test, vi } from 'vitest'
-import { mint } from './Soundxyz'
+import { getDynamicNameParams, mint } from './Soundxyz'
 import {
   passingTestCases,
   failingTestCases,
@@ -12,6 +12,7 @@ import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 import { getMintIntent } from './Soundxyz'
 import { type Address } from 'viem'
 import {
+  ActionType,
   type MintIntentParams,
   type MintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -94,6 +95,55 @@ describe('getMintIntent', () => {
   })
 })
 
+describe('getDynamicNameParams function', () => {
+  test('should return correct values for valid input', async () => {
+    const params = {
+      type: ActionType.Mint,
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      author: 'Author Name',
+      tokenCollection: 'Collection Name',
+    }
+
+    const result = await getDynamicNameParams(params, metadata)
+
+    expect(result).toEqual({
+      actionType: 'Mint',
+      originQuantity: 1,
+      originTargetImage: 'image.png',
+      originAuthor: ' by Author Name',
+      originCollection: 'Collection Name',
+      originNetwork: 10,
+      projectImage:
+        'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
+      project: 'Sound.XYZ',
+    })
+  })
+
+  test('should throw error for invalid action type', async () => {
+    const params = {
+      type: ActionType.Swap, // invalid action type
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      author: 'Author Name',
+      tokenCollection: 'Collection Name',
+    }
+
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
+      `Invalid action type "${params.type}"`,
+    )
+  })
+})
 describe('getProjectFees', () => {
   test('should return the correct fee', async () => {
     const contractAddress: Address =

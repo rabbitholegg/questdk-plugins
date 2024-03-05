@@ -61,5 +61,8 @@ export async function fetchERC1155MetadataByUUID(
   }
   const contractAddress = actionParams.data.contractAddress
   const tokenId = actionParams.data.tokenId
+  if (!contractAddress || !tokenId) {
+    throw new Error('Quest action is missing contract address or token ID')
+  }
   return fetchERC1155Metadata(client, contractAddress, tokenId)
 }

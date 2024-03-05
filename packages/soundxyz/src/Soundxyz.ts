@@ -18,6 +18,8 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
+  type DisctriminatedActionParams,
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   SUPERMINTER,
@@ -169,4 +171,26 @@ export const getSupportedTokenAddresses = async (
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.ETHEREUM, Chains.OPTIMISM, Chains.BASE]
+}
+
+export const getDynamicNameParams = async (
+  params: DisctriminatedActionParams,
+  metadata: Record<string, unknown>,
+): Promise<Record<string, unknown>> => {
+  if (params.type !== ActionType.Mint) {
+    throw new Error(`Invalid action type "${params.type}"`)
+  }
+  const data = params.data
+  const values: Record<string, unknown> = {
+    actionType: 'Mint',
+    originQuantity: data.amount ?? '',
+    originTargetImage: metadata.tokenImage, // NFT Image
+    originAuthor: ` by ${metadata.author}`, // NFT Author/Artist [format: "by {artist}"]
+    originCollection: metadata.tokenCollection, // NFT Collection
+    originNetwork: data.chainId,
+    projectImage:
+      'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
+    project: 'Sound.XYZ',
+  }
+  return values
 }

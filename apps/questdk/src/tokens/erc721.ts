@@ -62,5 +62,8 @@ export async function fetchERC721MetadataByUUID(
   }
   const contractAddress = actionParams.data.contractAddress
   const tokenId = actionParams.data.tokenId
+  if (!contractAddress || !tokenId) {
+    throw new Error('Invalid mint action params')
+  }
   return fetchERC721Metadata(client, contractAddress, tokenId)
 }

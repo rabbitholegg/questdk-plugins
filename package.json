@@ -8,6 +8,7 @@
     "format": "turbo run format --filter=!@rabbitholegg/questdk-plugin-project",
     "clean": "turbo run clean --filter=!@rabbitholegg/questdk-plugin-project",
     "test": "turbo run test --filter=!@rabbitholegg/questdk-plugin-project",
+    "test:questdk": "turbo run test --filter=@rabbitholegg/questdk",
     "test:ci": "turbo run test:ci --filter=!@rabbitholegg/questdk-plugin-project",
     "changeset": "changeset",
     "changeset:release": "turbo run build  --filter=!@rabbitholegg/questdk-plugin-project && changeset publish",
@@ -33,7 +34,10 @@
   "dependencies": {
     "@rabbitholegg/questdk": "2.0.0-alpha.35",
     "viem": "2.7.9",
-    "axios": "1.5.0"
+    "axios": "1.5.0",
+    "zod": "3.21.4",
+    "react-intl": "6.6.2",
+    "ts-pattern": "5.0.1"
   },
   "pnpm": {
     "overrides": {
