@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-llama
 
+## 1.0.0-alpha.20
+
+### Minor Changes
+
+- [#236](https://github.com/rabbitholegg/questdk-plugins/pull/236) [`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1) Thanks [@Quazia](https://github.com/Quazia)! - Add more types/schemas and dynamic name generation for all mint plugins
+
+### Patch Changes
+
+- Updated dependencies [[`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.13
+  - @rabbitholegg/questdk@2.0.0-alpha.43
+
 ## 1.0.0-alpha.19
 
 ### Patch Changes

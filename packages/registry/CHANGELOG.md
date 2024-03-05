@@ -1,5 +1,48 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.80
+
+### Minor Changes
+
+- [#236](https://github.com/rabbitholegg/questdk-plugins/pull/236) [`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1) Thanks [@Quazia](https://github.com/Quazia)! - Add more types/schemas and dynamic name generation for all mint plugins
+
+### Patch Changes
+
+- Updated dependencies [[`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1)]:
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.31
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.31
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-jojo@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.33
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.14
+
 ## 1.0.0-alpha.79
 
 ### Patch Changes

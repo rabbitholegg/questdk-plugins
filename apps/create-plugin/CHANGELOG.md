@@ -1,5 +1,11 @@
 # @rabbitholegg/create-plugin
 
+## 2.0.0-alpha.5
+
+### Minor Changes
+
+- [#236](https://github.com/rabbitholegg/questdk-plugins/pull/236) [`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1) Thanks [@Quazia](https://github.com/Quazia)! - Add more types/schemas and dynamic name generation for all mint plugins
+
 ## 2.0.0-alpha.4
 
 ### Minor Changes
