@@ -205,7 +205,51 @@ describe('Given the getProjectFee function', () => {
         BigInt('777000000000000'),
     }
 
-    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
+    const fee = await mockFns.getProjectFees(mintParams)
+    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
+    expect(fee).equals(BigInt('777000000000000'))
+  })
+
+  test('should return the correct fee for an 1155 mint', async () => {
+    const contractAddress: Address =
+      '0x393c46fe7887697124a73f6028f39751aa1961a3'
+    const tokenId = 1
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 2,
+    }
+
+    const mockFns = {
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('1554000000000000'),
+    }
+
+    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
+    const fee = await mockFns.getProjectFees(mintParams)
+    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
+    expect(fee).equals(BigInt('1554000000000000'))
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a 1155 mint when tokenId is not 0', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.ZORA,
+      contractAddress: '0xc53c050131a3507d51d014445f666f4c3a1a2c24',
+      tokenId: 1, // not 0
+      amount: BigInt(1),
+      recipient: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xE4eDb277e41dc89aB076a1F049f4a3EfA700bCE8'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(mint.contractAddress)
+    expect(request.value).toBe(value)
   })
 })
 
@@ -256,50 +300,5 @@ describe('getDynamicNameParams function', () => {
     await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
       `Invalid action type "${params.type}"`,
     )
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
-    const fee = await mockFns.getProjectFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee).equals(BigInt('777000000000000'))
-  })
-
-  test('should return the correct fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0x393c46fe7887697124a73f6028f39751aa1961a3'
-    const tokenId = 1
-    const mintParams = {
-      contractAddress,
-      tokenId,
-      chainId: Chains.ZORA,
-      amount: 2,
-    }
-
-    const mockFns = {
-      getProjectFees: async (_mint: MintActionParams) =>
-        BigInt('1554000000000000'),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
-    const fee = await mockFns.getProjectFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee).equals(BigInt('1554000000000000'))
-  })
-})
-
-describe('simulateMint function', () => {
-  test('should simulate a 1155 mint when tokenId is not 0', async () => {
-    const mint: MintIntentParams = {
-      chainId: Chains.ZORA,
-      contractAddress: '0xc53c050131a3507d51d014445f666f4c3a1a2c24',
-      tokenId: 1, // not 0
-      amount: BigInt(1),
-      recipient: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
-    }
-    const value = parseEther('0.000777')
-    const account = '0xE4eDb277e41dc89aB076a1F049f4a3EfA700bCE8'
-
-    const result = await simulateMint(mint, value, account)
-    const request = result.request
-    expect(request.address).toBe(mint.contractAddress)
-    expect(request.value).toBe(value)
   })
 })
