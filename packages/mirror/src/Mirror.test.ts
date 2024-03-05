@@ -2,12 +2,12 @@ import {
   Chains,
   type MintActionParams,
   type MintIntentParams,
-  ActionType
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { getDynamicNameParams,getMintIntent, mint } from './Mirror'
+import { getDynamicNameParams, getMintIntent, mint } from './Mirror'
 import { COLLECT_ENTRY_ABI } from './abi'
 import {
   EXPECTED_ENCODED_DATA,
@@ -87,8 +87,6 @@ describe('getMintIntent', () => {
   })
 })
 
-
-
 describe('getDynamicNameParams function', () => {
   test('should return correct values for valid input', async () => {
     const params = {
@@ -113,7 +111,8 @@ describe('getDynamicNameParams function', () => {
       originAuthor: 'by Author Name',
       originCollection: 'Collection Name',
       originNetwork: 10,
-      projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/mirror.png&w=3840&q=75',
+      projectImage:
+        'https://rabbithole-assets.s3.amazonaws.com/projects/mirror.png&w=3840&q=75',
       project: 'Mirror',
     })
   })
@@ -132,7 +131,9 @@ describe('getDynamicNameParams function', () => {
       collectionName: 'Collection Name',
     }
 
-    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(`Invalid action type "${params.type}"`)
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
+      `Invalid action type "${params.type}"`,
+    )
   })
 })
 describe('getProjectFees', () => {

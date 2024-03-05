@@ -33,10 +33,10 @@ function boost(rpcUrl: string) {
       fetchERC721MetadataByUUID(client, uuid),
     fetchERC1155MetadataByUUID: (uuid: string) =>
       fetchERC1155MetadataByUUID(client, uuid),
-    fetchTokenMetadata: (contractAddress: string, tokenId: number) => 
+    fetchTokenMetadata: (contractAddress: string, tokenId: number) =>
       fetchTokenMetadata(client, contractAddress, tokenId),
-      fetchTokenMetadataByUUID: (uuid: string) => fetchTokenMetadataByUUID(client, uuid),
-
+    fetchTokenMetadataByUUID: (uuid: string) =>
+      fetchTokenMetadataByUUID(client, uuid),
   }
 }
 

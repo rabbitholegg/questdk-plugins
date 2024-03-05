@@ -7,7 +7,7 @@ import {
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { getMintIntent, mint,getDynamicNameParams, simulateMint } from './Zora'
+import { getMintIntent, mint, getDynamicNameParams, simulateMint } from './Zora'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
@@ -206,7 +206,7 @@ describe('Given the getProjectFee function', () => {
     }
 
     await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
-  }) 
+  })
 })
 
 describe('getDynamicNameParams function', () => {
@@ -233,7 +233,8 @@ describe('getDynamicNameParams function', () => {
       originTarget: 'Token Name',
       originCollection: 'from Collection Name',
       originNetwork: 10,
-      projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
+      projectImage:
+        'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
       project: 'Zora',
     })
   })
@@ -252,7 +253,9 @@ describe('getDynamicNameParams function', () => {
       collection: 'Collection Name',
     }
 
-    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(`Invalid action type "${params.type}"`)
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
+      `Invalid action type "${params.type}"`,
+    )
     const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
     const fee = await mockFns.getProjectFees(mintParams)
     expect(getProjectsFeeSpy.mock.calls.length).toBe(1)

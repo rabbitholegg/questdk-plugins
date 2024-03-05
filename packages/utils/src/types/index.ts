@@ -27,7 +27,8 @@ export type {
   ActionParamsForm,
 } from './actions'
 
-export { QuestActionParamsSchema,
+export {
+  QuestActionParamsSchema,
   QuestInputActionParamsAmountOperatorEnum,
   QuestInputActionParamsAmountOperatorWithoutAny,
   BridgeActionDetailSchema,
@@ -45,7 +46,8 @@ export { QuestActionParamsSchema,
   VoteActionDetailSchema,
   OptionsActionFormSchema,
   OptionsActionDetailSchema,
-  ActionParamsFormSchema, } from './actions'
+  ActionParamsFormSchema,
+} from './actions'
 
 export {
   EthAddressSchema,
@@ -90,6 +92,5 @@ export {
   NetworkWithChainIdSchema,
   QuestDetailsSchema,
   RewardWithClaimSchema,
-  
   CreateQuestInputSchema,
 } from './quests'

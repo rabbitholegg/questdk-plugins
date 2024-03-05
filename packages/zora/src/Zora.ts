@@ -235,12 +235,10 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
   return CHAIN_ID_ARRAY as number[]
 }
 
-
 export const getDynamicNameParams = async (
   params: DisctriminatedActionParams,
   metadata: Record<string, unknown>,
-): Promise< Record<string, unknown>> => {
-  
+): Promise<Record<string, unknown>> => {
   if (params.type !== ActionType.Mint) {
     throw new Error(`Invalid action type "${params.type}"`)
   }
@@ -249,11 +247,12 @@ export const getDynamicNameParams = async (
     actionType: 'Mint',
     originQuantity: data.amount ?? '',
     originTargetImage: metadata.tokenImage, // NFT Image
-    originTarget: metadata.tokenName,  // NFT Name
-    originCollection: `from ${metadata.collection}`,  // NFT Collection
+    originTarget: metadata.tokenName, // NFT Name
+    originCollection: `from ${metadata.collection}`, // NFT Collection
     originNetwork: data.chainId,
-    projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
+    projectImage:
+      'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
     project: 'Zora',
-  };
+  }
   return values
 }
