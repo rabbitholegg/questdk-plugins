@@ -246,4 +246,3 @@ export const CreateQuestInputSchema = z.object({
 })
 
 export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>
-

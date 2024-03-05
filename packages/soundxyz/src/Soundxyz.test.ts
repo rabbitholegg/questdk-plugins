@@ -119,7 +119,8 @@ describe('getDynamicNameParams function', () => {
       originAuthor: ' by Author Name',
       originCollection: 'Collection Name',
       originNetwork: 10,
-      projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
+      projectImage:
+        'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
       project: 'Sound.XYZ',
     })
   })
@@ -138,7 +139,9 @@ describe('getDynamicNameParams function', () => {
       tokenCollection: 'Collection Name',
     }
 
-    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(`Invalid action type "${params.type}"`)
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
+      `Invalid action type "${params.type}"`,
+    )
   })
 })
 describe('getProjectFees', () => {

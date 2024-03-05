@@ -1,19 +1,18 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import { fetchQuestByUUID} from './fetchQuestData';
-import { type QuestDetails } from '@rabbitholegg/questdk-plugin-utils';
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import { fetchQuestByUUID } from './fetchQuestData'
+import { type QuestDetails } from '@rabbitholegg/questdk-plugin-utils'
 import { describe, expect, test, afterEach } from 'vitest'
 
-const mock = new MockAdapter(axios);
-const TEST_UUID = 'bdd71fd1-5b7f-4f6e-90f8-469b3d6ee67e';
+const mock = new MockAdapter(axios)
+const TEST_UUID = 'bdd71fd1-5b7f-4f6e-90f8-469b3d6ee67e'
 describe('fetchQuestActionParams', () => {
   afterEach(() => {
-    mock.reset();
-  });
-
+    mock.reset()
+  })
 
   test('should fetch quest action parameters successfully with mock', async () => {
-    const mockResponse: QuestDetails =  {
+    const mockResponse: QuestDetails = {
       actionSpecId: null,
       allowlistEnabled: true,
       id: 'test-id',
@@ -47,17 +46,23 @@ describe('fetchQuestActionParams', () => {
       questFactoryAddress: '0xabcdef1234567890',
       queued: false,
       isPublic: null,
-      actionParams: { } as any,// Fill with correct test data
-    };
-    mock.onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`).reply(200, mockResponse);
+      actionParams: {} as any, // Fill with correct test data
+    }
+    mock
+      .onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`)
+      .reply(200, mockResponse)
 
-    const result = await fetchQuestByUUID(TEST_UUID);
+    const result = await fetchQuestByUUID(TEST_UUID)
 
-    expect(result).toEqual(mockResponse);
-  });
+    expect(result).toEqual(mockResponse)
+  })
 
   test('should throw an error when the request fails', async () => {
-    mock.onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`).reply(500);
-    await expect(fetchQuestByUUID(TEST_UUID)).rejects.toThrow('Failed to fetch quest data');
-  });
-});
+    mock
+      .onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`)
+      .reply(500)
+    await expect(fetchQuestByUUID(TEST_UUID)).rejects.toThrow(
+      'Failed to fetch quest data',
+    )
+  })
+})
