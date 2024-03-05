@@ -6,13 +6,13 @@ import {
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
 } from './test-transactions'
-import { getMintIntent, mint } from './Zora'
+import { getMintIntent, getDynamicNameParams, mint } from './Zora'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
 } from './abi'
-import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import { type MintIntentParams, type ActionType } from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
@@ -195,5 +195,52 @@ describe('Given the getMintIntent function', () => {
     }
 
     await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+  }) 
+})
+
+describe('getDynamicNameParams function', () => {
+  test('should return correct values for valid input', async () => {
+    const params = {
+      type: 'mint',
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      tokenName: 'Token Name',
+      collection: 'Collection Name',
+    }
+
+    const result = await getDynamicNameParams(params, metadata)
+
+    expect(result).toEqual({
+      actionType: 'Mint',
+      originQuantity: 1,
+      originTargetImage: 'image.png',
+      originTarget: 'Token Name',
+      originCollection: 'from Collection Name',
+      originNetwork: 10,
+      projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
+      project: 'Zora',
+    })
+  })
+
+  test('should throw error for invalid action type', async () => {
+    const params = {
+      type: 'InvalidActionType',
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      tokenName: 'Token Name',
+      collection: 'Collection Name',
+    }
+
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(`Invalid action type "${params.type}"`)
   })
 })
