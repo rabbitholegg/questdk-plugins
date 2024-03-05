@@ -1,6 +1,6 @@
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test, vi } from 'vitest'
-import { mint } from './Soundxyz'
+import { getDynamicNameParams, mint } from './Soundxyz'
 import {
   passingTestCases,
   failingTestCases,
