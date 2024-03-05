@@ -12,7 +12,7 @@ import {
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
 } from './abi'
-import { type MintIntentParams, type ActionType } from '@rabbitholegg/questdk-plugin-utils'
+import { type MintIntentParams, ActionType } from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
@@ -201,7 +201,7 @@ describe('Given the getMintIntent function', () => {
 describe('getDynamicNameParams function', () => {
   test('should return correct values for valid input', async () => {
     const params = {
-      type: 'mint',
+      type: ActionType.Mint,
       data: {
         amount: 1,
         chainId: 10,
@@ -229,7 +229,7 @@ describe('getDynamicNameParams function', () => {
 
   test('should throw error for invalid action type', async () => {
     const params = {
-      type: 'InvalidActionType',
+      type: ActionType.Swap,
       data: {
         amount: 1,
         chainId: 10,
