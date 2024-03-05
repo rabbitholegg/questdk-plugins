@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.17
+
+### Minor Changes
+
+- [#272](https://github.com/rabbitholegg/questdk-plugins/pull/272) [`66f0d47b`](https://github.com/rabbitholegg/questdk-plugins/commit/66f0d47b2d52bc3e44089115ac83b88b3dc7b4b7) Thanks [@mmackz](https://github.com/mmackz)! - add support for targeting limited edition mints
+
 ## 1.0.0-alpha.16
 
 ### Minor Changes
