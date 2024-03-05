@@ -60,6 +60,7 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
 
 export const getDynamicNameParams = async (
   params: DisctriminatedActionParams,
+  metadata: Record<string, unknown>,
 ): Promise< Record<string, unknown>> => {
   
   if (params.type !== ActionType.Mint) {
@@ -69,9 +70,9 @@ export const getDynamicNameParams = async (
   const values: Record<string, unknown> = {
     actionType: 'Mint',
     originQuantity: data.amount ?? '',
-    originTargetImage: 'https://rabbithole.mirror.xyz/_next/image?url=https%3A%2F%2Fimages.mirror-media.xyz%2Fwnft%2FpXrAzyEa-8tXGMUiv8M1X.png%3Fheight%3D2048%26width%3D2048&w=384&q=90', // NFT Image
-    originAuthor: 'by Rabbithole',      // NFT Author/Artist [format: "by {artist}"]
-    originCollection: 'Introducing the Boost Guild',  // NFT Collection
+    originTargetImage: metadata.tokenImage, // NFT Image
+    originAuthor: `by ${metadata.author}`,      // NFT Author/Artist [format: "by {artist}"]
+    originCollection: metadata.collectionName,  // NFT Collection
     originNetwork: data.chainId,
     projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/mirror.png&w=3840&q=75',
     project: 'Mirror',
