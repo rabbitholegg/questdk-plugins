@@ -126,6 +126,7 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
 
 export const getDynamicNameParams = async (
   params: DisctriminatedActionParams,
+  metadata: Record<string, unknown>,
 ): Promise< Record<string, unknown>> => {
   
   if (params.type !== ActionType.Mint) {
@@ -135,9 +136,9 @@ export const getDynamicNameParams = async (
   const values: Record<string, unknown> = {
     actionType: 'Mint',
     originQuantity: data.amount ?? '',
-    originTargetImage: 'https://remote-image.decentralized-content.com/image?url=https%3A%2F%2Fipfs.decentralized-content.com%2Fipfs%2Fbafybeif5ndcdebirlc5oxx633jz6jjujsnkxaksv54i6oujaxr5uiebdp4&w=1080&q=75', // NFT Image
-    originTarget: 'Choice Is Yours',  // NFT Name
-    originCollection: 'from Between the Layers',  // NFT Collection
+    originTargetImage: metadata.tokenImage, // NFT Image
+    originTarget: metadata.tokenName,  // NFT Name
+    originCollection: `from ${metadata.collection}`,  // NFT Collection
     originNetwork: data.chainId,
     projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
     project: 'Zora',
