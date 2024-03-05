@@ -89,6 +89,7 @@ export const getSupportedChainIds = async (): Promise<number[]> => {
 
 export const getDynamicNameParams = async (
   params: DisctriminatedActionParams,
+  metadata: Record<string, unknown>,
 ): Promise< Record<string, unknown>> => {
   
   if (params.type !== ActionType.Mint) {
@@ -98,9 +99,9 @@ export const getDynamicNameParams = async (
   const values: Record<string, unknown> = {
     actionType: 'Mint',
     originQuantity: data.amount ?? '',
-    originTargetImage: 'https://raw.seadn.io/files/a13c1649910e13b12f0fee20ef037ee7.jpg', // NFT Image
-    originAuthor: 'by 33 Below',      // NFT Author/Artist [format: "by {artist}"]
-    originCollection: 'JUMPER',  // NFT Collection
+    originTargetImage: metadata.tokenImage, // NFT Image
+    originAuthor: ` by ${metadata.author}`,      // NFT Author/Artist [format: "by {artist}"]
+    originCollection: metadata.tokenCollection,  // NFT Collection
     originNetwork: data.chainId,
     projectImage: 'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
     project: 'Sound.XYZ',
