@@ -18,10 +18,28 @@ export async function fetchERC721Metadata(
   const tokenURI: string = await (client.readContract({
     address: contractAddress as Address,
     abi: [
-      'function tokenURI(uint256 tokenId) external view returns (string memory)',
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tokenId',
+            type: 'uint256',
+          },
+        ],
+        name: 'tokenURI',
+        outputs: [
+          {
+            internalType: 'string',
+            name: '',
+            type: 'string',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'tokenURI',
-    args: [tokenId],
+    args: [BigInt(tokenId)],
   }) as Promise<string>)
 
   const response = await axios.get(tokenURI)
