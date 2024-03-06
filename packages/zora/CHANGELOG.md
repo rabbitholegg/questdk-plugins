@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.26
+
+### Patch Changes
+
+- [#276](https://github.com/rabbitholegg/questdk-plugins/pull/276) [`5952f3f1`](https://github.com/rabbitholegg/questdk-plugins/commit/5952f3f187cf1449c9258a515b0922ca5dc01cd1) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Add extra handling for getting `projectFee`
+
 ## 1.0.0-alpha.25
 
 ### Minor Changes
