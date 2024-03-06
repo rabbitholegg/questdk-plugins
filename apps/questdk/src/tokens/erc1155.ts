@@ -43,7 +43,7 @@ export async function fetchERC1155Metadata(
   }) as Promise<string>)
 
   if (tokenURI.startsWith('ipfs://')) {
-    const ipfsIdentifier = tokenURI.split('/')[2]
+    const ipfsIdentifier = tokenURI.split('/').slice(2).join('/')
     tokenURI = `https://ipfs.io/ipfs/${ipfsIdentifier}`
   }
   const response = await axios.get(tokenURI)
