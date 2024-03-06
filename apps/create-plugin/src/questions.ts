@@ -89,8 +89,9 @@ export function getTxHashQuestion(transactions: TransactionDetail[]): PromptObje
     message: `Provide a transaction hash: ${
       transactions.length === 0 ? '(Optional)' : ''
     }`,
+    initial: '',
     validate: (input: string) => {
-      if (!isHash(input)) {
+      if (input !== '' && !isHash(input)) {
         return 'Please enter a valid transaction hash'
       }
       return true
