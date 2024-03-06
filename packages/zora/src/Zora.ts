@@ -218,14 +218,17 @@ export const getProjectFees = async (
 
     args.tokenId = tokenId ?? 1
 
-    const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(args)
-    const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+    const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(
+      args,
+    )
+    const quantityToMint =
+      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
     const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
 
     return fee.totalCost
   } catch (err) {
     console.error(err)
-    return parseEther("0.000777") // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
+    return parseEther('0.000777') // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
   }
 }
 
