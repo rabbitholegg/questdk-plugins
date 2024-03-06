@@ -15,6 +15,7 @@ import {
   type PublicClient,
   type SimulateContractReturnType,
   pad,
+  parseEther,
 } from 'viem'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
@@ -206,23 +207,29 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
-  const { chainId, contractAddress, tokenId, amount } = mint
+  try {
+    const { chainId, contractAddress, tokenId, amount } = mint
 
-  const client = new MintAPIClient(chainId)
+    const client = new MintAPIClient(chainId)
 
-  const args: { tokenAddress: Address; tokenId?: number } = {
-    tokenAddress: contractAddress,
+    const args: { tokenAddress: Address; tokenId?: number } = {
+      tokenAddress: contractAddress,
+    }
+
+    args.tokenId = tokenId ?? 1
+
+    const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(
+      args,
+    )
+    const quantityToMint =
+      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+    const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
+
+    return fee.totalCost
+  } catch (err) {
+    console.error(err)
+    return parseEther('0.000777') // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
   }
-
-  if (tokenId) {
-    args.tokenId = tokenId
-  }
-
-  const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(args)
-  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
-  const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
-
-  return fee.totalCost
 }
 
 export const getSupportedTokenAddresses = async (
