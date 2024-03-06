@@ -15,7 +15,7 @@ export async function fetchERC721Metadata(
   contractAddress: string,
   tokenId: number,
 ): Promise<any> {
-  const tokenURI: string = await (client.readContract({
+  let tokenURI: string = await (client.readContract({
     address: contractAddress as Address,
     abi: [
       {
@@ -42,6 +42,10 @@ export async function fetchERC721Metadata(
     args: [BigInt(tokenId)],
   }) as Promise<string>)
 
+  if (tokenURI.startsWith('ipfs://')) {
+    const ipfsIdentifier = tokenURI.split('/')[2]
+    tokenURI = `https://ipfs.io/ipfs/${ipfsIdentifier}`
+  }
   const response = await axios.get(tokenURI)
   return response.data
 }
