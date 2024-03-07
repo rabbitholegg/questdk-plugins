@@ -1,6 +1,10 @@
 import type { BridgeActionParams } from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { Chains, createTestCase, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  createTestCase,
+  type TestParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
 const BRIDGE_ETH_OP_ARB: TestParams<BridgeActionParams> = {
