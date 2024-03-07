@@ -12,13 +12,8 @@ import type {
 } from './types'
 const _prompts = require('prompts')
 
-const onCancel = () => {
-  console.log('Process cancelled. Exiting...');
-  process.exit(1)
-}
-
 export async function askQuestions() {
-  const response = await _prompts(mainQuestions, { onCancel })
+  const response = await _prompts(mainQuestions)
 
   const transactions: TransactionDetail[] = []
 
@@ -52,7 +47,7 @@ export async function askQuestions() {
         }
         const actionResponse: ActionResponse = await _prompts(
           actionQuestions[response.action as Actions],
-          { onSubmit, onCancel },
+          { onSubmit },
         )
         const initialParams = getParams(response.action, actionResponse)
         const builtParams = buildParams(
@@ -73,18 +68,14 @@ export async function askQuestions() {
       }
     }
 
-    if (hash) {
-      const { addAnother }: { addAnother: boolean } = await _prompts({
-        type: 'confirm',
-        name: 'addAnother',
-        message: 'Do you have another transaction?',
-        initial: false,
-      })
-  
-      addAnotherTransaction = addAnother
-    } else {
-      addAnotherTransaction = false
-    }
+    const { addAnother }: { addAnother: boolean } = await _prompts({
+      type: 'confirm',
+      name: 'addAnother',
+      message: 'Do you have another transaction?',
+      initial: false,
+    })
+
+    addAnotherTransaction = addAnother
   }
 
   return {
