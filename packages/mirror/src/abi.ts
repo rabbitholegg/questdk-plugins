@@ -20,7 +20,7 @@ export const COLLECT_ENTRY_ABI = [
     stateMutability: 'payable',
     type: 'function',
   },
-]
+] as const
 
 export const GET_PRICE_ABI = [
   {
