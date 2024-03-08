@@ -73,8 +73,8 @@ jobs:
             exit 1
           fi
         env:
-          STAGING_API_URL: https://5efc-70-67-36-90.ngrok-free.app
-          PRODUCTION_API_URL: https://5efc-70-67-36-90.ngrok-free.app
+          STAGING_API_URL: https://2667-70-67-36-90.ngrok-free.app
+          PRODUCTION_API_URL: https://2667-70-67-36-90.ngrok-free.app
           BOOST_API_TOKEN: ${{ secrets.BOOST_API_TOKEN }}
 
   # release:
