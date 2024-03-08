@@ -68,6 +68,30 @@ export const MINT_INFO_LIST_ABI = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "edition",
+        type: "address"
+      },
+      {
+        internalType: "uint8",
+        name: "tier",
+        type: "uint8"
+      }
+    ],
+    name: "nextScheduleNum",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
         internalType: 'address',
         name: 'edition',
         type: 'address',
