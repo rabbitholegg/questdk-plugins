@@ -9,6 +9,7 @@ import {
   mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  getDynamicNameParams,
   getProjectFees,
   getMintIntent,
   simulateMint,
@@ -21,6 +22,7 @@ export const Mirror: IActionPlugin = {
   mint,
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
+  getDynamicNameParams,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
   getMintIntent,

@@ -2,11 +2,13 @@ import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
+  ActionType,
 } from '@rabbitholegg/questdk'
 import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
+  type DisctriminatedActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -135,4 +137,26 @@ export const getSupportedTokenAddresses = async (
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.OPTIMISM, Chains.ZORA, Chains.BASE, Chains.LINEA]
+}
+
+export const getDynamicNameParams = async (
+  params: DisctriminatedActionParams,
+  metadata: Record<string, unknown>,
+): Promise<Record<string, unknown>> => {
+  if (params.type !== ActionType.Mint) {
+    throw new Error(`Invalid action type "${params.type}"`)
+  }
+  const data = params.data
+  const values: Record<string, unknown> = {
+    actionType: 'Mint',
+    originQuantity: data.amount ?? '',
+    originTargetImage: metadata.tokenImage, // NFT Image
+    originAuthor: `by ${metadata.author}`, // NFT Author/Artist [format: "by {artist}"]
+    originCollection: metadata.collectionName, // NFT Collection
+    originNetwork: data.chainId,
+    projectImage:
+      'https://rabbithole-assets.s3.amazonaws.com/projects/mirror.png&w=3840&q=75',
+    project: 'Mirror',
+  }
+  return values
 }

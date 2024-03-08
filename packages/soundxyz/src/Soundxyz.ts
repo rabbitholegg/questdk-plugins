@@ -18,6 +18,8 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
+  type DisctriminatedActionParams,
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   SUPERMINTER,
@@ -32,7 +34,7 @@ import type { MintInfoList, TotalPriceAndFees } from './types'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
 
   return compressJson({
     chainId,
@@ -44,6 +46,7 @@ export const mint = async (
       p: {
         edition: contractAddress,
         quantity: amount,
+        tier: tokenId,
         to: recipient, // Can be given as gift, so recipient will not always match sender
       },
     },
@@ -168,4 +171,26 @@ export const getSupportedTokenAddresses = async (
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.ETHEREUM, Chains.OPTIMISM, Chains.BASE]
+}
+
+export const getDynamicNameParams = async (
+  params: DisctriminatedActionParams,
+  metadata: Record<string, unknown>,
+): Promise<Record<string, unknown>> => {
+  if (params.type !== ActionType.Mint) {
+    throw new Error(`Invalid action type "${params.type}"`)
+  }
+  const data = params.data
+  const values: Record<string, unknown> = {
+    actionType: 'Mint',
+    originQuantity: data.amount ?? '',
+    originTargetImage: metadata.tokenImage, // NFT Image
+    originAuthor: ` by ${metadata.author}`, // NFT Author/Artist [format: "by {artist}"]
+    originCollection: metadata.tokenCollection, // NFT Collection
+    originNetwork: data.chainId,
+    projectImage:
+      'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
+    project: 'Sound.XYZ',
+  }
+  return values
 }

@@ -2,11 +2,12 @@ import {
   Chains,
   type MintActionParams,
   type MintIntentParams,
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { getMintIntent, mint } from './Mirror'
+import { getDynamicNameParams, getMintIntent, mint } from './Mirror'
 import { COLLECT_ENTRY_ABI } from './abi'
 import {
   EXPECTED_ENCODED_DATA,
@@ -86,6 +87,55 @@ describe('getMintIntent', () => {
   })
 })
 
+describe('getDynamicNameParams function', () => {
+  test('should return correct values for valid input', async () => {
+    const params = {
+      type: ActionType.Mint,
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      author: 'Author Name',
+      collectionName: 'Collection Name',
+    }
+
+    const result = await getDynamicNameParams(params, metadata)
+
+    expect(result).toEqual({
+      actionType: 'Mint',
+      originQuantity: 1,
+      originTargetImage: 'image.png',
+      originAuthor: 'by Author Name',
+      originCollection: 'Collection Name',
+      originNetwork: 10,
+      projectImage:
+        'https://rabbithole-assets.s3.amazonaws.com/projects/mirror.png&w=3840&q=75',
+      project: 'Mirror',
+    })
+  })
+
+  test('should throw error for invalid action type', async () => {
+    const params = {
+      type: ActionType.Swap, // invalid action type
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      author: 'Author Name',
+      collectionName: 'Collection Name',
+    }
+
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
+      `Invalid action type "${params.type}"`,
+    )
+  })
+})
 describe('getProjectFees', () => {
   test('should return the correct fee', async () => {
     const contractAddress: Address =

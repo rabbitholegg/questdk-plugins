@@ -1,5 +1,23 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.26
+
+### Patch Changes
+
+- [#276](https://github.com/rabbitholegg/questdk-plugins/pull/276) [`5952f3f1`](https://github.com/rabbitholegg/questdk-plugins/commit/5952f3f187cf1449c9258a515b0922ca5dc01cd1) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Add extra handling for getting `projectFee`
+
+## 1.0.0-alpha.25
+
+### Minor Changes
+
+- [#236](https://github.com/rabbitholegg/questdk-plugins/pull/236) [`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1) Thanks [@Quazia](https://github.com/Quazia)! - Add more types/schemas and dynamic name generation for all mint plugins
+
+### Patch Changes
+
+- Updated dependencies [[`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.13
+  - @rabbitholegg/questdk@2.0.0-alpha.43
+
 ## 1.0.0-alpha.24
 
 ### Patch Changes

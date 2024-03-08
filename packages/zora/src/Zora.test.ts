@@ -2,11 +2,12 @@ import {
   Chains,
   type MintActionParams,
   type MintIntentParams,
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { getMintIntent, mint, simulateMint } from './Zora'
+import { getMintIntent, mint, getDynamicNameParams, simulateMint } from './Zora'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
@@ -249,5 +250,55 @@ describe('simulateMint function', () => {
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
+  })
+})
+
+describe('getDynamicNameParams function', () => {
+  test('should return correct values for valid input', async () => {
+    const params = {
+      type: ActionType.Mint,
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      tokenName: 'Token Name',
+      collection: 'Collection Name',
+    }
+
+    const result = await getDynamicNameParams(params, metadata)
+
+    expect(result).toEqual({
+      actionType: 'Mint',
+      originQuantity: 1,
+      originTargetImage: 'image.png',
+      originTarget: 'Token Name',
+      originCollection: 'from Collection Name',
+      originNetwork: 10,
+      projectImage:
+        'https://rabbithole-assets.s3.amazonaws.com/projects/zora.png&w=3840&q=75',
+      project: 'Zora',
+    })
+  })
+
+  test('should throw error for invalid action type', async () => {
+    const params = {
+      type: ActionType.Swap,
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      tokenName: 'Token Name',
+      collection: 'Collection Name',
+    }
+
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
+      `Invalid action type "${params.type}"`,
+    )
   })
 })

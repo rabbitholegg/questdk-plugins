@@ -1,6 +1,6 @@
 {
     "name": "@rabbitholegg/questdk",
-    "version": "2.0.0-alpha.42",
+    "version": "2.0.0-alpha.43",
     "description": "",
     "type": "module",
     "main": "./dist/cjs/index.js",
@@ -94,7 +94,8 @@
         "@size-limit/preset-big-lib": "8.2.6",
         "@types/fs-extra": "11.0.1",
         "fs-extra": "11.1.1",
-        "size-limit": "8.2.6"
+        "size-limit": "8.2.6",
+        "axios-mock-adapter": "1.19.0"
     },
     "repository": "rabbitholegg/questdk",
     "publishConfig": {
