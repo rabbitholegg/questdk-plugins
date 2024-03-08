@@ -137,27 +137,27 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
-  const { chainId, contractAddress } = mint
+  const { chainId, contractAddress, tokenId } = mint
 
+  const tier = tokenId ?? 0
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
     transport: http(),
   })
 
-  const mintInfoList = (await client.readContract({
+  const nextSchedule = (await client.readContract({
     address: SUPERMINTER_V2,
     abi: MINT_INFO_LIST_ABI,
-    functionName: 'mintInfoList',
-    args: [contractAddress],
-  })) as MintInfoList
+    functionName: 'nextScheduleNum',
+    args: [contractAddress, tier],
+  })) as bigint
 
-  const mintInfo = mintInfoList[0]
 
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
     abi: TOTAL_PRICE_AND_FEES_ABI,
     functionName: 'totalPriceAndFees',
-    args: [contractAddress, mintInfo.tier, mintInfo.scheduleNum, 1, false], // assume quantity is 1 and hasValidAffiliate is false
+    args: [contractAddress, tier, nextSchedule - BigInt('1'), 1, false], // assume quantity is 1 and hasValidAffiliate is false
   })) as TotalPriceAndFees
 
   return totalPriceAndFees.total
