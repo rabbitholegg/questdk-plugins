@@ -52,6 +52,11 @@ async function validateIcon(iconUrl: string) {
     {
       iconOption: iconUrl,
     },
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
+      },
+    },
   );
   if (response.status === 200) {
     console.log("Icon is valid:", iconUrl);
