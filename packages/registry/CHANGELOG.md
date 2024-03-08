@@ -1,5 +1,47 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.82
+
+### Minor Changes
+
+- [#283](https://github.com/rabbitholegg/questdk-plugins/pull/283) [`492492fd`](https://github.com/rabbitholegg/questdk-plugins/commit/492492fd15d5b528e82cef29f2ee0a62e5e833bb) Thanks [@Quazia](https://github.com/Quazia)! - Fix issue with simulated mints for sound and mirror
+
+### Patch Changes
+
+- Updated dependencies [[`492492fd`](https://github.com/rabbitholegg/questdk-plugins/commit/492492fd15d5b528e82cef29f2ee0a62e5e833bb)]:
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.34
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-jojo@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.30
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.32
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.32
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.27
+
 ## 1.0.0-alpha.81
 
 ### Patch Changes

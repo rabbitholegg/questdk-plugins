@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-treasure
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- Updated dependencies [[`1f827031`](https://github.com/rabbitholegg/questdk-plugins/commit/1f8270310d5388a7d6b21452ca3e1bdc5eaf76f5)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.14
+  - @rabbitholegg/questdk@2.0.0-alpha.43
+
 ## 1.0.0-alpha.16
 
 ### Minor Changes
