@@ -120,6 +120,7 @@ export const getTxSimulation = (
   client?: PublicClient,
   account?: Address,
 ) => {
+  console.log('getTxSimulation', plugin, actionType, params, value, client, account)
   switch (actionType) {
     case ActionType.Mint:
       if (plugin.simulateMint !== undefined) {
