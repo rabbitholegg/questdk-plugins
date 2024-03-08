@@ -46,6 +46,22 @@ export const SUPERMINTER_ABI = [
     stateMutability: 'payable',
     type: 'function',
   },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'paid',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'required',
+        type: 'uint256',
+      },
+    ],
+    name: 'WrongPayment',
+    type: 'error',
+  },
 ]
 
 export const MINT_INFO_LIST_ABI = [

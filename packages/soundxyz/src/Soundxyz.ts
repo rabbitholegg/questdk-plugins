@@ -126,7 +126,7 @@ export const simulateMint = async (
     abi: SUPERMINTER_ABI,
     functionName: 'mintTo',
     args: [mintTo],
-    address: contractAddress,
+    address: SUPERMINTER_V2,
     value,
     account: account || DEFAULT_ACCOUNT,
   })
