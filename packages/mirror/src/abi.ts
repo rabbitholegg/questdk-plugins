@@ -33,7 +33,7 @@ export const PURCHASE_ABI = [
     outputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
     stateMutability: 'payable',
     type: 'function',
-  }
+  },
 ]
 
 export const GET_PRICE_ABI = [

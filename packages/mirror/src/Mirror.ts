@@ -84,7 +84,7 @@ export const simulateMint = async (
     value,
     abi: PURCHASE_ABI,
     functionName: 'purchase',
-    args: [recipient, '', BOOST_TREASURY_ADDRESS ],
+    args: [recipient, '', BOOST_TREASURY_ADDRESS],
     account: account || DEFAULT_ACCOUNT,
   })
 
