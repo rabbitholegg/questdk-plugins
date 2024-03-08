@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.14
+
+### Minor Changes
+
+- [#281](https://github.com/rabbitholegg/questdk-plugins/pull/281) [`1f827031`](https://github.com/rabbitholegg/questdk-plugins/commit/1f8270310d5388a7d6b21452ca3e1bdc5eaf76f5) Thanks [@mmackz](https://github.com/mmackz)! - add mode and blast chainid to Chains enum
+
 ## 1.0.0-alpha.13
 
 ### Minor Changes
