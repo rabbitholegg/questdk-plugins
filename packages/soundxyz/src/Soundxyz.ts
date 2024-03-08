@@ -152,7 +152,6 @@ export const getProjectFees = async (
     args: [contractAddress, tier],
   })) as bigint
 
-
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
     abi: TOTAL_PRICE_AND_FEES_ABI,
