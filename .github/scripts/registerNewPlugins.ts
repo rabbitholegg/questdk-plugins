@@ -1,12 +1,12 @@
-const _axios = require("axios");
-const _fs = require("fs/promises");
-const _yaml = require("js-yaml");
-const _utils = require("./utils");
+const _axios = require('axios')
+const _fs = require('fs/promises')
+const _yaml = require('js-yaml')
+const _utils = require('./utils')
 
 async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
-  const fileContents = await _fs.readFile(detailsPath, "utf8");
-  const details = _yaml.load(fileContents);
-  const { project, tasks } = details;
+  const fileContents = await _fs.readFile(detailsPath, 'utf8')
+  const details = _yaml.load(fileContents)
+  const { project, tasks } = details
 
   // send project details to staging API
   const { data: stagingData } = await _axios.post(
@@ -20,7 +20,7 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
         Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
       },
     },
-  );
+  )
 
   // send project details to production API
   const { data } = await _axios.post(
@@ -31,7 +31,7 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
         Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
       },
     },
-  );
+  )
 
   for (const task of tasks) {
     // send task details to staging API
@@ -47,8 +47,8 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
           Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
         },
       },
-    );
-    
+    )
+
     // send task details to production API
     await _axios.post(
       `${process.env.PRODUCTION_API_URL}/plugins/add-task`,
@@ -61,30 +61,30 @@ async function sendPluginDetailsToAPI(detailsPath: string): Promise<void> {
           Authorization: `Bearer ${process.env.BOOST_API_TOKEN}`,
         },
       },
-    );
+    )
   }
 
-  console.log(`Successfully registered plugin details for ${project.name}`);
+  console.log(`Successfully registered plugin details for ${project.name}`)
 }
 
 async function _main() {
-  const newPackagesPaths = await _utils.getNewPackages();
-  const updatedDetailsPaths = await _utils.getUpdatedPluginDetailsPaths();
+  const newPackagesPaths = await _utils.getNewPackages()
+  const updatedDetailsPaths = await _utils.getUpdatedPluginDetailsPaths()
   const uniqueDetailsPaths = Array.from(
     new Set([...newPackagesPaths, ...updatedDetailsPaths]),
-  );
+  )
   if (uniqueDetailsPaths.length) {
     const validDetailsPaths = await _utils.validatePluginDetailsPaths(
       uniqueDetailsPaths,
-    );
+    )
     for (const detailsPath of validDetailsPaths) {
-      await sendPluginDetailsToAPI(detailsPath);
+      await sendPluginDetailsToAPI(detailsPath)
     }
   } else {
-    console.log("No new packages found.");
+    console.log('No new packages found.')
   }
 }
 
 _main().catch((error) => {
-  throw new Error(`Error registering plugin details: ${error}`);
-});
+  throw new Error(`Error registering plugin details: ${error}`)
+})

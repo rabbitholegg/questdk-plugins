@@ -101,7 +101,9 @@ export async function getTokenInfo(address: Address, chain: number) {
       return { decimals, symbol }
     } catch {
       console.log(
-        yellow(`decimals for token ${address} not found... using default decimal value 18`),
+        yellow(
+          `decimals for token ${address} not found... using default decimal value 18`,
+        ),
       )
       return { decimals: 18 }
     }
