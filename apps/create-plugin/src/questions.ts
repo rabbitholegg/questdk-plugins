@@ -66,6 +66,57 @@ export const mainQuestions: PromptObject[] = [
   },
 ]
 
+export const detailsQuestions: PromptObject[] = [
+  {
+    type: 'text',
+    name: 'projectUrl',
+    message: 'What is the project url? (Optional)',
+    validate: (name: string) => {
+      if (
+        name !== '' &&
+        !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(
+          name,
+        )
+      ) {
+        return 'Please enter a valid URL'
+      }
+      return true
+    },
+  },
+  {
+    type: 'text',
+    name: 'iconUrl',
+    message: 'What is the project icon url? (Optional)',
+    initial: '',
+    validate: (name: string) => {
+      if (
+        name !== '' &&
+        !/^(https?:\/\/.*\.(?:png|jpg|jpeg|svg)(\?.*)?)$/.test(name)
+      ) {
+        return 'Please enter a valid image URL'
+      }
+      return true
+    },
+  },
+  {
+    type: 'text',
+    name: 'taskUrl',
+    message:
+      'What is the action specfic url (ie: https://myProject/trade)? (Optional)',
+    validate: (name: string) => {
+      if (
+        name !== '' &&
+        !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(
+          name,
+        )
+      ) {
+        return 'Please enter a valid URL'
+      }
+      return true
+    },
+  },
+]
+
 const descriptionQuestion: PromptObject = {
   type: 'text',
   name: 'description',
@@ -82,7 +133,9 @@ const descriptionQuestion: PromptObject = {
   },
 }
 
-export function getTxHashQuestion(transactions: TransactionDetail[]): PromptObject {
+export function getTxHashQuestion(
+  transactions: TransactionDetail[],
+): PromptObject {
   return {
     type: 'text',
     name: 'hash',
