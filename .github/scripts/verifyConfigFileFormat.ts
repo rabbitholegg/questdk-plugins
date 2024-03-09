@@ -48,7 +48,7 @@ async function validateConfigFile(filePath: string): Promise<void> {
 
 async function validateIcon(iconUrl: string) {
   const response = await axios.post(
-    `${process.env.API_URL}/plugins/validate-icon`,
+    `${process.env.BOOST_API}/plugins/validate-icon`,
     {
       iconOption: iconUrl,
     },
