@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-zora",
-  "version": "1.0.0-alpha.18",
+  "version": "1.0.0-alpha.27",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -9,7 +9,6 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "packageManager": "pnpm@8.15.1",
   "description": "",
   "scripts": {
     "bench": "vitest bench",
@@ -37,7 +36,7 @@
     "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   },
   "dependencies": {
-    "@zoralabs/protocol-sdk": "0.5.3",
+    "@zoralabs/protocol-sdk": "0.5.6-exports.0",
     "@zoralabs/universal-minter": "0.2.15",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"

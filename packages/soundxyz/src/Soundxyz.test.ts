@@ -1,6 +1,6 @@
 import { apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
-import { mint } from './Soundxyz'
+import { describe, expect, test, vi } from 'vitest'
+import { getDynamicNameParams, mint } from './Soundxyz'
 import {
   passingTestCases,
   failingTestCases,
@@ -11,7 +11,11 @@ import { Chains } from './utils'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
 import { getMintIntent } from './Soundxyz'
 import { type Address } from 'viem'
-import { type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  ActionType,
+  type MintIntentParams,
+  type MintActionParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the soundxyz plugin', () => {
   describe('When handling the mint action', () => {
@@ -88,5 +92,72 @@ describe('getMintIntent', () => {
     }
 
     await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
+  })
+})
+
+describe('getDynamicNameParams function', () => {
+  test('should return correct values for valid input', async () => {
+    const params = {
+      type: ActionType.Mint,
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      author: 'Author Name',
+      tokenCollection: 'Collection Name',
+    }
+
+    const result = await getDynamicNameParams(params, metadata)
+
+    expect(result).toEqual({
+      actionType: 'Mint',
+      originQuantity: 1,
+      originTargetImage: 'image.png',
+      originAuthor: ' by Author Name',
+      originCollection: 'Collection Name',
+      originNetwork: 10,
+      projectImage:
+        'https://rabbithole-assets.s3.amazonaws.com/projects/sound.jpeg&w=3840&q=75',
+      project: 'Sound.XYZ',
+    })
+  })
+
+  test('should throw error for invalid action type', async () => {
+    const params = {
+      type: ActionType.Swap, // invalid action type
+      data: {
+        amount: 1,
+        chainId: 10,
+      },
+    }
+    const metadata = {
+      tokenImage: 'image.png',
+      author: 'Author Name',
+      tokenCollection: 'Collection Name',
+    }
+
+    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
+      `Invalid action type "${params.type}"`,
+    )
+  })
+})
+describe('getProjectFees', () => {
+  test('should return the correct fee', async () => {
+    const contractAddress: Address =
+      '0xFCB12A059C722AEaaFc4AC5531493cad49cA1848'
+    const mintParams = { contractAddress, chainId: Chains.BASE }
+
+    const mockFns = {
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('777000000000000'),
+    }
+
+    const getProjectFeesSpy = vi.spyOn(mockFns, 'getProjectFees')
+    const fee = await mockFns.getProjectFees(mintParams)
+    expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
+    expect(fee).toEqual(BigInt('777000000000000'))
   })
 })

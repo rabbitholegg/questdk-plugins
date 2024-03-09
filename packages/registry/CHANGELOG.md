@@ -1,5 +1,322 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.82
+
+### Minor Changes
+
+- [#283](https://github.com/rabbitholegg/questdk-plugins/pull/283) [`492492fd`](https://github.com/rabbitholegg/questdk-plugins/commit/492492fd15d5b528e82cef29f2ee0a62e5e833bb) Thanks [@Quazia](https://github.com/Quazia)! - Fix issue with simulated mints for sound and mirror
+
+### Patch Changes
+
+- Updated dependencies [[`492492fd`](https://github.com/rabbitholegg/questdk-plugins/commit/492492fd15d5b528e82cef29f2ee0a62e5e833bb)]:
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.34
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-jojo@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.30
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.32
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.32
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.27
+
+## 1.0.0-alpha.81
+
+### Patch Changes
+
+- Updated dependencies [[`5952f3f1`](https://github.com/rabbitholegg/questdk-plugins/commit/5952f3f187cf1449c9258a515b0922ca5dc01cd1)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.26
+
+## 1.0.0-alpha.80
+
+### Minor Changes
+
+- [#236](https://github.com/rabbitholegg/questdk-plugins/pull/236) [`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1) Thanks [@Quazia](https://github.com/Quazia)! - Add more types/schemas and dynamic name generation for all mint plugins
+
+### Patch Changes
+
+- Updated dependencies [[`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1)]:
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.31
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.31
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-jojo@1.0.0-alpha.4
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.33
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.14
+
+## 1.0.0-alpha.79
+
+### Patch Changes
+
+- Updated dependencies [[`66f0d47b`](https://github.com/rabbitholegg/questdk-plugins/commit/66f0d47b2d52bc3e44089115ac83b88b3dc7b4b7)]:
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.17
+
+## 1.0.0-alpha.78
+
+### Patch Changes
+
+- Updated dependencies [[`f9fa05cf`](https://github.com/rabbitholegg/questdk-plugins/commit/f9fa05cf5f4b2fb2bbb97a297e33abbff524eb3e)]:
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.24
+
+## 1.0.0-alpha.77
+
+### Patch Changes
+
+- Updated dependencies [[`0ba133e2`](https://github.com/rabbitholegg/questdk-plugins/commit/0ba133e2378c2f2be30986731cf4a793fc78ced1)]:
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.32
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-jojo@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.30
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.30
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.22
+
+## 1.0.0-alpha.76
+
+### Patch Changes
+
+- Updated dependencies [[`26202e50`](https://github.com/rabbitholegg/questdk-plugins/commit/26202e50247b34cc2417db3743914a26e013f7e6)]:
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.31
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-jojo@1.0.0-alpha.2
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.21
+
+## 1.0.0-alpha.75
+
+### Patch Changes
+
+- Updated dependencies [[`2d5db724`](https://github.com/rabbitholegg/questdk-plugins/commit/2d5db72467c9f96d6cbe11413b662f7f18b8446e)]:
+  - @rabbitholegg/questdk-plugin-jojo@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.30
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.17
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.21
+
+## 1.0.0-alpha.74
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
+### Patch Changes
+
+- Updated dependencies [[`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547)]:
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.25
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.13
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.27
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.16
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.29
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.14
+
+## 1.0.0-alpha.73
+
+### Minor Changes
+
+- [#256](https://github.com/rabbitholegg/questdk-plugins/pull/256) [`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db) Thanks [@Quazia](https://github.com/Quazia)! - Adds a simulateMint function to all mint plugins
+
+### Patch Changes
+
+- Updated dependencies [[`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db)]:
+  - @rabbitholegg/questdk-plugin-rabbithole@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-symbiosis@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-traderjoe@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-balancer@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-handlefi@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.24
+  - @rabbitholegg/questdk-plugin-optimism@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-paraswap@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-stargate@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-treasure@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-camelot@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-connext@1.0.0-alpha.21
+  - @rabbitholegg/questdk-plugin-polygon@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.14
+  - @rabbitholegg/questdk-plugin-uniswap@1.0.0-alpha.23
+  - @rabbitholegg/questdk-plugin-across@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-hyphen@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-pendle@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-boost@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-llama@1.0.0-alpha.15
+  - @rabbitholegg/questdk-plugin-sushi@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-tally@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-woofi@1.0.0-alpha.18
+  - @rabbitholegg/questdk-plugin-kote@1.0.0-alpha.7
+  - @rabbitholegg/questdk-plugin-vela@1.0.0-alpha.10
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.19
+  - @rabbitholegg/questdk-plugin-gmx@1.0.0-alpha.28
+  - @rabbitholegg/questdk-plugin-hop@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-mux@1.0.0-alpha.8
+  - @rabbitholegg/questdk-plugin-arbitrum@1.0.0-alpha.14
+
+## 1.0.0-alpha.72
+
+### Patch Changes
+
+- Updated dependencies [[`b7677ea9`](https://github.com/rabbitholegg/questdk-plugins/commit/b7677ea9ca1c834f2d99d70fa1874d4aa74f466b), [`1490c25e`](https://github.com/rabbitholegg/questdk-plugins/commit/1490c25e5fb4e9634666f0b7b99a695809a5ad78)]:
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.11
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.23
+
 ## 1.0.0-alpha.71
 
 ### Patch Changes

@@ -1,2 +1,0 @@
-# @rabbitholegg/questdk-plugin-{{projectName}}
-

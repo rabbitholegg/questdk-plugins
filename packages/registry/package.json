@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.71",
+  "version": "1.0.0-alpha.82",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -9,7 +9,6 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "packageManager": "pnpm@8.15.1",
   "description": "",
   "scripts": {
     "bench": "vitest bench",
@@ -49,7 +48,6 @@
     "@rabbitholegg/questdk-plugin-paraswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-polygon": "workspace:*",
     "@rabbitholegg/questdk-plugin-stargate": "workspace:*",
-    "@rabbitholegg/questdk-plugin-symbiosis": "workspace:*",
     "@rabbitholegg/questdk-plugin-tally": "workspace:*",
     "@rabbitholegg/questdk-plugin-uniswap": "workspace:*",
     "@rabbitholegg/questdk-plugin-rabbithole": "workspace:*",
@@ -69,6 +67,7 @@
     "@rabbitholegg/questdk-plugin-mux": "workspace:*",
     "@rabbitholegg/questdk-plugin-llama": "workspace:*",
     "@rabbitholegg/questdk-plugin-boost": "workspace:*",
-    "@rabbitholegg/questdk-plugin-kote": "workspace:*"
+    "@rabbitholegg/questdk-plugin-kote": "workspace:*",
+    "@rabbitholegg/questdk-plugin-jojo": "workspace:*"
   }
 }

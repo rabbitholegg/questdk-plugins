@@ -2,12 +2,22 @@ import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
+  ActionType,
 } from '@rabbitholegg/questdk'
 import {
   type MintIntentParams,
   chainIdToViemChain,
+  DEFAULT_ACCOUNT,
+  type DisctriminatedActionParams,
+  BOOST_TREASURY_ADDRESS,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, type TransactionRequest, encodeFunctionData } from 'viem'
+import {
+  type Address,
+  type TransactionRequest,
+  encodeFunctionData,
+  type PublicClient,
+  type SimulateContractReturnType,
+} from 'viem'
 import { http, createPublicClient } from 'viem'
 import {
   COLLECT_ENTRY_ABI,
@@ -15,6 +25,7 @@ import {
   GET_FEE_CONFIGURATION_ABI,
   GET_PLATFORM_FEE_ABI,
   GET_PRICE_ABI,
+  PURCHASE_ABI,
 } from './abi'
 import { Chains } from './utils'
 
@@ -52,6 +63,32 @@ export const getMintIntent = async (
   }
 
   return transaction
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { contractAddress, recipient } = mint
+  const _client =
+    client ||
+    createPublicClient({
+      chain: chainIdToViemChain(mint.chainId),
+      transport: http(),
+    })
+
+  const result = await _client.simulateContract({
+    address: contractAddress,
+    value,
+    abi: PURCHASE_ABI,
+    functionName: 'purchase',
+    args: [recipient, '', BOOST_TREASURY_ADDRESS],
+    account: account || DEFAULT_ACCOUNT,
+  })
+
+  return result
 }
 
 export const getProjectFees = async (
@@ -102,4 +139,26 @@ export const getSupportedTokenAddresses = async (
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.OPTIMISM, Chains.ZORA, Chains.BASE, Chains.LINEA]
+}
+
+export const getDynamicNameParams = async (
+  params: DisctriminatedActionParams,
+  metadata: Record<string, unknown>,
+): Promise<Record<string, unknown>> => {
+  if (params.type !== ActionType.Mint) {
+    throw new Error(`Invalid action type "${params.type}"`)
+  }
+  const data = params.data
+  const values: Record<string, unknown> = {
+    actionType: 'Mint',
+    originQuantity: data.amount ?? '',
+    originTargetImage: metadata.tokenImage, // NFT Image
+    originAuthor: `by ${metadata.author}`, // NFT Author/Artist [format: "by {artist}"]
+    originCollection: metadata.collectionName, // NFT Collection
+    originNetwork: data.chainId,
+    projectImage:
+      'https://rabbithole-assets.s3.amazonaws.com/projects/mirror.png&w=3840&q=75',
+    project: 'Mirror',
+  }
+  return values
 }

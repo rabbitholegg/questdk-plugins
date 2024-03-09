@@ -1,5 +1,41 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.14
+
+### Minor Changes
+
+- [#281](https://github.com/rabbitholegg/questdk-plugins/pull/281) [`1f827031`](https://github.com/rabbitholegg/questdk-plugins/commit/1f8270310d5388a7d6b21452ca3e1bdc5eaf76f5) Thanks [@mmackz](https://github.com/mmackz)! - add mode and blast chainid to Chains enum
+
+## 1.0.0-alpha.13
+
+### Minor Changes
+
+- [#236](https://github.com/rabbitholegg/questdk-plugins/pull/236) [`23a28603`](https://github.com/rabbitholegg/questdk-plugins/commit/23a28603c1c4f9892c9a18189df17647112397d1) Thanks [@Quazia](https://github.com/Quazia)! - Add more types/schemas and dynamic name generation for all mint plugins
+
+## 1.0.0-alpha.12
+
+### Minor Changes
+
+- [#267](https://github.com/rabbitholegg/questdk-plugins/pull/267) [`0ba133e2`](https://github.com/rabbitholegg/questdk-plugins/commit/0ba133e2378c2f2be30986731cf4a793fc78ced1) Thanks [@Quazia](https://github.com/Quazia)! - Pin Symbiosis versions
+
+## 1.0.0-alpha.11
+
+### Minor Changes
+
+- [#261](https://github.com/rabbitholegg/questdk-plugins/pull/261) [`26202e50`](https://github.com/rabbitholegg/questdk-plugins/commit/26202e50247b34cc2417db3743914a26e013f7e6) Thanks [@Quazia](https://github.com/Quazia)! - Update zora mint simulation with new ABI
+
+## 1.0.0-alpha.10
+
+### Minor Changes
+
+- [#258](https://github.com/rabbitholegg/questdk-plugins/pull/258) [`79f29763`](https://github.com/rabbitholegg/questdk-plugins/commit/79f29763d361d05847e324cc9d326b5877968547) Thanks [@Quazia](https://github.com/Quazia)! - Add txSimulation helper to registry
+
+## 1.0.0-alpha.9
+
+### Minor Changes
+
+- [#256](https://github.com/rabbitholegg/questdk-plugins/pull/256) [`e22bab38`](https://github.com/rabbitholegg/questdk-plugins/commit/e22bab38eae0b0715af391a9581ccf498fca12db) Thanks [@Quazia](https://github.com/Quazia)! - Adds a simulateMint function to all mint plugins
+
 ## 1.0.0-alpha.8
 
 ### Patch Changes

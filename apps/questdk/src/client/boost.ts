@@ -9,6 +9,7 @@ import {
   fetchERC1155MetadataByUUID,
 } from '../tokens/erc1155.js'
 import { type PublicClient, createClient, http } from 'viem'
+import { fetchTokenMetadata, fetchTokenMetadataByUUID } from '../tokens/nft.js'
 /**
  * Initializes an Ethereum client with the specified RPC URL and provides methods for ERC721 and ERC1155 token interactions.
  * @param {string} rpcUrl - The RPC URL for connecting to the Ethereum network.
@@ -32,6 +33,10 @@ function boost(rpcUrl: string) {
       fetchERC721MetadataByUUID(client, uuid),
     fetchERC1155MetadataByUUID: (uuid: string) =>
       fetchERC1155MetadataByUUID(client, uuid),
+    fetchTokenMetadata: (contractAddress: string, tokenId: number) =>
+      fetchTokenMetadata(client, contractAddress, tokenId),
+    fetchTokenMetadataByUUID: (uuid: string) =>
+      fetchTokenMetadataByUUID(client, uuid),
   }
 }
 
