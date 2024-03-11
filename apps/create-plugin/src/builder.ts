@@ -278,7 +278,7 @@ async function setActionNames(params: BuilderParams) {
 export async function updateRegistry(params: BuilderParams) {
   const filePath = path.join(
     __dirname,
-    '../../../packages/plugins/',
+    '../../../packages/',
     'registry',
     'src/index.ts',
   )
@@ -310,7 +310,7 @@ export async function updateRegistry(params: BuilderParams) {
   // add plugin to registry package.json
   const packagefilePath = path.join(
     __dirname,
-    '../../../packages/plugins/',
+    '../../../packages/',
     'registry',
     'package.json',
   )
