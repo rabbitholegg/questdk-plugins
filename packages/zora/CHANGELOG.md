@@ -1,5 +1,16 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.28
+
+### Minor Changes
+
+- [#288](https://github.com/rabbitholegg/questdk-plugins/pull/288) [`41fa85e5`](https://github.com/rabbitholegg/questdk-plugins/commit/41fa85e50889db0e45f667bd5c3ad4a36f507483) Thanks [@Quazia](https://github.com/Quazia)! - Update legacy ABI for indexing Zora
+
+### Patch Changes
+
+- Updated dependencies [[`cfaf9b3a`](https://github.com/rabbitholegg/questdk-plugins/commit/cfaf9b3a94c1ac85e56c741da3f0afbe21149e88)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.27
 
 ### Patch Changes
