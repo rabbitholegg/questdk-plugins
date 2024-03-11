@@ -74,7 +74,7 @@ export const mint = async (
   }
 
   const ERC1155_FILTER = {
-    $abi: ZORA_MINTER_ABI_1155,
+    $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
     $and: andArray1155.length !== 0 ? andArray1155 : undefined,
   }
 
