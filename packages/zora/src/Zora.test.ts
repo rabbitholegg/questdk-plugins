@@ -12,6 +12,7 @@ import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
+  ZORA_MINTER_ABI_1155_LEGACY,
 } from './abi'
 import { failingTestCases, passingTestCases } from './test-setup'
 import {
@@ -64,7 +65,7 @@ describe('Given the zora plugin', () => {
                       ],
                     },
                     {
-                      $abi: ZORA_MINTER_ABI_1155,
+                      $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
                       $and: [
                         {
                           $or: [
@@ -107,7 +108,7 @@ describe('Given the zora plugin', () => {
               ],
             },
             {
-              $abi: ZORA_MINTER_ABI_1155,
+              $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
               $and: [
                 {
                   $or: [
