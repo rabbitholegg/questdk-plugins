@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
 import { metaBurnABI, metaRouteABI } from './abi'
 import { zeroAddress, isAddress } from 'viem'
-import { Chains } from './utils'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import {
   bridge,
   getSupportedChainIds,
