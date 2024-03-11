@@ -135,81 +135,81 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfig
 
-  packages/across:
+  packages/plugins/across:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/arbitrum:
+  packages/plugins/arbitrum:
     devDependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/balancer:
+  packages/plugins/balancer:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/basepaint:
+  packages/plugins/basepaint:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/boost:
+  packages/plugins/boost:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/camelot:
+  packages/plugins/camelot:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/connext:
+  packages/plugins/connext:
     dependencies:
       '@connext/nxtp-txservice':
         specifier: ^2.0.0
@@ -222,42 +222,42 @@ importers:
         version: 2.0.0(ethers@5.2.0)
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/gmx:
+  packages/plugins/gmx:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/handlefi:
+  packages/plugins/handlefi:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/hop:
+  packages/plugins/hop:
     dependencies:
       '@hop-protocol/core':
         specifier: 0.0.1-beta.182
@@ -267,81 +267,81 @@ importers:
         version: 0.0.1-beta.535
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/hyphen:
+  packages/plugins/hyphen:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/jojo:
+  packages/plugins/jojo:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/kote:
+  packages/plugins/kote:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/llama:
+  packages/plugins/llama:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/mirror:
+  packages/plugins/mirror:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/mux:
+  packages/plugins/mux:
     dependencies:
       '@ethersproject/providers':
         specifier: 5.7.2
@@ -351,261 +351,152 @@ importers:
         version: 2.9.12
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/okutrade:
+  packages/plugins/okutrade:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/optimism:
+  packages/plugins/optimism:
     dependencies:
       '@eth-optimism/contracts-ts':
         specifier: 0.15.0
         version: 0.15.0(typescript@5.3.2)(zod@3.21.4)
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/paraswap:
+  packages/plugins/paraswap:
     dependencies:
       '@paraswap/sdk':
         specifier: ^6.2.4
         version: 6.3.0(axios@1.5.0)(typescript@5.3.2)
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/pendle:
+  packages/plugins/pendle:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/polygon:
+  packages/plugins/polygon:
     dependencies:
       '@maticnetwork/pos-portal':
         specifier: 1.5.2
         version: 1.5.2
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/rabbithole:
+  packages/plugins/rabbithole:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/registry:
-    dependencies:
-      '@rabbitholegg/questdk-plugin-across':
-        specifier: workspace:*
-        version: link:../across
-      '@rabbitholegg/questdk-plugin-arbitrum':
-        specifier: workspace:*
-        version: link:../arbitrum
-      '@rabbitholegg/questdk-plugin-balancer':
-        specifier: workspace:*
-        version: link:../balancer
-      '@rabbitholegg/questdk-plugin-basepaint':
-        specifier: workspace:*
-        version: link:../basepaint
-      '@rabbitholegg/questdk-plugin-boost':
-        specifier: workspace:*
-        version: link:../boost
-      '@rabbitholegg/questdk-plugin-camelot':
-        specifier: workspace:*
-        version: link:../camelot
-      '@rabbitholegg/questdk-plugin-connext':
-        specifier: workspace:*
-        version: link:../connext
-      '@rabbitholegg/questdk-plugin-gmx':
-        specifier: workspace:*
-        version: link:../gmx
-      '@rabbitholegg/questdk-plugin-handlefi':
-        specifier: workspace:*
-        version: link:../handlefi
-      '@rabbitholegg/questdk-plugin-hop':
-        specifier: workspace:*
-        version: link:../hop
-      '@rabbitholegg/questdk-plugin-hyphen':
-        specifier: workspace:*
-        version: link:../hyphen
-      '@rabbitholegg/questdk-plugin-jojo':
-        specifier: workspace:*
-        version: link:../jojo
-      '@rabbitholegg/questdk-plugin-kote':
-        specifier: workspace:*
-        version: link:../kote
-      '@rabbitholegg/questdk-plugin-llama':
-        specifier: workspace:*
-        version: link:../llama
-      '@rabbitholegg/questdk-plugin-mirror':
-        specifier: workspace:*
-        version: link:../mirror
-      '@rabbitholegg/questdk-plugin-mux':
-        specifier: workspace:*
-        version: link:../mux
-      '@rabbitholegg/questdk-plugin-okutrade':
-        specifier: workspace:*
-        version: link:../okutrade
-      '@rabbitholegg/questdk-plugin-optimism':
-        specifier: workspace:*
-        version: link:../optimism
-      '@rabbitholegg/questdk-plugin-paraswap':
-        specifier: workspace:*
-        version: link:../paraswap
-      '@rabbitholegg/questdk-plugin-pendle':
-        specifier: workspace:*
-        version: link:../pendle
-      '@rabbitholegg/questdk-plugin-polygon':
-        specifier: workspace:*
-        version: link:../polygon
-      '@rabbitholegg/questdk-plugin-rabbithole':
-        specifier: workspace:*
-        version: link:../rabbithole
-      '@rabbitholegg/questdk-plugin-soundxyz':
-        specifier: workspace:*
-        version: link:../soundxyz
-      '@rabbitholegg/questdk-plugin-stargate':
-        specifier: workspace:*
-        version: link:../stargate
-      '@rabbitholegg/questdk-plugin-sushi':
-        specifier: workspace:*
-        version: link:../sushi
-      '@rabbitholegg/questdk-plugin-synapse':
-        specifier: workspace:*
-        version: link:../synapse
-      '@rabbitholegg/questdk-plugin-tally':
-        specifier: workspace:*
-        version: link:../tally
-      '@rabbitholegg/questdk-plugin-traderjoe':
-        specifier: workspace:*
-        version: link:../traderjoe
-      '@rabbitholegg/questdk-plugin-treasure':
-        specifier: workspace:*
-        version: link:../treasure
-      '@rabbitholegg/questdk-plugin-uniswap':
-        specifier: workspace:*
-        version: link:../uniswap
-      '@rabbitholegg/questdk-plugin-vela':
-        specifier: workspace:*
-        version: link:../vela
-      '@rabbitholegg/questdk-plugin-woofi':
-        specifier: workspace:*
-        version: link:../woofi
-      '@rabbitholegg/questdk-plugin-zora':
-        specifier: workspace:*
-        version: link:../zora
-    devDependencies:
-      '@rabbitholegg/questdk-plugin-utils':
-        specifier: workspace:*
-        version: link:../utils
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-
-  packages/soundxyz:
+  packages/plugins/soundxyz:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/stargate:
+  packages/plugins/stargate:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/sushi:
+  packages/plugins/sushi:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
       '@sushiswap/core-sdk':
         specifier: 1.0.0-canary.34
         version: 1.0.0-canary.34
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/symbiosis:
+  packages/plugins/symbiosis:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
       ethers:
         specifier: 5.2.0
         version: 5.2.0
@@ -615,73 +506,71 @@ importers:
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/synapse:
+  packages/plugins/synapse:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/tally:
+  packages/plugins/tally:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/traderjoe:
+  packages/plugins/traderjoe:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
       '@traderjoe-xyz/sdk-v2':
         specifier: 2.1.8
         version: 2.1.8(viem@2.7.9)
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/treasure:
+  packages/plugins/treasure:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/tsconfig: {}
-
-  packages/uniswap:
+  packages/plugins/uniswap:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
       '@uniswap/sdk-core':
         specifier: ^4.0.9
         version: 4.0.10
@@ -691,58 +580,169 @@ importers:
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/utils:
-    dependencies:
-      tslib:
-        specifier: 2.3.1
-        version: 2.3.1
-    devDependencies:
-      tsconfig:
-        specifier: workspace:*
-        version: link:../tsconfig
-
-  packages/vela:
+  packages/plugins/vela:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/woofi:
+  packages/plugins/woofi:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
     devDependencies:
       tsconfig:
         specifier: workspace:*
-        version: link:../tsconfig
+        version: link:../../tsconfig
 
-  packages/zora:
+  packages/plugins/zora:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
-        version: link:../../apps/questdk
+        version: link:../../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
-        version: link:../utils
+        version: link:../../utils
       '@zoralabs/protocol-sdk':
         specifier: 0.5.6-exports.0
         version: 0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)(zod@3.21.4)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
         version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4)
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tsconfig
+
+  packages/registry:
+    dependencies:
+      '@rabbitholegg/questdk-plugin-across':
+        specifier: workspace:*
+        version: link:../plugins/across
+      '@rabbitholegg/questdk-plugin-arbitrum':
+        specifier: workspace:*
+        version: link:../plugins/arbitrum
+      '@rabbitholegg/questdk-plugin-balancer':
+        specifier: workspace:*
+        version: link:../plugins/balancer
+      '@rabbitholegg/questdk-plugin-basepaint':
+        specifier: workspace:*
+        version: link:../plugins/basepaint
+      '@rabbitholegg/questdk-plugin-boost':
+        specifier: workspace:*
+        version: link:../plugins/boost
+      '@rabbitholegg/questdk-plugin-camelot':
+        specifier: workspace:*
+        version: link:../plugins/camelot
+      '@rabbitholegg/questdk-plugin-connext':
+        specifier: workspace:*
+        version: link:../plugins/connext
+      '@rabbitholegg/questdk-plugin-gmx':
+        specifier: workspace:*
+        version: link:../plugins/gmx
+      '@rabbitholegg/questdk-plugin-handlefi':
+        specifier: workspace:*
+        version: link:../plugins/handlefi
+      '@rabbitholegg/questdk-plugin-hop':
+        specifier: workspace:*
+        version: link:../plugins/hop
+      '@rabbitholegg/questdk-plugin-hyphen':
+        specifier: workspace:*
+        version: link:../plugins/hyphen
+      '@rabbitholegg/questdk-plugin-jojo':
+        specifier: workspace:*
+        version: link:../plugins/jojo
+      '@rabbitholegg/questdk-plugin-kote':
+        specifier: workspace:*
+        version: link:../plugins/kote
+      '@rabbitholegg/questdk-plugin-llama':
+        specifier: workspace:*
+        version: link:../plugins/llama
+      '@rabbitholegg/questdk-plugin-mirror':
+        specifier: workspace:*
+        version: link:../plugins/mirror
+      '@rabbitholegg/questdk-plugin-mux':
+        specifier: workspace:*
+        version: link:../plugins/mux
+      '@rabbitholegg/questdk-plugin-okutrade':
+        specifier: workspace:*
+        version: link:../plugins/okutrade
+      '@rabbitholegg/questdk-plugin-optimism':
+        specifier: workspace:*
+        version: link:../plugins/optimism
+      '@rabbitholegg/questdk-plugin-paraswap':
+        specifier: workspace:*
+        version: link:../plugins/paraswap
+      '@rabbitholegg/questdk-plugin-pendle':
+        specifier: workspace:*
+        version: link:../plugins/pendle
+      '@rabbitholegg/questdk-plugin-polygon':
+        specifier: workspace:*
+        version: link:../plugins/polygon
+      '@rabbitholegg/questdk-plugin-rabbithole':
+        specifier: workspace:*
+        version: link:../plugins/rabbithole
+      '@rabbitholegg/questdk-plugin-soundxyz':
+        specifier: workspace:*
+        version: link:../plugins/soundxyz
+      '@rabbitholegg/questdk-plugin-stargate':
+        specifier: workspace:*
+        version: link:../plugins/stargate
+      '@rabbitholegg/questdk-plugin-sushi':
+        specifier: workspace:*
+        version: link:../plugins/sushi
+      '@rabbitholegg/questdk-plugin-synapse':
+        specifier: workspace:*
+        version: link:../plugins/synapse
+      '@rabbitholegg/questdk-plugin-tally':
+        specifier: workspace:*
+        version: link:../plugins/tally
+      '@rabbitholegg/questdk-plugin-traderjoe':
+        specifier: workspace:*
+        version: link:../plugins/traderjoe
+      '@rabbitholegg/questdk-plugin-treasure':
+        specifier: workspace:*
+        version: link:../plugins/treasure
+      '@rabbitholegg/questdk-plugin-uniswap':
+        specifier: workspace:*
+        version: link:../plugins/uniswap
+      '@rabbitholegg/questdk-plugin-vela':
+        specifier: workspace:*
+        version: link:../plugins/vela
+      '@rabbitholegg/questdk-plugin-woofi':
+        specifier: workspace:*
+        version: link:../plugins/woofi
+      '@rabbitholegg/questdk-plugin-zora':
+        specifier: workspace:*
+        version: link:../plugins/zora
+    devDependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/tsconfig: {}
+
+  packages/utils:
+    dependencies:
+      tslib:
+        specifier: 2.3.1
+        version: 2.3.1
     devDependencies:
       tsconfig:
         specifier: workspace:*
@@ -2580,7 +2580,7 @@ packages:
     dependencies:
       '@ledgerhq/cryptoassets': 5.53.0
       '@ledgerhq/errors': 5.50.0
-      '@ledgerhq/hw-transport': 5.26.0
+      '@ledgerhq/hw-transport': 5.51.1
       bignumber.js: 9.1.2
       rlp: 2.2.7
     dev: false
@@ -2603,7 +2603,7 @@ packages:
     dependencies:
       '@ledgerhq/devices': 5.51.1
       '@ledgerhq/errors': 5.50.0
-      '@ledgerhq/hw-transport': 5.26.0
+      '@ledgerhq/hw-transport': 5.51.1
       '@ledgerhq/hw-transport-node-hid-noevents': 5.51.1
       '@ledgerhq/logs': 5.50.0
       lodash: 4.17.21
@@ -2617,7 +2617,7 @@ packages:
     deprecated: '@ledgerhq/hw-transport-u2f is deprecated. Please use @ledgerhq/hw-transport-webusb or @ledgerhq/hw-transport-webhid. https://github.com/LedgerHQ/ledgerjs/blob/master/docs/migrate_webusb.md'
     dependencies:
       '@ledgerhq/errors': 5.50.0
-      '@ledgerhq/hw-transport': 5.26.0
+      '@ledgerhq/hw-transport': 5.51.1
       '@ledgerhq/logs': 5.50.0
       u2f-api: 0.2.7
     dev: false
@@ -2638,7 +2638,6 @@ packages:
       '@ledgerhq/errors': 5.50.0
       events: 3.3.0
     dev: false
-    optional: true
 
   /@ledgerhq/logs@5.50.0:
     resolution: {integrity: sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==}
@@ -3656,7 +3655,7 @@ packages:
   /@types/bn.js@5.1.5:
     resolution: {integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==}
     dependencies:
-      '@types/node': 20.11.6
+      '@types/node': 20.4.5
     dev: false
 
   /@types/cacheable-request@6.0.3:
@@ -3779,12 +3778,6 @@ packages:
 
   /@types/node@18.15.13:
     resolution: {integrity: sha512-N+0kuo9KgrUQ1Sn/ifDXsvg0TTleP7rIy4zOBGECxAljqvqfqpTfzx0Q1NUedOixRMBfe2Whhb056a42cWs26Q==}
-    dev: false
-
-  /@types/node@20.11.6:
-    resolution: {integrity: sha512-+EOokTnksGVgip2PbYbr3xnR7kZigh4LbybAfBAw5BpnQ+FqBYUsvCEjYd70IXKlbohQ64mzEYmMtlWUY8q//Q==}
-    dependencies:
-      undici-types: 5.26.5
     dev: false
 
   /@types/node@20.4.5:
@@ -4595,7 +4588,7 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       buffer: 5.7.1
-      immediate: 3.2.3
+      immediate: 3.3.0
       level-concat-iterator: 2.0.1
       level-supports: 1.0.1
       xtend: 4.0.2
@@ -12028,10 +12021,6 @@ packages:
       buffer: 5.7.1
       through: 2.3.8
     dev: true
-
-  /undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-    dev: false
 
   /undici@5.28.2:
     resolution: {integrity: sha512-wh1pHJHnUeQV5Xa8/kyQhO7WFa8M34l026L5P/+2TYiakvGy5Rdc8jWZVyG7ieht/0WgJLEd3kcU5gKx+6GC8w==}

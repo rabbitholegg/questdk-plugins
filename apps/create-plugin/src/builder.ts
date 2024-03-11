@@ -28,7 +28,7 @@ export async function createPlugin(params: BuilderParams) {
   console.log()
   console.log(
     'View your new plugin todo list in the README, located at',
-    cyan(`packages/${params.projectName}/README.md`),
+    cyan(`packages/plugins/${params.projectName}/README.md`),
   )
 
   console.log('\n\n\n')
@@ -65,17 +65,20 @@ function registerHelpers() {
   Handlebars.registerHelper('eq', function (this: string, arg1, arg2, options) {
     return arg1 === arg2 ? options.fn(this) : options.inverse(this)
   })
-  Handlebars.registerHelper('hasAmountKey', function(this: string, tx, options) {
-    // Logic to determine if any tx.params keys start with "amount"
-    for (const transaction of tx) {
-      for (const key of Object.keys(transaction.params)) {
-        if (key.startsWith("amount")) {
-          return options.fn(this)
+  Handlebars.registerHelper(
+    'hasAmountKey',
+    function (this: string, tx, options) {
+      // Logic to determine if any tx.params keys start with "amount"
+      for (const transaction of tx) {
+        for (const key of Object.keys(transaction.params)) {
+          if (key.startsWith('amount')) {
+            return options.fn(this)
+          }
         }
       }
-    }
-    return options.inverse(this)
-  })
+      return options.inverse(this)
+    },
+  )
 }
 
 /**
@@ -92,7 +95,7 @@ async function copyDirectory(params: BuilderParams) {
   // get the target directory location
   const dest = path.join(
     __dirname,
-    `../../../packages/${params.projectName.toLowerCase()}`,
+    `../../../packages/plugins/${params.projectName.toLowerCase()}`,
   )
   // if there is already a directory with the name throw an error
   if (await fs.pathExists(dest)) {
@@ -149,7 +152,7 @@ async function replaceProjectName(params: BuilderParams) {
   // get the target directory location
   const dest = path.join(
     __dirname,
-    `../../../packages/${params.projectName.toLowerCase()}`,
+    `../../../packages/plugins/${params.projectName.toLowerCase()}`,
   )
 
   // replace the project name in the package.json
@@ -191,7 +194,7 @@ async function replaceFileNames(params: BuilderParams) {
   // get the target directory location
   const dest = path.join(
     __dirname,
-    `../../../packages/${params.projectName.toLowerCase()}`,
+    `../../../packages/plugins/${params.projectName.toLowerCase()}`,
   )
 
   //rename index.ts
@@ -238,7 +241,7 @@ async function setActionNames(params: BuilderParams) {
   // get the target directory location
   const dest = path.join(
     __dirname,
-    `../../../packages/${params.projectName.toLowerCase()}`,
+    `../../../packages/plugins/${params.projectName.toLowerCase()}`,
   )
 
   //replace the action names in the index

@@ -82,7 +82,9 @@ const descriptionQuestion: PromptObject = {
   },
 }
 
-export function getTxHashQuestion(transactions: TransactionDetail[]): PromptObject {
+export function getTxHashQuestion(
+  transactions: TransactionDetail[],
+): PromptObject {
   return {
     type: 'text',
     name: 'hash',

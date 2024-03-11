@@ -21,7 +21,7 @@ export async function askQuestions() {
 
   while (addAnotherTransaction) {
     const { hash }: { hash: Hash | undefined } = await _prompts(
-      getTxHashQuestion(transactions)
+      getTxHashQuestion(transactions),
     )
 
     if (hash) {
