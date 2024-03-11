@@ -9,6 +9,7 @@ import {
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
   type DisctriminatedActionParams,
+  BOOST_TREASURY_ADDRESS,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -24,6 +25,7 @@ import {
   GET_FEE_CONFIGURATION_ABI,
   GET_PLATFORM_FEE_ABI,
   GET_PRICE_ABI,
+  PURCHASE_ABI,
 } from './abi'
 import { Chains } from './utils'
 
@@ -80,9 +82,9 @@ export const simulateMint = async (
   const result = await _client.simulateContract({
     address: contractAddress,
     value,
-    abi: COLLECT_ENTRY_ABI,
+    abi: PURCHASE_ABI,
     functionName: 'purchase',
-    args: [recipient],
+    args: [recipient, '', BOOST_TREASURY_ADDRESS],
     account: account || DEFAULT_ACCOUNT,
   })
 

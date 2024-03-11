@@ -15,15 +15,37 @@ export async function fetchERC721Metadata(
   contractAddress: string,
   tokenId: number,
 ): Promise<any> {
-  const tokenURI: string = await (client.readContract({
+  let tokenURI: string = await (client.readContract({
     address: contractAddress as Address,
     abi: [
-      'function tokenURI(uint256 tokenId) external view returns (string memory)',
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'tokenId',
+            type: 'uint256',
+          },
+        ],
+        name: 'tokenURI',
+        outputs: [
+          {
+            internalType: 'string',
+            name: '',
+            type: 'string',
+          },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
     ],
     functionName: 'tokenURI',
-    args: [tokenId],
+    args: [BigInt(tokenId)],
   }) as Promise<string>)
 
+  if (tokenURI.startsWith('ipfs://')) {
+    const ipfsIdentifier = tokenURI.split('/').slice(2).join('/')
+    tokenURI = `https://ipfs.io/ipfs/${ipfsIdentifier}`
+  }
   const response = await axios.get(tokenURI)
   return response.data
 }

@@ -26,7 +26,7 @@ We recommend using direct linking, not global linking. If the local questDK chan
 
 Also remember the package must be built for changes to take effect in this repo. It should not be necessary to re-link after builds.
 
-At times it may be necesary to [restart the typescript server](https://tinytip.co/tips/vscode-restart-ts/) when working with a linked package in VSCode.
+At times it may be necessary to [restart the typescript server](https://tinytip.co/tips/vscode-restart-ts/) when working with a linked package in VSCode.
 
 In order to link the `questdk` run this from root of this package:
 ```
@@ -40,7 +40,7 @@ pnpm link path/to/questdk
 
 Quest Plugins are how we translate transaction data into actions. It’s how our platform can take information from smart contracts deployed for any EVM native protocol and quickly parse it into a standardized format. Using this standardized action information we determine if a given user has transactions that meet the specific criteria for a given quest. 
 
-For example, writing a plugin for Uniswap that translates a `swap` action allows users to create, and complete Quests to  on Uniswap . The plugin is used by our Indexing service to parse transaction data into specific information about that  allowing quests to target certain amounts, certain recipients, or even certain tokens.
+For example, writing a plugin for Uniswap that translates a `swap` action allows users to create, and complete Quests on Uniswap. The plugin is used by our Indexing service to parse transaction data into specific information about that  allowing quests to target certain amounts, certain recipients, or even certain tokens.
 
 
 
