@@ -328,6 +328,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/manifold:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/mirror:
     dependencies:
       '@rabbitholegg/questdk':
@@ -491,6 +504,9 @@ importers:
       '@rabbitholegg/questdk-plugin-llama':
         specifier: workspace:*
         version: link:../llama
+      '@rabbitholegg/questdk-plugin-manifold':
+        specifier: workspace:*
+        version: link:../manifold
       '@rabbitholegg/questdk-plugin-mirror':
         specifier: workspace:*
         version: link:../mirror
