@@ -35,20 +35,20 @@ describe('Given the {{lowercase projectName}} plugin', () => {
           {{/eq}}
           {{/eq}}
         })
-        expect(filter).toBeTypeOf('object');
-        expect(['string', 'number']).toContain(typeof filter.chainId);
-        expect(filter.chainId).toBe(1);
+        expect(filter).toBeTypeOf('object')
+        expect(['string', 'number']).toContain(typeof filter.chainId)
+        expect(Number(filter.chainId)).toBe(1)
         if (typeof filter.to === 'string') {
-          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/);
+          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
         } else {
           // if to is an object, it should have a logical operator as the only key
-          expect(filter.to).toBeTypeOf('object');
-          expect(Object.keys(filter.to)).toHaveLength(1);
+          expect(filter.to).toBeTypeOf('object')
+          expect(Object.keys(filter.to)).toHaveLength(1)
           expect(['$or', '$and'].some(prop => Object.hasOwnProperty.call(filter.to, prop))).to.be.true
-          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) => arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)));
+          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) => arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)))
         }
         // Check the input property is the correct type and has a valid $abi operator
-        expect(filter.input).toBeTypeOf('object');
+        expect(filter.input).toBeTypeOf('object')
         expect(['$abi', '$abiParams', '$abiAbstract','$or', '$and'].some(prop => Object.hasOwnProperty.call(filter.input, prop))).to.be.true
       })
     })
