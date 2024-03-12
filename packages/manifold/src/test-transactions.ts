@@ -1,10 +1,13 @@
-import { type MintActionParams } from '@rabbitholegg/questdk'
+import {
+  GreaterThanOrEqual,
+  type MintActionParams,
+} from '@rabbitholegg/questdk'
 import {
   createTestCase,
   type TestParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
-export const MINT_TEST_0: TestParams<MintActionParams> = {
+export const ERC1155_MINT: TestParams<MintActionParams> = {
   transaction: {
     chainId: 8453,
     from: '0x0971ca34b258c3d9095fc43c51a6d1ec542136c6',
@@ -17,11 +20,12 @@ export const MINT_TEST_0: TestParams<MintActionParams> = {
   params: {
     chainId: 8453,
     tokenId: 1,
-    contractAddress: '0x26bbea7803dcac346d5f5f135b57cf2c752a02be',
+    contractAddress: '0xe096f28c87f331758af3da402add89b33a2853d8',
+    amount: GreaterThanOrEqual(1),
     recipient: '0x0971ca34b258c3d9095fc43c51a6d1ec542136c6',
   },
 }
-export const MINT_TEST_1: TestParams<MintActionParams> = {
+export const ERC1155_MINTBATCH: TestParams<MintActionParams> = {
   transaction: {
     chainId: 8453,
     from: '0x7921c8081e58dc80bd67c8e8c97b23c102c69579',
@@ -34,11 +38,12 @@ export const MINT_TEST_1: TestParams<MintActionParams> = {
   params: {
     chainId: 8453,
     tokenId: 1,
-    contractAddress: '0x26bbea7803dcac346d5f5f135b57cf2c752a02be',
+    contractAddress: '0x86b31ddc447a6eefbcc7c2f03a4d5837aba1aa48',
+    amount: GreaterThanOrEqual(2),
     recipient: '0x7921c8081e58dc80bd67c8e8c97b23c102c69579',
   },
 }
-export const MINT_TEST_2: TestParams<MintActionParams> = {
+export const ERC721_MINT: TestParams<MintActionParams> = {
   transaction: {
     chainId: 10,
     from: '0xbef2416b5db819c6005fb07d7022a79cc628b457',
@@ -50,11 +55,12 @@ export const MINT_TEST_2: TestParams<MintActionParams> = {
   },
   params: {
     chainId: 10,
-    contractAddress: '0x26bbea7803dcac346d5f5f135b57cf2c752a02be',
+    contractAddress: '0x031b54862ec923bfcddcfe88cf22bde6d070fe29',
+    amount: GreaterThanOrEqual(1),
     recipient: '0xbef2416b5db819c6005fb07d7022a79cc628b457',
   },
 }
-export const MINT_TEST_3: TestParams<MintActionParams> = {
+export const ERC721_MINTSIGNATURE: TestParams<MintActionParams> = {
   transaction: {
     chainId: 10,
     from: '0x432cbcee14652cd7ca4c1cf7fe4430410e4b1502',
@@ -66,18 +72,42 @@ export const MINT_TEST_3: TestParams<MintActionParams> = {
   },
   params: {
     chainId: 10,
-    contractAddress: '0x26bbea7803dcac346d5f5f135b57cf2c752a02be',
+    contractAddress: '0x839edd6c023ea20d7aac12c6850f0eb3247c97a5',
+    amount: GreaterThanOrEqual(1),
     recipient: '0x432cbcee14652cd7ca4c1cf7fe4430410e4b1502',
   },
 }
 
 export const passingTestCases = [
-  createTestCase(MINT_TEST_0, 'when using ERC1155 mint'),
-  createTestCase(MINT_TEST_1, 'when using ERC1155 mint batch'),
-  createTestCase(MINT_TEST_2, 'when using ERC721 mint'),
-  createTestCase(MINT_TEST_3, 'when using ERC721 mint signature'),
+  createTestCase(ERC1155_MINT, 'when using ERC1155 mint'),
+  createTestCase(ERC1155_MINTBATCH, 'when using ERC1155 mint batch'),
+  createTestCase(ERC721_MINT, 'when using ERC721 mint'),
+  createTestCase(ERC721_MINTSIGNATURE, 'when using ERC721 mint signature'),
+  createTestCase(ERC1155_MINT, 'when tokenId is "any"', { tokenId: undefined }),
+  createTestCase(ERC1155_MINTBATCH, 'when amount is "any"', {
+    amount: undefined,
+  }),
 ]
 
 export const failingTestCases = [
-  createTestCase(MINT_TEST_0, 'when chainId is not correct', { chainId: 0 }),
+  createTestCase(ERC1155_MINT, 'when chainId is not correct', {
+    chainId: 42161,
+  }),
+  createTestCase(
+    ERC1155_MINTBATCH,
+    'when using mint batch and amount is not sufficient',
+    { amount: 10 },
+  ),
+  createTestCase(ERC1155_MINT, 'when using mint and amount is not sufficient', {
+    amount: 10,
+  }),
+  createTestCase(ERC1155_MINT, 'when tokenId is not correct', { tokenId: 100 }),
+  createTestCase(
+    ERC721_MINT,
+    'when minting ERC721 and amount is not sufficient',
+    { amount: 10 },
+  ),
+  createTestCase(ERC721_MINTSIGNATURE, 'when contract address is not correct', {
+    contractAddress: '0x23aA05a271DEBFFAA3D75739aF5581f744b326E4',
+  }),
 ]
