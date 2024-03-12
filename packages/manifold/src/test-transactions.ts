@@ -1,5 +1,6 @@
 import {
   GreaterThanOrEqual,
+  LessThan,
   type MintActionParams,
 } from '@rabbitholegg/questdk'
 import {
@@ -87,6 +88,7 @@ export const passingTestCases = [
   createTestCase(ERC1155_MINTBATCH, 'when amount is "any"', {
     amount: undefined,
   }),
+  createTestCase(ERC1155_MINTBATCH, 'when amount is exact', { amount: '2' }),
 ]
 
 export const failingTestCases = [
@@ -101,7 +103,7 @@ export const failingTestCases = [
   createTestCase(ERC1155_MINT, 'when using mint and amount is not sufficient', {
     amount: 10,
   }),
-  createTestCase(ERC1155_MINT, 'when tokenId is not correct', { tokenId: 100 }),
+  createTestCase(ERC1155_MINT, 'when tokenId is not correct', { tokenId: 2 }),
   createTestCase(
     ERC721_MINT,
     'when minting ERC721 and amount is not sufficient',
@@ -109,5 +111,8 @@ export const failingTestCases = [
   ),
   createTestCase(ERC721_MINTBATCH, 'when contract address is not correct', {
     contractAddress: '0x23aA05a271DEBFFAA3D75739aF5581f744b326E4',
+  }),
+  createTestCase(ERC1155_MINT, 'when amount is less than 1', {
+    amount: LessThan(1),
   }),
 ]
