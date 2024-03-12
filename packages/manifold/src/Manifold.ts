@@ -4,32 +4,68 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { Chains, type FilterOperator } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  ERC721_CONTRACT,
+  ERC1155_CONTRACT,
+  ABI_MINT,
+  ABI_MULTI,
+} from './constants'
 
-/*
- * Function templates for handling various blockchain action types.
- * It's adaptable for actions defined in ActionParams: Bridge, Swap, Stake, Mint, Delegate, Quest, Etc.
- * Duplicate and customize for each specific action type.
- * If you wish to use a different action other than swap, import one of the ActionParams types
- * from @rabbitholegg/questdk (ie: SwapActionParams) and change the function below to use
- * the action params you wish to use.
- */
+interface ManifoldInput {
+  $abi: typeof ABI_MULTI | typeof ABI_MINT
+  creatorContractAddress: string
+  instanceId?: number | string
+  mintCount?: FilterOperator | undefined
+  mintFor?: string
+}
+
+// Function to evaluate if the ABI_MINT should not be included
+const shouldIncludeAbiMint = (amount: FilterOperator | undefined): boolean => {
+  if (amount == null) return true
+  if (typeof amount === 'object') {
+    if ('$gte' in amount && (amount.$gte as bigint) >= 2) return false
+    if ('$gt' in amount && (amount.$gt as bigint) >= 1) return false
+    if ('$eq' in amount && (amount.$eq as bigint) >= 2) return false
+    if ('$lt' in amount && (amount.$lt as bigint) <= 1) return false // This might need special handling
+  } else {
+    return Number(amount) === 1
+  }
+  return true
+}
 
 export const mint = async (
-  _params: MintActionParams,
+  mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  // the ActionParams for this function are populated in the Boost Manager when the actual Boost is launched.
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
-  // In this function you should load the ABI, and translate any ActionParams into the input object defined below
-  // which should match the parameter names in the transaction
+  const inputConditions: ManifoldInput[] = [
+    {
+      $abi: ABI_MULTI,
+      creatorContractAddress: contractAddress,
+      instanceId: undefined,
+      mintCount: amount,
+      mintFor: recipient,
+    },
+  ]
 
-  // You can also use the boostdk filter system to support operators on parameters, for example, greater than
+  if (shouldIncludeAbiMint(amount)) {
+    inputConditions.push({
+      $abi: ABI_MINT,
+      creatorContractAddress: contractAddress,
+      instanceId: undefined,
+      mintFor: recipient,
+    })
+  }
 
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: '0x0',
-    to: '0x0', // The to field is the address of the contract we're interacting with
-    input: {}, // The input object is where we'll put the ABI and the parameters
+    chainId,
+    to: {
+      $or: [ERC721_CONTRACT.toLowerCase(), ERC1155_CONTRACT.toLowerCase()],
+    },
+    input: {
+      $or: inputConditions,
+    },
   })
 }
 
