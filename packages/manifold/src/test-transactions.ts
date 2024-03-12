@@ -107,7 +107,7 @@ export const failingTestCases = [
     'when minting ERC721 and amount is not sufficient',
     { amount: 10 },
   ),
-  createTestCase(ERC721_MINTSIGNATURE, 'when contract address is not correct', {
+  createTestCase(ERC721_MINTBATCH, 'when contract address is not correct', {
     contractAddress: '0x23aA05a271DEBFFAA3D75739aF5581f744b326E4',
   }),
 ]
