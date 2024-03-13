@@ -137,6 +137,13 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
+  const fees = await getFees(mint);
+  return fees.projectFee + fees.actionFee;
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress } = mint
 
   const client = createPublicClient({
@@ -160,7 +167,10 @@ export const getProjectFees = async (
     args: [contractAddress, mintInfo.tier, mintInfo.scheduleNum, 1, false], // assume quantity is 1 and hasValidAffiliate is false
   })) as TotalPriceAndFees
 
-  return totalPriceAndFees.total
+  return {
+    actionFee: totalPriceAndFees.subTotal,
+    projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
+  }
 }
 
 export const getSupportedTokenAddresses = async (
