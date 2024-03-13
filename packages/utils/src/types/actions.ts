@@ -322,6 +322,9 @@ export interface IActionPlugin {
     client?: PublicClient,
   ) => Promise<SimulateContractReturnType>
   getProjectFees?: (params: ActionParams) => Promise<bigint>
+  getFees?: (
+    params: ActionParams,
+  ) => Promise<{ actionFee: bigint; projectFee: bigint }>
 }
 
 export enum ActionType {
