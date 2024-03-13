@@ -86,7 +86,10 @@ export const failingTestCases = [
   createTestCase(TOKENS_FOR_TOKENS, 'when tokenOut is not correct', {
     tokenOut: '0x6982508145454ce325ddbe47a25d4ec3d2311933',
   }),
-  createTestCase(TOKENS_FOR_ETH, 'when amountIn is insufficient', {
+  createTestCase(ETH_FOR_TOKENS, 'when amountIn is insufficient using ETH', {
+    amountIn: GreaterThanOrEqual(parseEther('1000000000')),
+  }),
+  createTestCase(TOKENS_FOR_ETH, 'when amountIn is insufficient using tokens', {
     amountIn: GreaterThanOrEqual(parseEther('1000000000')),
   }),
 ]
