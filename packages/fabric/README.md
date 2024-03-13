@@ -9,7 +9,7 @@ Mint Gallery: https://hypersub.withfabric.xyz/
 
 ### Mint Plugin
 
-The main plugin targets the mint functions on the [SubscriptionTokenV1](https://basescan.org/address/0x90e1c94ca5e161acb420e59d8be5041db931c9dd#code) contract. There are 4 functions that mints may be routed through.
+The mint plugin targets the mint functions on the [SubscriptionTokenV1](https://basescan.org/address/0x90e1c94ca5e161acb420e59d8be5041db931c9dd#code) contract. There are 4 functions that mints may be routed through.
 
 - `mint`
 - `mintFor`
