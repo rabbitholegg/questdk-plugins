@@ -21,6 +21,7 @@ import {
   ERC721_CONTRACT,
   INSTANCEID_ABI,
 } from './constants'
+import { shouldIncludeAbiMint } from './utils'
 
 interface ManifoldInput {
   $abi: typeof ABI_MULTI | typeof ABI_MINT
@@ -30,18 +31,7 @@ interface ManifoldInput {
   mintFor?: string
 }
 
-const shouldIncludeAbiMint = (amount: FilterOperator | undefined): boolean => {
-  if (amount == null) return true
-  if (typeof amount === 'object') {
-    if ('$gte' in amount && (amount.$gte as bigint) >= 2) return false
-    if ('$gt' in amount && (amount.$gt as bigint) >= 1) return false
-    if ('$eq' in amount && (amount.$eq as bigint) >= 2) return false
-    if ('$lt' in amount && (amount.$lt as bigint) <= 1) return false
-  } else {
-    return Number(amount) === 1
-  }
-  return true
-}
+const instanceIdCache: Record<string, number | undefined> = {}
 
 export const mint = async (
   mint: MintActionParams,
@@ -51,27 +41,32 @@ export const mint = async (
   let instanceId: number | undefined = undefined
 
   if (tokenId) {
-    const client = createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    })
+    const cacheKey = `${chainId}-${contractAddress}-${tokenId}`
+    if (instanceIdCache[cacheKey] !== undefined) {
+      instanceId = instanceIdCache[cacheKey]
+    } else {
+      const client = createPublicClient({
+        chain: chainIdToViemChain(chainId),
+        transport: http(),
+      })
 
-    try {
-      const data: ContractFunctionReturnType<typeof INSTANCEID_ABI> =
-        await client.readContract({
-          address: ERC1155_CONTRACT, // ERC-721 should not use tokenId
-          abi: INSTANCEID_ABI,
-          functionName: 'getClaimForToken',
-          args: [contractAddress, tokenId],
-        })
+      try {
+        const data: ContractFunctionReturnType<typeof INSTANCEID_ABI> =
+          await client.readContract({
+            address: ERC1155_CONTRACT, // ERC-721 should not use tokenId
+            abi: INSTANCEID_ABI,
+            functionName: 'getClaimForToken',
+            args: [contractAddress, tokenId],
+          })
 
-      if (typeof data === 'object' && Array.isArray(data)) {
-        instanceId = data[0]
+        if (typeof data === 'object' && Array.isArray(data)) {
+          instanceId = data[0]
+          instanceIdCache[cacheKey] = instanceId
+        }
+      } catch (e) {
+        instanceId = 0
+        instanceIdCache[cacheKey] = instanceId
       }
-    } catch (e) {
-      // no instanceId can be found for this tokenId
-      // we should fail the transaction
-      instanceId = 0
     }
   }
 
