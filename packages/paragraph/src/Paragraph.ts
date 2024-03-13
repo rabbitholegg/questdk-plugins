@@ -5,14 +5,20 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { MINT_ABI } from './abi'
 
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
+  const { chainId, contractAddress, recipient } = mint
+
   return compressJson({
-    chainId: '0x0',
-    to: '0x0',
-    input: {},
+    chainId,
+    to: contractAddress,
+    input: {
+      $abi: MINT_ABI,
+      to: recipient,
+    },
   })
 }
 
