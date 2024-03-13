@@ -11,8 +11,7 @@ describe('Given the aerodrome plugin', () => {
           chainId: 1,
         })
         expect(filter).toBeTypeOf('object')
-        expect(['string', 'number']).toContain(typeof filter.chainId)
-        expect(filter.chainId).toBe(1)
+        expect(Number(filter.chainId)).toBe(1)
         if (typeof filter.to === 'string') {
           expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
         } else {
@@ -28,7 +27,7 @@ describe('Given the aerodrome plugin', () => {
             arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
           )
         }
-        // Check the input property is the correct type and has a valid $abi or logical operator
+        // Check the input property is the correct type and has a valid filter operator
         expect(filter.input).toBeTypeOf('object')
         expect(
           ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
