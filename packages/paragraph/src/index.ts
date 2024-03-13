@@ -1,6 +1,4 @@
-import {
-  type IActionPlugin,
-} from '@rabbitholegg/questdk'
+import { type IActionPlugin } from '@rabbitholegg/questdk'
 
 import {
   mint,
@@ -9,8 +7,8 @@ import {
 } from './Paragraph.js'
 
 export const Paragraph: IActionPlugin = {
-  pluginId: "paragraph",
+  pluginId: 'paragraph',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  mint, 
+  mint,
 }
