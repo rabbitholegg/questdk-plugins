@@ -5,6 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { FABRIC_ABI } from './abi'
 
 export const mint = async (
   mint: MintActionParams,
@@ -13,7 +14,9 @@ export const mint = async (
   return compressJson({
     chainId,
     to: contractAddress,
-    input: {},
+    input: {
+      $abi: FABRIC_ABI,
+    },
   })
 }
 
