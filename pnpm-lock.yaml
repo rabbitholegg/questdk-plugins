@@ -148,6 +148,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/aerodrome:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/arbitrum:
     devDependencies:
       '@rabbitholegg/questdk':
@@ -452,6 +465,9 @@ importers:
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
+      '@rabbitholegg/questdk-plugin-aerodrome':
+        specifier: workspace:*
+        version: link:../aerodrome
       '@rabbitholegg/questdk-plugin-arbitrum':
         specifier: workspace:*
         version: link:../arbitrum
