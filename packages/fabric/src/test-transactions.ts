@@ -17,7 +17,6 @@ export const FABRIC_MINT: TestParams<MintActionParams> = {
   params: {
     chainId: 8453,
     contractAddress: '0x2efc6064239121d1d7efb503355daa82b87ee89c',
-    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
   },
 }
 
@@ -28,5 +27,8 @@ export const passingTestCases = [
 export const failingTestCases = [
   createTestCase(FABRIC_MINT, 'when chainId is not correct', {
     chainId: 42161,
+  }),
+  createTestCase(FABRIC_MINT, 'when contractAddress is not correct', {
+    contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
   }),
 ]
