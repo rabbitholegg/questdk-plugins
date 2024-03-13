@@ -4,9 +4,8 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address, getAddress } from 'viem'
-import { CHAIN_ID_ARRAY, CHAIN_TO_TOKENS } from './constants'
+import { CHAIN_ID_ARRAY, CHAIN_TO_TOKENS, CHAIN_TO_ROUTER } from './constants'
 import { metaBurnABI, metaRouteABI } from './abi'
-import { symbiosis } from './symbiosis-sdk'
 
 export const bridge = async (
   bridge: BridgeActionParams,
@@ -21,7 +20,7 @@ export const bridge = async (
   } = bridge
 
   const bridgeContract: Address =
-    contractAddress ?? (symbiosis.metaRouter(sourceChainId).address as Address)
+    contractAddress ?? CHAIN_TO_ROUTER[sourceChainId]
 
   return compressJson({
     chainId: sourceChainId,

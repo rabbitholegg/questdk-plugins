@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.44
+
+### Patch Changes
+
+- [#275](https://github.com/rabbitholegg/questdk-plugins/pull/275) [`cfaf9b3a`](https://github.com/rabbitholegg/questdk-plugins/commit/cfaf9b3a94c1ac85e56c741da3f0afbe21149e88) Thanks [@veganbeef](https://github.com/veganbeef)! - fixed token metadata functions
+
 ## 2.0.0-alpha.43
 
 ### Minor Changes

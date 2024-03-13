@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-stargate
 
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- Updated dependencies [[`cfaf9b3a`](https://github.com/rabbitholegg/questdk-plugins/commit/cfaf9b3a94c1ac85e56c741da3f0afbe21149e88)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.32
 
 ### Patch Changes
