@@ -389,6 +389,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/paragraph:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/paraswap:
     dependencies:
       '@paraswap/sdk':
@@ -503,6 +516,9 @@ importers:
       '@rabbitholegg/questdk-plugin-optimism':
         specifier: workspace:*
         version: link:../optimism
+      '@rabbitholegg/questdk-plugin-paragraph':
+        specifier: workspace:*
+        version: link:../paragraph
       '@rabbitholegg/questdk-plugin-paraswap':
         specifier: workspace:*
         version: link:../paraswap
