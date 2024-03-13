@@ -10,12 +10,13 @@ import { FABRIC_ABI } from './abi'
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress } = mint
+  const { chainId, contractAddress, recipient } = mint
   return compressJson({
     chainId,
     to: contractAddress,
     input: {
       $abi: FABRIC_ABI,
+      account: recipient,
     },
   })
 }
