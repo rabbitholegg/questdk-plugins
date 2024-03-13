@@ -1,18 +1,15 @@
 {
-    "extends": "tsconfig/base.json",
-    "include": ["src"],
-    "exclude": [
-      "src/**/*.test.ts",
-      "src/**/*.test-d.ts",
-      "src/**/*.bench.ts",
-      "src/_test"
-    ],
-    "compilerOptions": {
-      "declaration": true,
-      "declarationDir": "./dist/types",
-      "resolveJsonModule": true,
-      "sourceMap": true,
-      "rootDir": "./src"
-    }
+  "extends": "tsconfig/base.json",
+  "include": ["src"],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test-d.ts",
+    "src/**/*.bench.ts",
+    "src/_test"
+  ],
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "rootDir": "./src",
   }
-  
+}

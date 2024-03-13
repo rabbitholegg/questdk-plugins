@@ -8,10 +8,9 @@
     "src/_test"
   ],
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "./dist/types",
     "resolveJsonModule": true,
     "sourceMap": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+
   }
 }
