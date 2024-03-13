@@ -31,7 +31,6 @@ import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
-import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
   type MintIntentParams,
@@ -200,8 +199,4 @@ export const executePlugin = (
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
-}
-
-export const getIndexedContracts = (_chainId: number) => {
-  return [ENTRYPOINT]
 }
