@@ -8,5 +8,4 @@ tasks:
   - name: Swap on Aerodrome
     # action specific link to your project. (ie: myapp.com/swap)
     link: https://aerodrome.finance/swap
-    iconOption: https://assets.coingecko.com/coins/images/31745/large/token.png
     actionPluginId: swap
