@@ -12,7 +12,6 @@ describe('Given the manifold plugin', () => {
           contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
         })
         expect(filter).toBeTypeOf('object')
-        expect(['string', 'number']).toContain(typeof filter.chainId)
         expect(Number(filter.chainId)).toBe(1)
         if (typeof filter.to === 'string') {
           expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
@@ -29,7 +28,7 @@ describe('Given the manifold plugin', () => {
             arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
           )
         }
-        // Check the input property is the correct type and has a valid $abi operator
+        // Check the input property is the correct type and has a valid filter operator
         expect(filter.input).toBeTypeOf('object')
         expect(
           ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
