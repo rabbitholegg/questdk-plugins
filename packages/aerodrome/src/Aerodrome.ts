@@ -10,6 +10,7 @@ import {
   ETH_FOR_TOKENS_FRAGMENTS,
   TOKENS_FOR_ETH_FRAGMENTS,
   TOKENS_FOR_TOKENS_FRAGMENTS,
+  WETH_ADDRESS,
 } from './constants'
 
 export const swap = async (
@@ -30,7 +31,7 @@ export const swap = async (
           routes: {
             $and: [
               {
-                $first: { from: '0x4200000000000000000000000000000000000006' },
+                $first: { from: WETH_ADDRESS },
               },
               { $last: { to: tokenOut } },
             ],
@@ -45,7 +46,7 @@ export const swap = async (
           routes: {
             $and: [
               { $first: { from: tokenIn } },
-              { $last: { to: '0x4200000000000000000000000000000000000006' } },
+              { $last: { to: WETH_ADDRESS } },
             ],
           },
           to: recipient,
