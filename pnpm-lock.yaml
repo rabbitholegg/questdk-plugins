@@ -158,13 +158,14 @@ importers:
         version: link:../tsconfig
 
   packages/artblocks:
-    specifiers:
-      '@rabbitholegg/questdk-plugin-utils': workspace:*
-      tsconfig: workspace:*
     dependencies:
-      '@rabbitholegg/questdk-plugin-utils': link:../utils
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
-      tsconfig: link:../tsconfig
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
 
   packages/balancer:
     dependencies:
@@ -457,77 +458,6 @@ importers:
         version: link:../tsconfig
 
   packages/registry:
-<<<<<<< HEAD
-    specifiers:
-      '@rabbitholegg/questdk-plugin-across': workspace:*
-      '@rabbitholegg/questdk-plugin-arbitrum': workspace:*
-      '@rabbitholegg/questdk-plugin-artblocks': workspace:*
-      '@rabbitholegg/questdk-plugin-balancer': workspace:*
-      '@rabbitholegg/questdk-plugin-basepaint': workspace:*
-      '@rabbitholegg/questdk-plugin-boost': workspace:*
-      '@rabbitholegg/questdk-plugin-camelot': workspace:*
-      '@rabbitholegg/questdk-plugin-connext': workspace:*
-      '@rabbitholegg/questdk-plugin-gmx': workspace:*
-      '@rabbitholegg/questdk-plugin-handlefi': workspace:*
-      '@rabbitholegg/questdk-plugin-hop': workspace:*
-      '@rabbitholegg/questdk-plugin-hyphen': workspace:*
-      '@rabbitholegg/questdk-plugin-llama': workspace:*
-      '@rabbitholegg/questdk-plugin-mirror': workspace:*
-      '@rabbitholegg/questdk-plugin-mux': workspace:*
-      '@rabbitholegg/questdk-plugin-okutrade': workspace:*
-      '@rabbitholegg/questdk-plugin-optimism': workspace:*
-      '@rabbitholegg/questdk-plugin-paraswap': workspace:*
-      '@rabbitholegg/questdk-plugin-pendle': workspace:*
-      '@rabbitholegg/questdk-plugin-polygon': workspace:*
-      '@rabbitholegg/questdk-plugin-rabbithole': workspace:*
-      '@rabbitholegg/questdk-plugin-soundxyz': workspace:*
-      '@rabbitholegg/questdk-plugin-stargate': workspace:*
-      '@rabbitholegg/questdk-plugin-sushi': workspace:*
-      '@rabbitholegg/questdk-plugin-symbiosis': workspace:*
-      '@rabbitholegg/questdk-plugin-synapse': workspace:*
-      '@rabbitholegg/questdk-plugin-tally': workspace:*
-      '@rabbitholegg/questdk-plugin-traderjoe': workspace:*
-      '@rabbitholegg/questdk-plugin-treasure': workspace:*
-      '@rabbitholegg/questdk-plugin-uniswap': workspace:*
-      '@rabbitholegg/questdk-plugin-vela': workspace:*
-      '@rabbitholegg/questdk-plugin-woofi': workspace:*
-      '@rabbitholegg/questdk-plugin-zora': workspace:*
-      tsconfig: workspace:*
-    dependencies:
-      '@rabbitholegg/questdk-plugin-across': link:../across
-      '@rabbitholegg/questdk-plugin-arbitrum': link:../arbitrum
-      '@rabbitholegg/questdk-plugin-artblocks': link:../artblocks
-      '@rabbitholegg/questdk-plugin-balancer': link:../balancer
-      '@rabbitholegg/questdk-plugin-basepaint': link:../basepaint
-      '@rabbitholegg/questdk-plugin-boost': link:../boost
-      '@rabbitholegg/questdk-plugin-camelot': link:../camelot
-      '@rabbitholegg/questdk-plugin-connext': link:../connext
-      '@rabbitholegg/questdk-plugin-gmx': link:../gmx
-      '@rabbitholegg/questdk-plugin-handlefi': link:../handlefi
-      '@rabbitholegg/questdk-plugin-hop': link:../hop
-      '@rabbitholegg/questdk-plugin-hyphen': link:../hyphen
-      '@rabbitholegg/questdk-plugin-llama': link:../llama
-      '@rabbitholegg/questdk-plugin-mirror': link:../mirror
-      '@rabbitholegg/questdk-plugin-mux': link:../mux
-      '@rabbitholegg/questdk-plugin-okutrade': link:../okutrade
-      '@rabbitholegg/questdk-plugin-optimism': link:../optimism
-      '@rabbitholegg/questdk-plugin-paraswap': link:../paraswap
-      '@rabbitholegg/questdk-plugin-pendle': link:../pendle
-      '@rabbitholegg/questdk-plugin-polygon': link:../polygon
-      '@rabbitholegg/questdk-plugin-rabbithole': link:../rabbithole
-      '@rabbitholegg/questdk-plugin-soundxyz': link:../soundxyz
-      '@rabbitholegg/questdk-plugin-stargate': link:../stargate
-      '@rabbitholegg/questdk-plugin-sushi': link:../sushi
-      '@rabbitholegg/questdk-plugin-symbiosis': link:../symbiosis
-      '@rabbitholegg/questdk-plugin-synapse': link:../synapse
-      '@rabbitholegg/questdk-plugin-tally': link:../tally
-      '@rabbitholegg/questdk-plugin-traderjoe': link:../traderjoe
-      '@rabbitholegg/questdk-plugin-treasure': link:../treasure
-      '@rabbitholegg/questdk-plugin-uniswap': link:../uniswap
-      '@rabbitholegg/questdk-plugin-vela': link:../vela
-      '@rabbitholegg/questdk-plugin-woofi': link:../woofi
-      '@rabbitholegg/questdk-plugin-zora': link:../zora
-=======
     dependencies:
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
@@ -535,6 +465,9 @@ importers:
       '@rabbitholegg/questdk-plugin-arbitrum':
         specifier: workspace:*
         version: link:../arbitrum
+      '@rabbitholegg/questdk-plugin-artblocks':
+        specifier: workspace:*
+        version: link:../artblocks
       '@rabbitholegg/questdk-plugin-balancer':
         specifier: workspace:*
         version: link:../balancer
@@ -628,7 +561,6 @@ importers:
       '@rabbitholegg/questdk-plugin-zora':
         specifier: workspace:*
         version: link:../zora
->>>>>>> origin/main
     devDependencies:
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
