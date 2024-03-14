@@ -11,6 +11,5 @@
   "compilerOptions": {
     "sourceMap": true,
     "rootDir": "./src",
-
   }
 }

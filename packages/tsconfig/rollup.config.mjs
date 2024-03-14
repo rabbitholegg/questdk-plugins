@@ -20,7 +20,6 @@ export default [
       }
     ],
     plugins: [
-      typescript({ tsconfig: './tsconfig.build.json' }), // TypeScript compilation
       resolve(), // Resolves node modules
       commonjs(), // Converts CommonJS modules to ES6
       terser(), // Minify the output (optional),

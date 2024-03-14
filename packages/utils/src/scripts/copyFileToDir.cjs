@@ -11,7 +11,7 @@ if (!fileToCopy) {
 const directoriesToCheck = ['packages', 'apps']; // Directories to copy the file into
 
 directoriesToCheck.forEach((dir) => {
-  const baseDir = path.join(__dirname, dir);
+  const baseDir = path.join(__dirname, '..', '..', '..', '..', dir);
   fs.readdir(baseDir, { withFileTypes: true }, (err, entries) => {
     if (err) {
       console.error(`Failed to read ${dir} directory:`, err);
