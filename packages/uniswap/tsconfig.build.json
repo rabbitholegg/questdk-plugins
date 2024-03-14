@@ -8,7 +8,6 @@
     "src/_test"
   ],
   "compilerOptions": {
-    "resolveJsonModule": true,
     "sourceMap": true,
     "rootDir": "./src",
 

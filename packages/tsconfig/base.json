@@ -2,7 +2,6 @@
   "include": [],
   "compilerOptions": {
     "incremental": true,
-
     "strict": true,
     "useDefineForClassFields": true,
     "noFallthroughCasesInSwitch": true,
@@ -11,20 +10,15 @@
     "noImplicitOverride": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "resolveJsonModule": true,
     "allowJs": false,
     "checkJs": false,
-
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "verbatimModuleSyntax": true,
     "importHelpers": true,
-
     "moduleResolution": "node",
     "target": "ES2021",
     "lib": ["ES2022", "DOM"],
-
     "skipLibCheck": true
   }
 }

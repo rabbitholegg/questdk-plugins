@@ -9,7 +9,6 @@
     "scripts/**/*"
   ],
   "compilerOptions": {
-    "resolveJsonModule": true,
     "sourceMap": true,
     "rootDir": "./src",
 
