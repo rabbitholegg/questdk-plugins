@@ -46,4 +46,203 @@ export const SUPERMINTER_ABI = [
     stateMutability: 'payable',
     type: 'function',
   },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'paid',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'required',
+        type: 'uint256',
+      },
+    ],
+    name: 'WrongPayment',
+    type: 'error',
+  },
+]
+
+export const MINT_INFO_LIST_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'edition',
+        type: 'address',
+      },
+    ],
+    name: 'mintInfoList',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'edition',
+            type: 'address',
+          },
+          {
+            internalType: 'uint8',
+            name: 'tier',
+            type: 'uint8',
+          },
+          {
+            internalType: 'uint8',
+            name: 'scheduleNum',
+            type: 'uint8',
+          },
+          {
+            internalType: 'address',
+            name: 'platform',
+            type: 'address',
+          },
+          {
+            internalType: 'uint96',
+            name: 'price',
+            type: 'uint96',
+          },
+          {
+            internalType: 'uint32',
+            name: 'startTime',
+            type: 'uint32',
+          },
+          {
+            internalType: 'uint32',
+            name: 'endTime',
+            type: 'uint32',
+          },
+          {
+            internalType: 'uint32',
+            name: 'maxMintablePerAccount',
+            type: 'uint32',
+          },
+          {
+            internalType: 'uint32',
+            name: 'maxMintable',
+            type: 'uint32',
+          },
+          {
+            internalType: 'uint32',
+            name: 'minted',
+            type: 'uint32',
+          },
+          {
+            internalType: 'uint16',
+            name: 'affiliateFeeBPS',
+            type: 'uint16',
+          },
+          {
+            internalType: 'uint8',
+            name: 'mode',
+            type: 'uint8',
+          },
+          {
+            internalType: 'bool',
+            name: 'paused',
+            type: 'bool',
+          },
+          {
+            internalType: 'bool',
+            name: 'hasMints',
+            type: 'bool',
+          },
+          {
+            internalType: 'bytes32',
+            name: 'affiliateMerkleRoot',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'bytes32',
+            name: 'merkleRoot',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'address',
+            name: 'signer',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct ISuperMinterV2.MintInfo[]',
+        name: 'a',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+]
+
+export const TOTAL_PRICE_AND_FEES_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'edition',
+        type: 'address',
+      },
+      {
+        internalType: 'uint8',
+        name: 'tier',
+        type: 'uint8',
+      },
+      {
+        internalType: 'uint8',
+        name: 'scheduleNum',
+        type: 'uint8',
+      },
+      {
+        internalType: 'uint32',
+        name: 'quantity',
+        type: 'uint32',
+      },
+      {
+        internalType: 'bool',
+        name: 'hasValidAffiliate',
+        type: 'bool',
+      },
+    ],
+    name: 'totalPriceAndFees',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'total',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'subTotal',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'unitPrice',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'finalArtistFee',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'finalAffiliateFee',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'finalPlatformFee',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct ISuperMinterV2.TotalPriceAndFees',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
 ]

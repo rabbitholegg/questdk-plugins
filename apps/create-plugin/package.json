@@ -1,0 +1,28 @@
+{
+  "name": "@rabbitholegg/create-plugin",
+  "version": "2.0.0-alpha.5",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"no test specified\"",
+    "dev": "pnpm run build && node dist/index.js",
+    "create": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "figlet": "1.7.0"
+  },
+  "devDependencies": {
+    "@types/prompt": "1.1.8",
+    "@types/prompts": "2.4.9",
+    "fs-extra": "11.2.0",
+    "handlebars": "4.7.8",
+    "picocolors": "1.0.0",
+    "prompts": "2.4.2",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
+  }
+}

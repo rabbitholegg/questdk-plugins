@@ -14,6 +14,7 @@ const ethereumTokenAddresses: Address[] = [
   '0x6810e776880C02933D47DB1b9fc05908e5386b96', // GNO
   '0x6De037ef9aD2725EB40118Bb1702EBb27e4Aeb24', // RNDR
   '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', // UNI
+  '0xD69a0A9682F679f50e34dE40105A93BEbB2fF43d', // MACKE
 ]
 
 const optimismTokenAddresses: Address[] = [
@@ -64,6 +65,7 @@ const baseTokenAddresses: Address[] = [
   '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA', // USDbC
   '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // USDC
   '0x4200000000000000000000000000000000000006', // WETH
+  '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', // DEGEN
 ]
 
 const arbitrumTokenAddresses: Address[] = [

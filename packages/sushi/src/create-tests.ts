@@ -1,16 +1,17 @@
-import { createTestCase } from './utils'
 import {
-  PROCESS_ROUTE_ETH_TOKEN,
-  PROCESS_ROUTE_TOKEN_ETH,
-  PROCESS_ROUTE_TOKEN_TOKEN,
   ETH_FOR_EXACT_TOKENS,
   EXACT_ETH_FOR_TOKENS,
   EXACT_TOKENS_FOR_ETH,
   EXACT_TOKENS_FOR_TOKENS,
+  PROCESS_ROUTE_ETH_TOKEN,
+  PROCESS_ROUTE_TOKEN_ETH,
+  PROCESS_ROUTE_TOKEN_TOKEN,
+  PROCESS_ROUTE_V4,
   TOKENS_FOR_EXACT_ETH,
   TOKENS_FOR_EXACT_TOKENS,
 } from './test-transactions'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther } from 'viem'
 
 export const passingTestCases = [
@@ -25,6 +26,10 @@ export const passingTestCases = [
   createTestCase(
     PROCESS_ROUTE_TOKEN_TOKEN,
     'when swapping tokens to tokens using route processor',
+  ),
+  createTestCase(
+    PROCESS_ROUTE_V4,
+    'when swapping ETH to tokens using V4 route processor',
   ),
   createTestCase(
     ETH_FOR_EXACT_TOKENS,

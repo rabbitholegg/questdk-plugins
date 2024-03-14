@@ -1,17 +1,19 @@
-import { getAddress } from 'viem'
-import { createTestCase } from './utils'
 import {
   BASIC_PURCHASE,
+  BATCH_MINT_ARB,
+  MINT_BATCH_WITHOUT_FEES,
   MINT_WITH_REWARDS,
   MINT_WITH_REWARDS_1155,
-  MINT_BATCH_WITHOUT_FEES,
 } from './test-transactions'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
+import { getAddress } from 'viem'
 
 export const passingTestCases = [
   createTestCase(BASIC_PURCHASE, 'when doing a basic purchase'),
   createTestCase(MINT_WITH_REWARDS, 'Minting with rewards'),
   createTestCase(MINT_WITH_REWARDS_1155, 'Minting with rewards 1155'),
   createTestCase(MINT_BATCH_WITHOUT_FEES, 'When using the batch mint function'),
+  createTestCase(BATCH_MINT_ARB, 'when using batch mint function on arbitrum'),
   createTestCase(MINT_WITH_REWARDS, 'when contractAddress is checksummed', {
     contractAddress: getAddress(MINT_WITH_REWARDS.params.contractAddress),
   }),

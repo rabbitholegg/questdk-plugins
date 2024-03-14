@@ -226,6 +226,36 @@ export const ZORA_MINTER_ABI_721 = [
   // https://github.com/ourzora/zora-protocol/blob/8d1fe9bdd79a552a8f74b4712451185f6aebf9a0/packages/1155-contracts/src/nft/ZoraCreator1155Impl.sol#L427
 ]
 
+export const ZORA_MINTER_ABI_1155_LEGACY = [
+  {
+    inputs: [
+      {
+        internalType: 'contract IMinter1155',
+        name: 'minter',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'quantity',
+        type: 'uint256',
+      },
+      {
+        internalType: 'bytes',
+        name: 'minterArguments',
+        type: 'bytes',
+      },
+    ],
+    name: 'mint',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
 export const ZORA_MINTER_ABI_1155 = [
   {
     inputs: [
@@ -243,6 +273,11 @@ export const ZORA_MINTER_ABI_1155 = [
         internalType: 'uint256',
         name: 'quantity',
         type: 'uint256',
+      },
+      {
+        internalType: 'address[]',
+        name: 'rewardsRecipients',
+        type: 'address[]',
       },
       {
         internalType: 'bytes',

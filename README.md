@@ -26,7 +26,7 @@ We recommend using direct linking, not global linking. If the local questDK chan
 
 Also remember the package must be built for changes to take effect in this repo. It should not be necessary to re-link after builds.
 
-At times it may be necesary to [restart the typescript server](https://tinytip.co/tips/vscode-restart-ts/) when working with a linked package in VSCode.
+At times it may be necessary to [restart the typescript server](https://tinytip.co/tips/vscode-restart-ts/) when working with a linked package in VSCode.
 
 In order to link the `questdk` run this from root of this package:
 ```
@@ -40,7 +40,7 @@ pnpm link path/to/questdk
 
 Quest Plugins are how we translate transaction data into actions. It’s how our platform can take information from smart contracts deployed for any EVM native protocol and quickly parse it into a standardized format. Using this standardized action information we determine if a given user has transactions that meet the specific criteria for a given quest. 
 
-For example, writing a plugin for Uniswap that translates a `swap` action allows users to create, and complete Quests to  on Uniswap . The plugin is used by our Indexing service to parse transaction data into specific information about that  allowing quests to target certain amounts, certain recipients, or even certain tokens.
+For example, writing a plugin for Uniswap that translates a `swap` action allows users to create, and complete Quests on Uniswap. The plugin is used by our Indexing service to parse transaction data into specific information about that  allowing quests to target certain amounts, certain recipients, or even certain tokens.
 
 
 
@@ -142,7 +142,7 @@ If you're ready to publish, remove the `private` tag from your `package.json` fi
 ## Contributing
 If you'd like to build a plugin and get support for your protocol on RabbiteHole all you need to do is submit a PR with the finished plugin. Here are some useful tips to assist, and when in doubt please [join our discord](https://discord.com/invite/rabbitholegg) or reach out by email [<arthur@rabbithole.gg>] for assistance building a plugin.
 ### Changesets & Publishing
-In order to publish you need to make sure that the pull request you're submitting has a changeset. If you don't want to publish this isn't needed. In order to generate a changeset run pnpm changeset, select a change type [major,minor,patch], and draft a small summary of the changeset. Select version based on [semantic versioning](https://semver.org/).
+In order to publish you need to make sure that the pull request you're submitting has a changeset. If you don't want to publish this isn't needed. In order to generate a changeset run `pnpm changeset`, select a change type [major,minor,patch], and draft a small summary of the changeset. Select version based on [semantic versioning](https://semver.org/).
 
 After this all you need to do is push and merge the pull request and the Github Action will handle the process of versioning, and publishing.
 ### Commit Standards

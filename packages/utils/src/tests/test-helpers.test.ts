@@ -1,7 +1,7 @@
 import { createTestCase, type TestParams } from '../'
 import { describe, expect, test } from 'vitest'
-import type { SwapActionParams } from '@rabbitholegg/questdk'
 import type { Address } from 'viem'
+import type { SwapActionParams } from '../types'
 
 describe('createTestCase', () => {
   test('should create a test case with the given parameters', () => {

@@ -24,7 +24,7 @@ describe('Given the uniswap plugin', () => {
 
         expect(filter).to.deep.equal({
           chainId: 10,
-          to: '0xeC8B0F7Ffe3ae75d7FfAb09429e3675bb63503e4',
+          to: '0xCb1355ff08Ab38bBCE60111F1bb2B784bE25D7e8',
           input: {
             $abi: EXECUTE_ABI_FRAGMENTS,
             inputs: {
