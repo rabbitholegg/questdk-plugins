@@ -19,7 +19,6 @@ export default [
         sourcemap: true,
       }
     ],
-    external: ['worker_threads'],
     plugins: [
       typescript({ tsconfig: './tsconfig.build.json' }), // TypeScript compilation
       resolve(), // Resolves node modules
