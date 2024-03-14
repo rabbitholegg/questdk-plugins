@@ -19,6 +19,12 @@
     "moduleResolution": "node",
     "target": "ES2021",
     "lib": ["ES2022", "DOM"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "outDir": "dist/types"
   }
 }
+
+// Path: packages/tsconfig/base.json
