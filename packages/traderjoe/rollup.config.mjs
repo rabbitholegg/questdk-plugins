@@ -20,9 +20,15 @@ export default [
       }
     ],
     plugins: [
-      resolve(), // Resolves node modules
-      commonjs(), // Converts CommonJS modules to ES6
       typescript({ tsconfig: './tsconfig.build.json' }), // TypeScript compilation
+      // Trader Joe SDK isn't correctly distributing their module so we need to use the main field
+      resolve({
+        // Target only the specific package
+        only: ['@traderjoe-xyz/sdk-v2'],
+        mainFields: ['main'], // Prioritize the "main" field for this package
+      }),
+      resolve({debug: true}), // Resolves node modules
+      commonjs(), // Converts CommonJS modules to ES6
       terser(), // Minify the output (optional),
       json(), // Support JSON imports
     ]
