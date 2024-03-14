@@ -38,6 +38,7 @@
   "dependencies": {
     "@rabbitholegg/questdk-plugin-across": "workspace:*",
     "@rabbitholegg/questdk-plugin-arbitrum": "workspace:*",
+    "@rabbitholegg/questdk-plugin-artblocks": "workspace:*",
     "@rabbitholegg/questdk-plugin-basepaint": "workspace:*",
     "@rabbitholegg/questdk-plugin-camelot": "workspace:*",
     "@rabbitholegg/questdk-plugin-connext": "workspace:*",
