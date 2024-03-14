@@ -1,24 +1,33 @@
-// babel.config.js
-const sharedPresets = ['@babel/typescript'];
-const shared = {
-  ignore: ['src/**/*.spec.ts'],
-  presets: sharedPresets
-}
-
-export default {
-  env: {
-    esmUnbundled: shared,
-    esmBundled: {
-      ...shared,
-      presets: [['@babel/env', {
-        targets: "> 0.25%, not dead"
-      }], ...sharedPresets],
+export default  {
+  input: 'src/index.ts',
+  output: [
+    {
+      file: 'dist/bundles/bundle.esm.js',
+      format: 'esm',
+      sourcemap: true
     },
-    cjs: {
-      ...shared,
-      presets: [['@babel/env', {
-        modules: 'commonjs'
-      }], ...sharedPresets],
+    {
+      file: 'dist/bundles/bundle.esm.min.js',
+      format: 'esm',
+      plugins: [terser()],
+      sourcemap: true
+    },
+    {
+      file: 'dist/bundles/bundle.umd.js',
+      format: 'umd',
+      name: 'myLibrary',
+      sourcemap: true
+    },
+    {
+      file: 'dist/bundles/bundle.umd.min.js',
+      format: 'umd',
+      name: 'myLibrary',
+      plugins: [terser()],
+      sourcemap: true
     }
-  }
+  ],
+  plugins: [
+    resolve({ extensions }),
+    babel({ babelHelpers: 'bundled', include: ['src/**/*.ts'], extensions, exclude: './node_modules/**'})
+  ]
 }
