@@ -1,8 +1,8 @@
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
-import { terser } from 'rollup-plugin-terser';
-import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import typescript from '@rollup/plugin-typescript'
+import { terser } from 'rollup-plugin-terser'
+import json from '@rollup/plugin-json'
 
 export default [
   {
@@ -17,7 +17,7 @@ export default [
         dir: 'dist/esm',
         format: 'esm', // ESM output
         sourcemap: true,
-      }
+      },
     ],
     plugins: [
       typescript({ tsconfig: './tsconfig.build.json' }), // TypeScript compilation
@@ -27,10 +27,10 @@ export default [
         only: ['@traderjoe-xyz/sdk-v2'],
         mainFields: ['main'], // Prioritize the "main" field for this package
       }),
-      resolve({debug: true}), // Resolves node modules
+      resolve({ debug: true }), // Resolves node modules
       commonjs(), // Converts CommonJS modules to ES6
       terser(), // Minify the output (optional),
       json(), // Support JSON imports
-    ]
-  }
-];
+    ],
+  },
+]
