@@ -25,11 +25,11 @@ import {
   SUPERMINTER,
   SUPERMINTER_V2,
   SUPERMINTER_ABI,
-  MINT_INFO_LIST_ABI,
+  NEXT_SCHEDULE_NUM_ABI,
   TOTAL_PRICE_AND_FEES_ABI,
 } from './constants'
 import { Chains } from './utils'
-import type { MintInfoList, TotalPriceAndFees } from './types'
+import type { TotalPriceAndFees } from './types'
 
 export const mint = async (
   mint: MintActionParams,
@@ -137,9 +137,10 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
-  const { chainId, contractAddress, tokenId } = mint
+  const { chainId, contractAddress, tokenId, amount } = mint
 
   const tier = tokenId ?? 0
+  const quantity = amount ?? 1
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
     transport: http(),
@@ -147,16 +148,22 @@ export const getProjectFees = async (
 
   const nextSchedule = (await client.readContract({
     address: SUPERMINTER_V2,
-    abi: MINT_INFO_LIST_ABI,
+    abi: NEXT_SCHEDULE_NUM_ABI,
     functionName: 'nextScheduleNum',
     args: [contractAddress, tier],
-  })) as bigint
+  })) as number
 
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
     abi: TOTAL_PRICE_AND_FEES_ABI,
     functionName: 'totalPriceAndFees',
-    args: [contractAddress, tier, nextSchedule - BigInt('1'), 1, false], // assume quantity is 1 and hasValidAffiliate is false
+    args: [
+      contractAddress,
+      tier,
+      BigInt(nextSchedule) - BigInt('1'),
+      quantity,
+      false, // assume hasValidAffiliate is false
+    ],
   })) as TotalPriceAndFees
 
   return totalPriceAndFees.total

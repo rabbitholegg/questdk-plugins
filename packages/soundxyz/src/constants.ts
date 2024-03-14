@@ -64,7 +64,7 @@ export const SUPERMINTER_ABI = [
   },
 ]
 
-export const MINT_INFO_LIST_ABI = [
+export const NEXT_SCHEDULE_NUM_ABI = [
   {
     inputs: [
       {
