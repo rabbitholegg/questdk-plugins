@@ -157,6 +157,16 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/artblocks:
+    dependencies:
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/balancer:
     dependencies:
       '@rabbitholegg/questdk':
@@ -220,6 +230,19 @@ importers:
       '@connext/smart-contracts':
         specifier: ^2.0.0
         version: 2.0.0(ethers@5.7.2)
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/fabric:
+    dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -316,6 +339,19 @@ importers:
         version: link:../tsconfig
 
   packages/llama:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/manifold:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
@@ -455,6 +491,9 @@ importers:
       '@rabbitholegg/questdk-plugin-arbitrum':
         specifier: workspace:*
         version: link:../arbitrum
+      '@rabbitholegg/questdk-plugin-artblocks':
+        specifier: workspace:*
+        version: link:../artblocks
       '@rabbitholegg/questdk-plugin-balancer':
         specifier: workspace:*
         version: link:../balancer
@@ -470,6 +509,9 @@ importers:
       '@rabbitholegg/questdk-plugin-connext':
         specifier: workspace:*
         version: link:../connext
+      '@rabbitholegg/questdk-plugin-fabric':
+        specifier: workspace:*
+        version: link:../fabric
       '@rabbitholegg/questdk-plugin-gmx':
         specifier: workspace:*
         version: link:../gmx
@@ -491,6 +533,9 @@ importers:
       '@rabbitholegg/questdk-plugin-llama':
         specifier: workspace:*
         version: link:../llama
+      '@rabbitholegg/questdk-plugin-manifold':
+        specifier: workspace:*
+        version: link:../manifold
       '@rabbitholegg/questdk-plugin-mirror':
         specifier: workspace:*
         version: link:../mirror
