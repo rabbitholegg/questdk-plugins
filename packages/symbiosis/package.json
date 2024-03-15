@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-symbiosis",
-  "version": "1.0.0-alpha.28",
+  "version": "1.0.0-alpha.29",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
