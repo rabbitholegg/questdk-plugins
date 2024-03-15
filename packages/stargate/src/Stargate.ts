@@ -45,8 +45,8 @@ export const bridge = async (bridge: BridgeActionParams) => {
     tokenAddress === NATIVE_TOKEN_ADDRESS
       ? 13
       : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][
-          tokenAddress.toLowerCase()
-        ]
+        tokenAddress.toLowerCase()
+      ]
 
   if (typeof sourcePool === 'undefined') {
     throw new Error(`No pool found for provided tokenAddress: ${tokenAddress}`)

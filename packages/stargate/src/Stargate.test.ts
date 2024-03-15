@@ -1,7 +1,14 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { bridge, getSupportedTokenAddresses } from './Stargate'
-import { LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID } from './chain-ids'
+import { LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID ,
+  ARBITRUM_LAYER_ZERO_CHAIN_ID,
+  ETH_LAYER_ZERO_CHAIN_ID,
+  ETH_CHAIN_ID,
+  ARBITRUM_CHAIN_ID,
+  OPTIMISM_CHAIN_ID,
+  POLYGON_CHAIN_ID,
+} from './chain-ids'
 import { getFilteredChainIds, shortenAddress } from './utils'
 import {
   DEPOSIT_ETH,
@@ -12,14 +19,6 @@ import {
   USDC_OP_PASS,
   USDC_OP_FAIL,
 } from './test-transactions'
-import {
-  ARBITRUM_LAYER_ZERO_CHAIN_ID,
-  ETH_LAYER_ZERO_CHAIN_ID,
-  ETH_CHAIN_ID,
-  ARBITRUM_CHAIN_ID,
-  OPTIMISM_CHAIN_ID,
-  POLYGON_CHAIN_ID,
-} from './chain-ids'
 import { STARGATE_BRIDGE_ABI } from './abi'
 import { parseEther } from 'viem'
 import {
@@ -242,8 +241,8 @@ describe('Given the Stargate plugin', () => {
               token === NATIVE_TOKEN_ADDRESS
                 ? 13
                 : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[chainId][
-                    token.toLowerCase()
-                  ]
+                  token.toLowerCase()
+                ]
 
             if (sourcePool === 13) {
               expect(filter).to.deep.equal({

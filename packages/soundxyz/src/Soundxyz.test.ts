@@ -1,6 +1,6 @@
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test, vi } from 'vitest'
-import { getDynamicNameParams, mint } from './Soundxyz'
+import { getDynamicNameParams, mint , getMintIntent } from './Soundxyz'
 import {
   passingTestCases,
   failingTestCases,
@@ -9,7 +9,6 @@ import {
 } from './test-transactions'
 import { Chains } from './utils'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
-import { getMintIntent } from './Soundxyz'
 import { type Address } from 'viem'
 import {
   ActionType,

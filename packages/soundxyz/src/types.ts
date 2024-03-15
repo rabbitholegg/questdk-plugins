@@ -1,4 +1,4 @@
-export type MintInfoList = Array<MintInfo>
+export type MintInfoList = MintInfo[]
 
 type MintInfo = {
   edition: string

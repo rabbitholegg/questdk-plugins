@@ -1,6 +1,6 @@
 import { mainnet as addresses } from '@hop-protocol/core/addresses'
 import { mainnet } from '@hop-protocol/core/networks'
-import { ChainSlug, utils } from '@hop-protocol/sdk'
+import { utils } from '@hop-protocol/sdk'
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import {
   type Bridges,
@@ -91,12 +91,12 @@ export const getSupportedTokenAddresses = async (
         // Find the bridge element whose key matches the chainSlug and return the token address
         if (bridge && bridge[chainSlug]) {
           if ('l1CanonicalToken' in bridge[chainSlug]) {
-            return (bridge[chainSlug] as L1BridgeProps).l1CanonicalToken;
+            return (bridge[chainSlug] as L1BridgeProps).l1CanonicalToken
           } else if ('l2CanonicalToken' in bridge[chainSlug]) {
-            return (bridge[chainSlug] as L2BridgeProps).l2CanonicalToken;
+            return (bridge[chainSlug] as L2BridgeProps).l2CanonicalToken
           }
         }
-        return '0x0';
+        return '0x0'
       },
     ) as Address[]
   }

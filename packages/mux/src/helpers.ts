@@ -4,6 +4,7 @@ import {
   getChainStorage,
   PositionOrderFlags,
   type Asset,
+  /* eslint-disable import/no-unresolved */
 } from '@mux-network/mux'
 import { CHAIN_ID_TO_PROVIDER } from './provider'
 import { type Address, zeroAddress, getAddress } from 'viem'
@@ -31,7 +32,7 @@ export const getMuxTokenId = async (
   if (assetsCache.has(chainId)) {
     assets = assetsCache.get(chainId)
   } else {
-    const reader = await getReaderContract(provider as any)
+    const reader = await getReaderContract(provider)
     const chainStorage = await getChainStorage(reader)
     assets = chainStorage.assets
     assetsCache.set(chainId, assets)

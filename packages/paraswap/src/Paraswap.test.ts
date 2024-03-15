@@ -1,5 +1,4 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
-import { ActionType } from '@rabbitholegg/questdk'
+import { GreaterThanOrEqual, apply , ActionType } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import {
   MULTI_DEPOSIT,
@@ -121,7 +120,6 @@ describe('Given the paraswap plugin', () => {
       const testFilter: TransactionFilter = {
         to: AUGUSTUS_SWAPPER_ARBITRUM,
         input: {
-          //@ts-ignore
           $abi: PARASWAP_SWAP_ABI,
           $or: [
             {

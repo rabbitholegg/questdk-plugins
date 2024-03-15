@@ -37,11 +37,11 @@ export const bridge = async (
   const contractTarget = contractAddress
     ? contractAddress
     : {
-        $or: [
-          CHAIN_TO_ROUTER[sourceChainId].toLowerCase(),
-          SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase(),
-        ],
-      }
+      $or: [
+        CHAIN_TO_ROUTER[sourceChainId].toLowerCase(),
+        SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase(),
+      ],
+    }
 
   if (recipient !== undefined) {
     return compressJson({
