@@ -1,0 +1,72 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "import"
+    ],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "indent": ["error", 2, { "SwitchCase": 1 }],
+      "quotes": ["error", "single", { "avoidEscape": true }],
+      "comma-dangle": ["error", "always-multiline"],
+      "semi": ["error", "never"],
+      "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "no-extra-semi": "error",
+      "import/extensions": ["error", "always", {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }],
+      "import/no-unresolved": [2, { "caseSensitive": true }],
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off"
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      },
+      "react": {
+        "version": "detect"
+      }
+    },
+    "ignorePatterns": [
+      "**/node_modules",
+      "CHANGELOG.md",
+      "cache",
+      "coverage",
+      "dist",
+      "tsconfig.json",
+      "tsconfig.*.json",
+      "generated.ts",
+      "pnpm-lock.yaml"
+    ]
+  }
+  
