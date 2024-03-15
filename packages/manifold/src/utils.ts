@@ -38,19 +38,12 @@ export const shouldIncludeAbiMint = (
   return true
 }
 
-const instanceIdCache: Record<string, number | undefined> = {}
-
 export async function getInstanceId(
   chainId: number,
   contractAddress: Address,
   tokenId?: number,
 ): Promise<number | undefined> {
   if (tokenId == null) return undefined
-
-  const cacheKey = `${chainId}-${contractAddress}-${tokenId}`
-  if (instanceIdCache[cacheKey]) {
-    return instanceIdCache[cacheKey]
-  }
 
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
@@ -67,11 +60,10 @@ export async function getInstanceId(
       })
 
     if (typeof data === 'object' && Array.isArray(data)) {
-      instanceIdCache[cacheKey] = data[0]
       return data[0]
     }
   } catch (e) {
-    instanceIdCache[cacheKey] = 0
+    // instanceId not found, return a value that is expected to fail
     return 0
   }
   return undefined
