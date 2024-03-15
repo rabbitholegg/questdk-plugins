@@ -53,17 +53,39 @@ export const mint = async (
   })
 }
 
+const getNextScheduleNum = async (client: PublicClient, contractAddress: Address, tier: number) => {
+  const nextSchedule = (await client.readContract({
+    address: SUPERMINTER_V2,
+    abi: NEXT_SCHEDULE_NUM_ABI,
+    functionName: 'nextScheduleNum',
+    args: [contractAddress, tier],
+  })) as number
+
+  return nextSchedule;
+}
+
 export const getMintIntent = async (
   mint: MintIntentParams,
+  client?: PublicClient,
 ): Promise<TransactionRequest> => {
-  const { contractAddress, recipient, tokenId } = mint
+  const { contractAddress, recipient, tokenId, amount } = mint
+  const _client =
+    client ||
+    createPublicClient({
+      chain: chainIdToViemChain(mint.chainId),
+      transport: http(),
+    })
+
+  const tier = tokenId ?? 0;
+  const quantity = amount ?? 1;
+  const nextScheduleNum = await getNextScheduleNum(_client as PublicClient, contractAddress, tier);
 
   const mintTo = {
     edition: contractAddress,
-    tier: tokenId ?? 0,
-    scheduleNum: 0,
+    tier,
+    scheduleNum: nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
     to: recipient,
-    quantity: 1,
+    quantity,
     allowlisted: zeroAddress,
     allowlistedQuantity: 0,
     allowlistProof: [zeroHash],
@@ -96,7 +118,7 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { contractAddress, recipient, tokenId } = mint
+  const { contractAddress, recipient, tokenId, amount } = mint
   const _client =
     client ||
     createPublicClient({
@@ -104,12 +126,16 @@ export const simulateMint = async (
       transport: http(),
     })
 
+  const tier = tokenId ?? 0;
+  const quantity = amount ?? 1;
+  const nextScheduleNum = await getNextScheduleNum(_client as PublicClient, contractAddress, tier);
+
   const mintTo = {
     edition: contractAddress,
-    tier: tokenId ?? 0,
-    scheduleNum: 0,
+    tier,
+    scheduleNum: nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
     to: recipient,
-    quantity: 1,
+    quantity,
     allowlisted: zeroAddress,
     allowlistedQuantity: 0,
     allowlistProof: [zeroHash],
@@ -139,19 +165,14 @@ export const getProjectFees = async (
 ): Promise<bigint> => {
   const { chainId, contractAddress, tokenId, amount } = mint
 
-  const tier = tokenId ?? 0
-  const quantity = amount ?? 1
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
     transport: http(),
   })
 
-  const nextSchedule = (await client.readContract({
-    address: SUPERMINTER_V2,
-    abi: NEXT_SCHEDULE_NUM_ABI,
-    functionName: 'nextScheduleNum',
-    args: [contractAddress, tier],
-  })) as number
+  const tier = tokenId ?? 0
+  const quantity = amount ?? 1
+  const nextScheduleNum = await getNextScheduleNum(client as PublicClient, contractAddress, tier)
 
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
@@ -160,7 +181,7 @@ export const getProjectFees = async (
     args: [
       contractAddress,
       tier,
-      BigInt(nextSchedule) - BigInt('1'),
+      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
       quantity,
       false, // assume hasValidAffiliate is false
     ],
