@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.30
+
+### Patch Changes
+
+- [#299](https://github.com/rabbitholegg/questdk-plugins/pull/299) [`3ba216e2`](https://github.com/rabbitholegg/questdk-plugins/commit/3ba216e2841f6138ce6a24c6fd3ac3f8a18990d6) Thanks [@benjaminykim](https://github.com/benjaminykim)! - Zora getFees incorrect fees
+
 ## 1.0.0-alpha.29
 
 ### Minor Changes
