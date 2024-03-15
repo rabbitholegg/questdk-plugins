@@ -35,16 +35,16 @@ export const bridge = async (bridge: BridgeActionParams) => {
     const contracts =
       sourceChainId === ETH_CHAIN_ID
         ? [
-            MAINNET_TO_ARB_NOVA_GATEWAY,
-            MAINNET_TO_ARB_ONE_GATEWAY,
-            ARB_ONE_DELAYED_INBOX,
-            ARB_NOVA_DELAYED_INBOX,
-          ]
+          MAINNET_TO_ARB_NOVA_GATEWAY,
+          MAINNET_TO_ARB_ONE_GATEWAY,
+          ARB_ONE_DELAYED_INBOX,
+          ARB_NOVA_DELAYED_INBOX,
+        ]
         : [
-            ARB_ONE_TO_MAINNET_GATEWAY,
-            ARB_NOVA_TO_MAINNET_GATEWAY,
-            UNIVERSAL_ARBSYS_PRECOMPILE,
-          ]
+          ARB_ONE_TO_MAINNET_GATEWAY,
+          ARB_NOVA_TO_MAINNET_GATEWAY,
+          UNIVERSAL_ARBSYS_PRECOMPILE,
+        ]
 
     const abiFrags =
       sourceChainId === ETH_CHAIN_ID
@@ -77,8 +77,8 @@ export const bridge = async (bridge: BridgeActionParams) => {
         to: bridgeContract
           ? bridgeContract
           : {
-              $or: [ARB_ONE_TO_MAINNET_GATEWAY, ARB_NOVA_TO_MAINNET_GATEWAY],
-            },
+            $or: [ARB_ONE_TO_MAINNET_GATEWAY, ARB_NOVA_TO_MAINNET_GATEWAY],
+          },
         input: {
           $abi: OUTBOUND_TRANSFER_L2_TO_L1,
           _to: recipient,
@@ -94,8 +94,8 @@ export const bridge = async (bridge: BridgeActionParams) => {
       to: bridgeContract
         ? bridgeContract
         : {
-            $or: [MAINNET_TO_ARB_NOVA_GATEWAY, MAINNET_TO_ARB_ONE_GATEWAY],
-          },
+          $or: [MAINNET_TO_ARB_NOVA_GATEWAY, MAINNET_TO_ARB_ONE_GATEWAY],
+        },
       input: {
         $abi: OUTBOUND_TRANSFER_L1_TO_L2,
         _to: recipient,

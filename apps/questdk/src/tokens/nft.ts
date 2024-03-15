@@ -1,7 +1,7 @@
-import { type Address, type PublicClient, zeroAddress } from 'viem'
-import { fetchERC1155Metadata } from './erc1155'
-import { fetchERC721Metadata } from './erc721'
 import fetchQuestActionParams from '../quests/fetchQuestData.js'
+import { fetchERC721Metadata } from './erc721'
+import { fetchERC1155Metadata } from './erc1155'
+import { type Address, type PublicClient, zeroAddress } from 'viem'
 
 export async function fetchTokenMetadata(
   client: PublicClient,
@@ -21,7 +21,7 @@ export async function fetchTokenMetadata(
 
     // If the call succeeds, it's an ERC721 contract
     return fetchERC721Metadata(client, contractAddress, tokenId)
-  } catch (error) {
+  } catch (_error) {
     // If the call fails, try to call the ERC1155 balanceOf function
     await client.readContract({
       address: contractAddress as Address,

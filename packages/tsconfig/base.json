@@ -1,6 +1,9 @@
 {
   "include": [],
   "compilerOptions": {
+    "plugins": [
+      { "transform": "ts-transform-asset/transform" }
+    ],
     "incremental": true,
     "strict": true,
     "useDefineForClassFields": true,
