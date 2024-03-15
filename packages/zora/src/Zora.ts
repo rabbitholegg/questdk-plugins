@@ -207,8 +207,8 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
-  const fees = await getFees(mint);
-  return fees.projectFee + fees.actionFee;
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
 }
 
 export const getFees = async (
