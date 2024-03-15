@@ -4,8 +4,7 @@ import {
   getChainStorage,
   PositionOrderFlags,
   type Asset,
-  /* eslint-disable import/no-unresolved */
-} from '@mux-network/mux'
+} from '@mux-network/mux.js'
 import { CHAIN_ID_TO_PROVIDER } from './provider'
 import { type Address, zeroAddress, getAddress } from 'viem'
 import { Chains } from './utils'

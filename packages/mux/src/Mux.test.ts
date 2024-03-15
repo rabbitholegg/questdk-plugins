@@ -10,8 +10,7 @@ import {
   AggregatorProxyFactory__factory,
   AggregatorGmxV2Adapter__factory,
   OrderBook__factory,
-/* eslint-disable import/no-unresolved */
-} from '@mux-network/mux'
+} from '@mux-network/mux.js'
 import {
   passingTestCases,
   failingTestCases,
