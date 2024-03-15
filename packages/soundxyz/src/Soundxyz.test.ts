@@ -161,8 +161,5 @@ describe('getProjectFees', () => {
     const fee = await mockFns.getProjectFees(mintParams)
     expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee).toEqual(BigInt('777000000000000'))
-
-    // const projectFees = await getProjectFees(mintParams)
-    // expect(projectFees).toEqual(BigInt('777000000000000'))
   })
 })
