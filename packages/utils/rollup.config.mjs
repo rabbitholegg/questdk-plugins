@@ -8,28 +8,28 @@ import inject from '@rollup/plugin-inject'
 
 const extensions = ['.js', '.ts']
 
-export default  {
+export default {
   input: 'src/index.ts',
   output: [
     {
       inlineDynamicImports: true,
       file: 'dist/bundles/bundle.esm.js',
       format: 'esm',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       inlineDynamicImports: true,
       file: 'dist/bundles/bundle.esm.min.js',
       format: 'esm',
       plugins: [terser()],
-      sourcemap: true
+      sourcemap: true,
     },
     {
-      inlineDynamicImports: true, 
+      inlineDynamicImports: true,
       file: 'dist/bundles/bundle.umd.js',
       format: 'umd',
       name: 'myLibrary',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       inlineDynamicImports: true,
@@ -37,14 +37,19 @@ export default  {
       format: 'umd',
       name: 'myLibrary',
       plugins: [terser()],
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
   plugins: [
     polyfillNode(),
     json(),
-    resolve({ extensions,  preferBuiltins: true }),
+    resolve({ extensions, preferBuiltins: true }),
     commonjs(),
-    babel({ babelHelpers: 'bundled', include: ['src/**/*.ts'], extensions, exclude: './node_modules/**'})
-  ]
+    babel({
+      babelHelpers: 'bundled',
+      include: ['src/**/*.ts'],
+      extensions,
+      exclude: './node_modules/**',
+    }),
+  ],
 }
