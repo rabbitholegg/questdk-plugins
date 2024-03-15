@@ -4,10 +4,11 @@ export {
   DEFAULT_ACCOUNT,
   BOOST_TREASURY_ADDRESS,
 } from './constants'
+
+export type { TestParams, TestCase } from './helpers'
+
 export {
   createTestCase,
-  type TestCase,
-  type TestParams,
   chainIdToViemChain,
 } from './helpers'
 export type {

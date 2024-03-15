@@ -8,7 +8,7 @@
     "scripts": {
         "bench": "vitest bench",
         "bench:ci": "CI=true vitest bench",
-        "build": "pnpm build:types && pnpm build:esm && pnpm build:cjs",
+        "build": "pnpm build:types && pnpm build:esm && pnpm build:cjs && BABEL_ENV=esmBundled pnpm rollup -c",
         "build:cjs": "tsc --project tsconfig.build.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
         "build:esm": "tsc --project tsconfig.build.json --module es2015 --outDir ./dist/esm && echo > ./dist/esm/package.json '{\"type\":\"module\",\"sideEffects\":false}'",
         "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
