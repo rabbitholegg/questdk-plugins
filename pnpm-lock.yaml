@@ -12,12 +12,9 @@ importers:
 
   .:
     dependencies:
-      '@rabbitholegg/questdk':
-        specifier: 2.0.0-alpha.35
-        version: 2.0.0-alpha.35(typescript@5.3.2)(zod@3.21.4)
       axios:
-        specifier: 1.5.0
-        version: 1.5.0
+        specifier: 1.6.7
+        version: 1.6.7
       react-intl:
         specifier: 6.6.2
         version: 6.6.2(react@18.2.0)(typescript@5.3.2)
@@ -49,6 +46,9 @@ importers:
       '@changesets/cli':
         specifier: 2.26.2
         version: 2.26.2
+      '@rollup/plugin-alias':
+        specifier: ^5.1.0
+        version: 5.1.0(rollup@4.13.0)
       '@rollup/plugin-babel':
         specifier: 6.0.4
         version: 6.0.4(@babel/core@7.24.0)(rollup@4.13.0)
@@ -89,13 +89,13 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       rollup:
-        specifier: ^4.13.0
+        specifier: 4.13.0
         version: 4.13.0
       rollup-plugin-polyfill-node:
-        specifier: ^0.13.0
+        specifier: 0.13.0
         version: 0.13.0(rollup@4.13.0)
       rollup-plugin-terser:
-        specifier: ^7.0.2
+        specifier: 7.0.2
         version: 7.0.2(rollup@4.13.0)
       rome:
         specifier: 12.1.3
@@ -169,7 +169,7 @@ importers:
         version: 11.0.1
       axios-mock-adapter:
         specifier: 1.19.0
-        version: 1.19.0(axios@1.5.0)
+        version: 1.19.0(axios@1.6.7)
       fs-extra:
         specifier: 11.1.1
         version: 11.1.1
@@ -438,7 +438,7 @@ importers:
     dependencies:
       '@paraswap/sdk':
         specifier: ^6.2.4
-        version: 6.3.0(axios@1.5.0)(typescript@5.3.2)
+        version: 6.3.0(axios@1.6.7)(typescript@5.3.2)
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -4066,7 +4066,7 @@ packages:
     resolution: {integrity: sha512-ecnX8ezlhYWFwolZxYEz+K+RfLr8xaxQqiJKlxJ8Yf00tXTGxDGn6/Acy00t4+9Kv0apewd7++J33eJt9yNfwg==}
     dev: false
 
-  /@paraswap/sdk@6.3.0(axios@1.5.0)(typescript@5.3.2):
+  /@paraswap/sdk@6.3.0(axios@1.6.7)(typescript@5.3.2):
     resolution: {integrity: sha512-hA4hrSADeBFAFSZpdOCcyKL9t+KwKl0sifawIR6bbNjnndJrwLOXrWyyGJwEtifixlJUnPm3Aakz5l0eRX7j+Q==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -4082,7 +4082,7 @@ packages:
         optional: true
     dependencies:
       '@paraswap/core': 1.1.0
-      axios: 1.5.0
+      axios: 1.6.7
       bignumber.js: 9.1.2
       ts-essentials: 9.4.1(typescript@5.3.2)
     transitivePeerDependencies:
@@ -4095,23 +4095,18 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@rabbitholegg/questdk@2.0.0-alpha.35(typescript@5.3.2)(zod@3.21.4):
-    resolution: {integrity: sha512-rkqHMhJHy6AmotlgOtzOYfw6m6NnRtJc0huR1uB+em/3hNmG7VuLQ3BWgeZOaYr56fXrFJZL1HLzZ4xDX3Lt3w==}
+  /@rollup/plugin-alias@5.1.0(rollup@4.13.0):
+    resolution: {integrity: sha512-lpA3RZ9PdIG7qqhEfv79tBffNaoDuukFDrmhLqg9ifv99u/ehn+lOg30x2zmhf8AQqQUZaMk/B9fZraQ6/acDQ==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
-      typescript: '>=5.1.6'
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
-      typescript:
+      rollup:
         optional: true
     dependencies:
-      abitype: 0.9.10(typescript@5.3.2)(zod@3.21.4)
-      rimraf: 5.0.1
-      typescript: 5.3.2
-      viem: 2.7.9(typescript@5.3.2)(zod@3.21.4)
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-      - zod
-    dev: false
+      rollup: 4.13.0
+      slash: 4.0.0
+    dev: true
 
   /@rollup/plugin-babel@6.0.4(@babel/core@7.24.0)(rollup@4.13.0):
     resolution: {integrity: sha512-YF7Y52kFdFT/xVSuVdjkV5ZdX/3YtmX0QulG+x0taQOtJdHYzVU61aSSkAgVJ7NOv6qPkIYiJSgSWWN/DM5sGw==}
@@ -6064,12 +6059,12 @@ packages:
     resolution: {integrity: sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==}
     dev: false
 
-  /axios-mock-adapter@1.19.0(axios@1.5.0):
+  /axios-mock-adapter@1.19.0(axios@1.6.7):
     resolution: {integrity: sha512-D+0U4LNPr7WroiBDvWilzTMYPYTuZlbo6BI8YHZtj7wYQS8NkARlP9KBt8IWWHTQJ0q/8oZ0ClPBtKCCkx8cQg==}
     peerDependencies:
       axios: '>= 0.9.0'
     dependencies:
-      axios: 1.5.0
+      axios: 1.6.7
       fast-deep-equal: 3.1.3
       is-buffer: 2.0.5
     dev: true
@@ -6084,8 +6079,8 @@ packages:
       - debug
     dev: false
 
-  /axios@1.5.0:
-    resolution: {integrity: sha512-D4DdjDo5CY50Qms0qGQTTw6Q44jl7zRwY7bthds06pUGfChBCTcQs+N743eFWGEd6pRTMd6A+I87aWyFV5wiZQ==}
+  /axios@1.6.7:
+    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
     dependencies:
       follow-redirects: 1.15.5(debug@4.3.4)
       form-data: 4.0.0
@@ -11864,6 +11859,7 @@ packages:
     hasBin: true
     dependencies:
       glob: 10.3.10
+    dev: true
 
   /ripemd160@2.0.2:
     resolution: {integrity: sha512-ii4iagi25WusVoiC4B4lq7pbXfAp3D9v5CwfkY33vffw2+pkDjY1D8GaN7spsxvCSx8dkPqOZCEZyfxcmJG2IA==}
@@ -12297,7 +12293,6 @@ packages:
   /slash@4.0.0:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
     engines: {node: '>=12'}
-    dev: false
 
   /slice-ansi@4.0.0:
     resolution: {integrity: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==}

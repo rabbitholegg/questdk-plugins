@@ -40,7 +40,6 @@ export default  {
     }
   ],
   plugins: [
-    polyfillNode(),
     json(),
     resolve({ extensions,  preferBuiltins: true }),
     commonjs(),

@@ -40,11 +40,6 @@ export default  {
     }
   ],
   plugins: [
-    polyfillNode(),
-    inject({
-      TextEncoder: ['text-encoding', 'TextEncoder'], 
-      TextDecoder: ['text-encoding', 'TextDecoder'], 
-    }),
     json(),
     resolve({ extensions,  preferBuiltins: true }),
     commonjs(),
