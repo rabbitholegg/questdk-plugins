@@ -156,6 +156,23 @@ export const getProjectFees = (
   }
 }
 
+export const getFees = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: ActionParams,
+) => {
+  switch (actionType) {
+    case ActionType.Mint:
+      if (plugin.mint && plugin.getFees) {
+        return plugin.getFees(params as unknown as MintActionParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
 export const executePlugin = (
   plugin: IActionPlugin,
   actionType: ActionType,
