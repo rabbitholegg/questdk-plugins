@@ -1,10 +1,12 @@
-import babel from '@rollup/plugin-babel';
-import resolve from '@rollup/plugin-node-resolve';
-import terser from "@rollup/plugin-terser";
-import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
+import babel from '@rollup/plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
+import commonjs from '@rollup/plugin-commonjs'
+import json from '@rollup/plugin-json'
+import polyfillNode from 'rollup-plugin-polyfill-node'
+import inject from '@rollup/plugin-inject'
 
-const extensions = ['.js', '.ts' ];
+const extensions = ['.js', '.ts']
 
 export default  {
   input: 'src/index.ts',
@@ -39,8 +41,10 @@ export default  {
     }
   ],
   plugins: [
+    polyfillNode(),
     json(),
     resolve({ extensions,  preferBuiltins: true }),
-    commonjs(),    babel({ babelHelpers: 'bundled', include: ['src/**/*.ts'], extensions, exclude: './node_modules/**'})
+    commonjs(),
+    babel({ babelHelpers: 'bundled', include: ['src/**/*.ts'], extensions, exclude: './node_modules/**'})
   ]
 }

@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from "@rollup/plugin-terser";
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
+import polyfillNode from 'rollup-plugin-polyfill-node';
 
 const extensions = ['.js', '.ts' ];
 
@@ -39,8 +40,14 @@ export default  {
     }
   ],
   plugins: [
+    polyfillNode(),
+    inject({
+      TextEncoder: ['text-encoding', 'TextEncoder'], 
+      TextDecoder: ['text-encoding', 'TextDecoder'], 
+    }),
     json(),
     resolve({ extensions,  preferBuiltins: true }),
-    commonjs(),    babel({ babelHelpers: 'bundled', include: ['src/**/*.ts'], extensions, exclude: './node_modules/**'})
+    commonjs(),
+    babel({ babelHelpers: 'bundled', include: ['src/**/*.ts'], extensions, exclude: './node_modules/**'})
   ]
 }
