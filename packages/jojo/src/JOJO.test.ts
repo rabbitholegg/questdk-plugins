@@ -1,5 +1,5 @@
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 
 import { stake } from './JOJO'

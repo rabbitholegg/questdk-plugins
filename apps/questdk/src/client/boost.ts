@@ -2,13 +2,13 @@ import {
   fetchERC721Media,
   fetchERC721Metadata,
   fetchERC721MetadataByUUID,
-} from '../tokens/erc721.js'
+} from '../tokens/erc721'
 import {
   fetchERC1155Media,
   fetchERC1155Metadata,
   fetchERC1155MetadataByUUID,
-} from '../tokens/erc1155.js'
-import { fetchTokenMetadata, fetchTokenMetadataByUUID } from '../tokens/nft.js'
+} from '../tokens/erc1155'
+import { fetchTokenMetadata, fetchTokenMetadataByUUID } from '../tokens/nft'
 import { type PublicClient, createClient, http } from 'viem'
 /**
  * Initializes an Ethereum client with the specified RPC URL and provides methods for ERC721 and ERC1155 token interactions.

@@ -1,14 +1,14 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { getSupportedTokenAddresses, swap } from './Uniswap.js'
+import { getSupportedTokenAddresses, swap } from './Uniswap'
 import { getAddress, type Address } from 'viem'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
-} from './constants.js'
-import { failingTestCases, passingTestCases } from './test-transactions.js'
+} from './constants'
+import { failingTestCases, passingTestCases } from './test-transactions'
 
 describe('Given the uniswap plugin', () => {
   describe('When handling the swap', () => {

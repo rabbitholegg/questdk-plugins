@@ -9,7 +9,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Paraswap.js'
+} from './Paraswap'
 
 // Replace *project* with the name of the project
 export const Paraswap: IActionPlugin = {

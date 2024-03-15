@@ -4,8 +4,8 @@ import {
   l2StandardBridgeABI,
   addresses,
 } from '@eth-optimism/contracts-ts'
-import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
-import { ETH_TOKEN_ADDRESS, CHAIN_ID_TO_TOKENS } from './token-addresses.js'
+import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids'
+import { ETH_TOKEN_ADDRESS, CHAIN_ID_TO_TOKENS } from './token-addresses'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const { sourceChainId, contractAddress, tokenAddress, amount } = bridge

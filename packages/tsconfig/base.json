@@ -1,5 +1,6 @@
 {
   "include": [],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "plugins": [
       { "transform": "ts-transform-asset/transform" }

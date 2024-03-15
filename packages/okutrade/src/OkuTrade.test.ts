@@ -1,13 +1,13 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { getSupportedTokenAddresses, swap } from './OkuTrade.js'
+import { getSupportedTokenAddresses, swap } from './OkuTrade'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
-} from './constants.js'
-import { failingTestCases, passingTestCases } from './test-transactions.js'
+} from './constants'
+import { failingTestCases, passingTestCases } from './test-transactions'
 import { zeroAddress } from 'viem'
 
 describe('Given the uniswap plugin', () => {

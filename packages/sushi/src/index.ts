@@ -7,7 +7,7 @@ import {
   getSupportedChainIds,
   getSupportedTokenAddresses,
   swap,
-} from './Sushi.js'
+} from './Sushi'
 
 export const Sushi: IActionPlugin = {
   pluginId: 'sushi',

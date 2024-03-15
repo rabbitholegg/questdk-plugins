@@ -1,24 +1,24 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { GMX_SEND_TOKENS_ABI, GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
+import { GMX_SEND_TOKENS_ABI, GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi'
 import {
   getOrderType,
   getSupportedTokenAddresses,
   options,
   swap,
-} from './GMX.js'
-import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
-import { Tokens } from './utils.js'
+} from './GMX'
+import { ARB_ONE_CHAIN_ID } from './chain-ids'
+import { Tokens } from './utils'
 import {
   DEFAULT_TOKEN_LIST,
   GMX_ROUTERV2_ADDRESS,
-} from './contract-addresses.js'
+} from './contract-addresses'
 import {
   passingTestCasesV2,
   failingTestCasesV2,
   failingOptionsTestCases,
   passingOptionsTestCases,
-} from './test-setup.js'
+} from './test-setup'
 import { OrderType, type OptionsActionParams } from '@rabbitholegg/questdk'
 import { parseUnits } from 'viem'
 

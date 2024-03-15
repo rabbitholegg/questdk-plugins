@@ -1,4 +1,4 @@
-import fetchQuestActionParams from '../quests/fetchQuestData.js'
+import fetchQuestActionParams from '../quests/fetchQuestData'
 import { fetchERC721Metadata } from './erc721'
 import { fetchERC1155Metadata } from './erc1155'
 import { type Address, type PublicClient, zeroAddress } from 'viem'

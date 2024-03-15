@@ -7,7 +7,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './WooFi.js'
+} from './WooFi'
 
 export const WooFi: IActionPlugin = {
   pluginId: 'woofi',

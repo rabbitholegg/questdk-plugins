@@ -1,10 +1,10 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { TALLY_ABI } from './abi.js'
-import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
-import { TALLY_TOKENS } from './token-addresses.js'
-import { delegate } from './Tally.js'
-import { ARBITRUM_DELEGATION } from './test-transactions.js'
+import { TALLY_ABI } from './abi'
+import { ARB_ONE_CHAIN_ID } from './chain-ids'
+import { TALLY_TOKENS } from './token-addresses'
+import { delegate } from './Tally'
+import { ARBITRUM_DELEGATION } from './test-transactions'
 const TEST_ADDRESS = '0x95222290DD7278Aa3Ddd389Cc1E1d165CC4BAfe5'
 const TEST_PROJECT = TALLY_TOKENS[ARB_ONE_CHAIN_ID][0]
 

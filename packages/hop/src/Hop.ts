@@ -7,7 +7,7 @@ import {
   type Bridge,
   type L2BridgeProps,
   type L1BridgeProps,
-} from './types.js'
+} from './types'
 import {
   l1BridgeAbi,
   l2AmmWrapperAbi,

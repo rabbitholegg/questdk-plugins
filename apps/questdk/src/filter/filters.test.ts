@@ -8,7 +8,7 @@ import {
   handleOr,
   handleRegex,
   handleSome,
-} from './filters.js'
+} from './filters'
 import { assertType, describe, expect, test } from 'vitest'
 
 describe('parser', () => {

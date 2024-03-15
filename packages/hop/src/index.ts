@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Hop.js'
+} from './Hop'
 
 export const Hop: IActionPlugin = {
   pluginId: 'hop',

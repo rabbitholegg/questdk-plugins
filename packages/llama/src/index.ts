@@ -7,7 +7,7 @@ import {
   getSupportedChainIds,
   getSupportedTokenAddresses,
   vote,
-} from './Llama.js'
+} from './Llama'
 
 export const Llama: IActionPlugin = {
   pluginId: 'llama',

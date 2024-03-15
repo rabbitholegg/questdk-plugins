@@ -4,7 +4,7 @@ import {
   getSupportedChainIds,
   getSupportedTokenAddresses,
   stake,
-} from './JOJO.js'
+} from './JOJO'
 
 export const JOJO: IActionPlugin = {
   pluginId: 'jojo',

@@ -19,7 +19,8 @@
     "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",    "clean": "rimraf dist",
     "format": "rome format . --write",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",    "test": "vitest dev",
+    "lint:fix": "eslint . --fix",    
+    "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
     "test:ui": "vitest dev --ui"

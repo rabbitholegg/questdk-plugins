@@ -13,7 +13,7 @@ import {
   getMintIntent,
   getProjectFees,
   simulateMint,
-} from './Soundxyz.js'
+} from './Soundxyz'
 
 export const Soundxyz: IActionPlugin = {
   pluginId: 'soundxyz',

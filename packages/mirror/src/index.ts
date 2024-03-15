@@ -13,7 +13,7 @@ import {
   getProjectFees,
   getMintIntent,
   simulateMint,
-} from './Mirror.js'
+} from './Mirror'
 
 export const Mirror: IActionPlugin = {
   pluginId: 'mirror',

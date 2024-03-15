@@ -10,7 +10,7 @@ import {
   CHAIN_ID_TO_AGGREGATOR_FACTORY_ADDRESS,
   AggregatorProxyFactory__factory,
   AggregatorGmxV2Adapter__factory,
-} from '@mux-network/mux.js'
+} from '@mux-network/mux'
 import { GNS_ABI } from './abi'
 import { CHAIN_ID_TO_TOKENS, GNS_CONTRACT, GNS_REF_ADDRESS } from './constants'
 import {

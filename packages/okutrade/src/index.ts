@@ -7,7 +7,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './OkuTrade.js'
+} from './OkuTrade'
 
 export const OkuTrade: IActionPlugin = {
   pluginId: 'okutrade',

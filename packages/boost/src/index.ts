@@ -7,7 +7,7 @@ import {
   mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Boost.js'
+} from './Boost'
 
 export const Boost: IActionPlugin = {
   pluginId: 'boost',

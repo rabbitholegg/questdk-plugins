@@ -1,4 +1,4 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import {
   options,
@@ -10,7 +10,7 @@ import {
   AggregatorProxyFactory__factory,
   AggregatorGmxV2Adapter__factory,
   OrderBook__factory,
-} from '@mux-network/mux.js'
+} from '@mux-network/mux'
 import {
   passingTestCases,
   failingTestCases,

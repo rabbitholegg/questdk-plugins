@@ -32,13 +32,16 @@
       "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
       "@typescript-eslint/no-non-null-assertion": "off",
       "no-extra-semi": "error",
-      "import/extensions": ["error", "always", {
+      "import/extensions": ["error", "ignorePackages", {
         "js": "never",
         "jsx": "never",
         "ts": "never",
         "tsx": "never"
       }],
       "import/no-unresolved": [2, { "caseSensitive": true }],
+      "import/no-internal-modules": ["error", {
+        "allow": ["**/index.js", "**/index.ts"]
+      }],
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off"
     },

@@ -3,9 +3,9 @@ export {
   Chains,
   DEFAULT_ACCOUNT,
   BOOST_TREASURY_ADDRESS,
-} from './constants'
+} from './constants/index'
 
-export type { TestParams, TestCase } from './helpers'
+export type { TestParams, TestCase } from './helpers/index'
 
 export {
   createTestCase,

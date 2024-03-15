@@ -4,7 +4,7 @@ import {
   MAIN_SPOKE, // mainnet, polygon, avalanche
   LAYER2_SPOKE, // arbitrum, optimism
   BINANCE_SPOKE,
-} from './contract-addresses.js'
+} from './contract-addresses'
 
 import {
   type ChainIds,
@@ -14,7 +14,7 @@ import {
   POLYGON_CHAIN_ID,
   ARBITRUM_CHAIN_ID,
   AVALANCHE_CHAIN_ID,
-} from './chain-ids.js'
+} from './chain-ids'
 
 export const CHAIN_TO_CONTRACT: { [chainId in ChainIds]: Address } = {
   [ETH_CHAIN_ID]: MAIN_SPOKE,
