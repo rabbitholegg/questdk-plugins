@@ -66,6 +66,7 @@
     "green-years-admire",
     "healthy-bugs-enjoy",
     "hip-mirrors-divide",
+    "hot-schools-refuse",
     "hungry-squids-drop",
     "kind-lemons-pretend",
     "kind-panthers-count",
@@ -93,6 +94,7 @@
     "nice-apricots-bathe",
     "nine-moose-beam",
     "nine-schools-nail",
+    "nine-steaks-clap",
     "nine-waves-lie",
     "odd-cows-judge",
     "odd-islands-film",
@@ -103,6 +105,7 @@
     "perfect-gorillas-arrive",
     "pink-horses-change",
     "pink-moons-tickle",
+    "polite-vans-know",
     "poor-ducks-share",
     "pretty-lobsters-report",
     "proud-pans-promise",
@@ -235,6 +238,8 @@
     "@rabbitholegg/questdk": "1.0.1-alpha.0",
     "@rabbitholegg/questdk-plugin-kote": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-jojo": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-artblocks": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-artblocks": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-fabric": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-manifold": "1.0.0-alpha.0"
   }
 }
