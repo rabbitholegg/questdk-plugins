@@ -56,11 +56,11 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { contractAddress, recipient } = mint
+  const { contractAddress, recipient, tokenId } = mint
 
   const mintTo = {
     edition: contractAddress,
-    tier: 0,
+    tier: tokenId ?? 0,
     scheduleNum: 0,
     to: recipient,
     quantity: 1,
@@ -96,7 +96,7 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { contractAddress, recipient } = mint
+  const { contractAddress, recipient, tokenId } = mint
   const _client =
     client ||
     createPublicClient({
@@ -106,7 +106,7 @@ export const simulateMint = async (
 
   const mintTo = {
     edition: contractAddress,
-    tier: 0,
+    tier: tokenId ?? 0,
     scheduleNum: 0,
     to: recipient,
     quantity: 1,
