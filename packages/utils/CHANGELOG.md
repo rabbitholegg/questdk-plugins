@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.15
+
+### Minor Changes
+
+- [#295](https://github.com/rabbitholegg/questdk-plugins/pull/295) [`34a44e11`](https://github.com/rabbitholegg/questdk-plugins/commit/34a44e11249a4815bf240542e9f5f45dbca76b10) Thanks [@benjaminykim](https://github.com/benjaminykim)! - add getFees to expose project and action fees for mint action projects
+
 ## 1.0.0-alpha.14
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-vela",
-  "version": "1.0.0-alpha.17",
+  "version": "1.0.0-alpha.18",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

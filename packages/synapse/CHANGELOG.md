@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-synapse
 
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- Updated dependencies [[`34a44e11`](https://github.com/rabbitholegg/questdk-plugins/commit/34a44e11249a4815bf240542e9f5f45dbca76b10)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.15
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.21
 
 ### Patch Changes
