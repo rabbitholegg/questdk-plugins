@@ -53,7 +53,11 @@ export const mint = async (
   })
 }
 
-const getNextScheduleNum = async (client: PublicClient, contractAddress: Address, tier: number) => {
+const getNextScheduleNum = async (
+  client: PublicClient,
+  contractAddress: Address,
+  tier: number,
+) => {
   const nextSchedule = (await client.readContract({
     address: SUPERMINTER_V2,
     abi: NEXT_SCHEDULE_NUM_ABI,
@@ -61,7 +65,7 @@ const getNextScheduleNum = async (client: PublicClient, contractAddress: Address
     args: [contractAddress, tier],
   })) as number
 
-  return nextSchedule;
+  return nextSchedule
 }
 
 export const getMintIntent = async (
@@ -76,14 +80,19 @@ export const getMintIntent = async (
       transport: http(),
     })
 
-  const tier = tokenId ?? 0;
-  const quantity = amount ?? 1;
-  const nextScheduleNum = await getNextScheduleNum(_client as PublicClient, contractAddress, tier);
+  const tier = tokenId ?? 0
+  const quantity = amount ?? 1
+  const nextScheduleNum = await getNextScheduleNum(
+    _client as PublicClient,
+    contractAddress,
+    tier,
+  )
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum: nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum:
+      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -126,14 +135,19 @@ export const simulateMint = async (
       transport: http(),
     })
 
-  const tier = tokenId ?? 0;
-  const quantity = amount ?? 1;
-  const nextScheduleNum = await getNextScheduleNum(_client as PublicClient, contractAddress, tier);
+  const tier = tokenId ?? 0
+  const quantity = amount ?? 1
+  const nextScheduleNum = await getNextScheduleNum(
+    _client as PublicClient,
+    contractAddress,
+    tier,
+  )
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum: nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum:
+      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -172,7 +186,11 @@ export const getProjectFees = async (
 
   const tier = tokenId ?? 0
   const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(client as PublicClient, contractAddress, tier)
+  const nextScheduleNum = await getNextScheduleNum(
+    client as PublicClient,
+    contractAddress,
+    tier,
+  )
 
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
