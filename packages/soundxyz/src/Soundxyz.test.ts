@@ -70,7 +70,7 @@ describe('getMintIntent', () => {
     const mint: MintIntentParams = {
       chainId: 1,
       tokenId: 0,
-      contractAddress: SUPERMINTER.toLowerCase() as Address,
+      contractAddress: SUPERMINTER_V2.toLowerCase() as Address,
       amount: BigInt('10'),
       recipient: test_address,
     }
