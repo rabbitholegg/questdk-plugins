@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- [#300](https://github.com/rabbitholegg/questdk-plugins/pull/300) [`d6e1cdd3`](https://github.com/rabbitholegg/questdk-plugins/commit/d6e1cdd371cc84180cff9ac54d07d36c8e16f23e) Thanks [@benjaminykim](https://github.com/benjaminykim)! - fix: format
+
 ## 1.0.0-alpha.21
 
 ### Minor Changes
