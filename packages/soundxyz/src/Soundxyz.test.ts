@@ -6,7 +6,7 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { getDynamicNameParams, mint , getMintIntent } from './Soundxyz'
+import { getDynamicNameParams, mint, getMintIntent } from './Soundxyz'
 import {
   EXPECTED_ENCODED_DATA,
   OP_SUPERMINTER_V2,

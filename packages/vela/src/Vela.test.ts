@@ -1,4 +1,4 @@
-import { apply , ActionType } from '@rabbitholegg/questdk'
+import { apply, ActionType } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { options, stake, getSupportedTokenAddresses } from './Vela'
 import { CHAIN_ID_ARRAY } from './chain-ids'

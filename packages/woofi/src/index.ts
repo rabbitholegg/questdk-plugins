@@ -3,11 +3,7 @@ import {
   PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk'
 
-import {
-  swap,
-  getSupportedChainIds,
-  getSupportedTokenAddresses,
-} from './WooFi'
+import { swap, getSupportedChainIds, getSupportedTokenAddresses } from './WooFi'
 
 export const WooFi: IActionPlugin = {
   pluginId: 'woofi',

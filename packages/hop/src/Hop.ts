@@ -103,8 +103,6 @@ export const getSupportedTokenAddresses = async (
   return [] as Address[]
 }
 
-
-
 // https://github.com/hop-protocol/hop/blob/develop/packages/core/src/networks/mainnet.ts
 export const getSupportedChainIds = async () => {
   return Object.entries(mainnet).map(([, chain]) => {

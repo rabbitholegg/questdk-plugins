@@ -1,4 +1,4 @@
-import { GreaterThanOrEqual, apply , ActionType } from '@rabbitholegg/questdk'
+import { GreaterThanOrEqual, apply, ActionType } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import {
   MULTI_DEPOSIT,

@@ -1,6 +1,10 @@
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases, BOOST_PASS_MINT } from './test-transactions'
+import {
+  passingTestCases,
+  failingTestCases,
+  BOOST_PASS_MINT,
+} from './test-transactions'
 import { mint } from './Boost'
 import { BOOST_PASS_ABI } from './constants'
 

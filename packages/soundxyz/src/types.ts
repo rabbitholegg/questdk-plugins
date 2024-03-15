@@ -1,4 +1,3 @@
-
 export type TotalPriceAndFees = {
   total: bigint
   subTotal: bigint

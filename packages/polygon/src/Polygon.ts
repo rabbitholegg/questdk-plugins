@@ -1,10 +1,7 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { POLYGON_BRIDGE_ABI_FUNCS } from './abi'
 import { POLYGON_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids'
-import {
-  PolygonTokens,
-  ETH_ADDRESS_MAINNET,
-} from './supported-token-addresses'
+import { PolygonTokens, ETH_ADDRESS_MAINNET } from './supported-token-addresses'
 import { MAINNET_BRIDGE } from './contract-addresses'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object

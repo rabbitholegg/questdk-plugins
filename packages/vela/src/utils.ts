@@ -74,7 +74,10 @@ export function getOrderTypePacked(
 
 export function getOrderType(
   orderType: OrderType | undefined,
-): { _orderType: undefined } | { $or: Array<{ _orderType: number }> } | undefined {
+):
+  | { _orderType: undefined }
+  | { $or: Array<{ _orderType: number }> }
+  | undefined {
   if (!orderType) return { _orderType: undefined }
   const orderTypeValues = {
     [OrderType.Market]: {
