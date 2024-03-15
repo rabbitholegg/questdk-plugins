@@ -1,7 +1,12 @@
 import { Answers, PromptObject } from 'prompts'
 import { green, red } from 'picocolors'
 import { Address, type Hash, parseUnits } from 'viem'
-import { actionQuestions, mainQuestions, getTxHashQuestion } from './questions'
+import {
+  actionQuestions,
+  mainQuestions,
+  getTxHashQuestion,
+  detailsQuestions,
+} from './questions'
 import { ActionParamKeys, Actions } from './types'
 import { getTokenInfo, getTransaction } from './viem'
 import type {
@@ -21,7 +26,7 @@ export async function askQuestions() {
 
   while (addAnotherTransaction) {
     const { hash }: { hash: Hash | undefined } = await _prompts(
-      getTxHashQuestion(transactions)
+      getTxHashQuestion(transactions),
     )
 
     if (hash) {
@@ -78,12 +83,15 @@ export async function askQuestions() {
     addAnotherTransaction = addAnother
   }
 
+  const detailsResponse = await _prompts(detailsQuestions)
+
   return {
     projectName: response.name,
     chains: response.chain,
     tx: transactions,
     actionType: response.action,
     publish: response.publish,
+    details: detailsResponse,
   }
 }
 
