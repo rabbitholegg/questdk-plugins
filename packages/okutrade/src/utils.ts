@@ -1,7 +1,6 @@
 import type { FilterOperator } from '@rabbitholegg/questdk'
 import { getAddress, type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import axios from 'axios'
 
 const request = async (chain: string, method: string, data: any) => {
   const result = await fetch(`https://omni.oku.zone/${chain}`, {
@@ -42,7 +41,13 @@ export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   }
 }
 
-export const getPools = async (tokenIn: string, chainId: number) => {
+export const getPools = async (
+  tokenIn: `0x${string}` | undefined,
+  chainId: number,
+) => {
+  if (!tokenIn) {
+    return undefined
+  }
   const chain = getChainName(chainId)
   const resp = await request(chain, 'getTokenPools', [tokenIn])
   return resp as string[]

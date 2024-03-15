@@ -1,5 +1,6 @@
 import {
   compressJson,
+  type OptionsActionParams,
   type SwapActionParams,
   type TransactionFilter,
 } from '@rabbitholegg/questdk'

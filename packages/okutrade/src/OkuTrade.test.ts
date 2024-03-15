@@ -17,7 +17,10 @@ describe('Given the uniswap plugin', () => {
       CHAIN_ID_ARRAY.forEach((chainId) => {
         test(`for chainId: ${chainId}`, async () => {
           const token = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-          const pools = await getPools('ethereum', token)
+          const pools = await getPools(token, 1)
+          if (!pools) {
+            return
+          }
           pools.forEach((pool) => {
             expect(pool).to.match(
               /^0x[a-fA-F0-9]{40}$/,
