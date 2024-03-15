@@ -64,7 +64,6 @@ describe('Given the soundxyz plugin', () => {
   })
 })
 
-
 describe('getDynamicNameParams function', () => {
   test('should return correct values for valid input', async () => {
     const params = {
