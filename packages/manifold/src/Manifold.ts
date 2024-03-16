@@ -79,7 +79,7 @@ export const getFees = async (
 
     const quantityToMint =
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
-    
+
     if (instanceId) {
       const reponse = await fetch(
         `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
@@ -87,20 +87,22 @@ export const getFees = async (
       const data = await reponse.json()
       // determine project fee based on whether the project is exclusive or not
       const isExclusive = data.publicData.merkleTreeId !== undefined
-      const projectFee = (isExclusive ? parseEther('0.00069') : parseEther('0.0005')) * quantityToMint
-      
+      const projectFee =
+        (isExclusive ? parseEther('0.00069') : parseEther('0.0005')) *
+        quantityToMint
+
       // calculate action fee
       const mintPrice = data.mintPrice
-      let actionFee = 0n;
+      let actionFee = 0n
       if (mintPrice && typeof mintPrice === 'number') {
-        actionFee = parseEther(mintPrice.toString()) * quantityToMint;
+        actionFee = parseEther(mintPrice.toString()) * quantityToMint
       }
       return { actionFee, projectFee }
     }
     return { actionFee: 0n, projectFee: parseEther('0.0005') * quantityToMint }
   } catch (err) {
     // https://github.com/manifoldxyz/creator-core-extensions-solidity/blob/66b794ec164d7e81022d97287c8e8591777a6590/packages/manifold/contracts/lazyclaim/LazyPayableClaim.sol#L42
-    return { actionFee: 0n, projectFee: parseEther('0.0005') } 
+    return { actionFee: 0n, projectFee: parseEther('0.0005') }
   }
 }
 

@@ -2,11 +2,7 @@ import {
   chainIdToViemChain,
   type FilterOperator,
 } from '@rabbitholegg/questdk-plugin-utils'
-import {
-  INSTANCE_ID_PARAMS,
-  ABI_MINT,
-  ABI_MULTI,
-} from './constants'
+import { INSTANCE_ID_PARAMS, ABI_MINT, ABI_MULTI } from './constants'
 import {
   createPublicClient,
   http,
