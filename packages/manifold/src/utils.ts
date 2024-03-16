@@ -3,8 +3,7 @@ import {
   type FilterOperator,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
-  ERC1155_CONTRACT,
-  INSTANCEID_ABI,
+  INSTANCE_ID_PARAMS,
   ABI_MINT,
   ABI_MULTI,
 } from './constants'
@@ -50,21 +49,20 @@ export async function getInstanceId(
     transport: http(),
   })
 
-  try {
-    const data: ContractFunctionReturnType<typeof INSTANCEID_ABI> =
-      await client.readContract({
-        address: ERC1155_CONTRACT, // ERC-721 should not use tokenId
-        abi: INSTANCEID_ABI,
-        functionName: 'getClaimForToken',
-        args: [contractAddress, tokenId],
-      })
-
-    if (typeof data === 'object' && Array.isArray(data)) {
-      return data[0]
-    }
-  } catch (e) {
-    // instanceId not found, return a value that is expected to fail
-    return 0
+  for (const params of INSTANCE_ID_PARAMS) {
+    try {
+      const data: ContractFunctionReturnType<typeof params.abi> =
+        await client.readContract({
+          address: params.contract,
+          abi: params.abi,
+          functionName: 'getClaimForToken',
+          args: [contractAddress, tokenId],
+        })
+      if (typeof data === 'object' && Array.isArray(data)) {
+        return data[0]
+      }
+    } catch (e) {}
   }
-  return undefined
+  // no instanceId found
+  return 0
 }

@@ -4,7 +4,7 @@ import {
   type TransactionFilter,
 } from '@rabbitholegg/questdk'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address } from 'viem'
+import { type Address, parseEther } from 'viem'
 import {
   ABI_MINT,
   ABI_MULTI,
@@ -56,6 +56,52 @@ export const mint = async (
       $or: inputConditions,
     },
   })
+}
+
+export const getProjectFees = async (
+  mint: MintActionParams,
+): Promise<bigint> => {
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
+  try {
+    const { chainId, contractAddress, tokenId, amount } = mint
+
+    const instanceId = await getInstanceId(
+      chainId,
+      contractAddress,
+      tokenId ?? 1,
+    )
+
+    const quantityToMint =
+      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+    
+    if (instanceId) {
+      const reponse = await fetch(
+        `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
+      )
+      const data = await reponse.json()
+      // determine project fee based on whether the project is exclusive or not
+      const isExclusive = data.publicData.merkleTreeId !== undefined
+      const projectFee = (isExclusive ? parseEther('0.00069') : parseEther('0.0005')) * quantityToMint
+      
+      // calculate action fee
+      const mintPrice = data.mintPrice
+      let actionFee = 0n;
+      if (mintPrice && typeof mintPrice === 'number') {
+        actionFee = parseEther(mintPrice.toString()) * quantityToMint;
+      }
+      return { actionFee, projectFee }
+    }
+    return { actionFee: 0n, projectFee: parseEther('0.0005') * quantityToMint }
+  } catch (err) {
+    // https://github.com/manifoldxyz/creator-core-extensions-solidity/blob/66b794ec164d7e81022d97287c8e8591777a6590/packages/manifold/contracts/lazyclaim/LazyPayableClaim.sol#L42
+    return { actionFee: 0n, projectFee: parseEther('0.0005') } 
+  }
 }
 
 export const getSupportedTokenAddresses = async (
