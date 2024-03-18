@@ -71,6 +71,7 @@
     "@rabbitholegg/questdk-plugin-kote": "workspace:*",
     "@rabbitholegg/questdk-plugin-jojo": "workspace:*",
     "@rabbitholegg/questdk-plugin-manifold": "workspace:*",
-    "@rabbitholegg/questdk-plugin-fabric": "workspace:*"
+    "@rabbitholegg/questdk-plugin-fabric": "workspace:*",
+    "@rabbitholegg/questdk-plugin-paragraph": "workspace:*"
   }
 }
