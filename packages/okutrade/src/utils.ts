@@ -2,6 +2,26 @@ import type { FilterOperator } from '@rabbitholegg/questdk'
 import { getAddress, type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
+const request = async (chain: string, method: string, data: unknown) => {
+  const result = await fetch(`https://omni.oku.zone/${chain}`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: '1',
+      method: `cush_${method}`,
+      params: data,
+    }),
+  })
+  const resp = await result.json()
+  if (resp.error) {
+    throw resp.error
+  }
+  return resp.result.map((r: string) => getAddress(r))
+}
+
 export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v3 paths are formatted as 0x<token><fee><token>
 
@@ -19,6 +39,18 @@ export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   return {
     $and: conditions,
   }
+}
+
+export const getPools = async (
+  tokenIn: `0x${string}` | undefined,
+  chainId: number,
+) => {
+  if (!tokenIn) {
+    return undefined
+  }
+  const chain = getChainName(chainId)
+  const resp = await request(chain, 'getTokenPools', [tokenIn])
+  return resp as string[]
 }
 
 export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
@@ -56,6 +88,15 @@ const chainToWETH: Record<number, Address> = {
   [Chains.BASE]: '0x4200000000000000000000000000000000000006',
 }
 
+const chainIdToName: Record<number, string> = {
+  [Chains.ETHEREUM]: 'ethereum',
+  [Chains.OPTIMISM]: 'optimism',
+  [Chains.ARBITRUM_ONE]: 'arbitrum',
+  [Chains.POLYGON_POS]: 'polygon',
+  [Chains.ZK_SYNC_ERA]: 'zksync',
+  [Chains.BASE]: 'base',
+}
+
 export function getUniversalRouter(chainId: number): Address {
   const address = chainToContract[chainId]
   if (!address) {
@@ -70,4 +111,12 @@ export function getWETHAddress(chainId: number): Address {
     throw new Error(`WETH address not found for chain ID ${chainId}`)
   }
   return address
+}
+
+export function getChainName(chainId: number): string {
+  const name = chainIdToName[chainId]
+  if (!name) {
+    throw new Error(`Chain name not found for chain ID ${chainId}`)
+  }
+  return name
 }
