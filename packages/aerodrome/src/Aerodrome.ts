@@ -5,6 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address, zeroAddress } from 'viem'
 import { Chains, CHAIN_TO_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
+import { buildPathQuery } from './utils'
 import {
   AERODROME_ROUTER,
   ETH_FOR_TOKENS_FRAGMENTS,
@@ -56,9 +57,7 @@ export const swap = async (
           $abi: TOKENS_FOR_TOKENS_FRAGMENTS,
           amountIn: amountIn,
           amountOutMin: amountOut,
-          routes: {
-            $and: [{ $first: { from: tokenIn } }, { $last: { to: tokenOut } }],
-          },
+          routes: buildPathQuery(tokenIn, tokenOut),
           to: recipient,
         },
       ],
