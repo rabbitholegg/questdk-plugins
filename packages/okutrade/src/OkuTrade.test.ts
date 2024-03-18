@@ -15,6 +15,7 @@ import {
 } from './test-transactions.js'
 import { zeroAddress } from 'viem'
 import { getPools } from './utils.js'
+import { ActionType } from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the uniswap plugin', () => {
   describe('When handling the options action', () => {
@@ -143,10 +144,13 @@ describe('Given the uniswap plugin', () => {
     describe('should return a valid list of tokens for each supported chain', () => {
       CHAIN_ID_ARRAY.forEach((chainId) => {
         test(`for chainId: ${chainId}`, async () => {
-          const tokens = await getSupportedTokenAddresses(chainId)
+          const tokens = await getSupportedTokenAddresses(
+            chainId,
+            ActionType.Options,
+          )
           const addressRegex = /^0x[a-fA-F0-9]{40}$/
           expect(tokens).to.be.an('array')
-          expect(tokens).to.contain(zeroAddress)
+          expect(tokens).to.not.contain(zeroAddress)
           expect(tokens).to.have.length.greaterThan(1)
           expect(tokens).to.have.length.lessThan(100)
           tokens.forEach((token) => {

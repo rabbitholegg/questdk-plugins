@@ -1,10 +1,11 @@
 import {
+  ActionType,
   compressJson,
   type OptionsActionParams,
   type SwapActionParams,
   type TransactionFilter,
 } from '@rabbitholegg/questdk'
-import { zeroAddress as ETH_ADDRESS } from 'viem'
+import { zeroAddress as ETH_ADDRESS, zeroAddress } from 'viem'
 import {
   CHAIN_ID_ARRAY,
   V2_SWAP_EXACT_TYPES,
@@ -89,6 +90,14 @@ export const getSupportedChainIds = async () => {
   return CHAIN_ID_ARRAY as number[]
 }
 
-export const getSupportedTokenAddresses = async (_chainId: number) => {
+export const getSupportedTokenAddresses = async (
+  _chainId: number,
+  actionType?: ActionType,
+) => {
+  if (actionType === 'options') {
+    return (
+      CHAIN_TO_TOKENS[_chainId]?.filter((token) => token !== zeroAddress) ?? []
+    )
+  }
   return CHAIN_TO_TOKENS[_chainId] ?? []
 }
