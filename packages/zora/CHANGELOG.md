@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.32
+
+### Patch Changes
+
+- [#301](https://github.com/rabbitholegg/questdk-plugins/pull/301) [`57553232`](https://github.com/rabbitholegg/questdk-plugins/commit/57553232b6e35e32cced7afc33d373d494dc6854) Thanks [@mmackz](https://github.com/mmackz)! - change referral address to zora deployer
+
 ## 1.0.0-alpha.31
 
 ### Patch Changes
