@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-okutrade",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.32",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

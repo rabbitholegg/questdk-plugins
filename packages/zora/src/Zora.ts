@@ -207,6 +207,13 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   try {
     const { chainId, contractAddress, tokenId, amount } = mint
 
@@ -225,10 +232,10 @@ export const getProjectFees = async (
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
     const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
 
-    return fee.totalCost
+    return { actionFee: fee.tokenPurchaseCost, projectFee: fee.mintFee }
   } catch (err) {
     console.error(err)
-    return parseEther('0.000777') // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
+    return { actionFee: parseEther('0'), projectFee: parseEther('0.000777') } // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
   }
 }
 

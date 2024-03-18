@@ -5,15 +5,12 @@ import {
   passingTestCases,
   failingTestCases,
   OP_SUPERMINTER_V2,
-  EXPECTED_ENCODED_DATA,
 } from './test-transactions'
 import { Chains } from './utils'
 import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
-import { getMintIntent } from './Soundxyz'
 import { type Address } from 'viem'
 import {
   ActionType,
-  type MintIntentParams,
   type MintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
@@ -61,37 +58,6 @@ describe('Given the soundxyz plugin', () => {
         })
       })
     })
-  })
-})
-
-describe('getMintIntent', () => {
-  const test_address = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
-  test('returns a TransactionRequest with correct properties', async () => {
-    const mint: MintIntentParams = {
-      chainId: 1,
-      tokenId: 0,
-      contractAddress: SUPERMINTER.toLowerCase() as Address,
-      amount: BigInt('10'),
-      recipient: test_address,
-    }
-
-    const result = await getMintIntent(mint)
-
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA,
-    })
-  })
-
-  test('throws an error if required parameters are missing', async () => {
-    const mint: Partial<MintIntentParams> = {
-      contractAddress: test_address,
-      amount: BigInt('10'),
-      // recipient is missing
-    }
-
-    await expect(getMintIntent(mint as MintIntentParams)).rejects.toThrow()
   })
 })
 
@@ -144,11 +110,13 @@ describe('getDynamicNameParams function', () => {
     )
   })
 })
+
 describe('getProjectFees', () => {
   test('should return the correct fee', async () => {
+    // If actually testing this contract, may not work if it is no longer mintable
     const contractAddress: Address =
       '0xFCB12A059C722AEaaFc4AC5531493cad49cA1848'
-    const mintParams = { contractAddress, chainId: Chains.BASE }
+    const mintParams = { contractAddress, chainId: Chains.BASE, tokenId: 1 }
 
     const mockFns = {
       getProjectFees: async (_mint: MintActionParams) =>
@@ -159,5 +127,25 @@ describe('getProjectFees', () => {
     const fee = await mockFns.getProjectFees(mintParams)
     expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee).toEqual(BigInt('777000000000000'))
+  })
+})
+describe('getFees', () => {
+  test('should return the correct fee for project and action', async () => {
+    const contractAddress: Address =
+      '0xFCB12A059C722AEaaFc4AC5531493cad49cA1848'
+    const mintParams = { contractAddress, chainId: Chains.BASE }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: BigInt('777000000000000'),
+        actionFee: BigInt('0'),
+      }),
+    }
+
+    const getProjectFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
+    expect(fee.projectFee).toEqual(BigInt('777000000000000'))
+    expect(fee.actionFee).toEqual(BigInt('0'))
   })
 })

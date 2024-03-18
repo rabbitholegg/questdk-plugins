@@ -94,6 +94,13 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress } = mint
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
@@ -128,7 +135,7 @@ export const getProjectFees = async (
     functionName: 'price',
   })
 
-  return platformFee + nftPrice
+  return { projectFee: platformFee, actionFee: nftPrice }
 }
 
 export const getSupportedTokenAddresses = async (
