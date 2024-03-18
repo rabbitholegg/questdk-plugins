@@ -1,5 +1,29 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.86
+
+### Patch Changes
+
+- Updated dependencies [[`d6e1cdd3`](https://github.com/rabbitholegg/questdk-plugins/commit/d6e1cdd371cc84180cff9ac54d07d36c8e16f23e)]:
+  - @rabbitholegg/questdk-plugin-mirror@1.0.0-alpha.20
+  - @rabbitholegg/questdk-plugin-soundxyz@1.0.0-alpha.22
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.31
+
+## 1.0.0-alpha.85
+
+### Minor Changes
+
+- [#291](https://github.com/rabbitholegg/questdk-plugins/pull/291) [`b1de63a1`](https://github.com/rabbitholegg/questdk-plugins/commit/b1de63a172f289bbefefa6583e7b13e5892d531b) Thanks [@mmackz](https://github.com/mmackz)! - add manifold plugin to questdk
+
+- [#292](https://github.com/rabbitholegg/questdk-plugins/pull/292) [`c72b883e`](https://github.com/rabbitholegg/questdk-plugins/commit/c72b883e7e2aca79a1b73943d6f4f84b4792bb13) Thanks [@mmackz](https://github.com/mmackz)! - add fabric plugin to questdk
+
+### Patch Changes
+
+- Updated dependencies [[`b1de63a1`](https://github.com/rabbitholegg/questdk-plugins/commit/b1de63a172f289bbefefa6583e7b13e5892d531b), [`3ba216e2`](https://github.com/rabbitholegg/questdk-plugins/commit/3ba216e2841f6138ce6a24c6fd3ac3f8a18990d6), [`c72b883e`](https://github.com/rabbitholegg/questdk-plugins/commit/c72b883e7e2aca79a1b73943d6f4f84b4792bb13)]:
+  - @rabbitholegg/questdk-plugin-manifold@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.30
+  - @rabbitholegg/questdk-plugin-fabric@1.0.0-alpha.1
+
 ## 1.0.0-alpha.84
 
 ### Minor Changes
