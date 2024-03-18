@@ -28,11 +28,13 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
-  BOOST_TREASURY_ADDRESS,
   ActionType,
   type DisctriminatedActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { FIXED_PRICE_SALE_STRATS } from './contract-addresses'
+import {
+  FIXED_PRICE_SALE_STRATS,
+  ZORA_DEPLOYER_ADDRESS,
+} from './contract-addresses'
 
 export const mint = async (
   mint: MintActionParams,
@@ -110,7 +112,7 @@ export const getMintIntent = async (
       FIXED_PRICE_SALE_STRATS[mint.chainId],
       tokenId,
       amount,
-      [BOOST_TREASURY_ADDRESS],
+      [ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     // Assume it's an 1155 mint
@@ -156,7 +158,7 @@ export const simulateMint = async (
         FIXED_PRICE_SALE_STRATS[mint.chainId],
         tokenId,
         amount,
-        [BOOST_TREASURY_ADDRESS],
+        [ZORA_DEPLOYER_ADDRESS],
         pad(recipient),
       ]
       const result = await _client.simulateContract({
