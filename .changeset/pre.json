@@ -54,6 +54,7 @@
     "four-mails-joke",
     "fresh-tables-poke",
     "fuzzy-camels-shop",
+    "giant-bulldogs-thank",
     "giant-clouds-mix",
     "gold-lizards-leave",
     "gold-socks-dream",
@@ -113,6 +114,7 @@
     "purple-trainers-occur",
     "quick-eyes-retire",
     "quick-otters-deliver",
+    "quiet-numbers-change",
     "quiet-spies-drum",
     "quiet-swans-wave",
     "rotten-bees-battle",
@@ -142,6 +144,7 @@
     "silent-rats-explode",
     "silent-schools-notice",
     "silent-scissors-refuse",
+    "silent-walls-poke",
     "sixty-countries-leave",
     "sixty-trains-yawn",
     "slow-cars-hope",
@@ -167,6 +170,7 @@
     "stale-singers-worry",
     "strange-hornets-notice",
     "strong-kiwis-crash",
+    "sweet-tools-shave",
     "swift-dancers-refuse",
     "tasty-bobcats-clean",
     "tasty-bulldogs-occur",
@@ -241,6 +245,8 @@
     "@rabbitholegg/questdk-plugin-jojo": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-artblocks": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-fabric": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-manifold": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-manifold": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-aerodrome": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-paragraph": "1.0.0-alpha.0"
   }
 }

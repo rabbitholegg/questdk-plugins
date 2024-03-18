@@ -1,5 +1,21 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.87
+
+### Minor Changes
+
+- [#293](https://github.com/rabbitholegg/questdk-plugins/pull/293) [`9be42124`](https://github.com/rabbitholegg/questdk-plugins/commit/9be42124175d44c749da401714250760aae7d598) Thanks [@mmackz](https://github.com/mmackz)! - add aerodrome to questdk plugins
+
+- [#294](https://github.com/rabbitholegg/questdk-plugins/pull/294) [`a99edb28`](https://github.com/rabbitholegg/questdk-plugins/commit/a99edb281b3f23695500927a068ef1403ec1cf05) Thanks [@mmackz](https://github.com/mmackz)! - add paragraph to questdk plugins
+
+### Patch Changes
+
+- Updated dependencies [[`b5fe0e8a`](https://github.com/rabbitholegg/questdk-plugins/commit/b5fe0e8a462dea6017e860946dc8fa99ec9ace15), [`9be42124`](https://github.com/rabbitholegg/questdk-plugins/commit/9be42124175d44c749da401714250760aae7d598), [`57553232`](https://github.com/rabbitholegg/questdk-plugins/commit/57553232b6e35e32cced7afc33d373d494dc6854), [`a99edb28`](https://github.com/rabbitholegg/questdk-plugins/commit/a99edb281b3f23695500927a068ef1403ec1cf05)]:
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.33
+  - @rabbitholegg/questdk-plugin-aerodrome@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.32
+  - @rabbitholegg/questdk-plugin-paragraph@1.0.0-alpha.1
+
 ## 1.0.0-alpha.86
 
 ### Patch Changes
