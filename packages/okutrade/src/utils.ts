@@ -2,7 +2,7 @@ import type { FilterOperator } from '@rabbitholegg/questdk'
 import { getAddress, type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
-const request = async (chain: string, method: string, data: any) => {
+const request = async (chain: string, method: string, data: unknown) => {
   const result = await fetch(`https://omni.oku.zone/${chain}`, {
     method: 'POST',
     headers: {
@@ -11,7 +11,7 @@ const request = async (chain: string, method: string, data: any) => {
     body: JSON.stringify({
       jsonrpc: '2.0',
       id: '1',
-      method: method,
+      method: `cush_${method}`,
       params: data,
     }),
   })
@@ -19,7 +19,7 @@ const request = async (chain: string, method: string, data: any) => {
   if (resp.error) {
     throw resp.error
   }
-  return resp.result
+  return resp.result.map((r: string) => getAddress(r))
 }
 
 export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {

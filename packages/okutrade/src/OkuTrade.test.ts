@@ -1,37 +1,61 @@
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { getSupportedTokenAddresses, swap } from './OkuTrade.js'
+import { getSupportedTokenAddresses, swap, options } from './OkuTrade.js'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
 } from './constants.js'
-import { failingTestCases, passingTestCases } from './test-transactions.js'
+import {
+  failingTestCasesOptions,
+  passingTestCasesOptions,
+  failingTestCasesSwap,
+  passingTestCasesSwap,
+} from './test-transactions.js'
 import { zeroAddress } from 'viem'
 import { getPools } from './utils.js'
 
 describe('Given the uniswap plugin', () => {
-  describe('When handling the limt order', () => {
+  describe('When handling the options action', () => {
     describe('should return a valid list of pools for a given token', () => {
-      CHAIN_ID_ARRAY.forEach((chainId) => {
-        test(`for chainId: ${chainId}`, async () => {
-          const token = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-          const pools = await getPools(token, 1)
-          if (!pools) {
-            return
-          }
-          pools.forEach((pool) => {
-            expect(pool).to.match(
-              /^0x[a-fA-F0-9]{40}$/,
-              `Pool address ${pool} is not a valid Ethereum address`,
-            )
-          })
+      test('for USDC on Ethereum mainnet', async () => {
+        const token = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+        const pools = await getPools(token, 1)
+        if (!pools) {
+          return
+        }
+        pools.forEach((pool) => {
+          expect(pool).to.match(
+            /^0x[a-fA-F0-9]{40}$/,
+            `Pool address ${pool} is not a valid Ethereum address`,
+          )
+        })
+      })
+    })
+
+    describe('should pass filter with valid transactions', () => {
+      passingTestCasesOptions.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await options(params)
+          expect(apply(transaction, filter)).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingTestCasesOptions.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await options(params)
+          expect(apply(transaction, filter)).to.be.false
         })
       })
     })
   })
-  describe('When handling the swap', () => {
+
+  describe('When handling the swap action', () => {
     describe('should return a valid action filter', () => {
       test('with a valid swap action', async () => {
         const filter = await swap({
@@ -97,7 +121,7 @@ describe('Given the uniswap plugin', () => {
     })
 
     describe('should pass filter with valid transactions', () => {
-      passingTestCases.forEach((testCase) => {
+      passingTestCasesSwap.forEach((testCase) => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await swap(params)
@@ -107,7 +131,7 @@ describe('Given the uniswap plugin', () => {
     })
 
     describe('should not pass filter with invalid transactions', () => {
-      failingTestCases.forEach((testCase) => {
+      failingTestCasesSwap.forEach((testCase) => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await swap(params)
