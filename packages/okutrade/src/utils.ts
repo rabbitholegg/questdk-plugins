@@ -89,12 +89,12 @@ const chainToWETH: Record<number, Address> = {
 }
 
 const chainIdToName: Record<number, string> = {
-  1: 'ethereum',
-  10: 'optimism',
-  42161: 'arbitrum',
-  137: 'polygon',
-  324: 'zksync',
-  8453: 'base',
+  [Chains.ETHEREUM]: 'ethereum',
+  [Chains.OPTIMISM]: 'optimism',
+  [Chains.ARBITRUM_ONE]: 'arbitrum',
+  [Chains.POLYGON_POS]: 'polygon',
+  [Chains.ZK_SYNC_ERA]: 'zksync',
+  [Chains.BASE]: 'base',
 }
 
 export function getUniversalRouter(chainId: number): Address {
