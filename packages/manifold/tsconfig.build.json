@@ -1,0 +1,18 @@
+{
+  "extends": "tsconfig/base.json",
+  "include": ["src"],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test-d.ts",
+    "src/**/*.bench.ts",
+    "src/_test",
+    "scripts/**/*"
+  ],
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "rootDir": "./src"
+  }
+}

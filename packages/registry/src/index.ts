@@ -32,6 +32,9 @@ import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
 import { ArtBlocks } from '@rabbitholegg/questdk-plugin-artblocks'
+import { Manifold } from '@rabbitholegg/questdk-plugin-manifold'
+import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
+import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -87,6 +90,9 @@ export const plugins: Record<string, IActionPlugin> = {
   [Kote.pluginId]: Kote,
   [JOJO.pluginId]: JOJO,
   [ArtBlocks.pluginId]: ArtBlocks,
+  [Manifold.pluginId]: Manifold,
+  [Fabric.pluginId]: Fabric,
+  [Paragraph.pluginId]: Paragraph,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -148,6 +154,23 @@ export const getProjectFees = (
     case ActionType.Mint:
       if (plugin.mint && plugin.getProjectFees) {
         return plugin.getProjectFees(params as unknown as MintActionParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
+export const getFees = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  params: ActionParams,
+) => {
+  switch (actionType) {
+    case ActionType.Mint:
+      if (plugin.mint && plugin.getFees) {
+        return plugin.getFees(params as unknown as MintActionParams)
       } else {
         throw new PluginActionNotImplementedError()
       }

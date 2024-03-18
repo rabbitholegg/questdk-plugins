@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-mirror",
-  "version": "1.0.0-alpha.18",
+  "version": "1.0.0-alpha.20",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

@@ -12,6 +12,7 @@ import {
   getSupportedTokenAddresses,
   mint,
   getProjectFees,
+  getFees,
   simulateMint,
 } from './Zora.js'
 
@@ -25,6 +26,8 @@ export const Zora: IActionPlugin = {
   getDynamicNameParams,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
+  getFees: async (params: ActionParams) =>
+    getFees(params as unknown as MintActionParams),
   getMintIntent,
   simulateMint,
 }
