@@ -29,14 +29,7 @@ export const swap = async (
           // swapExactETHForTokens
           $abi: ETH_FOR_TOKENS_FRAGMENTS,
           amountOutMin: amountOut,
-          routes: {
-            $and: [
-              {
-                $first: { from: WETH_ADDRESS },
-              },
-              { $last: { to: tokenOut } },
-            ],
-          },
+          routes: buildPathQuery(WETH_ADDRESS, tokenOut),
           to: recipient,
         },
         {
@@ -44,12 +37,7 @@ export const swap = async (
           $abi: TOKENS_FOR_ETH_FRAGMENTS,
           amountIn: amountIn,
           amountOutMin: amountOut,
-          routes: {
-            $and: [
-              { $first: { from: tokenIn } },
-              { $last: { to: WETH_ADDRESS } },
-            ],
-          },
+          routes: buildPathQuery(tokenIn, WETH_ADDRESS),
           to: recipient,
         },
         {
