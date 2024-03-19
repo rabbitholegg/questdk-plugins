@@ -36,6 +36,7 @@ import { Manifold } from '@rabbitholegg/questdk-plugin-manifold'
 import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
 import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
+import { JokeRace } from '@rabbitholegg/questdk-plugin-jokerace'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -53,6 +54,8 @@ import {
   type SwapActionParams,
   type TransactionFilter,
   type VoteActionParams,
+  type ProposeActionParams,
+  type ProposeWithoutProofActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import type { Address, PublicClient } from 'viem'
 
@@ -95,6 +98,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Fabric.pluginId]: Fabric,
   [Paragraph.pluginId]: Paragraph,
   [Aerodrome.pluginId]: Aerodrome,
+  [JokeRace.pluginId]: JokeRace,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -223,6 +227,16 @@ export const executePlugin = (
       if (plugin.vote === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.vote(params as unknown as VoteActionParams)
+    }
+    case ActionType.Propose: {
+      if (plugin.propose === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.propose(params as unknown as ProposeActionParams)
+    }
+    case ActionType.ProposeWithoutProof: {
+      if (plugin.proposeWithoutProof === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.proposeWithoutProof(params as unknown as ProposeWithoutProofActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
