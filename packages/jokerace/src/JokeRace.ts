@@ -5,7 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { JOKERACE_ABI } from './abi'
+import { JOKERACE_CAST_VOTE_ABI, JOKERACE_CAST_VOTE_WITHOUT_PROOF_ABI } from './abi'
 
 export const vote = async (
   vote: VoteActionParams,
@@ -15,12 +15,22 @@ export const vote = async (
     chainId,
     to: contractAddress,
     input: {
-      $abi: JOKERACE_ABI,
-      proposalId: proposalId,
-      support: support,
-      totalVotes: ,
-      numVotes: ,
-      proof: ,
+      $or: [
+        {
+          $abi: JOKERACE_CAST_VOTE_ABI,
+          proposalId: proposalId,
+          support: support,
+          totalVotes: ,
+          numVotes: ,
+          proof: ,
+        },
+        {
+          $abi: JOKERACE_CAST_VOTE_WITHOUT_PROOF_ABI,
+          proposalId: proposalId,
+          support: support,
+          numVotes: ,
+        }
+      ]
     },
   })
 }

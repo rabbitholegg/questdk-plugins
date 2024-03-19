@@ -1,4 +1,4 @@
-export const JOKERACE_ABI = [
+export const JOKERACE_CAST_VOTE_ABI = [
   {
     "type": "function",
     "name": "castVote",
@@ -38,6 +38,9 @@ export const JOKERACE_ABI = [
     ],
     "stateMutability": "payable"
   },
+]
+
+export const JOKERACE_CAST_VOTE_WITHOUT_PROOF_ABI = [
   {
     "type": "function",
     "name": "castVoteWithoutProof",
