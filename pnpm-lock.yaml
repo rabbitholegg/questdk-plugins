@@ -229,6 +229,9 @@ importers:
 
   packages/artblocks:
     dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
         version: link:../utils
