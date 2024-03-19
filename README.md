@@ -53,6 +53,13 @@ This powerful command is ideal for resetting your project to a clean state.
 
 Remember to replace the filter parameter with the specific package you're targeting for individual commands as needed.
 
+### Changesets & Publishing
+In order to publish you need to make sure that the pull request you're submitting has a changeset. If you don't want to publish this isn't needed. In order to generate a changeset run `pnpm changeset`, select a change type [major,minor,patch], and draft a small summary of the changeset. Select version based on [semantic versioning](https://semver.org/).
+
+After this all you need to do is push and merge the pull request and the Github Action will handle the process of versioning, and publishing.
+### Commit Standards
+We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in order to make changelogs and versioning a breeze.
+
 ### Package Linking
 Often times when testing it's necessary to link into the [questDK repo](https://github.com/rabbitholegg/questdk).
 We handle this through [package linking](https://pnpm.io/cli/link).
@@ -207,13 +214,6 @@ While the new build process marks a significant improvement, some tasks remain, 
 
 We are committed to addressing these challenges and will provide updates as we refine the build process further. Your feedback and contributions are welcome as we continue to improve the efficiency and effectiveness of our package.
 
-
 ## Contributing
 If you'd like to build a plugin and get support for your protocol on RabbiteHole all you need to do is submit a PR with the finished plugin. Here are some useful tips to assist, and when in doubt please [join our discord](https://discord.com/invite/rabbitholegg) or reach out by email [<arthur@rabbithole.gg>] for assistance building a plugin.
-### Changesets & Publishing
-In order to publish you need to make sure that the pull request you're submitting has a changeset. If you don't want to publish this isn't needed. In order to generate a changeset run `pnpm changeset`, select a change type [major,minor,patch], and draft a small summary of the changeset. Select version based on [semantic versioning](https://semver.org/).
-
-After this all you need to do is push and merge the pull request and the Github Action will handle the process of versioning, and publishing.
-### Commit Standards
-We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in order to make changelogs and versioning a breeze.
 
