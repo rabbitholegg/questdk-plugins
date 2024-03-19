@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.23
+
+### Patch Changes
+
+- [#309](https://github.com/rabbitholegg/questdk-plugins/pull/309) [`10125455`](https://github.com/rabbitholegg/questdk-plugins/commit/10125455e5e6c8c6e299df096b7bdb8430287104) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Enforce `scheduleNum` to be `0`
+
 ## 1.0.0-alpha.22
 
 ### Patch Changes
