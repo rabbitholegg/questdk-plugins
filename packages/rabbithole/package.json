@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-rabbithole",
-  "version": "1.0.0-alpha.21",
+  "version": "1.0.0-alpha.22",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-stargate",
-  "version": "1.0.0-alpha.33",
+  "version": "1.0.0-alpha.34",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

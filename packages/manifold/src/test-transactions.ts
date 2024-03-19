@@ -1,0 +1,118 @@
+import {
+  GreaterThanOrEqual,
+  LessThan,
+  type MintActionParams,
+} from '@rabbitholegg/questdk'
+import {
+  createTestCase,
+  type TestParams,
+} from '@rabbitholegg/questdk-plugin-utils'
+
+export const ERC1155_MINT: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 8453,
+    from: '0x0971ca34b258c3d9095fc43c51a6d1ec542136c6',
+    hash: '0xe20f869064bdda5b6f0d730541d5ddfe3d572516c872440fd642dbff9e53ab7f',
+    input:
+      '0xfa2b068f000000000000000000000000e096f28c87f331758af3da402add89b33a2853d80000000000000000000000000000000000000000000000000000000002cb90f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000971ca34b258c3d9095fc43c51a6d1ec542136c60000000000000000000000000000000000000000000000000000000000000000',
+    to: '0x26bbea7803dcac346d5f5f135b57cf2c752a02be',
+    value: '1020000000000000',
+  },
+  params: {
+    chainId: 8453,
+    tokenId: 1,
+    contractAddress: '0xe096f28c87f331758af3da402add89b33a2853d8',
+    amount: GreaterThanOrEqual(1),
+    recipient: '0x0971ca34b258c3d9095fc43c51a6d1ec542136c6',
+  },
+}
+export const ERC1155_MINTBATCH: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 8453,
+    from: '0x7921c8081e58dc80bd67c8e8c97b23c102c69579',
+    hash: '0xe60b30fa7b08bae948197b5eea775120202612bcf84d614accec7fabb9af8abf',
+    input:
+      '0x26c858a400000000000000000000000086b31ddc447a6eefbcc7c2f03a4d5837aba1aa480000000000000000000000000000000000000000000000000000000002cac0f0000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000007921c8081e58dc80bd67c8e8c97b23c102c6957900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    to: '0x26bbea7803dcac346d5f5f135b57cf2c752a02be',
+    value: '1000000000000000',
+  },
+  params: {
+    chainId: 8453,
+    tokenId: 1,
+    contractAddress: '0x86b31ddc447a6eefbcc7c2f03a4d5837aba1aa48',
+    amount: GreaterThanOrEqual(2),
+    recipient: '0x7921c8081e58dc80bd67c8e8c97b23c102c69579',
+  },
+}
+export const ERC721_MINT: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 10,
+    from: '0x7921c8081e58dc80bd67c8e8c97b23c102c69579',
+    hash: '0xc5c5429a7b6f52fe0d151882a592a40eb9c8ca7d0b14c415a51b960ca13cc7f4',
+    input:
+      '0xfa2b068f0000000000000000000000006935cd348193bab133f3081f53eb99ee6f0d685b0000000000000000000000000000000000000000000000000000000002c3c8f0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000007921c8081e58dc80bd67c8e8c97b23c102c695790000000000000000000000000000000000000000000000000000000000000000',
+    to: '0x23aa05a271debffaa3d75739af5581f744b326e4',
+    value: '500000000000000',
+  },
+  params: {
+    chainId: 10,
+    contractAddress: '0x6935cd348193bab133f3081f53eb99ee6f0d685b',
+    amount: GreaterThanOrEqual(1),
+    recipient: '0x7921c8081e58dc80bd67c8e8c97b23c102c69579',
+  },
+}
+export const ERC721_MINTBATCH: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 10,
+    from: '0x25892b8c6fbe9912675f0dc1708c417169dddf1d',
+    hash: '0xad27cb26318f6a7fd953092641b02e6c8e3555618aa22a1b2bf1e82420b38061',
+    input:
+      '0x26c858a400000000000000000000000044560f4dc4d35f1a478f1001ab411f575028504e00000000000000000000000000000000000000000000000000000000029eb8f0000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000e000000000000000000000000025892b8c6fbe9912675f0dc1708c417169dddf1d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    to: '0x23aa05a271debffaa3d75739af5581f744b326e4',
+    value: '1100000000000000',
+  },
+  params: {
+    chainId: 10,
+    contractAddress: '0x44560f4dc4d35f1a478f1001ab411f575028504e',
+    amount: GreaterThanOrEqual(2),
+    recipient: '0x25892b8c6fbe9912675f0dc1708c417169dddf1d',
+  },
+}
+
+export const passingTestCases = [
+  createTestCase(ERC1155_MINT, 'when using ERC1155 mint'),
+  createTestCase(ERC1155_MINTBATCH, 'when using ERC1155 mint batch'),
+  createTestCase(ERC721_MINT, 'when using ERC721 mint'),
+  createTestCase(ERC721_MINTBATCH, 'when using ERC721 mint signature'),
+  createTestCase(ERC1155_MINT, 'when tokenId is "any"', { tokenId: undefined }),
+  createTestCase(ERC1155_MINTBATCH, 'when amount is "any"', {
+    amount: undefined,
+  }),
+  createTestCase(ERC1155_MINTBATCH, 'when amount is exact', { amount: '2' }),
+]
+
+export const failingTestCases = [
+  createTestCase(ERC1155_MINT, 'when chainId is not correct', {
+    chainId: 42161,
+  }),
+  createTestCase(
+    ERC1155_MINTBATCH,
+    'when using mint batch and amount is not sufficient',
+    { amount: 10 },
+  ),
+  createTestCase(ERC1155_MINT, 'when using mint and amount is not sufficient', {
+    amount: 10,
+  }),
+  createTestCase(ERC1155_MINT, 'when tokenId is not correct', { tokenId: 2 }),
+  createTestCase(
+    ERC721_MINT,
+    'when minting ERC721 and amount is not sufficient',
+    { amount: 10 },
+  ),
+  createTestCase(ERC721_MINTBATCH, 'when contract address is not correct', {
+    contractAddress: '0x23aA05a271DEBFFAA3D75739aF5581f744b326E4',
+  }),
+  createTestCase(ERC1155_MINT, 'when amount is less than 1', {
+    amount: LessThan(1),
+  }),
+]

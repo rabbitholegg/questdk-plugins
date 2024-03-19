@@ -1,5 +1,19 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.33
+
+### Minor Changes
+
+- [#306](https://github.com/rabbitholegg/questdk-plugins/pull/306) [`b5fe0e8a`](https://github.com/rabbitholegg/questdk-plugins/commit/b5fe0e8a462dea6017e860946dc8fa99ec9ace15) Thanks [@abs3ntdev](https://github.com/abs3ntdev)! - Implement limit orders
+
+## 1.0.0-alpha.32
+
+### Patch Changes
+
+- Updated dependencies [[`34a44e11`](https://github.com/rabbitholegg/questdk-plugins/commit/34a44e11249a4815bf240542e9f5f45dbca76b10)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.15
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.31
 
 ### Patch Changes

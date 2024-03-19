@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.31
+
+### Patch Changes
+
+- [#287](https://github.com/rabbitholegg/questdk-plugins/pull/287) [`cfc7c026`](https://github.com/rabbitholegg/questdk-plugins/commit/cfc7c026b77ece01bce5f97b531de4846c8efca5) Thanks [@mmackz](https://github.com/mmackz)! - bump uniswap sdk version
+
+- Updated dependencies [[`34a44e11`](https://github.com/rabbitholegg/questdk-plugins/commit/34a44e11249a4815bf240542e9f5f45dbca76b10)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.15
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.30
 
 ### Patch Changes

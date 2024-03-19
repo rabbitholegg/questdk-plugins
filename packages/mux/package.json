@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-mux",
-  "version": "1.0.0-alpha.15",
+  "version": "1.0.0-alpha.16",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

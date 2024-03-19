@@ -28,11 +28,13 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
-  BOOST_TREASURY_ADDRESS,
   ActionType,
   type DisctriminatedActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { FIXED_PRICE_SALE_STRATS } from './contract-addresses'
+import {
+  FIXED_PRICE_SALE_STRATS,
+  ZORA_DEPLOYER_ADDRESS,
+} from './contract-addresses'
 
 export const mint = async (
   mint: MintActionParams,
@@ -110,7 +112,7 @@ export const getMintIntent = async (
       FIXED_PRICE_SALE_STRATS[mint.chainId],
       tokenId,
       amount,
-      [BOOST_TREASURY_ADDRESS],
+      [ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     // Assume it's an 1155 mint
@@ -156,7 +158,7 @@ export const simulateMint = async (
         FIXED_PRICE_SALE_STRATS[mint.chainId],
         tokenId,
         amount,
-        [BOOST_TREASURY_ADDRESS],
+        [ZORA_DEPLOYER_ADDRESS],
         pad(recipient),
       ]
       const result = await _client.simulateContract({
@@ -207,6 +209,13 @@ export const simulateMint = async (
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   try {
     const { chainId, contractAddress, tokenId, amount } = mint
 
@@ -225,10 +234,10 @@ export const getProjectFees = async (
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
     const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
 
-    return fee.totalCost
+    return { actionFee: fee.tokenPurchaseCost, projectFee: fee.mintFee }
   } catch (err) {
     console.error(err)
-    return parseEther('0.000777') // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
+    return { actionFee: parseEther('0'), projectFee: parseEther('0.000777') } // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
   }
 }
 

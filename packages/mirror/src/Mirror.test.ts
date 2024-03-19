@@ -153,3 +153,23 @@ describe('getProjectFees', () => {
     expect(fee).toEqual(BigInt('690000000000000'))
   })
 })
+describe('getFees', () => {
+  test('should return project and action fees', async () => {
+    const contractAddress: Address =
+      '0x8F3227b2ff643BAE66e99981904A899361ffB83E'
+    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: BigInt('690000000000000'),
+        actionFee: BigInt('0'),
+      }),
+    }
+
+    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getProjectsFeeSpy).toHaveBeenCalledWith(mintParams)
+    expect(fee.projectFee).toEqual(BigInt('690000000000000'))
+    expect(fee.actionFee).toEqual(BigInt('0'))
+  })
+})

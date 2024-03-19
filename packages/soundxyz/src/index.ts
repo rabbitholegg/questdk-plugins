@@ -13,7 +13,8 @@ import {
   getMintIntent,
   getProjectFees,
   simulateMint,
-} from './Soundxyz'
+  getFees,
+} from './Soundxyz.js'
 
 export const Soundxyz: IActionPlugin = {
   pluginId: 'soundxyz',
@@ -26,5 +27,7 @@ export const Soundxyz: IActionPlugin = {
   getMintIntent,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
+  getFees: async (params: ActionParams) =>
+    getFees(params as unknown as MintActionParams),
   simulateMint,
 }

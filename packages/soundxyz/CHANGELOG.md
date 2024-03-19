@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- [#300](https://github.com/rabbitholegg/questdk-plugins/pull/300) [`d6e1cdd3`](https://github.com/rabbitholegg/questdk-plugins/commit/d6e1cdd371cc84180cff9ac54d07d36c8e16f23e) Thanks [@benjaminykim](https://github.com/benjaminykim)! - fix: format
+
+## 1.0.0-alpha.21
+
+### Minor Changes
+
+- [#284](https://github.com/rabbitholegg/questdk-plugins/pull/284) [`0f2e552f`](https://github.com/rabbitholegg/questdk-plugins/commit/0f2e552f41efe08d556807fff2d0c37570e6fe9f) Thanks [@Quazia](https://github.com/Quazia)! - Change how sound fees are calculated
+
+- [#295](https://github.com/rabbitholegg/questdk-plugins/pull/295) [`34a44e11`](https://github.com/rabbitholegg/questdk-plugins/commit/34a44e11249a4815bf240542e9f5f45dbca76b10) Thanks [@benjaminykim](https://github.com/benjaminykim)! - add getFees to expose project and action fees for mint action projects
+
+### Patch Changes
+
+- Updated dependencies [[`34a44e11`](https://github.com/rabbitholegg/questdk-plugins/commit/34a44e11249a4815bf240542e9f5f45dbca76b10)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.15
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.20
 
 ### Patch Changes

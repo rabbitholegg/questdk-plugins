@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-tally",
-  "version": "1.0.0-alpha.25",
+  "version": "1.0.0-alpha.26",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

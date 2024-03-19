@@ -205,6 +205,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/aerodrome:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/arbitrum:
     devDependencies:
       '@rabbitholegg/questdk':
@@ -287,6 +300,19 @@ importers:
       '@connext/smart-contracts':
         specifier: ^2.0.0
         version: 2.0.0(ethers@5.7.2)
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/fabric:
+    dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -395,6 +421,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/manifold:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/mirror:
     dependencies:
       '@rabbitholegg/questdk':
@@ -445,6 +484,19 @@ importers:
       '@eth-optimism/contracts-ts':
         specifier: 0.15.0
         version: 0.15.0(typescript@5.3.2)(zod@3.21.4)
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/paragraph:
+    dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -519,6 +571,9 @@ importers:
       '@rabbitholegg/questdk-plugin-across':
         specifier: workspace:*
         version: link:../across
+      '@rabbitholegg/questdk-plugin-aerodrome':
+        specifier: workspace:*
+        version: link:../aerodrome
       '@rabbitholegg/questdk-plugin-arbitrum':
         specifier: workspace:*
         version: link:../arbitrum
@@ -540,6 +595,9 @@ importers:
       '@rabbitholegg/questdk-plugin-connext':
         specifier: workspace:*
         version: link:../connext
+      '@rabbitholegg/questdk-plugin-fabric':
+        specifier: workspace:*
+        version: link:../fabric
       '@rabbitholegg/questdk-plugin-gmx':
         specifier: workspace:*
         version: link:../gmx
@@ -561,6 +619,9 @@ importers:
       '@rabbitholegg/questdk-plugin-llama':
         specifier: workspace:*
         version: link:../llama
+      '@rabbitholegg/questdk-plugin-manifold':
+        specifier: workspace:*
+        version: link:../manifold
       '@rabbitholegg/questdk-plugin-mirror':
         specifier: workspace:*
         version: link:../mirror
@@ -573,6 +634,9 @@ importers:
       '@rabbitholegg/questdk-plugin-optimism':
         specifier: workspace:*
         version: link:../optimism
+      '@rabbitholegg/questdk-plugin-paragraph':
+        specifier: workspace:*
+        version: link:../paragraph
       '@rabbitholegg/questdk-plugin-paraswap':
         specifier: workspace:*
         version: link:../paraswap

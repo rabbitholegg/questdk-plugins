@@ -13,7 +13,8 @@ import {
   getProjectFees,
   getMintIntent,
   simulateMint,
-} from './Mirror'
+  getFees,
+} from './Mirror.js'
 
 export const Mirror: IActionPlugin = {
   pluginId: 'mirror',
@@ -25,6 +26,8 @@ export const Mirror: IActionPlugin = {
   getDynamicNameParams,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
+  getFees: async (params: ActionParams) =>
+    getFees(params as unknown as MintActionParams),
   getMintIntent,
   simulateMint,
 }
