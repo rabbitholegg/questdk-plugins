@@ -25,7 +25,6 @@ import {
   SUPERMINTER,
   SUPERMINTER_V2,
   SUPERMINTER_ABI,
-  NEXT_SCHEDULE_NUM_ABI,
   TOTAL_PRICE_AND_FEES_ABI,
 } from './constants'
 import { Chains } from './utils'
@@ -53,46 +52,17 @@ export const mint = async (
   })
 }
 
-const getNextScheduleNum = async (
-  client: PublicClient,
-  contractAddress: Address,
-  tier: number,
-) => {
-  const nextSchedule = (await client.readContract({
-    address: SUPERMINTER_V2,
-    abi: NEXT_SCHEDULE_NUM_ABI,
-    functionName: 'nextScheduleNum',
-    args: [contractAddress, tier],
-  })) as number
-
-  return nextSchedule
-}
-
 export const getMintIntent = async (
   mint: MintIntentParams,
-  client?: PublicClient,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient, tokenId, amount } = mint
-  const _client =
-    client ||
-    createPublicClient({
-      chain: chainIdToViemChain(mint.chainId),
-      transport: http(),
-    })
-
   const tier = tokenId ?? 0
   const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    _client as PublicClient,
-    contractAddress,
-    tier,
-  )
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum:
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum: BigInt(0),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -137,17 +107,11 @@ export const simulateMint = async (
 
   const tier = tokenId ?? 0
   const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    _client as PublicClient,
-    contractAddress,
-    tier,
-  )
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum:
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum: BigInt(0),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -193,11 +157,6 @@ export const getFees = async (
 
   const tier = tokenId ?? 0
   const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    client as PublicClient,
-    contractAddress,
-    tier,
-  )
 
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
@@ -206,7 +165,7 @@ export const getFees = async (
     args: [
       contractAddress,
       tier,
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+      BigInt(0),
       quantity,
       false, // assume hasValidAffiliate is false
     ],
