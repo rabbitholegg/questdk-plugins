@@ -54,7 +54,6 @@ export const mint = async (
 
 export const getMintIntent = async (
   mint: MintIntentParams,
-  client?: PublicClient,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient, tokenId, amount } = mint
   const tier = tokenId ?? 0
