@@ -81,8 +81,10 @@ export type DelegateActionParams = {
 export type VoteActionParams = {
   chainId: number
   project: Address | string
+  contractAddress?: Address
   support?: bigint | boolean | FilterOperator
   proposalId?: bigint | FilterOperator
+  numVotes?: bigint | FilterOperator
 }
 
 export type ActionParams =
@@ -218,6 +220,8 @@ export const VoteActionFormSchema = z.object({
   project: EthAddressSchema,
   proposalId: z.number().optional(),
   support: z.boolean().optional(),
+  contractAddress: EthAddressSchema,
+  numVotes: z.bigint().optional(),
 })
 
 export const VoteActionDetailSchema = z.object({
@@ -225,6 +229,8 @@ export const VoteActionDetailSchema = z.object({
   project: EthAddressSchema,
   proposalId: z.number().optional(),
   support: z.boolean().optional(),
+  contractAddress: EthAddressSchema,
+  numVotes: z.bigint().optional(),
 })
 
 export type VoteActionDetail = z.infer<typeof VoteActionDetailSchema>
