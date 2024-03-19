@@ -101,12 +101,14 @@ export const ActionParamKeys = {
   propose: [
     'chainId',
     'project',
+    'contractAddress',
     'proposal',
     'proof',
   ],
   proposeWithoutProof: [
     'chainId',
     'project',
+    'contractAddress',
     'proposal',
   ],
 }

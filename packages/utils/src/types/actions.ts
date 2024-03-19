@@ -105,6 +105,7 @@ export type ProposalCore = {
 export type ProposeActionParams = {
   chainId: number
   project: Address | string
+  contractAddress?: Address
   proposal?: ProposalCore | FilterOperator
   proof?: any[] | FilterOperator
 }
@@ -112,6 +113,7 @@ export type ProposeActionParams = {
 export type ProposeWithoutProofActionParams = {
   chainId: number
   project: Address | string
+  contractAddress?: Address
   proposal?: ProposalCore | FilterOperator
 }
 
@@ -288,6 +290,7 @@ export type OptionsActionForm = z.infer<typeof OptionsActionFormSchema>
 
 export const ProposeActionFormSchema = z.object({
   project: EthAddressSchema,
+  contractAddress: EthAddressSchema,
   proposal: ProposalCoreSchema.optional(),
   proof: z.array(z.any()).optional(),
 })
@@ -295,6 +298,7 @@ export const ProposeActionFormSchema = z.object({
 export const ProposeActionDetailSchema = z.object({
   chainId: z.number(),
   project: EthAddressSchema,
+  contractAddress: EthAddressSchema,
   proposalId: ProposalCoreSchema.optional(),
   proof: z.array(z.any()).optional(),
 })
@@ -304,12 +308,14 @@ export type ProposeActionForm = z.infer<typeof ProposeActionFormSchema>
 
 export const ProposeWithoutProofActionFormSchema = z.object({
   project: EthAddressSchema,
+  contractAddress: EthAddressSchema,
   proposal: ProposalCoreSchema.optional(),
 })
 
 export const ProposeWithoutProofActionDetailSchema = z.object({
   chainId: z.number(),
   project: EthAddressSchema,
+  contractAddress: EthAddressSchema,
   proposalId: ProposalCoreSchema.optional(),
 })
 
