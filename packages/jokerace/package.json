@@ -1,5 +1,5 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-fabric",
+  "name": "@rabbitholegg/questdk-plugin-jokerace",
   "private": false,
   "version": "1.0.0-alpha.1",
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "description": "Plugin for Fabric",
+  "description": "Plugin for JokeRace",
   "scripts": {
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",

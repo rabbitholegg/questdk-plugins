@@ -1,84 +1,137 @@
-export const FABRIC_ABI = [
+export const JOKERACE_ABI = [
   {
-    inputs: [
+    "type": "function",
+    "name": "propose",
+    "inputs": [
       {
-        internalType: 'uint256',
-        name: 'numTokens',
-        type: 'uint256',
+        "name": "proposal",
+        "type": "tuple",
+        "internalType": "struct Governor.ProposalCore",
+        "components": [
+          {
+            "name": "author",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "exists",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "targetMetadata",
+            "type": "tuple",
+            "internalType": "struct Governor.TargetMetadata",
+            "components": [
+              {
+                "name": "targetAddress",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "safeMetadata",
+            "type": "tuple",
+            "internalType": "struct Governor.SafeMetadata",
+            "components": [
+              {
+                "name": "signers",
+                "type": "address[]",
+                "internalType": "address[]"
+              },
+              {
+                "name": "threshold",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          }
+        ]
       },
+      {
+        "name": "proof",
+        "type": "bytes32[]",
+        "internalType": "bytes32[]"
+      }
     ],
-    name: 'mint',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "payable"
   },
   {
-    inputs: [
+    "type": "function",
+    "name": "proposeWithoutProof",
+    "inputs": [
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'numTokens',
-        type: 'uint256',
-      },
+        "name": "proposal",
+        "type": "tuple",
+        "internalType": "struct Governor.ProposalCore",
+        "components": [
+          {
+            "name": "author",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "exists",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "targetMetadata",
+            "type": "tuple",
+            "internalType": "struct Governor.TargetMetadata",
+            "components": [
+              {
+                "name": "targetAddress",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "safeMetadata",
+            "type": "tuple",
+            "internalType": "struct Governor.SafeMetadata",
+            "components": [
+              {
+                "name": "signers",
+                "type": "address[]",
+                "internalType": "address[]"
+              },
+              {
+                "name": "threshold",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ]
+          }
+        ]
+      }
     ],
-    name: 'mintFor',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
+    "outputs": [
       {
-        internalType: 'uint256',
-        name: 'numTokens',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'referralCode',
-        type: 'uint256',
-      },
-      {
-        internalType: 'address',
-        name: 'referrer',
-        type: 'address',
-      },
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
     ],
-    name: 'mintWithReferral',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'numTokens',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'referralCode',
-        type: 'uint256',
-      },
-      {
-        internalType: 'address',
-        name: 'referrer',
-        type: 'address',
-      },
-    ],
-    name: 'mintWithReferralFor',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
+    "stateMutability": "payable"
   },
 ]

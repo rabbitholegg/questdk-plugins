@@ -1,14 +1,16 @@
 import { type IActionPlugin } from '@rabbitholegg/questdk'
 
 import {
-  mint,
+  propose,
+  proposeWithoutProof,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Fabric.js'
+} from './JokeRace.js'
 
-export const Fabric: IActionPlugin = {
-  pluginId: 'fabric',
+export const JokeRace: IActionPlugin = {
+  pluginId: 'jokerace',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  mint,
+  propose,
+  proposeWithoutProof,
 }
