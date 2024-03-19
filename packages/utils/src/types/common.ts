@@ -9,6 +9,23 @@ export const NetworkSchema = z.object({
   chainId: z.string(),
 })
 
+export const TargetMetadataSchema = z.object({
+  targetAddress: EthAddressSchema,
+})
+
+export const SafeMetadataSchema = z.object({
+  signers: z.array(EthAddressSchema),
+  threshold: z.number(),
+})
+
+export const ProposalCoreSchema = z.object({
+  author: EthAddressSchema,
+  exists: z.boolean(),
+  description: z.string(),
+  targetMetadata: TargetMetadataSchema,
+  safeMetadata: SafeMetadataSchema,
+})
+
 export type NetworkName = z.infer<typeof NetworkNameSchema>
 
 export const NetworkNameSchema = z.union([

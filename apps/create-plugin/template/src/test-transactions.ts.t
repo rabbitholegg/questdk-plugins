@@ -44,6 +44,14 @@ export const {{uppercase actionType}}_TEST: TestParams<{{capitalize actionType}}
     chainId: 0,
     project: '0x0',
   {{else}}
+  {{#eq actionType 'propose'}}
+    chainId: 0,
+    project: '0x0',
+  {{else}}
+  {{#eq actionType 'proposeWithoutProof'}}
+    chainId: 0,
+    project: '0x0',
+  {{else}}
     chainId: 0,
   {{/eq}}
   {{/eq}}

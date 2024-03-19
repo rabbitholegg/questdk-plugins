@@ -9,6 +9,8 @@ export type Actions =
   | 'vote'
   | 'delegate'
   | 'options'
+  | 'propose'
+  | 'proposeWithoutProof'
 
 export type BuilderParams = {
   projectName: string
@@ -95,5 +97,16 @@ export const ActionParamKeys = {
     'amount',
     'recipient',
     'orderType',
+  ],
+  propose: [
+    'chainId',
+    'project',
+    'proposal',
+    'proof',
+  ],
+  proposeWithoutProof: [
+    'chainId',
+    'project',
+    'proposal',
   ],
 }

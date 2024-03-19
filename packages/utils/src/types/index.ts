@@ -9,6 +9,8 @@ export type {
   BurnActionParams,
   QuestActionParams,
   DelegateActionParams,
+  ProposeActionParams,
+  ProposeWithoutProofActionParams,
   ActionParams,
   IActionPlugin,
   DisctriminatedActionParams,
@@ -24,6 +26,10 @@ export type {
   VoteActionForm,
   OptionsActionDetail,
   OptionsActionForm,
+  ProposeActionDetail,
+  ProposeActionForm,
+  ProposeWithoutProofActionDetail,
+  ProposeWithoutProofActionForm,
   ActionParamsForm,
 } from './actions'
 
@@ -46,12 +52,19 @@ export {
   VoteActionDetailSchema,
   OptionsActionFormSchema,
   OptionsActionDetailSchema,
+  ProposeActionFormSchema,
+  ProposeActionDetailSchema,
+  ProposeWithoutProofActionFormSchema,
+  ProposeWithoutProofActionDetailSchema,
   ActionParamsFormSchema,
 } from './actions'
 
 export {
   EthAddressSchema,
   NetworkNameSchema,
+  TargetMetadataSchema,
+  SafeMetadataSchema,
+  ProposalCoreSchema,
 } from './common'
 
 export { ActionType, OrderType } from './actions'

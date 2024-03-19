@@ -8,7 +8,7 @@ import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import type { MintIntentParams } from './intents'
 import { z } from 'zod'
-import { EthAddressSchema } from './common'
+import { EthAddressSchema, ProposalCoreSchema } from './common'
 
 export type SwapActionParams = {
   chainId: number
@@ -85,6 +85,36 @@ export type VoteActionParams = {
   proposalId?: bigint | FilterOperator
 }
 
+export type TargetMetadata = {
+  targetAddress: Address
+}
+
+export type SafeMetadata = {
+  signers: Address[]
+  threshold: number
+}
+
+export type ProposalCore = {
+  author: Address
+  exists: boolean
+  description: string
+  targetMetadata: TargetMetadata
+  safeMetadata: SafeMetadata
+}
+
+export type ProposeActionParams = {
+  chainId: number
+  project: Address | string
+  proposal?: ProposalCore | FilterOperator
+  proof?: any[] | FilterOperator
+}
+
+export type ProposeWithoutProofActionParams = {
+  chainId: number
+  project: Address | string
+  proposal?: ProposalCore | FilterOperator
+}
+
 export type ActionParams =
   | SwapActionParams
   | StakeActionParams
@@ -94,6 +124,8 @@ export type ActionParams =
   | QuestActionParams
   | OptionsActionParams
   | VoteActionParams
+  | ProposeActionParams
+  | ProposeWithoutProofActionParams
 
 export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
@@ -104,6 +136,8 @@ export type DisctriminatedActionParams =
   | { type: ActionType.Quest; data: QuestActionParams }
   | { type: ActionType.Options; data: OptionsActionParams }
   | { type: ActionType.Vote; data: VoteActionParams }
+  | { type: ActionType.Propose; data: ProposeActionParams }
+  | { type: ActionType.ProposeWithoutProof; data: ProposeWithoutProofActionParams }
 
 export const QuestInputActionParamsAmountOperatorEnum = z.enum([
   'any',
@@ -252,6 +286,36 @@ export const OptionsActionDetailSchema = z.object({
 export type OptionsActionDetail = z.infer<typeof OptionsActionDetailSchema>
 export type OptionsActionForm = z.infer<typeof OptionsActionFormSchema>
 
+export const ProposeActionFormSchema = z.object({
+  project: EthAddressSchema,
+  proposal: ProposalCoreSchema.optional(),
+  proof: z.array(z.any()).optional(),
+})
+
+export const ProposeActionDetailSchema = z.object({
+  chainId: z.number(),
+  project: EthAddressSchema,
+  proposalId: ProposalCoreSchema.optional(),
+  proof: z.array(z.any()).optional(),
+})
+
+export type ProposeActionDetail = z.infer<typeof ProposeActionDetailSchema>
+export type ProposeActionForm = z.infer<typeof ProposeActionFormSchema>
+
+export const ProposeWithoutProofActionFormSchema = z.object({
+  project: EthAddressSchema,
+  proposal: ProposalCoreSchema.optional(),
+})
+
+export const ProposeWithoutProofActionDetailSchema = z.object({
+  chainId: z.number(),
+  project: EthAddressSchema,
+  proposalId: ProposalCoreSchema.optional(),
+})
+
+export type ProposeWithoutProofActionDetail = z.infer<typeof ProposeWithoutProofActionDetailSchema>
+export type ProposeWithoutProofActionForm = z.infer<typeof ProposeWithoutProofActionFormSchema>
+
 export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('bridge'), data: BridgeActionFormSchema }),
   z.object({ type: z.literal('swap'), data: SwapActionFormSchema }),
@@ -260,6 +324,8 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('delegate'), data: DelegateActionFormSchema }),
   z.object({ type: z.literal('options'), data: OptionsActionFormSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionFormSchema }),
+  z.object({ type: z.literal('propose'), data: ProposeActionFormSchema }),
+  z.object({ type: z.literal('proposeWithoutProof'), data: ProposeWithoutProofActionFormSchema }),
 ])
 
 export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
@@ -272,6 +338,8 @@ export const QuestActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('mint'), data: MintActionDetailSchema }),
   z.object({ type: z.literal('options'), data: OptionsActionDetailSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
+  z.object({ type: z.literal('propose'), data: ProposeActionDetailSchema }),
+  z.object({ type: z.literal('proposeWithoutProof'), data: ProposeWithoutProofActionDetailSchema }),
 ])
 
 export interface IActionPlugin {
@@ -308,6 +376,12 @@ export interface IActionPlugin {
   vote?: (
     params: VoteActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  propose?: (
+    params: ProposeActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  proposeWithoutProof?: (
+    params: ProposeWithoutProofActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   getMintIntent?: (
     mint: MintIntentParams,
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
@@ -340,6 +414,8 @@ export enum ActionType {
   Other = 'other',
   Options = 'options',
   Vote = 'vote',
+  Propose = 'propose',
+  ProposeWithoutProof = 'proposeWithoutProof',
 }
 
 export enum OrderType {

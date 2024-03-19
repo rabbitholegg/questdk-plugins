@@ -149,6 +149,16 @@ function buildParams(
         chainId: transaction.chainId,
         ...params,
       }
+    case 'propose':
+      return {
+        chainId: transaction.chainId,
+        ...params,
+      }
+    case 'proposeWithoutProof':
+      return {
+        chainId: transaction.chainId,
+        ...params,
+      }
     case 'delegate':
       return {
         chainId: transaction.chainId,

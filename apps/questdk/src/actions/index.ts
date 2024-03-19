@@ -8,6 +8,8 @@ export type {
   OptionsActionParams,
   DelegateActionParams,
   VoteActionParams,
+  ProposeActionParams,
+  ProposeWithoutProofActionParams,
   ActionParams,
   IActionPlugin,
 } from '@rabbitholegg/questdk-plugin-utils'

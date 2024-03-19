@@ -345,6 +345,38 @@ const voteQuestions: PromptObject[] = [
   descriptionQuestion,
 ]
 
+const proposeQuestions: PromptObject[] = [
+  {
+    type: 'text',
+    name: 'project',
+    message: 'What is the JokeRace contract address?',
+    initial: '',
+    validate: (project: string) => {
+      if (project && !isAddress(project)) {
+        return 'Please enter a valid JokeRace contract address'
+      }
+      return true
+    },
+  },
+  descriptionQuestion,
+]
+
+const proposeWithoutProofQuestions: PromptObject[] = [
+  {
+    type: 'text',
+    name: 'project',
+    message: 'What is the JokeRace contract address?',
+    initial: '',
+    validate: (project: string) => {
+      if (project && !isAddress(project)) {
+        return 'Please enter a valid JokeRace contract address'
+      }
+      return true
+    },
+  },
+  descriptionQuestion,
+]
+
 export const actionQuestions: { [key in Actions]: PromptObject[] } = {
   mint: mintQuestions,
   swap: swapQuestions,
@@ -354,4 +386,6 @@ export const actionQuestions: { [key in Actions]: PromptObject[] } = {
   vote: voteQuestions,
   delegate: delegateQuestions,
   options: optionsQuestions,
+  propose: proposeQuestions,
+  proposeWithoutProof: proposeWithoutProofQuestions,
 }
