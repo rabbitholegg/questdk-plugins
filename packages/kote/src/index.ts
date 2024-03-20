@@ -11,7 +11,7 @@ import {
   getSupportedTokenAddresses,
   getProjectFees,
   getFees,
-  simulateMint
+  simulateMint,
 } from './Kote'
 
 export const Kote: IActionPlugin = {
@@ -21,7 +21,8 @@ export const Kote: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   mint,
-  getProjectFees: async (params: ActionParams) => getProjectFees(params as MintActionParams),
+  getProjectFees: async (params: ActionParams) =>
+    getProjectFees(params as MintActionParams),
   getFees: async (params: ActionParams) => getFees(params as MintActionParams),
   simulateMint,
 }
