@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.34
+
+### Patch Changes
+
+- [#314](https://github.com/rabbitholegg/questdk-plugins/pull/314) [`d286a83`](https://github.com/rabbitholegg/questdk-plugins/commit/d286a8396c47c6c6e70c92c9532ecaa79ee21ece) Thanks [@jonathandiep](https://github.com/jonathandiep)! - fix: Use zora sdk to grab the fixed price sale strategy
+
 ## 1.0.0-alpha.33
 
 ### Minor Changes
