@@ -1,5 +1,16 @@
 # @rabbitholegg/questdk-plugin-artblocks
 
+## 1.0.0-alpha.2
+
+### Minor Changes
+
+- [#312](https://github.com/rabbitholegg/questdk-plugins/pull/312) [`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221) Thanks [@Quazia](https://github.com/Quazia)! - Handle token ID undefined better and handle single tier 1 collections in sound
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+
 ## 1.0.0-alpha.1
 
 ### Minor Changes
