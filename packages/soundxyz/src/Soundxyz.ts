@@ -100,14 +100,18 @@ export const simulateMint = async (
 ): Promise<SimulateContractReturnType> => {
   const { contractAddress, recipient, tokenId, amount } = mint
   console.log('mint', mint)
-  const _client =
-    (client ??
+  const _client = (client ??
     createPublicClient({
       chain: chainIdToViemChain(mint.chainId),
       transport: http(),
     })) as PublicClient
-    const tier = await getDefaultMintTier(mint.chainId, contractAddress, tokenId, _client)
-    const quantity = amount ?? 1
+  const tier = await getDefaultMintTier(
+    mint.chainId,
+    contractAddress,
+    tokenId,
+    _client,
+  )
+  const quantity = amount ?? 1
 
   const mintTo = {
     edition: contractAddress,
@@ -156,7 +160,12 @@ export const getFees = async (
     transport: http(),
   }) as PublicClient
 
-  const tier = await getDefaultMintTier(chainId, contractAddress, tokenId, client)
+  const tier = await getDefaultMintTier(
+    chainId,
+    contractAddress,
+    tokenId,
+    client,
+  )
   const quantity = amount ?? 1
 
   const totalPriceAndFees = (await client.readContract({
@@ -195,10 +204,7 @@ export const getDefaultMintTier = async (
     address: SUPERMINTER_V2,
     abi: NEXT_SCHEDULE_NUM_ABI,
     functionName: 'nextScheduleNum',
-    args: [
-      contractAddress,
-      BigInt(0)
-    ],
+    args: [contractAddress, BigInt(0)],
   })) as number
   // If we pass in a tokenId, we use that to infer the tier, otherwise we default to 0 if it exists, otherwise 1
   const tier = tokenId ?? (BigInt(tier0NextSchedule) === BigInt(0) ? 1 : 0)

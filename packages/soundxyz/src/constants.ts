@@ -200,18 +200,18 @@ export const NEXT_SCHEDULE_NUM_ABI = [
 export const TOTAL_PRICE_AND_FEES_ABI = [
   {
     inputs: [],
-    name: "ExceedsMaxPerAccount",
-    type: "error"
+    name: 'ExceedsMaxPerAccount',
+    type: 'error',
   },
   {
     inputs: [],
-    name: "ExceedsMintSupply",
-    type: "error"
+    name: 'ExceedsMintSupply',
+    type: 'error',
   },
   {
     inputs: [],
-    name: "MintDoesNotExist",
-    type: "error"
+    name: 'MintDoesNotExist',
+    type: 'error',
   },
   {
     inputs: [
