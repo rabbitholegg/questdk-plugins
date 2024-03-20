@@ -49,7 +49,7 @@ export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient } = mint
-  const tokenId = mint.tokenId ? mint.tokenId.toString() : '';
+  const tokenId = mint.tokenId ? mint.tokenId.toString() : ''
   const data = encodeFunctionData({
     abi: COLLECT_ENTRY_ABI,
     functionName: 'purchase',
@@ -72,7 +72,6 @@ export const simulateMint = async (
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
   const { contractAddress, recipient } = mint
-  console.log('mint', mint)
   const _client =
     client ||
     createPublicClient({
