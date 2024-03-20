@@ -105,11 +105,25 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
   let data
+
+  let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+
+  try {
+    console.log({ chainId, contractAddress, tokenId })
+    fixedPriceSaleStratAddress = (
+      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
+    ).fixedPrice.address
+  } catch {
+    console.error(
+      `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
+    )
+  }
+
   if (tokenId !== null && tokenId !== undefined) {
     const mintArgs = [
-      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      fixedPriceSaleStratAddress,
       tokenId,
       amount,
       [ZORA_DEPLOYER_ADDRESS],
@@ -143,11 +157,11 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
   const _client =
     client ??
     createPublicClient({
-      chain: chainIdToViemChain(mint.chainId),
+      chain: chainIdToViemChain(chainId),
       transport: http(),
     })
   const from = account ?? DEFAULT_ACCOUNT
@@ -162,9 +176,19 @@ export const simulateMint = async (
     _tokenId = Number(nextTokenId) - 1
   }
 
+  let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+
+  try {
+    fixedPriceSaleStratAddress = (
+      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
+    ).fixedPrice.address
+  } catch {
+    console.error('Unable to fetch salesConfigAndTokenInfo')
+  }
+
   try {
     const mintArgs = [
-      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      fixedPriceSaleStratAddress,
       _tokenId,
       amount,
       [ZORA_DEPLOYER_ADDRESS],
@@ -181,7 +205,7 @@ export const simulateMint = async (
     return result
   } catch {
     const mintArgs = [
-      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      fixedPriceSaleStratAddress,
       _tokenId,
       amount,
       pad(recipient),
@@ -216,6 +240,24 @@ export const simulateMint = async (
   }
 }
 
+const getSalesConfigAndTokenInfo = async (
+  chainId: number,
+  tokenAddress: Address,
+  tokenId?: number,
+) => {
+  const client = new MintAPIClient(chainId)
+
+  const args: { tokenAddress: Address; tokenId?: number } = {
+    tokenAddress,
+  }
+
+  args.tokenId = tokenId ?? 1
+
+  const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(args)
+
+  return salesConfigAndTokenInfo
+}
+
 export const getProjectFees = async (
   mint: MintActionParams,
 ): Promise<bigint> => {
@@ -229,16 +271,10 @@ export const getFees = async (
   try {
     const { chainId, contractAddress, tokenId, amount } = mint
 
-    const client = new MintAPIClient(chainId)
-
-    const args: { tokenAddress: Address; tokenId?: number } = {
-      tokenAddress: contractAddress,
-    }
-
-    args.tokenId = tokenId ?? 1
-
-    const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(
-      args,
+    const salesConfigAndTokenInfo = await getSalesConfigAndTokenInfo(
+      chainId,
+      contractAddress,
+      tokenId,
     )
     const quantityToMint =
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
