@@ -109,12 +109,16 @@ export const getMintIntent = async (
   let data
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
-  
+
   try {
     console.log({ chainId, contractAddress, tokenId })
-    fixedPriceSaleStratAddress = (await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)).fixedPrice.address
+    fixedPriceSaleStratAddress = (
+      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
+    ).fixedPrice.address
   } catch {
-    console.error(`Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`)
+    console.error(
+      `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
+    )
   }
 
   if (tokenId !== null && tokenId !== undefined) {
@@ -173,9 +177,11 @@ export const simulateMint = async (
   }
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
-  
+
   try {
-    fixedPriceSaleStratAddress = (await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)).fixedPrice.address
+    fixedPriceSaleStratAddress = (
+      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
+    ).fixedPrice.address
   } catch {
     console.error('Unable to fetch salesConfigAndTokenInfo')
   }
@@ -234,20 +240,22 @@ export const simulateMint = async (
   }
 }
 
-const getSalesConfigAndTokenInfo = async (chainId: number, tokenAddress: Address, tokenId?: number) => {
+const getSalesConfigAndTokenInfo = async (
+  chainId: number,
+  tokenAddress: Address,
+  tokenId?: number,
+) => {
   const client = new MintAPIClient(chainId)
 
-    const args: { tokenAddress: Address; tokenId?: number } = {
-      tokenAddress,
-    }
+  const args: { tokenAddress: Address; tokenId?: number } = {
+    tokenAddress,
+  }
 
-    args.tokenId = tokenId ?? 1
+  args.tokenId = tokenId ?? 1
 
-    const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(
-      args,
-    )
+  const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(args)
 
-    return salesConfigAndTokenInfo
+  return salesConfigAndTokenInfo
 }
 
 export const getProjectFees = async (
@@ -263,7 +271,11 @@ export const getFees = async (
   try {
     const { chainId, contractAddress, tokenId, amount } = mint
 
-    const salesConfigAndTokenInfo = await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
+    const salesConfigAndTokenInfo = await getSalesConfigAndTokenInfo(
+      chainId,
+      contractAddress,
+      tokenId,
+    )
     const quantityToMint =
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
     const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
