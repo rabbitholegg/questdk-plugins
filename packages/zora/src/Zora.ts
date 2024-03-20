@@ -151,32 +151,42 @@ export const simulateMint = async (
       transport: http(),
     })
   const from = account ?? DEFAULT_ACCOUNT
+  let _tokenId = tokenId
+  if (tokenId === null || tokenId === undefined) {
+    const nextTokenId = (await _client.readContract({
+      address: contractAddress,
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'nextTokenId',
+    })) as BigInt
 
-  if (tokenId !== null && tokenId !== undefined) {
+    _tokenId = Number(nextTokenId) - 1
+  }
+
+  try {
+    const mintArgs = [
+      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      _tokenId,
+      amount,
+      [ZORA_DEPLOYER_ADDRESS],
+      pad(recipient),
+    ]
+    const result = await _client.simulateContract({
+      address: contractAddress,
+      value,
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'mint',
+      args: mintArgs,
+      account: from,
+    })
+    return result
+  } catch {
+    const mintArgs = [
+      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      _tokenId,
+      amount,
+      pad(recipient),
+    ]
     try {
-      const mintArgs = [
-        FIXED_PRICE_SALE_STRATS[mint.chainId],
-        tokenId,
-        amount,
-        [ZORA_DEPLOYER_ADDRESS],
-        pad(recipient),
-      ]
-      const result = await _client.simulateContract({
-        address: contractAddress,
-        value,
-        abi: ZORA_MINTER_ABI_1155,
-        functionName: 'mint',
-        args: mintArgs,
-        account: from,
-      })
-      return result
-    } catch {
-      const mintArgs = [
-        FIXED_PRICE_SALE_STRATS[mint.chainId],
-        tokenId,
-        amount,
-        pad(recipient),
-      ]
       const result = await _client.simulateContract({
         address: contractAddress,
         value,
@@ -191,18 +201,18 @@ export const simulateMint = async (
         // }],
       })
       return result
+    } catch {
+      // Assume it's a 721 mint
+      const result = await _client.simulateContract({
+        address: contractAddress,
+        value,
+        abi: ZORA_MINTER_ABI_721,
+        functionName: 'purchase',
+        args: [amount],
+        account: from,
+      })
+      return result
     }
-  } else {
-    // Assume it's a 721 mint
-    const result = await _client.simulateContract({
-      address: contractAddress,
-      value,
-      abi: ZORA_MINTER_ABI_721,
-      functionName: 'purchase',
-      args: [amount],
-      account: from,
-    })
-    return result
   }
 }
 
