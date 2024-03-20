@@ -49,7 +49,7 @@ export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient } = mint
-  const tokenId = mint.tokenId ? mint.tokenId.toString() : ''
+  const tokenId = (mint.tokenId ?? '').toString();
   const data = encodeFunctionData({
     abi: COLLECT_ENTRY_ABI,
     functionName: 'purchase',
