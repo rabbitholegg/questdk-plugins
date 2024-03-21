@@ -8,7 +8,7 @@ import {
   options,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './GMX.js'
+} from './GMX'
 
 // Replace *project* with the name of the project
 export const GMX: IActionPlugin = {

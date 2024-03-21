@@ -14,7 +14,7 @@ import {
   getProjectFees,
   getFees,
   simulateMint,
-} from './Zora.js'
+} from './Zora'
 
 export const Zora: IActionPlugin = {
   pluginId: 'zora',

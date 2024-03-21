@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Hyphen.js'
+} from './Hyphen'
 
 export const Hyphen: IActionPlugin = {
   pluginId: 'hyphen',

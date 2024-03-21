@@ -8,7 +8,7 @@ import {
   stake,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Vela.js'
+} from './Vela'
 
 export const Vela: IActionPlugin = {
   pluginId: 'vela',

@@ -1,7 +1,7 @@
 import { type DelegateActionParams, compressJson } from '@rabbitholegg/questdk'
-import { TALLY_ABI } from './abi.js'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
-import { TALLY_TOKENS } from './token-addresses.js'
+import { TALLY_ABI } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { TALLY_TOKENS } from './token-addresses'
 
 export const delegate = async (delegateParams: DelegateActionParams) => {
   // This is the information we'll use to compose the Transaction object

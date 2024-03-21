@@ -1,3 +1,4 @@
+import type { Filter, FilterObject } from './'
 import {
   apply,
   handleAnd,
@@ -7,8 +8,7 @@ import {
   handleOr,
   handleRegex,
   handleSome,
-} from './filters.js'
-import type { Filter, FilterObject } from './'
+} from './filters'
 import { assertType, describe, expect, test } from 'vitest'
 
 describe('parser', () => {

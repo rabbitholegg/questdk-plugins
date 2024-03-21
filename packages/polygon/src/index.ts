@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Polygon.js'
+} from './Polygon'
 
 export const Polygon: IActionPlugin = {
   pluginId: 'polygon',

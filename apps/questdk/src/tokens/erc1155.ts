@@ -1,4 +1,4 @@
-import fetchQuestActionParams from '../quests/fetchQuestData.js'
+import fetchQuestActionParams from '../quests/fetchQuestData'
 import axios from 'axios'
 import { type Address, type PublicClient } from 'viem'
 

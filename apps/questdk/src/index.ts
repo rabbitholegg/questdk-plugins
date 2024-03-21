@@ -2,7 +2,7 @@ export {
   SUPPORTED_REWARD_CHAINS,
   SUPPORTED_TASK_CHAINS,
   type ChainMap,
-} from './constants.js'
+} from './constants'
 
 export { PluginActionNotImplementedError } from '@rabbitholegg/questdk-plugin-utils'
 
@@ -22,7 +22,7 @@ export type {
 
 export { ActionType, OrderType } from './actions'
 
-export { apply } from './filter/filters.js'
+export { apply } from './filter/filters'
 
 export type {
   ArrayOperator,
@@ -33,7 +33,7 @@ export type {
   TransactionFilter,
 } from '@rabbitholegg/questdk-plugin-utils'
 
-export { compressJson } from './utils/compressJson.js'
+export { compressJson } from './utils/compressJson'
 
 export {
   GreaterThan,
@@ -41,4 +41,4 @@ export {
   LessThanOrEqual,
   GreaterThanOrEqual,
   Equal,
-} from './filter/operators.js'
+} from './filter/operators'

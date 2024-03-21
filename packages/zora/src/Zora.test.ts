@@ -4,7 +4,7 @@ import {
   type MintIntentParams,
   ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 import { getMintIntent, mint, getDynamicNameParams, simulateMint } from './Zora'

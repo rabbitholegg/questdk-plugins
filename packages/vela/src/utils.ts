@@ -4,7 +4,7 @@ import { TOKEN_TO_ID } from './contract-addresses'
 import { TOKENFARM_ABI, TOKENFARM_ABI2 } from './abi'
 import type { BitmaskFilter } from '@rabbitholegg/questdk-plugin-utils'
 
-type Amount = FilterOperator | BigInt | number | string | undefined
+type Amount = FilterOperator | bigint | number | string | undefined
 
 export function getTokenPacked(
   token: Address | undefined,
@@ -53,7 +53,7 @@ export function getAmountPacked(
 
 export function getOrderTypePacked(
   orderType: OrderType | undefined,
-): { $or: { $bitmask: BitmaskFilter }[] } | undefined {
+): { $or: Array<{ $bitmask: BitmaskFilter }> } | undefined {
   if (!orderType) return undefined
   const bitmask =
     '0xFF000000000000000000000000000000000000000000000000000000000'
@@ -74,7 +74,10 @@ export function getOrderTypePacked(
 
 export function getOrderType(
   orderType: OrderType | undefined,
-): { _orderType: undefined } | { $or: { _orderType: number }[] } | undefined {
+):
+  | { _orderType: undefined }
+  | { $or: Array<{ _orderType: number }> }
+  | undefined {
   if (!orderType) return { _orderType: undefined }
   const orderTypeValues = {
     [OrderType.Market]: {

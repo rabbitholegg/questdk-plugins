@@ -1,6 +1,3 @@
-// This file is standard for more projects.
-// The main degree of nuance is in the
-
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
@@ -11,7 +8,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Paraswap.js'
+} from './Paraswap'
 
 // Replace *project* with the name of the project
 export const Paraswap: IActionPlugin = {

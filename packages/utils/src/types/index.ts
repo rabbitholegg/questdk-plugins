@@ -71,7 +71,7 @@ export type {
   StringOperator,
   FilterOperator,
   TransactionFilter,
-} from './filters.js'
+} from './filters'
 
 export type {
   Quest,

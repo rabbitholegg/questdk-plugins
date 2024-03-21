@@ -3,11 +3,7 @@ import {
   PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk'
 
-import {
-  getSupportedChainIds,
-  getSupportedTokenAddresses,
-  vote,
-} from './Llama.js'
+import { getSupportedChainIds, getSupportedTokenAddresses, vote } from './Llama'
 
 export const Llama: IActionPlugin = {
   pluginId: 'llama',

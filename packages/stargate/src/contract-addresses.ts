@@ -19,7 +19,7 @@ import {
   KAVA_CHAIN_ID,
   LINEA_CHAIN_ID,
   BASE_CHAIN_ID,
-} from './chain-ids.js'
+} from './chain-ids'
 
 export const ETHEREUM_ETH_ROUTER = '0x150f94B44927F078737562f0fcF3C95c01Cc2376'
 export const ETHEREUM_ROUTER = '0x8731d54E9D02c286767d56ac03e8037C07e01e98'

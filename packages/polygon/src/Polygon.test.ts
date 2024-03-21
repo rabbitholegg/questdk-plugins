@@ -1,23 +1,23 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Polygon.js'
-import { POLYGON_CHAIN_ID, ETH_CHAIN_ID } from './chain-ids.js'
-import { MAINNET_BRIDGE } from './contract-addresses.js'
+import { bridge } from './Polygon'
+import { POLYGON_CHAIN_ID, ETH_CHAIN_ID } from './chain-ids'
+import { MAINNET_BRIDGE } from './contract-addresses'
 
-import { POLYGON_BRIDGE_ABI_FUNCS } from './abi.js'
+import { POLYGON_BRIDGE_ABI_FUNCS } from './abi'
 import {
   DEPOSIT_ETH,
   DEPOSIT_ERC20,
   WITHDRAW_ETH,
   WITHDRAW_ERC20,
-} from './test-transactions.js'
+} from './test-transactions'
 import {
   ETH_ADDRESS_MAINNET,
   MATIC_ADDRESS_POLYGON,
   USDC_ADDRESS_MAINNET,
   USDC_ADDRESS_POLYGON,
   WETH_ADDRESS_POLYGON,
-} from './supported-token-addresses.js'
+} from './supported-token-addresses'
 import { parseEther } from 'viem'
 // Random ETHEREUM address
 const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'

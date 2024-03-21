@@ -9,7 +9,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Treasure.js'
+} from './Treasure'
 
 export const Treasure: IActionPlugin = {
   pluginId: 'treasure',

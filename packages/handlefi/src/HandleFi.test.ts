@@ -1,4 +1,4 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { swap, getSupportedTokenAddresses } from './HandleFi'
 import { passingTestCases, failingTestCases } from './test-transactions'

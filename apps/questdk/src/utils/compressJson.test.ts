@@ -1,4 +1,4 @@
-import { compressJson } from './compressJson.js'
+import { compressJson } from './compressJson'
 import { describe, expect, test } from 'vitest'
 
 describe('compressJson', () => {

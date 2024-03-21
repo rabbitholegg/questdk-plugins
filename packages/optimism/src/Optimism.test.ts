@@ -1,6 +1,6 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Optimism.js'
+import { bridge } from './Optimism'
 import {
   l1StandardBridgeABI,
   l2StandardBridgeABI,
@@ -11,7 +11,7 @@ import {
   DEPOSIT_TETHER,
   WITHDRAW_ETH,
   WITHDRAW_USDC,
-} from './test-transactions.js'
+} from './test-transactions'
 import {
   ETH_TOKEN_ADDRESS,
   USDC_TOKEN_ADDRESS,

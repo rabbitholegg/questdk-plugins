@@ -1,8 +1,8 @@
-import axios from 'axios'
 import {
   type QuestActionParamsByType,
   type QuestDetails,
 } from '@rabbitholegg/questdk-plugin-utils'
+import axios from 'axios'
 /**
  * Fetches quest data from RabbitHole API and extracts action parameters.
  * @param {string} uuid The UUID of the quest.

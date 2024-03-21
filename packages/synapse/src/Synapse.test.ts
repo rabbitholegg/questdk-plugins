@@ -1,6 +1,6 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { bridge, getSupportedTokenAddresses } from './Synapse.js'
+import { bridge, getSupportedTokenAddresses } from './Synapse'
 import {
   DEPOSIT_ETH,
   WITHDRAW_ERC20,
@@ -8,14 +8,14 @@ import {
   DEPOSIT_ERC20,
   DEPOSIT_CCTP,
   WITHDRAW_CCTP,
-} from './test-transactions.js'
+} from './test-transactions'
 import {
   ARBITRUM_CHAIN_ID,
   ETH_CHAIN_ID,
   BSC_CHAIN_ID,
   CHAIN_ID_ARRAY,
-} from './chain-ids.js'
-import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi.js'
+} from './chain-ids'
+import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 import {
   SynapseCCTPContract,

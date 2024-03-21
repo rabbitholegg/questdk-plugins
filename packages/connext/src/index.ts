@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Connext.js'
+} from './Connext'
 
 export const Connext: IActionPlugin = {
   pluginId: 'connext',

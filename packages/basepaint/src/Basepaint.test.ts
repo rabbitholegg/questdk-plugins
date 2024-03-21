@@ -1,4 +1,4 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { mint } from './Basepaint'
 import { CONTRACT_ADDRESS, MINT_ABI, TEST_TRANSACTIONS } from './constants'

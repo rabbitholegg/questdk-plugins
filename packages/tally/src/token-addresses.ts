@@ -1,5 +1,5 @@
 import { type Address } from 'viem'
-import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
+import { ARB_ONE_CHAIN_ID } from './chain-ids'
 
 // This is just the Arbitrum token address since we only support that token right now
 export const TALLY_TOKENS: Record<number, Address[]> = {

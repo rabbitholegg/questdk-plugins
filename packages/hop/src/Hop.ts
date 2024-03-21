@@ -7,7 +7,7 @@ import {
   type Bridge,
   type L2BridgeProps,
   type L1BridgeProps,
-} from './types.js'
+} from './types'
 import {
   l1BridgeAbi,
   l2AmmWrapperAbi,
@@ -77,6 +77,7 @@ export const bridge = (bridge: BridgeActionParams) => {
     })
   }
 }
+
 // https://github.com/hop-protocol/hop/blob/develop/packages/core/src/metadata/tokens.ts
 export const getSupportedTokenAddresses = async (
   _chainId: number,
@@ -88,10 +89,13 @@ export const getSupportedTokenAddresses = async (
     return Object.entries(addresses.bridges! as Bridges).map(
       ([, bridge]: [string, Bridge]) => {
         // Find the bridge element whose key matches the chainSlug and return the token address
-        if (bridge && (bridge as any)[chainSlug])
-          return _chainId === 1
-            ? (bridge[chainSlug] as L1BridgeProps).l1CanonicalToken
-            : (bridge[chainSlug] as L2BridgeProps).l2CanonicalToken
+        if (bridge && bridge[chainSlug]) {
+          if ('l1CanonicalToken' in bridge[chainSlug]) {
+            return (bridge[chainSlug] as L1BridgeProps).l1CanonicalToken
+          } else if ('l2CanonicalToken' in bridge[chainSlug]) {
+            return (bridge[chainSlug] as L2BridgeProps).l2CanonicalToken
+          }
+        }
         return '0x0'
       },
     ) as Address[]

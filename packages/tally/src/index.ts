@@ -7,7 +7,7 @@ import {
   delegate,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Tally.js'
+} from './Tally'
 
 export const Tally: IActionPlugin = {
   pluginId: 'tally',

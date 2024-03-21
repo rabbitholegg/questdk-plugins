@@ -36,7 +36,7 @@ import { Manifold } from '@rabbitholegg/questdk-plugin-manifold'
 import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
 import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
-import { ENTRYPOINT } from './contract-addresses'
+// ^^^ New Imports Go Here ^^^
 import {
   type IntentParams,
   type MintIntentParams,
@@ -227,8 +227,4 @@ export const executePlugin = (
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
-}
-
-export const getIndexedContracts = (_chainId: number) => {
-  return [ENTRYPOINT]
 }

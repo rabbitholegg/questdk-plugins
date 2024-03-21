@@ -4,7 +4,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { ABI } from './abi.js'
+import { ABI } from './abi'
 import { NATIVE_TOKEN_ADDRESS, CHAIN_TO_TOKENS } from './chain-to-tokens'
 import { CHAIN_TO_CONTRACT } from './chain-to-contract'
 import { type ChainIds, CHAIN_ID_ARRAY } from './chain-ids'

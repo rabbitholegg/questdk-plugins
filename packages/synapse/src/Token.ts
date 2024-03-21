@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export class Token {
   addresses: { [key: number]: string } // list of token addresses on each chain
   wrapperAddresses?: Record<number, string> // list of wrapper addresses on each chain like gmx

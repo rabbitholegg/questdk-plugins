@@ -7,7 +7,7 @@ import {
   mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Basepaint.js'
+} from './Basepaint'
 
 export const BasePaint: IActionPlugin = {
   pluginId: 'basepaint',

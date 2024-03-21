@@ -1,5 +1,4 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { ActionType } from '@rabbitholegg/questdk'
+import { GreaterThanOrEqual, apply, ActionType } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import {
   MULTI_DEPOSIT,
@@ -16,11 +15,11 @@ import {
   UNISWAP_V3_SWAP,
   WETH_PROD_TEST,
 } from './test-transactions'
-import { stake, swap, getSupportedTokenAddresses } from './Paraswap.js'
-import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids.js'
+import { stake, swap, getSupportedTokenAddresses } from './Paraswap'
+import { ARB_ONE_CHAIN_ID, OPTIMISM_CHAIN_ID } from './chain-ids'
 import { Tokens } from './utils'
 import { parseEther, parseUnits } from 'viem'
-import { PARASWAP_SWAP_ABI } from './abi.js'
+import { PARASWAP_SWAP_ABI } from './abi'
 import type {
   FilterObject,
   TransactionFilter,
@@ -121,7 +120,6 @@ describe('Given the paraswap plugin', () => {
       const testFilter: TransactionFilter = {
         to: AUGUSTUS_SWAPPER_ARBITRUM,
         input: {
-          //@ts-ignore
           $abi: PARASWAP_SWAP_ABI,
           $or: [
             {

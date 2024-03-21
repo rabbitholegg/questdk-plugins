@@ -1,4 +1,4 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { bridge } from './Hyphen'
 import { describe, expect, test } from 'vitest'
 import { ABI } from './abi'

@@ -7,7 +7,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Pendle.js'
+} from './Pendle'
 
 export const Pendle: IActionPlugin = {
   pluginId: 'pendle',

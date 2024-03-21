@@ -1,6 +1,6 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { STARGATE_BRIDGE_ABI } from './abi.js'
+import { STARGATE_BRIDGE_ABI } from './abi'
 import {
   ARBITRUM_CHAIN_ID,
   NATIVE_CHAIN_ID_ARRAY,
@@ -8,13 +8,13 @@ import {
   LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID,
   OPTIMISM_CHAIN_ID,
   BASE_CHAIN_ID,
-} from './chain-ids.js'
+} from './chain-ids'
 import {
   NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS,
   NATIVE_TOKEN_ADDRESS,
   CHAIN_ID_TO_ETH_ROUTER_ADDRESS,
   CHAIN_ID_TO_ROUTER_ADDRESS,
-} from './contract-addresses.js'
+} from './contract-addresses'
 
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object

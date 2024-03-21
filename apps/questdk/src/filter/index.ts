@@ -1,4 +1,4 @@
-export { apply } from './filters.js'
+export { apply } from './filters'
 
 export {
   GreaterThan,
@@ -6,7 +6,7 @@ export {
   Equal,
   LessThanOrEqual,
   GreaterThanOrEqual,
-} from './operators.js'
+} from './operators'
 
 export type {
   ArrayOperator,

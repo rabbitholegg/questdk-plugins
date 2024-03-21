@@ -40,7 +40,7 @@ export const CHAIN_TO_ROUTER: { [chainId: number]: string } = {
   [AURORA_CHAIN_ID]: '0x7e7a0e201fd38d3adaa9523da6c109a07118c96a',
 } as const
 
-export const SynapseCCTPContract: Record<any, string> = {
+export const SynapseCCTPContract: Record<number, string> = {
   [ETH_CHAIN_ID]: '0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84',
   [OPTIMISM_CHAIN_ID]: '0x5e69c336661dde70404e3345BA61F9c01DdB4C36',
   [ARBITRUM_CHAIN_ID]: '0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84',
@@ -48,7 +48,7 @@ export const SynapseCCTPContract: Record<any, string> = {
   [AVALANCHE_CHAIN_ID]: '0xfB2Bfc368a7edfD51aa2cbEC513ad50edEa74E84',
 }
 
-export const SYNAPSE_CCTP_ROUTER: Record<any, string> = {
+export const SYNAPSE_CCTP_ROUTER: Record<number, string> = {
   [ETH_CHAIN_ID]: '0xd359bc471554504f683fbd4f6e36848612349ddf',
   [OPTIMISM_CHAIN_ID]: '0xd359bc471554504f683fbd4f6e36848612349ddf',
   [ARBITRUM_CHAIN_ID]: '0xd359bc471554504f683fbd4f6e36848612349ddf',
@@ -56,7 +56,7 @@ export const SYNAPSE_CCTP_ROUTER: Record<any, string> = {
   [AVALANCHE_CHAIN_ID]: '0xd359bc471554504f683fbd4f6e36848612349ddf',
 }
 
-export function getContractAddress(chainId: any): `0x${string}` | undefined {
+export function getContractAddress(chainId: number): `0x${string}` | undefined {
   const address = SynapseCCTPContract[chainId]
   if (address?.startsWith('0x')) {
     return address as `0x${string}`

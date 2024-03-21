@@ -1,21 +1,21 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Across.js'
+import { bridge } from './Across'
 import {
   DEPOSIT_ETH,
   DEPOSIT_ERC20,
   WITHDRAW_ETH,
   WITHDRAW_ERC20,
-} from './test-transactions.js'
+} from './test-transactions'
 import {
   ARBITRUM_CHAIN_ID,
   ETH_CHAIN_ID,
   POLYGON_CHAIN_ID,
   OPTIMISM_CHAIN_ID,
-} from './chain-ids.js'
-import { ACROSS_BRIDGE_ABI } from './abi.js'
+} from './chain-ids'
+import { ACROSS_BRIDGE_ABI } from './abi'
 import { parseEther } from 'viem'
-import { CHAIN_TO_CONTRACT } from './chain-to-contract.js'
+import { CHAIN_TO_CONTRACT } from './chain-to-contract'
 
 export const WETH_ADRESS_MAINNET = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
 export const WETH_ADDRESS_ARBITRUM =

@@ -69,7 +69,7 @@ function registerHelpers() {
     // Logic to determine if any tx.params keys start with "amount"
     for (const transaction of tx) {
       for (const key of Object.keys(transaction.params)) {
-        if (key.startsWith("amount")) {
+        if (key.startsWith('amount')) {
           return options.fn(this)
         }
       }
@@ -286,7 +286,7 @@ export async function updateRegistry(params: BuilderParams) {
     const data = fs.readFileSync(filePath, 'utf-8')
     const lines: string[] = data.split('\n')
     const importIndex = lines.findIndex((line) =>
-      line.includes("import { ENTRYPOINT } from './contract-addresses'"),
+      line.includes('^^^ New Imports Go Here ^^^'),
     )
     const newImport = `import { ${capitalize(
       projectName,

@@ -1,5 +1,5 @@
 import { type Address } from 'viem'
-import { ETH_CHAIN_ID, POLYGON_CHAIN_ID } from './chain-ids.js'
+import { ETH_CHAIN_ID, POLYGON_CHAIN_ID } from './chain-ids'
 
 export const ETH_ADDRESS_MAINNET = '0x0000000000000000000000000000000000000000'
 export const MATIC_ADDRESS_MAINNET =

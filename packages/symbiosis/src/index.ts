@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Symbiosis.js'
+} from './Symbiosis'
 
 export const Symbiosis: IActionPlugin = {
   pluginId: 'symbiosis',

@@ -7,7 +7,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './HandleFi.js'
+} from './HandleFi'
 
 export const HandleFi: IActionPlugin = {
   pluginId: 'handlefi',

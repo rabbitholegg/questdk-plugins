@@ -1,4 +1,4 @@
-import { apply } from '@rabbitholegg/questdk'
+import { apply, ActionType } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { options, stake, getSupportedTokenAddresses } from './Vela'
 import { CHAIN_ID_ARRAY } from './chain-ids'
@@ -9,7 +9,6 @@ import {
   passingTestCasesStake,
   failingTestCasesStake,
 } from './test-transactions'
-import { ActionType } from '@rabbitholegg/questdk'
 
 describe('Given the vela plugin', () => {
   describe('When handling the options action', () => {

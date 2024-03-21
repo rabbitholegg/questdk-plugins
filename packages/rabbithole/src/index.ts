@@ -7,7 +7,7 @@ import {
   quest,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Rabbithole.js'
+} from './Rabbithole'
 
 export const Rabbithole: IActionPlugin = {
   pluginId: 'rabbithole',
