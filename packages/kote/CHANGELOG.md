@@ -1,5 +1,19 @@
 # @rabbitholegg/questdk-plugin-kote
 
+## 1.0.0-alpha.17
+
+### Patch Changes
+
+- [#316](https://github.com/rabbitholegg/questdk-plugins/pull/316) [`487f892f`](https://github.com/rabbitholegg/questdk-plugins/commit/487f892f73cadce9ae944e8c0344b673ac190f59) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Add fees and simulation to Kote
+
+## 1.0.0-alpha.16
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.15
 
 ### Patch Changes

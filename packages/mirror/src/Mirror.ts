@@ -49,11 +49,11 @@ export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient } = mint
-
+  const tokenId = (mint.tokenId ?? '').toString()
   const data = encodeFunctionData({
     abi: COLLECT_ENTRY_ABI,
     functionName: 'purchase',
-    args: [recipient, mint.tokenId.toString(), recipient],
+    args: [recipient, tokenId, recipient],
   })
   // Note: Do we need to pass back value here?
   const transaction: TransactionRequest = {
