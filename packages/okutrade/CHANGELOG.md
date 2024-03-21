@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.35
+
+### Patch Changes
+
+- [#318](https://github.com/rabbitholegg/questdk-plugins/pull/318) [`2d140b9`](https://github.com/rabbitholegg/questdk-plugins/commit/2d140b96cc0dbc35c16fbca5da7e2f671c0f88db) Thanks [@mmackz](https://github.com/mmackz)! - add options action to IActionPlugin
+
 ## 1.0.0-alpha.34
 
 ### Patch Changes
