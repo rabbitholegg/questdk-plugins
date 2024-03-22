@@ -28,11 +28,13 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
-  BOOST_TREASURY_ADDRESS,
   ActionType,
   type DisctriminatedActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { FIXED_PRICE_SALE_STRATS } from './contract-addresses'
+import {
+  FIXED_PRICE_SALE_STRATS,
+  ZORA_DEPLOYER_ADDRESS,
+} from './contract-addresses'
 
 export const mint = async (
   mint: MintActionParams,
@@ -103,14 +105,28 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
   let data
+
+  let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+
+  try {
+    console.log({ chainId, contractAddress, tokenId })
+    fixedPriceSaleStratAddress = (
+      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
+    ).fixedPrice.address
+  } catch {
+    console.error(
+      `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
+    )
+  }
+
   if (tokenId !== null && tokenId !== undefined) {
     const mintArgs = [
-      FIXED_PRICE_SALE_STRATS[mint.chainId],
+      fixedPriceSaleStratAddress,
       tokenId,
       amount,
-      [BOOST_TREASURY_ADDRESS],
+      [ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     // Assume it's an 1155 mint
@@ -141,40 +157,60 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
   const _client =
     client ??
     createPublicClient({
-      chain: chainIdToViemChain(mint.chainId),
+      chain: chainIdToViemChain(chainId),
       transport: http(),
     })
   const from = account ?? DEFAULT_ACCOUNT
+  let _tokenId = tokenId
+  if (tokenId === null || tokenId === undefined) {
+    const nextTokenId = (await _client.readContract({
+      address: contractAddress,
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'nextTokenId',
+    })) as BigInt
 
-  if (tokenId !== null && tokenId !== undefined) {
+    _tokenId = Number(nextTokenId) - 1
+  }
+
+  let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+
+  try {
+    fixedPriceSaleStratAddress = (
+      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
+    ).fixedPrice.address
+  } catch {
+    console.error('Unable to fetch salesConfigAndTokenInfo')
+  }
+
+  try {
+    const mintArgs = [
+      fixedPriceSaleStratAddress,
+      _tokenId,
+      amount,
+      [ZORA_DEPLOYER_ADDRESS],
+      pad(recipient),
+    ]
+    const result = await _client.simulateContract({
+      address: contractAddress,
+      value,
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'mint',
+      args: mintArgs,
+      account: from,
+    })
+    return result
+  } catch {
+    const mintArgs = [
+      fixedPriceSaleStratAddress,
+      _tokenId,
+      amount,
+      pad(recipient),
+    ]
     try {
-      const mintArgs = [
-        FIXED_PRICE_SALE_STRATS[mint.chainId],
-        tokenId,
-        amount,
-        [BOOST_TREASURY_ADDRESS],
-        pad(recipient),
-      ]
-      const result = await _client.simulateContract({
-        address: contractAddress,
-        value,
-        abi: ZORA_MINTER_ABI_1155,
-        functionName: 'mint',
-        args: mintArgs,
-        account: from,
-      })
-      return result
-    } catch {
-      const mintArgs = [
-        FIXED_PRICE_SALE_STRATS[mint.chainId],
-        tokenId,
-        amount,
-        pad(recipient),
-      ]
       const result = await _client.simulateContract({
         address: contractAddress,
         value,
@@ -189,19 +225,37 @@ export const simulateMint = async (
         // }],
       })
       return result
+    } catch {
+      // Assume it's a 721 mint
+      const result = await _client.simulateContract({
+        address: contractAddress,
+        value,
+        abi: ZORA_MINTER_ABI_721,
+        functionName: 'purchase',
+        args: [amount],
+        account: from,
+      })
+      return result
     }
-  } else {
-    // Assume it's a 721 mint
-    const result = await _client.simulateContract({
-      address: contractAddress,
-      value,
-      abi: ZORA_MINTER_ABI_721,
-      functionName: 'purchase',
-      args: [amount],
-      account: from,
-    })
-    return result
   }
+}
+
+const getSalesConfigAndTokenInfo = async (
+  chainId: number,
+  tokenAddress: Address,
+  tokenId?: number,
+) => {
+  const client = new MintAPIClient(chainId)
+
+  const args: { tokenAddress: Address; tokenId?: number } = {
+    tokenAddress,
+  }
+
+  args.tokenId = tokenId ?? 1
+
+  const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(args)
+
+  return salesConfigAndTokenInfo
 }
 
 export const getProjectFees = async (
@@ -217,22 +271,16 @@ export const getFees = async (
   try {
     const { chainId, contractAddress, tokenId, amount } = mint
 
-    const client = new MintAPIClient(chainId)
-
-    const args: { tokenAddress: Address; tokenId?: number } = {
-      tokenAddress: contractAddress,
-    }
-
-    args.tokenId = tokenId ?? 1
-
-    const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(
-      args,
+    const salesConfigAndTokenInfo = await getSalesConfigAndTokenInfo(
+      chainId,
+      contractAddress,
+      tokenId,
     )
     const quantityToMint =
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
     const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
 
-    return { actionFee: fee.mintFee, projectFee: fee.tokenPurchaseCost }
+    return { actionFee: fee.tokenPurchaseCost, projectFee: fee.mintFee }
   } catch (err) {
     console.error(err)
     return { actionFee: parseEther('0'), projectFee: parseEther('0.000777') } // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27

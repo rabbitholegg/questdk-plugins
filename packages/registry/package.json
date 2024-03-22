@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.84",
+  "version": "1.0.0-alpha.92",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -70,6 +70,9 @@
     "@rabbitholegg/questdk-plugin-boost": "workspace:*",
     "@rabbitholegg/questdk-plugin-kote": "workspace:*",
     "@rabbitholegg/questdk-plugin-jojo": "workspace:*",
-    "@rabbitholegg/questdk-plugin-manifold": "workspace:*"
+    "@rabbitholegg/questdk-plugin-aerodrome": "workspace:*",
+    "@rabbitholegg/questdk-plugin-manifold": "workspace:*",
+    "@rabbitholegg/questdk-plugin-fabric": "workspace:*",
+    "@rabbitholegg/questdk-plugin-paragraph": "workspace:*"
   }
 }

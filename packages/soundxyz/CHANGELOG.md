@@ -1,5 +1,29 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.24
+
+### Minor Changes
+
+- [#312](https://github.com/rabbitholegg/questdk-plugins/pull/312) [`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221) Thanks [@Quazia](https://github.com/Quazia)! - Handle token ID undefined better and handle single tier 1 collections in sound
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.23
+
+### Patch Changes
+
+- [#309](https://github.com/rabbitholegg/questdk-plugins/pull/309) [`10125455`](https://github.com/rabbitholegg/questdk-plugins/commit/10125455e5e6c8c6e299df096b7bdb8430287104) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Enforce `scheduleNum` to be `0`
+
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- [#300](https://github.com/rabbitholegg/questdk-plugins/pull/300) [`d6e1cdd3`](https://github.com/rabbitholegg/questdk-plugins/commit/d6e1cdd371cc84180cff9ac54d07d36c8e16f23e) Thanks [@benjaminykim](https://github.com/benjaminykim)! - fix: format
+
 ## 1.0.0-alpha.21
 
 ### Minor Changes

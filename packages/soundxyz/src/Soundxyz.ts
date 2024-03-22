@@ -25,8 +25,8 @@ import {
   SUPERMINTER,
   SUPERMINTER_V2,
   SUPERMINTER_ABI,
-  NEXT_SCHEDULE_NUM_ABI,
   TOTAL_PRICE_AND_FEES_ABI,
+  NEXT_SCHEDULE_NUM_ABI,
 } from './constants'
 import { Chains } from './utils'
 import type { TotalPriceAndFees } from './types'
@@ -53,46 +53,17 @@ export const mint = async (
   })
 }
 
-const getNextScheduleNum = async (
-  client: PublicClient,
-  contractAddress: Address,
-  tier: number,
-) => {
-  const nextSchedule = (await client.readContract({
-    address: SUPERMINTER_V2,
-    abi: NEXT_SCHEDULE_NUM_ABI,
-    functionName: 'nextScheduleNum',
-    args: [contractAddress, tier],
-  })) as number
-
-  return nextSchedule
-}
-
 export const getMintIntent = async (
   mint: MintIntentParams,
-  client?: PublicClient,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient, tokenId, amount } = mint
-  const _client =
-    client ||
-    createPublicClient({
-      chain: chainIdToViemChain(mint.chainId),
-      transport: http(),
-    })
-
-  const tier = tokenId ?? 0
+  const tier = await getDefaultMintTier(mint.chainId, contractAddress, tokenId)
   const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    _client as PublicClient,
-    contractAddress,
-    tier,
-  )
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum:
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum: BigInt(0),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -128,26 +99,23 @@ export const simulateMint = async (
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
   const { contractAddress, recipient, tokenId, amount } = mint
-  const _client =
-    client ||
+  const _client = (client ??
     createPublicClient({
       chain: chainIdToViemChain(mint.chainId),
       transport: http(),
-    })
-
-  const tier = tokenId ?? 0
-  const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    _client as PublicClient,
+    })) as PublicClient
+  const tier = await getDefaultMintTier(
+    mint.chainId,
     contractAddress,
-    tier,
+    tokenId,
+    _client,
   )
+  const quantity = amount ?? 1
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum:
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum: BigInt(0),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -189,15 +157,15 @@ export const getFees = async (
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
     transport: http(),
-  })
+  }) as PublicClient
 
-  const tier = tokenId ?? 0
-  const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    client as PublicClient,
+  const tier = await getDefaultMintTier(
+    chainId,
     contractAddress,
-    tier,
+    tokenId,
+    client,
   )
+  const quantity = amount ?? 1
 
   const totalPriceAndFees = (await client.readContract({
     address: SUPERMINTER_V2,
@@ -206,7 +174,7 @@ export const getFees = async (
     args: [
       contractAddress,
       tier,
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+      BigInt(0),
       quantity,
       false, // assume hasValidAffiliate is false
     ],
@@ -216,6 +184,30 @@ export const getFees = async (
     actionFee: totalPriceAndFees.subTotal,
     projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
   }
+}
+
+export const getDefaultMintTier = async (
+  chainId: number,
+  contractAddress: Address,
+  tokenId?: number,
+  client?: PublicClient,
+) => {
+  const _client =
+    client ??
+    createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    })
+  // If the next schedule to tier 0 is 0 then the edition is not scheduled
+  const tier0NextSchedule = (await _client.readContract({
+    address: SUPERMINTER_V2,
+    abi: NEXT_SCHEDULE_NUM_ABI,
+    functionName: 'nextScheduleNum',
+    args: [contractAddress, BigInt(0)],
+  })) as number
+  // If we pass in a tokenId, we use that to infer the tier, otherwise we default to 0 if it exists, otherwise 1
+  const tier = tokenId ?? (BigInt(tier0NextSchedule) === BigInt(0) ? 1 : 0)
+  return tier
 }
 
 export const getSupportedTokenAddresses = async (

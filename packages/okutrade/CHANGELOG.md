@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.35
+
+### Patch Changes
+
+- [#318](https://github.com/rabbitholegg/questdk-plugins/pull/318) [`2d140b9`](https://github.com/rabbitholegg/questdk-plugins/commit/2d140b96cc0dbc35c16fbca5da7e2f671c0f88db) Thanks [@mmackz](https://github.com/mmackz)! - add options action to IActionPlugin
+
+## 1.0.0-alpha.34
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.33
+
+### Minor Changes
+
+- [#306](https://github.com/rabbitholegg/questdk-plugins/pull/306) [`b5fe0e8a`](https://github.com/rabbitholegg/questdk-plugins/commit/b5fe0e8a462dea6017e860946dc8fa99ec9ace15) Thanks [@abs3ntdev](https://github.com/abs3ntdev)! - Implement limit orders
+
 ## 1.0.0-alpha.32
 
 ### Patch Changes

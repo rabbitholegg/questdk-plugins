@@ -1,5 +1,41 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.34
+
+### Patch Changes
+
+- [#314](https://github.com/rabbitholegg/questdk-plugins/pull/314) [`d286a83`](https://github.com/rabbitholegg/questdk-plugins/commit/d286a8396c47c6c6e70c92c9532ecaa79ee21ece) Thanks [@jonathandiep](https://github.com/jonathandiep)! - fix: Use zora sdk to grab the fixed price sale strategy
+
+## 1.0.0-alpha.33
+
+### Minor Changes
+
+- [#312](https://github.com/rabbitholegg/questdk-plugins/pull/312) [`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221) Thanks [@Quazia](https://github.com/Quazia)! - Handle token ID undefined better and handle single tier 1 collections in sound
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.32
+
+### Patch Changes
+
+- [#301](https://github.com/rabbitholegg/questdk-plugins/pull/301) [`57553232`](https://github.com/rabbitholegg/questdk-plugins/commit/57553232b6e35e32cced7afc33d373d494dc6854) Thanks [@mmackz](https://github.com/mmackz)! - change referral address to zora deployer
+
+## 1.0.0-alpha.31
+
+### Patch Changes
+
+- [#300](https://github.com/rabbitholegg/questdk-plugins/pull/300) [`d6e1cdd3`](https://github.com/rabbitholegg/questdk-plugins/commit/d6e1cdd371cc84180cff9ac54d07d36c8e16f23e) Thanks [@benjaminykim](https://github.com/benjaminykim)! - fix: format
+
+## 1.0.0-alpha.30
+
+### Patch Changes
+
+- [#299](https://github.com/rabbitholegg/questdk-plugins/pull/299) [`3ba216e2`](https://github.com/rabbitholegg/questdk-plugins/commit/3ba216e2841f6138ce6a24c6fd3ac3f8a18990d6) Thanks [@benjaminykim](https://github.com/benjaminykim)! - Zora getFees incorrect fees
+
 ## 1.0.0-alpha.29
 
 ### Minor Changes
