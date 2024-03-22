@@ -7,19 +7,16 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
-  ActionType,
-  type DisctriminatedActionParams,
+  Chains,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
-  getAddress,
   type TransactionRequest,
   encodeFunctionData,
   createPublicClient,
   http,
   type PublicClient,
   type SimulateContractReturnType,
-  pad,
   parseEther,
 } from 'viem'
 import {
@@ -103,6 +100,72 @@ export const getMintIntent = async (
     from: recipient,
     to: contractAddress,
     data,
+  }
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const _client =
+    client ??
+    createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    })
+  const from = account ?? DEFAULT_ACCOUNT
+
+  const instanceId = await getInstanceId(chainId, contractAddress, tokenId ?? 1)
+
+  if (amount > 1) {
+    const mintArgs = [contractAddress, instanceId, amount, [], [], recipient]
+    try {
+      const result = await _client.simulateContract({
+        address: ERC1155_CONTRACT,
+        value,
+        abi: ABI_MULTI,
+        functionName: 'mintBatch',
+        args: mintArgs,
+        account: from,
+      })
+      return result
+    } catch {
+      const result = await _client.simulateContract({
+        address: ERC721_CONTRACT,
+        value,
+        abi: ABI_MULTI,
+        functionName: 'mintBatch',
+        args: mintArgs,
+        account: from,
+      })
+      return result
+    }
+  }
+
+  const mintArgs = [contractAddress, instanceId, 0, [], recipient]
+  try {
+    const result = await _client.simulateContract({
+      address: ERC1155_CONTRACT,
+      value,
+      abi: ABI_MINT,
+      functionName: 'mint',
+      args: mintArgs,
+      account: from,
+    })
+    return result
+  } catch {
+    const result = await _client.simulateContract({
+      address: ERC721_CONTRACT,
+      value,
+      abi: ABI_MINT,
+      functionName: 'mint',
+      args: mintArgs,
+      account: from,
+    })
+    return result
   }
 }
 
