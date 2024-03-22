@@ -1,8 +1,11 @@
 import { apply } from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint, getFees, getProjectFees } from './Manifold'
+import { mint, getFees, getProjectFees, getMintIntent } from './Manifold'
 import { parseEther, type Address } from 'viem'
 
 describe('Given the manifold plugin', () => {
@@ -62,51 +65,89 @@ describe('Given the manifold plugin', () => {
   })
 })
 
-describe('Given the getProjectFee function', () => {
-  test('should return the correct fee for a 721 mint', async () => {
-    const contractAddress: Address =
-      '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
-    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
-    const fee = await getProjectFees(mintParams)
-    expect(fee).equals(parseEther('0.0005'))
+describe('Given the getMintIntent function', () => {
+  // Define the constant for the contract address
+  const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
+
+  test('returns a TransactionRequest with correct properties when amount is set greater than 1', async () => {
+    const mint: MintIntentParams = {
+      chainId: 1,
+      tokenId: 1, // not 0
+      contractAddress: CONTRACT_ADDRESS,
+      amount: BigInt('2'),
+      recipient: RECIPIENT_ADDRESS,
+    }
+    const result = await getMintIntent(mint)
+    expect(result).toEqual({
+      from: mint.recipient,
+      to: mint.contractAddress,
+      data: '0x26c858a40000000000000000000000006ecbe1db9ef729cbe972c83fb886247691fb6beb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000123456789012345678901234567890123456789000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    })
   })
 
-  test('should return the correct fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0xe096f28c87f331758af3da402add89b33a2853d8'
-    const mintParams = {
-      contractAddress,
+  test('returns a TransactionRequest when amount is 1 or undefined', async () => {
+    const mint: MintIntentParams = {
+      chainId: 1,
       tokenId: 1,
-      chainId: Chains.BASE,
-      amount: 1,
+      amount: BigInt('1'),
+      contractAddress: CONTRACT_ADDRESS,
+      recipient: RECIPIENT_ADDRESS,
     }
-    const fee = await getProjectFees(mintParams)
-    expect(fee).equals(parseEther('0.00102'))
-  })
-})
-
-describe('Given the getFee function', () => {
-  test('should return the correct project + action fee for a 721 mint', async () => {
-    const contractAddress: Address =
-      '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
-    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
-    const fee = await getFees(mintParams)
-    expect(fee.projectFee).equals(parseEther('0.0005'))
-    expect(fee.actionFee).equals(0n)
+    const result = await getMintIntent(mint)
+    expect(result).toEqual({
+      from: mint.recipient,
+      to: mint.contractAddress,
+      data: '0xfa2b068f0000000000000000000000006ecbe1db9ef729cbe972c83fb886247691fb6beb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000012345678901234567890123456789012345678900000000000000000000000000000000000000000000000000000000000000000',
+    })
   })
 
-  test('should return the correct project + action fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0xe096f28c87f331758af3da402add89b33a2853d8'
-    const tokenId = 1
-    const mintParams = {
-      contractAddress,
-      tokenId,
-      chainId: Chains.BASE,
-      amount: 1,
-    }
-    const fee = await getFees(mintParams)
-    expect(fee.projectFee).equals(parseEther('0.0005'))
-    expect(fee.actionFee).equals(parseEther('0.00052'))
+  describe('Given the getProjectFee function', () => {
+    test('should return the correct fee for a 721 mint', async () => {
+      const contractAddress: Address =
+        '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
+      const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+      const fee = await getProjectFees(mintParams)
+      expect(fee).equals(parseEther('0.0005'))
+    })
+
+    test('should return the correct fee for an 1155 mint', async () => {
+      const contractAddress: Address =
+        '0xe096f28c87f331758af3da402add89b33a2853d8'
+      const mintParams = {
+        contractAddress,
+        tokenId: 1,
+        chainId: Chains.BASE,
+        amount: 1,
+      }
+      const fee = await getProjectFees(mintParams)
+      expect(fee).equals(parseEther('0.00102'))
+    })
+  })
+
+  describe('Given the getFee function', () => {
+    test('should return the correct project + action fee for a 721 mint', async () => {
+      const contractAddress: Address =
+        '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
+      const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+      const fee = await getFees(mintParams)
+      expect(fee.projectFee).equals(parseEther('0.0005'))
+      expect(fee.actionFee).equals(0n)
+    })
+
+    test('should return the correct project + action fee for an 1155 mint', async () => {
+      const contractAddress: Address =
+        '0xe096f28c87f331758af3da402add89b33a2853d8'
+      const tokenId = 1
+      const mintParams = {
+        contractAddress,
+        tokenId,
+        chainId: Chains.BASE,
+        amount: 1,
+      }
+      const fee = await getFees(mintParams)
+      expect(fee.projectFee).equals(parseEther('0.0005'))
+      expect(fee.actionFee).equals(parseEther('0.00052'))
+    })
   })
 })
