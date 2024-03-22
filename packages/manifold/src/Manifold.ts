@@ -3,8 +3,25 @@ import {
   type MintActionParams,
   type TransactionFilter,
 } from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, parseEther } from 'viem'
+import {
+  type MintIntentParams,
+  chainIdToViemChain,
+  DEFAULT_ACCOUNT,
+  ActionType,
+  type DisctriminatedActionParams,
+} from '@rabbitholegg/questdk-plugin-utils'
+import {
+  type Address,
+  getAddress,
+  type TransactionRequest,
+  encodeFunctionData,
+  createPublicClient,
+  http,
+  type PublicClient,
+  type SimulateContractReturnType,
+  pad,
+  parseEther,
+} from 'viem'
 import {
   ABI_MINT,
   ABI_MULTI,
@@ -56,6 +73,37 @@ export const mint = async (
       $or: inputConditions,
     },
   })
+}
+
+export const getMintIntent = async (
+  mint: MintIntentParams,
+): Promise<TransactionRequest> => {
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  let data
+
+  const instanceId = await getInstanceId(chainId, contractAddress, tokenId ?? 1)
+
+  if (amount > 1) {
+    const mintArgs = [contractAddress, instanceId, amount, [], [], recipient]
+    data = encodeFunctionData({
+      abi: ABI_MULTI,
+      functionName: 'mintBatch',
+      args: mintArgs,
+    })
+  } else {
+    const mintArgs = [contractAddress, instanceId, 0, [], recipient]
+    data = encodeFunctionData({
+      abi: ABI_MINT,
+      functionName: 'mint',
+      args: mintArgs,
+    })
+  }
+
+  return {
+    from: recipient,
+    to: contractAddress,
+    data,
+  }
 }
 
 export const getProjectFees = async (
