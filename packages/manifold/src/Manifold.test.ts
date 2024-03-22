@@ -1,11 +1,19 @@
 import { apply } from '@rabbitholegg/questdk'
 import {
   Chains,
+  DEFAULT_ACCOUNT,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint, getFees, getProjectFees, getMintIntent } from './Manifold'
+import { ERC1155_CONTRACT, ERC721_CONTRACT } from './constants'
+import {
+  mint,
+  getFees,
+  getProjectFees,
+  getMintIntent,
+  simulateMint,
+} from './Manifold'
 import { parseEther, type Address } from 'viem'
 
 describe('Given the manifold plugin', () => {
@@ -73,7 +81,7 @@ describe('Given the getMintIntent function', () => {
   test('returns a TransactionRequest with correct properties when amount is set greater than 1', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
-      tokenId: 1, // not 0
+      tokenId: 1,
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('2'),
       recipient: RECIPIENT_ADDRESS,
@@ -101,53 +109,102 @@ describe('Given the getMintIntent function', () => {
       data: '0xfa2b068f0000000000000000000000006ecbe1db9ef729cbe972c83fb886247691fb6beb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000012345678901234567890123456789012345678900000000000000000000000000000000000000000000000000000000000000000',
     })
   })
+})
 
-  describe('Given the getProjectFee function', () => {
-    test('should return the correct fee for a 721 mint', async () => {
-      const contractAddress: Address =
-        '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
-      const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
-      const fee = await getProjectFees(mintParams)
-      expect(fee).equals(parseEther('0.0005'))
-    })
-
-    test('should return the correct fee for an 1155 mint', async () => {
-      const contractAddress: Address =
-        '0xe096f28c87f331758af3da402add89b33a2853d8'
-      const mintParams = {
-        contractAddress,
-        tokenId: 1,
-        chainId: Chains.BASE,
-        amount: 1,
-      }
-      const fee = await getProjectFees(mintParams)
-      expect(fee).equals(parseEther('0.00102'))
-    })
+describe('Given the getProjectFee function', () => {
+  test('should return the correct fee for a 721 mint', async () => {
+    const contractAddress: Address =
+      '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
+    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+    const fee = await getProjectFees(mintParams)
+    expect(fee).equals(parseEther('0.0005'))
   })
 
-  describe('Given the getFee function', () => {
-    test('should return the correct project + action fee for a 721 mint', async () => {
-      const contractAddress: Address =
-        '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
-      const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
-      const fee = await getFees(mintParams)
-      expect(fee.projectFee).equals(parseEther('0.0005'))
-      expect(fee.actionFee).equals(0n)
-    })
+  test('should return the correct fee for an 1155 mint', async () => {
+    const contractAddress: Address =
+      '0xe096f28c87f331758af3da402add89b33a2853d8'
+    const mintParams = {
+      contractAddress,
+      tokenId: 1,
+      chainId: Chains.BASE,
+      amount: 1,
+    }
+    const fee = await getProjectFees(mintParams)
+    expect(fee).equals(parseEther('0.00102'))
+  })
+})
 
-    test('should return the correct project + action fee for an 1155 mint', async () => {
-      const contractAddress: Address =
-        '0xe096f28c87f331758af3da402add89b33a2853d8'
-      const tokenId = 1
-      const mintParams = {
-        contractAddress,
-        tokenId,
-        chainId: Chains.BASE,
-        amount: 1,
-      }
-      const fee = await getFees(mintParams)
-      expect(fee.projectFee).equals(parseEther('0.0005'))
-      expect(fee.actionFee).equals(parseEther('0.00052'))
-    })
+describe('Given the getFee function', () => {
+  test('should return the correct project + action fee for a 721 mint', async () => {
+    const contractAddress: Address =
+      '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
+    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+    const fee = await getFees(mintParams)
+    expect(fee.projectFee).equals(parseEther('0.0005'))
+    expect(fee.actionFee).equals(0n)
+  })
+
+  test('should return the correct project + action fee for an 1155 mint', async () => {
+    const contractAddress: Address =
+      '0xe096f28c87f331758af3da402add89b33a2853d8'
+    const tokenId = 1
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.BASE,
+      amount: 1,
+    }
+    const fee = await getFees(mintParams)
+    expect(fee.projectFee).equals(parseEther('0.0005'))
+    expect(fee.actionFee).equals(parseEther('0.00052'))
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a 1155 mint', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.BASE,
+      contractAddress: '0xd5428e8181be784f12e492ff04ccda44be6f43fb',
+      tokenId: 1,
+      amount: BigInt('1'),
+      recipient: DEFAULT_ACCOUNT,
+    }
+    const value = parseEther('0.00119')
+    const result = await simulateMint(mint, value, mint.recipient)
+    const request = result.request
+    expect(request.address).toBe(ERC1155_CONTRACT)
+    expect(request.value).toBe(value)
+  })
+
+  test('should simulate a 1155 batchmint', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.BASE,
+      contractAddress: '0xe096f28c87f331758af3da402add89b33a2853d8',
+      tokenId: 1,
+      amount: BigInt('2'),
+      recipient: DEFAULT_ACCOUNT,
+    }
+    const value = parseEther('0.00204')
+    const result = await simulateMint(mint, value, mint.recipient)
+    const request = result.request
+    expect(request.address).toBe(ERC1155_CONTRACT)
+    expect(request.value).toBe(value)
+  })
+
+  test('should simulate a 721 mint', async () => {
+    const mint = {
+      chainId: Chains.OPTIMISM,
+      contractAddress: '0x6935cd348193bab133f3081f53eb99ee6f0d685b',
+      recipient: DEFAULT_ACCOUNT,
+    }
+    const value = parseEther('0.0005')
+    const result = await simulateMint(
+      mint as MintIntentParams,
+      value,
+      mint.recipient as Address,
+    )
+    const request = result.request
+    expect(request.address).toBe(ERC721_CONTRACT)
+    expect(request.value).toBe(value)
   })
 })
