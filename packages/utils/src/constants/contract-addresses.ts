@@ -80,7 +80,7 @@ export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
 }
 
-// Deployer Address. Used for simulations
+// Deployer Address. Can be used for simulations
 export const DEFAULT_ACCOUNT = '0x017f8ad14a2e745ea0f756bd57cd4852400be78c'
 
 // This needs to exist and be set for every network with refer on
