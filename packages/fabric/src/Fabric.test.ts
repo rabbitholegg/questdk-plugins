@@ -1,7 +1,7 @@
+import { mint } from './Fabric'
+import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint } from './Fabric'
 
 describe('Given the fabric plugin', () => {
   describe('When handling the mint action', () => {

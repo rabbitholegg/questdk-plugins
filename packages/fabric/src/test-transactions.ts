@@ -1,7 +1,7 @@
 import { type MintActionParams } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
   type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 export const FABRIC_MINT: TestParams<MintActionParams> = {
