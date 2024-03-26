@@ -82,8 +82,8 @@ export const getFees = async (
       actionFee: parseEther('0'),
       projectFee:
         chainId === Chains.POLYGON_POS
-          ? parseEther('2')
-          : parseEther('0.000777'),
+          ? parseEther('2') // 2 MATIC
+          : parseEther('0.000777'), // 0.000777 ETH
     }
   }
 }
