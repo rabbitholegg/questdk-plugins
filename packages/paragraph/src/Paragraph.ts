@@ -3,8 +3,20 @@ import {
   type MintActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address, createPublicClient, http, parseEther } from 'viem'
-import { Chains, chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  type Address,
+  type TransactionRequest,
+  createPublicClient,
+  encodeFunctionData,
+  http,
+  parseEther,
+} from 'viem'
+import {
+  type MintIntentParams,
+  Chains,
+  chainIdToViemChain,
+  BOOST_TREASURY_ADDRESS,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { ERC_721_ABI, MINT_ABI } from './abi'
 
 export const mint = async (
@@ -70,6 +82,26 @@ export const getFees = async (
           ? parseEther('2')
           : parseEther('0.000777'),
     }
+  }
+}
+
+export const getMintIntent = async (
+  mint: MintIntentParams,
+): Promise<TransactionRequest> => {
+  const { contractAddress, recipient } = mint
+
+  const mintArgs = [recipient, BOOST_TREASURY_ADDRESS]
+
+  const data = encodeFunctionData({
+    abi: ERC_721_ABI,
+    functionName: 'mintWithReferrer',
+    args: mintArgs,
+  })
+
+  return {
+    from: recipient,
+    to: contractAddress,
+    data,
   }
 }
 
