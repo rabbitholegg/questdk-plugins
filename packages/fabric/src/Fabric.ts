@@ -1,4 +1,5 @@
-import { FABRIC_ABI, SUBSCRIPTION_ABI } from './abi'
+import { FABRIC_ABI } from './abi'
+import { getContractData } from './utils'
 import {
   type MintActionParams,
   type TransactionFilter,
@@ -8,16 +9,13 @@ import {
   Chains,
   DEFAULT_ACCOUNT,
   type MintIntentParams,
-  chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type PublicClient,
   type SimulateContractReturnType,
   type TransactionRequest,
-  createPublicClient,
   encodeFunctionData,
-  http,
   zeroAddress,
 } from 'viem'
 
@@ -47,25 +45,10 @@ export const getFees = async (
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, amount } = mint
 
-  const client = createPublicClient({
-    chain: chainIdToViemChain(chainId),
-    transport: http(),
-  })
-
-  const contract = {
-    address: contractAddress,
-    abi: SUBSCRIPTION_ABI,
-  }
-
-  const [erc20Address, minPurchaseSeconds, tps] = (
-    await client.multicall({
-      contracts: [
-        { ...contract, functionName: 'erc20Address' },
-        { ...contract, functionName: 'minPurchaseSeconds' },
-        { ...contract, functionName: 'tps' },
-      ],
-    })
-  ).map((v) => v.result)
+  const { erc20Address, minPurchaseSeconds, tps } = await getContractData(
+    chainId,
+    contractAddress,
+  )
 
   if (erc20Address !== zeroAddress) {
     throw new Error('ERC20 not supported')
@@ -83,25 +66,10 @@ export const getMintIntent = async (
 ): Promise<TransactionRequest> => {
   const { chainId, amount, contractAddress, recipient } = mint
 
-  const client = createPublicClient({
-    chain: chainIdToViemChain(chainId),
-    transport: http(),
-  })
-
-  const contract = {
-    address: contractAddress,
-    abi: SUBSCRIPTION_ABI,
-  }
-
-  const [erc20Address, minPurchaseSeconds, tps] = (
-    await client.multicall({
-      contracts: [
-        { ...contract, functionName: 'erc20Address' },
-        { ...contract, functionName: 'minPurchaseSeconds' },
-        { ...contract, functionName: 'tps' },
-      ],
-    })
-  ).map((v) => v.result)
+  const { erc20Address, minPurchaseSeconds, tps } = await getContractData(
+    chainId,
+    contractAddress,
+  )
 
   if (erc20Address !== zeroAddress) {
     throw new Error('ERC20 not supported')
@@ -129,29 +97,16 @@ export const simulateMint = async (
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
   const { chainId, contractAddress, amount } = mint
-  const _client =
-    client ??
-    createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    })
+
   const from = account ?? DEFAULT_ACCOUNT
+  const {
+    erc20Address,
+    minPurchaseSeconds,
+    tps,
+    client: _client,
+  } = await getContractData(chainId, contractAddress, client)
 
-  const contract = {
-    address: contractAddress,
-    abi: SUBSCRIPTION_ABI,
-  }
-
-  const [erc20Address, minPurchaseSeconds, tps] = (
-    await _client.multicall({
-      contracts: [
-        { ...contract, functionName: 'erc20Address' },
-        { ...contract, functionName: 'minPurchaseSeconds' },
-        { ...contract, functionName: 'tps' },
-      ],
-    })
-  ).map((v) => v.result)
-
+  // fail simulation if erc20 is used
   if (erc20Address !== zeroAddress) {
     throw new Error('ERC20 not supported')
   }
