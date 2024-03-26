@@ -1,5 +1,8 @@
 import { apply } from '@rabbitholegg/questdk'
-import { Chains, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
 import { mint, getFees, getMintIntent } from './Paragraph'
