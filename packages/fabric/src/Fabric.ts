@@ -35,6 +35,49 @@ export const mint = async (
   })
 }
 
+export const getProjectFees = async (
+  mint: MintActionParams,
+): Promise<bigint> => {
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
+  const { chainId, contractAddress, amount } = mint
+
+  const client = createPublicClient({
+    chain: chainIdToViemChain(chainId),
+    transport: http(),
+  })
+
+  const contract = {
+    address: contractAddress,
+    abi: SUBSCRIPTION_ABI,
+  }
+
+  const [erc20Address, minPurchaseSeconds, tps] = (
+    await client.multicall({
+      contracts: [
+        { ...contract, functionName: 'erc20Address' },
+        { ...contract, functionName: 'minPurchaseSeconds' },
+        { ...contract, functionName: 'tps' },
+      ],
+    })
+  ).map((v) => v.result)
+
+  if (erc20Address !== zeroAddress) {
+    throw new Error('ERC20 not supported')
+  }
+
+  const mintUnits = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+
+  const mintCost = (minPurchaseSeconds as bigint) * (tps as bigint) * mintUnits
+
+  return { actionFee: mintCost, projectFee: BigInt(0) }
+}
+
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {

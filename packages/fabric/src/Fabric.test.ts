@@ -1,11 +1,11 @@
-import { getMintIntent, mint, simulateMint } from './Fabric'
+import { getFees, getMintIntent, mint, simulateMint } from './Fabric'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import {
   Chains,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
-import { parseEther } from 'viem'
+import { type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the fabric plugin', () => {
@@ -65,6 +65,18 @@ describe('Given the fabric plugin', () => {
   })
 })
 
+describe('Given the getFee function', () => {
+  test('should return the correct project + action fee for a 721 mint', async () => {
+    const contractAddress: Address =
+      '0xd77269c83aab591ca834b3687e1f4164b2ff25f5'
+    const mintParams = { chainId: Chains.SEPOLIA, contractAddress, amount: 1n }
+    const fee = await getFees(mintParams)
+    console.log(fee)
+    expect(fee.projectFee).equals(0n)
+    expect(fee.actionFee).equals(499999999997664000n)
+  })
+})
+
 describe('Given the getMintIntent function', () => {
   // Define the constant for the contract address
   const CONTRACT_ADDRESS = '0x2efc6064239121d1d7efb503355daa82b87ee89c'
@@ -91,7 +103,7 @@ describe('Given the getMintIntent function', () => {
 describe('simulateMint function', () => {
   test('should simulate a mint', async () => {
     const mint: MintIntentParams = {
-      chainId: 11155111,
+      chainId: Chains.SEPOLIA,
       contractAddress: '0xD77269c83AAB591Ca834B3687E1f4164B2fF25f5',
       amount: BigInt(2),
       recipient: '0x000000000000000000000000000000000000dEaD',
