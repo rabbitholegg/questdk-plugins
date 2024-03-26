@@ -1,7 +1,9 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint } from './Paragraph'
+import { mint, getFees } from './Paragraph'
+import { type Address } from 'viem'
 
 describe('Given the paragraph plugin', () => {
   describe('When handling the mint action', () => {
@@ -57,5 +59,17 @@ describe('Given the paragraph plugin', () => {
         })
       })
     })
+  })
+})
+
+describe('Given the getFee function', () => {
+  test('should return the correct project + action fee for a 721 mint', async () => {
+    const contractAddress: Address =
+      '0x48cE2aA2c8B8c321883Ea9f2459a5dA9279DcA88'
+    const mintParams = { contractAddress, chainId: Chains.BASE }
+
+    const fee = await getFees(mintParams)
+    expect(fee.projectFee).equals(777000000000000n)
+    expect(fee.actionFee).equals(300000000000000n)
   })
 })
