@@ -1,4 +1,4 @@
-import { arbitrum, base, mainnet, optimism, polygon, zora } from 'viem/chains'
+import { arbitrum, base, mainnet, optimism, polygon, sepolia, zora } from 'viem/chains'
 
 export const chainIdToViemChain = (chainId: number) => {
   switch (chainId) {
@@ -12,6 +12,8 @@ export const chainIdToViemChain = (chainId: number) => {
       return optimism
     case polygon.id:
       return polygon
+    case sepolia.id:
+      return sepolia
     case zora.id:
       return zora
     default:
