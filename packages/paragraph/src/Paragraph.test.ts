@@ -1,12 +1,12 @@
+import { getFees, getMintIntent, mint, simulateMint } from './Paragraph'
+import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import {
   Chains,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint, getFees, getMintIntent, simulateMint } from './Paragraph'
 import { type Address } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the paragraph plugin', () => {
   describe('When handling the mint action', () => {

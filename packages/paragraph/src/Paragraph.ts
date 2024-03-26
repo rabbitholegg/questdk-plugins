@@ -1,8 +1,16 @@
+import { ERC_721_ABI, MINT_ABI } from './abi'
 import {
-  type TransactionFilter,
   type MintActionParams,
+  type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
+import {
+  BOOST_TREASURY_ADDRESS,
+  Chains,
+  DEFAULT_ACCOUNT,
+  type MintIntentParams,
+  chainIdToViemChain,
+} from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type PublicClient,
@@ -13,14 +21,6 @@ import {
   http,
   parseEther,
 } from 'viem'
-import {
-  type MintIntentParams,
-  Chains,
-  chainIdToViemChain,
-  BOOST_TREASURY_ADDRESS,
-  DEFAULT_ACCOUNT,
-} from '@rabbitholegg/questdk-plugin-utils'
-import { ERC_721_ABI, MINT_ABI } from './abi'
 
 export const mint = async (
   mint: MintActionParams,
