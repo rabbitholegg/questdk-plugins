@@ -1,17 +1,25 @@
-import { FABRIC_ABI } from './abi'
+import { FABRIC_ABI, SUBSCRIPTION_ABI } from './abi'
 import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
 import {
-  ActionType,
   Chains,
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, type TransactionRequest, encodeFunctionData } from 'viem'
+import {
+  type Address,
+  type PublicClient,
+  type SimulateContractReturnType,
+  type TransactionRequest,
+  createPublicClient,
+  encodeFunctionData,
+  http,
+  zeroAddress,
+} from 'viem'
 
 export const mint = async (
   mint: MintActionParams,
@@ -30,50 +38,92 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
-  let data
+  const { chainId, amount, contractAddress, recipient } = mint
 
-  let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+  const client = createPublicClient({
+    chain: chainIdToViemChain(chainId),
+    transport: http(),
+  })
 
-  try {
-    console.log({ chainId, contractAddress, tokenId })
-    fixedPriceSaleStratAddress = (
-      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
-    ).fixedPrice.address
-  } catch {
-    console.error(
-      `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
-    )
+  const contract = {
+    address: contractAddress,
+    abi: SUBSCRIPTION_ABI,
   }
 
-  if (tokenId !== null && tokenId !== undefined) {
-    const mintArgs = [
-      fixedPriceSaleStratAddress,
-      tokenId,
-      amount,
-      [ZORA_DEPLOYER_ADDRESS],
-      pad(recipient),
-    ]
-    // Assume it's an 1155 mint
-    data = encodeFunctionData({
-      abi: ZORA_MINTER_ABI_1155,
-      functionName: 'mint',
-      args: mintArgs,
+  const [erc20Address, minPurchaseSeconds, tps] = (
+    await client.multicall({
+      contracts: [
+        { ...contract, functionName: 'erc20Address' },
+        { ...contract, functionName: 'minPurchaseSeconds' },
+        { ...contract, functionName: 'tps' },
+      ],
     })
-  } else {
-    // Assume it's a 721 mint
-    data = encodeFunctionData({
-      abi: ZORA_MINTER_ABI_721,
-      functionName: 'purchase',
-      args: [amount],
-    })
+  ).map((v) => v.result)
+
+  if (erc20Address !== zeroAddress) {
+    throw new Error('ERC20 not supported')
   }
+
+  const mintArgs = [(minPurchaseSeconds as bigint) * (tps as bigint) * amount]
+
+  const data = encodeFunctionData({
+    abi: FABRIC_ABI,
+    functionName: 'mint',
+    args: mintArgs,
+  })
 
   return {
     from: recipient,
     to: contractAddress,
     data,
   }
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { chainId, contractAddress, amount } = mint
+  const _client =
+    client ??
+    createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    })
+  const from = account ?? DEFAULT_ACCOUNT
+
+  const contract = {
+    address: contractAddress,
+    abi: SUBSCRIPTION_ABI,
+  }
+
+  const [erc20Address, minPurchaseSeconds, tps] = (
+    await _client.multicall({
+      contracts: [
+        { ...contract, functionName: 'erc20Address' },
+        { ...contract, functionName: 'minPurchaseSeconds' },
+        { ...contract, functionName: 'tps' },
+      ],
+    })
+  ).map((v) => v.result)
+
+  if (erc20Address !== zeroAddress) {
+    throw new Error('ERC20 not supported')
+  }
+
+  const mintArgs = [(minPurchaseSeconds as bigint) * (tps as bigint) * amount]
+
+  const result = await _client.simulateContract({
+    address: contractAddress,
+    value,
+    abi: FABRIC_ABI,
+    functionName: 'mint',
+    args: mintArgs,
+    account: from,
+  })
+  return result
 }
 
 export const getSupportedTokenAddresses = async (
