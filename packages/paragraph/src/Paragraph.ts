@@ -3,9 +3,9 @@ import {
   type MintActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { MINT_ABI } from './abi'
+import { type Address, createPublicClient, http, parseEther } from 'viem'
+import { Chains, chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
+import { ERC_721_ABI, MINT_ABI } from './abi'
 
 export const mint = async (
   mint: MintActionParams,
@@ -20,6 +20,57 @@ export const mint = async (
       to: recipient,
     },
   })
+}
+
+export const getProjectFees = async (
+  mint: MintActionParams,
+): Promise<bigint> => {
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
+  const { chainId, contractAddress } = mint
+
+  try {
+    const client = createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    })
+
+    const contract = {
+      address: contractAddress,
+      abi: ERC_721_ABI,
+    }
+
+    const [actionFee, projectFee] = await client.multicall({
+      contracts: [
+        {
+          ...contract,
+          functionName: 'priceWei',
+        },
+        {
+          ...contract,
+          functionName: 'getMintFee',
+        },
+      ],
+    })
+
+    return {
+      actionFee: actionFee.result as bigint,
+      projectFee: projectFee.result as bigint,
+    }
+  } catch {
+    return {
+      actionFee: parseEther('0'),
+      projectFee:
+        chainId === Chains.POLYGON_POS
+          ? parseEther('2')
+          : parseEther('0.000777'),
+    }
+  }
 }
 
 export const getSupportedTokenAddresses = async (
