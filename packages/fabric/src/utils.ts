@@ -2,11 +2,18 @@ import { SUBSCRIPTION_ABI } from './abi'
 import { chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, type PublicClient, createPublicClient, http } from 'viem'
 
+interface ContractData {
+  erc20Address: Address
+  minPurchaseSeconds: bigint
+  tps: bigint
+  client: PublicClient
+}
+
 export async function getContractData(
   chainId: number,
   contractAddress: Address,
   _client?: PublicClient,
-) {
+): Promise<ContractData> {
   const client =
     _client ??
     createPublicClient({
@@ -30,9 +37,9 @@ export async function getContractData(
   ).map((v) => v.result)
 
   return {
-    erc20Address,
-    minPurchaseSeconds,
-    tps,
-    client,
+    erc20Address: erc20Address as Address,
+    minPurchaseSeconds: minPurchaseSeconds as bigint,
+    tps: tps as bigint,
+    client: client as PublicClient,
   }
 }
