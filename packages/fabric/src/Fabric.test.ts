@@ -1,6 +1,11 @@
-import { mint } from './Fabric'
+import { getMintIntent, mint, simulateMint } from './Fabric'
 import { failingTestCases, passingTestCases } from './test-transactions'
+import {
+  Chains,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
+import { parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the fabric plugin', () => {
@@ -57,5 +62,46 @@ describe('Given the fabric plugin', () => {
         })
       })
     })
+  })
+})
+
+describe('Given the getMintIntent function', () => {
+  // Define the constant for the contract address
+  const CONTRACT_ADDRESS = '0x2efc6064239121d1d7efb503355daa82b87ee89c'
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
+
+  test('returns a TransactionRequest with correct properties', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.BASE,
+      contractAddress: CONTRACT_ADDRESS,
+      amount: BigInt('1'),
+      recipient: RECIPIENT_ADDRESS,
+    }
+
+    const result = await getMintIntent(mint)
+
+    expect(result).toEqual({
+      from: mint.recipient,
+      to: mint.contractAddress,
+      data: '0xa0712d6800000000000000000000000000000000000000000000000000028fbee4d84c00',
+    })
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a mint', async () => {
+    const mint: MintIntentParams = {
+      chainId: 11155111,
+      contractAddress: '0xD77269c83AAB591Ca834B3687E1f4164B2fF25f5',
+      amount: BigInt(2),
+      recipient: '0x000000000000000000000000000000000000dEaD',
+    }
+    const value = 999999999995328000n
+    const account = '0x000000000000000000000000000000000000dEaD'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(mint.contractAddress)
+    expect(request.value).toBe(value)
   })
 })
