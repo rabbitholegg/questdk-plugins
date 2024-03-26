@@ -5,6 +5,8 @@ import {
 } from '@rabbitholegg/questdk'
 import {
   type Address,
+  type PublicClient,
+  type SimulateContractReturnType,
   type TransactionRequest,
   createPublicClient,
   encodeFunctionData,
@@ -16,6 +18,7 @@ import {
   Chains,
   chainIdToViemChain,
   BOOST_TREASURY_ADDRESS,
+  DEFAULT_ACCOUNT,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { ERC_721_ABI, MINT_ABI } from './abi'
 
@@ -103,6 +106,34 @@ export const getMintIntent = async (
     to: contractAddress,
     data,
   }
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { chainId, contractAddress, recipient } = mint
+  
+  const _client =
+    client ??
+    createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    })
+  const from = account ?? DEFAULT_ACCOUNT
+
+  const mintArgs = [recipient, BOOST_TREASURY_ADDRESS]
+  const result = await _client.simulateContract({
+    address: contractAddress,
+    value,
+    abi: ERC_721_ABI,
+    functionName: 'mintWithReferrer',
+    args: mintArgs,
+    account: from,
+  })
+  return result
 }
 
 export const getSupportedTokenAddresses = async (
