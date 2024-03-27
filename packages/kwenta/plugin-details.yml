@@ -1,0 +1,10 @@
+project:
+  name: Kwenta
+  iconOption: https://images.mirror-media.xyz/publication-images/5bBT3wYBQQc3wlVFQMJtx.png
+  appLink: https://kwenta.io/
+
+tasks:
+  - name: Options on Kwenta
+    link: https://v3.kwenta.io/market/
+    iconOption: https://images.mirror-media.xyz/publication-images/5bBT3wYBQQc3wlVFQMJtx.png
+    actionPluginId: options
