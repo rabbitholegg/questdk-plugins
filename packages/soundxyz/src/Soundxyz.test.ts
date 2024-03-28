@@ -138,6 +138,15 @@ describe('getProjectFees', () => {
     expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee).toEqual(BigInt('777000000000000'))
   })
+
+  test('should return the correct fee for a legacy mint', async () => {
+    const contractAddress: Address =
+      '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE'
+    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+
+    const fee = await getProjectFees(mintParams)
+    expect(fee).equals(777000000000000n)
+  })
 })
 describe('getFees', () => {
   test('should return the correct fee for project and action', async () => {
@@ -157,39 +166,6 @@ describe('getFees', () => {
     expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee.projectFee).toEqual(BigInt('777000000000000'))
     expect(fee.actionFee).toEqual(BigInt('0'))
-  })
-})
-
-describe('Given the getProjectFee function', () => {
-  test('should return the correct fee for a legacy mint', async () => {
-    const contractAddress: Address =
-      '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE'
-    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
-
-    const fee = await getProjectFees(mintParams)
-    expect(fee).equals(777000000000000n)
-  })
-
-  test('should return the correct fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0x393c46fe7887697124a73f6028f39751aa1961a3'
-    const tokenId = 1
-    const mintParams = {
-      contractAddress,
-      tokenId,
-      chainId: Chains.ZORA,
-      amount: 2,
-    }
-
-    const mockFns = {
-      getProjectFees: async (_mint: MintActionParams) =>
-        BigInt('1554000000000000'),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
-    const fee = await mockFns.getProjectFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee).equals(BigInt('1554000000000000'))
   })
 })
 
