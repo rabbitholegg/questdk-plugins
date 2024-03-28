@@ -1,9 +1,9 @@
 import { type IActionPlugin } from '@rabbitholegg/questdk'
 
 import {
-  mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  mint,
 } from './Fabric.js'
 
 export const Fabric: IActionPlugin = {
