@@ -23,6 +23,8 @@ export const bridge = async (
 
   const bridgeContract = contractAddress ?? CHAIN_TO_CONTRACT[sourceChainId]
   const isNative = tokenAddress === zeroAddress
+  const tokenAmount = tokenAddress && !isNative ? amount : undefined
+  const token = tokenAddress && !isNative ? tokenAddress : undefined
 
   return compressJson({
     chainId: sourceChainId,
@@ -32,8 +34,8 @@ export const bridge = async (
       $abi: ABI,
       toChainId: destinationChainId,
       receiver: recipient,
-      tokenAddress: isNative ? undefined : tokenAddress,
-      amount: isNative ? undefined : amount,
+      tokenAddress: token,
+      amount: tokenAmount,
     },
   })
 }

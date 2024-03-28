@@ -72,7 +72,10 @@ export const passingTestCases = [
   createTestCase(ERC20_BRIDGE_SWAP, 'when amount is "any"', {
     amount: undefined,
   }),
-  createTestCase(ERC20_TRANSFER, 'when amount and tokenAddress are "any"', {
+  createTestCase(NATIVE_TRANSFER, 'when tokenAddress is "any" (native)', {
+    tokenAddress: undefined,
+  }),
+  createTestCase(ERC20_TRANSFER, 'when amount and tokenAddress are "any" (erc20)', {
     amount: undefined,
     tokenAddress: undefined,
   }),
