@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.35
+
+### Patch Changes
+
+- [#322](https://github.com/rabbitholegg/questdk-plugins/pull/322) [`f03eafed`](https://github.com/rabbitholegg/questdk-plugins/commit/f03eafedbdfcc37eb95f78c0ed1368ac8344dc6e) Thanks [@mmackz](https://github.com/mmackz)! - update simulate mint test
+
 ## 1.0.0-alpha.34
 
 ### Patch Changes
