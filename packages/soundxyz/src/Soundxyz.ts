@@ -24,8 +24,10 @@ import {
 import {
   SUPERMINTER,
   SUPERMINTER_V2,
-  SUPERMINTER_ABI,
-  TOTAL_PRICE_AND_FEES_ABI,
+  SUPERMINTER_V1_ABI,
+  SUPERMINTER_V2_ABI,
+  TOTAL_PRICE_AND_FEES_V1_ABI,
+  TOTAL_PRICE_AND_FEES_V2_ABI,
   NEXT_SCHEDULE_NUM_ABI,
 } from './constants'
 import { Chains } from './utils'
@@ -42,7 +44,7 @@ export const mint = async (
       $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
     },
     input: {
-      $abi: SUPERMINTER_ABI,
+      $abi: SUPERMINTER_V2_ABI,
       p: {
         edition: contractAddress,
         quantity: amount,
@@ -80,7 +82,7 @@ export const getMintIntent = async (
   }
 
   const data = encodeFunctionData({
-    abi: SUPERMINTER_ABI,
+    abi: SUPERMINTER_V2_ABI,
     functionName: 'mintTo',
     args: [mintTo],
   })
@@ -130,16 +132,28 @@ export const simulateMint = async (
     affiliateProof: [zeroHash],
     attributionId: 0,
   }
-  const result = await _client.simulateContract({
-    abi: SUPERMINTER_ABI,
-    functionName: 'mintTo',
-    args: [mintTo],
-    address: SUPERMINTER_V2,
-    value,
-    account: account || DEFAULT_ACCOUNT,
-  })
 
-  return result
+  try {
+    const result = await _client.simulateContract({
+      abi: SUPERMINTER_V2_ABI,
+      functionName: 'mintTo',
+      args: [mintTo],
+      address: SUPERMINTER_V2,
+      value,
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  } catch {
+    const result = await _client.simulateContract({
+      abi: SUPERMINTER_V1_ABI,
+      functionName: 'mintTo',
+      args: [mintTo],
+      address: SUPERMINTER,
+      value,
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  }
 }
 
 export const getProjectFees = async (
@@ -167,22 +181,41 @@ export const getFees = async (
   )
   const quantity = amount ?? 1
 
-  const totalPriceAndFees = (await client.readContract({
-    address: SUPERMINTER_V2,
-    abi: TOTAL_PRICE_AND_FEES_ABI,
-    functionName: 'totalPriceAndFees',
-    args: [
-      contractAddress,
-      tier,
-      BigInt(0),
-      quantity,
-      false, // assume hasValidAffiliate is false
-    ],
-  })) as TotalPriceAndFees
+  try {
+    const totalPriceAndFees = (await client.readContract({
+      address: SUPERMINTER_V2,
+      abi: TOTAL_PRICE_AND_FEES_V2_ABI,
+      functionName: 'totalPriceAndFees',
+      args: [
+        contractAddress,
+        tier,
+        BigInt(0),
+        quantity,
+        false, // assume hasValidAffiliate is false
+      ],
+    })) as TotalPriceAndFees
 
-  return {
-    actionFee: totalPriceAndFees.subTotal,
-    projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
+    return {
+      actionFee: totalPriceAndFees.subTotal,
+      projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
+    }
+  } catch {
+    const totalPriceAndFees = (await client.readContract({
+      address: SUPERMINTER,
+      abi: TOTAL_PRICE_AND_FEES_V1_ABI,
+      functionName: 'totalPriceAndFees',
+      args: [
+        contractAddress,
+        tier,
+        BigInt(0),
+        quantity,
+      ],
+    })) as TotalPriceAndFees
+
+    return {
+      actionFee: totalPriceAndFees.subTotal,
+      projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
+    }
   }
 }
 
@@ -200,7 +233,7 @@ export const getDefaultMintTier = async (
     })
   // If the next schedule to tier 0 is 0 then the edition is not scheduled
   const tier0NextSchedule = (await _client.readContract({
-    address: SUPERMINTER_V2,
+    address: SUPERMINTER,
     abi: NEXT_SCHEDULE_NUM_ABI,
     functionName: 'nextScheduleNum',
     args: [contractAddress, BigInt(0)],
