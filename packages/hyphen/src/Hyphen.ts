@@ -3,11 +3,11 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { zeroAddress, type Address } from 'viem'
 import { ABI } from './abi.js'
-import { NATIVE_TOKEN_ADDRESS, CHAIN_TO_TOKENS } from './chain-to-tokens'
+import { CHAIN_TO_TOKENS } from './chain-to-tokens'
 import { CHAIN_TO_CONTRACT } from './chain-to-contract'
-import { type ChainIds, CHAIN_ID_ARRAY } from './chain-ids'
 
 export const bridge = async (
   bridge: BridgeActionParams,
@@ -21,33 +21,19 @@ export const bridge = async (
     recipient,
   } = bridge
 
-  const bridgeContract =
-    contractAddress ?? CHAIN_TO_CONTRACT[sourceChainId as ChainIds]
+  const bridgeContract = contractAddress ?? CHAIN_TO_CONTRACT[sourceChainId]
+  const isNative = tokenAddress === zeroAddress
 
-  // if transfer is using the native gas token
-  if (tokenAddress === NATIVE_TOKEN_ADDRESS) {
-    return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
-      to: bridgeContract, // The contract address of the bridge
-      value: amount,
-      input: {
-        $abi: ABI,
-        toChainId: destinationChainId,
-        receiver: recipient,
-      },
-    })
-  }
-
-  // if transfer is for ERC-20 tokens
   return compressJson({
     chainId: sourceChainId,
     to: bridgeContract,
+    value: isNative ? amount : undefined,
     input: {
       $abi: ABI,
       toChainId: destinationChainId,
-      tokenAddress,
       receiver: recipient,
-      amount,
+      tokenAddress: isNative ? undefined : tokenAddress,
+      amount: isNative ? undefined : amount,
     },
   })
 }
@@ -55,11 +41,16 @@ export const bridge = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
-  return CHAIN_TO_TOKENS[_chainId as ChainIds] ?? []
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
-  return CHAIN_ID_ARRAY
+  return [
+    Chains.ETHEREUM,
+    Chains.OPTIMISM,
+    Chains.BINANCE_SMART_CHAIN,
+    Chains.POLYGON_POS,
+    Chains.ARBITRUM_ONE,
+    Chains.AVALANCHE,
+  ]
 }
