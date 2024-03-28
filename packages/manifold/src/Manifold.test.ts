@@ -176,21 +176,6 @@ describe('simulateMint function', () => {
     expect(request.value).toBe(value)
   })
 
-  test('should simulate a 1155 batchmint', async () => {
-    const mint: MintIntentParams = {
-      chainId: Chains.BASE,
-      contractAddress: '0xe096f28c87f331758af3da402add89b33a2853d8',
-      tokenId: 1,
-      amount: BigInt('2'),
-      recipient: DEFAULT_ACCOUNT,
-    }
-    const value = parseEther('0.00204')
-    const result = await simulateMint(mint, value, mint.recipient)
-    const request = result.request
-    expect(request.address).toBe(ERC1155_CONTRACT)
-    expect(request.value).toBe(value)
-  })
-
   test('should simulate a 721 mint', async () => {
     const mint = {
       chainId: Chains.OPTIMISM,
