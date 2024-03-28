@@ -1,11 +1,10 @@
-import type { Address } from 'viem'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-
 import {
-  MAIN_SPOKE, // mainnet, polygon, avalanche
-  LAYER2_SPOKE, // arbitrum, optimism
   BINANCE_SPOKE,
+  LAYER2_SPOKE, // arbitrum, optimism
+  MAIN_SPOKE, // mainnet, polygon, avalanche
 } from './contract-addresses.js'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import type { Address } from 'viem'
 
 export const CHAIN_TO_CONTRACT: { [chainId: number]: Address } = {
   [Chains.ETHEREUM]: MAIN_SPOKE,

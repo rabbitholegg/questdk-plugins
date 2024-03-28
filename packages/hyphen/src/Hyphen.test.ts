@@ -1,12 +1,12 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { bridge } from './Hyphen'
-import { describe, expect, test } from 'vitest'
 import { ABI } from './abi'
 import { CHAIN_TO_CONTRACT } from './chain-to-contract'
 import { CHAIN_TO_TOKENS } from './chain-to-tokens'
 import { failingTestCases, passingTestCases } from './test-transactions'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { zeroAddress } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the Hyphen plugin', () => {
   describe('When handling the bridge', () => {

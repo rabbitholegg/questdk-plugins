@@ -1,5 +1,5 @@
-import { type Address, zeroAddress } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress } from 'viem'
 
 export const CHAIN_TO_TOKENS: Record<number, Address[]> = {
   [Chains.ETHEREUM]: [

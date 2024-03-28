@@ -1,11 +1,11 @@
+import { CHAIN_TO_TOKENS } from './chain-to-tokens'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import {
-  Chains,
   type BridgeActionParams,
+  Chains,
   type TestParams,
   createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { CHAIN_TO_TOKENS } from './chain-to-tokens'
 import { parseEther, zeroAddress } from 'viem'
 
 export const NATIVE_TRANSFER: TestParams<BridgeActionParams> = {
