@@ -204,12 +204,7 @@ export const getFees = async (
       address: SUPERMINTER,
       abi: TOTAL_PRICE_AND_FEES_V1_ABI,
       functionName: 'totalPriceAndFees',
-      args: [
-        contractAddress,
-        tier,
-        BigInt(0),
-        quantity,
-      ],
+      args: [contractAddress, tier, BigInt(0), quantity],
     })) as TotalPriceAndFees
 
     return {
