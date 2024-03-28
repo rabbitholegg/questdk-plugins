@@ -75,10 +75,14 @@ export const passingTestCases = [
   createTestCase(NATIVE_TRANSFER, 'when tokenAddress is "any" (native)', {
     tokenAddress: undefined,
   }),
-  createTestCase(ERC20_TRANSFER, 'when amount and tokenAddress are "any" (erc20)', {
-    amount: undefined,
-    tokenAddress: undefined,
-  }),
+  createTestCase(
+    ERC20_TRANSFER,
+    'when amount and tokenAddress are "any" (erc20)',
+    {
+      amount: undefined,
+      tokenAddress: undefined,
+    },
+  ),
 ]
 
 export const failingTestCases = [
