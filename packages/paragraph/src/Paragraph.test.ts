@@ -1,7 +1,12 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { getFees, getMintIntent, mint, simulateMint } from './Paragraph'
+import { failingTestCases, passingTestCases } from './test-transactions'
+import { apply } from '@rabbitholegg/questdk'
+import {
+  Chains,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint } from './Paragraph'
 
 describe('Given the paragraph plugin', () => {
   describe('When handling the mint action', () => {
@@ -57,5 +62,54 @@ describe('Given the paragraph plugin', () => {
         })
       })
     })
+  })
+})
+
+describe('Given the getMintIntent function', () => {
+  // Define the constant for the contract address
+  const CONTRACT_ADDRESS = '0x48cE2aA2c8B8c321883Ea9f2459a5dA9279DcA88'
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
+
+  test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
+    const mint = {
+      chainId: Chains.BASE,
+      contractAddress: CONTRACT_ADDRESS,
+      recipient: RECIPIENT_ADDRESS,
+    }
+    const result = await getMintIntent(mint as MintIntentParams)
+    expect(result).toEqual({
+      from: mint.recipient,
+      to: mint.contractAddress,
+      data: '0x13c84557000000000000000000000000123456789012345678901234567890123456789000000000000000000000000048e6a039bcf6d99806ce4595fc59e4a7c0caab19',
+    })
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a 1155 mint when tokenId is not 0', async () => {
+    const mint = {
+      chainId: Chains.BASE,
+      contractAddress: '0x48cE2aA2c8B8c321883Ea9f2459a5dA9279DcA88',
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = 1077000000000000n
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint as MintIntentParams, value, account)
+    const request = result.request
+    expect(request.address).toBe(mint.contractAddress)
+    expect(request.value).toBe(value)
+  })
+})
+
+describe('Given the getFee function', () => {
+  test('should return the correct project + action fee for a 721 mint', async () => {
+    const contractAddress: Address =
+      '0x48cE2aA2c8B8c321883Ea9f2459a5dA9279DcA88'
+    const mintParams = { contractAddress, chainId: Chains.BASE }
+
+    const fee = await getFees(mintParams)
+    expect(fee.projectFee).equals(777000000000000n)
+    expect(fee.actionFee).equals(300000000000000n)
   })
 })
