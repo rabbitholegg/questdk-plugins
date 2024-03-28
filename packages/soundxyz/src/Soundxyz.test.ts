@@ -1,17 +1,24 @@
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test, vi } from 'vitest'
-import { getDynamicNameParams, mint } from './Soundxyz'
+import {
+  getDynamicNameParams,
+  getProjectFees,
+  mint,
+  simulateMint,
+} from './Soundxyz'
 import {
   passingTestCases,
   failingTestCases,
   OP_SUPERMINTER_V2,
 } from './test-transactions'
 import { Chains } from './utils'
-import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
-import { type Address } from 'viem'
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI } from './constants'
+import { type Address, parseEther } from 'viem'
 import {
   ActionType,
+  type DisctriminatedActionParams,
   type MintActionParams,
+  type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 describe('Given the soundxyz plugin', () => {
@@ -26,7 +33,7 @@ describe('Given the soundxyz plugin', () => {
             $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
           },
           input: {
-            $abi: SUPERMINTER_ABI,
+            $abi: SUPERMINTER_V2_ABI,
             p: {
               edition: params.contractAddress,
               quantity: {
@@ -76,7 +83,10 @@ describe('getDynamicNameParams function', () => {
       tokenCollection: 'Collection Name',
     }
 
-    const result = await getDynamicNameParams(params, metadata)
+    const result = await getDynamicNameParams(
+      params as DisctriminatedActionParams,
+      metadata,
+    )
 
     expect(result).toEqual({
       actionType: 'Mint',
@@ -105,9 +115,9 @@ describe('getDynamicNameParams function', () => {
       tokenCollection: 'Collection Name',
     }
 
-    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
-      `Invalid action type "${params.type}"`,
-    )
+    await expect(
+      getDynamicNameParams(params as DisctriminatedActionParams, metadata),
+    ).rejects.toThrow(`Invalid action type "${params.type}"`)
   })
 })
 
@@ -147,5 +157,56 @@ describe('getFees', () => {
     expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee.projectFee).toEqual(BigInt('777000000000000'))
     expect(fee.actionFee).toEqual(BigInt('0'))
+  })
+})
+
+describe('Given the getProjectFee function', () => {
+  test('should return the correct fee for a legacy mint', async () => {
+    const contractAddress: Address =
+      '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE'
+    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+
+    const fee = await getProjectFees(mintParams)
+    expect(fee).equals(777000000000000n)
+  })
+
+  test('should return the correct fee for an 1155 mint', async () => {
+    const contractAddress: Address =
+      '0x393c46fe7887697124a73f6028f39751aa1961a3'
+    const tokenId = 1
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 2,
+    }
+
+    const mockFns = {
+      getProjectFees: async (_mint: MintActionParams) =>
+        BigInt('1554000000000000'),
+    }
+
+    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
+    const fee = await mockFns.getProjectFees(mintParams)
+    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
+    expect(fee).equals(BigInt('1554000000000000'))
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a legacy mint', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.OPTIMISM,
+      contractAddress: '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE',
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(SUPERMINTER)
+    expect(request.value).toBe(value)
   })
 })
