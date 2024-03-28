@@ -1,5 +1,9 @@
-export const ERC1155_CONTRACT = '0x26bbea7803dcac346d5f5f135b57cf2c752a02be'
-export const ERC721_CONTRACT = '0x23aa05a271debffaa3d75739af5581f744b326e4'
+import type { Address } from 'viem'
+
+export const ERC1155_CONTRACT: Address =
+  '0x26bbea7803dcac346d5f5f135b57cf2c752a02be'
+export const ERC721_CONTRACT: Address =
+  '0x23aa05a271debffaa3d75739af5581f744b326e4'
 
 export const ABI_MINT = [
   {
@@ -108,7 +112,7 @@ export const ERC721_MINT_ABI = [
   },
 ]
 
-export const INSTANCEID_ABI = [
+const INSTANCEID_ABI_1155 = [
   {
     inputs: [
       {
@@ -152,5 +156,64 @@ export const INSTANCEID_ABI = [
     ],
     stateMutability: 'view',
     type: 'function',
+  },
+]
+
+const INSTANCEID_ABI_721 = [
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'creatorContractAddress',
+        type: 'address',
+      },
+      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+    ],
+    name: 'getClaimForToken',
+    outputs: [
+      { internalType: 'uint256', name: 'instanceId', type: 'uint256' },
+      {
+        components: [
+          { internalType: 'uint32', name: 'total', type: 'uint32' },
+          { internalType: 'uint32', name: 'totalMax', type: 'uint32' },
+          { internalType: 'uint32', name: 'walletMax', type: 'uint32' },
+          { internalType: 'uint48', name: 'startDate', type: 'uint48' },
+          { internalType: 'uint48', name: 'endDate', type: 'uint48' },
+          {
+            internalType: 'enum ILazyPayableClaim.StorageProtocol',
+            name: 'storageProtocol',
+            type: 'uint8',
+          },
+          { internalType: 'uint8', name: 'contractVersion', type: 'uint8' },
+          { internalType: 'bool', name: 'identical', type: 'bool' },
+          { internalType: 'bytes32', name: 'merkleRoot', type: 'bytes32' },
+          { internalType: 'string', name: 'location', type: 'string' },
+          { internalType: 'uint256', name: 'cost', type: 'uint256' },
+          {
+            internalType: 'address payable',
+            name: 'paymentReceiver',
+            type: 'address',
+          },
+          { internalType: 'address', name: 'erc20', type: 'address' },
+          { internalType: 'address', name: 'signingAddress', type: 'address' },
+        ],
+        internalType: 'struct IERC721LazyPayableClaim.Claim',
+        name: 'claim',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+]
+
+export const INSTANCE_ID_PARAMS = [
+  {
+    contract: ERC1155_CONTRACT,
+    abi: INSTANCEID_ABI_1155,
+  },
+  {
+    contract: ERC721_CONTRACT,
+    abi: INSTANCEID_ABI_721,
   },
 ]
