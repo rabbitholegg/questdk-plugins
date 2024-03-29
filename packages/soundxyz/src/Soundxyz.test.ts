@@ -170,7 +170,7 @@ describe('getFees', () => {
 })
 
 describe('simulateMint function', () => {
-    test('should simulate a mint', async () => {
+  test('should simulate a mint', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.OPTIMISM,
       contractAddress: '0xdf71F2F15bCcDC7c7A89F01dd45cDE5A43F7e79f',
