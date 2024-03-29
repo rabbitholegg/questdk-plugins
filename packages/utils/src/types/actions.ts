@@ -81,10 +81,9 @@ export type DelegateActionParams = {
 export type VoteActionParams = {
   chainId: number
   project: Address | string
-  contractAddress?: Address
   support?: bigint | boolean | FilterOperator
   proposalId?: bigint | FilterOperator
-  numVotes?: bigint | FilterOperator
+  weight?: bigint | FilterOperator
 }
 
 export type ActionParams =

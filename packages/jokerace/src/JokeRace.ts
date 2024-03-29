@@ -10,15 +10,15 @@ import { JOKERACE_CAST_VOTE_WITHOUT_PROOF_ABI } from './abi'
 export const vote = async (
   vote: VoteActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, support, proposalId, numVotes } = vote
+  const { chainId, project, support, proposalId, weight } = vote
   return compressJson({
     chainId,
-    to: contractAddress,
+    to: project,
     input: {
       $abi: JOKERACE_CAST_VOTE_WITHOUT_PROOF_ABI,
       proposalId: proposalId,
       support: support,
-      numVotes: numVotes,
+      numVotes: weight,
     },
   })
 }
