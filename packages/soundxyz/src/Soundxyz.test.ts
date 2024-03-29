@@ -170,6 +170,22 @@ describe('getFees', () => {
 })
 
 describe('simulateMint function', () => {
+    test('should simulate a mint', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.OPTIMISM,
+      contractAddress: '0xdf71F2F15bCcDC7c7A89F01dd45cDE5A43F7e79f',
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(SUPERMINTER_V2)
+    expect(request.value).toBe(value)
+  })
+
   test('should simulate a legacy mint', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.OPTIMISM,
