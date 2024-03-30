@@ -1,25 +1,25 @@
-import { apply } from '@rabbitholegg/questdk'
-import { describe, expect, test, vi } from 'vitest'
 import {
   getDynamicNameParams,
   getProjectFees,
   mint,
   simulateMint,
 } from './Soundxyz'
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI } from './constants'
 import {
-  passingTestCases,
-  failingTestCases,
   OP_SUPERMINTER_V2,
+  failingTestCases,
+  passingTestCases,
 } from './test-transactions'
 import { Chains } from './utils'
-import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI } from './constants'
-import { type Address, parseEther } from 'viem'
+import { apply } from '@rabbitholegg/questdk'
 import {
   ActionType,
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, parseEther } from 'viem'
+import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the soundxyz plugin', () => {
   describe('When handling the mint action', () => {
