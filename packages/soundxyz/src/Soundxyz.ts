@@ -22,13 +22,14 @@ import {
   ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
+  NEXT_SCHEDULE_NUM_ABI,
+  MINT_INFO_LIST_ABI,
   SUPERMINTER,
   SUPERMINTER_V2,
   SUPERMINTER_V1_ABI,
   SUPERMINTER_V2_ABI,
   TOTAL_PRICE_AND_FEES_V1_ABI,
   TOTAL_PRICE_AND_FEES_V2_ABI,
-  NEXT_SCHEDULE_NUM_ABI,
 } from './constants'
 import { Chains } from './utils'
 import type { TotalPriceAndFees } from './types'
@@ -226,13 +227,26 @@ export const getDefaultMintTier = async (
       chain: chainIdToViemChain(chainId),
       transport: http(),
     })
-  // If the next schedule to tier 0 is 0 then the edition is not scheduled
-  const tier0NextSchedule = (await _client.readContract({
+
+  // check to see if contract uses legacy SUPERMINTER
+  // will return an array of mintInfo or an empty array
+  const mintInfoListResult = (await _client.readContract({
     address: SUPERMINTER,
+    abi: MINT_INFO_LIST_ABI,
+    functionName: 'mintInfoList',
+    args: [contractAddress],
+  })) as unknown[]
+  const isLegacy = mintInfoListResult.length
+
+  const minterAddress = isLegacy ? SUPERMINTER : SUPERMINTER_V2
+
+  const tier0NextSchedule = (await _client.readContract({
+    address: minterAddress,
     abi: NEXT_SCHEDULE_NUM_ABI,
     functionName: 'nextScheduleNum',
     args: [contractAddress, BigInt(0)],
   })) as number
+
   // If we pass in a tokenId, we use that to infer the tier, otherwise we default to 0 if it exists, otherwise 1
   const tier = tokenId ?? (BigInt(tier0NextSchedule) === BigInt(0) ? 1 : 0)
   return tier
