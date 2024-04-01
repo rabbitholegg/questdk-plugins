@@ -2,6 +2,7 @@ import {
   SMART_MARGIN_V3,
   SMART_MARGIN_V3_COMMIT_ORDER_ABI,
   TOKEN_TO_MARKET,
+  WBTC,
   WETH,
 } from './constants.js'
 import {
@@ -34,7 +35,7 @@ export const options = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return [WETH]
+  return [WETH, WBTC]
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {

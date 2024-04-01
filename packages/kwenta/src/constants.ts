@@ -4,10 +4,13 @@ import { type Address } from 'viem'
 export const SMART_MARGIN_V3: Address =
   '0xe331a7eec851ba702aa8bf43070a178451d6d28e'
 export const ETH_PERPS_MARKET_ID = 100
+export const WBTC_PERPS_MARKET_ID = 200
 export const WETH: Address = '0x4200000000000000000000000000000000000006'
+export const WBTC: Address = '0x1ceA84203673764244E05693e42E6Ace62bE9BA5'
 
 export const TOKEN_TO_MARKET: Record<Address, number> = {
   [WETH]: ETH_PERPS_MARKET_ID,
+  [WBTC]: WBTC_PERPS_MARKET_ID,
 }
 
 // https://basescan.org/address/0xe331a7eec851ba702aa8bf43070a178451d6d28e#code
