@@ -15,7 +15,7 @@ import {
 } from './abi'
 import { failingTestCases, passingTestCases } from './test-setup'
 import {
-  BASIC_PURCHASE,
+  POD_MINT,
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
 } from './test-transactions'
@@ -23,14 +23,14 @@ import {
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
     test('should return a valid action filter', async () => {
-      const { params } = BASIC_PURCHASE
+      const { params } = POD_MINT
       const filter = await mint(params)
       expect(filter).to.deep.equal({
-        chainId: 10,
+        chainId: 8453,
         to: {
           $or: [
-            '0xfff631ef40557f8705e89053af794a1dcfa0a90b',
-            '0x97eb05b8db496b12244bccf17cf377d00a99b67a',
+            '0x36cb061f9655368ebae79127c0e8bd34fd5a89c2',
+            '0x308e190d70c7d1c6ed569554bce73dc3f4ad359a',
           ],
         },
         input: {
@@ -38,7 +38,7 @@ describe('Given the zora plugin', () => {
             {
               $abiAbstract: UNIVERSAL_MINTER_ABI,
               _targets: {
-                $some: '0xfFF631EF40557f8705e89053aF794a1DCFA0A90b',
+                $some: '0x36Cb061F9655368eBAe79127c0e8bD34fD5A89C2',
               },
               _calldatas: {
                 $some: {
@@ -50,14 +50,14 @@ describe('Given the zora plugin', () => {
                           $or: [
                             {
                               recipient:
-                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                             },
                             {
                               tokenRecipient:
-                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                             },
                             {
-                              to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                              to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                             },
                           ],
                         },
@@ -72,14 +72,20 @@ describe('Given the zora plugin', () => {
                           $or: [
                             {
                               recipient:
-                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                             },
                             {
                               tokenRecipient:
-                                '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                             },
                             {
-                              to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                              to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+                            },
+                            {
+                              minterArguments: {
+                                $regex:
+                                  '.*865c301c46d64de5c9b124ec1a97ef1efc1bcbd1.*',
+                              },
                             },
                           ],
                         },
@@ -95,14 +101,14 @@ describe('Given the zora plugin', () => {
                 {
                   $or: [
                     {
-                      recipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                      recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                     },
                     {
                       tokenRecipient:
-                        '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                        '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                     },
                     {
-                      to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                      to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                     },
                   ],
                 },
@@ -114,14 +120,19 @@ describe('Given the zora plugin', () => {
                 {
                   $or: [
                     {
-                      recipient: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                      recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                     },
                     {
                       tokenRecipient:
-                        '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                        '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
                     },
                     {
-                      to: '0x628d4c61d81ac4f286b1778a063ed2f8810bc367',
+                      to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+                    },
+                    {
+                      minterArguments: {
+                        $regex: '.*865c301c46d64de5c9b124ec1a97ef1efc1bcbd1.*',
+                      },
                     },
                   ],
                 },
@@ -286,12 +297,12 @@ describe('simulateMint function', () => {
   test('should simulate a 1155 mint when tokenId is not 0', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.BASE,
-      contractAddress: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
-      tokenId: 10,
+      contractAddress: '0x36cb061f9655368ebae79127c0e8bd34fd5a89c2',
+      tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
     }
-    const value = parseEther('0.000777')
+    const value = parseEther('0.0007')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
 
     const result = await simulateMint(mint, value, account)

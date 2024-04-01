@@ -55,7 +55,16 @@ export const mint = async (
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
     })
     andArray1155.push({
-      $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
+      $or: [
+        { recipient },
+        { tokenRecipient: recipient },
+        { to: recipient },
+        {
+          minterArguments: {
+            $regex: `.*${recipient.toLowerCase().replace(/^0x/, '')}.*`,
+          },
+        },
+      ],
     })
   }
   if (tokenId || amount) {
