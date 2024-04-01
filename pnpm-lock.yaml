@@ -480,6 +480,25 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/pods:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@zoralabs/protocol-sdk':
+        specifier: 0.5.6-exports.0
+        version: 0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.7.9)(zod@3.21.4)
+      '@zoralabs/universal-minter':
+        specifier: 0.2.15
+        version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4)
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/polygon:
     dependencies:
       '@maticnetwork/pos-portal':
@@ -586,6 +605,9 @@ importers:
       '@rabbitholegg/questdk-plugin-pendle':
         specifier: workspace:*
         version: link:../pendle
+      '@rabbitholegg/questdk-plugin-pods':
+        specifier: workspace:*
+        version: link:../pods
       '@rabbitholegg/questdk-plugin-polygon':
         specifier: workspace:*
         version: link:../polygon
