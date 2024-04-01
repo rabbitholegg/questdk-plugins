@@ -1,8 +1,8 @@
+import { Chains, type TestParams, createTestCase } from './utils'
 import {
   GreaterThanOrEqual,
   type MintActionParams,
 } from '@rabbitholegg/questdk'
-import { Chains, createTestCase, type TestParams } from './utils'
 
 const OP_SUPERMINTER: TestParams<MintActionParams> = {
   transaction: {
