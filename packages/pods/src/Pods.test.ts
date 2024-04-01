@@ -20,7 +20,7 @@ import {
   EXPECTED_ENCODED_DATA_1155,
 } from './test-transactions'
 
-describe('Given the zora plugin', () => {
+describe('Given the pods plugin', () => {
   describe('When handling the mint', () => {
     test('should return a valid action filter', async () => {
       const { params } = POD_MINT
