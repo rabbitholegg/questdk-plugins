@@ -1,5 +1,5 @@
 import { SMART_MARGIN_V3, WETH } from './constants'
-import { type OptionsActionParams, OrderType } from '@rabbitholegg/questdk'
+import { type OptionsActionParams } from '@rabbitholegg/questdk'
 import {
   type TestParams,
   createTestCase,
