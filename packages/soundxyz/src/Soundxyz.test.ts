@@ -1,18 +1,25 @@
-import { apply } from '@rabbitholegg/questdk'
-import { describe, expect, test, vi } from 'vitest'
-import { getDynamicNameParams, mint } from './Soundxyz'
 import {
-  passingTestCases,
-  failingTestCases,
+  getDynamicNameParams,
+  getProjectFees,
+  mint,
+  simulateMint,
+} from './Soundxyz'
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI } from './constants'
+import {
   OP_SUPERMINTER_V2,
+  failingTestCases,
+  passingTestCases,
 } from './test-transactions'
 import { Chains } from './utils'
-import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_ABI } from './constants'
-import { type Address } from 'viem'
+import { apply } from '@rabbitholegg/questdk'
 import {
   ActionType,
+  type DisctriminatedActionParams,
   type MintActionParams,
+  type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, parseEther } from 'viem'
+import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the soundxyz plugin', () => {
   describe('When handling the mint action', () => {
@@ -26,7 +33,7 @@ describe('Given the soundxyz plugin', () => {
             $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
           },
           input: {
-            $abi: SUPERMINTER_ABI,
+            $abi: SUPERMINTER_V2_ABI,
             p: {
               edition: params.contractAddress,
               quantity: {
@@ -76,7 +83,10 @@ describe('getDynamicNameParams function', () => {
       tokenCollection: 'Collection Name',
     }
 
-    const result = await getDynamicNameParams(params, metadata)
+    const result = await getDynamicNameParams(
+      params as DisctriminatedActionParams,
+      metadata,
+    )
 
     expect(result).toEqual({
       actionType: 'Mint',
@@ -105,9 +115,9 @@ describe('getDynamicNameParams function', () => {
       tokenCollection: 'Collection Name',
     }
 
-    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
-      `Invalid action type "${params.type}"`,
-    )
+    await expect(
+      getDynamicNameParams(params as DisctriminatedActionParams, metadata),
+    ).rejects.toThrow(`Invalid action type "${params.type}"`)
   })
 })
 
@@ -128,6 +138,15 @@ describe('getProjectFees', () => {
     expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee).toEqual(BigInt('777000000000000'))
   })
+
+  test('should return the correct fee for a legacy mint', async () => {
+    const contractAddress: Address =
+      '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE'
+    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+
+    const fee = await getProjectFees(mintParams)
+    expect(fee).equals(777000000000000n)
+  })
 })
 describe('getFees', () => {
   test('should return the correct fee for project and action', async () => {
@@ -147,5 +166,39 @@ describe('getFees', () => {
     expect(getProjectFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee.projectFee).toEqual(BigInt('777000000000000'))
     expect(fee.actionFee).toEqual(BigInt('0'))
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a mint', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.OPTIMISM,
+      contractAddress: '0xdf71F2F15bCcDC7c7A89F01dd45cDE5A43F7e79f',
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(SUPERMINTER_V2)
+    expect(request.value).toBe(value)
+  })
+
+  test('should simulate a legacy mint', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.OPTIMISM,
+      contractAddress: '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE',
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(SUPERMINTER)
+    expect(request.value).toBe(value)
   })
 })
