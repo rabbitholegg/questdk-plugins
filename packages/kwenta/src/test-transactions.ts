@@ -23,7 +23,6 @@ export const OPTIONS_TEST: TestParams<OptionsActionParams> = {
     contractAddress: SMART_MARGIN_V3,
     token: WETH,
     amount: '20000000000000000000',
-    orderType: OrderType.Limit,
   },
 }
 
@@ -34,9 +33,6 @@ export const passingTestCases = [
 export const failingTestCases = [
   createTestCase(OPTIONS_TEST, 'when chainId is not correct', { chainId: 0 }),
   createTestCase(OPTIONS_TEST, 'when amount is not correct', { amount: 10000 }),
-  createTestCase(OPTIONS_TEST, 'when orderType is not correct', {
-    orderType: OrderType.Market,
-  }),
   createTestCase(OPTIONS_TEST, 'when recipient is not correct', {
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc2bcbd1',
   }),
