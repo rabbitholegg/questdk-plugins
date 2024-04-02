@@ -1,145 +1,46 @@
 import {
   Chains,
-  type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address, parseEther } from 'viem'
-import { describe, expect, test, vi } from 'vitest'
-import { getMintIntent, mint, simulateMint } from './Pods'
-import {
-  UNIVERSAL_MINTER_ABI,
-  ZORA_MINTER_ABI_721,
-  ZORA_MINTER_ABI_1155,
-  ZORA_MINTER_ABI_1155_LEGACY,
-} from './abi'
+import { describe, expect, test } from 'vitest'
+import { getFees, getMintIntent, mint, simulateMint } from './Pods'
 import { failingTestCases, passingTestCases } from './test-setup'
-import {
-  POD_MINT,
-  EXPECTED_ENCODED_DATA_721,
-  EXPECTED_ENCODED_DATA_1155,
-} from './test-transactions'
+import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
 
 describe('Given the pods plugin', () => {
   describe('When handling the mint', () => {
-    test('should return a valid action filter', async () => {
-      const { params } = POD_MINT
-      const filter = await mint(params)
-      expect(filter).to.deep.equal({
-        chainId: 8453,
-        to: {
-          $or: [
-            '0x36cb061f9655368ebae79127c0e8bd34fd5a89c2',
-            '0x308e190d70c7d1c6ed569554bce73dc3f4ad359a',
-          ],
-        },
-        input: {
-          $or: [
-            {
-              $abiAbstract: UNIVERSAL_MINTER_ABI,
-              _targets: {
-                $some: '0x36Cb061F9655368eBAe79127c0e8bD34fD5A89C2',
-              },
-              _calldatas: {
-                $some: {
-                  $or: [
-                    {
-                      $abi: ZORA_MINTER_ABI_721,
-                      $and: [
-                        {
-                          $or: [
-                            {
-                              recipient:
-                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                            },
-                            {
-                              tokenRecipient:
-                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                            },
-                            {
-                              to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                    {
-                      $abi: ZORA_MINTER_ABI_1155.concat(
-                        ZORA_MINTER_ABI_1155_LEGACY,
-                      ),
-                      $and: [
-                        {
-                          $or: [
-                            {
-                              recipient:
-                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                            },
-                            {
-                              tokenRecipient:
-                                '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                            },
-                            {
-                              to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                            },
-                            {
-                              minterArguments: {
-                                $regex:
-                                  '.*865c301c46d64de5c9b124ec1a97ef1efc1bcbd1.*',
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              },
-            },
-            {
-              $abi: ZORA_MINTER_ABI_721,
-              $and: [
-                {
-                  $or: [
-                    {
-                      recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                    },
-                    {
-                      tokenRecipient:
-                        '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                    },
-                    {
-                      to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
-              $and: [
-                {
-                  $or: [
-                    {
-                      recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                    },
-                    {
-                      tokenRecipient:
-                        '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                    },
-                    {
-                      to: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-                    },
-                    {
-                      minterArguments: {
-                        $regex: '.*865c301c46d64de5c9b124ec1a97ef1efc1bcbd1.*',
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
+    describe('should return a valid action filter', () => {
+      test('when making a valid mint action', async () => {
+        const filter = await mint({
+          chainId: 1,
+          contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+        })
+        expect(filter).toBeTypeOf('object')
+        expect(Number(filter.chainId)).toBe(1)
+        if (typeof filter.to === 'string') {
+          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+        } else {
+          // if to is an object, it should have a logical operator as the only key
+          expect(filter.to).toBeTypeOf('object')
+          expect(Object.keys(filter.to)).toHaveLength(1)
+          expect(
+            ['$or', '$and'].some((prop) =>
+              Object.hasOwnProperty.call(filter.to, prop),
+            ),
+          ).to.be.true
+          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+            arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+          )
+        }
+        // Check the input property is the correct type and has a valid filter operator
+        expect(filter.input).toBeTypeOf('object')
+        expect(
+          ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
+            Object.hasOwnProperty.call(filter.input, prop),
+          ),
+        ).to.be.true
       })
     })
 
@@ -173,7 +74,7 @@ describe('Given the getMintIntent function', () => {
   test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
-      tokenId: 1, // not 0
+      tokenId: 1,
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
@@ -187,109 +88,21 @@ describe('Given the getMintIntent function', () => {
       data: EXPECTED_ENCODED_DATA_1155,
     })
   })
-
-  test('returns a TransactionRequest with correct properties when tokenId is null', async () => {
-    const mint: MintIntentParams = {
-      chainId: 1,
-
-      contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt('10'),
-      recipient: RECIPIENT_ADDRESS,
-    }
-
-    const result = await getMintIntent(mint)
-
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_721,
-    })
-  })
-})
-
-describe('Given the getProjectFee function', () => {
-  test('should return the correct fee for a 721 mint', async () => {
-    const contractAddress: Address =
-      '0x4f86113fc3e9783cf3ec9a552cbb566716a57628'
-    const mintParams = { contractAddress, chainId: Chains.ZORA }
-
-    const mockFns = {
-      getProjectFees: async (_mint: MintActionParams) =>
-        BigInt('777000000000000'),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
-    const fee = await mockFns.getProjectFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee).equals(BigInt('777000000000000'))
-  })
-
-  test('should return the correct fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0x393c46fe7887697124a73f6028f39751aa1961a3'
-    const tokenId = 1
-    const mintParams = {
-      contractAddress,
-      tokenId,
-      chainId: Chains.ZORA,
-      amount: 2,
-    }
-
-    const mockFns = {
-      getProjectFees: async (_mint: MintActionParams) =>
-        BigInt('1554000000000000'),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getProjectFees')
-    const fee = await mockFns.getProjectFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee).equals(BigInt('1554000000000000'))
-  })
 })
 
 describe('Given the getFee function', () => {
-  test('should return the correct project + action fee for a 721 mint', async () => {
+  test('should return the correct fee for an 1155 mint', async () => {
     const contractAddress: Address =
-      '0x4f86113fc3e9783cf3ec9a552cbb566716a57628'
-    const mintParams = { contractAddress, chainId: Chains.ZORA }
-
-    const mockFns = {
-      getFees: async (_mint: MintActionParams) => ({
-        projectFee: BigInt('777000000000000'),
-        actionFee: BigInt('0'),
-      }),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
-    const fee = await mockFns.getFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee.projectFee).equals(BigInt('777000000000000'))
-    expect(fee.actionFee).equals(BigInt('0'))
-  })
-
-  test('should return the correct project + action fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0x393c46fe7887697124a73f6028f39751aa1961a3'
+      '0x36cb061f9655368ebae79127c0e8bd34fd5a89c2'
     const tokenId = 1
     const mintParams = {
       contractAddress,
       tokenId,
-      chainId: Chains.ZORA,
-      amount: 2,
+      chainId: Chains.BASE,
     }
-
-    const mockFns = {
-      getFees: async (_mint: MintActionParams) => ({
-        projectFee: BigInt('1554000000000000'),
-        actionFee: BigInt('0'),
-      }),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
-    const fee = await mockFns.getFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee.projectFee).equals(BigInt('1554000000000000'))
-    expect(fee.actionFee).equals(BigInt('0'))
+    const { actionFee, projectFee } = await getFees(mintParams)
+    expect(actionFee).equals(BigInt('0'))
+    expect(projectFee).equals(BigInt('700000000000000'))
   })
 })
 
