@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-jojo",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

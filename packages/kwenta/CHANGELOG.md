@@ -1,10 +1,10 @@
-# @rabbitholegg/questdk-plugin-pods
+# @rabbitholegg/questdk-plugin-kwenta
 
 ## 1.0.0-alpha.1
 
 ### Minor Changes
 
-- [#331](https://github.com/rabbitholegg/questdk-plugins/pull/331) [`3fa119a8`](https://github.com/rabbitholegg/questdk-plugins/commit/3fa119a8e588903d798e2ee895873fe92a0c9dc8) Thanks [@mmackz](https://github.com/mmackz)! - add pods plugin to questdk
+- [#327](https://github.com/rabbitholegg/questdk-plugins/pull/327) [`946bc3ea`](https://github.com/rabbitholegg/questdk-plugins/commit/946bc3ea8de5f3186bb9d626191e754c29fe439f) Thanks [@rontero83](https://github.com/rontero83)! - add Kwenta options support in Base
 
 ### Patch Changes
 
