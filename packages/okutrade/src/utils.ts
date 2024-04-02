@@ -3,7 +3,7 @@ import { getAddress, type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 const request = async (chain: string, method: string, data: unknown) => {
-  const result = await fetch(`https://omni.oku.zone/${chain}`, {
+  const result = await fetch(`https://omni.icarus.tools/${chain}`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
