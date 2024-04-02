@@ -2,37 +2,24 @@ import type { FilterOperator } from '@rabbitholegg/questdk'
 import { getAddress, type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
-const request = async (chain: string, contract: Address) => {
-  const params = [
-    contract,
-    {
-      result_size: 100,
-      sort_by: 'tvl_usd',
+const request = async (chain: string, method: string, data: unknown) => {
+  const result = await fetch(`https://omni.icarus.tools/${chain}`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
     },
-  ]
-
-  const result = await fetch(
-    `https://omni.icarus.tools/${chain}/cush/searchPoolsByAddress`,
-    {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: '1',
-        params,
-      }),
-    },
-  )
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: '1',
+      method: `cush_${method}`,
+      params: data,
+    }),
+  })
   const resp = await result.json()
   if (resp.error) {
     throw resp.error
   }
-
-  return resp.result.pools.map((r: { address: string }) =>
-    getAddress(r.address),
-  )
+  return resp.result.map((r: string) => getAddress(r))
 }
 
 export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
@@ -62,7 +49,7 @@ export const getPools = async (
     return undefined
   }
   const chain = getChainName(chainId)
-  const resp = await request(chain, tokenIn)
+  const resp = await request(chain, 'getTokenPools', [tokenIn])
   return resp as string[]
 }
 
