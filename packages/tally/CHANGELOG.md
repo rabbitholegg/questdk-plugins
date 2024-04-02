@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-tally
 
+## 1.0.0-alpha.28
+
+### Minor Changes
+
+- [#320](https://github.com/rabbitholegg/questdk-plugins/pull/320) [`4b159abe`](https://github.com/rabbitholegg/questdk-plugins/commit/4b159abe5046d69b67d5859eb1c584a3b6fce0fe) Thanks [@rontero83](https://github.com/rontero83)! - add Optimism delegate support for Tally
+
+### Patch Changes
+
+- Updated dependencies [[`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6), [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.17
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.27
 
 ### Patch Changes

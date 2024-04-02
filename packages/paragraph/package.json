@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-paragraph",
   "private": false,
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",

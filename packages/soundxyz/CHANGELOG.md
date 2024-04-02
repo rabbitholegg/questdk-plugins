@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.25
+
+### Minor Changes
+
+- [#329](https://github.com/rabbitholegg/questdk-plugins/pull/329) [`aecc0a7b`](https://github.com/rabbitholegg/questdk-plugins/commit/aecc0a7b5bbcb3deb4b8eef767281346d35108e4) Thanks [@mmackz](https://github.com/mmackz)! - add support for legacy contract in simulation and projectfees helpers
+
+### Patch Changes
+
+- Updated dependencies [[`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6), [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.17
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.24
 
 ### Minor Changes
