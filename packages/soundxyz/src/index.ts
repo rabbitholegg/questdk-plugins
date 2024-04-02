@@ -1,19 +1,19 @@
 import {
-  type IActionPlugin,
-  PluginActionNotImplementedError,
   type ActionParams,
+  type IActionPlugin,
   type MintActionParams,
+  PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
-  mint,
-  getSupportedChainIds,
-  getSupportedTokenAddresses,
   getDynamicNameParams,
+  getFees,
   getMintIntent,
   getProjectFees,
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+  mint,
   simulateMint,
-  getFees,
 } from './Soundxyz.js'
 
 export const Soundxyz: IActionPlugin = {

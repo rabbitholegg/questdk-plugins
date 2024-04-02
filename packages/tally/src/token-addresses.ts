@@ -1,7 +1,7 @@
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
-import { ARB_ONE_CHAIN_ID } from './chain-ids.js'
 
-// This is just the Arbitrum token address since we only support that token right now
 export const TALLY_TOKENS: Record<number, Address[]> = {
-  [ARB_ONE_CHAIN_ID]: ['0xc4ed0a9ea70d5bcc69f748547650d32cc219d882'],
+  [Chains.ARBITRUM_ONE]: ['0x912ce59144191c1204e64559fe8253a0e49e6548'],
+  [Chains.OPTIMISM]: ['0x4200000000000000000000000000000000000042'],
 }

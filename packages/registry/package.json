@@ -73,6 +73,8 @@
     "@rabbitholegg/questdk-plugin-aerodrome": "workspace:*",
     "@rabbitholegg/questdk-plugin-manifold": "workspace:*",
     "@rabbitholegg/questdk-plugin-fabric": "workspace:*",
-    "@rabbitholegg/questdk-plugin-paragraph": "workspace:*"
+    "@rabbitholegg/questdk-plugin-paragraph": "workspace:*",
+    "@rabbitholegg/questdk-plugin-pods": "workspace:*",
+    "@rabbitholegg/questdk-plugin-kwenta": "workspace:*"
   }
 }

@@ -351,6 +351,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/kwenta:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/llama:
     dependencies:
       '@rabbitholegg/questdk':
@@ -480,6 +493,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/pods:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/polygon:
     dependencies:
       '@maticnetwork/pos-portal':
@@ -559,6 +585,9 @@ importers:
       '@rabbitholegg/questdk-plugin-kote':
         specifier: workspace:*
         version: link:../kote
+      '@rabbitholegg/questdk-plugin-kwenta':
+        specifier: workspace:*
+        version: link:../kwenta
       '@rabbitholegg/questdk-plugin-llama':
         specifier: workspace:*
         version: link:../llama
@@ -586,6 +615,9 @@ importers:
       '@rabbitholegg/questdk-plugin-pendle':
         specifier: workspace:*
         version: link:../pendle
+      '@rabbitholegg/questdk-plugin-pods':
+        specifier: workspace:*
+        version: link:../pods
       '@rabbitholegg/questdk-plugin-polygon':
         specifier: workspace:*
         version: link:../polygon
