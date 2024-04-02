@@ -1,6 +1,5 @@
 {
   "name": "@rabbitholegg/questdk-plugin-kwenta",
-  "private": true,
   "version": "1.0.0-alpha.1",
   "type": "module",
   "exports": {
