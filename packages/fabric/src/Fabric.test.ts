@@ -71,7 +71,6 @@ describe('Given the getFee function', () => {
       '0xd77269c83aab591ca834b3687e1f4164b2ff25f5'
     const mintParams = { chainId: Chains.SEPOLIA, contractAddress, amount: 1n }
     const fee = await getFees(mintParams)
-    console.log(fee)
     expect(fee.projectFee).equals(0n)
     expect(fee.actionFee).equals(499999999997664000n)
   })
