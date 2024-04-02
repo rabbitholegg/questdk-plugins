@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-kwenta
 
+## 1.0.0-alpha.2
+
+### Patch Changes
+
+- [#333](https://github.com/rabbitholegg/questdk-plugins/pull/333) [`cf4fb571`](https://github.com/rabbitholegg/questdk-plugins/commit/cf4fb571d44d8f008624c1d63d0cbf57a567fa28) Thanks [@mmackz](https://github.com/mmackz)! - remove private field from package.json
+
 ## 1.0.0-alpha.1
 
 ### Minor Changes

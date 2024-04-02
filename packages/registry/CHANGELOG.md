@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.94
+
+### Patch Changes
+
+- Updated dependencies [[`cf4fb571`](https://github.com/rabbitholegg/questdk-plugins/commit/cf4fb571d44d8f008624c1d63d0cbf57a567fa28)]:
+  - @rabbitholegg/questdk-plugin-kwenta@1.0.0-alpha.2
+
 ## 1.0.0-alpha.93
 
 ### Minor Changes
