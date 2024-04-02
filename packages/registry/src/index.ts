@@ -37,6 +37,7 @@ import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
 import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
 import { Pods } from '@rabbitholegg/questdk-plugin-pods'
+import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -97,6 +98,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Paragraph.pluginId]: Paragraph,
   [Aerodrome.pluginId]: Aerodrome,
   [Pods.pluginId]: Pods,
+  [Kwenta.pluginId]: Kwenta,
 }
 
 export const getPlugin = (pluginId: string) => {
