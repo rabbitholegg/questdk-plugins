@@ -1,3 +1,4 @@
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type Chain,
@@ -30,14 +31,14 @@ interface Transaction {
 }
 
 const chains: Record<number, Chain> = {
-  1: mainnet,
-  10: optimism,
-  137: polygon,
-  324: zkSync,
-  8453: base,
-  42161: arbitrum,
-  81457: blast,
-  7777777: zora,
+  [Chains.ETHEREUM]: mainnet,
+  [Chains.OPTIMISM]: optimism,
+  [Chains.POLYGON_POS]: polygon,
+  [Chains.ZK_SYNC_ERA]: zkSync,
+  [Chains.BASE]: base,
+  [Chains.ARBITRUM_ONE]: arbitrum,
+  [Chains.BLAST]: blast,
+  [Chains.ZORA]: zora,
 }
 
 function getClient(chain: Chain): PublicClient {
