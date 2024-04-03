@@ -36,6 +36,7 @@ import { Manifold } from '@rabbitholegg/questdk-plugin-manifold'
 import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
 import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
+import { BaseBridge } from '@rabbitholegg/questdk-plugin-basebridge'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -95,6 +96,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Fabric.pluginId]: Fabric,
   [Paragraph.pluginId]: Paragraph,
   [Aerodrome.pluginId]: Aerodrome,
+  [BaseBridge.pluginId]: BaseBridge,
 }
 
 export const getPlugin = (pluginId: string) => {
