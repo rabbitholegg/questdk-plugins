@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-paragraph
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- [#336](https://github.com/rabbitholegg/questdk-plugins/pull/336) [`04ef7baa`](https://github.com/rabbitholegg/questdk-plugins/commit/04ef7baa417873cb118cf80e99e2d342ddd39921) Thanks [@mmackz](https://github.com/mmackz)! - add helpers to Paragraph plugin
+
 ## 1.0.0-alpha.3
 
 ### Minor Changes
