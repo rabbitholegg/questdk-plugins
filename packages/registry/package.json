@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.92",
+  "version": "1.0.0-alpha.95",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -74,6 +74,8 @@
     "@rabbitholegg/questdk-plugin-manifold": "workspace:*",
     "@rabbitholegg/questdk-plugin-fabric": "workspace:*",
     "@rabbitholegg/questdk-plugin-paragraph": "workspace:*",
+    "@rabbitholegg/questdk-plugin-pods": "workspace:*",
+    "@rabbitholegg/questdk-plugin-kwenta": "workspace:*",
     "@rabbitholegg/questdk-plugin-basebridge": "workspace:*"
   }
 }

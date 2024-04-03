@@ -1,5 +1,23 @@
 # @rabbitholegg/questdk-plugin-paragraph
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- [#336](https://github.com/rabbitholegg/questdk-plugins/pull/336) [`04ef7baa`](https://github.com/rabbitholegg/questdk-plugins/commit/04ef7baa417873cb118cf80e99e2d342ddd39921) Thanks [@mmackz](https://github.com/mmackz)! - add helpers to Paragraph plugin
+
+## 1.0.0-alpha.3
+
+### Minor Changes
+
+- [#326](https://github.com/rabbitholegg/questdk-plugins/pull/326) [`26079ddd`](https://github.com/rabbitholegg/questdk-plugins/commit/26079ddd68e37484b708dd4e200cf68e7e712622) Thanks [@mmackz](https://github.com/mmackz)! - implement projectFees and simulation functions
+
+### Patch Changes
+
+- Updated dependencies [[`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6), [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.17
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.2
 
 ### Patch Changes

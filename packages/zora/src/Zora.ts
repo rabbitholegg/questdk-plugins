@@ -111,7 +111,6 @@ export const getMintIntent = async (
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
   try {
-    console.log({ chainId, contractAddress, tokenId })
     fixedPriceSaleStratAddress = (
       await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
     ).fixedPrice.address

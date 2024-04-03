@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.17
+
+### Minor Changes
+
+- [#323](https://github.com/rabbitholegg/questdk-plugins/pull/323) [`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6) Thanks [@mmackz](https://github.com/mmackz)! - add sepolia chain to chainIdToViemChain
+
+### Patch Changes
+
+- [#321](https://github.com/rabbitholegg/questdk-plugins/pull/321) [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87) Thanks [@mmackz](https://github.com/mmackz)! - add projectFees and simulation to manifold plugin
+
 ## 1.0.0-alpha.16
 
 ### Minor Changes

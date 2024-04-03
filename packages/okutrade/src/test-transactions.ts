@@ -148,6 +148,25 @@ export const failingTestCasesSwap = [
 
 // ----- Options Action Type ------
 
+const LIMIT_ORDER_DEGEN: TestParams<OptionsActionParams> = {
+  transaction: {
+    chainId: 8453,
+    to: '0xff8b754c64e9a8473bd6e1118d0eac67f0a8ae27',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    hash: '0x93c84b66161f915c74430dfbd33a8de91e74c2f6381a96dc7317717f63df7074',
+    input:
+      '0x53410e7b000000000000000000000000c9034c3e7f58003e6ae0c8438e7c8f4598d5acaa000000000000000000000000000000000000000000000000000000000001b3b40000000000000000000000000000000000000000000000138400eca364a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018f3701c7e0',
+    value: '0',
+  },
+  params: {
+    chainId: 8453,
+    contractAddress: '0xff8b754c64e9a8473bd6e1118d0eac67f0a8ae27',
+    token: '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', // DEGEN
+    amount: GreaterThanOrEqual(parseUnits('300', 18)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+  },
+}
+
 const LIMIT_ORDER: TestParams<OptionsActionParams> = {
   transaction: {
     chainId: 8453,
@@ -168,26 +187,24 @@ const LIMIT_ORDER: TestParams<OptionsActionParams> = {
 }
 
 export const passingTestCasesOptions = [
+  createTestCase(LIMIT_ORDER_DEGEN, 'when using limit order base (degen)'),
   createTestCase(LIMIT_ORDER, 'when using limit order base'),
-  createTestCase(LIMIT_ORDER, 'when using "any" token', {
+  createTestCase(LIMIT_ORDER_DEGEN, 'when using "any" token', {
     token: undefined,
   }),
-  createTestCase(LIMIT_ORDER, 'when amount is "any"', {
+  createTestCase(LIMIT_ORDER_DEGEN, 'when amount is "any"', {
     amount: undefined,
   }),
 ]
 
 export const failingTestCasesOptions = [
-  createTestCase(LIMIT_ORDER, 'when chainId is incorrect', {
+  createTestCase(LIMIT_ORDER_DEGEN, 'when chainId is incorrect', {
     chainId: 1,
   }),
-  createTestCase(LIMIT_ORDER, 'when amount is insufficient', {
-    amount: GreaterThanOrEqual(parseUnits('10000', 6)),
+  createTestCase(LIMIT_ORDER_DEGEN, 'when amount is insufficient', {
+    amount: GreaterThanOrEqual(parseUnits('10000', 18)),
   }),
-  createTestCase(LIMIT_ORDER, 'when wrong token (degen) is traded', {
-    token: '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', // degen
-  }),
-  createTestCase(LIMIT_ORDER, 'when wrong token (usdc) is traded', {
-    token: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', // usdc
+  createTestCase(LIMIT_ORDER_DEGEN, 'when wrong token (usdc.b) is traded', {
+    token: '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA', // usdc.b
   }),
 ]
