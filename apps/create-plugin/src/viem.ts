@@ -1,18 +1,19 @@
 import {
-  createPublicClient,
-  http,
-  type Hash,
-  type PublicClient,
   type Address,
   type Chain,
-  zeroAddress,
+  type Hash,
+  type PublicClient,
+  createPublicClient,
+  http,
   isAddress,
+  zeroAddress,
 } from 'viem'
 import {
-  mainnet,
-  base,
-  optimism,
   arbitrum,
+  base,
+  blast,
+  mainnet,
+  optimism,
   polygon,
   zkSync,
   zora,
@@ -31,10 +32,11 @@ interface Transaction {
 const chains: Record<number, Chain> = {
   1: mainnet,
   10: optimism,
-  42161: arbitrum,
-  8453: base,
   137: polygon,
   324: zkSync,
+  8453: base,
+  42161: arbitrum,
+  81457: blast,
   7777777: zora,
 }
 
