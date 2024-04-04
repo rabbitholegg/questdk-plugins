@@ -639,6 +639,9 @@ importers:
       '@rabbitholegg/questdk-plugin-tally':
         specifier: workspace:*
         version: link:../tally
+      '@rabbitholegg/questdk-plugin-thruster':
+        specifier: workspace:*
+        version: link:../thruster
       '@rabbitholegg/questdk-plugin-traderjoe':
         specifier: workspace:*
         version: link:../traderjoe
@@ -734,6 +737,19 @@ importers:
         version: link:../tsconfig
 
   packages/tally:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/thruster:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
