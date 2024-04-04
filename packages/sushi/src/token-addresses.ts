@@ -1,4 +1,7 @@
-import { Chains, CHAIN_TO_TOKENS as DEFAULT_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  CHAIN_TO_TOKENS as DEFAULT_TOKENS,
+  Chains,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
 
 const ethereumTokenAddresses: Address[] = [

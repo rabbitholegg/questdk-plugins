@@ -34,7 +34,7 @@ export const CHAIN_TO_CONTRACTS: { [_chainId: number]: Address[] | undefined } =
     ],
     [Chains.BLAST]: [
       '0xCdBCd51a5E8728E0AF4895ce5771b7d17fF71959', // RouteProcessor4
-    ]
+    ],
   }
 
 export const INTERNAL_ETHER_ADDRESS =
