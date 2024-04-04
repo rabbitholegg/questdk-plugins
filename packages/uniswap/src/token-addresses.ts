@@ -1,5 +1,8 @@
 import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
-import { Chains, CHAIN_TO_TOKENS as DEFAULT_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  CHAIN_TO_TOKENS as DEFAULT_TOKENS,
+} from '@rabbitholegg/questdk-plugin-utils'
 
 const ethereumTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
@@ -100,7 +103,7 @@ const avalancheTokenAddresses: Address[] = [
 ]
 
 const blastTokenAddresses: Address[] = [
-  ...DEFAULT_TOKENS[Chains.BLAST] as Address[],
+  ...(DEFAULT_TOKENS[Chains.BLAST] as Address[]),
   '0xbf5495efe5db9ce00f80364c8b423567e58d2110', // EZETH
   '0xb79dd08ea68a908a97220c76d19a6aa9cbde4376', // USD+
   '0x9e20461bc2c4c980f62f1b279d71734207a6a356', // OMNI
