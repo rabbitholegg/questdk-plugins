@@ -1,15 +1,15 @@
-import {
-  type TransactionFilter,
-  type BridgeActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { zeroAddress, type Address } from 'viem'
-import { SYNAPSE_CCTP_ROUTER, CHAIN_TO_ROUTER } from './contract-addresses'
+import { Token } from './Token'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { Token } from './Token'
+import { CHAIN_TO_ROUTER, SYNAPSE_CCTP_ROUTER } from './contract-addresses'
 import * as tokens from './tokens'
+import {
+  type BridgeActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { CHAIN_TO_TOKENS, Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress } from 'viem'
 
 const allTokens: Token[] = Object.values(tokens)
 

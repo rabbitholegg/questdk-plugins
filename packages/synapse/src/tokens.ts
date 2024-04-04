@@ -1,5 +1,5 @@
-import { zeroAddress } from 'viem'
 import { Token } from './Token'
+import { zeroAddress } from 'viem'
 
 export const GOHM = new Token({
   addresses: {

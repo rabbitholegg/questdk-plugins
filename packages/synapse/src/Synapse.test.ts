@@ -1,30 +1,30 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { describe, expect, test } from 'vitest'
 import { bridge, getSupportedTokenAddresses } from './Synapse.js'
+import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi.js'
 import {
+  ARBITRUM_CHAIN_ID,
+  BSC_CHAIN_ID,
+  CHAIN_ID_ARRAY,
+  ETH_CHAIN_ID,
+} from './chain-ids.js'
+import {
+  CHAIN_TO_ROUTER,
+  SYNAPSE_CCTP_ROUTER,
+  SynapseCCTPContract,
+  getContractAddress,
+} from './contract-addresses'
+import {
+  DEPOSIT_CCTP,
+  DEPOSIT_ERC20,
   DEPOSIT_ETH,
+  WITHDRAW_CCTP,
   WITHDRAW_ERC20,
   WITHDRAW_ETH,
-  DEPOSIT_ERC20,
-  DEPOSIT_CCTP,
-  WITHDRAW_CCTP,
   failingTestCases,
   passingTestCases,
 } from './test-transactions.js'
-import {
-  ARBITRUM_CHAIN_ID,
-  ETH_CHAIN_ID,
-  BSC_CHAIN_ID,
-  CHAIN_ID_ARRAY,
-} from './chain-ids.js'
-import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi.js'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
-import {
-  SynapseCCTPContract,
-  getContractAddress,
-  CHAIN_TO_ROUTER,
-  SYNAPSE_CCTP_ROUTER,
-} from './contract-addresses'
+import { describe, expect, test } from 'vitest'
 
 const ARBITRUM_USDCE_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
 const ARBITRUM_USDC_ADDRESS = '0xaf88d065e77c8cc2239327c5edb3a432268e5831'

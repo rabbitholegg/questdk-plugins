@@ -1,8 +1,8 @@
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import {
-  type TestParams,
   type BridgeActionParams,
   Chains,
+  type TestParams,
   createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, zeroAddress } from 'viem'
