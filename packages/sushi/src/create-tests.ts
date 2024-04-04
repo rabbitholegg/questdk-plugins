@@ -1,4 +1,5 @@
 import {
+  BLAST_SWAP,
   ETH_FOR_EXACT_TOKENS,
   EXACT_ETH_FOR_TOKENS,
   EXACT_TOKENS_FOR_ETH,
@@ -54,6 +55,31 @@ export const passingTestCases = [
   createTestCase(
     TOKENS_FOR_EXACT_TOKENS,
     'when swapping tokens for exact tokens using V2 router',
+  ),
+  createTestCase(
+    BLAST_SWAP,
+    'when swapping ETH to USDB using V3 router',
+  ),
+  createTestCase(
+    PROCESS_ROUTE_TOKEN_ETH,
+    'when token out is "any"',
+    {
+      tokenOut: undefined,
+    },
+  ),
+  createTestCase(PROCESS_ROUTE_V4, 'when amount is "any"', {
+    amountIn: undefined,
+    amountOut: undefined,
+  }),
+  createTestCase(
+    BLAST_SWAP,
+    'when tokenIn is "any"',
+    {
+      tokenIn: undefined,
+      tokenOut: undefined,
+      amountIn: undefined,
+      amountOut: undefined,
+    },
   ),
 ]
 
