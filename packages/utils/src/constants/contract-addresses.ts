@@ -84,8 +84,8 @@ export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.ARBITRUM_ONE]: arbitrumTokenAddresses,
   [Chains.POLYGON_POS]: polygonTokenAddresses,
   [Chains.BASE]: baseTokenAddresses,
-  [Chains.BLAST]: blastTokenAddresses,
   [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
+  [Chains.BLAST]: blastTokenAddresses,
 }
 
 // Deployer Address. Can be used for simulations
