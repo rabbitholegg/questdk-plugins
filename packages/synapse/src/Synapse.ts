@@ -9,6 +9,7 @@ import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { Token } from './Token'
 import * as tokens from './tokens'
+import { CHAIN_TO_TOKENS, Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 const allTokens: Token[] = Object.values(tokens)
 
@@ -38,8 +39,8 @@ export const bridge = async (
     ? contractAddress
     : {
         $or: [
-          CHAIN_TO_ROUTER[sourceChainId].toLowerCase(),
-          SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase(),
+          CHAIN_TO_ROUTER[sourceChainId]?.toLowerCase(),
+          SYNAPSE_CCTP_ROUTER[sourceChainId]?.toLowerCase(),
         ],
       }
 
@@ -80,6 +81,10 @@ export const bridge = async (
 export const getSupportedTokenAddresses = async (
   chainId: number,
 ): Promise<Address[]> => {
+  if (chainId === Chains.BLAST) {
+    return CHAIN_TO_TOKENS[chainId] as Address[]
+  }
+
   const supportedTokens = allTokens.filter((token) =>
     Object.prototype.hasOwnProperty.call(token.addresses, chainId),
   )
