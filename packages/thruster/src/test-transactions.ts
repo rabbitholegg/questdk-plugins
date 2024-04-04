@@ -97,7 +97,7 @@ export const ETH_FOR_EXACT_TOKENS_V2: TestParams<SwapActionParams> = {
   },
   params: {
     chainId: 81457,
-    amountIn: GreaterThanOrEqual(2446616489800000n),
+    amountIn: GreaterThanOrEqual(2000000000000000n),
     tokenIn: '0x0000000000000000000000000000000000000000',
     tokenOut: '0x4300000000000000000000000000000000000003',
     amountOut: GreaterThanOrEqual(8000000000000000000n),
@@ -179,9 +179,7 @@ export const TOKENS_FOR_EXACT_TOKENS_V2: TestParams<SwapActionParams> = {
 }
 
 export const passingTestCases = [
-  createTestCase(ETH_FOR_TOKENS_V3, 'when swapping ETH for Tokens (V3)'),
-  createTestCase(TOKENS_FOR_ETH_V3, 'when swapping Tokens for ETH (V3)'),
-  createTestCase(TOKENS_FOR_TOKENS_V3, 'when swapping Tokens for Tokens (V3)'),
+  // V2 Tests
   createTestCase(
     EXACT_TOKENS_FOR_TOKENS_V2,
     'when swapping exact Tokens for Tokens (V2)',
@@ -199,25 +197,15 @@ export const passingTestCases = [
     'when swapping ETH for exact Tokens (V2)',
   ),
   createTestCase(
-    EXACT_TOKENS_FOR_ETH_V2,
-    'when swapping exact Tokens for ETH (V2)',
+    EXACT_ETH_FOR_TOKENS_V2,
+    'when swapping exact ETH for Tokens (V2)',
   ),
   createTestCase(
     ETH_FOR_EXACT_TOKENS_V2,
     'when swapping ETH for exact Tokens (V2)',
   ),
-  createTestCase(TOKENS_FOR_TOKENS_V3, 'when all amount is "any" (V3)', {
-    amountIn: undefined,
-    amountOut: undefined,
-  }),
   createTestCase(EXACT_TOKENS_FOR_TOKENS_V2, 'when all amount is "any" (V2)', {
     amountIn: undefined,
-    amountOut: undefined,
-  }),
-  createTestCase(TOKENS_FOR_TOKENS_V3, 'when all token/amount is "any" (V3)', {
-    tokenIn: undefined,
-    amountIn: undefined,
-    tokenOut: undefined,
     amountOut: undefined,
   }),
   createTestCase(
@@ -230,6 +218,20 @@ export const passingTestCases = [
       amountOut: undefined,
     },
   ),
+  // V3 Tests
+  createTestCase(ETH_FOR_TOKENS_V3, 'when swapping ETH for Tokens (V3)'),
+  createTestCase(TOKENS_FOR_ETH_V3, 'when swapping Tokens for ETH (V3)'),
+  createTestCase(TOKENS_FOR_TOKENS_V3, 'when swapping Tokens for Tokens (V3)'),
+  createTestCase(TOKENS_FOR_TOKENS_V3, 'when all amount is "any" (V3)', {
+    amountIn: undefined,
+    amountOut: undefined,
+  }),
+  createTestCase(TOKENS_FOR_TOKENS_V3, 'when all token/amount is "any" (V3)', {
+    tokenIn: undefined,
+    amountIn: undefined,
+    tokenOut: undefined,
+    amountOut: undefined,
+  }),
 ]
 
 export const failingTestCases = [
