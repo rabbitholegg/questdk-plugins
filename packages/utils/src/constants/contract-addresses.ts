@@ -69,6 +69,13 @@ const zkSyncEraTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
   '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4', // USDC
   '0x493257fD37EDB34451f62EDf8D2a0C418852bA4C', // USDT
+  '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91', // WETH
+]
+
+const blastTokenAddresses: Address[] = [
+  ETH_ADDRESS, // ETH
+  '0x4300000000000000000000000000000000000003', // USDB
+  '0x4300000000000000000000000000000000000004', // WETH
 ]
 
 export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
@@ -78,6 +85,7 @@ export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.POLYGON_POS]: polygonTokenAddresses,
   [Chains.BASE]: baseTokenAddresses,
   [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
+  [Chains.BLAST]: blastTokenAddresses,
 }
 
 // Deployer Address. Can be used for simulations
