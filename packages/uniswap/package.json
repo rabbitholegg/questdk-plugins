@@ -36,6 +36,6 @@
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*",
     "@uniswap/sdk-core": "4.2.0",
-    "@uniswap/universal-router-sdk": "1.7.1"
+    "@uniswap/universal-router-sdk": "1.9.0"
   }
 }
