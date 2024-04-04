@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.18
+
+### Minor Changes
+
+- [#341](https://github.com/rabbitholegg/questdk-plugins/pull/341) [`6e8f8e01`](https://github.com/rabbitholegg/questdk-plugins/commit/6e8f8e011f4251c6c179693d242dc6be34f76974) Thanks [@mmackz](https://github.com/mmackz)! - add blast tokens to CHAIN_TO_TOKENS
+
 ## 1.0.0-alpha.17
 
 ### Minor Changes
