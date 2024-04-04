@@ -8,6 +8,8 @@ import {
   DEPOSIT_ERC20,
   DEPOSIT_CCTP,
   WITHDRAW_CCTP,
+  failingTestCases,
+  passingTestCases,
 } from './test-transactions.js'
 import {
   ARBITRUM_CHAIN_ID,
@@ -250,6 +252,26 @@ describe('When given the Synapse plugin', () => {
         contractAddress: '0xd359bc471554504f683fbd4f6e36848612349ddf',
       })
       expect(apply(transaction, filter)).to.be.true
+    })
+  })
+
+  describe('should pass filter with valid transactions', () => {
+    passingTestCases.forEach((testCase) => {
+      const { transaction, description, params } = testCase
+      test(description, async () => {
+        const filter = await bridge(params)
+        expect(apply(transaction, filter)).to.be.true
+      })
+    })
+  })
+
+  describe('should not pass filter with invalid transactions', () => {
+    failingTestCases.forEach((testCase) => {
+      const { transaction, description, params } = testCase
+      test(description, async () => {
+        const filter = await bridge(params)
+        expect(apply(transaction, filter)).to.be.false
+      })
     })
   })
 
