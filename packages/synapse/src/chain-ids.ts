@@ -16,6 +16,7 @@ export const CRONOS_CHAIN_ID = 25
 export const DOGECHAIN_CHAIN_ID = 2000
 export const KLAYTN_CHAIN_ID = 8217
 export const BOBA_CHAIN_ID = 288
+export const BLAST_CHAIN_ID = 81457
 
 export const CHAIN_ID_ARRAY = [
   ETH_CHAIN_ID,
@@ -36,4 +37,5 @@ export const CHAIN_ID_ARRAY = [
   KLAYTN_CHAIN_ID,
   BOBA_CHAIN_ID,
   AURORA_CHAIN_ID,
+  BLAST_CHAIN_ID,
 ]
