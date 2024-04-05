@@ -1,4 +1,4 @@
-import { getAbiItem } from 'viem'
+import { getAbiItem, type AbiFunction } from 'viem'
 
 export const THRUSTER_V2_ADDRESS = '0x98994a9a7a2570367554589189dc9772241650f6'
 export const THRUSTER_V3_ADDRESS = '0x337827814155ecbf24d20231fca4444f530c0555'
@@ -154,15 +154,15 @@ export const TOKENS_FOR_TOKENS_FRAGMENTS = THRUSTER_V2_ABI.filter(({ name }) =>
 export const ETH_FOR_EXACT_TOKENS_FRAGMENT = getAbiItem({
   abi: THRUSTER_V2_ABI,
   name: 'swapETHForExactTokens',
-})
+}) as AbiFunction
 export const TOKENS_FOR_EXACT_ETH_FRAGMENT = getAbiItem({
   abi: THRUSTER_V2_ABI,
   name: 'swapTokensForExactETH',
-})
+}) as AbiFunction
 export const TOKENS_FOR_EXACT_TOKENS_FRAGMENT = getAbiItem({
   abi: THRUSTER_V2_ABI,
   name: 'swapTokensForExactTokens',
-})
+}) as AbiFunction
 
 export const THRUSTER_V3_ABI = [
   {
