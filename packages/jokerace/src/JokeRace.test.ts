@@ -7,9 +7,12 @@ describe('Given the jokerace plugin', () => {
   describe('When handling the vote action', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid vote action', async () => {
-        const filter = await vote({
-          chainId: 1,
-          contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+        const filter = await vote({ //https://optimistic.etherscan.io/tx/0x465dfa83d66c4536952a97958933bf695ec331051c5c012b4176ad216c458790
+          chainId: 10,
+          project: '0xaEB8722de564846dEd437E4D6Ee257B72eA8377c',
+          support: 0,
+          proposalId: 13533116179072430328851703657304235715448937558538095270613423517546182149299,
+          weight: 90000000000000000000,
         })
         expect(filter).toBeTypeOf('object')
         expect(Number(filter.chainId)).toBe(1)

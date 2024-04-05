@@ -1,55 +1,37 @@
-import { type MintActionParams } from '@rabbitholegg/questdk'
+import { type VoteActionParams } from '@rabbitholegg/questdk'
 import {
   createTestCase,
   type TestParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
-export const FABRIC_MINT: TestParams<MintActionParams> = {
+export const JOKERACE_VOTE_WITHOUT_PROOF: TestParams<VoteActionParams> = {
   transaction: {
-    chainId: 8453,
-    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
-    hash: '0xc0eaf3fa1e32bf3b32ff12e6f5d98b14b46865b62416237b7ed9bc898a5d7d93',
+    chainId: 10,
+    from: '0xcEd09CCFc82b091195bdE04E6Cd65374518E7b95',
+    hash: '0x465dfa83d66c4536952a97958933bf695ec331051c5c012b4176ad216c458790',
     input:
-      '0xa0712d6800000000000000000000000000000000000000000000000000028fbee4d84c00',
-    to: '0x2efc6064239121d1d7efb503355daa82b87ee89c',
-    value: '720999999360000',
+      '0x65f162631deb78e9b19ec93d5269a317479e7d79053d9375a0318433e755fdb74e8904b30000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004e1003b28d9280000',
+    to: '0xaEB8722de564846dEd437E4D6Ee257B72eA8377c',
+    value: '0.000069',
   },
   params: {
-    chainId: 8453,
-    contractAddress: '0x2efc6064239121d1d7efb503355daa82b87ee89c',
-  },
-}
-
-export const FABRIC_MINTFOR: TestParams<MintActionParams> = {
-  transaction: {
-    chainId: 8453,
-    from: '0x9ce405cf35064af63fe8d77cef084a4905469abe',
-    hash: '0x5b48379058011a2fd5419b236019b37768ffc2333c03ab097dd6d7fab432c31e',
-    input:
-      '0xda1919b30000000000000000000000000c52af4921aaf20dcdfd2853e1e2f700f7a0c1910000000000000000000000000000000000000000000000000018838370f1c900',
-    to: '0x3db5bc85fb89c59d7d03e1dda7ee4563f9c54270',
-    value: '6899999999904000',
-  },
-  params: {
-    chainId: 8453,
-    contractAddress: '0x3db5bc85fb89c59d7d03e1dda7ee4563f9c54270',
-    recipient: '0x0c52aF4921aAF20DcDFd2853E1e2F700F7A0C191',
+    chainId: 10,
+    project: '0xaEB8722de564846dEd437E4D6Ee257B72eA8377c',
+    support: 0,
+    proposalId: 13533116179072430328851703657304235715448937558538095270613423517546182149299,
+    weight: 90000000000000000000,
   },
 }
 
 export const passingTestCases = [
-  createTestCase(FABRIC_MINT, 'when minting a fabric subscription NFT'),
-  createTestCase(FABRIC_MINTFOR, 'when gifting a fabric subscription NFT'),
+  createTestCase(JOKERACE_VOTE_WITHOUT_PROOF, 'when minting a fabric subscription NFT'),
 ]
 
 export const failingTestCases = [
-  createTestCase(FABRIC_MINT, 'when chainId is not correct', {
+  createTestCase(JOKERACE_VOTE_WITHOUT_PROOF, 'when chainId is not correct', {
     chainId: 42161,
   }),
-  createTestCase(FABRIC_MINT, 'when contractAddress is not correct', {
+  createTestCase(JOKERACE_VOTE_WITHOUT_PROOF, 'when contractAddress is not correct', {
     contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
-  }),
-  createTestCase(FABRIC_MINTFOR, 'when recipient is not correct', {
-    recipient: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
   }),
 ]
