@@ -1,12 +1,7 @@
-export const ETH_CHAIN_ID = 1
-export const OPTIMISM_CHAIN_ID = 10
-export const ARBITRUM_CHAIN_ID = 42161
-export const BASE_CHAIN_ID = 8453
-export const POLYGON_CHAIN_ID = 137
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+
 export const AURORA_CHAIN_ID = 1313161554
-export const BSC_CHAIN_ID = 56
 export const FANTOM_CHAIN_ID = 250
-export const AVALANCHE_CHAIN_ID = 43114
 export const MOONRIVER_CHAIN_ID = 1285
 export const MOONBEAM_CHAIN_ID = 1284
 export const METIS_CHAIN_ID = 1088
@@ -16,17 +11,16 @@ export const CRONOS_CHAIN_ID = 25
 export const DOGECHAIN_CHAIN_ID = 2000
 export const KLAYTN_CHAIN_ID = 8217
 export const BOBA_CHAIN_ID = 288
-export const BLAST_CHAIN_ID = 81457
 
 export const CHAIN_ID_ARRAY = [
-  ETH_CHAIN_ID,
-  POLYGON_CHAIN_ID,
-  OPTIMISM_CHAIN_ID,
-  ARBITRUM_CHAIN_ID,
-  BASE_CHAIN_ID,
-  BSC_CHAIN_ID,
+  Chains.ETHEREUM,
+  Chains.POLYGON_POS,
+  Chains.OPTIMISM,
+  Chains.ARBITRUM_ONE,
+  Chains.BASE,
+  Chains.BINANCE_SMART_CHAIN,
   FANTOM_CHAIN_ID,
-  AVALANCHE_CHAIN_ID,
+  Chains.AVALANCHE,
   MOONBEAM_CHAIN_ID,
   MOONRIVER_CHAIN_ID,
   METIS_CHAIN_ID,
@@ -37,5 +31,5 @@ export const CHAIN_ID_ARRAY = [
   KLAYTN_CHAIN_ID,
   BOBA_CHAIN_ID,
   AURORA_CHAIN_ID,
-  BLAST_CHAIN_ID,
+  Chains.BLAST,
 ]
