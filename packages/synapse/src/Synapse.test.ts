@@ -17,8 +17,8 @@ import {
   failingTestCases,
   passingTestCases,
 } from './test-transactions.js'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 import { describe, expect, test } from 'vitest'
 
