@@ -3,9 +3,9 @@ import {
   ETH_FOR_EXACT_TOKENS_FRAGMENT,
   ETH_FOR_TOKENS_FRAGMENTS,
   THRUSTER_V2_ADDRESS,
+  THRUSTER_V3_ADDRESS,
   THRUSTER_V3_EXACT_INPUT_ABI,
   THRUSTER_V3_EXACT_OUTPUT_ABI,
-  THRUSTER_V3_ADDRESS,
   TOKENS_FOR_ETH_FRAGMENTS,
   TOKENS_FOR_EXACT_ETH_FRAGMENT,
   TOKENS_FOR_EXACT_TOKENS_FRAGMENT,
@@ -18,7 +18,7 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { zeroAddress, type Address } from 'viem'
+import { type Address, zeroAddress } from 'viem'
 
 export const swap = async (
   swap: SwapActionParams,
