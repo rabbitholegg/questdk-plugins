@@ -219,7 +219,6 @@ export const VoteActionFormSchema = z.object({
   project: EthAddressSchema,
   proposalId: z.number().optional(),
   support: z.boolean().optional(),
-  contractAddress: EthAddressSchema,
   weight: z.bigint().optional(),
 })
 
@@ -228,7 +227,6 @@ export const VoteActionDetailSchema = z.object({
   project: EthAddressSchema,
   proposalId: z.number().optional(),
   support: z.boolean().optional(),
-  contractAddress: EthAddressSchema,
   weight: z.bigint().optional(),
 })
 
