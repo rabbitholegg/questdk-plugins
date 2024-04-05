@@ -24,7 +24,7 @@ export const JOKERACE_VOTE_WITHOUT_PROOF: TestParams<VoteActionParams> = {
 }
 
 export const passingTestCases = [
-  createTestCase(JOKERACE_VOTE_WITHOUT_PROOF, 'when minting a fabric subscription NFT'),
+  createTestCase(JOKERACE_VOTE_WITHOUT_PROOF, 'when voting in an anyone can vote jokerace'),
 ]
 
 export const failingTestCases = [
