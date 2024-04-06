@@ -372,6 +372,19 @@ export const ZORA_MINTER_ABI_1155 = [
     stateMutability: 'payable',
     type: 'function',
   }, // Legacy SoundEditionV1_2
+  {
+    inputs: [],
+    name: 'nextTokenId',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
 ]
 
 export const UNIVERSAL_MINTER_ABI = [

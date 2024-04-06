@@ -33,7 +33,7 @@ jobs:
     name: Build
     needs: lint
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
       - name: Clone repository
@@ -99,6 +99,6 @@ jobs:
           command: pnpm test:ci -- --shard=${{ matrix.shard }}/${{ matrix.total-shards }}
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.1.0
+        uses: codecov/codecov-action@v4.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

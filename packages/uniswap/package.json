@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-uniswap",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.34",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -36,6 +36,6 @@
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*",
     "@uniswap/sdk-core": "4.2.0",
-    "@uniswap/universal-router-sdk": "1.7.1"
+    "@uniswap/universal-router-sdk": "1.9.0"
   }
 }

@@ -286,14 +286,14 @@ describe('Given the getFee function', () => {
 describe('simulateMint function', () => {
   test('should simulate a 1155 mint when tokenId is not 0', async () => {
     const mint: MintIntentParams = {
-      chainId: Chains.ZORA,
-      contractAddress: '0xc53c050131a3507d51d014445f666f4c3a1a2c24',
-      tokenId: 1, // not 0
+      chainId: Chains.BASE,
+      contractAddress: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
+      tokenId: 10,
       amount: BigInt(1),
-      recipient: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
     }
     const value = parseEther('0.000777')
-    const account = '0xE4eDb277e41dc89aB076a1F049f4a3EfA700bCE8'
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
 
     const result = await simulateMint(mint, value, account)
     const request = result.request

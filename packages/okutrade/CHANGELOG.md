@@ -1,5 +1,37 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.37
+
+### Patch Changes
+
+- Updated dependencies [[`6e8f8e01`](https://github.com/rabbitholegg/questdk-plugins/commit/6e8f8e011f4251c6c179693d242dc6be34f76974)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.18
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.36
+
+### Patch Changes
+
+- [#332](https://github.com/rabbitholegg/questdk-plugins/pull/332) [`35a783ba`](https://github.com/rabbitholegg/questdk-plugins/commit/35a783ba3ed598e39d2d38a067a3caac32022b05) Thanks [@mmackz](https://github.com/mmackz)! - update getPools api call
+
+- Updated dependencies [[`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6), [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.17
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.35
+
+### Patch Changes
+
+- [#318](https://github.com/rabbitholegg/questdk-plugins/pull/318) [`2d140b9`](https://github.com/rabbitholegg/questdk-plugins/commit/2d140b96cc0dbc35c16fbca5da7e2f671c0f88db) Thanks [@mmackz](https://github.com/mmackz)! - add options action to IActionPlugin
+
+## 1.0.0-alpha.34
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.33
 
 ### Minor Changes

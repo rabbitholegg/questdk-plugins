@@ -1,5 +1,11 @@
 # @rabbitholegg/create-plugin
 
+## 2.0.0-alpha.6
+
+### Minor Changes
+
+- [#339](https://github.com/rabbitholegg/questdk-plugins/pull/339) [`9218a273`](https://github.com/rabbitholegg/questdk-plugins/commit/9218a273f981980fb99b8cd60fe2159a79bc6d6d) Thanks [@mmackz](https://github.com/mmackz)! - add blast chain support
+
 ## 2.0.0-alpha.5
 
 ### Minor Changes

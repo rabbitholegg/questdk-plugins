@@ -25,8 +25,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       viem:
-        specifier: 2.7.9
-        version: 2.7.9(typescript@5.3.2)(zod@3.21.4)
+        specifier: 2.9.9
+        version: 2.9.9(typescript@5.3.2)(zod@3.21.4)
       zod:
         specifier: 3.21.4
         version: 3.21.4
@@ -364,6 +364,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/kwenta:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/llama:
     dependencies:
       '@rabbitholegg/questdk':
@@ -493,6 +506,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/pods:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/polygon:
     dependencies:
       '@maticnetwork/pos-portal':
@@ -572,6 +598,9 @@ importers:
       '@rabbitholegg/questdk-plugin-kote':
         specifier: workspace:*
         version: link:../kote
+      '@rabbitholegg/questdk-plugin-kwenta':
+        specifier: workspace:*
+        version: link:../kwenta
       '@rabbitholegg/questdk-plugin-llama':
         specifier: workspace:*
         version: link:../llama
@@ -599,6 +628,9 @@ importers:
       '@rabbitholegg/questdk-plugin-pendle':
         specifier: workspace:*
         version: link:../pendle
+      '@rabbitholegg/questdk-plugin-pods':
+        specifier: workspace:*
+        version: link:../pods
       '@rabbitholegg/questdk-plugin-polygon':
         specifier: workspace:*
         version: link:../polygon
@@ -620,6 +652,9 @@ importers:
       '@rabbitholegg/questdk-plugin-tally':
         specifier: workspace:*
         version: link:../tally
+      '@rabbitholegg/questdk-plugin-thruster':
+        specifier: workspace:*
+        version: link:../thruster
       '@rabbitholegg/questdk-plugin-traderjoe':
         specifier: workspace:*
         version: link:../traderjoe
@@ -727,6 +762,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/thruster:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/traderjoe:
     dependencies:
       '@rabbitholegg/questdk':
@@ -770,8 +818,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       '@uniswap/universal-router-sdk':
-        specifier: 1.7.1
-        version: 1.7.1(hardhat@2.22.2)
+        specifier: 1.9.0
+        version: 1.9.0(hardhat@2.22.2)
     devDependencies:
       tsconfig:
         specifier: workspace:*
@@ -2989,7 +3037,7 @@ packages:
     resolution: {integrity: sha512-N1ZhksgwD3OBlwTv3R6KFEcPojl/W4ElJOeCZdi+vuI5QmTFwLq3OFf2zd2ROpKvxFdgZ6hUpb0dx9bVNEwYCA==}
     dependencies:
       '@noble/curves': 1.2.0
-      '@noble/hashes': 1.3.3
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.6
     dev: false
 
@@ -3011,7 +3059,7 @@ packages:
   /@scure/bip39@1.2.1:
     resolution: {integrity: sha512-Z3/Fsz1yr904dduJD0NpiyRHhRYHdcnyh73FZWiV+/qhWi83wNJ3NWolYqCEN+ZWsUz2TWwajJggcRE9r1zUYg==}
     dependencies:
-      '@noble/hashes': 1.3.3
+      '@noble/hashes': 1.3.2
       '@scure/base': 1.1.6
     dev: false
 
@@ -3629,8 +3677,8 @@ packages:
       - hardhat
     dev: false
 
-  /@uniswap/universal-router-sdk@1.7.1(hardhat@2.22.2):
-    resolution: {integrity: sha512-No8E/02Y9DiWD7E3XOHY0pcqh+zc6ZU5JLgx9Pw/0Nc5DA4Pa2fs8C+gQ1tnNt3YSoPrRxFNLPE9CE2gUgz6Eg==}
+  /@uniswap/universal-router-sdk@1.9.0(hardhat@2.22.2):
+    resolution: {integrity: sha512-B6iEczP2WdMsq/aVIdQfvHWWLJyhaUD7enfxO6koxaH3huYOqUWRAzmZLl026fRK7R7P+tVFcA6AqImWLG6tYQ==}
     engines: {node: '>=14'}
     dependencies:
       '@uniswap/permit2-sdk': 1.2.0
@@ -11729,6 +11777,29 @@ packages:
 
   /viem@2.7.9(typescript@5.3.2)(zod@3.21.4):
     resolution: {integrity: sha512-iDfc8TwaZFp1K95zlsxYh6Cs0OWCt35Tqs8uYgXKSxtz7w075mZ0H5SJ8zSyJGoEaticVDhtdmRRX6TtcW9EeQ==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@adraffy/ens-normalize': 1.10.0
+      '@noble/curves': 1.2.0
+      '@noble/hashes': 1.3.2
+      '@scure/bip32': 1.3.2
+      '@scure/bip39': 1.2.1
+      abitype: 1.0.0(typescript@5.3.2)(zod@3.21.4)
+      isows: 1.0.3(ws@8.13.0)
+      typescript: 5.3.2
+      ws: 8.13.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
+  /viem@2.9.9(typescript@5.3.2)(zod@3.21.4):
+    resolution: {integrity: sha512-SUIHBL6M5IIlqDCMEQwAAvHzeglaM4FEqM6bCI+srLXtFYmrpV4tWhnpobQRNwh4f7HIksmKLLZ+cytv8FfnJQ==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
