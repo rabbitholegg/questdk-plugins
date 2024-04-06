@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.97
+
+### Patch Changes
+
+- Updated dependencies [[`059e2e27`](https://github.com/rabbitholegg/questdk-plugins/commit/059e2e27bdde84c37b1a958624a0cbf288501fcd), [`eaf47aae`](https://github.com/rabbitholegg/questdk-plugins/commit/eaf47aaefc10f5e0ce5c4d50b29180d30c232f82)]:
+  - @rabbitholegg/questdk-plugin-synapse@1.0.0-alpha.26
+  - @rabbitholegg/questdk-plugin-thruster@1.0.0-alpha.1
+
 ## 1.0.0-alpha.96
 
 ### Patch Changes

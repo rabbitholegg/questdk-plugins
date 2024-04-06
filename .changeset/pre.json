@@ -130,6 +130,7 @@
     "quiet-spies-drum",
     "quiet-swans-wave",
     "real-ducks-leave",
+    "rich-socks-marry",
     "rotten-bees-battle",
     "rotten-monkeys-attack",
     "rude-humans-jump",
@@ -185,6 +186,7 @@
     "stale-singers-worry",
     "strange-hornets-notice",
     "strong-kiwis-crash",
+    "stupid-meals-jam",
     "stupid-pans-smash",
     "sweet-tools-shave",
     "swift-dancers-refuse",
@@ -271,6 +273,7 @@
     "@rabbitholegg/questdk-plugin-aerodrome": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-paragraph": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-kwenta": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-pods": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-pods": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-thruster": "1.0.0-alpha.0"
   }
 }
