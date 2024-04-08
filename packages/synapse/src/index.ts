@@ -1,6 +1,3 @@
-// This file is standard for more projects.
-// The main degree of nuance is in the
-
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
@@ -12,7 +9,6 @@ import {
   getSupportedTokenAddresses,
 } from './Synapse.js'
 
-// Replace *project* with the name of the project
 export const Synapse: IActionPlugin = {
   pluginId: 'synapse',
   getSupportedTokenAddresses,

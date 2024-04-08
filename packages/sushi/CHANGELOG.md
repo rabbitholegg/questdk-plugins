@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-sushi
 
+## 1.0.0-alpha.21
+
+### Minor Changes
+
+- [#344](https://github.com/rabbitholegg/questdk-plugins/pull/344) [`c0a8b4af`](https://github.com/rabbitholegg/questdk-plugins/commit/c0a8b4af82ed0ab755e100de2250d8aa7aa8e432) Thanks [@mmackz](https://github.com/mmackz)! - add blast support for sushi plugin
+
+### Patch Changes
+
+- Updated dependencies [[`6e8f8e01`](https://github.com/rabbitholegg/questdk-plugins/commit/6e8f8e011f4251c6c179693d242dc6be34f76974)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.18
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.20
 
 ### Patch Changes

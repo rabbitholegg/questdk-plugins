@@ -1,5 +1,19 @@
 # @rabbitholegg/questdk-plugin-synapse
 
+## 1.0.0-alpha.26
+
+### Minor Changes
+
+- [#345](https://github.com/rabbitholegg/questdk-plugins/pull/345) [`059e2e27`](https://github.com/rabbitholegg/questdk-plugins/commit/059e2e27bdde84c37b1a958624a0cbf288501fcd) Thanks [@mmackz](https://github.com/mmackz)! - add blast support to synapse plugin
+
+## 1.0.0-alpha.25
+
+### Patch Changes
+
+- Updated dependencies [[`6e8f8e01`](https://github.com/rabbitholegg/questdk-plugins/commit/6e8f8e011f4251c6c179693d242dc6be34f76974)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.18
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.24
 
 ### Patch Changes

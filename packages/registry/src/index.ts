@@ -38,6 +38,7 @@ import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
 import { Pods } from '@rabbitholegg/questdk-plugin-pods'
 import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
+import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
 import { BaseBridge } from '@rabbitholegg/questdk-plugin-basebridge'
 import { ENTRYPOINT } from './contract-addresses'
 import {
@@ -100,6 +101,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Aerodrome.pluginId]: Aerodrome,
   [Pods.pluginId]: Pods,
   [Kwenta.pluginId]: Kwenta,
+  [Thruster.pluginId]: Thruster,
   [BaseBridge.pluginId]: BaseBridge,
 }
 

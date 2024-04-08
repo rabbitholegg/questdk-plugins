@@ -1,4 +1,7 @@
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  CHAIN_TO_TOKENS as DEFAULT_TOKENS,
+  Chains,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
 
 const ethereumTokenAddresses: Address[] = [
@@ -65,10 +68,24 @@ const arbitrumTokenAddresses: Address[] = [
   '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
 ]
 
+const blastTokenAddresses: Address[] = [
+  ...(DEFAULT_TOKENS[Chains.BLAST] as Address[]),
+  '0xbf5495efe5db9ce00f80364c8b423567e58d2110', // EZETH
+  '0xb79dd08ea68a908a97220c76d19a6aa9cbde4376', // USD+
+  '0x9e20461bc2c4c980f62f1b279d71734207a6a356', // OMNI
+  '0x5ffd9ebd27f2fcab044c0f0a26a45cb62fa29c06', // PAC
+  '0x818a92bc81aad0053d72ba753fb5bc3d0c5c0923', // JUICE
+  '0x2598c30330d5771ae9f983979209486ae26de875', // AI
+  '0xd43d8adac6a4c7d9aeece7c3151fca8f23752cf8', // ANDY
+  '0x42e12d42b3d6c4a74a88a61063856756ea2db357', // ORBIT
+  '0x20fe91f17ec9080e3cac2d688b4ecb48c5ac3a9c', // YES
+]
+
 export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.ETHEREUM]: ethereumTokenAddresses,
   [Chains.OPTIMISM]: optimismTokenAddresses,
   [Chains.ARBITRUM_ONE]: arbitrumTokenAddresses,
   [Chains.POLYGON_POS]: polygonTokenAddresses,
   [Chains.BASE]: baseTokenAddresses,
+  [Chains.BLAST]: blastTokenAddresses,
 }
