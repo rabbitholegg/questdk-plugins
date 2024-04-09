@@ -1,8 +1,8 @@
-import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
 import {
-  Chains,
   CHAIN_TO_TOKENS as TOKENS,
+  Chains,
 } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
 
 const ethereumTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
