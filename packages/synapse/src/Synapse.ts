@@ -1,14 +1,15 @@
-import {
-  type TransactionFilter,
-  type BridgeActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { zeroAddress, type Address } from 'viem'
-import { SYNAPSE_CCTP_ROUTER, CHAIN_TO_ROUTER } from './contract-addresses'
+import { Token } from './Token'
 import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { Token } from './Token'
+import { CHAIN_TO_ROUTER, SYNAPSE_CCTP_ROUTER } from './contract-addresses'
 import * as tokens from './tokens'
+import {
+  type BridgeActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import { CHAIN_TO_TOKENS, Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress } from 'viem'
 
 const allTokens: Token[] = Object.values(tokens)
 
@@ -38,8 +39,8 @@ export const bridge = async (
     ? contractAddress
     : {
         $or: [
-          CHAIN_TO_ROUTER[sourceChainId].toLowerCase(),
-          SYNAPSE_CCTP_ROUTER[sourceChainId].toLowerCase(),
+          CHAIN_TO_ROUTER[sourceChainId]?.toLowerCase(),
+          SYNAPSE_CCTP_ROUTER[sourceChainId]?.toLowerCase(),
         ],
       }
 
@@ -80,6 +81,10 @@ export const bridge = async (
 export const getSupportedTokenAddresses = async (
   chainId: number,
 ): Promise<Address[]> => {
+  if (chainId === Chains.BLAST) {
+    return CHAIN_TO_TOKENS[chainId] as Address[]
+  }
+
   const supportedTokens = allTokens.filter((token) =>
     Object.prototype.hasOwnProperty.call(token.addresses, chainId),
   )

@@ -1,5 +1,27 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.34
+
+### Minor Changes
+
+- [#343](https://github.com/rabbitholegg/questdk-plugins/pull/343) [`2d510cf3`](https://github.com/rabbitholegg/questdk-plugins/commit/2d510cf3dde3c3711e7ea10b598cc53d899453ea) Thanks [@mmackz](https://github.com/mmackz)! - add blast support to uniswap plugin
+
+### Patch Changes
+
+- [#340](https://github.com/rabbitholegg/questdk-plugins/pull/340) [`0a278a77`](https://github.com/rabbitholegg/questdk-plugins/commit/0a278a778fa420f595e1ea7a009506fd283c42e3) Thanks [@Ataxia123](https://github.com/Ataxia123)! - Update token-addresses.ts
+
+- Updated dependencies [[`6e8f8e01`](https://github.com/rabbitholegg/questdk-plugins/commit/6e8f8e011f4251c6c179693d242dc6be34f76974)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.18
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- Updated dependencies [[`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6), [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.17
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
 ## 1.0.0-alpha.32
 
 ### Patch Changes

@@ -38,6 +38,9 @@ import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
 import { Pods } from '@rabbitholegg/questdk-plugin-pods'
 import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
+import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
+import { Base } from '@rabbitholegg/questdk-plugin-base'
+import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -99,6 +102,9 @@ export const plugins: Record<string, IActionPlugin> = {
   [Aerodrome.pluginId]: Aerodrome,
   [Pods.pluginId]: Pods,
   [Kwenta.pluginId]: Kwenta,
+  [Thruster.pluginId]: Thruster,
+  [Base.pluginId]: Base,
+  [Orbit.pluginId]: Orbit,
 }
 
 export const getPlugin = (pluginId: string) => {

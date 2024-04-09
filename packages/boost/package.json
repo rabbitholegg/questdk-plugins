@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-boost",
-  "version": "1.0.0-alpha.17",
+  "version": "1.0.0-alpha.19",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
