@@ -16,7 +16,7 @@ import {
 } from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
 
-describe('Given the basebridge plugin', () => {
+describe('Given the base plugin', () => {
   describe('When handling the bridge action', () => {
     describe('should return a valid action filter', () => {
       test('when bridge eth from ethereum to base', async () => {

@@ -102,7 +102,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Pods.pluginId]: Pods,
   [Kwenta.pluginId]: Kwenta,
   [Thruster.pluginId]: Thruster,
-  [BaseBridge.pluginId]: BaseBridge,
+  [Base.pluginId]: Base,
 }
 
 export const getPlugin = (pluginId: string) => {
