@@ -76,6 +76,7 @@
     "@rabbitholegg/questdk-plugin-paragraph": "workspace:*",
     "@rabbitholegg/questdk-plugin-pods": "workspace:*",
     "@rabbitholegg/questdk-plugin-kwenta": "workspace:*",
-    "@rabbitholegg/questdk-plugin-thruster": "workspace:*"
+    "@rabbitholegg/questdk-plugin-thruster": "workspace:*",
+    "@rabbitholegg/questdk-plugin-orbit": "workspace:*"
   }
 }

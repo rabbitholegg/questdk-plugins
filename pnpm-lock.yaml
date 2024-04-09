@@ -451,6 +451,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/orbit:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/paragraph:
     dependencies:
       '@rabbitholegg/questdk':
@@ -606,6 +619,9 @@ importers:
       '@rabbitholegg/questdk-plugin-optimism':
         specifier: workspace:*
         version: link:../optimism
+      '@rabbitholegg/questdk-plugin-orbit':
+        specifier: workspace:*
+        version: link:../orbit
       '@rabbitholegg/questdk-plugin-paragraph':
         specifier: workspace:*
         version: link:../paragraph
