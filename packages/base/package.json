@@ -9,7 +9,7 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "description": "Plugin for BaseBridge",
+  "description": "Plugin for Base Bridge",
   "scripts": {
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",
