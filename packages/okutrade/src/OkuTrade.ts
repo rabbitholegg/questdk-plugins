@@ -5,6 +5,7 @@ import {
   type SwapActionParams,
   type TransactionFilter,
 } from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { zeroAddress as ETH_ADDRESS, zeroAddress } from 'viem'
 import {
   CHAIN_ID_ARRAY,
@@ -86,7 +87,10 @@ export const options = async (
   })
 }
 
-export const getSupportedChainIds = async () => {
+export const getSupportedChainIds = async (actionType?: ActionType) => {
+  if (actionType === 'swap') {
+    return [Chains.BLAST]
+  }
   return CHAIN_ID_ARRAY as number[]
 }
 

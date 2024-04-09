@@ -148,6 +148,25 @@ export const failingTestCasesSwap = [
 
 // ----- Options Action Type ------
 
+const LIMIT_ORDER_BLAST: TestParams<OptionsActionParams> = {
+  transaction: {
+    chainId: 81457,
+    to: '0x0337d36a3df76d882369e3cbf984a2ea40f6636f',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    hash: '0x87361ccdbcc65814a79f9c2fe37e763c6d5098d9f9a67ff493f5fe983a51f712',
+    input:
+      '0x53410e7b000000000000000000000000f5a23bdd36a56ede75d503f6f643d5eaf25b1a8ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffec1a400000000000000000000000000000000000000000000000029a2241af62c0000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018f5eb1d755',
+    value: '0',
+  },
+  params: {
+    chainId: 81457,
+    contractAddress: '0x0337d36a3df76d882369e3cbf984a2ea40f6636f',
+    token: '0x4300000000000000000000000000000000000003', // USDB
+    amount: GreaterThanOrEqual(parseUnits('3', 18)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+  },
+}
+
 const LIMIT_ORDER_DEGEN: TestParams<OptionsActionParams> = {
   transaction: {
     chainId: 8453,
@@ -187,6 +206,7 @@ const LIMIT_ORDER: TestParams<OptionsActionParams> = {
 }
 
 export const passingTestCasesOptions = [
+  createTestCase(LIMIT_ORDER_BLAST, 'when using limit order on blast'),
   createTestCase(LIMIT_ORDER_DEGEN, 'when using limit order base (degen)'),
   createTestCase(LIMIT_ORDER, 'when using limit order base'),
   createTestCase(LIMIT_ORDER_DEGEN, 'when using "any" token', {

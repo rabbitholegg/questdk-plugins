@@ -8,6 +8,7 @@ export const CHAIN_ID_ARRAY = [
   Chains.POLYGON_POS,
   Chains.ZK_SYNC_ERA,
   Chains.BASE,
+  Chains.BLAST,
 ] as number[]
 
 /* 
