@@ -4,10 +4,10 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  options,
-  swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  options,
+  swap,
 } from './OkuTrade.js'
 
 export const OkuTrade: IActionPlugin = {

@@ -1,5 +1,8 @@
+import {
+  CHAIN_TO_TOKENS as TOKENS,
+  Chains,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, zeroAddress as ETH_ADDRESS } from 'viem'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
 const ethereumTokenAddresses: Address[] = [
   ETH_ADDRESS, // ETH
@@ -82,6 +85,14 @@ const baseTokenAddresses: Address[] = [
   '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', // DEGEN
 ]
 
+const blastTokenAddresses: Address[] = [
+  ...(TOKENS[Chains.BLAST] as Address[]),
+  '0x2416092f143378750bb29b79eD961ab195CcEea5', // ezETH
+  '0x20fE91f17ec9080E3caC2d688b4EcB48C5aC3a9C', // YES
+  '0xF7bc58b8D8f97ADC129cfC4c9f45Ce3C0E1D2692', // WBTC
+  '0x818a92bc81Aad0053d72ba753fb5Bc3d0C5C0923', // JUICE
+]
+
 export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.ETHEREUM]: ethereumTokenAddresses,
   [Chains.OPTIMISM]: optimismTokenAddresses,
@@ -89,4 +100,5 @@ export const CHAIN_TO_TOKENS: { [chainId: number]: Address[] | undefined } = {
   [Chains.POLYGON_POS]: polygonTokenAddresses,
   [Chains.ZK_SYNC_ERA]: zkSyncEraTokenAddresses,
   [Chains.BASE]: baseTokenAddresses,
+  [Chains.BLAST]: blastTokenAddresses,
 }
