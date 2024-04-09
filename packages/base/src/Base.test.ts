@@ -1,7 +1,3 @@
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
-import { parseEther } from 'viem'
-import { describe, expect, test } from 'vitest'
 import { bridge } from './Base'
 import {
   BASE_ERC20_ABI,
@@ -15,6 +11,10 @@ import {
   ETHEREUM_ETH_BRIDGE_ADDRESS,
 } from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { apply } from '@rabbitholegg/questdk/filter'
+import { parseEther } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the base plugin', () => {
   describe('When handling the bridge action', () => {
