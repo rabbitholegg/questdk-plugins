@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.38
+
+### Minor Changes
+
+- [#350](https://github.com/rabbitholegg/questdk-plugins/pull/350) [`6cd550b1`](https://github.com/rabbitholegg/questdk-plugins/commit/6cd550b119d38bef3eda44c227502eaa2dab89c2) Thanks [@mmackz](https://github.com/mmackz)! - add blast support to okutrade plugin
+
 ## 1.0.0-alpha.37
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-fabric
 
+## 1.0.0-alpha.5
+
+### Minor Changes
+
+- [#325](https://github.com/rabbitholegg/questdk-plugins/pull/325) [`d137d1f4`](https://github.com/rabbitholegg/questdk-plugins/commit/d137d1f428a4f21e85e3cba39ac40c398d6aff2c) Thanks [@mmackz](https://github.com/mmackz)! - add projectFees/simulation functions
+
 ## 1.0.0-alpha.4
 
 ### Patch Changes

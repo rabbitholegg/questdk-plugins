@@ -1,5 +1,21 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.98
+
+### Minor Changes
+
+- [#348](https://github.com/rabbitholegg/questdk-plugins/pull/348) [`ae6f777d`](https://github.com/rabbitholegg/questdk-plugins/commit/ae6f777dbdea9872dcf86985f5556e1b7bb1ba82) Thanks [@mmackz](https://github.com/mmackz)! - add orbit lending plugin to questdk
+
+- [#338](https://github.com/rabbitholegg/questdk-plugins/pull/338) [`128fcf25`](https://github.com/rabbitholegg/questdk-plugins/commit/128fcf25837835ed6b1f493a956c633cf751eb02) Thanks [@rontero83](https://github.com/rontero83)! - add base bridge plugin to questdk
+
+### Patch Changes
+
+- Updated dependencies [[`d137d1f4`](https://github.com/rabbitholegg/questdk-plugins/commit/d137d1f428a4f21e85e3cba39ac40c398d6aff2c), [`6cd550b1`](https://github.com/rabbitholegg/questdk-plugins/commit/6cd550b119d38bef3eda44c227502eaa2dab89c2), [`ae6f777d`](https://github.com/rabbitholegg/questdk-plugins/commit/ae6f777dbdea9872dcf86985f5556e1b7bb1ba82), [`128fcf25`](https://github.com/rabbitholegg/questdk-plugins/commit/128fcf25837835ed6b1f493a956c633cf751eb02)]:
+  - @rabbitholegg/questdk-plugin-fabric@1.0.0-alpha.5
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.38
+  - @rabbitholegg/questdk-plugin-orbit@1.0.0-alpha.1
+  - @rabbitholegg/questdk-plugin-base@1.0.0-alpha.1
+
 ## 1.0.0-alpha.97
 
 ### Patch Changes

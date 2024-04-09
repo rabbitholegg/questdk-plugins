@@ -21,6 +21,7 @@
     "clean-coins-count",
     "clever-candles-beg",
     "clever-hats-tease",
+    "cold-bobcats-knock",
     "cold-turtles-share",
     "cool-bats-cheer",
     "cool-geckos-sit",
@@ -55,6 +56,7 @@
     "flat-adults-wash",
     "fluffy-adults-invite",
     "fluffy-hornets-count",
+    "forty-camels-bow",
     "forty-shoes-sell",
     "forty-tips-clean",
     "four-mails-joke",
@@ -73,6 +75,7 @@
     "green-years-admire",
     "healthy-bugs-enjoy",
     "hip-mirrors-divide",
+    "hip-tables-behave",
     "hot-schools-refuse",
     "hungry-deers-look",
     "hungry-squids-drop",
@@ -210,6 +213,7 @@
     "twenty-pets-jump",
     "two-pandas-jump",
     "unlucky-dolphins-stare",
+    "unlucky-geese-bow",
     "unlucky-impalas-shake",
     "unlucky-pumpkins-taste",
     "unlucky-tigers-deny",
@@ -274,6 +278,8 @@
     "@rabbitholegg/questdk-plugin-paragraph": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-kwenta": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-pods": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-thruster": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-thruster": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-base": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-orbit": "1.0.0-alpha.0"
   }
 }
