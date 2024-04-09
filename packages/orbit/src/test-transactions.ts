@@ -1,12 +1,12 @@
+import { ONE_DAY } from './constants'
 import {
-  type StakeActionParams,
   GreaterThanOrEqual,
+  type StakeActionParams,
 } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
   type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { ONE_DAY } from './constants'
 import { parseUnits } from 'viem'
 
 export const STAKE_ORBIT: TestParams<StakeActionParams> = {

@@ -1,9 +1,9 @@
 import { type IActionPlugin } from '@rabbitholegg/questdk'
 
 import {
-  stake,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  stake,
 } from './Orbit.js'
 
 export const Orbit: IActionPlugin = {
