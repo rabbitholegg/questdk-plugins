@@ -36,5 +36,3 @@ export const getSupportedTokenAddresses = async (
 export const getSupportedChainIds = async (): Promise<number[]> => {
   return [Chains.BLAST]
 }
-
-
