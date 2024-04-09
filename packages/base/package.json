@@ -1,5 +1,5 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-basebridge",
+  "name": "@rabbitholegg/questdk-plugin-base",
   "version": "1.0.0-alpha.0",
   "type": "module",
   "exports": {

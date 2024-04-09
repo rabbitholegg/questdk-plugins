@@ -39,7 +39,7 @@ import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
 import { Pods } from '@rabbitholegg/questdk-plugin-pods'
 import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
 import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
-import { BaseBridge } from '@rabbitholegg/questdk-plugin-basebridge'
+import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,

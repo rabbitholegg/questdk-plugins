@@ -193,7 +193,7 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
-  packages/basebridge:
+  packages/base:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
@@ -565,9 +565,9 @@ importers:
       '@rabbitholegg/questdk-plugin-balancer':
         specifier: workspace:*
         version: link:../balancer
-      '@rabbitholegg/questdk-plugin-basebridge':
+      '@rabbitholegg/questdk-plugin-base':
         specifier: workspace:*
-        version: link:../basebridge
+        version: link:../base
       '@rabbitholegg/questdk-plugin-basepaint':
         specifier: workspace:*
         version: link:../basepaint

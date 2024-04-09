@@ -1,4 +1,4 @@
-## BaseBridge Plugin for Boost
+## Base Plugin for Boost
 
 ## Overview
 

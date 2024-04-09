@@ -4,10 +4,10 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './BaseBridge.js'
+} from './Base.js'
 
-export const BaseBridge: IActionPlugin = {
-  pluginId: 'basebridge',
+export const Base: IActionPlugin = {
+  pluginId: 'base',
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge,
