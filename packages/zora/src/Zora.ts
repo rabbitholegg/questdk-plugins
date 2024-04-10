@@ -175,6 +175,12 @@ export const simulateMint = async (
     _tokenId = Number(nextTokenId) - 1
   }
 
+  // check to see if the address is a contract
+  const bytecode = await _client.getBytecode({ address: contractAddress })
+  if (!bytecode) {
+    throw new Error('Address is not a contract')
+  }
+
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
   try {
