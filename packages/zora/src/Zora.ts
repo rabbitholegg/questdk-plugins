@@ -1,4 +1,5 @@
 import {
+  FUNCTION_SELECTORS,
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
@@ -30,10 +31,14 @@ import {
   type TransactionRequest,
   createPublicClient,
   encodeFunctionData,
+  fromHex,
   getAddress,
   http,
+  keccak256,
   pad,
   parseEther,
+  stringToBytes,
+  toHex,
 } from 'viem'
 
 export const mint = async (
@@ -175,10 +180,29 @@ export const simulateMint = async (
     _tokenId = Number(nextTokenId) - 1
   }
 
+  const slot = keccak256(stringToBytes('eip1967.proxy.implementation'))
+  const slotValue = toHex(fromHex(slot, 'bigint') - 1n)
+  const slotForImplementation = pad(slotValue, { size: 32 })
+  const implementationAddressRaw = await _client.getStorageAt({
+    address: contractAddress,
+    slot: slotForImplementation,
+  })
+  const implementationAddress: Address = `0x${implementationAddressRaw?.slice(
+    -40,
+  )}`
+
   // check to see if the address is a contract
-  const bytecode = await _client.getBytecode({ address: contractAddress })
-  if (!bytecode) {
-    throw new Error('Address is not a contract')
+  const bytecode = await _client.getBytecode({ address: implementationAddress })
+
+  // Check if the bytecode contains any of the function selectors
+  const containsSelector = FUNCTION_SELECTORS.some((selector) =>
+    bytecode?.includes(selector),
+  )
+
+  if (!containsSelector) {
+    throw new Error(
+      'None of the specified function selectors are present in the contract bytecode.',
+    )
   }
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]

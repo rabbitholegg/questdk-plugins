@@ -313,7 +313,7 @@ describe('simulateMint function', () => {
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
     await expect(simulateMint(mint, value, account)).rejects.toThrow(
-      'Address is not a contract',
+      'None of the specified function selectors are present in the contract bytecode.',
     )
   })
 })
