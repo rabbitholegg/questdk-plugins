@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.37
+
+### Patch Changes
+
+- [#351](https://github.com/rabbitholegg/questdk-plugins/pull/351) [`4cf78466`](https://github.com/rabbitholegg/questdk-plugins/commit/4cf7846666052de24da3d0ecab969fedcfe34b2f) Thanks [@mmackz](https://github.com/mmackz)! - check contract exists before simulations
+
 ## 1.0.0-alpha.36
 
 ### Patch Changes
