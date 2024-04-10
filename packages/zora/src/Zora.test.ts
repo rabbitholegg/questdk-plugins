@@ -3,6 +3,7 @@ import {
   type MintActionParams,
   type MintIntentParams,
   ActionType,
+  type DisctriminatedActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address, parseEther } from 'viem'
@@ -300,6 +301,21 @@ describe('simulateMint function', () => {
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
   })
+
+  test('should return an error object if address is not a contract', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.ARBITRUM_ONE,
+      contractAddress: '0x0fc434acc936c79ac1f8f44ed07c7da92ade8f94',
+      tokenId: 1,
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+    await expect(simulateMint(mint, value, account)).rejects.toThrow(
+      'Address is not a contract',
+    )
+  })
 })
 
 describe('getDynamicNameParams function', () => {
@@ -317,7 +333,10 @@ describe('getDynamicNameParams function', () => {
       collection: 'Collection Name',
     }
 
-    const result = await getDynamicNameParams(params, metadata)
+    const result = await getDynamicNameParams(
+      params as DisctriminatedActionParams,
+      metadata,
+    )
 
     expect(result).toEqual({
       actionType: 'Mint',
@@ -346,8 +365,8 @@ describe('getDynamicNameParams function', () => {
       collection: 'Collection Name',
     }
 
-    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
-      `Invalid action type "${params.type}"`,
-    )
+    await expect(
+      getDynamicNameParams(params as DisctriminatedActionParams, metadata),
+    ).rejects.toThrow(`Invalid action type "${params.type}"`)
   })
 })
