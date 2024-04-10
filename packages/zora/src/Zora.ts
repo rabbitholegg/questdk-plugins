@@ -180,6 +180,7 @@ export const simulateMint = async (
     _tokenId = Number(nextTokenId) - 1
   }
 
+  // find implementation address for EIP-1967 proxy
   const slot = keccak256(stringToBytes('eip1967.proxy.implementation'))
   const slotValue = toHex(fromHex(slot, 'bigint') - 1n)
   const slotForImplementation = pad(slotValue, { size: 32 })
@@ -191,10 +192,8 @@ export const simulateMint = async (
     -40,
   )}`
 
-  // check to see if the address is a contract
+  // Check if the implementation contracts bytecode contains valid function selectors
   const bytecode = await _client.getBytecode({ address: implementationAddress })
-
-  // Check if the bytecode contains any of the function selectors
   const containsSelector = FUNCTION_SELECTORS.some((selector) =>
     bytecode?.includes(selector),
   )
