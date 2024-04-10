@@ -1,13 +1,4 @@
-import {
-  Chains,
-  type MintActionParams,
-  type MintIntentParams,
-  ActionType,
-} from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
-import { type Address, parseEther } from 'viem'
-import { describe, expect, test, vi } from 'vitest'
-import { getMintIntent, mint, getDynamicNameParams, simulateMint } from './Zora'
+import { getDynamicNameParams, getMintIntent, mint, simulateMint } from './Zora'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
@@ -20,6 +11,16 @@ import {
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
 } from './test-transactions'
+import {
+  ActionType,
+  Chains,
+  type DisctriminatedActionParams,
+  type MintActionParams,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { apply } from '@rabbitholegg/questdk/filter'
+import { type Address, parseEther } from 'viem'
+import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
@@ -300,6 +301,21 @@ describe('simulateMint function', () => {
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
   })
+
+  test('should return an error object if address is not a contract', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.ARBITRUM_ONE,
+      contractAddress: '0x0fc434acc936c79ac1f8f44ed07c7da92ade8f94',
+      tokenId: 1,
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+    await expect(simulateMint(mint, value, account)).rejects.toThrow(
+      'None of the specified function selectors are present in the contract bytecode.',
+    )
+  })
 })
 
 describe('getDynamicNameParams function', () => {
@@ -317,7 +333,10 @@ describe('getDynamicNameParams function', () => {
       collection: 'Collection Name',
     }
 
-    const result = await getDynamicNameParams(params, metadata)
+    const result = await getDynamicNameParams(
+      params as DisctriminatedActionParams,
+      metadata,
+    )
 
     expect(result).toEqual({
       actionType: 'Mint',
@@ -346,8 +365,8 @@ describe('getDynamicNameParams function', () => {
       collection: 'Collection Name',
     }
 
-    await expect(getDynamicNameParams(params, metadata)).rejects.toThrow(
-      `Invalid action type "${params.type}"`,
-    )
+    await expect(
+      getDynamicNameParams(params as DisctriminatedActionParams, metadata),
+    ).rejects.toThrow(`Invalid action type "${params.type}"`)
   })
 })

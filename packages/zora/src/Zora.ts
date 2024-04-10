@@ -1,40 +1,45 @@
 import {
-  type TransactionFilter,
-  type MintActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
-import { getMintCosts, MintAPIClient } from '@zoralabs/protocol-sdk'
-import {
-  type Address,
-  getAddress,
-  type TransactionRequest,
-  encodeFunctionData,
-  createPublicClient,
-  http,
-  type PublicClient,
-  type SimulateContractReturnType,
-  pad,
-  parseEther,
-} from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import {
+  FUNCTION_SELECTORS,
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
   ZORA_MINTER_ABI_1155_LEGACY,
 } from './abi'
-import {
-  type MintIntentParams,
-  chainIdToViemChain,
-  DEFAULT_ACCOUNT,
-  ActionType,
-  type DisctriminatedActionParams,
-} from '@rabbitholegg/questdk-plugin-utils'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
   FIXED_PRICE_SALE_STRATS,
   ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
+import {
+  type MintActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import {
+  ActionType,
+  DEFAULT_ACCOUNT,
+  type DisctriminatedActionParams,
+  type MintIntentParams,
+  chainIdToViemChain,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { MintAPIClient, getMintCosts } from '@zoralabs/protocol-sdk'
+import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
+import {
+  type Address,
+  type PublicClient,
+  type SimulateContractReturnType,
+  type TransactionRequest,
+  createPublicClient,
+  encodeFunctionData,
+  fromHex,
+  getAddress,
+  http,
+  keccak256,
+  pad,
+  parseEther,
+  stringToBytes,
+  toHex,
+} from 'viem'
 
 export const mint = async (
   mint: MintActionParams,
@@ -173,6 +178,30 @@ export const simulateMint = async (
     })) as BigInt
 
     _tokenId = Number(nextTokenId) - 1
+  }
+
+  // find implementation address for EIP-1967 proxy
+  const slot = keccak256(stringToBytes('eip1967.proxy.implementation'))
+  const slotValue = toHex(fromHex(slot, 'bigint') - 1n)
+  const slotForImplementation = pad(slotValue, { size: 32 })
+  const implementationAddressRaw = await _client.getStorageAt({
+    address: contractAddress,
+    slot: slotForImplementation,
+  })
+  const implementationAddress: Address = `0x${implementationAddressRaw?.slice(
+    -40,
+  )}`
+
+  // Check if the implementation contracts bytecode contains valid function selectors
+  const bytecode = await _client.getBytecode({ address: implementationAddress })
+  const containsSelector = FUNCTION_SELECTORS.some((selector) =>
+    bytecode?.includes(selector),
+  )
+
+  if (!containsSelector) {
+    throw new Error(
+      'None of the specified function selectors are present in the contract bytecode.',
+    )
   }
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]

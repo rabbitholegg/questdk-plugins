@@ -1,18 +1,18 @@
 import {
-  type IActionPlugin,
-  PluginActionNotImplementedError,
   type ActionParams,
+  type IActionPlugin,
   type MintActionParams,
+  PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
   getDynamicNameParams,
+  getFees,
   getMintIntent,
+  getProjectFees,
   getSupportedChainIds,
   getSupportedTokenAddresses,
   mint,
-  getProjectFees,
-  getFees,
   simulateMint,
 } from './Zora.js'
 
