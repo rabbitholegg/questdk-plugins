@@ -1,14 +1,4 @@
-import {
-  Chains,
-  type MintActionParams,
-  type MintIntentParams,
-  ActionType,
-  type DisctriminatedActionParams,
-} from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
-import { type Address, parseEther } from 'viem'
-import { describe, expect, test, vi } from 'vitest'
-import { getMintIntent, mint, getDynamicNameParams, simulateMint } from './Zora'
+import { getDynamicNameParams, getMintIntent, mint, simulateMint } from './Zora'
 import {
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
@@ -21,6 +11,16 @@ import {
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
 } from './test-transactions'
+import {
+  ActionType,
+  Chains,
+  type DisctriminatedActionParams,
+  type MintActionParams,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { apply } from '@rabbitholegg/questdk/filter'
+import { type Address, parseEther } from 'viem'
+import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
