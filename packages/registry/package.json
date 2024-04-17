@@ -78,6 +78,7 @@
     "@rabbitholegg/questdk-plugin-kwenta": "workspace:*",
     "@rabbitholegg/questdk-plugin-base": "workspace:*",
     "@rabbitholegg/questdk-plugin-thruster": "workspace:*",
-    "@rabbitholegg/questdk-plugin-orbit": "workspace:*"
+    "@rabbitholegg/questdk-plugin-orbit": "workspace:*",
+    "@rabbitholegg/questdk-plugin-gains": "workspace:*"
   }
 }

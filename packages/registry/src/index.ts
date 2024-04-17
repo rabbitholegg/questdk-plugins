@@ -41,6 +41,7 @@ import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
 import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
 import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
+import { Gains } from '@rabbitholegg/questdk-plugin-gains'
 import { ENTRYPOINT } from './contract-addresses'
 import {
   type IntentParams,
@@ -105,6 +106,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Thruster.pluginId]: Thruster,
   [Base.pluginId]: Base,
   [Orbit.pluginId]: Orbit,
+  [Gains.pluginId]: Gains,
 }
 
 export const getPlugin = (pluginId: string) => {

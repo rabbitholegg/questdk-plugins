@@ -1,0 +1,10 @@
+project:
+  name: Gains
+  iconOption: https://gainsnetwork.io/favicon-32x32.png
+  appLink: https://gainsnetwork.io/
+
+tasks:
+  - name: Gains
+    link: https://gains.trade/trading
+    actionPluginId: options
+    iconOption: https://gainsnetwork.io/favicon-32x32.png

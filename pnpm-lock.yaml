@@ -280,6 +280,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/gains:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/gmx:
     dependencies:
       '@rabbitholegg/questdk':
@@ -596,6 +609,9 @@ importers:
       '@rabbitholegg/questdk-plugin-fabric':
         specifier: workspace:*
         version: link:../fabric
+      '@rabbitholegg/questdk-plugin-gains':
+        specifier: workspace:*
+        version: link:../gains
       '@rabbitholegg/questdk-plugin-gmx':
         specifier: workspace:*
         version: link:../gmx
@@ -12811,7 +12827,7 @@ packages:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     requiresBuild: true
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
     dev: false
     optional: true
 
