@@ -34,7 +34,7 @@ export const tokenToId = {
   [BAL]: 186,
 }
 
-// https://github.com/GainsNetwork/gTrade-v6.1/blob/7803cc0a1d62c5b115c38b8e432a7436b51926d3/contracts/GNSTradingV6_1.sol#L81
+// https://arbiscan.io/address/0x0b213d09c5264ffdceb3d24b86f746a2d8acc11c#code
 export const ABI = [
   {
     inputs: [
@@ -51,17 +51,17 @@ export const ABI = [
           { internalType: 'uint256', name: 'tp', type: 'uint256' },
           { internalType: 'uint256', name: 'sl', type: 'uint256' },
         ],
-        internalType: 'struct StorageInterfaceV5.Trade',
+        internalType: 'struct IGNSTradingStorage.Trade',
         name: 't',
         type: 'tuple',
       },
       {
-        internalType: 'enum NftRewardsInterfaceV6.OpenLimitOrderType',
-        name: '_type',
+        internalType: 'enum IGNSOracleRewards.OpenLimitOrderType',
+        name: 'orderType',
         type: 'uint8',
       },
-      { internalType: 'uint256', name: '_slippageP', type: 'uint256' },
-      { internalType: 'address', name: '_referral', type: 'address' },
+      { internalType: 'uint256', name: 'slippageP', type: 'uint256' },
+      { internalType: 'address', name: 'referrer', type: 'address' },
     ],
     name: 'openTrade',
     outputs: [],
