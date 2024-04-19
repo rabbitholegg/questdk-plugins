@@ -149,7 +149,7 @@ export const DEPOSIT_ETH_TO: TestParams<BridgeActionParams> = {
     destinationChainId: Chains.BASE,
     tokenAddress: '0x0000000000000000000000000000000000000000',
     amount: GreaterThanOrEqual(500000000000000n),
-    recipient: '0x3fc2ec80079b150a0ba345543454aea480036fe0',
+    recipient: '0x85772752e3b5ff0917345c67d51f20caf1e1de5b',
   },
 }
 export const WITHDRAW_ETH: TestParams<BridgeActionParams> = {
@@ -274,12 +274,16 @@ export const passingTestCases = [
   createTestCase(WITHDRAW_ERC20, 'when withdraw (ERC) (BASE->ETH)'),
   createTestCase(WITHDRAW_TO, 'when withdrawTo (ERC) (BASE->ETH)'),
   createTestCase(WITHDRAW_BRIDGE_ETH_TO, 'when bridgeETHTo (BASE->ETH)'),
-  createTestCase(WITHDRAW_BRIDGE_ETH_TO, 'when bridgeERC20To (BASE->ETH)'),
+  createTestCase(WITHDRAW_BRIDGE_ERC20_TO, 'when bridgeERC20To (BASE->ETH)'),
   createTestCase(WITHDRAW_BRIDGE_ERC20, 'when bridgeERC20 (BASE->ETH)'),
 ]
 
 export const failingTestCases = [
-  createTestCase(BRIDGE_ERC20, 'when sourceChainId is not correct', {
-    sourceChainId: 0,
+  createTestCase(WITHDRAW_ETH, 'when sourceChainId is not correct', {
+    sourceChainId: 10,
+  }),
+  // pick a random testcase and set a parameter to undeifned
+  createTestCase(BRIDGE_ETH, 'when destinationChainId is not correct', {
+    destinationChainId: 10,
   }),
 ]
