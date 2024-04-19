@@ -1,4 +1,13 @@
-import { type AbiFunction, getAbiItem } from "viem"
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type AbiFunction, getAbiItem } from 'viem'
+
+export const mainToL2BridgeContract: Record<number, string> = {
+  [Chains.BASE]: '0x3154cf16ccdb4c6d922629664174b904d80f2c35',
+}
+
+export const l2ToMainBridgeContract: Record<number, string> = {
+  [Chains.BASE]: '0x4200000000000000000000000000000000000010',
+}
 
 const STANDARD_BRIDGE_ABI = [
   {
