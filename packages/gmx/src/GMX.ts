@@ -7,15 +7,15 @@ import {
   OrderType as BoostOrderType,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { OrderType, Tokens, buildPathQuery } from './utils.js'
-import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids.js'
-import { GMX_SEND_TOKENS_ABI, GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi.js'
+import { OrderType, Tokens, buildPathQuery } from './utils'
+import { ARB_ONE_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids'
+import { GMX_SEND_TOKENS_ABI, GMX_SWAPV1_ABI, GMX_SWAPV2_ABI } from './abi'
 import {
   DEFAULT_TOKEN_LIST,
   GMX_ROUTERV2_ADDRESS,
   ETH_ADDRESS,
   MARKET_TOKENS,
-} from './contract-addresses.js'
+} from './contract-addresses'
 
 function getMarketAddress(
   tokenIn: Address | undefined,

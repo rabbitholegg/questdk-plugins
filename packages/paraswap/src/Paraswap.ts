@@ -5,14 +5,14 @@ import {
   type ActionType,
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids.js'
-import { Tokens, buildPathQuery, filterTokenList } from './utils.js'
+import { STAKE_CHAIN_ID_ARRAY, SWAP_CHAIN_ID_ARRAY } from './chain-ids'
+import { Tokens, buildPathQuery, filterTokenList } from './utils'
 import {
   constructGetTokens,
   constructAxiosFetcher,
   constructGetSpender,
 } from '@paraswap/sdk'
-import { PARASWAP_STAKE_ABI, PARASWAP_SWAP_ABI } from './abi.js'
+import { PARASWAP_STAKE_ABI, PARASWAP_SWAP_ABI } from './abi'
 import axios from 'axios'
 import {
   DEFAULT_STAKE_TOKEN_LIST,
@@ -22,7 +22,7 @@ import {
   MAINNET_SEPSP2_ADDRESS,
   OPTIMISM_SEPSP1_ADDRESS,
   OPTIMISM_SEPSP2_ADDRESS,
-} from './contract-addresses.js'
+} from './contract-addresses'
 const fetcher = constructAxiosFetcher(axios) // alternatively constructFetchFetcher
 
 export const swap = async (swap: SwapActionParams) => {

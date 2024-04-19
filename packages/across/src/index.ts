@@ -6,7 +6,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Across.js'
+} from './Across'
 export const Across: IActionPlugin = {
   pluginId: 'across',
   getSupportedTokenAddresses,

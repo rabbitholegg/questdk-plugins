@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Stargate.js'
+} from './Stargate'
 
 export const Stargate: IActionPlugin = {
   pluginId: 'stargate',

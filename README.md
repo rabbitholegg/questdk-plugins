@@ -18,6 +18,48 @@ To run individual package test:
 
 Replace the filter param with the package you're trying to target.
 
+## Building Your Project
+To build all projects except the `@rabbitholegg/questdk-plugin-project`, run the following command:
+
+```bash
+pnpm build
+```
+
+This command utilizes Turbo to optimize the build process, ensuring that only relevant changes trigger rebuilds, significantly speeding up development time.
+
+## Linting
+Maintain code quality and consistency with our linting commands. To lint all projects except the `@rabbitholegg/questdk-plugin-project`, you can run:
+
+```bash
+pnpm lint
+```
+
+For automatic fixes to linting issues, execute:
+
+```bash
+pnpm lint:fix
+```
+
+These commands help ensure that your code adheres to our coding standards and styles.
+
+## Cleaning the Project
+Encountering build issues or need to start from scratch? The `nuke` command is your go-to solution. It cleans your working directory by removing all untracked files and directories, then reinstalls dependencies:
+
+```bash
+pnpm nuke
+```
+
+This powerful command is ideal for resetting your project to a clean state.
+
+Remember to replace the filter parameter with the specific package you're targeting for individual commands as needed.
+
+### Changesets & Publishing
+In order to publish you need to make sure that the pull request you're submitting has a changeset. If you don't want to publish this isn't needed. In order to generate a changeset run `pnpm changeset`, select a change type [major,minor,patch], and draft a small summary of the changeset. Select version based on [semantic versioning](https://semver.org/).
+
+After this all you need to do is push and merge the pull request and the Github Action will handle the process of versioning, and publishing.
+### Commit Standards
+We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in order to make changelogs and versioning a breeze.
+
 ### Package Linking
 Often times when testing it's necessary to link into the [questDK repo](https://github.com/rabbitholegg/questdk).
 We handle this through [package linking](https://pnpm.io/cli/link).
@@ -33,6 +75,8 @@ In order to link the `questdk` run this from root of this package:
 pnpm link path/to/questdk
 
 ```
+
+If you encounter `Module not found: Can't resolve 'viem/chains'` or another dependency related issue immediatly after linking you most likely need to rebuild the package that has been linked into the host package.
 
 ## Plugins: an Overview
 
@@ -138,13 +182,38 @@ Also remember to add the new repo within the monorepo to the `package.json` of t
 ### Private Repo
 
 If you're ready to publish, remove the `private` tag from your `package.json` file.
+## Build Process Update
+
+We've made significant updates to our build process to enhance modularity, improve integration times, and set a foundation for reducing the overall package size. Although the package remains larger than our target, these changes pave the way for future optimizations through deduplication and exclusions.
+
+### Motivations for the Update
+
+- **Enhanced Portability**: The new structure improves the portability of modules, facilitating their use in diverse environments.
+- **Foundation for Slimming Down**: By breaking down the build process and migrating away from unsupported tools, we've laid the groundwork for future size reductions.
+- **Improved Integration and Performance**: Anecdotal evidence suggests a smoother and faster integration process, likely due to more efficient tree-shaking capabilities.
+
+### New Build Flow
+
+Our build process now consists of three discrete steps, designed to ensure both type safety and build speed:
+
+1. **Type Verification**: We start by verifying types and building type definitions. This step ensures the type safety of our code before it moves to transpilation.
+2. **Transpilation**: The code is then transpiled into unbundled CommonJS (CJS) and ECMAScript Module (ESM) formats using Babel. This step focuses on speed, bypassing the checks performed in the first step.
+3. **Bundling**: Finally, we bundle the transpiled code into ESM and Universal Module Definition (UMD) formats. This step also includes the minification of each version to reduce the size further.
+
+### Additional Updates
+
+- **Migration Away from Rome**: Recognizing that Rome is no longer maintained, we've started to migrate our tooling away from it to ensure future compatibility and support.
+- **Utility Script for File Management**: To facilitate cleaner updates, a helper script has been added for copying files out to every directory. This approach allows for a more straightforward "delete all and replace" strategy when updating modules.
+
+### Remaining Tasks and Considerations
+
+While the new build process marks a significant improvement, some tasks remain, particularly concerning node polyfills:
+
+- **Node Polyfills with Rollup**: Issues have arisen around `TextDecoder`, which is unavailable in certain environments. While we've managed to polyfill node utilities for most packages, exceptions exist for those utilizing Axios due to its reliance on `TextDecoder`.
+- **Web Environment Compatibility**: As `TextDecoder` should be available in web environments, further investigation is needed to selectively polyfill node utilities. This consideration is crucial for web browser deployment, suggesting that webpack may offer a solution for filling these gaps.
+
+We are committed to addressing these challenges and will provide updates as we refine the build process further. Your feedback and contributions are welcome as we continue to improve the efficiency and effectiveness of our package.
 
 ## Contributing
 If you'd like to build a plugin and get support for your protocol on RabbiteHole all you need to do is submit a PR with the finished plugin. Here are some useful tips to assist, and when in doubt please [join our discord](https://discord.com/invite/rabbitholegg) or reach out by email [<arthur@rabbithole.gg>] for assistance building a plugin.
-### Changesets & Publishing
-In order to publish you need to make sure that the pull request you're submitting has a changeset. If you don't want to publish this isn't needed. In order to generate a changeset run `pnpm changeset`, select a change type [major,minor,patch], and draft a small summary of the changeset. Select version based on [semantic versioning](https://semver.org/).
-
-After this all you need to do is push and merge the pull request and the Github Action will handle the process of versioning, and publishing.
-### Commit Standards
-We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in order to make changelogs and versioning a breeze.
 

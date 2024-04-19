@@ -1,4 +1,4 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
 import { metaBurnABI, metaRouteABI } from './abi'

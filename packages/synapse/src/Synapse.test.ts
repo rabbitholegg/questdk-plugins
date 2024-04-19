@@ -1,6 +1,6 @@
-import { bridge, getSupportedTokenAddresses } from './Synapse.js'
-import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi.js'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
+import { bridge, getSupportedTokenAddresses } from './Synapse'
+import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
   CHAIN_TO_ROUTER,
   SYNAPSE_CCTP_ROUTER,
@@ -16,7 +16,7 @@ import {
   WITHDRAW_ETH,
   failingTestCases,
   passingTestCases,
-} from './test-transactions.js'
+} from './test-transactions'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { parseEther, parseUnits, zeroAddress } from 'viem'

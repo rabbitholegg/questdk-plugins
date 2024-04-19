@@ -7,7 +7,7 @@ import {
   MAINNET_TO_ARB_ONE_GATEWAY,
 } from './contract-addresses'
 
-const l1ToL2Map: [string, Address][] = [
+const l1ToL2Map: Array<[string, Address]> = [
   [
     // USDC
     JSON.stringify([

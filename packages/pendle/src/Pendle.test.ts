@@ -1,14 +1,14 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { getSupportedTokenAddresses, swap } from './Pendle.js'
+import { getSupportedTokenAddresses, swap } from './Pendle'
 import {
   SWAP_EXACT_TOKEN_FOR_YT,
   SWAP_EXACT_YT_FOR_TOKEN,
 } from './test-transactions'
-import { getRouterAddress } from './contract-addresses.js'
-import { SUPPORTED_CHAINS, SUPPORTED_CHAINS_ARRAY } from './chain-ids.js'
-import * as abi from './abi.js'
-import { getDefaultTokenAddresses } from './pendle-backend.js'
+import { getRouterAddress } from './contract-addresses'
+import { SUPPORTED_CHAINS, SUPPORTED_CHAINS_ARRAY } from './chain-ids'
+import * as abi from './abi'
+import { getDefaultTokenAddresses } from './pendle-backend'
 
 describe('Given the Pendle plugin', () => {
   describe('When handling Pendle backend', () => {

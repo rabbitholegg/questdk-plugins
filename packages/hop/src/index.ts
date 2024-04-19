@@ -3,11 +3,7 @@ import {
   PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk'
 
-import {
-  bridge,
-  getSupportedChainIds,
-  getSupportedTokenAddresses,
-} from './Hop.js'
+import { bridge, getSupportedChainIds, getSupportedTokenAddresses } from './Hop'
 
 export const Hop: IActionPlugin = {
   pluginId: 'hop',

@@ -1,5 +1,5 @@
-import { TALLY_ABI } from './abi.js'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
+import { TALLY_ABI } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import { compressJson, type DelegateActionParams } from '@rabbitholegg/questdk'
 
 export const delegate = async (delegateParams: DelegateActionParams) => {

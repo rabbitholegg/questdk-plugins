@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Synapse.js'
+} from './Synapse'
 
 export const Synapse: IActionPlugin = {
   pluginId: 'synapse',

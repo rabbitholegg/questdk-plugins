@@ -3,7 +3,7 @@ import { PROCESS_ROUTE_ABI, ROUTER_ABI } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { CHAIN_TO_CONTRACTS } from './contract-addresses'
 import { failingTestCases, passingTestCases } from './create-tests'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the Sushi plugin', () => {
