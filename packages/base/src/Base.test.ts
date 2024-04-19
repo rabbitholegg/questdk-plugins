@@ -6,7 +6,7 @@ import { describe, expect, test } from 'vitest'
 describe('Given the base plugin', () => {
   describe('When handling the bridge action', () => {
     describe('should return a valid action filter', () => {
-      test('when making a valid swap action', async () => {
+      test('when making a valid bridge action', async () => {
         const filter = await bridge({
           sourceChainId: 1,
           destinationChainId: 8453,
