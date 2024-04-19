@@ -22,7 +22,8 @@
     "postbuild:esm": "echo '{\"type\":\"module\"}' > dist/esm/package.json",
     "format": "rome format . --write",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",    "test": "vitest dev",
+    "lint:fix": "eslint . --fix",    
+    "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
     "test:ui": "vitest dev --ui"
@@ -36,9 +37,9 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@connext/nxtp-txservice": "^2.0.0",
-    "@connext/nxtp-utils": "^2.0.4",
-    "@connext/smart-contracts": "^2.0.0",
+    "@connext/nxtp-txservice": "2.4.0",
+    "@connext/nxtp-utils": "2.4.1",
+    "@connext/smart-contracts": "2.4.0",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"
   }
