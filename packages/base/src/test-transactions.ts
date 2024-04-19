@@ -28,7 +28,7 @@ export const ETH_FROM_ETHEREUM_TO_BASE_TEST: TestParams<BridgeActionParams> = {
     sourceChainId: Chains.ETHEREUM,
     destinationChainId: Chains.BASE,
     tokenAddress: ETH,
-    // contractAddress: ETHEREUM_ETH_BRIDGE_ADDRESS,
+    contractAddress: ETHEREUM_ETH_BRIDGE_ADDRESS,
     amount: '8000000000000000',
     recipient: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4',
   },
