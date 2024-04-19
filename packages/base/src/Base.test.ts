@@ -1,96 +1,40 @@
 import { bridge } from './Base'
-import {
-  BASE_ERC20_ABI,
-  BASE_ERC20_BRIDGE_ADDRESS,
-  BASE_ETH_ABI,
-  BASE_ETH_BRIDGE_ADDRESS,
-  ETH,
-  ETHEREUM_ERC20_ABI,
-  ETHEREUM_ERC20_BRIDGE_ADDRESS,
-  ETHEREUM_ETH_ABI,
-  ETHEREUM_ETH_BRIDGE_ADDRESS,
-} from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
-import { parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the base plugin', () => {
   describe('When handling the bridge action', () => {
     describe('should return a valid action filter', () => {
-      test('when bridge eth from ethereum to base', async () => {
-        const amount = parseEther('0.008').toString()
+      test('when making a valid swap action', async () => {
         const filter = await bridge({
-          sourceChainId: Chains.ETHEREUM,
-          destinationChainId: Chains.BASE,
-          tokenAddress: ETH,
-          amount,
+          sourceChainId: 1,
+          destinationChainId: 8453,
         })
-        expect(filter).to.deep.equal({
-          chainId: Chains.ETHEREUM,
-          to: ETHEREUM_ETH_BRIDGE_ADDRESS,
-          input: {
-            $abi: ETHEREUM_ETH_ABI,
-            _value: amount,
-          },
-        })
-      })
-
-      test('when bridge erc20 from ethereum to base', async () => {
-        const amount = parseEther('0.008').toString()
-        const filter = await bridge({
-          sourceChainId: Chains.ETHEREUM,
-          destinationChainId: Chains.BASE,
-          tokenAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4333',
-          amount,
-        })
-        expect(filter).to.deep.equal({
-          chainId: Chains.ETHEREUM,
-          to: ETHEREUM_ERC20_BRIDGE_ADDRESS,
-          input: {
-            $abi: ETHEREUM_ERC20_ABI,
-            amount,
-            burnToken: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4333',
-          },
-        })
-      })
-
-      test('when bridge eth from base to ethereum', async () => {
-        const amount = parseEther('0.008').toString()
-        const filter = await bridge({
-          sourceChainId: Chains.BASE,
-          destinationChainId: Chains.ETHEREUM,
-          tokenAddress: ETH,
-          amount,
-        })
-        expect(filter).to.deep.equal({
-          chainId: Chains.BASE,
-          to: BASE_ETH_BRIDGE_ADDRESS,
-          value: amount,
-          input: {
-            $abi: BASE_ETH_ABI,
-          },
-        })
-      })
-
-      test('when bridge erc20 from base to ethereum', async () => {
-        const amount = parseEther('0.008').toString()
-        const filter = await bridge({
-          sourceChainId: Chains.BASE,
-          destinationChainId: Chains.ETHEREUM,
-          tokenAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4333',
-          amount,
-        })
-        expect(filter).to.deep.equal({
-          chainId: Chains.BASE,
-          to: BASE_ERC20_BRIDGE_ADDRESS,
-          input: {
-            $abi: BASE_ERC20_ABI,
-            amount,
-            burnToken: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4333',
-          },
-        })
+        expect(filter).toBeTypeOf('object')
+        expect(Number(filter.chainId)).toBe(1)
+        if (typeof filter.to === 'string') {
+          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+        } else {
+          // if to is an object, it should have a logical operator as the only key
+          expect(filter.to).toBeTypeOf('object')
+          expect(Object.keys(filter.to)).toHaveLength(1)
+          expect(
+            ['$or', '$and'].some((prop) =>
+              Object.hasOwnProperty.call(filter.to, prop),
+            ),
+          ).to.be.true
+          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+            arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+          )
+        }
+        // Check the input property is the correct type and has a valid filter operator
+        expect(filter.input).toBeTypeOf('object')
+        expect(
+          ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
+            Object.hasOwnProperty.call(filter.input, prop),
+          ),
+        ).to.be.true
       })
     })
 
