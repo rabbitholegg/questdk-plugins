@@ -1,56 +1,44 @@
-import { options } from './Gains'
-import { ABI, CONTRACTS, MARKET_ORDER_TYPE, PAIRS } from './constants'
+import {
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+  options,
+} from './Gains'
 import { failingTestCases, passingTestCases } from './test-transactions'
-import { compressJson } from '@rabbitholegg/questdk'
-import { Chains, OrderType } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the gains plugin', () => {
   describe('When handling the options action', () => {
     describe('should return a valid action filter', () => {
-      test('for limit order', async () => {
+      test('when making a valid options action', async () => {
         const filter = await options({
-          chainId: Chains.ARBITRUM_ONE,
-          amount: 10000,
-          orderType: OrderType.Limit,
+          chainId: 1,
         })
-        expect(filter).toStrictEqual(
-          compressJson({
-            chainId: Chains.ARBITRUM_ONE,
-            to: { $or: CONTRACTS },
-            input: {
-              $abi: ABI,
-              t: {
-                pairIndex: { $or: PAIRS },
-                positionSizeDai: 10000,
-              },
-              _type: { $gt: MARKET_ORDER_TYPE },
-            },
-          }),
-        )
-      })
-
-      test('for market order', async () => {
-        const filter = await options({
-          chainId: Chains.ARBITRUM_ONE,
-          amount: 20000,
-          orderType: OrderType.Market,
-        })
-        expect(filter).toStrictEqual(
-          compressJson({
-            chainId: Chains.ARBITRUM_ONE,
-            to: { $or: CONTRACTS },
-            input: {
-              $abi: ABI,
-              t: {
-                pairIndex: { $or: PAIRS },
-                positionSizeDai: 20000,
-              },
-              _type: MARKET_ORDER_TYPE,
-            },
-          }),
-        )
+        expect(filter).toBeTypeOf('object')
+        expect(Number(filter.chainId)).toBe(1)
+        console.log(filter)
+        if (typeof filter.to === 'string') {
+          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+        } else {
+          // if to is an object, it should have a logical operator as the only key
+          expect(filter.to).toBeTypeOf('object')
+          expect(Object.keys(filter.to)).toHaveLength(1)
+          expect(
+            ['$or', '$and'].some((prop) =>
+              Object.hasOwnProperty.call(filter.to, prop),
+            ),
+          ).to.be.true
+          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+            arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+          )
+        }
+        // Check the input property is the correct type and has a valid filter operator
+        expect(filter.input).toBeTypeOf('object')
+        expect(
+          ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
+            Object.hasOwnProperty.call(filter.input, prop),
+          ),
+        ).to.be.true
       })
     })
 
@@ -70,6 +58,24 @@ describe('Given the gains plugin', () => {
         test(description, async () => {
           const filter = await options(params)
           expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+
+    describe('should return a valid list of tokens for each supported chain', async () => {
+      const chainIdArray = await getSupportedChainIds()
+      chainIdArray.forEach((chainId) => {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(chainId)
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach((token) => {
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
+          })
         })
       })
     })

@@ -1,13 +1,10 @@
 import {
   ABI,
-  CONTRACTS,
+  GNS_TRADING_CONTRACT,
   MARKET_ORDER_TYPE,
-  PAIRS,
-  TOKENS,
-  TOKEN_PAIRS,
+  tokenToId,
 } from './constants'
 import {
-  type FilterOperator,
   type OptionsActionParams,
   type TransactionFilter,
   compressJson,
@@ -21,19 +18,12 @@ export const options = async (
   const { recipient, amount, orderType, chainId, contractAddress, token } =
     params
 
-  if (contractAddress !== undefined && !CONTRACTS.includes(contractAddress)) {
-    throw new Error(
-      "Unsupported 'contractAddress', use one of supported contracts: ${CONTRACTS}",
-    )
+  // if tokenToId doesn't have the token, it will force failure
+  if (token && tokenToId[token] === undefined) {
+    throw new Error('Invalid token')
   }
-  const to = contractAddress ?? { $or: CONTRACTS }
 
-  if (token !== undefined && !(token in TOKEN_PAIRS)) {
-    throw new Error(
-      "Unsupported 'token', use one of supported tokens: ${TOKENS}",
-    )
-  }
-  const pairFilter: FilterOperator = token ? TOKEN_PAIRS[token] : { $or: PAIRS }
+  const tokenPair = token ? tokenToId[token] : undefined
 
   let typeFilter = undefined
   if (orderType === OrderType.Market) {
@@ -45,12 +35,12 @@ export const options = async (
 
   return compressJson({
     chainId,
-    to,
+    to: contractAddress ?? GNS_TRADING_CONTRACT,
     input: {
       $abi: ABI,
       t: {
         trader: recipient,
-        pairIndex: pairFilter,
+        pairIndex: tokenPair,
         positionSizeDai: amount,
       },
       _type: typeFilter,
@@ -61,7 +51,10 @@ export const options = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return TOKENS
+  if (_chainId !== Chains.ARBITRUM_ONE) {
+    return Object.keys(tokenToId) as Address[]
+  }
+  return []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
