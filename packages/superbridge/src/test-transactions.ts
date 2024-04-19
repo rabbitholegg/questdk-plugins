@@ -282,7 +282,6 @@ export const failingTestCases = [
   createTestCase(WITHDRAW_ETH, 'when sourceChainId is not correct', {
     sourceChainId: 10,
   }),
-  // pick a random testcase and set a parameter to undeifned
   createTestCase(BRIDGE_ETH, 'when destinationChainId is not correct', {
     destinationChainId: 10,
   }),
