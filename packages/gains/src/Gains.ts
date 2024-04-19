@@ -1,6 +1,6 @@
 import {
   ABI,
-  GNS_TRADING_CONTRACT,
+  GNS_TRADING_DAI_CONTRACT,
   MARKET_ORDER_TYPE,
   tokenToId,
 } from './constants'
@@ -35,7 +35,7 @@ export const options = async (
 
   return compressJson({
     chainId,
-    to: contractAddress ?? GNS_TRADING_CONTRACT,
+    to: contractAddress ?? GNS_TRADING_DAI_CONTRACT,
     input: {
       $abi: ABI,
       t: {
@@ -43,7 +43,7 @@ export const options = async (
         pairIndex: tokenPair,
         positionSizeDai: amount,
       },
-      _type: typeFilter,
+      orderType: typeFilter,
     },
   })
 }
