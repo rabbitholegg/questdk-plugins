@@ -7,6 +7,7 @@ import {
   type TestParams,
   createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
+import { parseUnits } from 'viem'
 
 export const BRIDGE_ERC20: TestParams<BridgeActionParams> = {
   transaction: {
@@ -276,6 +277,21 @@ export const passingTestCases = [
   createTestCase(WITHDRAW_BRIDGE_ETH_TO, 'when bridgeETHTo (BASE->ETH)'),
   createTestCase(WITHDRAW_BRIDGE_ERC20_TO, 'when bridgeERC20To (BASE->ETH)'),
   createTestCase(WITHDRAW_BRIDGE_ERC20, 'when bridgeERC20 (BASE->ETH)'),
+  createTestCase(BRIDGE_ERC20_TO, 'when tokenAddress is "any"', {
+    tokenAddress: undefined,
+  }),
+  createTestCase(BRIDGE_ETH, 'when amount is "any"', {
+    amount: undefined,
+  }),
+  createTestCase(DEPOSIT_ERC20_TO, 'when both amount and token are "any"', {
+    amount: undefined,
+    tokenAddress: undefined,
+  }),
+  createTestCase(WITHDRAW_TO, 'when all optional params are "any"', {
+    amount: undefined,
+    tokenAddress: undefined,
+    recipient: undefined,
+  }),
 ]
 
 export const failingTestCases = [
@@ -284,5 +300,14 @@ export const failingTestCases = [
   }),
   createTestCase(BRIDGE_ETH, 'when destinationChainId is not correct', {
     destinationChainId: 10,
+  }),
+  createTestCase(BRIDGE_ERC20, 'when amount is not correct', {
+    amount: GreaterThanOrEqual(parseUnits('1000000', 18)),
+  }),
+  createTestCase(BRIDGE_ERC20_TO, 'when tokenAddress is not correct', {
+    tokenAddress: '0x04d1963c76eb1bec59d0eeb249ed86f736b82993',
+  }),
+  createTestCase(WITHDRAW_TO, 'when recipient is not correct', {
+    recipient: '0x04d1963c76eb1bec59d0eeb249ed86f736b82993',
   }),
 ]
