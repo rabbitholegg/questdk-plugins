@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "create": "pnpm build && pnpm run -r --filter=@rabbitholegg/create-plugin create",
-    "build": "NODE_OPTIONS='--max-old-space-size=6096' turbo run build --filter=!@rabbitholegg/questdk-plugin-project,!@rabbitholegg/questdk-plugin-connext",
+    "build": "turbo run build --filter=!@rabbitholegg/questdk-plugin-project,!@rabbitholegg/questdk-plugin-connext",
     "lint": "turbo run lint --filter=!@rabbitholegg/questdk-plugin-project",
     "lint:fix": "pnpm run -r --filter=!@rabbitholegg/questdk-plugin-project lint:fix",
     "format": "turbo run format --filter=!@rabbitholegg/questdk-plugin-project",
