@@ -1,11 +1,4 @@
 import {
-  type TransactionFilter,
-  type BridgeActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { zeroAddress, type Address } from 'viem'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import {
   BRIDGE_ERC20_FRAGMENT,
   BRIDGE_ERC20_TO_FRAGMENT,
   BRIDGE_ETH_FRAGMENT,
@@ -16,9 +9,16 @@ import {
   DEPOSIT_ETH_TO_FRAGMENT,
   WITHDRAW_FRAGMENT,
   WITHDRAW_TO_FRAGMENT,
-  mainToL2BridgeContract,
   l2ToMainBridgeContract,
+  mainToL2BridgeContract,
 } from './constants'
+import {
+  type BridgeActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress } from 'viem'
 
 export const bridge = async (
   bridge: BridgeActionParams,

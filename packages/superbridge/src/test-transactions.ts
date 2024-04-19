@@ -4,8 +4,8 @@ import {
 } from '@rabbitholegg/questdk'
 import {
   Chains,
-  createTestCase,
   type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 export const BRIDGE_ERC20: TestParams<BridgeActionParams> = {

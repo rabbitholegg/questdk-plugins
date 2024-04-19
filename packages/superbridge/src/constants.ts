@@ -1,5 +1,8 @@
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { type AbiFunction, getAbiItem } from 'viem'
+import {
+  CHAIN_TO_TOKENS as DEFAULT_TOKENS,
+  Chains,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { type AbiFunction, type Address, getAbiItem } from 'viem'
 
 export const mainToL2BridgeContract: Record<number, string> = {
   [Chains.BASE]: '0x3154cf16ccdb4c6d922629664174b904d80f2c35',
@@ -173,3 +176,23 @@ export const WITHDRAW_TO_FRAGMENT = getAbiItem({
   abi: STANDARD_BRIDGE_ABI,
   name: 'withdrawTo',
 }) as AbiFunction
+
+const chainToCircleUSDCAddress: Record<number, string> = {
+  [Chains.BASE]: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
+  [Chains.ETHEREUM]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+}
+
+export const CHAIN_TO_TOKENS = {
+  [Chains.BASE]: [
+    ...(DEFAULT_TOKENS[Chains.BASE]?.filter(
+      (token) => token !== chainToCircleUSDCAddress[Chains.BASE],
+    ) as Address[]),
+    '0x04d1963c76eb1bec59d0eeb249ed86f736b82993', // SOFT
+  ],
+  [Chains.ETHEREUM]: [
+    ...(DEFAULT_TOKENS[Chains.ETHEREUM]?.filter(
+      (token) => token !== chainToCircleUSDCAddress[Chains.ETHEREUM],
+    ) as Address[]),
+    '0xfe3b138879d6d0555be4132dcfe6e7424e257a2e', // SOFT
+  ],
+}
