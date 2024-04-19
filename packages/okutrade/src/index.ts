@@ -4,15 +4,17 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  options,
+  swap,
 } from './OkuTrade'
 
 export const OkuTrade: IActionPlugin = {
   pluginId: 'okutrade',
   getSupportedTokenAddresses,
   getSupportedChainIds,
+  options,
   swap,
   bridge: async () => new PluginActionNotImplementedError(),
   mint: async () => new PluginActionNotImplementedError(),

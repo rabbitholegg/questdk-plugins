@@ -1,18 +1,20 @@
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import {
-  createPublicClient,
-  http,
-  type Hash,
-  type PublicClient,
   type Address,
   type Chain,
-  zeroAddress,
+  type Hash,
+  type PublicClient,
+  createPublicClient,
+  http,
   isAddress,
+  zeroAddress,
 } from 'viem'
 import {
-  mainnet,
-  base,
-  optimism,
   arbitrum,
+  base,
+  blast,
+  mainnet,
+  optimism,
   polygon,
   zkSync,
   zora,
@@ -29,13 +31,14 @@ interface Transaction {
 }
 
 const chains: Record<number, Chain> = {
-  1: mainnet,
-  10: optimism,
-  42161: arbitrum,
-  8453: base,
-  137: polygon,
-  324: zkSync,
-  7777777: zora,
+  [Chains.ETHEREUM]: mainnet,
+  [Chains.OPTIMISM]: optimism,
+  [Chains.POLYGON_POS]: polygon,
+  [Chains.ZK_SYNC_ERA]: zkSync,
+  [Chains.BASE]: base,
+  [Chains.ARBITRUM_ONE]: arbitrum,
+  [Chains.BLAST]: blast,
+  [Chains.ZORA]: zora,
 }
 
 function getClient(chain: Chain): PublicClient {

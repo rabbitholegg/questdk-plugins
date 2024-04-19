@@ -1,0 +1,10 @@
+project:
+  name: Base
+  iconOption: https://bridge.base.org/document/favicon-32x32.png
+  appLink: https://bridge.base.org/
+
+tasks:
+  - name: Base
+    link: https://bridge.base.org/deposit
+    actionPluginId: bridge
+    iconOption: https://bridge.base.org/document/favicon-32x32.png

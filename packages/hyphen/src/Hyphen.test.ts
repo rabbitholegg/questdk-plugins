@@ -1,21 +1,12 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { bridge } from './Hyphen'
-import { describe, expect, test } from 'vitest'
 import { ABI } from './abi'
 import { CHAIN_TO_CONTRACT } from './chain-to-contract'
-import { NATIVE_TOKEN_ADDRESS, CHAIN_TO_TOKENS } from './chain-to-tokens'
-import {
-  ARBITRUM_CHAIN_ID,
-  BINANCE_CHAIN_ID,
-  ETH_CHAIN_ID,
-  OPTIMISM_CHAIN_ID,
-  POLYGON_CHAIN_ID,
-} from './chain-ids'
-import {
-  NATIVE_TRANSFER,
-  ERC20_TRANSFER,
-  ERC20_BRIDGE_SWAP,
-} from './test-transactions'
+import { CHAIN_TO_TOKENS } from './chain-to-tokens'
+import { failingTestCases, passingTestCases } from './test-transactions'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { zeroAddress } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the Hyphen plugin', () => {
   describe('When handling the bridge', () => {
@@ -23,13 +14,13 @@ describe('Given the Hyphen plugin', () => {
 
     test('should return a valid bridge action filter using native token', async () => {
       // bridge ETH from Mainnet to Polygon
-      const sourceChainId = ETH_CHAIN_ID
-      const destinationChainId = POLYGON_CHAIN_ID
+      const sourceChainId = Chains.ETHEREUM
+      const destinationChainId = Chains.POLYGON_POS
 
       const filter = await bridge({
         sourceChainId,
         destinationChainId,
-        tokenAddress: NATIVE_TOKEN_ADDRESS,
+        tokenAddress: zeroAddress,
         recipient: TEST_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
       })
@@ -49,9 +40,9 @@ describe('Given the Hyphen plugin', () => {
 
     test('should return a valid bridge action filter using erc-20 token', async () => {
       // bridge erc-20 from Optimism to Polygon
-      const tokenAddress = CHAIN_TO_TOKENS[OPTIMISM_CHAIN_ID][0]
-      const sourceChainId = OPTIMISM_CHAIN_ID
-      const destinationChainId = POLYGON_CHAIN_ID
+      const tokenAddress = CHAIN_TO_TOKENS[Chains.OPTIMISM][0]
+      const sourceChainId = Chains.OPTIMISM
+      const destinationChainId = Chains.POLYGON_POS
 
       const filter = await bridge({
         sourceChainId,
@@ -75,40 +66,24 @@ describe('Given the Hyphen plugin', () => {
       })
     })
 
-    test('should pass filter when bridging native token', async () => {
-      // Bridge ETH from Optimism to Arbitrum
-      const filter = await bridge({
-        sourceChainId: OPTIMISM_CHAIN_ID,
-        destinationChainId: ARBITRUM_CHAIN_ID,
-        tokenAddress: NATIVE_TOKEN_ADDRESS,
-        amount: GreaterThanOrEqual(100000n),
+    describe('should pass filter when all parameters are valid', () => {
+      passingTestCases.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await bridge({ ...params })
+          expect(apply(transaction, filter)).to.be.true
+        })
       })
-
-      expect(apply(NATIVE_TRANSFER, filter)).to.be.true
     })
 
-    test('should pass filter when bridging erc20 token', async () => {
-      // Bridge USDT from Mainnet to Binance Chain
-      const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: BINANCE_CHAIN_ID,
-        tokenAddress: CHAIN_TO_TOKENS[ETH_CHAIN_ID][0], // USDT
-        amount: GreaterThanOrEqual(100000n),
+    describe('should not pass filter when parameters are invalid', () => {
+      failingTestCases.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await bridge({ ...params })
+          expect(apply(transaction, filter)).to.be.false
+        })
       })
-
-      expect(apply(ERC20_TRANSFER, filter)).to.be.true
-    })
-
-    test('should pass filter when using bridge and swap function', async () => {
-      // Bridge USDC from Mainnet to Optimism
-      const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: OPTIMISM_CHAIN_ID,
-        tokenAddress: CHAIN_TO_TOKENS[ETH_CHAIN_ID][1], // USDC
-        amount: GreaterThanOrEqual(100000n),
-      })
-
-      expect(apply(ERC20_BRIDGE_SWAP, filter)).to.be.true
     })
   })
 })

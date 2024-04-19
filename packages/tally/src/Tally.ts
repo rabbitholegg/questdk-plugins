@@ -1,7 +1,6 @@
-import { type DelegateActionParams, compressJson } from '@rabbitholegg/questdk'
 import { TALLY_ABI } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { TALLY_TOKENS } from './token-addresses'
+import { compressJson, type DelegateActionParams } from '@rabbitholegg/questdk'
 
 export const delegate = async (delegateParams: DelegateActionParams) => {
   // This is the information we'll use to compose the Transaction object
@@ -30,7 +29,7 @@ export const delegate = async (delegateParams: DelegateActionParams) => {
 
 export const getSupportedTokenAddresses = async (_chainId: number) => {
   // Given a specific chain we would expect this function to return a list of supported token addresses
-  return TALLY_TOKENS[_chainId]
+  return []
 }
 
 export const getSupportedChainIds = async () => {

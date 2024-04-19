@@ -1,19 +1,12 @@
 import {
-  ActionType,
-  compressJson,
-  type OptionsActionParams,
-  type SwapActionParams,
-  type TransactionFilter,
-} from '@rabbitholegg/questdk'
-import { zeroAddress as ETH_ADDRESS, zeroAddress } from 'viem'
-import {
   CHAIN_ID_ARRAY,
+  EXECUTE_ABI_FRAGMENTS,
+  LIMIT_ORDER_REGISTRY_ABI,
+  LIMIT_ORDER_REGISTRY_CONTRACT,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
-  EXECUTE_ABI_FRAGMENTS,
-  LIMIT_ORDER_REGISTRY_CONTRACT,
-  LIMIT_ORDER_REGISTRY_ABI,
 } from './constants'
+import { CHAIN_TO_TOKENS } from './token-addresses'
 import {
   buildV2PathQuery,
   buildV3PathQuery,
@@ -21,7 +14,15 @@ import {
   getUniversalRouter,
   getWETHAddress,
 } from './utils'
-import { CHAIN_TO_TOKENS } from './token-addresses'
+import {
+  ActionType,
+  type OptionsActionParams,
+  type SwapActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { zeroAddress as ETH_ADDRESS, zeroAddress } from 'viem'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -86,7 +87,10 @@ export const options = async (
   })
 }
 
-export const getSupportedChainIds = async () => {
+export const getSupportedChainIds = async (actionType?: ActionType) => {
+  if (actionType === 'swap') {
+    return [Chains.BLAST]
+  }
   return CHAIN_ID_ARRAY as number[]
 }
 

@@ -1,21 +1,21 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
-import { getSupportedTokenAddresses, swap, options } from './OkuTrade.js'
+import { getSupportedTokenAddresses, options, swap } from './OkuTrade'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
-} from './constants.js'
+} from './constants'
 import {
   failingTestCasesOptions,
-  passingTestCasesOptions,
   failingTestCasesSwap,
+  passingTestCasesOptions,
   passingTestCasesSwap,
-} from './test-transactions.js'
-import { zeroAddress } from 'viem'
-import { getPools } from './utils.js'
+} from './test-transactions'
+import { getPools } from './utils'
 import { ActionType } from '@rabbitholegg/questdk-plugin-utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { zeroAddress } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the uniswap plugin', () => {
   describe('When handling the options action', () => {

@@ -372,6 +372,19 @@ export const ZORA_MINTER_ABI_1155 = [
     stateMutability: 'payable',
     type: 'function',
   }, // Legacy SoundEditionV1_2
+  {
+    inputs: [],
+    name: 'nextTokenId',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
 ]
 
 export const UNIVERSAL_MINTER_ABI = [
@@ -387,3 +400,11 @@ export const UNIVERSAL_MINTER_ABI = [
     type: 'function',
   },
 ] // universal batch mint
+
+export const FUNCTION_SELECTORS = [
+  '359f1302', // mint (1155)
+  '731133e9', // mint (Legacy 1155)
+  '9dbb844d', // mintWithRewards (1155)
+  'efef39a1', // purchase (721)
+  '45368181', // mintWithRewards (721)
+]
