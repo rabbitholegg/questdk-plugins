@@ -1,8 +1,14 @@
 import { type Address, zeroAddress } from 'viem'
 
-// https://arbiscan.io/address/0x2c7e82641f03fa077f88833213210a86027f15dc
-export const GNS_TRADING_CONTRACT: Address =
+// https://gains-network.gitbook.io/docs-home/what-is-gains-network/contract-addresses/arbitrum-mainnet
+export const GNS_TRADING_DAI_CONTRACT: Address =
   '0x2c7e82641f03fa077f88833213210a86027f15dc'
+export const GNS_TRADING_USDC_CONTRACT: Address =
+  '0x2fe799d81fdfcc441093eab52af788d4cc6ff650'
+export const GNS_TRADING_WETH_CONTRACT: Address =
+  '0x48b07695c41aac54cc35f56af25573dd19235c6f'
+
+
 export const ETH: Address = zeroAddress
 export const WBTC: Address = '0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f'
 const LINK: Address = '0xf97f4df75117a78c1A5a0DBb814Af92458539FB4'
