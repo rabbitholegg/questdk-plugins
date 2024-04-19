@@ -1,4 +1,8 @@
-import { bridge, getSupportedChainIds, getSupportedTokenAddresses } from './Superbridge'
+import {
+  bridge,
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+} from './Superbridge'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
