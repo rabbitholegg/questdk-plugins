@@ -4,7 +4,9 @@ SuperBridge is a frontend for native superchain bridges.
 
 ### Implementation Details
 
-SuperBridge is just a frontend to access various superchain bridges. Superchain bridges are all based off the native OP bridge and use the `l1StandardBridge` and `l2StandardBridge` contracts from Optimism. In order to add new superchains to this plugin, simply map the `l1StandardBridge` and `l2StandardBridge` proxy contract addresses to the chainId in the constants.ts file. (`mainToL2BridgeContract`, `l2ToMainBridgeContract`)
+SuperBridge is a frontend to access various superchain bridges. Superchain bridges are all based off the native OP bridge and use the `l1StandardBridge` and `l2StandardBridge` contracts from Optimism. In order to add new superchains to this plugin, simply map the `l1StandardBridge` and `l2StandardBridge` proxy contract addresses to the chainId in the constants.ts file. (`mainToL2BridgeContract`, `l2ToMainBridgeContract`)
+
+USDC is not compatible as it is routed through the native CCTP bridge
 
 ### Sample Transactions
 
