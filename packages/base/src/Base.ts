@@ -28,13 +28,8 @@ export const bridge = async (
 const bridgeFromEthereum = async (
   params: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    amount,
-    contractAddress,
-    recipient,
-    sourceChainId,
-    tokenAddress,
-  } = params
+  const { amount, contractAddress, recipient, sourceChainId, tokenAddress } =
+    params
 
   const contracts = contractAddress ? [contractAddress] : ethereumContracts
 
@@ -58,13 +53,8 @@ const bridgeFromEthereum = async (
 const bridgeFromBase = async (
   params: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    amount,
-    contractAddress,
-    recipient,
-    sourceChainId,
-    tokenAddress,
-  } = params
+  const { amount, contractAddress, recipient, sourceChainId, tokenAddress } =
+    params
 
   const contracts = contractAddress ? [contractAddress] : baseContracts
 
