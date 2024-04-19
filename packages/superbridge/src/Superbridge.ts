@@ -3,6 +3,7 @@ import {
   BRIDGE_ERC20_TO_FRAGMENT,
   BRIDGE_ETH_FRAGMENT,
   BRIDGE_ETH_TO_FRAGMENT,
+  CHAIN_TO_TOKENS,
   DEPOSIT_ERC20_FRAGMENT,
   DEPOSIT_ERC20_TO_FRAGMENT,
   DEPOSIT_ETH_FRAGMENT,
@@ -133,7 +134,7 @@ export const bridge = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
