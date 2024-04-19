@@ -8,7 +8,7 @@ import {
   getSupportedTokenAddresses,
   options,
   swap,
-} from './OkuTrade.js'
+} from './OkuTrade'
 
 export const OkuTrade: IActionPlugin = {
   pluginId: 'okutrade',

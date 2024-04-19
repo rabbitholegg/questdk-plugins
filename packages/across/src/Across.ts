@@ -1,8 +1,8 @@
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
-import { ACROSS_BRIDGE_ABI } from './abi.js'
-import { CHAIN_TO_CONTRACT } from './chain-to-contract.js'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import { ACROSS_BRIDGE_ABI } from './abi'
+import { CHAIN_TO_CONTRACT } from './chain-to-contract'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =

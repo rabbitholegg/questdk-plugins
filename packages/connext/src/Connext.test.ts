@@ -1,13 +1,13 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Connext.js'
+} from './Connext'
 import { MultisendAbi } from '@connext/nxtp-utils'
-import { XCALL_ABI_FRAGMENTS } from './abi.js'
-import { passingTestCases, failingTestCases } from './test-transactions.js'
+import { XCALL_ABI_FRAGMENTS } from './abi'
+import { passingTestCases, failingTestCases } from './test-transactions'
 
 describe('Given the Connext plugin', () => {
   describe('When handling the bridge action', () => {

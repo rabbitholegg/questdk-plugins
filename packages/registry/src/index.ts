@@ -42,7 +42,7 @@ import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
 import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
 import { Gains } from '@rabbitholegg/questdk-plugin-gains'
-import { ENTRYPOINT } from './contract-addresses'
+// ^^^ New Imports Go Here ^^^
 import {
   type IntentParams,
   type MintIntentParams,
@@ -239,8 +239,4 @@ export const executePlugin = (
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
-}
-
-export const getIndexedContracts = (_chainId: number) => {
-  return [ENTRYPOINT]
 }

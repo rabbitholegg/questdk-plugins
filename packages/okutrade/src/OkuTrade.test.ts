@@ -1,17 +1,17 @@
-import { getSupportedTokenAddresses, options, swap } from './OkuTrade.js'
+import { getSupportedTokenAddresses, options, swap } from './OkuTrade'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
-} from './constants.js'
+} from './constants'
 import {
   failingTestCasesOptions,
   failingTestCasesSwap,
   passingTestCasesOptions,
   passingTestCasesSwap,
-} from './test-transactions.js'
-import { getPools } from './utils.js'
+} from './test-transactions'
+import { getPools } from './utils'
 import { ActionType } from '@rabbitholegg/questdk-plugin-utils'
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { zeroAddress } from 'viem'

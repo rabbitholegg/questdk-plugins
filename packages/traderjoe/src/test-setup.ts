@@ -18,7 +18,7 @@ import {
   WETH_AMOUNT_IN,
 } from './test-transactions'
 
-export const passingTestCases: TestCase<SwapActionParams>[] = [
+export const passingTestCases: Array<TestCase<SwapActionParams>> = [
   createTestCase(EXACT_NATIVE_FOR_TOKENS, 'when using exactNativeForTokens'),
   createTestCase(
     EXACT_NATIVE_FOR_TOKENS_FEE,
@@ -59,7 +59,7 @@ export const passingTestCases: TestCase<SwapActionParams>[] = [
   }),
 ]
 
-export const failingTestCases: TestCase<SwapActionParams>[] = [
+export const failingTestCases: Array<TestCase<SwapActionParams>> = [
   createTestCase(TOKENS_FOR_EXACT_NATIVE, 'when chainId is incorrect', {
     chainId: 10,
   }),

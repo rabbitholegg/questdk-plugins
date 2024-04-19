@@ -6,7 +6,7 @@ import {
   {{lowercase actionType}},
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './{{capitalize projectName}}.js'
+} from './{{capitalize projectName}}'
 
 export const {{capitalize projectName}}: IActionPlugin = {
   pluginId: "{{lowercase projectName}}",

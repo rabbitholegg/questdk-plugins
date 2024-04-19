@@ -9,9 +9,8 @@
     "src/_test"
   ],
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "./dist/types",
     "sourceMap": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+
   }
 }

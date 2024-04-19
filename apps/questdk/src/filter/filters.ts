@@ -15,10 +15,10 @@ import {
   decodeAbiParameters,
   decodeFunctionData,
   getAbiItem,
+  getFunctionSelector as toFunctionSelector,
   isAddress,
   parseAbiParameters,
   slice,
-  getFunctionSelector as toFunctionSelector,
 } from 'viem'
 type OperatorKey = keyof typeof operators
 

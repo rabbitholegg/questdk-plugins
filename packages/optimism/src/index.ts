@@ -7,7 +7,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Optimism.js'
+} from './Optimism'
 
 export const Optimism: IActionPlugin = {
   pluginId: 'optimism',

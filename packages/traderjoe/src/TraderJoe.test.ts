@@ -1,4 +1,4 @@
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { LBRouterV21ABI } from '@traderjoe-xyz/sdk-v2'
 import { describe, expect, test } from 'vitest'
 import { getSupportedTokenAddresses, swap } from './TraderJoe'

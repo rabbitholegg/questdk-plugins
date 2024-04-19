@@ -1,4 +1,4 @@
-import { executePlugin, getPlugin, plugins } from './index.js'
+import { executePlugin, getPlugin, plugins } from './index'
 import {
   type ActionParams,
   ActionType,

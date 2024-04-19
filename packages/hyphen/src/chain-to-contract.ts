@@ -2,7 +2,7 @@ import {
   BINANCE_SPOKE,
   LAYER2_SPOKE, // arbitrum, optimism
   MAIN_SPOKE, // mainnet, polygon, avalanche
-} from './contract-addresses.js'
+} from './contract-addresses'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import type { Address } from 'viem'
 
