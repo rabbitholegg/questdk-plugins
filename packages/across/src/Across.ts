@@ -6,6 +6,7 @@ import {
   CHAIN_TO_WETH,
 } from './contracts.js'
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
+import { CHAIN_TO_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, zeroAddress } from 'viem'
 
 export const bridge = async (bridge: BridgeActionParams) => {
@@ -34,7 +35,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async () => {
