@@ -1,5 +1,3 @@
-import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { zeroAddress, type Address } from 'viem'
 import { ACROSS_BRIDGE_ABI } from './abi.js'
 import { CHAIN_ID_ARRAY } from './chain-ids.js'
 import {
@@ -7,6 +5,9 @@ import {
   CHAIN_TO_SPOKE_VERIFIER,
   CHAIN_TO_WETH,
 } from './contracts.js'
+import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
+import { type Address, zeroAddress } from 'viem'
+
 export const bridge = async (bridge: BridgeActionParams) => {
   const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
     bridge

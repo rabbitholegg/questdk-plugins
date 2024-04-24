@@ -1,7 +1,3 @@
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { parseEther } from 'viem'
-import { describe, expect, test } from 'vitest'
 import { bridge } from './Across.js'
 import { ACROSS_BRIDGE_ABI } from './abi.js'
 import { CHAIN_TO_SPOKEPOOL } from './contracts.js'
@@ -13,6 +9,10 @@ import {
   failingTestCases,
   passingTestCases,
 } from './test-transactions.js'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { parseEther } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 export const WETH_ADRESS_MAINNET = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
 export const WETH_ADDRESS_ARBITRUM =
