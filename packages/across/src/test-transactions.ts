@@ -1,3 +1,12 @@
+import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
+import {
+  type BridgeActionParams,
+  Chains,
+  type TestParams,
+  createTestCase,
+} from '@rabbitholegg/questdk-plugin-utils'
+import { parseEther, parseUnits, zeroAddress } from 'viem'
+
 export const DEPOSIT_ETH = {
   type: 'eip2930',
   blockHash:
@@ -92,3 +101,60 @@ export const WITHDRAW_ETH = {
   s: '0x52f9b069de9660c17f9d33bc134623e75d6027af233ccdc8b157e0077f859ee4',
   typeHex: '0x2',
 }
+
+const BRIDGE_ERC: TestParams<BridgeActionParams> = {
+  transaction: {
+    chainId: 10,
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    to: '0x6f26bf09b1c792e3228e5467807a900a503c0281',
+    hash: '0x837959755dde49584e12e4400175c22a43a4e5bf83cf2253a03e1321b74a0a03',
+    input:
+      '0x1186ec33000000000000000000000000865c301c46d64de5c9b124ec1a97ef1efc1bcbd10000000000000000000000007f5c764cbc14f9669b88837ca1490cca17c316070000000000000000000000000000000000000000000000000000000000e4e1c0000000000000000000000000000000000000000000000000000000000000a4b10000000000000000000000000000000000000000000000000003b97cea0ddf8b000000000000000000000000000000000000000000000000000000006628437b0000000000000000000000000000000000000000000000000000000000000100ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000',
+    value: '0',
+  },
+  params: {
+    sourceChainId: Chains.OPTIMISM,
+    destinationChainId: Chains.ARBITRUM_ONE,
+    tokenAddress: '0x7f5c764cbc14f9669b88837ca1490cca17c31607',
+    amount: GreaterThanOrEqual(parseUnits('15', 6)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+  },
+}
+
+const BRIDGE_ETH: TestParams<BridgeActionParams> = {
+  transaction: {
+    chainId: 8453,
+    from: '0xeb01d9ef642c54f42a36fd3a80b66f0fcb13e92a',
+    to: '0xb4a8d45647445ea9fc3e1058096142390683dbc2',
+    hash: '0x4dc56a3e4695313e32604d9b5e45fa154689c3b60a5c5d145d8307e0383433be',
+    input:
+      '0xe0db3fcf00000000000000000000000009aea4b2242abc8bb4bb78d537a67a245a7bec64000000000000000000000000eb01d9ef642c54f42a36fd3a80b66f0fcb13e92a00000000000000000000000042000000000000000000000000000000000000060000000000000000000000000000000000000000000000007ce66c50e2840000000000000000000000000000000000000000000000000000000000000000a4b100000000000000000000000000000000000000000000000000010b02ec41d5a3000000000000000000000000000000000000000000000000000000006628437b0000000000000000000000000000000000000000000000000000000000000120ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000',
+    value: '9000000000000000000',
+  },
+  params: {
+    sourceChainId: Chains.BASE,
+    destinationChainId: Chains.ARBITRUM_ONE,
+    tokenAddress: zeroAddress,
+    amount: GreaterThanOrEqual(parseEther('9')),
+    recipient: '0xeb01d9ef642c54f42a36fd3a80b66f0fcb13e92a',
+  },
+}
+
+export const passingTestCases = [
+  createTestCase(BRIDGE_ERC, 'when bridging ERC20 tokens'),
+  createTestCase(BRIDGE_ETH, 'when bridging ETH'),
+  createTestCase(BRIDGE_ERC, 'when amount is "any"', { amount: undefined }),
+  createTestCase(BRIDGE_ERC, 'when token is "any"', {
+    amount: undefined,
+    recipient: undefined,
+  }),
+]
+
+export const failingTestCases = [
+  createTestCase(BRIDGE_ERC, 'when amount is insufficient', {
+    amount: GreaterThanOrEqual(parseEther('16')),
+  }),
+  createTestCase(BRIDGE_ERC, 'when token address is wrong', {
+    tokenAddress: '0x7f5c764cbc14f9669b88837ca1490cca17c31608',
+  }),
+]
