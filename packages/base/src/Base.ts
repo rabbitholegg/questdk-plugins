@@ -1,13 +1,9 @@
 import {
   BASE_ERC20_ABI,
-  BASE_ERC20_BRIDGE_ADDRESS,
   BASE_ETH_ABI,
-  BASE_ETH_BRIDGE_ADDRESS,
   ETH,
   ETHEREUM_ERC20_ABI,
-  ETHEREUM_ERC20_BRIDGE_ADDRESS,
   ETHEREUM_ETH_ABI,
-  ETHEREUM_ETH_BRIDGE_ADDRESS,
   baseContracts,
   ethereumContracts,
 } from './constants'
@@ -32,64 +28,14 @@ export const bridge = async (
 const bridgeFromEthereum = async (
   params: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    amount,
-    recipient,
-    destinationChainId,
-    sourceChainId,
-    contractAddress,
-    tokenAddress,
-  } = params
+  const { amount, contractAddress, recipient, sourceChainId, tokenAddress } =
+    params
 
-  if (destinationChainId !== Chains.BASE || sourceChainId !== Chains.ETHEREUM) {
-    return failingFilter()
-  }
-
-  if (
-    contractAddress !== undefined &&
-    !ethereumContracts.includes(contractAddress)
-  ) {
-    return failingFilter()
-  }
-
-  if (tokenAddress === ETH) {
-    if (
-      contractAddress !== undefined &&
-      contractAddress !== ETHEREUM_ETH_BRIDGE_ADDRESS
-    ) {
-      return failingFilter()
-    }
-
-    return compressJson({
-      chainId: Chains.ETHEREUM,
-      to: ETHEREUM_ETH_BRIDGE_ADDRESS,
-      input: { $abi: ETHEREUM_ETH_ABI, _to: recipient, _value: amount },
-    })
-  }
-
-  if (tokenAddress !== undefined) {
-    if (
-      contractAddress !== undefined &&
-      contractAddress !== ETHEREUM_ERC20_BRIDGE_ADDRESS
-    ) {
-      return failingFilter()
-    }
-
-    return compressJson({
-      chainId: Chains.ETHEREUM,
-      to: ETHEREUM_ERC20_BRIDGE_ADDRESS,
-      input: {
-        $abi: ETHEREUM_ERC20_ABI,
-        mintRecipient: recipient,
-        amount,
-        burnToken: tokenAddress,
-      },
-    })
-  }
+  const contracts = contractAddress ? [contractAddress] : ethereumContracts
 
   return compressJson({
-    chainId: Chains.ETHEREUM,
-    to: contractAddress ?? { $or: ethereumContracts },
+    chainId: sourceChainId,
+    to: { $or: contracts.map((c) => c.toLowerCase()) },
     input: {
       $or: [
         { $abi: ETHEREUM_ETH_ABI, _to: recipient, _value: amount },
@@ -107,92 +53,27 @@ const bridgeFromEthereum = async (
 const bridgeFromBase = async (
   params: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const {
-    amount,
-    recipient,
-    destinationChainId,
-    sourceChainId,
-    contractAddress,
-    tokenAddress,
-  } = params
-  if (destinationChainId !== Chains.ETHEREUM || sourceChainId !== Chains.BASE) {
-    return failingFilter()
-  }
+  const { amount, contractAddress, recipient, sourceChainId, tokenAddress } =
+    params
 
-  if (
-    contractAddress !== undefined &&
-    !baseContracts.includes(contractAddress)
-  ) {
-    return failingFilter()
-  }
+  const contracts = contractAddress ? [contractAddress] : baseContracts
 
-  if (tokenAddress === ETH) {
-    if (
-      contractAddress !== undefined &&
-      contractAddress !== BASE_ETH_BRIDGE_ADDRESS
-    ) {
-      return failingFilter()
-    }
-
-    return compressJson({
-      chainId: Chains.BASE,
-      to: BASE_ETH_BRIDGE_ADDRESS,
-      value: amount,
-      input: {
-        $abi: BASE_ETH_ABI,
-        _target: recipient,
-      },
-    })
-  }
-
-  if (tokenAddress !== undefined) {
-    if (
-      contractAddress !== undefined &&
-      contractAddress !== BASE_ERC20_BRIDGE_ADDRESS
-    ) {
-      return failingFilter()
-    }
-
-    return compressJson({
-      chainId: Chains.BASE,
-      to: BASE_ERC20_BRIDGE_ADDRESS,
-      input: {
-        $abi: BASE_ERC20_ABI,
-        mintRecipient: recipient,
-        amount,
-        burnToken: tokenAddress,
-      },
-    })
-  }
-
+  const isETH = tokenAddress === ETH
   return compressJson({
-    $or: [
-      {
-        chainId: Chains.BASE,
-        to: BASE_ETH_BRIDGE_ADDRESS,
-        value: amount,
-        input: {
-          $abi: BASE_ETH_ABI,
-          _target: recipient,
-        },
-      },
-      {
-        chainId: Chains.BASE,
-        to: BASE_ERC20_BRIDGE_ADDRESS,
-        input: {
+    chainId: sourceChainId,
+    to: { $or: contracts.map((c) => c.toLowerCase()) },
+    value: isETH ? amount : undefined,
+    input: {
+      $or: [
+        { $abi: BASE_ETH_ABI, _target: recipient },
+        {
           $abi: BASE_ERC20_ABI,
           mintRecipient: recipient,
           amount,
           burnToken: tokenAddress,
         },
-      },
-    ],
-  })
-}
-
-const failingFilter = async (): Promise<TransactionFilter> => {
-  return compressJson({
-    chainId: 99999,
+      ],
+    },
   })
 }
 
