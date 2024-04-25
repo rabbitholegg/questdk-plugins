@@ -3,11 +3,12 @@ export {
   Chains,
   DEFAULT_ACCOUNT,
   BOOST_TREASURY_ADDRESS,
-} from './constants'
+} from './constants/index'
+
+export type { TestParams, TestCase } from './helpers/index'
+
 export {
   createTestCase,
-  type TestCase,
-  type TestParams,
   chainIdToViemChain,
 } from './helpers'
 export type {

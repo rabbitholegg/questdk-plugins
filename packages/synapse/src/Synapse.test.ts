@@ -1,28 +1,26 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { describe, expect, test } from 'vitest'
-import { bridge, getSupportedTokenAddresses } from './Synapse.js'
+import { bridge, getSupportedTokenAddresses } from './Synapse'
+import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
-  DEPOSIT_ETH,
-  WITHDRAW_ERC20,
-  WITHDRAW_ETH,
-  DEPOSIT_ERC20,
-  DEPOSIT_CCTP,
-  WITHDRAW_CCTP,
-} from './test-transactions.js'
-import {
-  ARBITRUM_CHAIN_ID,
-  ETH_CHAIN_ID,
-  BSC_CHAIN_ID,
-  CHAIN_ID_ARRAY,
-} from './chain-ids.js'
-import { SYNAPSE_BRIDGE_FRAGMENTS } from './abi.js'
-import { parseEther, parseUnits, zeroAddress } from 'viem'
-import {
-  SynapseCCTPContract,
-  getContractAddress,
   CHAIN_TO_ROUTER,
   SYNAPSE_CCTP_ROUTER,
+  SynapseCCTPContract,
+  getContractAddress,
 } from './contract-addresses'
+import {
+  DEPOSIT_CCTP,
+  DEPOSIT_ERC20,
+  DEPOSIT_ETH,
+  WITHDRAW_CCTP,
+  WITHDRAW_ERC20,
+  WITHDRAW_ETH,
+  failingTestCases,
+  passingTestCases,
+} from './test-transactions'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { parseEther, parseUnits, zeroAddress } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 const ARBITRUM_USDCE_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
 const ARBITRUM_USDC_ADDRESS = '0xaf88d065e77c8cc2239327c5edb3a432268e5831'
@@ -35,18 +33,18 @@ describe('When given the Synapse plugin', () => {
   describe('When generating the filter', () => {
     test('Should return a valid bridge action filter for L2 token tx', async () => {
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID,
+        sourceChainId: Chains.ARBITRUM_ONE,
+        destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDCE_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
       expect(filter).to.deep.equal({
-        chainId: ARBITRUM_CHAIN_ID,
+        chainId: Chains.ARBITRUM_ONE,
         to: {
           $or: [
-            CHAIN_TO_ROUTER[ARBITRUM_CHAIN_ID].toLowerCase(),
-            SYNAPSE_CCTP_ROUTER[ARBITRUM_CHAIN_ID].toLowerCase(),
+            CHAIN_TO_ROUTER[Chains.ARBITRUM_ONE].toLowerCase(),
+            SYNAPSE_CCTP_ROUTER[Chains.ARBITRUM_ONE].toLowerCase(),
           ],
         },
         input: {
@@ -56,7 +54,7 @@ describe('When given the Synapse plugin', () => {
               amount: {
                 $gte: '100000',
               },
-              chainId: ETH_CHAIN_ID,
+              chainId: Chains.ETHEREUM,
               token: ARBITRUM_USDCE_ADDRESS,
             },
             { $or: [{ sender: TEST_USER }, { to: TEST_USER }] },
@@ -66,19 +64,19 @@ describe('When given the Synapse plugin', () => {
     })
     test('Should return a valid transaction for a L1 -> L2 transaction (Non CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: ARBITRUM_CHAIN_ID,
+        sourceChainId: Chains.ETHEREUM,
+        destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
 
       expect(filter).to.deep.equal({
-        chainId: ETH_CHAIN_ID,
+        chainId: Chains.ETHEREUM,
         to: {
           $or: [
-            CHAIN_TO_ROUTER[ETH_CHAIN_ID].toLowerCase(),
-            SYNAPSE_CCTP_ROUTER[ETH_CHAIN_ID].toLowerCase(),
+            CHAIN_TO_ROUTER[Chains.ETHEREUM].toLowerCase(),
+            SYNAPSE_CCTP_ROUTER[Chains.ETHEREUM].toLowerCase(),
           ],
         },
         input: {
@@ -88,7 +86,7 @@ describe('When given the Synapse plugin', () => {
               amount: {
                 $gte: '100000',
               },
-              chainId: ARBITRUM_CHAIN_ID,
+              chainId: Chains.ARBITRUM_ONE,
               token: ETHEREUM_USDC_ADDRESS,
             },
             { $or: [{ sender: TEST_USER }, { to: TEST_USER }] },
@@ -98,19 +96,19 @@ describe('When given the Synapse plugin', () => {
     })
     test('Should return a valid transaction for a L2 -> L1 transaction (Non CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID,
+        sourceChainId: Chains.ARBITRUM_ONE,
+        destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDCE_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
       })
 
       expect(filter).to.deep.equal({
-        chainId: ARBITRUM_CHAIN_ID,
+        chainId: Chains.ARBITRUM_ONE,
         to: {
           $or: [
-            CHAIN_TO_ROUTER[ARBITRUM_CHAIN_ID].toLowerCase(),
-            SYNAPSE_CCTP_ROUTER[ARBITRUM_CHAIN_ID].toLowerCase(),
+            CHAIN_TO_ROUTER[Chains.ARBITRUM_ONE].toLowerCase(),
+            SYNAPSE_CCTP_ROUTER[Chains.ARBITRUM_ONE].toLowerCase(),
           ],
         },
         input: {
@@ -120,7 +118,7 @@ describe('When given the Synapse plugin', () => {
               amount: {
                 $gte: '100000',
               },
-              chainId: ETH_CHAIN_ID,
+              chainId: Chains.ETHEREUM,
               token: ARBITRUM_USDCE_ADDRESS,
             },
             { $or: [{ sender: TEST_USER }, { to: TEST_USER }] },
@@ -131,17 +129,17 @@ describe('When given the Synapse plugin', () => {
     // // CCTP Transactions
     test('Should return a valid transaction for a L1 -> L2 transaction (CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: ARBITRUM_CHAIN_ID,
+        sourceChainId: Chains.ETHEREUM,
+        destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
-        contractAddress: getContractAddress(ETH_CHAIN_ID),
+        contractAddress: getContractAddress(Chains.ETHEREUM),
       })
 
       expect(filter).to.deep.equal({
-        chainId: ETH_CHAIN_ID,
-        to: getContractAddress(ETH_CHAIN_ID),
+        chainId: Chains.ETHEREUM,
+        to: getContractAddress(Chains.ETHEREUM),
         input: {
           $abi: SYNAPSE_BRIDGE_FRAGMENTS,
           $and: [
@@ -149,7 +147,7 @@ describe('When given the Synapse plugin', () => {
               amount: {
                 $gte: '100000',
               },
-              chainId: ARBITRUM_CHAIN_ID,
+              chainId: Chains.ARBITRUM_ONE,
               token: ETHEREUM_USDC_ADDRESS,
             },
             { $or: [{ sender: TEST_USER }, { to: TEST_USER }] },
@@ -159,17 +157,17 @@ describe('When given the Synapse plugin', () => {
     })
     test('Should return a valid transaction for a L2 -> L1 transaction (CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID,
+        sourceChainId: Chains.ARBITRUM_ONE,
+        destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
         recipient: TEST_USER,
-        contractAddress: getContractAddress(ETH_CHAIN_ID),
+        contractAddress: getContractAddress(Chains.ETHEREUM),
       })
 
       expect(filter).to.deep.equal({
-        chainId: ARBITRUM_CHAIN_ID,
-        to: SynapseCCTPContract[ARBITRUM_CHAIN_ID],
+        chainId: Chains.ARBITRUM_ONE,
+        to: SynapseCCTPContract[Chains.ARBITRUM_ONE],
         input: {
           $abi: SYNAPSE_BRIDGE_FRAGMENTS,
           $and: [
@@ -177,7 +175,7 @@ describe('When given the Synapse plugin', () => {
               amount: {
                 $gte: '100000',
               },
-              chainId: ETH_CHAIN_ID,
+              chainId: Chains.ETHEREUM,
               token: ARBITRUM_USDC_ADDRESS,
             },
             { $or: [{ sender: TEST_USER }, { to: TEST_USER }] },
@@ -191,8 +189,8 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L1 ETH tx', async () => {
       const transaction = DEPOSIT_ETH
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: ARBITRUM_CHAIN_ID,
+        sourceChainId: Chains.ETHEREUM,
+        destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: zeroAddress,
         amount: GreaterThanOrEqual(parseEther('.2')),
       })
@@ -201,8 +199,8 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L2 ETH tx', async () => {
       const transaction = WITHDRAW_ETH
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID,
+        sourceChainId: Chains.ARBITRUM_ONE,
+        destinationChainId: Chains.ETHEREUM,
         tokenAddress: zeroAddress,
         amount: GreaterThanOrEqual(parseEther('.259')),
       })
@@ -211,8 +209,8 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L1 Token tx', async () => {
       const transaction = DEPOSIT_ERC20
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: BSC_CHAIN_ID,
+        sourceChainId: Chains.ETHEREUM,
+        destinationChainId: Chains.BINANCE_SMART_CHAIN,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('9', 6)),
       })
@@ -221,8 +219,8 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L2 token tx', async () => {
       const transaction = WITHDRAW_ERC20
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID,
+        sourceChainId: Chains.ARBITRUM_ONE,
+        destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDCE_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('4006', 6)),
       })
@@ -232,8 +230,8 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid CCTP Deposit tx', async () => {
       const transaction = DEPOSIT_CCTP
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
-        destinationChainId: ARBITRUM_CHAIN_ID,
+        sourceChainId: Chains.ETHEREUM,
+        destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('300', 6)),
         contractAddress: '0xd359bc471554504f683fbd4f6e36848612349ddf',
@@ -243,13 +241,33 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid CCTP Withdraw tx', async () => {
       const transaction = WITHDRAW_CCTP
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
-        destinationChainId: ETH_CHAIN_ID,
+        sourceChainId: Chains.ARBITRUM_ONE,
+        destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('95', 6)),
         contractAddress: '0xd359bc471554504f683fbd4f6e36848612349ddf',
       })
       expect(apply(transaction, filter)).to.be.true
+    })
+  })
+
+  describe('should pass filter with valid transactions', () => {
+    passingTestCases.forEach((testCase) => {
+      const { transaction, description, params } = testCase
+      test(description, async () => {
+        const filter = await bridge(params)
+        expect(apply(transaction, filter)).to.be.true
+      })
+    })
+  })
+
+  describe('should not pass filter with invalid transactions', () => {
+    failingTestCases.forEach((testCase) => {
+      const { transaction, description, params } = testCase
+      test(description, async () => {
+        const filter = await bridge(params)
+        expect(apply(transaction, filter)).to.be.false
+      })
     })
   })
 

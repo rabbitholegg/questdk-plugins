@@ -1,5 +1,53 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.37
+
+### Patch Changes
+
+- [#351](https://github.com/rabbitholegg/questdk-plugins/pull/351) [`4cf78466`](https://github.com/rabbitholegg/questdk-plugins/commit/4cf7846666052de24da3d0ecab969fedcfe34b2f) Thanks [@mmackz](https://github.com/mmackz)! - check contract exists before simulations
+
+## 1.0.0-alpha.36
+
+### Patch Changes
+
+- Updated dependencies [[`6e8f8e01`](https://github.com/rabbitholegg/questdk-plugins/commit/6e8f8e011f4251c6c179693d242dc6be34f76974)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.18
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.35
+
+### Patch Changes
+
+- [#322](https://github.com/rabbitholegg/questdk-plugins/pull/322) [`f03eafed`](https://github.com/rabbitholegg/questdk-plugins/commit/f03eafedbdfcc37eb95f78c0ed1368ac8344dc6e) Thanks [@mmackz](https://github.com/mmackz)! - update simulate mint test
+
+- Updated dependencies [[`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6), [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.17
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.34
+
+### Patch Changes
+
+- [#314](https://github.com/rabbitholegg/questdk-plugins/pull/314) [`d286a83`](https://github.com/rabbitholegg/questdk-plugins/commit/d286a8396c47c6c6e70c92c9532ecaa79ee21ece) Thanks [@jonathandiep](https://github.com/jonathandiep)! - fix: Use zora sdk to grab the fixed price sale strategy
+
+## 1.0.0-alpha.33
+
+### Minor Changes
+
+- [#312](https://github.com/rabbitholegg/questdk-plugins/pull/312) [`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221) Thanks [@Quazia](https://github.com/Quazia)! - Handle token ID undefined better and handle single tier 1 collections in sound
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.32
+
+### Patch Changes
+
+- [#301](https://github.com/rabbitholegg/questdk-plugins/pull/301) [`57553232`](https://github.com/rabbitholegg/questdk-plugins/commit/57553232b6e35e32cced7afc33d373d494dc6854) Thanks [@mmackz](https://github.com/mmackz)! - change referral address to zora deployer
+
 ## 1.0.0-alpha.31
 
 ### Patch Changes

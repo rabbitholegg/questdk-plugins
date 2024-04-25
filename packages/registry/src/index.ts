@@ -34,7 +34,14 @@ import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
 import { ArtBlocks } from '@rabbitholegg/questdk-plugin-artblocks'
 import { Manifold } from '@rabbitholegg/questdk-plugin-manifold'
 import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
-import { ENTRYPOINT } from './contract-addresses'
+import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
+import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
+import { Pods } from '@rabbitholegg/questdk-plugin-pods'
+import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
+import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
+import { Base } from '@rabbitholegg/questdk-plugin-base'
+import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
+// ^^^ New Imports Go Here ^^^
 import {
   type IntentParams,
   type MintIntentParams,
@@ -91,6 +98,13 @@ export const plugins: Record<string, IActionPlugin> = {
   [ArtBlocks.pluginId]: ArtBlocks,
   [Manifold.pluginId]: Manifold,
   [Fabric.pluginId]: Fabric,
+  [Paragraph.pluginId]: Paragraph,
+  [Aerodrome.pluginId]: Aerodrome,
+  [Pods.pluginId]: Pods,
+  [Kwenta.pluginId]: Kwenta,
+  [Thruster.pluginId]: Thruster,
+  [Base.pluginId]: Base,
+  [Orbit.pluginId]: Orbit,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -223,8 +237,4 @@ export const executePlugin = (
     default:
       throw new Error(`Unknown action type "${actionType}"`)
   }
-}
-
-export const getIndexedContracts = (_chainId: number) => {
-  return [ENTRYPOINT]
 }

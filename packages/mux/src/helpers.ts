@@ -31,7 +31,7 @@ export const getMuxTokenId = async (
   if (assetsCache.has(chainId)) {
     assets = assetsCache.get(chainId)
   } else {
-    const reader = await getReaderContract(provider as any)
+    const reader = await getReaderContract(provider)
     const chainStorage = await getChainStorage(reader)
     assets = chainStorage.assets
     assetsCache.set(chainId, assets)

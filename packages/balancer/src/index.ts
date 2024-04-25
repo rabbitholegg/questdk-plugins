@@ -7,7 +7,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Balancer.js'
+} from './Balancer'
 
 export const Balancer: IActionPlugin = {
   pluginId: 'balancer',

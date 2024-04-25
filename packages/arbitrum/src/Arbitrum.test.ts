@@ -1,4 +1,4 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { bridge } from './Arbitrum'
 import { OUTBOUND_TRANSFER_L1_TO_L2 } from './abi'
 import { describe, expect, test } from 'vitest'
@@ -12,7 +12,7 @@ import {
   L1_TOKEN_TO_NOVA,
   L2_ETH_TO_L1,
   L2_TOKEN_TO_L1,
-} from './test-transactions.js'
+} from './test-transactions'
 describe('Given the arbitrum plugin', () => {
   describe('When handling the bridge', () => {
     const DAI = '0x6b175474e89094c44da98b954eedeac495271d0f'

@@ -3,11 +3,7 @@ import {
   PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk'
 
-import {
-  getSupportedChainIds,
-  getSupportedTokenAddresses,
-  swap,
-} from './Sushi.js'
+import { getSupportedChainIds, getSupportedTokenAddresses, swap } from './Sushi'
 
 export const Sushi: IActionPlugin = {
   pluginId: 'sushi',

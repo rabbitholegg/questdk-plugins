@@ -1,6 +1,26 @@
 import type { FilterOperator } from '@rabbitholegg/questdk'
-import { getAddress, type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, getAddress } from 'viem'
+
+const request = async (chain: string, method: string, data: unknown) => {
+  const result = await fetch(`https://omni.icarus.tools/${chain}`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: '1',
+      method: `cush_${method}`,
+      params: data,
+    }),
+  })
+  const resp = await result.json()
+  if (resp.error) {
+    throw resp.error
+  }
+  return resp.result.map((r: string) => getAddress(r))
+}
 
 export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   // v3 paths are formatted as 0x<token><fee><token>
@@ -19,6 +39,18 @@ export const buildV3PathQuery = (tokenIn?: string, tokenOut?: string) => {
   return {
     $and: conditions,
   }
+}
+
+export const getPools = async (
+  tokenIn: `0x${string}` | undefined,
+  chainId: number,
+) => {
+  if (!tokenIn) {
+    return undefined
+  }
+  const chain = getChainName(chainId)
+  const resp = await request(chain, 'getTokenPools', [tokenIn])
+  return resp as string[]
 }
 
 export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
@@ -45,6 +77,7 @@ const chainToContract: Record<number, Address> = {
   [Chains.ZK_SYNC_ERA]: '0x28731BCC616B5f51dD52CF2e4dF0E78dD1136C06',
   [Chains.ARBITRUM_ONE]: '0x4C60051384bd2d3C01bfc845Cf5F4b44bcbE9de5',
   [Chains.BASE]: '0xeC8B0F7Ffe3ae75d7FfAb09429e3675bb63503e4',
+  [Chains.BLAST]: '0x643770E279d5D0733F21d6DC03A8efbABf3255B4',
 }
 
 const chainToWETH: Record<number, Address> = {
@@ -54,6 +87,17 @@ const chainToWETH: Record<number, Address> = {
   [Chains.POLYGON_POS]: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
   [Chains.ZK_SYNC_ERA]: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
   [Chains.BASE]: '0x4200000000000000000000000000000000000006',
+  [Chains.BLAST]: '0x4300000000000000000000000000000000000004',
+}
+
+const chainIdToName: Record<number, string> = {
+  [Chains.ETHEREUM]: 'ethereum',
+  [Chains.OPTIMISM]: 'optimism',
+  [Chains.ARBITRUM_ONE]: 'arbitrum',
+  [Chains.POLYGON_POS]: 'polygon',
+  [Chains.ZK_SYNC_ERA]: 'zksync',
+  [Chains.BASE]: 'base',
+  [Chains.BLAST]: 'blast',
 }
 
 export function getUniversalRouter(chainId: number): Address {
@@ -70,4 +114,12 @@ export function getWETHAddress(chainId: number): Address {
     throw new Error(`WETH address not found for chain ID ${chainId}`)
   }
   return address
+}
+
+export function getChainName(chainId: number): string {
+  const name = chainIdToName[chainId]
+  if (!name) {
+    throw new Error(`Chain name not found for chain ID ${chainId}`)
+  }
+  return name
 }

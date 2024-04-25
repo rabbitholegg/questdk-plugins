@@ -7,7 +7,7 @@ import {
   swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Camelot.js'
+} from './Camelot'
 
 export const Camelot: IActionPlugin = {
   pluginId: 'camelot',

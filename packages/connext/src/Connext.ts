@@ -12,8 +12,8 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import { type Address, zeroAddress } from 'viem'
-import { XCALL_ABI_FRAGMENTS } from './abi.js'
-import { ConnextContract } from './contract-addresses.js'
+import { XCALL_ABI_FRAGMENTS } from './abi'
+import { ConnextContract } from './contract-addresses'
 
 let _chainDataCache: Map<string, ChainData> | null = null
 

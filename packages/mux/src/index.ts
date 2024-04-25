@@ -7,7 +7,7 @@ import {
   options,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Mux.js'
+} from './Mux'
 
 export const Mux: IActionPlugin = {
   pluginId: 'mux',

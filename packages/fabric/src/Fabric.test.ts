@@ -1,7 +1,12 @@
+import { getFees, getMintIntent, mint, simulateMint } from './Fabric'
+import { failingTestCases, passingTestCases } from './test-transactions'
+import {
+  Chains,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
+import { type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint } from './Fabric'
 
 describe('Given the fabric plugin', () => {
   describe('When handling the mint action', () => {
@@ -57,5 +62,57 @@ describe('Given the fabric plugin', () => {
         })
       })
     })
+  })
+})
+
+describe('Given the getFee function', () => {
+  test('should return the correct project + action fee for a 721 mint', async () => {
+    const contractAddress: Address =
+      '0xd77269c83aab591ca834b3687e1f4164b2ff25f5'
+    const mintParams = { chainId: Chains.SEPOLIA, contractAddress, amount: 1n }
+    const fee = await getFees(mintParams)
+    expect(fee.projectFee).equals(0n)
+    expect(fee.actionFee).equals(499999999997664000n)
+  })
+})
+
+describe('Given the getMintIntent function', () => {
+  // Define the constant for the contract address
+  const CONTRACT_ADDRESS = '0x2efc6064239121d1d7efb503355daa82b87ee89c'
+  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
+
+  test('returns a TransactionRequest with correct properties', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.BASE,
+      contractAddress: CONTRACT_ADDRESS,
+      amount: BigInt('1'),
+      recipient: RECIPIENT_ADDRESS,
+    }
+
+    const result = await getMintIntent(mint)
+
+    expect(result).toEqual({
+      from: mint.recipient,
+      to: mint.contractAddress,
+      data: '0xa0712d6800000000000000000000000000000000000000000000000000028fbee4d84c00',
+    })
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a mint', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.SEPOLIA,
+      contractAddress: '0xD77269c83AAB591Ca834B3687E1f4164B2fF25f5',
+      amount: BigInt(2),
+      recipient: '0x000000000000000000000000000000000000dEaD',
+    }
+    const value = 999999999995328000n
+    const account = '0x000000000000000000000000000000000000dEaD'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(mint.contractAddress)
+    expect(request.value).toBe(value)
   })
 })

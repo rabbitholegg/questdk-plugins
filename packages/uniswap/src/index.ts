@@ -7,7 +7,7 @@ import {
   getSupportedChainIds,
   getSupportedTokenAddresses,
   swap,
-} from './Uniswap.js'
+} from './Uniswap'
 
 export const Uniswap: IActionPlugin = {
   pluginId: 'uniswap',

@@ -1,0 +1,10 @@
+project:
+  name: Tally
+  iconOption: https://i.ibb.co/T43HWdQ/TALLY-LINK-SHARE-IMAGE.png
+  appLink: https://www.tally.xyz/
+
+tasks:
+  - name: Delegate on Tally
+    link: https://www.tally.xyz/explore
+    iconOption: https://i.ibb.co/T43HWdQ/TALLY-LINK-SHARE-IMAGE.png
+    actionPluginId: delegate

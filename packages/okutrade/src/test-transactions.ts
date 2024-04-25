@@ -1,12 +1,17 @@
-import type { SwapActionParams } from '@rabbitholegg/questdk'
+import type {
+  OptionsActionParams,
+  SwapActionParams,
+} from '@rabbitholegg/questdk'
 import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
   type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, parseUnits, zeroAddress } from 'viem'
 
-export const V3_NATIVE_TO_TOKENS: TestParams<SwapActionParams> = {
+// ----- Swap Action Type ------
+
+const V3_NATIVE_TO_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 10,
     to: '0xb555edF5dcF85f42cEeF1f3630a52A108E55A654',
@@ -26,7 +31,7 @@ export const V3_NATIVE_TO_TOKENS: TestParams<SwapActionParams> = {
   },
 }
 
-export const V3_TOKENS_TO_NATIVE: TestParams<SwapActionParams> = {
+const V3_TOKENS_TO_NATIVE: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 42161,
     to: '0x4c60051384bd2d3c01bfc845cf5f4b44bcbe9de5',
@@ -46,7 +51,7 @@ export const V3_TOKENS_TO_NATIVE: TestParams<SwapActionParams> = {
   },
 }
 
-export const V3_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
+const V3_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 324,
     to: '0x28731bcc616b5f51dd52cf2e4df0e78dd1136c06',
@@ -66,7 +71,7 @@ export const V3_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
   },
 }
 
-export const BASE_V3_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
+const BASE_V3_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
   transaction: {
     chainId: 8453,
     to: '0xec8b0f7ffe3ae75d7ffab09429e3675bb63503e4',
@@ -86,7 +91,7 @@ export const BASE_V3_TOKENS_TO_TOKENS: TestParams<SwapActionParams> = {
   },
 }
 
-export const passingTestCases = [
+export const passingTestCasesSwap = [
   createTestCase(V3_NATIVE_TO_TOKENS, 'swapping native to tokens on V3'),
   createTestCase(V3_TOKENS_TO_NATIVE, 'swapping tokens to native on V3'),
   createTestCase(V3_TOKENS_TO_TOKENS, 'swapping tokens to tokens on V3'),
@@ -120,7 +125,7 @@ export const passingTestCases = [
   }),
 ]
 
-export const failingTestCases = [
+export const failingTestCasesSwap = [
   createTestCase(V3_NATIVE_TO_TOKENS, 'when chainId is incorrect', {
     chainId: 1,
   }),
@@ -138,5 +143,88 @@ export const failingTestCases = [
   }),
   createTestCase(V3_TOKENS_TO_TOKENS, 'when amountOut is insufficient', {
     amountOut: GreaterThanOrEqual(parseEther('100000')),
+  }),
+]
+
+// ----- Options Action Type ------
+
+const LIMIT_ORDER_BLAST: TestParams<OptionsActionParams> = {
+  transaction: {
+    chainId: 81457,
+    to: '0x0337d36a3df76d882369e3cbf984a2ea40f6636f',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    hash: '0x87361ccdbcc65814a79f9c2fe37e763c6d5098d9f9a67ff493f5fe983a51f712',
+    input:
+      '0x53410e7b000000000000000000000000f5a23bdd36a56ede75d503f6f643d5eaf25b1a8ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffec1a400000000000000000000000000000000000000000000000029a2241af62c0000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018f5eb1d755',
+    value: '0',
+  },
+  params: {
+    chainId: 81457,
+    contractAddress: '0x0337d36a3df76d882369e3cbf984a2ea40f6636f',
+    token: '0x4300000000000000000000000000000000000003', // USDB
+    amount: GreaterThanOrEqual(parseUnits('3', 18)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+  },
+}
+
+const LIMIT_ORDER_DEGEN: TestParams<OptionsActionParams> = {
+  transaction: {
+    chainId: 8453,
+    to: '0xff8b754c64e9a8473bd6e1118d0eac67f0a8ae27',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    hash: '0x93c84b66161f915c74430dfbd33a8de91e74c2f6381a96dc7317717f63df7074',
+    input:
+      '0x53410e7b000000000000000000000000c9034c3e7f58003e6ae0c8438e7c8f4598d5acaa000000000000000000000000000000000000000000000000000000000001b3b40000000000000000000000000000000000000000000000138400eca364a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018f3701c7e0',
+    value: '0',
+  },
+  params: {
+    chainId: 8453,
+    contractAddress: '0xff8b754c64e9a8473bd6e1118d0eac67f0a8ae27',
+    token: '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', // DEGEN
+    amount: GreaterThanOrEqual(parseUnits('300', 18)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+  },
+}
+
+const LIMIT_ORDER: TestParams<OptionsActionParams> = {
+  transaction: {
+    chainId: 8453,
+    to: '0xff8b754c64e9a8473bd6e1118d0eac67f0a8ae27',
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    hash: '0x6841cba463ab7f10af3d69f34ea4bd452280dbed4e4055340b69275e374b1eba',
+    input:
+      '0x53410e7b0000000000000000000000004c36388be6f416a29c8d8eee81c771ce6be14b18fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd07f600000000000000000000000000000000000000000000000000000000005b8d80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000018ee3f0c428',
+    value: '0',
+  },
+  params: {
+    chainId: 8453,
+    contractAddress: '0xff8b754c64e9a8473bd6e1118d0eac67f0a8ae27',
+    token: '0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca', //USDC.b
+    amount: GreaterThanOrEqual(parseUnits('5', 6)),
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+  },
+}
+
+export const passingTestCasesOptions = [
+  createTestCase(LIMIT_ORDER_BLAST, 'when using limit order on blast'),
+  createTestCase(LIMIT_ORDER_DEGEN, 'when using limit order base (degen)'),
+  createTestCase(LIMIT_ORDER, 'when using limit order base'),
+  createTestCase(LIMIT_ORDER_DEGEN, 'when using "any" token', {
+    token: undefined,
+  }),
+  createTestCase(LIMIT_ORDER_DEGEN, 'when amount is "any"', {
+    amount: undefined,
+  }),
+]
+
+export const failingTestCasesOptions = [
+  createTestCase(LIMIT_ORDER_DEGEN, 'when chainId is incorrect', {
+    chainId: 1,
+  }),
+  createTestCase(LIMIT_ORDER_DEGEN, 'when amount is insufficient', {
+    amount: GreaterThanOrEqual(parseUnits('10000', 18)),
+  }),
+  createTestCase(LIMIT_ORDER_DEGEN, 'when wrong token (usdc.b) is traded', {
+    token: '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA', // usdc.b
   }),
 ]

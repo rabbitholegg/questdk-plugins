@@ -1,5 +1,43 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.26
+
+### Patch Changes
+
+- Updated dependencies [[`6e8f8e01`](https://github.com/rabbitholegg/questdk-plugins/commit/6e8f8e011f4251c6c179693d242dc6be34f76974)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.18
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.25
+
+### Minor Changes
+
+- [#329](https://github.com/rabbitholegg/questdk-plugins/pull/329) [`aecc0a7b`](https://github.com/rabbitholegg/questdk-plugins/commit/aecc0a7b5bbcb3deb4b8eef767281346d35108e4) Thanks [@mmackz](https://github.com/mmackz)! - add support for legacy contract in simulation and projectfees helpers
+
+### Patch Changes
+
+- Updated dependencies [[`59ae9b8d`](https://github.com/rabbitholegg/questdk-plugins/commit/59ae9b8df08fe4e05f7743f67a685428ea0927e6), [`cd6215e7`](https://github.com/rabbitholegg/questdk-plugins/commit/cd6215e78e6d42bc6d2e23fb46b7906c990f7c87)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.17
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.24
+
+### Minor Changes
+
+- [#312](https://github.com/rabbitholegg/questdk-plugins/pull/312) [`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221) Thanks [@Quazia](https://github.com/Quazia)! - Handle token ID undefined better and handle single tier 1 collections in sound
+
+### Patch Changes
+
+- Updated dependencies [[`d410b7c`](https://github.com/rabbitholegg/questdk-plugins/commit/d410b7cc98270a9f7c7720f07b07b831176c5221)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.16
+  - @rabbitholegg/questdk@2.0.0-alpha.44
+
+## 1.0.0-alpha.23
+
+### Patch Changes
+
+- [#309](https://github.com/rabbitholegg/questdk-plugins/pull/309) [`10125455`](https://github.com/rabbitholegg/questdk-plugins/commit/10125455e5e6c8c6e299df096b7bdb8430287104) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Enforce `scheduleNum` to be `0`
+
 ## 1.0.0-alpha.22
 
 ### Patch Changes

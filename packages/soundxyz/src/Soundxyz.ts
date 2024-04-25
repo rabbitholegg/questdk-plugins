@@ -1,35 +1,38 @@
 import {
-  type TransactionFilter,
+  MINT_INFO_LIST_ABI,
+  NEXT_SCHEDULE_NUM_ABI,
+  SUPERMINTER,
+  SUPERMINTER_V1_ABI,
+  SUPERMINTER_V2,
+  SUPERMINTER_V2_ABI,
+  TOTAL_PRICE_AND_FEES_V1_ABI,
+  TOTAL_PRICE_AND_FEES_V2_ABI,
+} from './constants'
+import type { TotalPriceAndFees } from './types'
+import { Chains } from './utils'
+import {
   type MintActionParams,
+  type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
 import {
-  createPublicClient,
-  http,
-  encodeFunctionData,
-  type Address,
-  type TransactionRequest,
-  zeroAddress,
-  zeroHash,
-  type PublicClient,
-  type SimulateContractReturnType,
-} from 'viem'
-import {
-  type MintIntentParams,
-  chainIdToViemChain,
+  ActionType,
   DEFAULT_ACCOUNT,
   type DisctriminatedActionParams,
-  ActionType,
+  type MintIntentParams,
+  chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
-  SUPERMINTER,
-  SUPERMINTER_V2,
-  SUPERMINTER_ABI,
-  NEXT_SCHEDULE_NUM_ABI,
-  TOTAL_PRICE_AND_FEES_ABI,
-} from './constants'
-import { Chains } from './utils'
-import type { TotalPriceAndFees } from './types'
+  type Address,
+  type PublicClient,
+  type SimulateContractReturnType,
+  type TransactionRequest,
+  createPublicClient,
+  encodeFunctionData,
+  http,
+  zeroAddress,
+  zeroHash,
+} from 'viem'
 
 export const mint = async (
   mint: MintActionParams,
@@ -42,7 +45,7 @@ export const mint = async (
       $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
     },
     input: {
-      $abi: SUPERMINTER_ABI,
+      $abi: SUPERMINTER_V2_ABI,
       p: {
         edition: contractAddress,
         quantity: amount,
@@ -53,46 +56,17 @@ export const mint = async (
   })
 }
 
-const getNextScheduleNum = async (
-  client: PublicClient,
-  contractAddress: Address,
-  tier: number,
-) => {
-  const nextSchedule = (await client.readContract({
-    address: SUPERMINTER_V2,
-    abi: NEXT_SCHEDULE_NUM_ABI,
-    functionName: 'nextScheduleNum',
-    args: [contractAddress, tier],
-  })) as number
-
-  return nextSchedule
-}
-
 export const getMintIntent = async (
   mint: MintIntentParams,
-  client?: PublicClient,
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient, tokenId, amount } = mint
-  const _client =
-    client ||
-    createPublicClient({
-      chain: chainIdToViemChain(mint.chainId),
-      transport: http(),
-    })
-
-  const tier = tokenId ?? 0
+  const tier = await getDefaultMintTier(mint.chainId, contractAddress, tokenId)
   const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    _client as PublicClient,
-    contractAddress,
-    tier,
-  )
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum:
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum: BigInt(0),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -109,7 +83,7 @@ export const getMintIntent = async (
   }
 
   const data = encodeFunctionData({
-    abi: SUPERMINTER_ABI,
+    abi: SUPERMINTER_V2_ABI,
     functionName: 'mintTo',
     args: [mintTo],
   })
@@ -128,26 +102,23 @@ export const simulateMint = async (
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
   const { contractAddress, recipient, tokenId, amount } = mint
-  const _client =
-    client ||
+  const _client = (client ??
     createPublicClient({
       chain: chainIdToViemChain(mint.chainId),
       transport: http(),
-    })
-
-  const tier = tokenId ?? 0
-  const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    _client as PublicClient,
+    })) as PublicClient
+  const tier = await getDefaultMintTier(
+    mint.chainId,
     contractAddress,
-    tier,
+    tokenId,
+    _client,
   )
+  const quantity = amount ?? 1
 
   const mintTo = {
     edition: contractAddress,
     tier,
-    scheduleNum:
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
+    scheduleNum: BigInt(0),
     to: recipient,
     quantity,
     allowlisted: zeroAddress,
@@ -162,16 +133,28 @@ export const simulateMint = async (
     affiliateProof: [zeroHash],
     attributionId: 0,
   }
-  const result = await _client.simulateContract({
-    abi: SUPERMINTER_ABI,
-    functionName: 'mintTo',
-    args: [mintTo],
-    address: SUPERMINTER_V2,
-    value,
-    account: account || DEFAULT_ACCOUNT,
-  })
 
-  return result
+  try {
+    const result = await _client.simulateContract({
+      abi: SUPERMINTER_V2_ABI,
+      functionName: 'mintTo',
+      args: [mintTo],
+      address: SUPERMINTER_V2,
+      value,
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  } catch {
+    const result = await _client.simulateContract({
+      abi: SUPERMINTER_V1_ABI,
+      functionName: 'mintTo',
+      args: [mintTo],
+      address: SUPERMINTER,
+      value,
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  }
 }
 
 export const getProjectFees = async (
@@ -189,33 +172,84 @@ export const getFees = async (
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
     transport: http(),
-  })
+  }) as PublicClient
 
-  const tier = tokenId ?? 0
-  const quantity = amount ?? 1
-  const nextScheduleNum = await getNextScheduleNum(
-    client as PublicClient,
+  const tier = await getDefaultMintTier(
+    chainId,
     contractAddress,
-    tier,
+    tokenId,
+    client,
   )
+  const quantity = amount ?? 1
 
-  const totalPriceAndFees = (await client.readContract({
-    address: SUPERMINTER_V2,
-    abi: TOTAL_PRICE_AND_FEES_ABI,
-    functionName: 'totalPriceAndFees',
-    args: [
-      contractAddress,
-      tier,
-      nextScheduleNum === 0 ? 0 : BigInt(nextScheduleNum) - BigInt(1),
-      quantity,
-      false, // assume hasValidAffiliate is false
-    ],
-  })) as TotalPriceAndFees
+  try {
+    const totalPriceAndFees = (await client.readContract({
+      address: SUPERMINTER_V2,
+      abi: TOTAL_PRICE_AND_FEES_V2_ABI,
+      functionName: 'totalPriceAndFees',
+      args: [
+        contractAddress,
+        tier,
+        BigInt(0),
+        quantity,
+        false, // assume hasValidAffiliate is false
+      ],
+    })) as TotalPriceAndFees
 
-  return {
-    actionFee: totalPriceAndFees.subTotal,
-    projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
+    return {
+      actionFee: totalPriceAndFees.subTotal,
+      projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
+    }
+  } catch {
+    const totalPriceAndFees = (await client.readContract({
+      address: SUPERMINTER,
+      abi: TOTAL_PRICE_AND_FEES_V1_ABI,
+      functionName: 'totalPriceAndFees',
+      args: [contractAddress, tier, BigInt(0), quantity],
+    })) as TotalPriceAndFees
+
+    return {
+      actionFee: totalPriceAndFees.subTotal,
+      projectFee: totalPriceAndFees.total - totalPriceAndFees.subTotal,
+    }
   }
+}
+
+export const getDefaultMintTier = async (
+  chainId: number,
+  contractAddress: Address,
+  tokenId?: number,
+  client?: PublicClient,
+) => {
+  const _client =
+    client ??
+    createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    })
+
+  // check to see if contract uses legacy SUPERMINTER
+  // will return an array of mintInfo or an empty array
+  const mintInfoListResult = (await _client.readContract({
+    address: SUPERMINTER,
+    abi: MINT_INFO_LIST_ABI,
+    functionName: 'mintInfoList',
+    args: [contractAddress],
+  })) as unknown[]
+  const isLegacy = mintInfoListResult.length
+
+  const minterAddress = isLegacy ? SUPERMINTER : SUPERMINTER_V2
+
+  const tier0NextSchedule = (await _client.readContract({
+    address: minterAddress,
+    abi: NEXT_SCHEDULE_NUM_ABI,
+    functionName: 'nextScheduleNum',
+    args: [contractAddress, BigInt(0)],
+  })) as number
+
+  // If we pass in a tokenId, we use that to infer the tier, otherwise we default to 0 if it exists, otherwise 1
+  const tier = tokenId ?? (BigInt(tier0NextSchedule) === BigInt(0) ? 1 : 0)
+  return tier
 }
 
 export const getSupportedTokenAddresses = async (

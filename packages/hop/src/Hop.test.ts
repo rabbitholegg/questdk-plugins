@@ -1,13 +1,13 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { bridge } from './Hop.js'
+import { bridge } from './Hop'
 import { l1BridgeAbi, l2AmmWrapperAbi } from '@hop-protocol/core/abi'
 import {
   DEPOSIT_ETH,
   DEPOSIT_ERC20,
   WITHDRAW_ETH,
   WITHDRAW_ERC20,
-} from './test-transactions.js'
+} from './test-transactions'
 const ETH_CHAIN_ID = 1
 const POLYGON_CHAIN_ID = 137
 const BASE_CHAIN_ID = 8453

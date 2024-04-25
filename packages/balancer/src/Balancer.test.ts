@@ -1,4 +1,4 @@
-import { apply, GreaterThanOrEqual } from '@rabbitholegg/questdk/filter'
+import { apply, GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 import { zeroAddress, parseEther, parseUnits } from 'viem'
 import { swap, getSupportedTokenAddresses } from './Balancer'
