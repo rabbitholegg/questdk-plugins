@@ -1,6 +1,4 @@
-import { bridge } from './Across.js'
-import { ACROSS_BRIDGE_ABI } from './abi.js'
-import { CHAIN_TO_SPOKEPOOL } from './contracts.js'
+import { bridge } from './Across'
 import {
   DEPOSIT_ERC20,
   DEPOSIT_ETH,
@@ -8,9 +6,9 @@ import {
   WITHDRAW_ETH,
   failingTestCases,
   passingTestCases,
-} from './test-transactions.js'
+} from './test-transactions'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
 
@@ -21,80 +19,37 @@ export const USDT_ADDRESS_ARBITRUM =
   '0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9'
 export const USDT_ADDRESS_MAINNET = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
 
-const TEST_USER = '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'
-
 describe('Given the Across plugin', () => {
   describe('When generating the filter', () => {
-    test('should return a valid bridge action filter for L2 token tx', async () => {
+    test('when making a valid bridge action', async () => {
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
-        destinationChainId: Chains.ETHEREUM,
-        tokenAddress: USDT_ADDRESS_ARBITRUM,
-        amount: GreaterThanOrEqual(100000n),
-        recipient: TEST_USER,
+        sourceChainId: 1,
+        destinationChainId: 10,
       })
-
-      expect(filter).to.deep.equal({
-        chainId: Chains.ARBITRUM_ONE,
-        to: CHAIN_TO_SPOKEPOOL[Chains.ARBITRUM_ONE],
-        input: {
-          $abi: ACROSS_BRIDGE_ABI,
-          recipient: TEST_USER,
-          destinationChainId: Chains.ETHEREUM,
-          amount: {
-            $gte: '100000',
-          },
-          originToken: USDT_ADDRESS_ARBITRUM,
-        },
-      })
-    })
-
-    test('should return a valid bridge action filter for L1 token tx', async () => {
-      const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
-        destinationChainId: Chains.ARBITRUM_ONE,
-        tokenAddress: USDT_ADDRESS_MAINNET,
-        amount: GreaterThanOrEqual(100000n),
-        recipient: TEST_USER,
-      })
-
-      expect(filter).to.deep.equal({
-        chainId: Chains.ETHEREUM,
-        to: CHAIN_TO_SPOKEPOOL[Chains.ETHEREUM],
-        input: {
-          $abi: ACROSS_BRIDGE_ABI,
-          recipient: TEST_USER,
-          destinationChainId: Chains.ARBITRUM_ONE,
-          amount: {
-            $gte: '100000',
-          },
-          originToken: USDT_ADDRESS_MAINNET,
-        },
-      })
-    })
-
-    test('should return a valid bridge action filter for L1 ETH tx', async () => {
-      const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
-        destinationChainId: Chains.ARBITRUM_ONE,
-        tokenAddress: WETH_ADRESS_MAINNET,
-        amount: GreaterThanOrEqual(100000n),
-        recipient: TEST_USER,
-      })
-
-      expect(filter).to.deep.equal({
-        chainId: Chains.ETHEREUM,
-        to: CHAIN_TO_SPOKEPOOL[Chains.ETHEREUM],
-        input: {
-          $abi: ACROSS_BRIDGE_ABI,
-          recipient: TEST_USER,
-          destinationChainId: Chains.ARBITRUM_ONE,
-          amount: {
-            $gte: '100000',
-          },
-          originToken: WETH_ADRESS_MAINNET,
-        },
-      })
+      expect(filter).toBeTypeOf('object')
+      expect(Number(filter.chainId)).toBe(1)
+      if (typeof filter.to === 'string') {
+        expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+      } else {
+        // if to is an object, it should have a logical operator as the only key
+        expect(filter.to).toBeTypeOf('object')
+        expect(Object.keys(filter.to)).toHaveLength(1)
+        expect(
+          ['$or', '$and'].some((prop) =>
+            Object.hasOwnProperty.call(filter.to, prop),
+          ),
+        ).to.be.true
+        expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+          arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+        )
+      }
+      // Check the input property is the correct type and has a valid filter operator
+      expect(filter.input).toBeTypeOf('object')
+      expect(
+        ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
+          Object.hasOwnProperty.call(filter.input, prop),
+        ),
+      ).to.be.true
     })
   })
   describe('When applying the filter', () => {

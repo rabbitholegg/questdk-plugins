@@ -2,7 +2,7 @@ import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
-} from './Across.js'
+} from './Across'
 import {
   type IActionPlugin,
   PluginActionNotImplementedError,
