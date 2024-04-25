@@ -10,6 +10,7 @@ export const CHAIN_TO_SPOKEPOOL: { [chainId: number]: Address } = {
   [Chains.BASE]: '0x09aea4b2242abc8bb4bb78d537a67a245a7bec64',
 }
 
+// Entry-point for Native tokens (ETH/MATIC)
 export const CHAIN_TO_SPOKE_VERIFIER: { [chainId: number]: Address } = {
   [Chains.ETHEREUM]: '0xb4a8d45647445ea9fc3e1058096142390683dbc2',
   [Chains.POLYGON_POS]: '0xb4a8d45647445ea9fc3e1058096142390683dbc2',
