@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-across
 
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- [#358](https://github.com/rabbitholegg/questdk-plugins/pull/358) [`9f48ea80`](https://github.com/rabbitholegg/questdk-plugins/commit/9f48ea80919c90c4bc71fc0ecb85c334828bb650) Thanks [@mmackz](https://github.com/mmackz)! - fix issue with spokepool verification
+
 ## 1.0.0-alpha.32
 
 ### Minor Changes
