@@ -1,4 +1,4 @@
-import { bridge } from './Across.js'
+import { bridge } from './Across'
 import {
   DEPOSIT_ERC20,
   DEPOSIT_ETH,
@@ -6,9 +6,9 @@ import {
   WITHDRAW_ETH,
   failingTestCases,
   passingTestCases,
-} from './test-transactions.js'
+} from './test-transactions'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
 
@@ -21,7 +21,7 @@ export const USDT_ADDRESS_MAINNET = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
 
 describe('Given the Across plugin', () => {
   describe('When generating the filter', () => {
-    test('when making a valid swap action', async () => {
+    test('when making a valid bridge action', async () => {
       const filter = await bridge({
         sourceChainId: 1,
         destinationChainId: 10,
@@ -91,9 +91,9 @@ describe('Given the Across plugin', () => {
       const filter = await bridge({
         sourceChainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.POLYGON_POS,
-        // tokenAddress: USDT_ADDRESS_ARBITRUM,
-        // amount: GreaterThanOrEqual('19000000'),
-        // recipient: '0x49b887e3f64C7007E76f72C17cE29c7bcFb9Af55',
+        tokenAddress: USDT_ADDRESS_ARBITRUM,
+        amount: GreaterThanOrEqual('19000000'),
+        recipient: '0x49b887e3f64C7007E76f72C17cE29c7bcFb9Af55',
       })
       expect(apply(transaction, filter)).to.be.true
     })

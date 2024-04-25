@@ -1,10 +1,10 @@
-import { ACROSS_BRIDGE_ABI } from './abi.js'
-import { CHAIN_ID_ARRAY } from './chain-ids.js'
+import { ACROSS_BRIDGE_ABI } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
   CHAIN_TO_SPOKEPOOL,
   CHAIN_TO_SPOKE_VERIFIER,
   CHAIN_TO_WETH,
-} from './contracts.js'
+} from './contracts'
 import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
 import { CHAIN_TO_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, zeroAddress } from 'viem'
