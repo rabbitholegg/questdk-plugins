@@ -15,9 +15,12 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
   const isNative = tokenAddress === zeroAddress
   const tokenIn = isNative ? CHAIN_TO_WETH[sourceChainId] : tokenAddress
-  const bridgeContract = isNative
-    ? CHAIN_TO_SPOKE_VERIFIER[sourceChainId]
-    : CHAIN_TO_SPOKEPOOL[sourceChainId]
+  const bridgeContract = {
+    $or: [
+      CHAIN_TO_SPOKE_VERIFIER[sourceChainId]?.toLowerCase(),
+      CHAIN_TO_SPOKEPOOL[sourceChainId]?.toLowerCase(),
+    ],
+  }
 
   return compressJson({
     chainId: sourceChainId,
