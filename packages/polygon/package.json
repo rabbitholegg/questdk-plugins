@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-polygon",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.32",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
@@ -16,12 +16,14 @@
     "build": "pnpm build:types && pnpm build:esm && pnpm postbuild:esm && pnpm build:cjs && pnpm postbuild:cjs && BABEL_ENV=esmBundled pnpm rollup -c",
     "build:esm": "BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir 'dist/esm' --source-maps",
     "build:cjs": "BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
-    "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",    "clean": "rimraf dist",
+    "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
+    "clean": "rimraf dist",
     "postbuild:cjs": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
     "postbuild:esm": "echo '{\"type\":\"module\"}' > dist/esm/package.json",
     "format": "rome format . --write",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",    "test": "vitest dev",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest dev",
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
     "test:ui": "vitest dev --ui"

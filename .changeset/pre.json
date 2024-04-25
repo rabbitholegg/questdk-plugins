@@ -10,6 +10,7 @@
     "big-gifts-retire",
     "big-pants-own",
     "blue-bikes-sip",
+    "blue-kangaroos-kiss",
     "breezy-trees-carry",
     "bright-turtles-divide",
     "brown-bats-hope",
@@ -112,6 +113,7 @@
     "nine-steaks-clap",
     "nine-waves-lie",
     "odd-cows-judge",
+    "odd-glasses-develop",
     "odd-islands-film",
     "orange-eagles-hope",
     "orange-mice-vanish",
@@ -134,6 +136,7 @@
     "quiet-spies-drum",
     "quiet-swans-wave",
     "real-ducks-leave",
+    "real-months-retire",
     "rich-socks-marry",
     "rotten-bees-battle",
     "rotten-monkeys-attack",
@@ -225,6 +228,7 @@
     "wicked-spoons-leave",
     "wicked-walls-hear",
     "wild-cobras-help",
+    "wise-hotels-tan",
     "wise-pianos-repair",
     "witty-zoos-destroy",
     "yellow-pears-cough",
@@ -281,6 +285,7 @@
     "@rabbitholegg/questdk-plugin-pods": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-thruster": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-base": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-orbit": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-orbit": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-superbridge": "1.0.0-alpha.0"
   }
 }

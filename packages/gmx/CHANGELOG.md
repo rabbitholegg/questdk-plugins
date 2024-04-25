@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.40
+
+### Minor Changes
+
+- [#296](https://github.com/rabbitholegg/questdk-plugins/pull/296) [`756ca6c0`](https://github.com/rabbitholegg/questdk-plugins/commit/756ca6c0ba08c2c7649a946af54c9186169a9c0e) Thanks [@Quazia](https://github.com/Quazia)! - Revise build and lint strategies
+
+### Patch Changes
+
+- Updated dependencies [[`756ca6c0`](https://github.com/rabbitholegg/questdk-plugins/commit/756ca6c0ba08c2c7649a946af54c9186169a9c0e)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.19
+  - @rabbitholegg/questdk@2.0.0-alpha.45
+
 ## 1.0.0-alpha.39
 
 ### Patch Changes
