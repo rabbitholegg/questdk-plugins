@@ -1,28 +1,35 @@
 import {
-  type TransactionFilter,
-  type SwapActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { type Address, zeroAddress } from 'viem'
-import { Chains, CHAIN_TO_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
-import { buildPathQuery } from './utils'
-import {
   AERODROME_ROUTER,
   ETH_FOR_TOKENS_FRAGMENTS,
+  EXECUTE_ABI_FRAGMENTS,
   TOKENS_FOR_ETH_FRAGMENTS,
   TOKENS_FOR_TOKENS_FRAGMENTS,
+  UNIVERSAL_ROUTER,
+  V2_SWAP_EXACT_TYPES,
+  V3_SWAP_EXACT_TYPES,
   WETH_ADDRESS,
 } from './constants'
+import { buildPathQuery, buildV2PathQuery, buildV3PathQuery } from './utils'
+import {
+  type SwapActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import { CHAIN_TO_TOKENS, Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress } from 'viem'
 
 export const swap = async (
   _params: SwapActionParams,
 ): Promise<TransactionFilter> => {
   const { chainId, tokenIn, tokenOut, amountIn, amountOut, recipient } = _params
 
+  const inputToken = tokenIn === zeroAddress ? WETH_ADDRESS : tokenIn
+  const outputToken = tokenOut === zeroAddress ? WETH_ADDRESS : tokenOut
+
   return compressJson({
     chainId,
     value: tokenIn === zeroAddress ? amountIn : undefined,
-    to: AERODROME_ROUTER,
+    to: { $or: [AERODROME_ROUTER, UNIVERSAL_ROUTER] },
     input: {
       $or: [
         {
@@ -47,6 +54,27 @@ export const swap = async (
           amountOutMin: amountOut,
           routes: buildPathQuery(tokenIn, tokenOut),
           to: recipient,
+        },
+        {
+          $abi: EXECUTE_ABI_FRAGMENTS,
+          inputs: {
+            $some: {
+              $or: [
+                {
+                  $abiParams: V3_SWAP_EXACT_TYPES,
+                  path: buildV3PathQuery(inputToken, outputToken),
+                  amountIn,
+                  amountOut,
+                },
+                {
+                  $abiParams: V2_SWAP_EXACT_TYPES,
+                  path: buildV2PathQuery(inputToken, outputToken),
+                  amountIn,
+                  amountOut,
+                },
+              ],
+            },
+          },
         },
       ],
     },

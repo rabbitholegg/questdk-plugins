@@ -1,9 +1,9 @@
 import { type IActionPlugin } from '@rabbitholegg/questdk'
 
 import {
-  swap,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  swap,
 } from './Aerodrome.js'
 
 export const Aerodrome: IActionPlugin = {
