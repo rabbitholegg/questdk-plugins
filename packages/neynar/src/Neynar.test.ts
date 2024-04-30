@@ -1,62 +1,91 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, vi, MockedFunction } from 'vitest'
 import { validateFollow } from './Neynar'
+import axios from 'axios'
 
-// Build out Axios mock
-const mockedAxios = {
-  get: vi.fn(),
-}
-
-vi.mock('axios', () => mockedAxios)
-
+vi.mock('axios', () => {
+  return {
+    default: {
+      post: vi.fn(),
+      get: vi.fn(),
+      delete: vi.fn(),
+      put: vi.fn(),
+      create: vi.fn().mockReturnThis(),
+      interceptors: {
+        request: {
+          use: vi.fn(),
+          eject: vi.fn(),
+        },
+        response: {
+          use: vi.fn(),
+          eject: vi.fn(),
+        },
+      },
+    },
+  }
+})
 describe('validateFollow function', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   beforeEach(() => {
-    mockedAxios.get.mockReset()
+    vi.resetAllMocks()
   })
 
+
   it('should return true if the actor is a follower of the target', async () => {
-    mockedAxios.get.mockResolvedValueOnce({
+    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({ status: 200, data: {
       data: {
         users: [{ custody_address: 'actor_address' }],
         next: { cursor: null },
       },
-    })
+    } },
+    )
 
     const result = await validateFollow({ target: 'target_fid' }, { actor: 'actor_address' })
     expect(result).toBe(true)
   })
 
   it('should return false if the actor is not a follower of the target', async () => {
-    mockedAxios.get.mockResolvedValueOnce({
-      data: {
-        users: [{ custody_address: 'different_address' }],
-        next: { cursor: null },
-      },
-    })
+    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue(
+      { status: 200, data: {
+        data: {
+          users: [{ custody_address: 'not_actor_address' }],
+          next: { cursor: null },
+        },
+      } },
+    )
 
     const result = await validateFollow({ target: 'target_fid' }, { actor: 'actor_address' })
     expect(result).toBe(false)
   })
 
   it('should handle pagination correctly', async () => {
-    mockedAxios.get.mockResolvedValueOnce({
-      data: {
-        users: [{ custody_address: 'different_address' }],
-        next: { cursor: 'next_cursor' },
-      },
-    }).mockResolvedValueOnce({
-      data: {
-        users: [{ custody_address: 'actor_address' }],
-        next: { cursor: null },
-      },
-    })
-
+    (axios.get as MockedFunction<typeof axios.get>)
+      .mockResolvedValueOnce({
+        status: 200,
+        data: {
+          data: {
+            users: [],
+            next: { cursor: '100' },
+          },
+        },
+      })
+      .mockResolvedValueOnce({
+        status: 200,
+        data: {
+          data: {
+            users: [{ custody_address: 'actor_address' }],
+            next: { cursor: null },
+          },
+        },
+      })
+  
     const result = await validateFollow({ target: 'target_fid' }, { actor: 'actor_address' })
     expect(result).toBe(true)
-    expect(mockedAxios.get).toHaveBeenCalledTimes(2) // Ensure pagination was handled
+    expect(axios.get).toHaveBeenCalledTimes(2) // Ensure pagination was handled correctly
   })
 
   it('should return false on API failure', async () => {
-    mockedAxios.get.mockRejectedValue(new Error('API failure'))
+    (axios.get as MockedFunction<typeof axios.get>).mockRejectedValue(new Error('API failure'))
 
     const result = await validateFollow({ target: 'target_fid' }, { actor: 'actor_address' })
     expect(result).toBe(false)

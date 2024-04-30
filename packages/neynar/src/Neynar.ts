@@ -58,11 +58,11 @@ const fetchFollowers = async (target: string, cursor: string | null) => {
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
-  // Implementation for fetching supported token addresses
+  // Implementation for fetching supported token addresses - not used for this plugin
   return []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // Implementation for fetching supported chain IDs
+  // Implementation for fetching supported chain IDs - not used for this plugin
   return []
 }
