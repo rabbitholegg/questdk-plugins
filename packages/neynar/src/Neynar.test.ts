@@ -1,8 +1,12 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { validateFollow } from './Neynar'
 
 // Build out Axios mock
-const mockedAxios = {}
+const mockedAxios = {
+  get: vi.fn(),
+}
+
+vi.mock('axios', () => mockedAxios)
 
 describe('validateFollow function', () => {
   beforeEach(() => {
