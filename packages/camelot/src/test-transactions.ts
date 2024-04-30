@@ -1,11 +1,11 @@
-import { Chains, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
 import { CAMELOT_V2_ROUTER } from './contract-addresses'
-import { parseEther, parseUnits } from 'viem'
 import { Tokens } from './utils'
 import {
   GreaterThanOrEqual,
   type SwapActionParams,
 } from '@rabbitholegg/questdk'
+import { Chains, type TestParams } from '@rabbitholegg/questdk-plugin-utils'
+import { parseEther, parseUnits } from 'viem'
 
 export const V2_SWAP_ETH: TestParams<SwapActionParams> = {
   transaction: {

@@ -1,7 +1,3 @@
-import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
-import { parseEther, parseUnits } from 'viem'
-import { Tokens } from './utils'
-import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
   PARASWAP_BALANCER,
   PARASWAP_CURVE,
@@ -21,6 +17,10 @@ import {
   YAK_TOKENS_TO_ETH,
   YAK_TOKENS_TO_TOKENS,
 } from './test-transactions'
+import { Tokens } from './utils'
+import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
+import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
+import { parseEther, parseUnits } from 'viem'
 
 export const passingTestCases = [
   createTestCase(V2_SWAP_ETH, 'when swapping ETH for tokens'),

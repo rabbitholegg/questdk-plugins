@@ -1,12 +1,4 @@
 import {
-  type TransactionFilter,
-  type SwapActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import { buildV2PathQuery, buildV3PathQuery, Tokens } from './utils'
-import {
   CAMELOT_V2_ABI,
   CAMELOT_V3_EXACT_INPUT_ABI,
   CAMELOT_V3_EXACT_OUTPUT_ABI,
@@ -16,15 +8,23 @@ import {
   TOKENS_FOR_TOKENS_FRAGMENTS,
   YAK_ROUTER_ABI,
 } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
-  DEFAULT_TOKEN_LIST,
   CAMELOT_V2_ROUTER,
   CAMELOT_V3_ROUTER,
-  PARASWAP_ROUTER,
+  DEFAULT_TOKEN_LIST,
   INTERNAL_ETH_ADDRESS,
+  PARASWAP_ROUTER,
   YAK_ROUTER,
 } from './contract-addresses'
+import { Tokens, buildV2PathQuery, buildV3PathQuery } from './utils'
+import {
+  type SwapActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address } from 'viem'
 
 const PARASWAP_PARTNER = '0x353D2d14Bb674892910685520Ac040f560CcBC06'
 

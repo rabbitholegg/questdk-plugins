@@ -1,22 +1,9 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
-import {
-  CAMELOT_V2_ROUTER,
-  CAMELOT_V3_ROUTER,
-  DEFAULT_TOKEN_LIST,
-  PARASWAP_ROUTER,
-} from './contract-addresses'
-import {
-  CAMELOT_V2_ABI,
-  CAMELOT_V3_EXACT_INPUT_ABI,
-  CAMELOT_V3_EXACT_OUTPUT_ABI,
-  PARASWAP_ABI,
-} from './abi'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { parseEther, getAddress } from 'viem'
 import { swap } from './Camelot'
-import { Tokens } from './utils'
+import { DEFAULT_TOKEN_LIST } from './contract-addresses'
 import { failingTestCases, passingTestCases } from './test-setup'
+import { apply } from '@rabbitholegg/questdk'
+import { getAddress } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the camelot plugin', () => {
   describe('should return a valid action filter', () => {

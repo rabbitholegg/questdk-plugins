@@ -1,5 +1,5 @@
-import { type Address } from 'viem'
 import { Tokens } from './utils'
+import { type Address } from 'viem'
 
 export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.ETH, // '0x0000000000000000000000000000000000000000' - ETH
