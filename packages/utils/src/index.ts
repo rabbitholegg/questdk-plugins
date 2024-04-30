@@ -102,7 +102,7 @@ export {
   CreateQuestInputSchema,
   EthAddressSchema,
   QuestActionParamsSchema,
-  NetworkNameSchema, 
+  NetworkNameSchema,
   FollowActionFormSchema,
   FollowActionDetailSchema,
   FollowValidationParamsSchema,

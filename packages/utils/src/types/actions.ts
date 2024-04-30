@@ -7,9 +7,9 @@ import {
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import type { MintIntentParams } from './intents'
-import { ZodSchema, z } from 'zod';
+import { ZodSchema, z } from 'zod'
 import { EthAddressSchema } from './common'
-import { UUID } from 'crypto';
+import { UUID } from 'crypto'
 
 export type SwapActionParams = {
   chainId: number
@@ -218,7 +218,6 @@ export const MintActionDetailSchema = z.object({
 export type MintActionDetail = z.infer<typeof MintActionDetailSchema>
 export type MintActionForm = z.infer<typeof MintActionFormSchema>
 
-
 /*
 FOLLOW
 */
@@ -231,18 +230,20 @@ export const FollowValidationParamsSchema = z.object({
   actor: EthAddressSchema,
   project: EthAddressSchema.optional(),
 })
-export type FollowValidationParams = z.infer<typeof FollowValidationParamsSchema>
+export type FollowValidationParams = z.infer<
+  typeof FollowValidationParamsSchema
+>
 
 export const FollowActionDetailSchema = z.object({
-  target: z.union([z.string(), EthAddressSchema]), 
+  target: z.union([z.string(), EthAddressSchema]),
   project: z.union([z.string(), EthAddressSchema]).optional(),
-});
-export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>;
+})
+export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>
 
 export const FollowActionFormSchema = z.object({
-  target: z.union([z.string(), EthAddressSchema]), 
-});
-export type FollowActionForm = z.infer<typeof FollowActionFormSchema>;
+  target: z.union([z.string(), EthAddressSchema]),
+})
+export type FollowActionForm = z.infer<typeof FollowActionFormSchema>
 
 /*
 VOTE
@@ -308,7 +309,6 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
   z.object({ type: z.literal('follow'), data: FollowActionDetailSchema }),
 ])
-
 
 export const QuestActionParamsSchema = ActionParamsSchema
 
@@ -385,27 +385,31 @@ export interface IActionPlugin {
 ACTION VALIDATION
 */
 export type ActionValidation<ActorType, ActionPayload> = {
-  actor: ActorType;
-  payload: ActionPayload;
-};
+  actor: ActorType
+  payload: ActionPayload
+}
 
-
-export function ActionValidationSchema(actorSchema: ZodSchema, payloadSchema: ZodSchema) {
+export function ActionValidationSchema(
+  actorSchema: ZodSchema,
+  payloadSchema: ZodSchema,
+) {
   return z.object({
     actor: actorSchema,
     payload: payloadSchema,
-  });
+  })
 }
 
-
 export type PluginActionPayload = {
-  actionParams: z.infer<typeof ActionParamsSchema>;
-  validationParams: z.infer<typeof ValidationParamsSchema>;
-  questId: UUID;
-  taskId: UUID;
-};
+  actionParams: z.infer<typeof ActionParamsSchema>
+  validationParams: z.infer<typeof ValidationParamsSchema>
+  questId: UUID
+  taskId: UUID
+}
 
-export type PluginActionValidation = ActionValidation<Address, PluginActionPayload>;
+export type PluginActionValidation = ActionValidation<
+  Address,
+  PluginActionPayload
+>
 
 export const PluginActionValidationSchema = ActionValidationSchema(
   z.string(),
@@ -414,10 +418,8 @@ export const PluginActionValidationSchema = ActionValidationSchema(
     validationParams: ValidationParamsSchema,
     questId: z.string().uuid(),
     taskId: z.string().uuid(),
-  })
-);
-
-
+  }),
+)
 
 /*
 ENUM TYPES

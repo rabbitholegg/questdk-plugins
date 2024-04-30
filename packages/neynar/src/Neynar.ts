@@ -14,27 +14,35 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     // Expectation is that we should probably pass this in through a config object long-term
-    'api_key': process.env.NEYNAR_API_KEY,
+    api_key: process.env.NEYNAR_API_KEY,
   },
 })
 
-export const validate = async(validationPayload: PluginActionValidation) => {
-  switch(validationPayload.payload.params.type) {
+export const validate = async (validationPayload: PluginActionValidation) => {
+  switch (validationPayload.payload.params.type) {
     case ActionType.Follow:
-      return await validateFollow(validationPayload.payload.params, validationPayload.payload.validationParams)
+      return await validateFollow(
+        validationPayload.payload.params,
+        validationPayload.payload.validationParams,
+      )
     default:
       // Implement other action types as needed
       return false
   }
 }
 
-export const validateFollow = async (actionP: FollowActionParams, validateP: FollowValidationParams): Promise<boolean> => {
+export const validateFollow = async (
+  actionP: FollowActionParams,
+  validateP: FollowValidationParams,
+): Promise<boolean> => {
   try {
     let cursor: string | null = null
     do {
       const response = await fetchFollowers(actionP.target, cursor)
       const followers = response.users
-      const actorIsFollower = followers.some(follower => follower.custody_address === validateP.actor)
+      const actorIsFollower = followers.some(
+        (follower) => follower.custody_address === validateP.actor,
+      )
       if (actorIsFollower) {
         return true
       }
@@ -47,22 +55,29 @@ export const validateFollow = async (actionP: FollowActionParams, validateP: Fol
   }
 }
 
-const fetchFollowers = async (target: string, cursor: string | null): Promise<FollowersResponse> => {
+const fetchFollowers = async (
+  target: string,
+  cursor: string | null,
+): Promise<FollowersResponse> => {
   const response = await axiosInstance.get('', {
     params: {
       fid: target,
       cursor: cursor,
-      limit: 100,  // Use maximum limit to reduce the number of requests
+      limit: 100, // Use maximum limit to reduce the number of requests
     },
   })
-  
+
   // Validate the response data with the Zod schema
-  const parsedResponse: FollowersResponse = FollowersResponseSchema.parse(response.data)
-  
+  const parsedResponse: FollowersResponse = FollowersResponseSchema.parse(
+    response.data,
+  )
+
   return parsedResponse
 }
 
-export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {
+export const getSupportedTokenAddresses = async (
+  _chainId: number,
+): Promise<Address[]> => {
   // Implementation for fetching supported token addresses - not used for this plugin
   return []
 }

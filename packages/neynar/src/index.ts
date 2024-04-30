@@ -1,6 +1,4 @@
-import {
-  type IActionPlugin,
-} from '@rabbitholegg/questdk'
+import { type IActionPlugin } from '@rabbitholegg/questdk'
 
 import {
   delegate,
@@ -9,8 +7,8 @@ import {
 } from './Neynar'
 
 export const Neynar: IActionPlugin = {
-  pluginId: "neynar",
+  pluginId: 'neynar',
   getSupportedTokenAddresses,
   getSupportedChainIds,
-  delegate, 
+  delegate,
 }

@@ -215,7 +215,6 @@ export const executeValidation = (
   }
 }
 
-
 export const executePlugin = (
   plugin: IActionPlugin,
   actionType: ActionType,
