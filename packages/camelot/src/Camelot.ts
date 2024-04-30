@@ -10,7 +10,11 @@ import {
   CAMELOT_V2_ABI,
   CAMELOT_V3_EXACT_INPUT_ABI,
   CAMELOT_V3_EXACT_OUTPUT_ABI,
+  ETH_FOR_TOKENS_FRAGMENTS,
   PARASWAP_ABI,
+  TOKENS_FOR_ETH_FRAGMENTS,
+  TOKENS_FOR_TOKENS_FRAGMENTS,
+  YAK_ROUTER_ABI,
 } from './abi'
 import {
   DEFAULT_TOKEN_LIST,
@@ -18,6 +22,7 @@ import {
   CAMELOT_V3_ROUTER,
   PARASWAP_ROUTER,
   INTERNAL_ETH_ADDRESS,
+  YAK_ROUTER,
 } from './contract-addresses'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 
@@ -44,6 +49,7 @@ export const swap = async (
         CAMELOT_V2_ROUTER.toLowerCase(),
         CAMELOT_V3_ROUTER.toLowerCase(),
         PARASWAP_ROUTER.toLowerCase(),
+        YAK_ROUTER.toLowerCase(),
       ],
     },
     value: ethUsedIn ? amountIn : undefined,
@@ -150,6 +156,15 @@ export const swap = async (
               },
             },
           ],
+        },
+        {
+          $abi: YAK_ROUTER_ABI,
+          _trade: {
+            amountIn: amountIn,
+            amountOut: amountOut,
+            path: buildV2PathQuery(tokenInOrWeth, tokenOutOrWeth),
+          },
+          _to: recipient,
         },
       ],
     },

@@ -3,20 +3,23 @@ import { parseEther, parseUnits } from 'viem'
 import { Tokens } from './utils'
 import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import {
+  PARASWAP_BALANCER,
+  PARASWAP_CURVE,
+  PARASWAP_MEGASWAP,
+  PARASWAP_MULTISWAP,
+  PARASWAP_SIMPLESWAP,
+  PARASWAP_UNISWAP,
+  SWAP_WRONG_PARTNER,
   V2_SWAP_ETH,
   V2_SWAP_TOKENS,
   V2_TOKENS_TO_ETH,
+  V3_EXACT_OUTPUT,
+  V3_EXACT_OUTPUT_SINGLE,
   V3_SWAP_ETH,
   V3_TOKEN_TO_ETH,
-  V3_EXACT_OUTPUT_SINGLE,
-  V3_EXACT_OUTPUT,
-  PARASWAP_SIMPLESWAP,
-  PARASWAP_MULTISWAP,
-  PARASWAP_MEGASWAP,
-  PARASWAP_UNISWAP,
-  PARASWAP_BALANCER,
-  PARASWAP_CURVE,
-  SWAP_WRONG_PARTNER,
+  YAK_ETH_TO_TOKENS,
+  YAK_TOKENS_TO_ETH,
+  YAK_TOKENS_TO_TOKENS,
 } from './test-transactions'
 
 export const passingTestCases = [
@@ -36,6 +39,12 @@ export const passingTestCases = [
   createTestCase(PARASWAP_UNISWAP, 'for directUniV3Swap'),
   createTestCase(PARASWAP_BALANCER, 'for directBalancerV2'),
   createTestCase(PARASWAP_CURVE, 'for directCurveV2Swap'),
+  createTestCase(YAK_ETH_TO_TOKENS, 'for native aggregator (eth to tokens)'),
+  createTestCase(YAK_TOKENS_TO_ETH, 'for native aggregator (tokens to eth)'),
+  createTestCase(
+    YAK_TOKENS_TO_TOKENS,
+    'for native aggregator (tokens to tokens)',
+  ),
   createTestCase(V2_SWAP_ETH, 'any/any V2', {
     tokenIn: undefined,
     tokenOut: undefined,
@@ -49,6 +58,12 @@ export const passingTestCases = [
     amountOut: undefined,
   }),
   createTestCase(PARASWAP_SIMPLESWAP, 'any/any V2', {
+    tokenIn: undefined,
+    tokenOut: undefined,
+    amountIn: undefined,
+    amountOut: undefined,
+  }),
+  createTestCase(YAK_ETH_TO_TOKENS, 'any/any Yak router', {
     tokenIn: undefined,
     tokenOut: undefined,
     amountIn: undefined,
@@ -102,6 +117,34 @@ export const failingTestCases = [
   createTestCase(V3_TOKEN_TO_ETH, 'when amountIn is insufficient (V3)', {
     amountIn: GreaterThanOrEqual(parseEther('1000')),
   }),
+  createTestCase(
+    YAK_TOKENS_TO_TOKENS,
+    'when tokenIn is incorrect (Yak router)',
+    {
+      tokenIn: Tokens.WETH,
+    },
+  ),
+  createTestCase(
+    YAK_TOKENS_TO_TOKENS,
+    'when tokenOut is incorrect (Yak router)',
+    {
+      tokenOut: Tokens.WETH,
+    },
+  ),
+  createTestCase(
+    YAK_ETH_TO_TOKENS,
+    'when amountIn is insufficient (Yak router)',
+    {
+      amountIn: GreaterThanOrEqual(parseEther('1000')),
+    },
+  ),
+  createTestCase(
+    YAK_ETH_TO_TOKENS,
+    'when amountOut is insufficient (Yak router)',
+    {
+      amountOut: GreaterThanOrEqual(parseEther('1000')),
+    },
+  ),
   createTestCase(
     V3_EXACT_OUTPUT_SINGLE,
     'when amountOut is insufficient (V3)',
