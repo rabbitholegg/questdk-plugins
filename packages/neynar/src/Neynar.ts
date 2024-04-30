@@ -6,6 +6,7 @@ import {
   type PluginActionValidation,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
+import { FollowersResponse, FollowersResponseSchema } from './types'
 
 const API_BASE_URL = 'https://api.neynar.com/v2/farcaster/followers'
 const axiosInstance = axios.create({
@@ -32,12 +33,12 @@ export const validateFollow = async (actionP: FollowActionParams, validateP: Fol
     let cursor: string | null = null
     do {
       const response = await fetchFollowers(actionP.target, cursor)
-      const followers = response.data.users
+      const followers = response.users
       const actorIsFollower = followers.some(follower => follower.custody_address === validateP.actor)
       if (actorIsFollower) {
         return true
       }
-      cursor = response.data.next.cursor
+      cursor = response.next.cursor
     } while (cursor)
     return false
   } catch (error) {
@@ -46,7 +47,7 @@ export const validateFollow = async (actionP: FollowActionParams, validateP: Fol
   }
 }
 
-const fetchFollowers = async (target: string, cursor: string | null) => {
+const fetchFollowers = async (target: string, cursor: string | null): Promise<FollowersResponse> => {
   const response = await axiosInstance.get('', {
     params: {
       fid: target,
@@ -54,7 +55,11 @@ const fetchFollowers = async (target: string, cursor: string | null) => {
       limit: 100,  // Use maximum limit to reduce the number of requests
     },
   })
-  return response.data
+  
+  // Validate the response data with the Zod schema
+  const parsedResponse: FollowersResponse = FollowersResponseSchema.parse(response.data)
+  
+  return parsedResponse
 }
 
 export const getSupportedTokenAddresses = async (_chainId: number): Promise<Address[]> => {

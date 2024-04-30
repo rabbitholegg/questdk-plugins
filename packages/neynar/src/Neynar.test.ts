@@ -24,8 +24,6 @@ vi.mock('axios', () => {
   }
 })
 describe('validateFollow function', () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
   beforeEach(() => {
     vi.resetAllMocks()
   })
