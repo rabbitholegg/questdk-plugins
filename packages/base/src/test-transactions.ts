@@ -242,23 +242,9 @@ export const failingTestCases = [
   ),
   createTestCase(
     ETH_FROM_ETHEREUM_TO_BASE_TEST,
-    'eth from ethereum to base, when tokenAddress is not correct',
-    {
-      tokenAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4',
-    },
-  ),
-  createTestCase(
-    ETH_FROM_ETHEREUM_TO_BASE_TEST,
     'eth from ethereum to base, when contractAddress is not correct',
     {
       contractAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4',
-    },
-  ),
-  createTestCase(
-    ETH_FROM_ETHEREUM_TO_BASE_TEST,
-    'eth from ethereum to base, when contractAddress is not correct2',
-    {
-      contractAddress: ETHEREUM_ERC20_BRIDGE_ADDRESS,
     },
   ),
   // erc20 from ethereum
@@ -290,13 +276,6 @@ export const failingTestCases = [
       contractAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4',
     },
   ),
-  createTestCase(
-    ERC20_FROM_ETHEREUM_TO_BASE_TEST,
-    'erc20 from ethereum to base, when contractAddress is not correct2',
-    {
-      contractAddress: ETHEREUM_ETH_BRIDGE_ADDRESS,
-    },
-  ),
 
   // eth from base
   createTestCase(
@@ -315,26 +294,11 @@ export const failingTestCases = [
   ),
   createTestCase(
     ETH_FROM_BASE_TO_ETHEREUM_TEST,
-    'eth from base to ethereum, when tokenAddress is not correct',
-    {
-      tokenAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4333',
-    },
-  ),
-  createTestCase(
-    ETH_FROM_BASE_TO_ETHEREUM_TEST,
     'eth from base to ethereum, when contractAddress is not correct',
     {
       contractAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4333',
     },
   ),
-  createTestCase(
-    ETH_FROM_BASE_TO_ETHEREUM_TEST,
-    'eth from base to ethereum, when contractAddress is not correct2',
-    {
-      contractAddress: BASE_ERC20_BRIDGE_ADDRESS,
-    },
-  ),
-
   // erc20 from base
   createTestCase(
     ERC20_FROM_BASE_TO_ETHEREUM_TEST,
@@ -362,13 +326,6 @@ export const failingTestCases = [
     'erc20 from base to ethereum, when contractAddress is not correct',
     {
       contractAddress: '0x990D07a69f23d69618e3Bb2444fA07f499193Fe4333',
-    },
-  ),
-  createTestCase(
-    ERC20_FROM_BASE_TO_ETHEREUM_TEST,
-    'erc20 from base to ethereum, when contractAddress is not correct2',
-    {
-      contractAddress: BASE_ETH_BRIDGE_ADDRESS,
     },
   ),
 ]

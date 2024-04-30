@@ -41,6 +41,7 @@ import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
 import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
 import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
+import { Superbridge } from '@rabbitholegg/questdk-plugin-superbridge'
 import { Gains } from '@rabbitholegg/questdk-plugin-gains'
 // ^^^ New Imports Go Here ^^^
 import {
@@ -106,6 +107,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Thruster.pluginId]: Thruster,
   [Base.pluginId]: Base,
   [Orbit.pluginId]: Orbit,
+  [Superbridge.pluginId]: Superbridge,
   [Gains.pluginId]: Gains,
 }
 

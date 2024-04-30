@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-arbitrum
 
+## 1.0.0-alpha.15
+
+### Minor Changes
+
+- [#296](https://github.com/rabbitholegg/questdk-plugins/pull/296) [`756ca6c0`](https://github.com/rabbitholegg/questdk-plugins/commit/756ca6c0ba08c2c7649a946af54c9186169a9c0e) Thanks [@Quazia](https://github.com/Quazia)! - Revise build and lint strategies
+
 ## 1.0.0-alpha.14
 
 ### Patch Changes

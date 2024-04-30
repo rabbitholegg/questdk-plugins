@@ -738,6 +738,9 @@ importers:
       '@rabbitholegg/questdk-plugin-stargate':
         specifier: workspace:*
         version: link:../stargate
+      '@rabbitholegg/questdk-plugin-superbridge':
+        specifier: workspace:*
+        version: link:../superbridge
       '@rabbitholegg/questdk-plugin-sushi':
         specifier: workspace:*
         version: link:../sushi
@@ -790,6 +793,19 @@ importers:
         version: link:../tsconfig
 
   packages/stargate:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
+  packages/superbridge:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*

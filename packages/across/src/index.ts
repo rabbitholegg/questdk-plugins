@@ -1,12 +1,13 @@
 import {
-  type IActionPlugin,
-  PluginActionNotImplementedError,
-} from '@rabbitholegg/questdk'
-import {
   bridge,
   getSupportedChainIds,
   getSupportedTokenAddresses,
 } from './Across'
+import {
+  type IActionPlugin,
+  PluginActionNotImplementedError,
+} from '@rabbitholegg/questdk'
+
 export const Across: IActionPlugin = {
   pluginId: 'across',
   getSupportedTokenAddresses,

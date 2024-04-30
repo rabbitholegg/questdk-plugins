@@ -1,31 +1,44 @@
-import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
-import { CHAIN_ID_ARRAY } from './chain-ids'
 import { ACROSS_BRIDGE_ABI } from './abi'
-import { CHAIN_TO_CONTRACT } from './chain-to-contract'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import {
+  CHAIN_TO_SPOKEPOOL,
+  CHAIN_TO_SPOKE_VERIFIER,
+  CHAIN_TO_WETH,
+} from './contracts'
+import { type BridgeActionParams, compressJson } from '@rabbitholegg/questdk'
+import { CHAIN_TO_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, zeroAddress } from 'viem'
+
 export const bridge = async (bridge: BridgeActionParams) => {
-  // This is the information we'll use to compose the Transaction object
   const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
     bridge
 
-  // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
+  const isNative = tokenAddress === zeroAddress
+  const tokenIn = isNative ? CHAIN_TO_WETH[sourceChainId] : tokenAddress
+  const bridgeContract = {
+    $or: [
+      CHAIN_TO_SPOKE_VERIFIER[sourceChainId]?.toLowerCase(),
+      CHAIN_TO_SPOKEPOOL[sourceChainId]?.toLowerCase(),
+    ],
+  }
+
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
-    to: CHAIN_TO_CONTRACT[sourceChainId], // The contract address of the bridge
+    chainId: sourceChainId,
+    to: bridgeContract,
     input: {
-      $abi: ACROSS_BRIDGE_ABI, // The ABI of the bridge contract
-      recipient: recipient, // The recipient of the funds
-      destinationChainId: destinationChainId, // The chainId of the destination chain
-      amount: amount, // The amount of tokens to send
-      originToken: tokenAddress, // The token address of the token to send
-    }, // The input object is where we'll put the ABI and the parameters
+      $abi: ACROSS_BRIDGE_ABI,
+      recipient: recipient,
+      destinationChainId: destinationChainId,
+      amount: amount,
+      originToken: tokenIn,
+    },
   })
 }
 
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  return []
+  return CHAIN_TO_TOKENS[_chainId] ?? []
 }
 
 export const getSupportedChainIds = async () => {

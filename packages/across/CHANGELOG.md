@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-across
 
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- [#358](https://github.com/rabbitholegg/questdk-plugins/pull/358) [`9f48ea80`](https://github.com/rabbitholegg/questdk-plugins/commit/9f48ea80919c90c4bc71fc0ecb85c334828bb650) Thanks [@mmackz](https://github.com/mmackz)! - fix issue with spokepool verification
+
+## 1.0.0-alpha.32
+
+### Minor Changes
+
+- [#357](https://github.com/rabbitholegg/questdk-plugins/pull/357) [`47e5396b`](https://github.com/rabbitholegg/questdk-plugins/commit/47e5396b36cf3fbe8d6c0f327f54dfd8eb0a6d60) Thanks [@mmackz](https://github.com/mmackz)! - update for Across V3
+
+- [#296](https://github.com/rabbitholegg/questdk-plugins/pull/296) [`756ca6c0`](https://github.com/rabbitholegg/questdk-plugins/commit/756ca6c0ba08c2c7649a946af54c9186169a9c0e) Thanks [@Quazia](https://github.com/Quazia)! - Revise build and lint strategies
+
+### Patch Changes
+
+- Updated dependencies [[`756ca6c0`](https://github.com/rabbitholegg/questdk-plugins/commit/756ca6c0ba08c2c7649a946af54c9186169a9c0e)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.19
+  - @rabbitholegg/questdk@2.0.0-alpha.45
+
 ## 1.0.0-alpha.31
 
 ### Patch Changes
