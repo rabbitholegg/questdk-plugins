@@ -42,12 +42,15 @@ import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
 import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
 import { Superbridge } from '@rabbitholegg/questdk-plugin-superbridge'
+import { Neynar } from '@rabbitholegg/questdk-plugin-neynar'
 // ^^^ New Imports Go Here ^^^
 import {
   type IntentParams,
   type MintIntentParams,
   type IActionPlugin,
   type ActionParams,
+  type ValidationParams,
+  type FollowActionParams,
   ActionType,
   type BridgeActionParams,
   type DelegateActionParams,
@@ -107,6 +110,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Base.pluginId]: Base,
   [Orbit.pluginId]: Orbit,
   [Superbridge.pluginId]: Superbridge,
+  [Neynar.pluginId]: Neynar,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -192,6 +196,25 @@ export const getFees = (
       throw new Error(`Unknown action type "${actionType}"`)
   }
 }
+
+export const executeValidation = (
+  plugin: IActionPlugin,
+  actionType: ActionType,
+  actionP: ActionParams,
+  validateP: ValidationParams,
+) => {
+  switch (actionType) {
+    case ActionType.Follow:
+      if (plugin.validate && plugin.validateFollow) {
+        return plugin.validate(actionType, actionP as unknown as FollowActionParams, validateP as unknown as FollowValidationParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
 
 export const executePlugin = (
   plugin: IActionPlugin,
