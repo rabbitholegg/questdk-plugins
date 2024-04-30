@@ -25,6 +25,9 @@ export type {
   OptionsActionDetail,
   OptionsActionForm,
   ActionParamsForm,
+  FollowActionParams,
+  FollowValidationParams,
+  ValidationParams,
 } from './actions'
 
 export {

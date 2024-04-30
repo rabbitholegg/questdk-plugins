@@ -10,6 +10,16 @@ import type { MintIntentParams } from './intents'
 import { z } from 'zod'
 import { EthAddressSchema } from './common'
 
+
+export type FollowActionParams = {
+  target: Address | string // Might want a more precise type here for FID?
+  project?: Address | string
+}
+
+export type FollowValidationParams = {
+  actor: Address | string
+}
+
 export type SwapActionParams = {
   chainId: number
   contractAddress?: Address
@@ -85,6 +95,8 @@ export type VoteActionParams = {
   proposalId?: bigint | FilterOperator
 }
 
+export type ValidationParams = FollowValidationParams
+
 export type ActionParams =
   | SwapActionParams
   | StakeActionParams
@@ -94,6 +106,7 @@ export type ActionParams =
   | QuestActionParams
   | OptionsActionParams
   | VoteActionParams
+  | FollowActionParams
 
 export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
@@ -325,6 +338,16 @@ export interface IActionPlugin {
   getFees?: (
     params: ActionParams,
   ) => Promise<{ actionFee: bigint; projectFee: bigint }>
+  validate?: (
+    actionType: ActionType,
+    params: ActionParams,
+    validateParams: Record<string, unknown>,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  validateFollow?: (
+    actionType: ActionType,
+    params: FollowActionParams,
+    validateParams: FollowValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
 }
 
 export enum ActionType {
@@ -340,6 +363,7 @@ export enum ActionType {
   Other = 'other',
   Options = 'options',
   Vote = 'vote',
+  Follow = 'follow',
 }
 
 export enum OrderType {
