@@ -49,8 +49,7 @@ import {
   type MintIntentParams,
   type IActionPlugin,
   type ActionParams,
-  type ValidationParams,
-  type FollowActionParams,
+  type PluginActionValidation,
   ActionType,
   type BridgeActionParams,
   type DelegateActionParams,
@@ -197,16 +196,17 @@ export const getFees = (
   }
 }
 
+// This should take a QuestActionValidationPaylod type
 export const executeValidation = (
   plugin: IActionPlugin,
-  actionType: ActionType,
-  actionP: ActionParams,
-  validateP: ValidationParams,
+  validationPayload: PluginActionValidation,
 ) => {
+  const actionType = validationPayload.payload.validationParams.type
+  // We might not even neese a switch statement here since we narrow in the actual plugin
   switch (actionType) {
     case ActionType.Follow:
       if (plugin.validate && plugin.validateFollow) {
-        return plugin.validate(actionType, actionP as unknown as FollowActionParams, validateP as unknown as FollowValidationParams)
+        return plugin.validate(validationPayload)
       } else {
         throw new PluginActionNotImplementedError()
       }

@@ -27,7 +27,12 @@ export type {
   ActionParamsForm,
   FollowActionParams,
   FollowValidationParams,
+  FollowActionDetail,
+  FollowActionForm,
   ValidationParams,
+  ActionValidation,
+  PluginActionPayload,
+  PluginActionValidation,
 } from './actions'
 
 export {
@@ -50,6 +55,13 @@ export {
   OptionsActionFormSchema,
   OptionsActionDetailSchema,
   ActionParamsFormSchema,
+  FollowActionFormSchema,
+  FollowActionDetailSchema,
+  FollowValidationParamsSchema,
+  ActionParamsSchema,
+  ValidationParamsSchema,
+  ActionValidationSchema,
+  PluginActionValidationSchema,
 } from './actions'
 
 export {

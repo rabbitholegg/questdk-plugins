@@ -3,6 +3,7 @@ import {
   type FollowActionParams,
   type FollowValidationParams,
   type ActionType,
+  type PluginActionValidation,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 
@@ -11,14 +12,15 @@ const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
+    // Expectation is that we should probably pass this in through a config object long-term
     'api_key': process.env.NEYNAR_API_KEY,
   },
 })
 
-export const validate = async(actionType: ActionType, actionP: FollowActionParams, validateP: FollowValidationParams) => {
-  switch(actionType) {
+export const validate = async(validationPayload: PluginActionValidation) => {
+  switch(validationPayload.payload.params.type) {
     case ActionType.Follow:
-      return await validateFollow(actionP, validateP)
+      return await validateFollow(validationPayload.payload.params, validationPayload.payload.validationParams)
     default:
       // Implement other action types as needed
       return false

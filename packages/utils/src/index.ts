@@ -25,8 +25,6 @@ export type {
   DelegateActionParams,
   ActionParams,
   FollowActionParams,
-  FollowValidationParams,
-  ValidationParams,
   IActionPlugin,
   FilterObject,
   BitmaskFilter,
@@ -67,6 +65,13 @@ export type {
   ActionParamsForm,
   CreateQuestInput,
   QuestActionParamsByType,
+  FollowValidationParams,
+  FollowActionDetail,
+  FollowActionForm,
+  ValidationParams,
+  ActionValidation,
+  PluginActionPayload,
+  PluginActionValidation,
 } from './types'
 
 export {
@@ -97,7 +102,14 @@ export {
   CreateQuestInputSchema,
   EthAddressSchema,
   QuestActionParamsSchema,
-  NetworkNameSchema,
+  NetworkNameSchema, 
+  FollowActionFormSchema,
+  FollowActionDetailSchema,
+  FollowValidationParamsSchema,
+  ActionParamsSchema,
+  ValidationParamsSchema,
+  ActionValidationSchema,
+  PluginActionValidationSchema,
 } from './types'
 
 export { PluginActionNotImplementedError } from './errors'
