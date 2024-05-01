@@ -24,13 +24,13 @@ export const validate = async (
 ): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
   const { actionParams, validationParams, questId, taskId } = payload
-
+  if(!process.env.NEYNAR_API_KEY) {
+    console.error('Neynar API key not found')
+    throw new Error('Neynar API key not found')
+  }
   switch (actionParams.type) {
     case ActionType.Follow: {
-      const isFollowValid = await validateFollow(
-        actionParams.data,
-        validationParams.data,
-      )
+      const isFollowValid = await validateFollow(actionParams.data, validationParams.data)
       if (isFollowValid) {
         return {
           address: actor,
@@ -42,7 +42,7 @@ export const validate = async (
       }
     }
     default:
-      return null
+      throw new Error('Unsupported action type')
   }
 }
 
