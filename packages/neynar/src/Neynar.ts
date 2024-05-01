@@ -19,6 +19,11 @@ const axiosInstance = axios.create({
   },
 })
 
+
+export const canValidate = (actionType: ActionType): boolean  => {
+  return actionType === ActionType.Follow
+}
+
 export const validate = async (
   validationPayload: PluginActionValidation,
 ): Promise<QuestCompletionPayload | null> => {
