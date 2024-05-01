@@ -86,8 +86,6 @@ export type VoteActionParams = {
   proposalId?: bigint | FilterOperator
 }
 
-export type ValidationParams = FollowValidationParams
-
 export type ActionParams =
   | SwapActionParams
   | StakeActionParams
