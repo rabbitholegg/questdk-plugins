@@ -196,6 +196,15 @@ export const getFees = (
   }
 }
 
+export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
+  switch (actionType) {
+    case ActionType.Follow:
+      return plugin.validateFollow !== undefined
+    default:
+      return false
+  }
+}
+
 // This should take a QuestActionValidationPaylod type
 export const executeValidation = (
   plugin: IActionPlugin,
