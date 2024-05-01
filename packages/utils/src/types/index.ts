@@ -25,6 +25,14 @@ export type {
   OptionsActionDetail,
   OptionsActionForm,
   ActionParamsForm,
+  FollowActionParams,
+  FollowValidationParams,
+  FollowActionDetail,
+  FollowActionForm,
+  ValidationParams,
+  ActionValidation,
+  PluginActionPayload,
+  PluginActionValidation,
 } from './actions'
 
 export {
@@ -47,6 +55,13 @@ export {
   OptionsActionFormSchema,
   OptionsActionDetailSchema,
   ActionParamsFormSchema,
+  FollowActionFormSchema,
+  FollowActionDetailSchema,
+  FollowValidationParamsSchema,
+  ActionParamsSchema,
+  ValidationParamsSchema,
+  ActionValidationSchema,
+  PluginActionValidationSchema,
 } from './actions'
 
 export {
@@ -85,6 +100,7 @@ export type {
   RewardWithClaim,
   CreateQuestInput,
   QuestActionParamsByType,
+  QuestCompletionPayload,
 } from './quests'
 
 export {

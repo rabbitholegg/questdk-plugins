@@ -495,6 +495,19 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
 
+  packages/neynar:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+
   packages/okutrade:
     dependencies:
       '@rabbitholegg/questdk':
@@ -689,6 +702,9 @@ importers:
       '@rabbitholegg/questdk-plugin-mux':
         specifier: workspace:*
         version: link:../mux
+      '@rabbitholegg/questdk-plugin-neynar':
+        specifier: workspace:*
+        version: link:../neynar
       '@rabbitholegg/questdk-plugin-okutrade':
         specifier: workspace:*
         version: link:../okutrade
