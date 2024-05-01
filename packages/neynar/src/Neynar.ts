@@ -19,8 +19,7 @@ const axiosInstance = axios.create({
   },
 })
 
-
-export const canValidate = (actionType: ActionType): boolean  => {
+export const canValidate = (actionType: ActionType): boolean => {
   return actionType === ActionType.Follow
 }
 
@@ -29,13 +28,16 @@ export const validate = async (
 ): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
   const { actionParams, validationParams, questId, taskId } = payload
-  if(!process.env.NEYNAR_API_KEY) {
+  if (!process.env.NEYNAR_API_KEY) {
     console.error('Neynar API key not found')
     throw new Error('Neynar API key not found')
   }
   switch (actionParams.type) {
     case ActionType.Follow: {
-      const isFollowValid = await validateFollow(actionParams.data, validationParams.data)
+      const isFollowValid = await validateFollow(
+        actionParams.data,
+        validationParams.data,
+      )
       if (isFollowValid) {
         return {
           address: actor,
