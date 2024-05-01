@@ -72,6 +72,7 @@ export type {
   ActionValidation,
   PluginActionPayload,
   PluginActionValidation,
+  QuestCompletionPayload,
 } from './types'
 
 export {

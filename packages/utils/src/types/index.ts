@@ -100,6 +100,7 @@ export type {
   RewardWithClaim,
   CreateQuestInput,
   QuestActionParamsByType,
+  QuestCompletionPayload,
 } from './quests'
 
 export {

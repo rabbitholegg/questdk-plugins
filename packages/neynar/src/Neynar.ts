@@ -4,6 +4,7 @@ import {
   type FollowValidationParams,
   type ActionType,
   type PluginActionValidation,
+  type QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 import { FollowersResponse, FollowersResponseSchema } from './types'
@@ -18,18 +19,28 @@ const axiosInstance = axios.create({
   },
 })
 
-export const validate = async (validationPayload: PluginActionValidation) => {
-  switch (validationPayload.payload.params.type) {
-    case ActionType.Follow:
-      return await validateFollow(
-        validationPayload.payload.params,
-        validationPayload.payload.validationParams,
-      )
+export const validate = async (validationPayload: PluginActionValidation): Promise<QuestCompletionPayload | null> => {
+  const { actor, payload } = validationPayload
+  const { actionParams, validationParams, questId, taskId } = payload
+
+  switch (actionParams.type) {
+    case ActionType.Follow: {
+      const isFollowValid = await validateFollow(actionParams, validationParams)
+      if (isFollowValid) {
+        return {
+          address: actor,
+          questId: questId,
+          taskId: taskId,
+        }
+      } else {
+        return null
+      }
+    }
     default:
-      // Implement other action types as needed
-      return false
+      return null
   }
 }
+
 
 export const validateFollow = async (
   actionP: FollowActionParams,
