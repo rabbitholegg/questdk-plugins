@@ -27,7 +27,10 @@ export const validate = async (
 
   switch (actionParams.type) {
     case ActionType.Follow: {
-      const isFollowValid = await validateFollow(actionParams.data, validationParams.data)
+      const isFollowValid = await validateFollow(
+        actionParams.data,
+        validationParams.data,
+      )
       if (isFollowValid) {
         return {
           address: actor,

@@ -370,7 +370,9 @@ export interface IActionPlugin {
   ) => Promise<{ actionFee: bigint; projectFee: bigint }>
   validate?: (
     validationPayload: PluginActionValidation,
-  ) => Promise<QuestCompletionPayload | null> | Promise<PluginActionNotImplementedError>
+  ) =>
+    | Promise<QuestCompletionPayload | null>
+    | Promise<PluginActionNotImplementedError>
   validateFollow?: (
     actionP: FollowActionParams,
     validateP: FollowValidationParams,
