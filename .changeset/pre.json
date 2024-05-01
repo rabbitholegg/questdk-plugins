@@ -193,6 +193,7 @@
     "stale-singers-worry",
     "strange-hornets-notice",
     "strong-kiwis-crash",
+    "stupid-kangaroos-destroy",
     "stupid-meals-jam",
     "stupid-pans-smash",
     "sweet-tools-shave",
@@ -287,6 +288,7 @@
     "@rabbitholegg/questdk-plugin-thruster": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-base": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-orbit": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-superbridge": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-superbridge": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-neynar": "1.0.0-alpha.0"
   }
 }

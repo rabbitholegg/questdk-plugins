@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-pods
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- Updated dependencies [[`0bbce385`](https://github.com/rabbitholegg/questdk-plugins/commit/0bbce385864b5750c08b1278a064daa371a11e25)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.20
+  - @rabbitholegg/questdk@2.0.0-alpha.45
+
 ## 1.0.0-alpha.3
 
 ### Patch Changes
