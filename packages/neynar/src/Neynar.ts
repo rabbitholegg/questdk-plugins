@@ -2,7 +2,7 @@ import axios from 'axios'
 import {
   type FollowActionParams,
   type FollowValidationParams,
-  type ActionType,
+  ActionType,
   type PluginActionValidation,
   type QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -27,7 +27,7 @@ export const validate = async (
 
   switch (actionParams.type) {
     case ActionType.Follow: {
-      const isFollowValid = await validateFollow(actionParams, validationParams)
+      const isFollowValid = await validateFollow(actionParams.data, validationParams.data)
       if (isFollowValid) {
         return {
           address: actor,

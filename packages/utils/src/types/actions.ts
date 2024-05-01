@@ -10,6 +10,7 @@ import type { MintIntentParams } from './intents'
 import { ZodSchema, z } from 'zod'
 import { EthAddressSchema } from './common'
 import { UUID } from 'crypto'
+import { QuestCompletionPayload } from './quests'
 
 export type SwapActionParams = {
   chainId: number
@@ -368,14 +369,11 @@ export interface IActionPlugin {
     params: ActionParams,
   ) => Promise<{ actionFee: bigint; projectFee: bigint }>
   validate?: (
-    actionType: ActionType,
-    params: ActionParams,
-    validateParams: Record<string, unknown>,
-  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+    validationPayload: PluginActionValidation,
+  ) => Promise<QuestCompletionPayload | null> | Promise<PluginActionNotImplementedError>
   validateFollow?: (
-    actionType: ActionType,
-    params: FollowActionParams,
-    validateParams: FollowValidationParams,
+    actionP: FollowActionParams,
+    validateP: FollowValidationParams,
   ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
 }
 
