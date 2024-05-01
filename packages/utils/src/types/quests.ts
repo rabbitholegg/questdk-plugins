@@ -248,11 +248,10 @@ export const CreateQuestInputSchema = z.object({
 
 export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>
 
-
 export type QuestCompletionPayload = {
-  address: Address;
-  questId: UUID;
-  taskId: UUID;
-  transactionHash?: string;
-  chainId?: number;
-};
+  address: Address
+  questId: UUID
+  taskId: UUID
+  transactionHash?: string
+  chainId?: number
+}

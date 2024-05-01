@@ -19,7 +19,9 @@ const axiosInstance = axios.create({
   },
 })
 
-export const validate = async (validationPayload: PluginActionValidation): Promise<QuestCompletionPayload | null> => {
+export const validate = async (
+  validationPayload: PluginActionValidation,
+): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
   const { actionParams, validationParams, questId, taskId } = payload
 
@@ -40,7 +42,6 @@ export const validate = async (validationPayload: PluginActionValidation): Promi
       return null
   }
 }
-
 
 export const validateFollow = async (
   actionP: FollowActionParams,

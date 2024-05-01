@@ -55,7 +55,7 @@ describe('validateFollow function', () => {
   })
 
   it('should return true if the actor is a follower of the target', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: MockedFollowersResponse,
     })
@@ -68,7 +68,7 @@ describe('validateFollow function', () => {
   })
 
   it('should return false if the actor is not a follower of the target', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: {},
     })
@@ -90,7 +90,7 @@ describe('validateFollow function', () => {
       ],
       next: { cursor: '50' },
     }
-  
+
     const secondResponse = {
       users: [
         {
@@ -100,7 +100,6 @@ describe('validateFollow function', () => {
       ],
       next: { cursor: null },
     }
-  
     ;(axios.get as MockedFunction<typeof axios.get>)
       .mockResolvedValueOnce({
         status: 200,
@@ -110,7 +109,7 @@ describe('validateFollow function', () => {
         status: 200,
         data: secondResponse,
       })
-  
+
     const result = await validateFollow(
       { target: 'target_fid' },
       { actor: 'actor_address' },
@@ -120,7 +119,7 @@ describe('validateFollow function', () => {
   })
 
   it('should return false on API failure', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockRejectedValue(
+    ;(axios.get as MockedFunction<typeof axios.get>).mockRejectedValue(
       new Error('API failure'),
     )
 
@@ -130,13 +129,11 @@ describe('validateFollow function', () => {
     )
     expect(result).toBe(false)
   })
-
-
 })
 
 describe('translateAddressToFID function', () => {
   it('should return the custody address if the input is a valid address', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: [
         {
@@ -145,7 +142,9 @@ describe('translateAddressToFID function', () => {
       ],
     })
 
-    const result = await translateAddressToFID('0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A')
+    const result = await translateAddressToFID(
+      '0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A',
+    )
     expect(result).toBe('custody_address')
   })
 
@@ -155,12 +154,14 @@ describe('translateAddressToFID function', () => {
   })
 
   it('should return null if the API response does not contain a custody address', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: [{}],
     })
 
-    const result = await translateAddressToFID('0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A')
+    const result = await translateAddressToFID(
+      '0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A',
+    )
     expect(result).toBe(null)
   })
 })
