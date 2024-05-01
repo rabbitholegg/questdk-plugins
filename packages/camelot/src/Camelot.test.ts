@@ -9,10 +9,10 @@ describe('Given the camelot plugin', () => {
   describe('should return a valid action filter', () => {
     test('when making a valid swap action', async () => {
       const filter = await swap({
-        chainId: 1,
+        chainId: 42161,
       })
       expect(filter).toBeTypeOf('object')
-      expect(Number(filter.chainId)).toBe(1)
+      expect(Number(filter.chainId)).toBe(42161)
       if (typeof filter.to === 'string') {
         expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
       } else {
