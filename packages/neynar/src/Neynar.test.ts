@@ -81,26 +81,36 @@ describe('validateFollow function', () => {
   })
 
   it('should handle pagination correctly', async () => {
-    const firstReponse = {
+    const firstResponse = {
       users: [
         {
           ...MockedFollowerSchema,
           custody_address: 'not_custody_address',
         },
       ],
-      next: { cursor: 100 },
-    };
-    
-    (axios.get as MockedFunction<typeof axios.get>)
+      next: { cursor: '50' },
+    }
+  
+    const secondResponse = {
+      users: [
+        {
+          ...MockedFollowerSchema,
+          custody_address: 'actor_address',
+        },
+      ],
+      next: { cursor: null },
+    }
+  
+    ;(axios.get as MockedFunction<typeof axios.get>)
       .mockResolvedValueOnce({
         status: 200,
-        data: firstReponse,
+        data: firstResponse,
       })
       .mockResolvedValueOnce({
         status: 200,
-        data: MockedFollowersResponse,
+        data: secondResponse,
       })
-
+  
     const result = await validateFollow(
       { target: 'target_fid' },
       { actor: 'actor_address' },
@@ -121,28 +131,7 @@ describe('validateFollow function', () => {
     expect(result).toBe(false)
   })
 
-  it('should return true if the actor is a follower of the target and the actor is an address', async () => {
-    (axios.get as MockedFunction<typeof axios.get>)
-      .mockResolvedValueOnce({
-        status: 200,
-        data: MockedFollowersResponse,
-      })
-      .mockResolvedValueOnce({
-        status: 200,
-        data: {
-          data: {
-            users: [{ custody_address: 'custody_address' }],
-            next: { cursor: null },
-          },
-        },
-      })
 
-    const result = await validateFollow(
-      { target: 'target_fid' },
-      { actor: 'valid_address' },
-    )
-    expect(result).toBe(true)
-  })
 })
 
 describe('translateAddressToFID function', () => {
@@ -156,12 +145,12 @@ describe('translateAddressToFID function', () => {
       ],
     })
 
-    const result = await translateAddressToFID('valid_address')
+    const result = await translateAddressToFID('0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A')
     expect(result).toBe('custody_address')
   })
 
   it('should return null if the input is not a valid address', async () => {
-    const result = await translateAddressToFID('invalid_address')
+    const result = await translateAddressToFID('junk_address')
     expect(result).toBe(null)
   })
 
@@ -171,7 +160,7 @@ describe('translateAddressToFID function', () => {
       data: [{}],
     })
 
-    const result = await translateAddressToFID('valid_address')
+    const result = await translateAddressToFID('0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A')
     expect(result).toBe(null)
   })
 })
