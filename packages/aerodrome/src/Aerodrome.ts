@@ -30,10 +30,7 @@ export const swap = async (
     chainId,
     value: tokenIn === zeroAddress ? amountIn : undefined,
     to: {
-      $or: [
-        AERODROME_ROUTER.toLowerCase(),
-        UNIVERSAL_ROUTER.toLowerCase(),
-      ],
+      $or: [AERODROME_ROUTER.toLowerCase(), UNIVERSAL_ROUTER.toLowerCase()],
     },
     input: {
       $or: [
