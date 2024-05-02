@@ -7,8 +7,10 @@ import {
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import type { MintIntentParams } from './intents'
-import { z } from 'zod'
+import { ZodSchema, z } from 'zod'
 import { EthAddressSchema } from './common'
+import { UUID } from 'crypto'
+import { QuestCompletionPayload } from './quests'
 
 export type SwapActionParams = {
   chainId: number
@@ -94,6 +96,7 @@ export type ActionParams =
   | QuestActionParams
   | OptionsActionParams
   | VoteActionParams
+  | FollowActionParams
 
 export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
@@ -214,6 +217,37 @@ export const MintActionDetailSchema = z.object({
 export type MintActionDetail = z.infer<typeof MintActionDetailSchema>
 export type MintActionForm = z.infer<typeof MintActionFormSchema>
 
+/*
+FOLLOW
+*/
+export type FollowActionParams = {
+  target: Address | string // Might want a more precise type here for FID?
+  project?: Address | string
+}
+
+export const FollowValidationParamsSchema = z.object({
+  actor: EthAddressSchema,
+  project: EthAddressSchema.optional(),
+})
+export type FollowValidationParams = z.infer<
+  typeof FollowValidationParamsSchema
+>
+
+export const FollowActionDetailSchema = z.object({
+  target: z.union([z.string(), EthAddressSchema]),
+  project: z.union([z.string(), EthAddressSchema]).optional(),
+})
+export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>
+
+export const FollowActionFormSchema = z.object({
+  target: z.union([z.string(), EthAddressSchema]),
+})
+export type FollowActionForm = z.infer<typeof FollowActionFormSchema>
+
+/*
+VOTE
+*/
+
 export const VoteActionFormSchema = z.object({
   project: EthAddressSchema,
   proposalId: z.number().optional(),
@@ -264,7 +298,7 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
 
 export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
 
-export const QuestActionParamsSchema = z.discriminatedUnion('type', [
+export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('bridge'), data: BridgeActionDetailSchema }),
   z.object({ type: z.literal('swap'), data: SwapActionDetailSchema }),
   z.object({ type: z.literal('delegate'), data: DelegateActionDetailSchema }),
@@ -272,7 +306,16 @@ export const QuestActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('mint'), data: MintActionDetailSchema }),
   z.object({ type: z.literal('options'), data: OptionsActionDetailSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
+  z.object({ type: z.literal('follow'), data: FollowActionDetailSchema }),
 ])
+
+export const QuestActionParamsSchema = ActionParamsSchema
+
+export const ValidationParamsSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('follow'), data: FollowValidationParamsSchema }),
+])
+
+export type ValidationParams = z.infer<typeof ValidationParamsSchema>
 
 export interface IActionPlugin {
   pluginId: string
@@ -325,8 +368,61 @@ export interface IActionPlugin {
   getFees?: (
     params: ActionParams,
   ) => Promise<{ actionFee: bigint; projectFee: bigint }>
+  validate?: (
+    validationPayload: PluginActionValidation,
+  ) =>
+    | Promise<QuestCompletionPayload | null>
+    | Promise<PluginActionNotImplementedError>
+  validateFollow?: (
+    actionP: FollowActionParams,
+    validateP: FollowValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  canValidate?: (actionType: ActionType) => boolean
 }
 
+/*
+ACTION VALIDATION
+*/
+export type ActionValidation<ActorType, ActionPayload> = {
+  actor: ActorType
+  payload: ActionPayload
+}
+
+export function ActionValidationSchema(
+  actorSchema: ZodSchema,
+  payloadSchema: ZodSchema,
+) {
+  return z.object({
+    actor: actorSchema,
+    payload: payloadSchema,
+  })
+}
+
+export type PluginActionPayload = {
+  actionParams: z.infer<typeof ActionParamsSchema>
+  validationParams: z.infer<typeof ValidationParamsSchema>
+  questId: UUID
+  taskId: UUID
+}
+
+export type PluginActionValidation = ActionValidation<
+  Address,
+  PluginActionPayload
+>
+
+export const PluginActionValidationSchema = ActionValidationSchema(
+  z.string(),
+  z.object({
+    actionParams: ActionParamsSchema,
+    validationParams: ValidationParamsSchema,
+    questId: z.string().uuid(),
+    taskId: z.string().uuid(),
+  }),
+)
+
+/*
+ENUM TYPES
+*/
 export enum ActionType {
   Bridge = 'bridge',
   Stake = 'stake',
@@ -340,6 +436,7 @@ export enum ActionType {
   Other = 'other',
   Options = 'options',
   Vote = 'vote',
+  Follow = 'follow',
 }
 
 export enum OrderType {

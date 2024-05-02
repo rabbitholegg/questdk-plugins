@@ -42,12 +42,14 @@ import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
 import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
 import { Superbridge } from '@rabbitholegg/questdk-plugin-superbridge'
+import { Neynar } from '@rabbitholegg/questdk-plugin-neynar'
 // ^^^ New Imports Go Here ^^^
 import {
   type IntentParams,
   type MintIntentParams,
   type IActionPlugin,
   type ActionParams,
+  type PluginActionValidation,
   ActionType,
   type BridgeActionParams,
   type DelegateActionParams,
@@ -107,6 +109,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Base.pluginId]: Base,
   [Orbit.pluginId]: Orbit,
   [Superbridge.pluginId]: Superbridge,
+  [Neynar.pluginId]: Neynar,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -185,6 +188,34 @@ export const getFees = (
     case ActionType.Mint:
       if (plugin.mint && plugin.getFees) {
         return plugin.getFees(params as unknown as MintActionParams)
+      } else {
+        throw new PluginActionNotImplementedError()
+      }
+    default:
+      throw new Error(`Unknown action type "${actionType}"`)
+  }
+}
+
+export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
+  switch (actionType) {
+    case ActionType.Follow:
+      return plugin.validateFollow !== undefined
+    default:
+      return false
+  }
+}
+
+// This should take a QuestActionValidationPaylod type
+export const executeValidation = (
+  plugin: IActionPlugin,
+  validationPayload: PluginActionValidation,
+) => {
+  const actionType = validationPayload.payload.validationParams.type
+  // We might not even neese a switch statement here since we narrow in the actual plugin
+  switch (actionType) {
+    case ActionType.Follow:
+      if (plugin.validate && plugin.validateFollow) {
+        return plugin.validate(validationPayload)
       } else {
         throw new PluginActionNotImplementedError()
       }
