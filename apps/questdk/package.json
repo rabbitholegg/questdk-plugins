@@ -1,106 +1,110 @@
 {
-    "name": "@rabbitholegg/questdk",
-    "version": "2.0.0-alpha.45",
-    "description": "",
-    "type": "module",
-    "main": "./dist/cjs/index.js",
-    "module": "./dist/esm/index.js",
-    "scripts": {
-        "bench": "vitest bench",
-        "bench:ci": "CI=true vitest bench",
-        "build": "pnpm build:types && pnpm build:esm && pnpm postbuild:esm && pnpm build:cjs && pnpm postbuild:cjs && BABEL_ENV=esmBundled pnpm rollup -c",
-        "build:esm": "BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir 'dist/esm' --source-maps",
-        "build:cjs": "BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
-        "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
-        "postbuild:cjs": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
-        "postbuild:esm": "echo '{\"type\":\"module\"}' > dist/esm/package.json",
-        "changeset": "changeset",
-        "changeset:release": "pnpm build && changeset publish",
-        "changeset:version": "changeset version && pnpm install --lockfile-only && node scripts/updateVersion.ts",
-        "clean": "rimraf dist",
-        "format": "rome format . --write",
-        "lint": "rome check .",
-        "lint:fix": "pnpm lint --apply",
-        "prepublishOnly": "node dist/cjs/scripts/prepublishOnly.js",
-        "size": "size-limit",
-        "test": "vitest dev",
-        "test:cov": "vitest dev --coverage",
-        "test:ci": "CI=true vitest --coverage",
-        "test:typecheck": "SKIP_GLOBAL_SETUP=true vitest typecheck",
-        "test:ui": "vitest dev --ui",
-        "typecheck": "tsc --noEmit"
-    },
-    "keywords": [],
-    "authors": [
-        "rabbitholegg"
-    ],
-    "license": "MIT",
-    "types": "./dist/types/index.d.ts",
-    "typings": "./dist/types/index.d.ts",
-    "typesVersions": {
-        "*": {
-            "utils": [
-                "./dist/types/utils/index.d.ts"
-            ],
-            "actions": [
-                "./dist/types/actions/index.d.ts"
-            ],
-            "filter": [
-                "./dist/types/filter/index.d.ts"
-            ]
-        }
-    },
-    "sideEffects": false,
-    "files": [
-        "dist",
-        "!dist/**/*.tsbuildinfo",
-        "src/**/*.ts",
-        "!src/**/*.test.ts",
-        "!src/**/*.test-d.ts",
-        "!src/**/*.bench.ts",
-        "!src/_test/**/*"
-    ],
-    "exports": {
-        ".": {
-            "types": "./dist/types/index.d.ts",
-            "import": "./dist/esm/index.js",
-            "default": "./dist/cjs/index.js"
-        },
-        "./actions": {
-            "types": "./dist/types/actions/index.d.ts",
-            "import": "./dist/esm/actions/index.js",
-            "default": "./dist/cjs/actions/index.js"
-        },
-        "./filter": {
-            "types": "./dist/types/filter/index.d.ts",
-            "import": "./dist/esm/filter/index.js",
-            "default": "./dist/cjs/filter/index.js"
-        },
-        "./tokens": {
-            "types": "./dist/types/tokens/index.d.ts",
-            "import": "./dist/esm/tokens/index.js",
-            "default": "./dist/cjs/tokens/index.js"
-        },
-        "./utils": {
-            "types": "./dist/types/utils/index.d.ts",
-            "import": "./dist/esm/utils/index.js",
-            "default": "./dist/cjs/utils/index.js"
-        }
-    },
-    "devDependencies": {
-        "tsconfig": "workspace:*",
-        "@rabbitholegg/questdk-plugin-utils": "workspace:*",
-        "@actions/core": "1.10.0",
-        "@actions/github": "5.1.1",
-        "@changesets/changelog-github": "0.4.8",
-        "@size-limit/preset-big-lib": "8.2.6",
-        "@types/fs-extra": "11.0.1",
-        "fs-extra": "11.1.1",
-        "size-limit": "8.2.6",
-        "axios-mock-adapter": "1.19.0"
-    },
-    "repository": "rabbitholegg/questdk",
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/"
+  "name": "@rabbitholegg/questdk",
+  "version": "2.0.0-alpha.45",
+  "description": "",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "scripts": {
+    "bench": "vitest bench",
+    "bench:ci": "CI=true vitest bench",
+    "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./dist/types",
+    "changeset": "changeset",
+    "changeset:release": "pnpm build && changeset publish",
+    "changeset:version": "changeset version && pnpm install --lockfile-only && node scripts/updateVersion.ts",
+    "clean": "rimraf dist",
+    "format": "rome format . --write",
+    "lint": "rome check .",
+    "lint:fix": "pnpm lint --apply",
+    "prepublishOnly": "node dist/cjs/scripts/prepublishOnly.js",
+    "size": "size-limit",
+    "test": "vitest dev",
+    "test:cov": "vitest dev --coverage",
+    "test:ci": "CI=true vitest --coverage",
+    "test:typecheck": "SKIP_GLOBAL_SETUP=true vitest typecheck",
+    "test:ui": "vitest dev --ui",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "authors": [
+    "rabbitholegg"
+  ],
+  "license": "MIT",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "utils": [
+        "./dist/types/utils/index.d.ts"
+      ],
+      "actions": [
+        "./dist/types/actions/index.d.ts"
+      ],
+      "filter": [
+        "./dist/types/filter/index.d.ts"
+      ],
+      "contants": [
+        "./dist/types/contants/index.d.ts"
+      ]
     }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "!dist/**/*.tsbuildinfo",
+    "src/**/*.ts",
+    "!src/**/*.test.ts",
+    "!src/**/*.test-d.ts",
+    "!src/**/*.bench.ts",
+    "!src/_test/**/*"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/cjs/index.js"
+    },
+    "./actions": {
+      "types": "./dist/types/actions/index.d.ts",
+      "import": "./dist/esm/actions/index.js",
+      "default": "./dist/cjs/actions/index.js"
+    },
+    "./filter": {
+      "types": "./dist/types/filter/index.d.ts",
+      "import": "./dist/esm/filter/index.js",
+      "default": "./dist/cjs/filter/index.js"
+    },
+    "./tokens": {
+      "types": "./dist/types/tokens/index.d.ts",
+      "import": "./dist/esm/tokens/index.js",
+      "default": "./dist/cjs/tokens/index.js"
+    },
+    "./utils": {
+      "types": "./dist/types/utils/index.d.ts",
+      "import": "./dist/esm/utils/index.js",
+      "default": "./dist/cjs/utils/index.js"
+    },
+    "./constants": {
+      "types": "./dist/types/constants.d.ts",
+      "import": "./dist/esm/constants/index.js",
+      "default": "./dist/cjs/constants/index.js"
+    }
+  },
+  "devDependencies": {
+    "@actions/core": "1.10.0",
+    "@actions/github": "5.1.1",
+    "@changesets/changelog-github": "0.4.8",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@size-limit/preset-big-lib": "8.2.6",
+    "@types/fs-extra": "11.0.1",
+    "axios-mock-adapter": "1.19.0",
+    "fs-extra": "11.1.1",
+    "size-limit": "8.2.6",
+    "tsconfig": "workspace:*",
+    "vite": "^5.2.11"
+  },
+  "repository": "rabbitholegg/questdk",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }
