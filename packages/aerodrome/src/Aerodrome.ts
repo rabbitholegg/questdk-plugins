@@ -29,7 +29,12 @@ export const swap = async (
   return compressJson({
     chainId,
     value: tokenIn === zeroAddress ? amountIn : undefined,
-    to: { $or: [AERODROME_ROUTER, UNIVERSAL_ROUTER] },
+    to: {
+      $or: [
+        AERODROME_ROUTER.toLowerCase(),
+        UNIVERSAL_ROUTER.toLowerCase(),
+      ],
+    },
     input: {
       $or: [
         {
