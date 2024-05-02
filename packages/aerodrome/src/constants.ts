@@ -1,4 +1,5 @@
-export const AERODROME_ROUTER = '0xcF77a3Ba9A5CA399B7c97c74d54e5b1Beb874E43'
+export const AERODROME_ROUTER = '0xcf77a3ba9a5ca399b7c97c74d54e5b1beb874e43'
+export const UNIVERSAL_ROUTER = '0xf07835bbf6eea0d05392fb4d3b9e5a333ca4da2a'
 export const WETH_ADDRESS = '0x4200000000000000000000000000000000000006'
 
 const ROUTER_ABI = [
@@ -637,3 +638,43 @@ export const TOKENS_FOR_TOKENS_FRAGMENTS = ROUTER_ABI.filter(({ name }) =>
     'swapExactTokensForTokensSupportingFeeOnTransferTokens',
   ].includes(name as string),
 )
+
+export const V3_SWAP_EXACT_TYPES = [
+  'address recipient',
+  'uint256 amountIn',
+  'uint256 amountOut',
+  'bytes path',
+  'bool payerIsUser',
+]
+
+export const V2_SWAP_EXACT_TYPES = [
+  'address recipient',
+  'uint256 amountIn',
+  'uint256 amountOut',
+  'address[] path',
+  'bool payerIsUser',
+]
+
+export const EXECUTE_ABI_FRAGMENTS = [
+  {
+    inputs: [
+      { internalType: 'bytes', name: 'commands', type: 'bytes' },
+      { internalType: 'bytes[]', name: 'inputs', type: 'bytes[]' },
+    ],
+    name: 'execute',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'bytes', name: 'commands', type: 'bytes' },
+      { internalType: 'bytes[]', name: 'inputs', type: 'bytes[]' },
+      { internalType: 'uint256', name: 'deadline', type: 'uint256' },
+    ],
+    name: 'execute',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
