@@ -226,7 +226,7 @@ export type FollowActionParams = {
 }
 
 export const FollowValidationParamsSchema = z.object({
-  actor: EthAddressSchema,
+  actor: z.string(),
   project: EthAddressSchema.optional(),
 })
 export type FollowValidationParams = z.infer<

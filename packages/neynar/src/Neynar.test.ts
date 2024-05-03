@@ -4,28 +4,16 @@ import axios from 'axios'
 import { type FollowersResponse, type Follower } from './types'
 
 const MockedFollowerSchema: Follower = {
+  object: 'user',
   fid: 1,
   username: 'actor',
-  display_name: 'Actor',
-  custody_address: 'actor_address',
-  pfp_url: 'http://example.com/pfp.jpg',
-  profile: {
-    follower_count: 100,
-    following_count: 100,
-    verifications: ['Verification 1', 'Verification 2'],
-    verified_addresses: {},
-    active_status: 'active',
-    power_badge: true,
+  viewer_context: {
+    following: true,
   },
 }
 
 const MockedFollowersResponse: FollowersResponse = {
-  users: [
-    {
-      ...MockedFollowerSchema,
-    },
-  ],
-  next: { cursor: null },
+  users: [MockedFollowerSchema],
 }
 
 vi.mock('axios', () => {
@@ -62,7 +50,7 @@ describe('validateFollow function', () => {
 
     const result = await validateFollow(
       { target: 'target_fid' },
-      { actor: 'actor_address' },
+      { actor: '1' },
     )
     expect(result).toBe(true)
   })
@@ -74,48 +62,10 @@ describe('validateFollow function', () => {
     })
 
     const result = await validateFollow(
-      { target: 'target_fid' },
-      { actor: 'actor_address' },
+      { target: '3' },
+      { actor: '0xd7053a3e7f8c02a6939377e2ca32bcc2a23023a1' },
     )
     expect(result).toBe(false)
-  })
-
-  it('should handle pagination correctly', async () => {
-    const firstResponse = {
-      users: [
-        {
-          ...MockedFollowerSchema,
-          custody_address: 'not_custody_address',
-        },
-      ],
-      next: { cursor: '50' },
-    }
-
-    const secondResponse = {
-      users: [
-        {
-          ...MockedFollowerSchema,
-          custody_address: 'actor_address',
-        },
-      ],
-      next: { cursor: null },
-    }
-    ;(axios.get as MockedFunction<typeof axios.get>)
-      .mockResolvedValueOnce({
-        status: 200,
-        data: firstResponse,
-      })
-      .mockResolvedValueOnce({
-        status: 200,
-        data: secondResponse,
-      })
-
-    const result = await validateFollow(
-      { target: 'target_fid' },
-      { actor: 'actor_address' },
-    )
-    expect(result).toBe(true)
-    expect(axios.get).toHaveBeenCalledTimes(2) // Ensure pagination was handled correctly
   })
 
   it('should return false on API failure', async () => {
@@ -135,17 +85,19 @@ describe('translateAddressToFID function', () => {
   it('should return the custody address if the input is a valid address', async () => {
     ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
-      data: [
-        {
-          custody_address: 'custody_address',
-        },
-      ],
+      data: {
+        '0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A': [
+          {
+            fid: 1,
+          },
+        ],
+      },
     })
 
     const result = await translateAddressToFID(
       '0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A',
     )
-    expect(result).toBe('custody_address')
+    expect(result).toBe(1)
   })
 
   it('should return null if the input is not a valid address', async () => {

@@ -1,6 +1,5 @@
 {
   "name": "questdk-plugins",
-  "type": "module",
   "scripts": {
     "create": "pnpm build && pnpm run -r --filter=@rabbitholegg/create-plugin create",
     "build": "turbo run build --filter=!@rabbitholegg/questdk-plugin-project,!@rabbitholegg/questdk-plugin-connext",
