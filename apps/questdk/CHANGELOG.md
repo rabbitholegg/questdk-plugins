@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.46
+
+### Patch Changes
+
+- [#367](https://github.com/rabbitholegg/questdk-plugins/pull/367) [`74fd59b`](https://github.com/rabbitholegg/questdk-plugins/commit/74fd59b6f0d07db40e564cc99bd125e443c6f6a8) Thanks [@Quazia](https://github.com/Quazia)! - chore: replace questdk build with vite, verify terminal build with linking
+
 ## 2.0.0-alpha.45
 
 ### Minor Changes
