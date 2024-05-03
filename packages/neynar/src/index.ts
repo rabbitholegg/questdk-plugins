@@ -5,6 +5,7 @@ import {
   validateFollow,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  canValidate,
 } from './Neynar'
 
 export const Neynar: IActionPlugin = {
@@ -13,4 +14,5 @@ export const Neynar: IActionPlugin = {
   getSupportedChainIds,
   validate,
   validateFollow,
+  canValidate,
 }
