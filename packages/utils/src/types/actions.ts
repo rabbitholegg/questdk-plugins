@@ -376,7 +376,7 @@ export interface IActionPlugin {
   validateFollow?: (
     actionP: FollowActionParams,
     validateP: FollowValidationParams,
-  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
 
