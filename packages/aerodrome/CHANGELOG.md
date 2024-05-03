@@ -1,5 +1,16 @@
 # @rabbitholegg/questdk-plugin-aerodrome
 
+## 1.0.0-alpha.7
+
+### Minor Changes
+
+- [#360](https://github.com/rabbitholegg/questdk-plugins/pull/360) [`1753c85`](https://github.com/rabbitholegg/questdk-plugins/commit/1753c85cdda11bfde160777903cfd4ef0866a630) Thanks [@mmackz](https://github.com/mmackz)! - update for universal router V3
+
+### Patch Changes
+
+- Updated dependencies [[`74fd59b`](https://github.com/rabbitholegg/questdk-plugins/commit/74fd59b6f0d07db40e564cc99bd125e443c6f6a8)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.46
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes

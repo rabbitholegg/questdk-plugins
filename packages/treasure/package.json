@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-treasure",
-  "version": "1.0.0-alpha.24",
+  "version": "1.0.0-alpha.25",
   "type": "module",
   "exports": {
     "require": "./dist/cjs/index.js",
