@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.21
+
+### Patch Changes
+
+- [#370](https://github.com/rabbitholegg/questdk-plugins/pull/370) [`993aa447`](https://github.com/rabbitholegg/questdk-plugins/commit/993aa4473b2b2b4df8e6d19360fbe1a73cd05eee) Thanks [@sammccord](https://github.com/sammccord)! - chore: replace utils build with vite + tsc
+
 ## 1.0.0-alpha.20
 
 ### Patch Changes

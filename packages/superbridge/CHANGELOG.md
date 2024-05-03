@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-superbridge
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- Updated dependencies [[`993aa447`](https://github.com/rabbitholegg/questdk-plugins/commit/993aa4473b2b2b4df8e6d19360fbe1a73cd05eee), [`d040886a`](https://github.com/rabbitholegg/questdk-plugins/commit/d040886acb2de9785d475f04d7c55a03fc6e3381)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.21
+  - @rabbitholegg/questdk@2.0.0-alpha.47
+
 ## 1.0.0-alpha.3
 
 ### Patch Changes
