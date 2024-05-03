@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.48
+
+### Patch Changes
+
+- [#373](https://github.com/rabbitholegg/questdk-plugins/pull/373) [`cc3ea9e8`](https://github.com/rabbitholegg/questdk-plugins/commit/cc3ea9e8a873344835acac144b372516acdf4e7d) Thanks [@Quazia](https://github.com/Quazia)! - Chore(questdk): remove pre-publish hook
+
 ## 2.0.0-alpha.47
 
 ### Patch Changes

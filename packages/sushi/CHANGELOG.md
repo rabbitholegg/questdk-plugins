@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-sushi
 
+## 1.0.0-alpha.26
+
+### Patch Changes
+
+- Updated dependencies [[`cc3ea9e8`](https://github.com/rabbitholegg/questdk-plugins/commit/cc3ea9e8a873344835acac144b372516acdf4e7d)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.48
+
 ## 1.0.0-alpha.25
 
 ### Patch Changes

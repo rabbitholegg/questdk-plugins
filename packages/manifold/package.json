@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-manifold",
   "private": false,
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
