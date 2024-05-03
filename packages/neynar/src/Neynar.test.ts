@@ -13,9 +13,7 @@ const MockedFollowerSchema: Follower = {
 }
 
 const MockedFollowersResponse: FollowersResponse = {
-  users: [
-    MockedFollowerSchema,
-  ],
+  users: [MockedFollowerSchema],
 }
 
 vi.mock('axios', () => {
@@ -45,7 +43,7 @@ describe('validateFollow function', () => {
   })
 
   it('should return true if the actor is a follower of the target', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: MockedFollowersResponse,
     })
@@ -58,7 +56,7 @@ describe('validateFollow function', () => {
   })
 
   it('should return false if the actor is not a follower of the target', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: {},
     })
@@ -71,7 +69,7 @@ describe('validateFollow function', () => {
   })
 
   it('should return false on API failure', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockRejectedValue(
+    ;(axios.get as MockedFunction<typeof axios.get>).mockRejectedValue(
       new Error('API failure'),
     )
 
@@ -85,7 +83,7 @@ describe('validateFollow function', () => {
 
 describe('translateAddressToFID function', () => {
   it('should return the custody address if the input is a valid address', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: {
         '0xB2f784dCC11a696D8f54dC1692fEb2b660959A6A': [
@@ -108,7 +106,7 @@ describe('translateAddressToFID function', () => {
   })
 
   it('should return null if the API response does not contain a custody address', async () => {
-    (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: [{}],
     })

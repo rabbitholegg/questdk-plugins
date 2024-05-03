@@ -56,12 +56,11 @@ export const validateFollow = async (
   validateP: FollowValidationParams,
 ): Promise<boolean> => {
   try {
-    const actorFid: number | null = await translateAddressToFID(
-      validateP.actor,
-    ) || Number(validateP.actor)
+    const actorFid: number | null =
+      (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
 
     const response = await fetchUser(actionP.target, actorFid)
-    if(response.users[0].viewer_context.following)
+    if (response.users[0].viewer_context.following)
       return response.users[0].viewer_context.following
 
     return false
@@ -97,7 +96,12 @@ export const translateAddressToFID = async (
         addresses: address,
       },
     })
-    if(response && response.data && response.data[address] && response.data[address][0])
+    if (
+      response &&
+      response.data &&
+      response.data[address] &&
+      response.data[address][0]
+    )
       // Assuming the first user in the response is the one we're interested in
       return response.data[address][0]?.fid || null
   }
