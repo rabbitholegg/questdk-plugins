@@ -56,62 +56,50 @@ export const validateFollow = async (
   validateP: FollowValidationParams,
 ): Promise<boolean> => {
   try {
-    let cursor: string | null = null
-    const actorAddress: string | null = await translateAddressToFID(
+    const actorFid: number | null = await translateAddressToFID(
       validateP.actor,
-    )
-    do {
-      const response = await fetchFollowers(actionP.target, cursor)
-      const followers = response.users
-      const actorIsFollower = followers.some(
-        (follower) =>
-          follower.custody_address === (actorAddress || validateP.actor),
-      )
-      if (actorIsFollower) {
-        return true
-      }
-      cursor = response.next.cursor
-    } while (cursor)
+    ) || Number(validateP.actor)
+
+    const response = await fetchUser(actionP.target, actorFid)
+    if(response.users[0].viewer_context.following)
+      return response.users[0].viewer_context.following
+
     return false
   } catch (error) {
-    console.error('Failed to validate follow relationship:', error)
     return false
   }
 }
 
-const fetchFollowers = async (
+const fetchUser = async (
   target: string,
-  cursor: string | null,
+  actorFid: number,
 ): Promise<FollowersResponse> => {
-  const response = await axiosInstance.get('/followers', {
+  const response = await axiosInstance.get('/user/bulk', {
     params: {
-      fid: target,
-      cursor: cursor,
-      limit: 100, // Use maximum limit to reduce the number of requests
+      fids: target,
+      viewer_fid: actorFid,
     },
   })
-  console.log('response', response)
 
   // Validate the response data with the Zod schema
   const parsedResponse: FollowersResponse = FollowersResponseSchema.parse(
     response.data,
   )
-
   return parsedResponse
 }
 
 export const translateAddressToFID = async (
   address: string,
-): Promise<string | null> => {
+): Promise<number | null> => {
   if (isAddress(address)) {
     const response = await axiosInstance.get('/user/bulk-by-address', {
       params: {
         addresses: address,
       },
     })
-
-    // Assuming the first user in the response is the one we're interested in
-    return response.data[0]?.custody_address || null
+    if(response && response.data && response.data[address] && response.data[address][0])
+      // Assuming the first user in the response is the one we're interested in
+      return response.data[address][0]?.fid || null
   }
   return null
 }
