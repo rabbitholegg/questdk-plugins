@@ -1,7 +1,6 @@
 {
   "include": [],
   "compilerOptions": {
-    "incremental": true,
     "strict": true,
     "useDefineForClassFields": true,
     "noFallthroughCasesInSwitch": true,

@@ -1,7 +1,7 @@
+import { swap } from './Aerodrome'
+import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { swap } from './Aerodrome'
 
 describe('Given the aerodrome plugin', () => {
   describe('When handling the swap action', () => {

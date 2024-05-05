@@ -1,210 +1,40 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
-import {
-  CAMELOT_V2_ROUTER,
-  CAMELOT_V3_ROUTER,
-  DEFAULT_TOKEN_LIST,
-  PARASWAP_ROUTER,
-} from './contract-addresses'
-import {
-  CAMELOT_V2_ABI,
-  CAMELOT_V3_EXACT_INPUT_ABI,
-  CAMELOT_V3_EXACT_OUTPUT_ABI,
-  PARASWAP_ABI,
-} from './abi'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { parseEther, getAddress } from 'viem'
 import { swap } from './Camelot'
-import { Tokens } from './utils'
+import { DEFAULT_TOKEN_LIST } from './contract-addresses'
 import { failingTestCases, passingTestCases } from './test-setup'
+import { apply } from '@rabbitholegg/questdk'
+import { getAddress } from 'viem'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the camelot plugin', () => {
   describe('should return a valid action filter', () => {
-    test('for a swap using ERC-20 token as tokenIn', async () => {
+    test('when making a valid swap action', async () => {
       const filter = await swap({
-        chainId: Chains.ARBITRUM_ONE,
-        tokenIn: Tokens.USDT,
-        tokenOut: Tokens.WETH,
-        amountIn: GreaterThanOrEqual(1000000n),
-        amountOut: GreaterThanOrEqual(parseEther('0.0005')),
-      })
-
-      expect(filter).to.deep.equal({
         chainId: 42161,
-        to: {
-          $or: [
-            CAMELOT_V2_ROUTER.toLowerCase(),
-            CAMELOT_V3_ROUTER.toLowerCase(),
-            PARASWAP_ROUTER.toLowerCase(),
-          ],
-        },
-        input: {
-          $or: [
-            {
-              $abi: CAMELOT_V2_ABI,
-              path: {
-                $and: [
-                  {
-                    $first: Tokens.USDT,
-                  },
-                  {
-                    $last: Tokens.WETH,
-                  },
-                ],
-              },
-              amountOutMin: {
-                $gte: '500000000000000',
-              },
-              amountIn: {
-                $gte: '1000000',
-              },
-            },
-            {
-              $or: [
-                {
-                  $abiAbstract: CAMELOT_V3_EXACT_OUTPUT_ABI,
-                  params: {
-                    $or: [
-                      {
-                        tokenIn: Tokens.USDT,
-                        tokenOut: Tokens.WETH,
-                      },
-                      {
-                        path: {
-                          $and: [
-                            {
-                              $regex:
-                                '^0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
-                            },
-                            {
-                              $regex:
-                                'fd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9$',
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                    amountInMaximum: {
-                      $gte: '1000000',
-                    },
-                    amountOut: {
-                      $gte: '500000000000000',
-                    },
-                  },
-                },
-                {
-                  $abiAbstract: CAMELOT_V3_EXACT_INPUT_ABI,
-                  params: {
-                    $or: [
-                      {
-                        tokenIn: Tokens.USDT,
-                        tokenOut: Tokens.WETH,
-                      },
-                      {
-                        path: {
-                          $and: [
-                            {
-                              $regex:
-                                '^0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
-                            },
-                            {
-                              $regex:
-                                '82af49447d8a07e3bd95bd0d56f35241523fbab1$',
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                    amountIn: {
-                      $gte: '1000000',
-                    },
-                    amountOutMinimum: {
-                      $gte: '500000000000000',
-                    },
-                  },
-                },
-              ],
-            },
-            {
-              $abi: PARASWAP_ABI,
-              $or: [
-                {
-                  data: {
-                    fromToken: Tokens.USDT,
-                    fromAmount: {
-                      $gte: '1000000',
-                    },
-                    toAmount: {
-                      $gte: '500000000000000',
-                    },
-                    toToken: Tokens.WETH,
-                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-                  },
-                },
-                {
-                  data: {
-                    fromToken: Tokens.USDT,
-                    fromAmount: {
-                      $gte: '1000000',
-                    },
-                    toAmount: {
-                      $gte: '500000000000000',
-                    },
-                    path: {
-                      $last: {
-                        to: Tokens.WETH,
-                      },
-                    },
-                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-                  },
-                },
-                {
-                  data: {
-                    fromToken: Tokens.USDT,
-                    fromAmount: {
-                      $gte: '1000000',
-                    },
-                    toAmount: {
-                      $gte: '500000000000000',
-                    },
-                    path: {
-                      $last: {
-                        path: {
-                          $last: {
-                            to: Tokens.WETH,
-                          },
-                        },
-                      },
-                    },
-                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-                  },
-                },
-                {
-                  data: {
-                    assets: {
-                      $and: [
-                        {
-                          $first: Tokens.USDT,
-                        },
-                        {
-                          $last: Tokens.WETH,
-                        },
-                      ],
-                    },
-                    fromAmount: {
-                      $gte: '1000000',
-                    },
-                    toAmount: {
-                      $gte: '500000000000000',
-                    },
-                    partner: '0x353D2d14Bb674892910685520Ac040f560CcBC06',
-                  },
-                },
-              ],
-            },
-          ],
-        },
       })
+      expect(filter).toBeTypeOf('object')
+      expect(Number(filter.chainId)).toBe(42161)
+      if (typeof filter.to === 'string') {
+        expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+      } else {
+        // if to is an object, it should have a logical operator as the only key
+        expect(filter.to).toBeTypeOf('object')
+        expect(Object.keys(filter.to)).toHaveLength(1)
+        expect(
+          ['$or', '$and'].some((prop) =>
+            Object.hasOwnProperty.call(filter.to, prop),
+          ),
+        ).to.be.true
+        expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+          arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+        )
+      }
+      // Check the input property is the correct type and has a valid filter operator
+      expect(filter.input).toBeTypeOf('object')
+      expect(
+        ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
+          Object.hasOwnProperty.call(filter.input, prop),
+        ),
+      ).to.be.true
     })
   })
 

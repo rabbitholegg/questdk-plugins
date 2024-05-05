@@ -1,5 +1,5 @@
-import { type Address } from 'viem'
 import { Tokens } from './utils'
+import { type Address } from 'viem'
 
 export const DEFAULT_TOKEN_LIST: Address[] = [
   Tokens.ETH, // '0x0000000000000000000000000000000000000000' - ETH
@@ -20,3 +20,4 @@ export const INTERNAL_ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 export const CAMELOT_V2_ROUTER = '0xc873fEcbd354f5A56E00E710B90EF4201db2448d'
 export const CAMELOT_V3_ROUTER = '0x1f721e2e82f6676fce4ea07a5958cf098d339e18'
 export const PARASWAP_ROUTER = '0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57'
+export const YAK_ROUTER = '0x99D4e80DB0C023EFF8D25d8155E0dCFb5aDDeC5E'

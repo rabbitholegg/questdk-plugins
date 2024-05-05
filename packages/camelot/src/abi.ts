@@ -798,3 +798,124 @@ export const PARASWAP_ABI = [
     type: 'function',
   },
 ]
+
+export const YAK_ROUTER_ABI = [
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
+          { internalType: 'address[]', name: 'path', type: 'address[]' },
+          { internalType: 'address[]', name: 'adapters', type: 'address[]' },
+          { internalType: 'address[]', name: 'recipients', type: 'address[]' },
+        ],
+        internalType: 'struct Trade',
+        name: '_trade',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: '_fee', type: 'uint256' },
+      { internalType: 'address', name: '_to', type: 'address' },
+    ],
+    name: 'swapNoSplit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
+          { internalType: 'address[]', name: 'path', type: 'address[]' },
+          { internalType: 'address[]', name: 'adapters', type: 'address[]' },
+          { internalType: 'address[]', name: 'recipients', type: 'address[]' },
+        ],
+        internalType: 'struct Trade',
+        name: '_trade',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: '_fee', type: 'uint256' },
+      { internalType: 'address', name: '_to', type: 'address' },
+    ],
+    name: 'swapNoSplitFromETH',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
+          { internalType: 'address[]', name: 'path', type: 'address[]' },
+          { internalType: 'address[]', name: 'adapters', type: 'address[]' },
+          { internalType: 'address[]', name: 'recipients', type: 'address[]' },
+        ],
+        internalType: 'struct Trade',
+        name: '_trade',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: '_fee', type: 'uint256' },
+      { internalType: 'address', name: '_to', type: 'address' },
+    ],
+    name: 'swapNoSplitToETH',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
+          { internalType: 'address[]', name: 'path', type: 'address[]' },
+          { internalType: 'address[]', name: 'adapters', type: 'address[]' },
+          { internalType: 'address[]', name: 'recipients', type: 'address[]' },
+        ],
+        internalType: 'struct Trade',
+        name: '_trade',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: '_fee', type: 'uint256' },
+      { internalType: 'address', name: '_to', type: 'address' },
+      { internalType: 'uint256', name: '_deadline', type: 'uint256' },
+      { internalType: 'uint8', name: '_v', type: 'uint8' },
+      { internalType: 'bytes32', name: '_r', type: 'bytes32' },
+      { internalType: 'bytes32', name: '_s', type: 'bytes32' },
+    ],
+    name: 'swapNoSplitToETHWithPermit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'uint256', name: 'amountIn', type: 'uint256' },
+          { internalType: 'uint256', name: 'amountOut', type: 'uint256' },
+          { internalType: 'address[]', name: 'path', type: 'address[]' },
+          { internalType: 'address[]', name: 'adapters', type: 'address[]' },
+          { internalType: 'address[]', name: 'recipients', type: 'address[]' },
+        ],
+        internalType: 'struct Trade',
+        name: '_trade',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: '_fee', type: 'uint256' },
+      { internalType: 'address', name: '_to', type: 'address' },
+      { internalType: 'uint256', name: '_deadline', type: 'uint256' },
+      { internalType: 'uint8', name: '_v', type: 'uint8' },
+      { internalType: 'bytes32', name: '_r', type: 'bytes32' },
+      { internalType: 'bytes32', name: '_s', type: 'bytes32' },
+    ],
+    name: 'swapNoSplitWithPermit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
