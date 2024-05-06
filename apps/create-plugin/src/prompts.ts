@@ -24,7 +24,7 @@ export async function askQuestions() {
       getTxHashQuestion(transactions)
     )
 
-    if (hash) {
+    if (hash && hash.length > 0) {
       const transaction = await getTransaction(hash)
       const tokenInfo: Record<string, { symbol?: string; decimals: number }> =
         {}

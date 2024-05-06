@@ -8,8 +8,8 @@ import { type {{capitalize actionType}}ActionParams } from '@rabbitholegg/questd
 {{/hasAmountKey}}
 import {
   createTestCase,
-  type TestParams,{{#eq actionType 'bridge'}}
-  Chains{{/eq}}
+  type TestParams,{{#eq actionType 'bridge'}}{{#if tx.length}}
+  Chains{{/if}}{{/eq}}
 } from '@rabbitholegg/questdk-plugin-utils'
 
 {{#unless tx.length}}
