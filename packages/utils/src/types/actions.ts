@@ -3,6 +3,7 @@ import {
   type Address,
   type SimulateContractReturnType,
   type TransactionRequest,
+  parseEther,
 } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
@@ -11,7 +12,11 @@ import { ZodSchema, z } from 'zod'
 import { EthAddressSchema } from './common'
 import { UUID } from 'crypto'
 import { QuestCompletionPayload } from './quests'
+import { NetworkNameSchema } from './network'
 
+/*
+ACTION PARAMS
+*/
 export type SwapActionParams = {
   chainId: number
   contractAddress?: Address
@@ -108,6 +113,9 @@ export type DisctriminatedActionParams =
   | { type: ActionType.Options; data: OptionsActionParams }
   | { type: ActionType.Vote; data: VoteActionParams }
 
+/*
+QUEST ACTIONS OPERATORS
+*/
 export const QuestInputActionParamsAmountOperatorEnum = z.enum([
   'any',
   'gt',
@@ -124,6 +132,9 @@ export type QuestInputActionParamsAmountOperator = z.infer<
   typeof QuestInputActionParamsAmountOperatorEnum
 >
 
+/*
+BRIDGE ACTION SCHEMAS
+*/
 export const BridgeActionDetailSchema = z.object({
   sourceChainId: z.number(),
   destinationChainId: z.number(),
@@ -132,31 +143,65 @@ export const BridgeActionDetailSchema = z.object({
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
-export type BridgeActionDetail = z.infer<typeof BridgeActionDetailSchema>
+export const BridgeActionFormSchema = z.object({
+  destinationNetworkId: z.string(),
+  tokenAddress: EthAddressSchema.optional(),
+  tokenDecimals: z.number().optional(),
+  amount: z.string().optional(),
+  amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
+})
+
+export type BridgeActionDetail = z.infer<typeof BridgeActionDetailSchema>;
+
+/*
+SWAP ACTION SCHEMAS
+*/
 
 export const SwapActionDetailSchema = z.object({
   sourceChainId: z.number().optional(),
   chainId: z.number().optional(),
   sourceTokenAddress: EthAddressSchema.optional(),
   targetTokenAddress: EthAddressSchema.optional(),
+  amountIn: z.string().optional(),
+  amountInOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
+  amountOut: z.string().optional(),
+  amountOutOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
+})
+
+export const SwapActionFormSchema = z.object({
+  sourceTokenAddress: EthAddressSchema.optional(),
+  targetTokenAddress: EthAddressSchema.optional(),
+  tokenDecimals: z.number().optional(),
+  amountIn: z.string().optional(),
+  amountInOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
+  amountOut: z.string().optional(),
+  amountOutOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
+})
+
+export type SwapActionDetail = z.infer<typeof SwapActionDetailSchema>;
+/*
+DELEGATE ACTION SCHEMAS
+*/
+export const DelegateActionFormSchema = z.object({
+  project: z.string(),
+  delegate: EthAddressSchema.optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
-export type SwapActionDetail = z.infer<typeof SwapActionDetailSchema>
-
-export const DelegateActionFormSchema = z.object({
-  delegate: EthAddressSchema.optional(),
-})
-
 export const DelegateActionDetailSchema = z.object({
   chainId: z.number(),
+  project: z.string(),
   delegate: EthAddressSchema.optional(),
+  amount: z.string().optional(),
+  amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
 export type DelegateActionDetail = z.infer<typeof DelegateActionDetailSchema>
-export type DelegateActionForm = z.infer<typeof DelegateActionFormSchema>
 
+/*
+STAKE ACTION SCHEMAS
+*/
 export const StakeActionDetailSchema = z.object({
   chainId: z.number(),
   tokenOne: EthAddressSchema.optional(),
@@ -167,25 +212,7 @@ export const StakeActionDetailSchema = z.object({
   amountTwoOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
-export type StakeActionDetail = z.infer<typeof StakeActionDetailSchema>
-
-export const BridgeActionFormSchema = z.object({
-  destinationNetworkId: z.string(),
-  tokenAddress: EthAddressSchema.optional(),
-  tokenDecimals: z.number().optional(),
-  amount: z.string().optional(),
-  amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-})
-
-export const SwapActionFormSchema = z.object({
-  sourceTokenAddress: EthAddressSchema.optional(),
-  targetTokenAddress: EthAddressSchema.optional(),
-  tokenDecimals: z.number().optional(),
-  amount: z.string().optional(),
-  amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
-})
-
-export const BaseStakeActionFormaSchema = z.object({
+export const StakeActionFormSchema = z.object({
   tokenOne: EthAddressSchema.optional(),
   tokenOneDecimals: z.number().optional(),
   amountOne: z.string().optional(),
@@ -197,7 +224,11 @@ export const BaseStakeActionFormaSchema = z.object({
   duration: z.number().optional(),
 })
 
-export const StakeActionFormSchema = BaseStakeActionFormaSchema
+export type StakeActionDetail = z.infer<typeof StakeActionDetailSchema>;
+
+/*
+MINT ACTION SCHEMAS
+*/
 
 export const MintActionFormSchema = z.object({
   contractAddress: EthAddressSchema,
@@ -214,8 +245,7 @@ export const MintActionDetailSchema = z.object({
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
-export type MintActionDetail = z.infer<typeof MintActionDetailSchema>
-export type MintActionForm = z.infer<typeof MintActionFormSchema>
+export type MintActionDetail = z.infer<typeof MintActionDetailSchema>;
 
 /*
 FOLLOW
@@ -233,21 +263,20 @@ export type FollowValidationParams = z.infer<
   typeof FollowValidationParamsSchema
 >
 
+export const FollowActionFormSchema = z.object({
+  target: z.union([z.string(), EthAddressSchema]),
+})
+
 export const FollowActionDetailSchema = z.object({
   target: z.union([z.string(), EthAddressSchema]),
   project: z.union([z.string(), EthAddressSchema]).optional(),
 })
-export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>
 
-export const FollowActionFormSchema = z.object({
-  target: z.union([z.string(), EthAddressSchema]),
-})
-export type FollowActionForm = z.infer<typeof FollowActionFormSchema>
+export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>;
 
 /*
 VOTE
 */
-
 export const VoteActionFormSchema = z.object({
   project: EthAddressSchema,
   proposalId: z.number().optional(),
@@ -261,9 +290,10 @@ export const VoteActionDetailSchema = z.object({
   support: z.boolean().optional(),
 })
 
-export type VoteActionDetail = z.infer<typeof VoteActionDetailSchema>
-export type VoteActionForm = z.infer<typeof VoteActionFormSchema>
-
+export type VoteActionDetail = z.infer<typeof VoteActionDetailSchema>;
+/*
+OPTIONS ACTION SCHEMAS
+*/
 export const OptionsActionFormSchema = z.object({
   contractAddress: EthAddressSchema.optional(),
   token: EthAddressSchema.optional(),
@@ -283,8 +313,7 @@ export const OptionsActionDetailSchema = z.object({
   orderType: z.string().optional(),
 })
 
-export type OptionsActionDetail = z.infer<typeof OptionsActionDetailSchema>
-export type OptionsActionForm = z.infer<typeof OptionsActionFormSchema>
+export type OptionsActionDetail = z.infer<typeof OptionsActionDetailSchema>;
 
 export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('bridge'), data: BridgeActionFormSchema }),
@@ -294,9 +323,10 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('delegate'), data: DelegateActionFormSchema }),
   z.object({ type: z.literal('options'), data: OptionsActionFormSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionFormSchema }),
+  z.object({ type: z.literal('follow'), data: FollowActionFormSchema }),
 ])
 
-export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
+export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>;
 
 export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('bridge'), data: BridgeActionDetailSchema }),
@@ -443,3 +473,33 @@ export enum OrderType {
   Limit = 'limit',
   Market = 'market',
 }
+
+
+export const CreateQuestInputSchema = z.object({
+  contractType: z.enum(['ERC20', 'ERC721']).optional(),
+  networkId: NetworkNameSchema.optional(), // used to specify the network when a task supports multiple
+  projectId: z.string(),
+  actionId: z.string(),
+  actionParams: ActionParamsFormSchema.optional(),
+  allowlistId: z.string().optional(),
+  rewardTokenId: z.string(),
+  rewardAmount: z.string().refine((value) => {
+    try {
+      return parseEther(value) > 0
+    } catch {
+      return false
+    }
+  }),
+  rewardDecimals: z.number(),
+  participantLimit: z.number().gt(0),
+  startTime: z.string().optional(),
+  endTime: z.string(),
+  accessList: z
+    .object({
+      allow: z.array(z.string()).optional(),
+      deny: z.array(z.string()).optional(),
+    })
+    .optional(),
+})
+
+export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>;
