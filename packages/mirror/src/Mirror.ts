@@ -39,7 +39,7 @@ export const mint = async (
     to: contractAddress,
     from: recipient,
     input: {
-      $abi: COLLECT_ENTRY_ABI,
+      $abiAbstract: COLLECT_ENTRY_ABI,
       tokenRecipient: recipient,
     },
   })

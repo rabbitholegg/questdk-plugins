@@ -48,7 +48,7 @@ export const mint = async (
   }
 
   const ERC1155_FILTER = {
-    $abi: ZORA_MINTER_ABI_1155,
+    $abiAbstract: ZORA_MINTER_ABI_1155,
     $and: andArray1155.length !== 0 ? andArray1155 : undefined,
   }
 
@@ -109,7 +109,7 @@ export const simulateMint = async (
       address: contractAddress,
       abi: ZORA_MINTER_ABI_1155,
       functionName: 'nextTokenId',
-    })) as BigInt
+    })) as bigint
 
     _tokenId = Number(nextTokenId) - 1
   }

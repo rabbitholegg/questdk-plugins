@@ -45,7 +45,7 @@ export const mint = async (
       $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
     },
     input: {
-      $abi: SUPERMINTER_V2_ABI,
+      $abiAbstract: SUPERMINTER_V2_ABI,
       p: {
         edition: contractAddress,
         quantity: amount,

@@ -175,7 +175,7 @@ export const simulateMint = async (
       address: contractAddress,
       abi: ZORA_MINTER_ABI_1155,
       functionName: 'nextTokenId',
-    })) as BigInt
+    })) as bigint
 
     _tokenId = Number(nextTokenId) - 1
   }
