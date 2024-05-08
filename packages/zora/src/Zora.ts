@@ -75,13 +75,23 @@ export const mint = async (
     })
   }
 
-  const ERC721_FILTER = {
+  const ERC721_FILTER_ABSTRACT = {
     $abiAbstract: ZORA_MINTER_ABI_721,
     $and: andArray721.length !== 0 ? andArray721 : undefined,
   }
 
-  const ERC1155_FILTER = {
+  const ERC1155_FILTER_ABSTRACT = {
     $abiAbstract: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
+    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+  }
+
+  const ERC721_FILTER = {
+    $abi: ZORA_MINTER_ABI_721,
+    $and: andArray721.length !== 0 ? andArray721 : undefined,
+  }
+
+  const ERC1155_FILTER = {
+    $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
     $and: andArray1155.length !== 0 ? andArray1155 : undefined,
   }
 
@@ -100,8 +110,8 @@ export const mint = async (
             },
           },
         },
-        ERC721_FILTER,
-        ERC1155_FILTER,
+        ERC721_FILTER_ABSTRACT,
+        ERC1155_FILTER_ABSTRACT,
       ],
     },
   })
