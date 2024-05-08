@@ -28,9 +28,13 @@ import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
     test('should return a valid action filter', async () => {
-      const { params } = createTestCase(BASIC_PURCHASE, 'when doing a basic purchase',{
-        amount: '1',
-      })
+      const { params } = createTestCase(
+        BASIC_PURCHASE,
+        'when doing a basic purchase',
+        {
+          amount: '1',
+        },
+      )
       const filter = await mint(params)
 
       const expectedFilter = {
@@ -56,7 +60,9 @@ describe('Given the zora plugin', () => {
                   ],
                 },
                 {
-                  $abiAbstract: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
+                  $abiAbstract: ZORA_MINTER_ABI_1155.concat(
+                    ZORA_MINTER_ABI_1155_LEGACY,
+                  ),
                   $and: [
                     {
                       $or: [
@@ -79,7 +85,9 @@ describe('Given the zora plugin', () => {
             to: {
               $or: [
                 params.contractAddress.toLowerCase(),
-                zoraUniversalMinterAddress[params.chainId as keyof typeof zoraUniversalMinterAddress].toLowerCase(),
+                zoraUniversalMinterAddress[
+                  params.chainId as keyof typeof zoraUniversalMinterAddress
+                ].toLowerCase(),
               ],
             },
             input: {
@@ -104,7 +112,9 @@ describe('Given the zora plugin', () => {
                       ],
                     },
                     {
-                      $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
+                      $abi: ZORA_MINTER_ABI_1155.concat(
+                        ZORA_MINTER_ABI_1155_LEGACY,
+                      ),
                       $and: [
                         {
                           $or: [
@@ -126,7 +136,7 @@ describe('Given the zora plugin', () => {
           },
         ],
       }
-    
+
       expect(filter).toEqual(compressJson(expectedFilter))
     })
 

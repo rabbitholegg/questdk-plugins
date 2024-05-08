@@ -114,10 +114,7 @@ export const mint = async (
     chainId,
     to: contractAddress,
     input: {
-      $or: [
-        ERC721_FILTER_ABSTRACT,
-        ERC1155_FILTER_ABSTRACT,
-      ],
+      $or: [ERC721_FILTER_ABSTRACT, ERC1155_FILTER_ABSTRACT],
     },
   }
   return compressJson({
