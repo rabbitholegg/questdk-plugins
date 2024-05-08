@@ -48,7 +48,7 @@ export type StakeActionParams = {
 }
 
 export type BridgeActionParams = {
-  sourceChainId: number
+  chainId: number
   destinationChainId: number
   contractAddress?: Address
   tokenAddress?: Address
@@ -136,9 +136,9 @@ export type QuestInputActionParamsAmountOperator = z.infer<
 BRIDGE ACTION SCHEMAS
 */
 export const BridgeActionDetailSchema = z.object({
-  sourceChainId: z.number(),
+  chainId: z.number(),
   destinationChainId: z.number(),
-  tokenAddress: z.string().optional(),
+  tokenAddress: EthAddressSchema.optional(),
   amount: z.string().optional(),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
@@ -158,7 +158,6 @@ SWAP ACTION SCHEMAS
 */
 
 export const SwapActionDetailSchema = z.object({
-  sourceChainId: z.number().optional(),
   chainId: z.number().optional(),
   sourceTokenAddress: EthAddressSchema.optional(),
   targetTokenAddress: EthAddressSchema.optional(),

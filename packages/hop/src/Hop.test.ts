@@ -29,7 +29,7 @@ describe('Given the hop plugin', () => {
       const USDC_POLYGON_AMM_ADDRESS =
         '0x76b22b8C1079A44F1211D867D68b1eda76a635A7'
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
+        chainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(100000n),
@@ -54,7 +54,7 @@ describe('Given the hop plugin', () => {
       const USDC_MAINNET_BRIDGE_ADDRESS =
         '0x3666f603Cc164936C1b87e207F36BEBa4AC5f18a'
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
@@ -79,7 +79,7 @@ describe('Given the hop plugin', () => {
       const ETH_MAINNET_BRIDGE_ADDRESS =
         '0xb8901acB165ed027E32754E0FFe830802919727f'
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
@@ -104,7 +104,7 @@ describe('Given the hop plugin', () => {
     test('should pass filter with valid L1 ETH tx', async () => {
       const transaction = DEPOSIT_ETH
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: BASE_CHAIN_ID,
         tokenAddress: ETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('.6')),
@@ -115,7 +115,7 @@ describe('Given the hop plugin', () => {
     test('should pass filter with valid L1 Token tx', async () => {
       const transaction = DEPOSIT_ERC20
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: OPTIMISM_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual('240000000'), // $250 USDC,
@@ -126,7 +126,7 @@ describe('Given the hop plugin', () => {
     test('should pass filter with valid L2 ETH tx', async () => {
       const transaction = WITHDRAW_ETH
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
+        chainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: WETH_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(parseEther('9')),
@@ -137,7 +137,7 @@ describe('Given the hop plugin', () => {
     test('should pass filter with valid L2 token tx', async () => {
       const transaction = WITHDRAW_ERC20
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
+        chainId: POLYGON_CHAIN_ID,
         destinationChainId: ARBITRUM_ONE_CHAIN_ID,
         tokenAddress: HOP_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(parseEther('4952')),

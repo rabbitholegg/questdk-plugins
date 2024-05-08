@@ -18,7 +18,7 @@ export const bridge = async (
 ): Promise<TransactionFilter> => {
   // This is the information we'll use to compose the Transaction object
   const {
-    sourceChainId,
+    chainId,
     destinationChainId,
     contractAddress,
     tokenAddress,
@@ -39,14 +39,14 @@ export const bridge = async (
     ? contractAddress
     : {
         $or: [
-          CHAIN_TO_ROUTER[sourceChainId]?.toLowerCase(),
-          SYNAPSE_CCTP_ROUTER[sourceChainId]?.toLowerCase(),
+          CHAIN_TO_ROUTER[chainId]?.toLowerCase(),
+          SYNAPSE_CCTP_ROUTER[chainId]?.toLowerCase(),
         ],
       }
 
   if (recipient !== undefined) {
     return compressJson({
-      chainId: sourceChainId,
+      chainId: chainId,
       to: contractTarget,
       input: {
         $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract
@@ -69,7 +69,7 @@ export const bridge = async (
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter (for non cctp)
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
+    chainId: chainId, // The chainId of the source chain
     to: contractTarget,
     input: {
       $abi: SYNAPSE_BRIDGE_FRAGMENTS, // The ABI of the bridge contract

@@ -25,7 +25,7 @@ export const ETH_FROM_ETHEREUM_TO_BASE_TEST: TestParams<BridgeActionParams> = {
     value: parseEther('0.008').toString(),
   },
   params: {
-    sourceChainId: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     destinationChainId: Chains.BASE,
     tokenAddress: ETH,
     contractAddress: ETHEREUM_ETH_BRIDGE_ADDRESS,
@@ -47,7 +47,7 @@ export const ERC20_FROM_ETHEREUM_TO_BASE_TEST: TestParams<BridgeActionParams> =
       value: '0',
     },
     params: {
-      sourceChainId: Chains.ETHEREUM,
+      chainId: Chains.ETHEREUM,
       destinationChainId: Chains.BASE,
       tokenAddress: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
       amount: '100000000',
@@ -69,7 +69,7 @@ export const ETH_FROM_BASE_TO_ETHEREUM_TEST: TestParams<BridgeActionParams> = {
     value: parseEther('0.11325').toString(),
   },
   params: {
-    sourceChainId: Chains.BASE,
+    chainId: Chains.BASE,
     destinationChainId: Chains.ETHEREUM,
     tokenAddress: ETH,
     contractAddress: BASE_ETH_BRIDGE_ADDRESS,
@@ -91,7 +91,7 @@ export const ERC20_FROM_BASE_TO_ETHEREUM_TEST: TestParams<BridgeActionParams> =
       value: '0',
     },
     params: {
-      sourceChainId: Chains.BASE,
+      chainId: Chains.BASE,
       destinationChainId: Chains.ETHEREUM,
       contractAddress: BASE_ERC20_BRIDGE_ADDRESS,
       tokenAddress: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
@@ -228,9 +228,9 @@ export const failingTestCases = [
   // eth from ethereum
   createTestCase(
     ETH_FROM_ETHEREUM_TO_BASE_TEST,
-    'eth from ethereum to base, when sourceChainId is not correct',
+    'eth from ethereum to base, when chainId is not correct',
     {
-      sourceChainId: 5,
+      chainId: 5,
     },
   ),
   createTestCase(
@@ -250,9 +250,9 @@ export const failingTestCases = [
   // erc20 from ethereum
   createTestCase(
     ERC20_FROM_ETHEREUM_TO_BASE_TEST,
-    'erc20 from ethereum to base, when sourceChainId is not correct',
+    'erc20 from ethereum to base, when chainId is not correct',
     {
-      sourceChainId: 5,
+      chainId: 5,
     },
   ),
   createTestCase(
@@ -280,9 +280,9 @@ export const failingTestCases = [
   // eth from base
   createTestCase(
     ETH_FROM_BASE_TO_ETHEREUM_TEST,
-    'eth from base to ethereum, when sourceChainId is not correct',
+    'eth from base to ethereum, when chainId is not correct',
     {
-      sourceChainId: 5,
+      chainId: 5,
     },
   ),
   createTestCase(
@@ -302,9 +302,9 @@ export const failingTestCases = [
   // erc20 from base
   createTestCase(
     ERC20_FROM_BASE_TO_ETHEREUM_TEST,
-    'erc20 from base to ethereum, when sourceChainId is not correct',
+    'erc20 from base to ethereum, when chainId is not correct',
     {
-      sourceChainId: 5,
+      chainId: 5,
     },
   ),
   createTestCase(

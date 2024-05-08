@@ -64,14 +64,14 @@ export function findL1TokenForL2Token(
 }
 
 export const getContractAddressFromChainId = (
-  sourceChainId: number,
+  chainId: number,
   destinationChainId: number | undefined,
 ): Address | undefined => {
   // This is klunky but the alternative is some sort of convoluted 2D mapping
   if (destinationChainId === undefined) return undefined
-  if (sourceChainId === ARB_NOVA_CHAIN_ID) return ARB_NOVA_TO_MAINNET_GATEWAY
-  if (sourceChainId === ARB_ONE_CHAIN_ID) return ARB_ONE_TO_MAINNET_GATEWAY
-  if (sourceChainId === ETH_CHAIN_ID) {
+  if (chainId === ARB_NOVA_CHAIN_ID) return ARB_NOVA_TO_MAINNET_GATEWAY
+  if (chainId === ARB_ONE_CHAIN_ID) return ARB_ONE_TO_MAINNET_GATEWAY
+  if (chainId === ETH_CHAIN_ID) {
     if (destinationChainId === ARB_NOVA_CHAIN_ID)
       return MAINNET_TO_ARB_NOVA_GATEWAY
     if (destinationChainId === ARB_ONE_CHAIN_ID)

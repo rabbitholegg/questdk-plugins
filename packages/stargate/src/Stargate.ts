@@ -19,7 +19,7 @@ import {
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
-    sourceChainId,
+    chainId,
     destinationChainId,
     contractAddress,
     tokenAddress,
@@ -44,7 +44,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   const sourcePool =
     tokenAddress === NATIVE_TOKEN_ADDRESS
       ? 13
-      : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[sourceChainId][
+      : NATIVE_CHAIN_AND_POOL_TO_TOKEN_ADDRESS[chainId][
           tokenAddress.toLowerCase()
         ]
 
@@ -55,11 +55,11 @@ export const bridge = async (bridge: BridgeActionParams) => {
   if (sourcePool === 13) {
     const targetContractAddress =
       CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
-        LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]
+        LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]
       ]
 
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
+      chainId: chainId, // The chainId of the source chain
       to: contractAddress || targetContractAddress, // The contract address of the bridge
       input: {
         $abi: STARGATE_BRIDGE_ABI, // The ABI of the bridge contract
@@ -71,11 +71,11 @@ export const bridge = async (bridge: BridgeActionParams) => {
   }
 
   const targetContractAddress =
-    CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[sourceChainId]]
+    CHAIN_ID_TO_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]]
 
   // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
+    chainId: chainId, // The chainId of the source chain
     to: contractAddress || targetContractAddress, // The contract address of the bridge
     input: {
       $abi: STARGATE_BRIDGE_ABI, // The ABI of the bridge contract

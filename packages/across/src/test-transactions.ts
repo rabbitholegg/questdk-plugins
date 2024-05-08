@@ -113,7 +113,7 @@ const BRIDGE_ERC: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: Chains.OPTIMISM,
+    chainId: Chains.OPTIMISM,
     destinationChainId: Chains.ARBITRUM_ONE,
     tokenAddress: '0x7f5c764cbc14f9669b88837ca1490cca17c31607',
     amount: GreaterThanOrEqual(parseUnits('15', 6)),
@@ -132,7 +132,7 @@ const BRIDGE_ETH: TestParams<BridgeActionParams> = {
     value: '9000000000000000000',
   },
   params: {
-    sourceChainId: Chains.BASE,
+    chainId: Chains.BASE,
     destinationChainId: Chains.ARBITRUM_ONE,
     tokenAddress: zeroAddress,
     amount: GreaterThanOrEqual(parseEther('9')),
@@ -151,7 +151,7 @@ const BRIDGE_ETH2: TestParams<BridgeActionParams> = {
     value: '9000000000000000000',
   },
   params: {
-    sourceChainId: Chains.BASE,
+    chainId: Chains.BASE,
     destinationChainId: Chains.ARBITRUM_ONE,
     // tokenAddress: zeroAddress,
     // amount: GreaterThanOrEqual(parseEther('9')),

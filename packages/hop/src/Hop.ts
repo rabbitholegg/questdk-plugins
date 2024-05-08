@@ -18,11 +18,11 @@ const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 export const bridge = (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
-  const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
+  const { chainId, destinationChainId, tokenAddress, amount, recipient } =
     bridge
   const bridges = addresses.bridges as Bridges
-  const chainSlug = utils.chainIdToSlug('mainnet', sourceChainId)
-  if (sourceChainId === 1) {
+  const chainSlug = utils.chainIdToSlug('mainnet', chainId)
+  if (chainId === 1) {
     const bridgeData: [string, Bridge] = Object.entries(bridges).filter(
       ([, bridge]: [string, Bridge]) => {
         if (bridge[chainSlug])
@@ -37,7 +37,7 @@ export const bridge = (bridge: BridgeActionParams) => {
     const contractTarget = bridgeProps.l1Bridge
     // We always want to return a compressed JSON object which we'll transform into a TransactionFilter
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
+      chainId: chainId, // The chainId of the source chain
       to: contractTarget, // The contract address of the bridge
       input: {
         $abi: l1BridgeAbi, // The ABI of the bridge contract
@@ -66,7 +66,7 @@ export const bridge = (bridge: BridgeActionParams) => {
       : bridgeProps.l2Bridge
     const abi = hasAMM ? l2AmmWrapperAbi : l2BridgeAbi
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
+      chainId: chainId, // The chainId of the source chain
       to: contractTarget, // The contract address of the bridge
       input: {
         $abi: abi, // The ABI of the bridge contract, if hop is the target token this is the bridge, otherwise it should be the AMM

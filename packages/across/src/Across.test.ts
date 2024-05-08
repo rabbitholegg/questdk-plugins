@@ -23,7 +23,7 @@ describe('Given the Across plugin', () => {
   describe('When generating the filter', () => {
     test('when making a valid bridge action', async () => {
       const filter = await bridge({
-        sourceChainId: 1,
+        chainId: 1,
         destinationChainId: 10,
       })
       expect(filter).toBeTypeOf('object')
@@ -56,7 +56,7 @@ describe('Given the Across plugin', () => {
     test('should pass filter with valid L1 ETH tx', async () => {
       const transaction = DEPOSIT_ETH
       const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
+        chainId: Chains.ETHEREUM,
         destinationChainId: Chains.OPTIMISM,
         tokenAddress: WETH_ADRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('.315')),
@@ -67,7 +67,7 @@ describe('Given the Across plugin', () => {
     test('should pass filter with valid L2 ETH tx', async () => {
       const transaction = WITHDRAW_ETH
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.ETHEREUM,
         tokenAddress: WETH_ADDRESS_ARBITRUM,
         amount: GreaterThanOrEqual(parseEther('.15')),
@@ -78,7 +78,7 @@ describe('Given the Across plugin', () => {
     test('should pass filter with valid L1 Token tx', async () => {
       const transaction = DEPOSIT_ERC20
       const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
+        chainId: Chains.ETHEREUM,
         destinationChainId: Chains.POLYGON_POS,
         tokenAddress: USDT_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual('9900000'), // $250 USDC,
@@ -89,7 +89,7 @@ describe('Given the Across plugin', () => {
     test('should pass filter with valid L2 token tx', async () => {
       const transaction = WITHDRAW_ERC20
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.POLYGON_POS,
         tokenAddress: USDT_ADDRESS_ARBITRUM,
         amount: GreaterThanOrEqual('19000000'),

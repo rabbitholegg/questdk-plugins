@@ -20,7 +20,7 @@ describe('Given the arbitrum plugin', () => {
 
     test('should return a valid action filter', async () => {
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
         tokenAddress: DAI,
         recipient: recipient,
@@ -44,7 +44,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0x6d7ac63aaa7ba8925dcb3e44be6355261dcf688f'
       const transaction = L1_ETH_TO_ONE
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
         tokenAddress: zeroAddress, // ETH
         amount: GreaterThanOrEqual(parseEther('3')),
@@ -57,7 +57,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0xba84392ae32a0ffcab1195c57172c05292e02b3e'
       const transaction = L1_ETH_TO_NOVA
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_NOVA_CHAIN_ID,
         tokenAddress: zeroAddress, // ETH
         amount: GreaterThanOrEqual(parseEther('0.25')),
@@ -70,7 +70,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0xf9ce182b0fbe597773ab9bb5159b7479047de8fe'
       const transaction = L1_TOKEN_TO_ONE
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
         tokenAddress: '0x514910771AF9Ca656af840dff83E8264EcF986CA', // LINK
         amount: GreaterThanOrEqual(parseEther('2000')),
@@ -83,7 +83,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0x1f536b22d877dc2a116c7bedc862a539551bc56d'
       const transaction = L1_TOKEN_TO_NOVA
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_NOVA_CHAIN_ID,
         tokenAddress: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', // USDC
         amount: GreaterThanOrEqual(parseUnits('10000', 6)),
@@ -96,7 +96,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0x7169b95c460a75bc6677481a1fcae1ea598f3b65'
       const transaction = L2_ETH_TO_L1
       const filter = await bridge({
-        sourceChainId: ARB_NOVA_CHAIN_ID,
+        chainId: ARB_NOVA_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         contractAddress: '0x0000000000000000000000000000000000000064',
         tokenAddress: zeroAddress,
@@ -110,7 +110,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0x572b093d735b9e91cbd90972e846333d444f25cd'
       const transaction = L2_TOKEN_TO_L1
       const filter = await bridge({
-        sourceChainId: ARB_ONE_CHAIN_ID,
+        chainId: ARB_ONE_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
         amount: GreaterThanOrEqual(parseUnits('152260', 6)),
@@ -123,7 +123,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0x7169b95c460a75bc6677481a1fcae1ea598f3b65'
       const transaction = L2_ETH_TO_L1
       const filter = await bridge({
-        sourceChainId: ARB_NOVA_CHAIN_ID,
+        chainId: ARB_NOVA_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         contractAddress: '0x0000000000000000000000000000000000000064',
         tokenAddress: undefined,
@@ -136,7 +136,7 @@ describe('Given the arbitrum plugin', () => {
       const recipient = '0x572b093d735b9e91cbd90972e846333d444f25cd'
       const transaction = L2_TOKEN_TO_L1
       const filter = await bridge({
-        sourceChainId: ARB_ONE_CHAIN_ID,
+        chainId: ARB_ONE_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: undefined,
         recipient: recipient,
@@ -149,7 +149,7 @@ describe('Given the arbitrum plugin', () => {
       const transaction = L1_TOKEN_TO_ONE
 
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
         tokenAddress: '0x514910771AF9Ca656af840dff83E8264EcF986CA', // LINK
         amount: GreaterThanOrEqual(parseEther('5000')), // 5000 LINK
@@ -164,7 +164,7 @@ describe('Given the arbitrum plugin', () => {
       const transaction = L1_TOKEN_TO_ONE
 
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
         tokenAddress: '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI
         amount: GreaterThanOrEqual(parseEther('2000')),
@@ -178,7 +178,7 @@ describe('Given the arbitrum plugin', () => {
       const transaction = L1_TOKEN_TO_ONE
 
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARB_ONE_CHAIN_ID,
         tokenAddress: '0x514910771AF9Ca656af840dff83E8264EcF986CA', // LINK
         amount: GreaterThanOrEqual(parseEther('2000')),

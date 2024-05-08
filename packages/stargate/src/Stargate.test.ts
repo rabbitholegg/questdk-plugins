@@ -39,7 +39,7 @@ describe('Given the Stargate plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
+        chainId: ARBITRUM_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: ARBITRUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -67,7 +67,7 @@ describe('Given the Stargate plugin', () => {
 
     test('should return a valid bridge action filter for L1 token tx', async () => {
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -95,7 +95,7 @@ describe('Given the Stargate plugin', () => {
 
     test('should return a valid bridge action filter for L1 ETH tx', async () => {
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -119,7 +119,7 @@ describe('Given the Stargate plugin', () => {
     test('should pass filter with valid L1 ETH tx', async () => {
       const transaction = DEPOSIT_ETH
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual(parseEther('.04')),
@@ -130,7 +130,7 @@ describe('Given the Stargate plugin', () => {
     test('should pass filter with valid L2 ETH tx', async () => {
       const transaction = WITHDRAW_ETH
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
+        chainId: ARBITRUM_CHAIN_ID,
         destinationChainId: OPTIMISM_CHAIN_ID,
         tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual(parseEther('.6')),
@@ -141,7 +141,7 @@ describe('Given the Stargate plugin', () => {
     test('should pass filter with valid L1 Token tx', async () => {
       const transaction = DEPOSIT_ERC20
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual('48500000'), // $250 USDC,
@@ -152,7 +152,7 @@ describe('Given the Stargate plugin', () => {
     test('should pass filter with valid L2 token tx', async () => {
       const transaction = WITHDRAW_ERC20
       const filter = await bridge({
-        sourceChainId: ARBITRUM_CHAIN_ID,
+        chainId: ARBITRUM_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ARBITRUM_USDT_ADDRESS,
         amount: GreaterThanOrEqual('1200000000'),
@@ -165,7 +165,7 @@ describe('Given the Stargate plugin', () => {
     test('should pass filter with valid L2 token tx', async () => {
       const transaction = USDC_OP_PASS
       const filter = await bridge({
-        sourceChainId: OPTIMISM_CHAIN_ID,
+        chainId: OPTIMISM_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: OP_USDCE_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
@@ -176,7 +176,7 @@ describe('Given the Stargate plugin', () => {
     test('should not pass filter with invalid tokenAddress', async () => {
       const transaction = USDC_OP_FAIL
       const filter = await bridge({
-        sourceChainId: OPTIMISM_CHAIN_ID,
+        chainId: OPTIMISM_CHAIN_ID,
         destinationChainId: ARBITRUM_CHAIN_ID,
         tokenAddress: NATIVE_TOKEN_ADDRESS,
         amount: GreaterThanOrEqual('1000000'),
@@ -189,7 +189,7 @@ describe('Given the Stargate plugin', () => {
       const transaction = ETH_OP_ARB
       try {
         const filter = await bridge({
-          sourceChainId: OPTIMISM_CHAIN_ID,
+          chainId: OPTIMISM_CHAIN_ID,
           destinationChainId: ARBITRUM_CHAIN_ID,
           amount: GreaterThanOrEqual('1000000'),
         })
@@ -205,7 +205,7 @@ describe('Given the Stargate plugin', () => {
       const transaction = ETH_OP_ARB
       try {
         const filter = await bridge({
-          sourceChainId: OPTIMISM_CHAIN_ID,
+          chainId: OPTIMISM_CHAIN_ID,
           destinationChainId: ARBITRUM_CHAIN_ID,
           tokenAddress: ARBITRUM_USDT_ADDRESS, // correct address, but wrong chain
           amount: GreaterThanOrEqual('1000000'),
@@ -232,7 +232,7 @@ describe('Given the Stargate plugin', () => {
             token,
           )}`, async () => {
             const filter = await bridge({
-              sourceChainId: chainId,
+              chainId: chainId,
               destinationChainId: ETH_CHAIN_ID,
               tokenAddress: token,
               amount: GreaterThanOrEqual(100000n),

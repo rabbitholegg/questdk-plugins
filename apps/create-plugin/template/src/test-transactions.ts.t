@@ -25,7 +25,7 @@ export const {{uppercase actionType}}_TEST: TestParams<{{capitalize actionType}}
   },
   params: {
   {{#eq actionType 'bridge'}}
-    sourceChainId: 0,
+    chainId: 0,
     destinationChainId: 0,
   {{else}}
   {{#eq actionType 'mint'}}
@@ -83,14 +83,14 @@ export const passingTestCases = [
 export const failingTestCases = [
   {{#unless tx.length}}
   {{#eq actionType 'bridge'}}
-  createTestCase({{uppercase actionType}}_TEST, 'when sourceChainId is not correct', { sourceChainId: 99 }),
+  createTestCase({{uppercase actionType}}_TEST, 'when chainId is not correct', { chainId: 99 }),
   {{else}}
   createTestCase({{uppercase actionType}}_TEST, 'when chainId is not correct', { chainId: 99 }),
   {{/eq}}
   {{/unless}}
   {{#if tx.length}}
   {{#eq actionType 'bridge'}}
-  createTestCase({{uppercase actionType}}_TEST_0, 'when sourceChainId is not correct', { sourceChainId: 0 }),
+  createTestCase({{uppercase actionType}}_TEST_0, 'when chainId is not correct', { chainId: 0 }),
   {{else}}
   createTestCase({{uppercase actionType}}_TEST_0, 'when chainId is not correct', { chainId: 0 }),
   {{/eq}}

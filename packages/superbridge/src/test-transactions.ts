@@ -20,7 +20,7 @@ export const BRIDGE_ERC20: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0x44ff8620b8cA30902395A7bD3F2407e1A091BF73',
     amount: GreaterThanOrEqual(75000000000000000000000n),
@@ -38,7 +38,7 @@ export const BRIDGE_ERC20_TO: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0x6b66ccd1340c479B07B390d326eaDCbb84E726Ba',
     amount: GreaterThanOrEqual(4600000000000000000000n),
@@ -56,7 +56,7 @@ export const BRIDGE_ETH: TestParams<BridgeActionParams> = {
     value: '10000000000000000',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0x0000000000000000000000000000000000000000',
     amount: GreaterThanOrEqual(10000000000000000n),
@@ -74,7 +74,7 @@ export const BRIDGE_ETH_TO: TestParams<BridgeActionParams> = {
     value: '5000000000000000000',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0x0000000000000000000000000000000000000000',
     amount: GreaterThanOrEqual(5000000000000000000n),
@@ -92,7 +92,7 @@ export const DEPOSIT_ERC20: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f',
     amount: GreaterThanOrEqual(1050000000000000000000n),
@@ -110,7 +110,7 @@ export const DEPOSIT_ERC20_TO: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0xfe3b138879d6d0555be4132dcfe6e7424e257a2e',
     amount: GreaterThanOrEqual(4920000000000000000000n),
@@ -128,7 +128,7 @@ export const DEPOSIT_ETH: TestParams<BridgeActionParams> = {
     value: '100508710767453794500',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0x0000000000000000000000000000000000000000',
     amount: GreaterThanOrEqual(100000000000000000000n),
@@ -146,7 +146,7 @@ export const DEPOSIT_ETH_TO: TestParams<BridgeActionParams> = {
     value: '500000000000000',
   },
   params: {
-    sourceChainId: 1,
+    chainId: 1,
     destinationChainId: Chains.BASE,
     tokenAddress: '0x0000000000000000000000000000000000000000',
     amount: GreaterThanOrEqual(500000000000000n),
@@ -164,7 +164,7 @@ export const WITHDRAW_ETH: TestParams<BridgeActionParams> = {
     value: '50823797200080939300',
   },
   params: {
-    sourceChainId: 8453,
+    chainId: 8453,
     destinationChainId: Chains.ETHEREUM,
     tokenAddress: '0x0000000000000000000000000000000000000000',
     amount: GreaterThanOrEqual(50000000000000000000n),
@@ -182,7 +182,7 @@ export const WITHDRAW_ERC20: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 8453,
+    chainId: 8453,
     destinationChainId: Chains.ETHEREUM,
     tokenAddress: '0x50c5725949a6f0c72e6c4a641f24049a917db0cb',
     amount: GreaterThanOrEqual(34000000000000000000n),
@@ -200,7 +200,7 @@ export const WITHDRAW_TO: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 8453,
+    chainId: 8453,
     destinationChainId: Chains.ETHEREUM,
     tokenAddress: '0x717d31a60a9e811469673429c9f8ea24358990f1',
     amount: GreaterThanOrEqual(3000000000000000000000n),
@@ -218,7 +218,7 @@ export const WITHDRAW_BRIDGE_ETH_TO: TestParams<BridgeActionParams> = {
     value: '12000000000000000',
   },
   params: {
-    sourceChainId: 8453,
+    chainId: 8453,
     destinationChainId: Chains.ETHEREUM,
     tokenAddress: '0x0000000000000000000000000000000000000000',
     amount: GreaterThanOrEqual(10000000000000000n),
@@ -236,7 +236,7 @@ export const WITHDRAW_BRIDGE_ERC20_TO: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 8453,
+    chainId: 8453,
     destinationChainId: Chains.ETHEREUM,
     tokenAddress: '0x717d31A60a9e811469673429c9F8Ea24358990f1',
     amount: GreaterThanOrEqual(3900000000000000000000n),
@@ -254,7 +254,7 @@ export const WITHDRAW_BRIDGE_ERC20: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 8453,
+    chainId: 8453,
     destinationChainId: Chains.ETHEREUM,
     tokenAddress: '0x37f0c2915CeCC7e977183B8543Fc0864d03E064C',
     amount: GreaterThanOrEqual(120000000000000000n),
@@ -295,8 +295,8 @@ export const passingTestCases = [
 ]
 
 export const failingTestCases = [
-  createTestCase(WITHDRAW_ETH, 'when sourceChainId is not correct', {
-    sourceChainId: 10,
+  createTestCase(WITHDRAW_ETH, 'when chainId is not correct', {
+    chainId: 10,
   }),
   createTestCase(BRIDGE_ETH, 'when destinationChainId is not correct', {
     destinationChainId: 10,

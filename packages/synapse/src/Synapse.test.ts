@@ -33,7 +33,7 @@ describe('When given the Synapse plugin', () => {
   describe('When generating the filter', () => {
     test('Should return a valid bridge action filter for L2 token tx', async () => {
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDCE_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -64,7 +64,7 @@ describe('When given the Synapse plugin', () => {
     })
     test('Should return a valid transaction for a L1 -> L2 transaction (Non CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
+        chainId: Chains.ETHEREUM,
         destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -96,7 +96,7 @@ describe('When given the Synapse plugin', () => {
     })
     test('Should return a valid transaction for a L2 -> L1 transaction (Non CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDCE_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -129,7 +129,7 @@ describe('When given the Synapse plugin', () => {
     // // CCTP Transactions
     test('Should return a valid transaction for a L1 -> L2 transaction (CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
+        chainId: Chains.ETHEREUM,
         destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -157,7 +157,7 @@ describe('When given the Synapse plugin', () => {
     })
     test('Should return a valid transaction for a L2 -> L1 transaction (CCTP)', async () => {
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
@@ -189,7 +189,7 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L1 ETH tx', async () => {
       const transaction = DEPOSIT_ETH
       const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
+        chainId: Chains.ETHEREUM,
         destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: zeroAddress,
         amount: GreaterThanOrEqual(parseEther('.2')),
@@ -199,7 +199,7 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L2 ETH tx', async () => {
       const transaction = WITHDRAW_ETH
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.ETHEREUM,
         tokenAddress: zeroAddress,
         amount: GreaterThanOrEqual(parseEther('.259')),
@@ -209,7 +209,7 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L1 Token tx', async () => {
       const transaction = DEPOSIT_ERC20
       const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
+        chainId: Chains.ETHEREUM,
         destinationChainId: Chains.BINANCE_SMART_CHAIN,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('9', 6)),
@@ -219,7 +219,7 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid L2 token tx', async () => {
       const transaction = WITHDRAW_ERC20
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDCE_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('4006', 6)),
@@ -230,7 +230,7 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid CCTP Deposit tx', async () => {
       const transaction = DEPOSIT_CCTP
       const filter = await bridge({
-        sourceChainId: Chains.ETHEREUM,
+        chainId: Chains.ETHEREUM,
         destinationChainId: Chains.ARBITRUM_ONE,
         tokenAddress: ETHEREUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('300', 6)),
@@ -241,7 +241,7 @@ describe('When given the Synapse plugin', () => {
     test('should pass filter with valid CCTP Withdraw tx', async () => {
       const transaction = WITHDRAW_CCTP
       const filter = await bridge({
-        sourceChainId: Chains.ARBITRUM_ONE,
+        chainId: Chains.ARBITRUM_ONE,
         destinationChainId: Chains.ETHEREUM,
         tokenAddress: ARBITRUM_USDC_ADDRESS,
         amount: GreaterThanOrEqual(parseUnits('95', 6)),

@@ -24,11 +24,11 @@ import { type Address, zeroAddress } from 'viem'
 export const bridge = async (
   bridge: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
+  const { chainId, destinationChainId, tokenAddress, amount, recipient } =
     bridge
 
   if (
-    sourceChainId !== Chains.ETHEREUM &&
+    chainId !== Chains.ETHEREUM &&
     destinationChainId !== Chains.ETHEREUM
   ) {
     throw new Error('Ethereum must be either the source or destination chain')
@@ -36,13 +36,13 @@ export const bridge = async (
 
   const isETH = tokenAddress === zeroAddress
 
-  if (sourceChainId === Chains.ETHEREUM) {
+  if (chainId === Chains.ETHEREUM) {
     if (!mainToL2BridgeContract[destinationChainId]) {
       throw new Error('Unsupported chainId')
     }
 
     return compressJson({
-      chainId: sourceChainId,
+      chainId: chainId,
       value: isETH ? amount : undefined,
       to: mainToL2BridgeContract[destinationChainId],
       input: {
@@ -81,7 +81,7 @@ export const bridge = async (
     })
   }
 
-  if (!l2ToMainBridgeContract[sourceChainId]) {
+  if (!l2ToMainBridgeContract[chainId]) {
     throw new Error('Unsupported chainId')
   }
 
@@ -90,9 +90,9 @@ export const bridge = async (
     : tokenAddress
 
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     value: isETH ? amount : undefined,
-    to: l2ToMainBridgeContract[sourceChainId],
+    to: l2ToMainBridgeContract[chainId],
     input: {
       $or: [
         {

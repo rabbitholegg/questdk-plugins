@@ -173,7 +173,7 @@ const BLAST_BASE_BRIDGE: TestParams<BridgeActionParams> = {
     value: '5000000000000000',
   },
   params: {
-    sourceChainId: Chains.BLAST,
+    chainId: Chains.BLAST,
     destinationChainId: Chains.BASE,
     amount: GreaterThanOrEqual(parseEther('0.005')),
     tokenAddress: zeroAddress,
@@ -194,7 +194,7 @@ export const passingTestCases = [
 
 export const failingTestCases = [
   createTestCase(BLAST_BASE_BRIDGE, 'when source chain is not correct', {
-    sourceChainId: Chains.OPTIMISM,
+    chainId: Chains.OPTIMISM,
   }),
   createTestCase(BLAST_BASE_BRIDGE, 'when destination chain is not correct', {
     destinationChainId: Chains.OPTIMISM,

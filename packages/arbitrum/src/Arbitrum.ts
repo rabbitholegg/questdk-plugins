@@ -22,7 +22,7 @@ import {
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
   const {
-    sourceChainId,
+    chainId,
     destinationChainId,
     contractAddress,
     tokenAddress,
@@ -33,7 +33,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   if (!tokenAddress) {
     // If token address is undefined, determining the exact bridge contract is not possible
     const contracts =
-      sourceChainId === ETH_CHAIN_ID
+      chainId === ETH_CHAIN_ID
         ? [
             MAINNET_TO_ARB_NOVA_GATEWAY,
             MAINNET_TO_ARB_ONE_GATEWAY,
@@ -47,12 +47,12 @@ export const bridge = async (bridge: BridgeActionParams) => {
           ]
 
     const abiFrags =
-      sourceChainId === ETH_CHAIN_ID
+      chainId === ETH_CHAIN_ID
         ? [...OUTBOUND_TRANSFER_L1_TO_L2, ...INBOX_DEPOSIT_ETH_FRAG]
         : [...OUTBOUND_TRANSFER_L2_TO_L1, ...ARBSYS_WITHDRAW_ETH_FRAG]
 
     return compressJson({
-      chainId: sourceChainId,
+      chainId: chainId,
       from: recipient,
       to: {
         $or: contracts,
@@ -68,12 +68,12 @@ export const bridge = async (bridge: BridgeActionParams) => {
   if (isBridgingToken) {
     const bridgeContract =
       contractAddress ||
-      getContractAddressFromChainId(sourceChainId, destinationChainId)
+      getContractAddressFromChainId(chainId, destinationChainId)
 
-    if (sourceChainId !== ETH_CHAIN_ID) {
+    if (chainId !== ETH_CHAIN_ID) {
       return compressJson({
         // L2 to L1 Token Transfer
-        chainId: sourceChainId,
+        chainId: chainId,
         to: bridgeContract
           ? bridgeContract
           : {
@@ -90,7 +90,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
     // L1 to L2 Token Transfer
     return compressJson({
-      chainId: sourceChainId,
+      chainId: chainId,
       to: bridgeContract
         ? bridgeContract
         : {
@@ -105,7 +105,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     })
   }
 
-  if (sourceChainId === ETH_CHAIN_ID) {
+  if (chainId === ETH_CHAIN_ID) {
     let networkInbox: Address | undefined
     if (destinationChainId) {
       networkInbox =
@@ -116,7 +116,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
     // L1 to L2 ETH Transfer
     return compressJson({
-      chainId: sourceChainId,
+      chainId: chainId,
       to: contractAddress || networkInbox,
       from: recipient,
       value: amount,
@@ -127,7 +127,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   }
   // L2 to L1 ETH Transfer
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     value: amount,
     to: contractAddress || UNIVERSAL_ARBSYS_PRECOMPILE,
     input: {

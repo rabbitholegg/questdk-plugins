@@ -11,7 +11,7 @@ export const bridge = async (
   bridge: BridgeActionParams,
 ): Promise<TransactionFilter> => {
   const {
-    sourceChainId,
+    chainId,
     destinationChainId,
     contractAddress,
     tokenAddress,
@@ -20,10 +20,10 @@ export const bridge = async (
   } = bridge
 
   const bridgeContract: Address =
-    contractAddress ?? CHAIN_TO_ROUTER[sourceChainId]
+    contractAddress ?? CHAIN_TO_ROUTER[chainId]
 
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     to: bridgeContract,
     input: {
       $abi: metaRouteABI,

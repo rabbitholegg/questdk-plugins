@@ -31,27 +31,27 @@ const _getChainData = async () => {
 export const bridge = async (
   bridge: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
+  const { chainId, destinationChainId, tokenAddress, amount, recipient } =
     bridge
 
-  const xcallContractAddress = ConnextContract[sourceChainId]
+  const xcallContractAddress = ConnextContract[chainId]
   const destinationDomain = destinationChainId
     ? chainIdToDomain(destinationChainId)
     : undefined
   const multiSendContractAddress =
-    getDeployedMultisendContract(sourceChainId)?.address
+    getDeployedMultisendContract(chainId)?.address
   const ethUsedIn = tokenAddress === ETH_TOKEN_ADDRESS
 
   if (!xcallContractAddress) {
-    throw new Error(`No xcall contract deployed on chain ${sourceChainId}`)
+    throw new Error(`No xcall contract deployed on chain ${chainId}`)
   }
 
   if (!multiSendContractAddress) {
-    throw new Error(`No multisend contract deployed on chain ${sourceChainId}`)
+    throw new Error(`No multisend contract deployed on chain ${chainId}`)
   }
 
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     to: {
       $or: [
         xcallContractAddress.toLowerCase(),

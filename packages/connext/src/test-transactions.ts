@@ -14,7 +14,7 @@ export const DAI_OP_GNOSIS: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: 10,
+    chainId: 10,
     destinationChainId: 100,
     tokenAddress: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
     amount: GreaterThanOrEqual(parseEther('2')),
@@ -33,7 +33,7 @@ export const ETH_OP_POLYGON: TestParams<BridgeActionParams> = {
     value: '49999999999999900',
   },
   params: {
-    sourceChainId: 10,
+    chainId: 10,
     destinationChainId: 137,
     tokenAddress: zeroAddress,
     amount: GreaterThanOrEqual(parseEther('0.001')),
@@ -52,7 +52,7 @@ export const ETH_OP_ARBITRUM: TestParams<BridgeActionParams> = {
     value: '49999999999999900',
   },
   params: {
-    sourceChainId: 10,
+    chainId: 10,
     destinationChainId: 42161,
     tokenAddress: zeroAddress,
     amount: GreaterThanOrEqual(parseEther('0.00005')),
@@ -79,8 +79,8 @@ export const passingTestCases = [
 ]
 
 export const failingTestCases = [
-  createTestCase(DAI_OP_GNOSIS, 'when sourceChainId is not correct', {
-    sourceChainId: 42161,
+  createTestCase(DAI_OP_GNOSIS, 'when chainId is not correct', {
+    chainId: 42161,
   }),
   createTestCase(DAI_OP_GNOSIS, 'when destinationChainId is not correct', {
     destinationChainId: 42161,

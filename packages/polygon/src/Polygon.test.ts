@@ -26,7 +26,7 @@ describe('Given the optimism plugin', () => {
   describe('When generating the filter', () => {
     test('should return a valid bridge action filter for L2 token tx', async () => {
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
+        chainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(100000n),
@@ -46,7 +46,7 @@ describe('Given the optimism plugin', () => {
 
     test('should return a valid bridge action filter for L1 token tx', async () => {
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
@@ -69,7 +69,7 @@ describe('Given the optimism plugin', () => {
 
     test('should return a valid bridge action filter for L1 ETH tx', async () => {
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ETH_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(100000n),
@@ -93,7 +93,7 @@ describe('Given the optimism plugin', () => {
     test('should pass filter with valid L1 ETH tx', async () => {
       const transaction = DEPOSIT_ETH
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: ETH_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual(parseEther('.04')),
@@ -105,7 +105,7 @@ describe('Given the optimism plugin', () => {
     test('should pass filter with valid L1 Token tx', async () => {
       const transaction = DEPOSIT_ERC20
       const filter = await bridge({
-        sourceChainId: ETH_CHAIN_ID,
+        chainId: ETH_CHAIN_ID,
         destinationChainId: POLYGON_CHAIN_ID,
         tokenAddress: USDC_ADDRESS_MAINNET,
         amount: GreaterThanOrEqual('400000000'), // $400 USDC,
@@ -117,7 +117,7 @@ describe('Given the optimism plugin', () => {
     test('should pass filter with valid L2 ETH tx', async () => {
       const transaction = WITHDRAW_ETH
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
+        chainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: WETH_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(parseEther('14')),
@@ -128,7 +128,7 @@ describe('Given the optimism plugin', () => {
     test('should pass filter with valid L2 token tx', async () => {
       const transaction = WITHDRAW_ERC20
       const filter = await bridge({
-        sourceChainId: POLYGON_CHAIN_ID,
+        chainId: POLYGON_CHAIN_ID,
         destinationChainId: ETH_CHAIN_ID,
         tokenAddress: MATIC_ADDRESS_POLYGON,
         amount: GreaterThanOrEqual(parseEther('495000')),

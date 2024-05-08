@@ -13,7 +13,7 @@ export const bridge = async (
   bridge: BridgeActionParams,
 ): Promise<TransactionFilter> => {
   const {
-    sourceChainId,
+    chainId,
     destinationChainId,
     contractAddress,
     tokenAddress,
@@ -21,13 +21,13 @@ export const bridge = async (
     recipient,
   } = bridge
 
-  const bridgeContract = contractAddress ?? CHAIN_TO_CONTRACT[sourceChainId]
+  const bridgeContract = contractAddress ?? CHAIN_TO_CONTRACT[chainId]
   const isNative = tokenAddress === zeroAddress
   const tokenAmount = tokenAddress && !isNative ? amount : undefined
   const token = tokenAddress && !isNative ? tokenAddress : undefined
 
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     to: bridgeContract,
     value: isNative ? amount : undefined,
     input: {

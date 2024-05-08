@@ -14,19 +14,19 @@ describe('Given the Hyphen plugin', () => {
 
     test('should return a valid bridge action filter using native token', async () => {
       // bridge ETH from Mainnet to Polygon
-      const sourceChainId = Chains.ETHEREUM
+      const chainId = Chains.ETHEREUM
       const destinationChainId = Chains.POLYGON_POS
 
       const filter = await bridge({
-        sourceChainId,
+        chainId,
         destinationChainId,
         tokenAddress: zeroAddress,
         recipient: TEST_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
       })
       expect(filter).to.deep.equal({
-        chainId: sourceChainId,
-        to: CHAIN_TO_CONTRACT[sourceChainId],
+        chainId: chainId,
+        to: CHAIN_TO_CONTRACT[chainId],
         value: {
           $gte: '100000',
         },
@@ -41,19 +41,19 @@ describe('Given the Hyphen plugin', () => {
     test('should return a valid bridge action filter using erc-20 token', async () => {
       // bridge erc-20 from Optimism to Polygon
       const tokenAddress = CHAIN_TO_TOKENS[Chains.OPTIMISM][0]
-      const sourceChainId = Chains.OPTIMISM
+      const chainId = Chains.OPTIMISM
       const destinationChainId = Chains.POLYGON_POS
 
       const filter = await bridge({
-        sourceChainId,
+        chainId,
         destinationChainId,
         tokenAddress,
         recipient: TEST_ADDRESS,
         amount: GreaterThanOrEqual(100000n),
       })
       expect(filter).to.deep.equal({
-        chainId: sourceChainId,
-        to: CHAIN_TO_CONTRACT[sourceChainId],
+        chainId: chainId,
+        to: CHAIN_TO_CONTRACT[chainId],
         input: {
           $abi: ABI,
           toChainId: destinationChainId,

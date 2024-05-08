@@ -19,7 +19,7 @@ export const NATIVE_TRANSFER: TestParams<BridgeActionParams> = {
     value: '68000000000000000',
   },
   params: {
-    sourceChainId: Chains.OPTIMISM,
+    chainId: Chains.OPTIMISM,
     destinationChainId: Chains.ARBITRUM_ONE,
     tokenAddress: zeroAddress,
     amount: GreaterThanOrEqual(100000n),
@@ -37,7 +37,7 @@ export const ERC20_TRANSFER: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     destinationChainId: Chains.BINANCE_SMART_CHAIN,
     tokenAddress: CHAIN_TO_TOKENS[Chains.ETHEREUM][0], // USDT
     amount: GreaterThanOrEqual(100000n),
@@ -55,7 +55,7 @@ export const ERC20_BRIDGE_SWAP: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: Chains.ETHEREUM,
+    chainId: Chains.ETHEREUM,
     destinationChainId: Chains.OPTIMISM,
     tokenAddress: CHAIN_TO_TOKENS[Chains.ETHEREUM][1], // USDC
     amount: GreaterThanOrEqual(100000n),

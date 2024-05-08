@@ -18,7 +18,7 @@ const BRIDGE_ETH_OP_ARB: TestParams<BridgeActionParams> = {
     value: '7500000000000000',
   },
   params: {
-    sourceChainId: Chains.OPTIMISM,
+    chainId: Chains.OPTIMISM,
     destinationChainId: Chains.ARBITRUM_ONE,
     tokenAddress: zeroAddress,
     amount: GreaterThanOrEqual(parseEther('0.0075')),
@@ -37,7 +37,7 @@ const BRIDGE_MATIC_POLYGON_BSC: TestParams<BridgeActionParams> = {
     value: '580000000000000000000',
   },
   params: {
-    sourceChainId: Chains.POLYGON_POS,
+    chainId: Chains.POLYGON_POS,
     destinationChainId: Chains.BINANCE_SMART_CHAIN,
     tokenAddress: zeroAddress,
     amount: GreaterThanOrEqual(parseEther('580')),
@@ -56,7 +56,7 @@ const BRIDGE_USDCE_ARB_MANTLE: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: Chains.ARBITRUM_ONE,
+    chainId: Chains.ARBITRUM_ONE,
     destinationChainId: Chains.MANTLE,
     tokenAddress: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8', // USDC.e
     amount: GreaterThanOrEqual(parseUnits('20', 6)),
@@ -74,7 +74,7 @@ const BRIDGE_USDC_ARB_BASE: TestParams<BridgeActionParams> = {
     value: '0',
   },
   params: {
-    sourceChainId: Chains.ARBITRUM_ONE,
+    chainId: Chains.ARBITRUM_ONE,
     destinationChainId: Chains.BASE,
     tokenAddress: '0xaf88d065e77c8cc2239327c5edb3a432268e5831', // USDC
     amount: GreaterThanOrEqual(parseUnits('20', 6)),
@@ -122,8 +122,8 @@ export const passingTestCases = [
 ]
 
 export const failingTestCases = [
-  createTestCase(BRIDGE_ETH_OP_ARB, 'when sourceChainId is incorrect', {
-    sourceChainId: Chains.POLYGON_POS,
+  createTestCase(BRIDGE_ETH_OP_ARB, 'when chainId is incorrect', {
+    chainId: Chains.POLYGON_POS,
   }),
   createTestCase(BRIDGE_ETH_OP_ARB, 'when destinationChainId is incorrect', {
     destinationChainId: Chains.POLYGON_POS,

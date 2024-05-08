@@ -12,7 +12,7 @@ describe('Given the superbridge plugin', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid bridge action', async () => {
         const filter = await bridge({
-          sourceChainId: 1,
+          chainId: 1,
           destinationChainId: 8453,
         })
         expect(filter).toBeTypeOf('object')

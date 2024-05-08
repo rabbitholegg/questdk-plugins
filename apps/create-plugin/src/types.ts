@@ -71,7 +71,7 @@ export const ActionParamKeys = {
     'duration',
   ],
   bridge: [
-    'sourceChainId',
+    'chainId',
     'destinationChainId',
     'contractAddress',
     'tokenAddress',

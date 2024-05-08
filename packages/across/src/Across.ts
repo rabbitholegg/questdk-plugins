@@ -10,20 +10,20 @@ import { CHAIN_TO_TOKENS } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, zeroAddress } from 'viem'
 
 export const bridge = async (bridge: BridgeActionParams) => {
-  const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
+  const { chainId, destinationChainId, tokenAddress, amount, recipient } =
     bridge
 
   const isNative = tokenAddress === zeroAddress
-  const tokenIn = isNative ? CHAIN_TO_WETH[sourceChainId] : tokenAddress
+  const tokenIn = isNative ? CHAIN_TO_WETH[chainId] : tokenAddress
   const bridgeContract = {
     $or: [
-      CHAIN_TO_SPOKE_VERIFIER[sourceChainId]?.toLowerCase(),
-      CHAIN_TO_SPOKEPOOL[sourceChainId]?.toLowerCase(),
+      CHAIN_TO_SPOKE_VERIFIER[chainId]?.toLowerCase(),
+      CHAIN_TO_SPOKEPOOL[chainId]?.toLowerCase(),
     ],
   }
 
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     to: bridgeContract,
     input: {
       $abi: ACROSS_BRIDGE_ABI,

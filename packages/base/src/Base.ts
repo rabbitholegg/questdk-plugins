@@ -18,9 +18,9 @@ import { type Address } from 'viem'
 export const bridge = async (
   params: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const { sourceChainId } = params
+  const { chainId } = params
 
-  return sourceChainId === Chains.ETHEREUM
+  return chainId === Chains.ETHEREUM
     ? bridgeFromEthereum(params)
     : bridgeFromBase(params)
 }
@@ -28,13 +28,13 @@ export const bridge = async (
 const bridgeFromEthereum = async (
   params: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const { amount, contractAddress, recipient, sourceChainId, tokenAddress } =
+  const { amount, contractAddress, recipient, chainId, tokenAddress } =
     params
 
   const contracts = contractAddress ? [contractAddress] : ethereumContracts
 
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     to: { $or: contracts.map((c) => c.toLowerCase()) },
     input: {
       $or: [
@@ -53,14 +53,14 @@ const bridgeFromEthereum = async (
 const bridgeFromBase = async (
   params: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const { amount, contractAddress, recipient, sourceChainId, tokenAddress } =
+  const { amount, contractAddress, recipient, chainId, tokenAddress } =
     params
 
   const contracts = contractAddress ? [contractAddress] : baseContracts
 
   const isETH = tokenAddress === ETH
   return compressJson({
-    chainId: sourceChainId,
+    chainId: chainId,
     to: { $or: contracts.map((c) => c.toLowerCase()) },
     value: isETH ? amount : undefined,
     input: {

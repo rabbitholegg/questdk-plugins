@@ -5,13 +5,13 @@ import { PolygonTokens, ETH_ADDRESS_MAINNET } from './supported-token-addresses'
 import { MAINNET_BRIDGE } from './contract-addresses'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
-  const { sourceChainId, contractAddress, tokenAddress, amount, recipient } =
+  const { chainId, contractAddress, tokenAddress, amount, recipient } =
     bridge
 
   // L2 Transactions are the same for ETH and ERC20
-  if (sourceChainId === POLYGON_CHAIN_ID) {
+  if (chainId === POLYGON_CHAIN_ID) {
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
+      chainId: chainId, // The chainId of the source chain
       to: contractAddress || tokenAddress, // on Polgon the contract that handles withdrawals is the token contract
       input: {
         $abi: POLYGON_BRIDGE_ABI_FUNCS,
@@ -22,7 +22,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   // Handle L1 ETH tx
   if (tokenAddress === ETH_ADDRESS_MAINNET) {
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
+      chainId: chainId, // The chainId of the source chain
       to: contractAddress || MAINNET_BRIDGE, // on Polgon the contract that handles withdrawals is the token contract
       value: amount,
       input: {
@@ -34,7 +34,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
   // Handle L1 ERC20 tx
   // The deposit function takes a bytes chunk as the last argument, and the amount is encoded in that value
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
+    chainId: chainId, // The chainId of the source chain
     to: contractAddress || MAINNET_BRIDGE, // on Polgon the contract that handles withdrawals is the token contract
     input: {
       $abi: POLYGON_BRIDGE_ABI_FUNCS,

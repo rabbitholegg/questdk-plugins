@@ -142,7 +142,7 @@ When implementing the action function, the parameters coming in are the criteria
 
 ```jsx
 const { 
-	sourceChainId, 
+	chainId, 
 	destinationChainId, 
 	tokenAddress,  // For Native Tokens (ETH, Matic, etc) sometimes this is 0x0 or blank
 	amount, 
@@ -154,8 +154,8 @@ Given these we have to map these supplied expected values against the actual ABI
 
 ```jsx
 return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
-    to: CHAIN_TO_CONTRACT[sourceChainId], // The contract address of the bridge
+    chainId: chainId, // The chainId of the source chain
+    to: CHAIN_TO_CONTRACT[chainId], // The contract address of the bridge
     input: {
       $abi: ACROSS_BRIDGE_ABI, // The ABI of the bridge contract
       recipient: recipient, // The recipient of the funds

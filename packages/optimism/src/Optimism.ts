@@ -8,13 +8,13 @@ import { ETH_CHAIN_ID, CHAIN_ID_ARRAY } from './chain-ids'
 import { ETH_TOKEN_ADDRESS, CHAIN_ID_TO_TOKENS } from './token-addresses'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
-  const { sourceChainId, contractAddress, tokenAddress, amount } = bridge
-  const isL1 = sourceChainId === ETH_CHAIN_ID
+  const { chainId, contractAddress, tokenAddress, amount } = bridge
+  const isL1 = chainId === ETH_CHAIN_ID
   if (isL1) {
     // If we're on the L1 and the token is ETH, we need to use a different input
     if (tokenAddress === ETH_TOKEN_ADDRESS) {
       return compressJson({
-        chainId: sourceChainId, // The chainId of the source chain
+        chainId: chainId, // The chainId of the source chain
         to: contractAddress || addresses.L1StandardBridge[1], // The contract address of the bridge
         value: amount,
         input: {
@@ -23,7 +23,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
       })
     }
     return compressJson({
-      chainId: sourceChainId, // The chainId of the source chain
+      chainId: chainId, // The chainId of the source chain
       to: contractAddress || addresses.L1StandardBridge[1], // The contract address of the bridge
       input: {
         $abi: l1StandardBridgeABI,
@@ -33,7 +33,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
     })
   }
   return compressJson({
-    chainId: sourceChainId, // The chainId of the source chain
+    chainId: chainId, // The chainId of the source chain
     to: contractAddress || addresses.L2StandardBridge[420], // The contract address of the bridge
     input: {
       $abi: l2StandardBridgeABI,

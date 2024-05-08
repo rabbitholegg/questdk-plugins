@@ -116,7 +116,7 @@ function buildParams(
       }
     case 'bridge':
       return {
-        sourceChainId: transaction.chainId,
+        chainId: transaction.chainId,
         ...params,
         destinationChainId: `Chains.${params.destinationChainId}`,
         amount: params.amount
