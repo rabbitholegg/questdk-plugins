@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.49
+
+### Patch Changes
+
+- [#377](https://github.com/rabbitholegg/questdk-plugins/pull/377) [`203185d1`](https://github.com/rabbitholegg/questdk-plugins/commit/203185d1c029560ba0b404800368bb28f40f2d1a) Thanks [@Quazia](https://github.com/Quazia)! - feat: make mint filters abstract
+
 ## 2.0.0-alpha.48
 
 ### Patch Changes

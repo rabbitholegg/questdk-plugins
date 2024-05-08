@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-thruster
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- Updated dependencies [[`203185d1`](https://github.com/rabbitholegg/questdk-plugins/commit/203185d1c029560ba0b404800368bb28f40f2d1a)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.49
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes
