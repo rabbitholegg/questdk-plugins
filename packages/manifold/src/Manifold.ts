@@ -44,7 +44,7 @@ export const mint = async (
 
   const inputConditions: ManifoldInput[] = [
     {
-      $abi: ABI_MULTI,
+      $abiAbstract: ABI_MULTI,
       creatorContractAddress: contractAddress,
       instanceId,
       mintCount: amount,
@@ -54,7 +54,7 @@ export const mint = async (
 
   if (shouldIncludeAbiMint(amount)) {
     inputConditions.push({
-      $abi: ABI_MINT,
+      $abiAbstract: ABI_MINT,
       creatorContractAddress: contractAddress,
       instanceId,
       mintFor: recipient,

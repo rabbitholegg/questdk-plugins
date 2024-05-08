@@ -31,7 +31,7 @@ export const mint = async (
     chainId,
     to: contractAddress,
     input: {
-      $abi: MINT_ABI,
+      $abiAbstract: MINT_ABI,
       to: recipient,
     },
   })
