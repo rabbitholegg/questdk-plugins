@@ -1,5 +1,14 @@
 # @rabbitholegg/questdk-plugin-mirror
 
+## 1.0.0-alpha.29
+
+### Patch Changes
+
+- [#377](https://github.com/rabbitholegg/questdk-plugins/pull/377) [`203185d1`](https://github.com/rabbitholegg/questdk-plugins/commit/203185d1c029560ba0b404800368bb28f40f2d1a) Thanks [@Quazia](https://github.com/Quazia)! - feat: make mint filters abstract
+
+- Updated dependencies [[`203185d1`](https://github.com/rabbitholegg/questdk-plugins/commit/203185d1c029560ba0b404800368bb28f40f2d1a)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.49
+
 ## 1.0.0-alpha.28
 
 ### Patch Changes

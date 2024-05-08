@@ -1,5 +1,11 @@
 # @rabbitholegg/create-plugin
 
+## 2.0.0-alpha.9
+
+### Minor Changes
+
+- [#361](https://github.com/rabbitholegg/questdk-plugins/pull/361) [`ca3b7ca2`](https://github.com/rabbitholegg/questdk-plugins/commit/ca3b7ca2ce97c5774c7090681b5d1b0d865cfc62) Thanks [@mmackz](https://github.com/mmackz)! - make tx hash optional
+
 ## 2.0.0-alpha.8
 
 ### Patch Changes
