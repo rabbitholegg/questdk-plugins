@@ -33,7 +33,7 @@ describe('Given the soundxyz plugin', () => {
             $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
           },
           input: {
-            $abi: SUPERMINTER_V2_ABI,
+            $abiAbstract: SUPERMINTER_V2_ABI,
             p: {
               edition: params.contractAddress,
               quantity: {

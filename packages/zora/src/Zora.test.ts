@@ -46,7 +46,7 @@ describe('Given the zora plugin', () => {
                 $some: {
                   $or: [
                     {
-                      $abi: ZORA_MINTER_ABI_721,
+                      $abiAbstract: ZORA_MINTER_ABI_721,
                       $and: [
                         {
                           $or: [
@@ -66,7 +66,7 @@ describe('Given the zora plugin', () => {
                       ],
                     },
                     {
-                      $abi: ZORA_MINTER_ABI_1155.concat(
+                      $abiAbstract: ZORA_MINTER_ABI_1155.concat(
                         ZORA_MINTER_ABI_1155_LEGACY,
                       ),
                       $and: [
@@ -92,7 +92,7 @@ describe('Given the zora plugin', () => {
               },
             },
             {
-              $abi: ZORA_MINTER_ABI_721,
+              $abiAbstract: ZORA_MINTER_ABI_721,
               $and: [
                 {
                   $or: [
@@ -111,7 +111,7 @@ describe('Given the zora plugin', () => {
               ],
             },
             {
-              $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
+              $abiAbstract: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
               $and: [
                 {
                   $or: [
