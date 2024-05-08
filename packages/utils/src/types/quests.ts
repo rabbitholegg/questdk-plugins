@@ -1,14 +1,15 @@
 import { z } from 'zod'
-import { EthAddressSchema, NetworkNameSchema } from './common'
+import { EthAddressSchema } from './common'
 import { Address, parseEther } from 'viem'
 import { ActionParamsFormSchema, QuestActionParamsSchema } from './actions'
 import { RewardTypeSchema } from './rewards'
 import { UUID } from 'crypto'
+import { NetworkNameSchema } from './'
 const NetworkSchema = z.object({
   name: z.string(),
   chainId: z.string(),
 })
-// Which one of these TaskSchema is the correct one?
+
 const TaskSchema = z.object({
   name: z.string(),
   description: z.string(),
@@ -24,22 +25,6 @@ const TaskSchema = z.object({
   title: z.string(),
   network: NetworkSchema,
 })
-
-// I Think this one is outdated but need to double check
-//   export const TaskSchema = z.object({
-//     name: z.string().nullish(),
-//     type: z.string(),
-//     project: z.string(),
-//     displayId: z.string().optional(),
-//     description: z.string().optional(),
-//     link: z.string().optional(),
-//     iconOption: z.string().optional(),
-//     deprecated: z.boolean().nullish(),
-//     contractAddress: z.string().nullish(),
-//     eventName: z.string().optional(),
-//     status: z.string().nullish(),
-//     network: NetworkWithChainIdSchema,
-//   });
 
 const QuestSchema = z.object({
   id: z.string(),
@@ -77,26 +62,6 @@ export const RewardSchema = z.object({
   decimals: z.number().nullish(),
   tokenId: z.string().nullish(),
 })
-
-// This one looks more outdated
-// export const RewardSchema = z.object({
-//     type: RewardTypeSchema,
-//     totalAllocated: z.number(),
-//     totalRedeemed: z.number(),
-//     tokenSymbol: z.string().nullish(),
-//     amount: z.string(),
-//     token: z.string().nullish(),
-//     tokenContractAddress: z.string(),
-//     questId: z.string().nullish(),
-//     tokenId: z.string().nullish(),
-//     s3Link: z.string().nullish(),
-//     network: NetworkWithChainIdSchema,
-//     ethValue: z.string().nullish(),
-//     decimals: z.number().nullish(),
-//     nftMedia: z.string().optional(),
-//     score: z.number(),
-//     scoreModel: z.string(),
-//   });
 
 export type QuestReward = z.infer<typeof RewardSchema>
 
