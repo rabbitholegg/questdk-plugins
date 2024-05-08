@@ -95,25 +95,33 @@ export const mint = async (
     $and: andArray1155.length !== 0 ? andArray1155 : undefined,
   }
 
-  return compressJson({
+  const UNIVERSAL_MINT_FILTER = {
     chainId,
     to: mintContract,
     input: {
-      $or: [
-        {
-          // batchmint function
-          $abiAbstract: UNIVERSAL_MINTER_ABI,
-          _targets: { $some: getAddress(contractAddress) },
-          _calldatas: {
-            $some: {
-              $or: [ERC721_FILTER, ERC1155_FILTER],
-            },
-          },
+      // batchmint function
+      $abiAbstract: UNIVERSAL_MINTER_ABI,
+      _targets: { $some: getAddress(contractAddress) },
+      _calldatas: {
+        $some: {
+          $or: [ERC721_FILTER, ERC1155_FILTER],
         },
+      },
+    },
+  }
+
+  const DIRECT_MINT_FILTER = {
+    chainId,
+    to: contractAddress,
+    input: {
+      $or: [
         ERC721_FILTER_ABSTRACT,
         ERC1155_FILTER_ABSTRACT,
       ],
     },
+  }
+  return compressJson({
+    $or: [DIRECT_MINT_FILTER, UNIVERSAL_MINT_FILTER],
   })
 }
 

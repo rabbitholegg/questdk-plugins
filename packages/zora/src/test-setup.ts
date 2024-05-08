@@ -47,7 +47,7 @@ export const failingTestCases = [
     MINT_BATCH_WITHOUT_FEES,
     'when using batchMint and contractAddress is incorrect',
     {
-      contractAddress: '0x4f330940159fB3368F5b06b34212C0cDB4e2C032',
+      contractAddress: '0xDEAD0940159fB3368F5b06b34212C0cDF4e2C032',
     },
   ),
   createTestCase(
