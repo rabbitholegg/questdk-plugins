@@ -27,7 +27,7 @@ export const NETWORK_TO_CHAIN_ID: Record<NetworkName, number> = {
   degen: 0x27bc86aa,
   'degen-mainnet': 0x27bc86aa,
 } as const
-  
+
 export const NETWORK_TO_NAME: Record<NetworkName, string> = {
   ethereum: 'Ethereum',
   'eth-mainnet': 'Ethereum',
@@ -55,7 +55,7 @@ export const NETWORK_TO_NAME: Record<NetworkName, string> = {
   degen: 'Degen',
   'degen-mainnet': 'Degen',
 } as const
-  
+
 export const CHAIN_ID_TO_NETWORK: Record<string, NetworkName> = Object.keys(
   NETWORK_TO_CHAIN_ID,
 ).reduce((acc, network) => {

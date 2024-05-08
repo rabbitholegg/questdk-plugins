@@ -19,8 +19,7 @@ export const bridge = async (
     recipient,
   } = bridge
 
-  const bridgeContract: Address =
-    contractAddress ?? CHAIN_TO_ROUTER[chainId]
+  const bridgeContract: Address = contractAddress ?? CHAIN_TO_ROUTER[chainId]
 
   return compressJson({
     chainId: chainId,

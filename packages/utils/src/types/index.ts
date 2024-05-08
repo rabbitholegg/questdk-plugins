@@ -58,9 +58,7 @@ export {
   PluginActionValidationSchema,
 } from './actions'
 
-export {
-  EthAddressSchema,
-} from './common'
+export { EthAddressSchema } from './common'
 
 export { ActionType, OrderType } from './actions'
 

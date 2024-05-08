@@ -54,9 +54,7 @@ export const bridge = async (bridge: BridgeActionParams) => {
 
   if (sourcePool === 13) {
     const targetContractAddress =
-      CHAIN_ID_TO_ETH_ROUTER_ADDRESS[
-        LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]
-      ]
+      CHAIN_ID_TO_ETH_ROUTER_ADDRESS[LAYER_ONE_TO_LAYER_ZERO_CHAIN_ID[chainId]]
 
     return compressJson({
       chainId: chainId, // The chainId of the source chain

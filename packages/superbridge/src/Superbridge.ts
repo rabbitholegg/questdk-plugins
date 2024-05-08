@@ -27,10 +27,7 @@ export const bridge = async (
   const { chainId, destinationChainId, tokenAddress, amount, recipient } =
     bridge
 
-  if (
-    chainId !== Chains.ETHEREUM &&
-    destinationChainId !== Chains.ETHEREUM
-  ) {
+  if (chainId !== Chains.ETHEREUM && destinationChainId !== Chains.ETHEREUM) {
     throw new Error('Ethereum must be either the source or destination chain')
   }
 

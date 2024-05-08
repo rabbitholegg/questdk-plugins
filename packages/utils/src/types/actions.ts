@@ -151,7 +151,7 @@ export const BridgeActionFormSchema = z.object({
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
-export type BridgeActionDetail = z.infer<typeof BridgeActionDetailSchema>;
+export type BridgeActionDetail = z.infer<typeof BridgeActionDetailSchema>
 
 /*
 SWAP ACTION SCHEMAS
@@ -177,7 +177,7 @@ export const SwapActionFormSchema = z.object({
   amountOutOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
-export type SwapActionDetail = z.infer<typeof SwapActionDetailSchema>;
+export type SwapActionDetail = z.infer<typeof SwapActionDetailSchema>
 /*
 DELEGATE ACTION SCHEMAS
 */
@@ -223,7 +223,7 @@ export const StakeActionFormSchema = z.object({
   duration: z.number().optional(),
 })
 
-export type StakeActionDetail = z.infer<typeof StakeActionDetailSchema>;
+export type StakeActionDetail = z.infer<typeof StakeActionDetailSchema>
 
 /*
 MINT ACTION SCHEMAS
@@ -244,7 +244,7 @@ export const MintActionDetailSchema = z.object({
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
-export type MintActionDetail = z.infer<typeof MintActionDetailSchema>;
+export type MintActionDetail = z.infer<typeof MintActionDetailSchema>
 
 /*
 FOLLOW
@@ -271,7 +271,7 @@ export const FollowActionDetailSchema = z.object({
   project: z.union([z.string(), EthAddressSchema]).optional(),
 })
 
-export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>;
+export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>
 
 /*
 VOTE
@@ -289,7 +289,7 @@ export const VoteActionDetailSchema = z.object({
   support: z.boolean().optional(),
 })
 
-export type VoteActionDetail = z.infer<typeof VoteActionDetailSchema>;
+export type VoteActionDetail = z.infer<typeof VoteActionDetailSchema>
 /*
 OPTIONS ACTION SCHEMAS
 */
@@ -312,7 +312,7 @@ export const OptionsActionDetailSchema = z.object({
   orderType: z.string().optional(),
 })
 
-export type OptionsActionDetail = z.infer<typeof OptionsActionDetailSchema>;
+export type OptionsActionDetail = z.infer<typeof OptionsActionDetailSchema>
 
 export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('bridge'), data: BridgeActionFormSchema }),
@@ -325,7 +325,7 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('follow'), data: FollowActionFormSchema }),
 ])
 
-export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>;
+export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
 
 export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('bridge'), data: BridgeActionDetailSchema }),
@@ -473,7 +473,6 @@ export enum OrderType {
   Market = 'market',
 }
 
-
 export const CreateQuestInputSchema = z.object({
   contractType: z.enum(['ERC20', 'ERC721']).optional(),
   networkId: NetworkNameSchema.optional(), // used to specify the network when a task supports multiple
@@ -501,4 +500,4 @@ export const CreateQuestInputSchema = z.object({
     .optional(),
 })
 
-export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>;
+export type CreateQuestInput = z.infer<typeof CreateQuestInputSchema>

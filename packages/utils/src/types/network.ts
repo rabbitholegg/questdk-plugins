@@ -28,5 +28,4 @@ export const NetworkNameSchema = z.union([
   z.literal('degen-mainnet'),
 ])
 
-export type NetworkName = z.infer<typeof NetworkNameSchema>;
-
+export type NetworkName = z.infer<typeof NetworkNameSchema>

@@ -5,8 +5,7 @@ import { PolygonTokens, ETH_ADDRESS_MAINNET } from './supported-token-addresses'
 import { MAINNET_BRIDGE } from './contract-addresses'
 export const bridge = async (bridge: BridgeActionParams) => {
   // This is the information we'll use to compose the Transaction object
-  const { chainId, contractAddress, tokenAddress, amount, recipient } =
-    bridge
+  const { chainId, contractAddress, tokenAddress, amount, recipient } = bridge
 
   // L2 Transactions are the same for ETH and ERC20
   if (chainId === POLYGON_CHAIN_ID) {
