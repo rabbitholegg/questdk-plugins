@@ -30,7 +30,7 @@ describe('Given the soundxyz plugin', () => {
         const filter = await mint(params)
         expect(filter).to.deep.equal({
           chainId: Chains.OPTIMISM,
-          to: getExitAddresses(Chains.OPTIMISM, [SUPERMINTER, SUPERMINTER_V2]), 
+          to: getExitAddresses(Chains.OPTIMISM, [SUPERMINTER, SUPERMINTER_V2]),
           input: {
             $abiAbstract: SUPERMINTER_V2_ABI,
             p: {
