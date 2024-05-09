@@ -31,6 +31,7 @@ import {
   getInstanceId,
   type ManifoldInput,
 } from './utils'
+import axios from 'axios'
 
 export const mint = async (
   mint: MintActionParams,
@@ -191,10 +192,10 @@ export const getFees = async (
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
 
     if (instanceId) {
-      const reponse = await fetch(
+      const response = await axios.get(
         `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
       )
-      const data = await reponse.json()
+      const data = response.data
       // determine project fee based on whether the project is exclusive or not
       const isExclusive = data.publicData.merkleTreeId !== undefined
       const projectFee =
