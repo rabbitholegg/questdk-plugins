@@ -8,6 +8,7 @@ import {
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
   Chains,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -28,7 +29,6 @@ import {
 import {
   shouldIncludeAbiMint,
   getInstanceId,
-  getExitAddresses,
   type ManifoldInput,
 } from './utils'
 
