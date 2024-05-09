@@ -28,6 +28,7 @@ import {
 import {
   shouldIncludeAbiMint,
   getInstanceId,
+  getExitAddresses,
   type ManifoldInput,
 } from './utils'
 
@@ -64,7 +65,7 @@ export const mint = async (
   return compressJson({
     chainId,
     to: {
-      $or: [ERC721_CONTRACT.toLowerCase(), ERC1155_CONTRACT.toLowerCase()],
+      $or: [ERC721_CONTRACT.toLowerCase(), ERC1155_CONTRACT.toLowerCase(), ...getExitAddresses(chainId)],
     },
     input: {
       $or: inputConditions,
