@@ -21,6 +21,7 @@ import {
   type DisctriminatedActionParams,
   type MintIntentParams,
   chainIdToViemChain,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -41,9 +42,7 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: {
-      $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
-    },
+    to: getExitAddresses(chainId, [SUPERMINTER, SUPERMINTER_V2]),
     input: {
       $abi: SUPERMINTER_V2_ABI,
       p: {
