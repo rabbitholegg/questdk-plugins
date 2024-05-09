@@ -42,7 +42,7 @@ describe('Given the zora plugin', () => {
         $or: [
           {
             chainId: params.chainId,
-            to: params.contractAddress,
+            to: getExitAddresses(10, params.contractAddress),
             input: {
               $or: [
                 {
@@ -83,12 +83,12 @@ describe('Given the zora plugin', () => {
           },
           {
             chainId: params.chainId,
-            to: getExitAddresses(10, [
-                  params.contractAddress.toLowerCase(),
-                  zoraUniversalMinterAddress[
+            to: getExitAddresses(10, ([
+              params.contractAddress.toLowerCase(),
+              zoraUniversalMinterAddress[
                     params.chainId as keyof typeof zoraUniversalMinterAddress
-                  ].toLowerCase(),
-                ]),
+              ].toLowerCase(),
+            ] as Address[])),
             input: {
               $abiAbstract: UNIVERSAL_MINTER_ABI,
               _targets: { $some: getAddress(params.contractAddress) },

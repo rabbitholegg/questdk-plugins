@@ -53,7 +53,7 @@ export const mint = async (
     ]
 
   const mintContracts = universalMinter
-    ? [contractAddress.toLowerCase(), universalMinter.toLowerCase()]
+    ? [contractAddress.toLowerCase(), universalMinter.toLowerCase()] as Address[]
     : contractAddress
 
   const andArray721 = []
