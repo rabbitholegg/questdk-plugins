@@ -1,6 +1,6 @@
 import { Chains } from "./chain-ids";
 
-export const RELAYER_ADDRESSES: { [chain in Chains]?: string } = {
+export const RELAYER_ADDRESSES: { [chain in Chains]?: Address } = {
   [Chains.ETHEREUM]: "0x902F09715B6303d4173037652FA7377e5b98089E",
   [Chains.OPTIMISM]: "0x81E792e5a9003CC1C8BF5569A00f34b65d75b017",
   [Chains.BINANCE_SMART_CHAIN]: "0xA27A2cA24DD28Ce14Fb5f5844b59851F03DCf182",
