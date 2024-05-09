@@ -44,7 +44,7 @@ export const mint = async (
     chainId,
     to: getExitAddresses(chainId, [SUPERMINTER, SUPERMINTER_V2]),
     input: {
-      $abi: SUPERMINTER_V2_ABI,
+      $abiAbstract: SUPERMINTER_V2_ABI,
       p: {
         edition: contractAddress,
         quantity: amount,

@@ -1,5 +1,29 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.49
+
+### Patch Changes
+
+- [#377](https://github.com/rabbitholegg/questdk-plugins/pull/377) [`203185d1`](https://github.com/rabbitholegg/questdk-plugins/commit/203185d1c029560ba0b404800368bb28f40f2d1a) Thanks [@Quazia](https://github.com/Quazia)! - feat: make mint filters abstract
+
+## 2.0.0-alpha.48
+
+### Patch Changes
+
+- [#373](https://github.com/rabbitholegg/questdk-plugins/pull/373) [`cc3ea9e8`](https://github.com/rabbitholegg/questdk-plugins/commit/cc3ea9e8a873344835acac144b372516acdf4e7d) Thanks [@Quazia](https://github.com/Quazia)! - Chore(questdk): remove pre-publish hook
+
+## 2.0.0-alpha.47
+
+### Patch Changes
+
+- [#371](https://github.com/rabbitholegg/questdk-plugins/pull/371) [`d040886a`](https://github.com/rabbitholegg/questdk-plugins/commit/d040886acb2de9785d475f04d7c55a03fc6e3381) Thanks [@Quazia](https://github.com/Quazia)! - Fix(neynar:follow): fix API calls for validation
+
+## 2.0.0-alpha.46
+
+### Patch Changes
+
+- [#367](https://github.com/rabbitholegg/questdk-plugins/pull/367) [`74fd59b`](https://github.com/rabbitholegg/questdk-plugins/commit/74fd59b6f0d07db40e564cc99bd125e443c6f6a8) Thanks [@Quazia](https://github.com/Quazia)! - chore: replace questdk build with vite, verify terminal build with linking
+
 ## 2.0.0-alpha.45
 
 ### Minor Changes

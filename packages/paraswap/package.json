@@ -1,8 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-paraswap",
   "private": false,
-  "version": "1.0.0-alpha.39",
-  "type": "module",
+  "version": "1.0.0-alpha.43",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",

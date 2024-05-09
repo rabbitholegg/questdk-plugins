@@ -19,6 +19,7 @@ import {
   isAddress,
   parseAbiParameters,
   slice,
+  AbiParameter,
 } from 'viem'
 type OperatorKey = keyof typeof operators
 
@@ -241,7 +242,7 @@ export const handleAbstractAbiDecode = (
   context: any,
   filter: AbstractAbiFilter,
 ) => {
-  const decodedReturn: ReturnType<typeof handleAbiDecode>[] = []
+  const decodedReturn: Array<ReturnType<typeof handleAbiDecode>> = []
   const elementCount = filter.$abiAbstract!.length
   const $abiAbstract = filter.$abiAbstract
   const { $abiAbstract: _, ...newFilter } = filter
@@ -288,7 +289,7 @@ export const handleAbiParamDecode = (context: any, filter: AbiParamFilter) => {
     const params = parseAbiParameters(filter.$abiParams.join(', '))
     const args = decodeAbiParameters(params, context)
     const namedArgs = params.reduce(
-      (acc: Record<string, any>, param, index) => {
+      (acc: Record<string, any>, param: AbiParameter, index) => {
         acc[`${param.name || index}`] = args[index]
         return acc
       },

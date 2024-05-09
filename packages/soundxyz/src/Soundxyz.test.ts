@@ -32,7 +32,7 @@ describe('Given the soundxyz plugin', () => {
           chainId: Chains.OPTIMISM,
           to: getExitAddresses(Chains.OPTIMISM, [SUPERMINTER, SUPERMINTER_V2]), 
           input: {
-            $abi: SUPERMINTER_V2_ABI,
+            $abiAbstract: SUPERMINTER_V2_ABI,
             p: {
               edition: params.contractAddress,
               quantity: {

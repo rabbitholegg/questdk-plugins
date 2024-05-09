@@ -11,7 +11,7 @@ import {
 } from 'viem'
 
 export interface ManifoldInput {
-  $abi: typeof ABI_MULTI | typeof ABI_MINT
+  $abiAbstract: typeof ABI_MULTI | typeof ABI_MINT
   creatorContractAddress: string
   instanceId?: number | string
   mintCount?: FilterOperator | undefined
