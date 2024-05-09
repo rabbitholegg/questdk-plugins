@@ -10,6 +10,7 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -29,7 +30,7 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: contractAddress,
+    to: getExitAddresses(chainId, contractAddress),
     input: {
       $abi: MINT_ABI,
       to: recipient,
