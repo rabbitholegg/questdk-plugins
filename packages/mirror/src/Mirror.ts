@@ -10,6 +10,7 @@ import {
   DEFAULT_ACCOUNT,
   type DisctriminatedActionParams,
   BOOST_TREASURY_ADDRESS,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -36,7 +37,7 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: contractAddress,
+    to: getExitAddresses(chainId, contractAddress),
     from: recipient,
     input: {
       $abi: COLLECT_ENTRY_ABI,
