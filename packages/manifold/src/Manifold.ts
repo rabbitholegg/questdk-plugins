@@ -64,7 +64,7 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: getExitAddresses(chainId, ERC1155_CONTRACT, ERC721_CONTRACT),
+    to: getExitAddresses(chainId, [ERC1155_CONTRACT, ERC721_CONTRACT]),
     input: {
       $or: inputConditions,
     },
