@@ -140,9 +140,9 @@ describe('Given the getFee function', () => {
   })
 
   test('should return the correct project + action fee for a 721 mint', async () => {
-    const contractAddress: Address = '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
+    const contractAddress: Address =
+      '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
     const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
-
     ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: {
@@ -159,7 +159,8 @@ describe('Given the getFee function', () => {
   })
 
   test('should return the correct project + action fee for an 1155 mint', async () => {
-    const contractAddress: Address = '0xe096f28c87f331758af3da402add89b33a2853d8'
+    const contractAddress: Address =
+      '0xe096f28c87f331758af3da402add89b33a2853d8'
     const tokenId = 1
     const mintParams = {
       contractAddress,
@@ -167,7 +168,6 @@ describe('Given the getFee function', () => {
       chainId: Chains.BASE,
       amount: 1,
     }
-
     ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
       data: {
