@@ -10,7 +10,6 @@ import { ERC1155_CONTRACT, ERC721_CONTRACT } from './constants'
 import {
   mint,
   getFees,
-  getProjectFees,
   getMintIntent,
   simulateMint,
 } from './Manifold'
