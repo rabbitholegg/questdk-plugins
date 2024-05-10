@@ -54,9 +54,9 @@ export const mint = async (
 
   const mintContracts = universalMinter
     ? ([
-        contractAddress.toLowerCase(),
-        universalMinter.toLowerCase(),
-      ] as Address[])
+      contractAddress.toLowerCase(),
+      universalMinter.toLowerCase(),
+    ] as Address[])
     : contractAddress
 
   const andArray721 = []
@@ -100,29 +100,22 @@ export const mint = async (
   }
 
   const UNIVERSAL_MINT_FILTER = {
-    chainId,
-    to: getExitAddresses(chainId, mintContracts),
-    input: {
-      // batchmint function
-      $abiAbstract: UNIVERSAL_MINTER_ABI,
-      _targets: { $some: getAddress(contractAddress) },
-      _calldatas: {
-        $some: {
-          $or: [ERC721_FILTER, ERC1155_FILTER],
-        },
+    // batchmint function
+    $abiAbstract: UNIVERSAL_MINTER_ABI,
+    _targets: { $some: getAddress(contractAddress) },
+    _calldatas: {
+      $some: {
+        $or: [ERC721_FILTER, ERC1155_FILTER],
       },
     },
   }
 
-  const DIRECT_MINT_FILTER = {
-    chainId,
-    to: getExitAddresses(chainId, contractAddress),
-    input: {
-      $or: [ERC721_FILTER_ABSTRACT, ERC1155_FILTER_ABSTRACT],
-    },
-  }
   return compressJson({
-    $or: [DIRECT_MINT_FILTER, UNIVERSAL_MINT_FILTER],
+    chainId,
+    to: getExitAddresses(chainId, mintContracts),
+    input: {
+      $or: [ERC721_FILTER_ABSTRACT, ERC1155_FILTER_ABSTRACT, UNIVERSAL_MINT_FILTER],
+    },
   })
 }
 
