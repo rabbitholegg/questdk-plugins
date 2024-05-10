@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-manifold
 
+## 1.0.0-alpha.12
+
+### Patch Changes
+
+- [#380](https://github.com/rabbitholegg/questdk-plugins/pull/380) [`86de6103`](https://github.com/rabbitholegg/questdk-plugins/commit/86de6103bc221a1b4c733c8a79106078813c7edd) Thanks [@Quazia](https://github.com/Quazia)! - Art/hotfix/layzer zero fix
+
 ## 1.0.0-alpha.11
 
 ### Patch Changes
