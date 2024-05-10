@@ -8,6 +8,7 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   http,
@@ -54,7 +55,7 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: contractAddress,
+    to: getExitAddresses(chainId, contractAddress),
     input: ERC1155_FILTER,
   })
 }

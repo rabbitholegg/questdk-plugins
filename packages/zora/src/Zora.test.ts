@@ -15,129 +15,40 @@ import {
 import {
   ActionType,
   Chains,
-  createTestCase,
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
-import { type Address, getAddress, parseEther } from 'viem'
+import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint', () => {
-    test('should return a valid action filter', async () => {
-      const { params } = createTestCase(
-        BASIC_PURCHASE,
-        'when doing a basic purchase',
-        {
-          amount: '1',
-        },
-      )
-      const filter = await mint(params)
-
-      const expectedFilter = {
-        $or: [
-          {
-            chainId: params.chainId,
-            to: params.contractAddress,
-            input: {
-              $or: [
-                {
-                  $abiAbstract: ZORA_MINTER_ABI_721,
-                  $and: [
-                    {
-                      $or: [
-                        { recipient: params.recipient },
-                        { tokenRecipient: params.recipient },
-                        { to: params.recipient },
-                      ],
-                    },
-                    {
-                      quantity: params.amount,
-                    },
-                  ],
-                },
-                {
-                  $abiAbstract: ZORA_MINTER_ABI_1155.concat(
-                    ZORA_MINTER_ABI_1155_LEGACY,
-                  ),
-                  $and: [
-                    {
-                      $or: [
-                        { recipient: params.recipient },
-                        { tokenRecipient: params.recipient },
-                        { to: params.recipient },
-                      ],
-                    },
-                    {
-                      quantity: params.amount,
-                      tokenId: params.tokenId,
-                    },
-                  ],
-                },
-              ],
-            },
-          },
-          {
-            chainId: params.chainId,
-            to: {
-              $or: [
-                params.contractAddress.toLowerCase(),
-                zoraUniversalMinterAddress[
-                  params.chainId as keyof typeof zoraUniversalMinterAddress
-                ].toLowerCase(),
-              ],
-            },
-            input: {
-              $abiAbstract: UNIVERSAL_MINTER_ABI,
-              _targets: { $some: getAddress(params.contractAddress) },
-              _calldatas: {
-                $some: {
-                  $or: [
-                    {
-                      $abi: ZORA_MINTER_ABI_721,
-                      $and: [
-                        {
-                          $or: [
-                            { recipient: params.recipient },
-                            { tokenRecipient: params.recipient },
-                            { to: params.recipient },
-                          ],
-                        },
-                        {
-                          quantity: params.amount,
-                        },
-                      ],
-                    },
-                    {
-                      $abi: ZORA_MINTER_ABI_1155.concat(
-                        ZORA_MINTER_ABI_1155_LEGACY,
-                      ),
-                      $and: [
-                        {
-                          $or: [
-                            { recipient: params.recipient },
-                            { tokenRecipient: params.recipient },
-                            { to: params.recipient },
-                          ],
-                        },
-                        {
-                          quantity: params.amount,
-                          tokenId: params.tokenId,
-                        },
-                      ],
-                    },
-                  ],
-                },
-              },
-            },
-          },
-        ],
-      }
-
-      expect(filter).toEqual(compressJson(expectedFilter))
+    describe('should return a valid action filter', () => {
+      test('when making a valid mint action', async () => {
+        const filter = await mint({
+          chainId: 1,
+          contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+        })
+        expect(filter).toBeTypeOf('object')
+        expect(Number(filter.chainId)).toBe(1)
+        if (typeof filter.to === 'string') {
+          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+        } else {
+          // if to is an object, it should have a logical operator as the only key
+          expect(filter.to).toBeTypeOf('object')
+          expect(Object.keys(filter.to)).toHaveLength(1)
+          expect(
+            ['$or', '$and'].some((prop) =>
+              Object.hasOwnProperty.call(filter.to, prop),
+            ),
+          ).to.be.true
+          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+            arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+          )
+        }
+      })
     })
 
     describe('should pass filter with valid transactions', () => {

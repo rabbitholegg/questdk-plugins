@@ -1,5 +1,27 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.46
+
+### Patch Changes
+
+- [#382](https://github.com/rabbitholegg/questdk-plugins/pull/382) [`e615e68a`](https://github.com/rabbitholegg/questdk-plugins/commit/e615e68a240de457f05746fbd2fb24421b558eee) Thanks [@Quazia](https://github.com/Quazia)! - fix(zora): resolve batch mint validation issue
+
+## 1.0.0-alpha.45
+
+### Patch Changes
+
+- [#380](https://github.com/rabbitholegg/questdk-plugins/pull/380) [`86de6103`](https://github.com/rabbitholegg/questdk-plugins/commit/86de6103bc221a1b4c733c8a79106078813c7edd) Thanks [@Quazia](https://github.com/Quazia)! - Art/hotfix/layzer zero fix
+
+## 1.0.0-alpha.44
+
+### Patch Changes
+
+- [#378](https://github.com/rabbitholegg/questdk-plugins/pull/378) [`131b16c`](https://github.com/rabbitholegg/questdk-plugins/commit/131b16c88672e2f545853d19979a3aefde8892d7) Thanks [@Quazia](https://github.com/Quazia)! - feat: add support for multiple standard exit addresses
+
+- Updated dependencies [[`131b16c`](https://github.com/rabbitholegg/questdk-plugins/commit/131b16c88672e2f545853d19979a3aefde8892d7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.22
+  - @rabbitholegg/questdk@2.0.0-alpha.49
+
 ## 1.0.0-alpha.43
 
 ### Patch Changes

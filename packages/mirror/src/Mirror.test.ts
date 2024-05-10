@@ -25,7 +25,12 @@ describe('Given the mirror plugin', () => {
         expect(filter).to.deep.equal({
           chainId: 10,
           from: '0x6e40dc97a419b42490923677bbc803e55338c26e',
-          to: '0x05b52003e4b3ce431f467de89a1d0b82b663fc6b',
+          to: {
+            $or: [
+              '0x81e792e5a9003cc1c8bf5569a00f34b65d75b017',
+              '0x05b52003e4b3ce431f467de89a1d0b82b663fc6b',
+            ],
+          },
           input: {
             $abiAbstract: COLLECT_ENTRY_ABI,
             tokenRecipient: '0x6e40dc97a419b42490923677bbc803e55338c26e',

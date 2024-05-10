@@ -1,4 +1,5 @@
-import { Chains } from "./chain-ids";
+import { Address } from 'viem'
+import { Chains } from './chain-ids'
 
 export const RELAYER_ADDRESSES: { [chain in Chains]?: Address } = {
   [Chains.ETHEREUM]: "0x902F09715B6303d4173037652FA7377e5b98089E",
