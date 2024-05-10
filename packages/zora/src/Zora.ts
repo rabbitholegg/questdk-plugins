@@ -54,9 +54,9 @@ export const mint = async (
 
   const mintContracts = universalMinter
     ? ([
-      contractAddress.toLowerCase(),
-      universalMinter.toLowerCase(),
-    ] as Address[])
+        contractAddress.toLowerCase(),
+        universalMinter.toLowerCase(),
+      ] as Address[])
     : contractAddress
 
   const andArray721 = []
@@ -114,7 +114,11 @@ export const mint = async (
     chainId,
     to: getExitAddresses(chainId, mintContracts),
     input: {
-      $or: [ERC721_FILTER_ABSTRACT, ERC1155_FILTER_ABSTRACT, UNIVERSAL_MINT_FILTER],
+      $or: [
+        ERC721_FILTER_ABSTRACT,
+        ERC1155_FILTER_ABSTRACT,
+        UNIVERSAL_MINT_FILTER,
+      ],
     },
   })
 }

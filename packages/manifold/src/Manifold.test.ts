@@ -7,12 +7,7 @@ import {
 import { describe, expect, beforeEach, vi, MockedFunction, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
 import { ERC1155_CONTRACT, ERC721_CONTRACT } from './constants'
-import {
-  mint,
-  getFees,
-  getMintIntent,
-  simulateMint,
-} from './Manifold'
+import { mint, getFees, getMintIntent, simulateMint } from './Manifold'
 import { parseEther, type Address } from 'viem'
 import axios from 'axios'
 
