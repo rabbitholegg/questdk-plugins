@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- [#378](https://github.com/rabbitholegg/questdk-plugins/pull/378) [`131b16c`](https://github.com/rabbitholegg/questdk-plugins/commit/131b16c88672e2f545853d19979a3aefde8892d7) Thanks [@Quazia](https://github.com/Quazia)! - feat: add support for multiple standard exit addresses
+
 ## 1.0.0-alpha.21
 
 ### Patch Changes

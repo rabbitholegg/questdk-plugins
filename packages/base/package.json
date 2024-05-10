@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-base",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
