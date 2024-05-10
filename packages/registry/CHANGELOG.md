@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.108
+
+### Patch Changes
+
+- Updated dependencies [[`86de6103`](https://github.com/rabbitholegg/questdk-plugins/commit/86de6103bc221a1b4c733c8a79106078813c7edd)]:
+  - @rabbitholegg/questdk-plugin-manifold@1.0.0-alpha.12
+  - @rabbitholegg/questdk-plugin-zora@1.0.0-alpha.45
+
 ## 1.0.0-alpha.107
 
 ### Patch Changes
