@@ -43,13 +43,13 @@ export const failingTestCases = [
   createTestCase(MINT_WITH_REWARDS_1155, 'when amount is incorrect', {
     amount: '72',
   }),
-  // createTestCase(
-  //   MINT_BATCH_WITHOUT_FEES,
-  //   'when using batchMint and contractAddress is incorrect',
-  //   {
-  //     contractAddress: '0xDEAD0940159fB3368F5b06b34212C0cDF4e2C032',
-  //   },
-  // ),
+  createTestCase(
+    MINT_BATCH_WITHOUT_FEES,
+    'when using batchMint and contractAddress is incorrect',
+    {
+      contractAddress: '0xDEAD0940159fB3368F5b06b34212C0cDF4e2C032',
+    },
+  ),
   createTestCase(
     MINT_BATCH_WITHOUT_FEES,
     'when using batchMint and tokenId is incorrect',
