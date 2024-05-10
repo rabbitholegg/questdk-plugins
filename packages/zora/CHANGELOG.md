@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.46
+
+### Patch Changes
+
+- [#382](https://github.com/rabbitholegg/questdk-plugins/pull/382) [`e615e68a`](https://github.com/rabbitholegg/questdk-plugins/commit/e615e68a240de457f05746fbd2fb24421b558eee) Thanks [@Quazia](https://github.com/Quazia)! - fix(zora): resolve batch mint validation issue
+
 ## 1.0.0-alpha.45
 
 ### Patch Changes
