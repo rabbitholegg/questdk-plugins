@@ -4,7 +4,7 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, beforeEach, vi, MockedFunction, test } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
 import { ERC1155_CONTRACT, ERC721_CONTRACT } from './constants'
 import {
@@ -15,6 +15,29 @@ import {
   simulateMint,
 } from './Manifold'
 import { parseEther, type Address } from 'viem'
+import axios from 'axios'
+
+vi.mock('axios', () => {
+  return {
+    default: {
+      post: vi.fn(),
+      get: vi.fn(),
+      delete: vi.fn(),
+      put: vi.fn(),
+      create: vi.fn().mockReturnThis(),
+      interceptors: {
+        request: {
+          use: vi.fn(),
+          eject: vi.fn(),
+        },
+        response: {
+          use: vi.fn(),
+          eject: vi.fn(),
+        },
+      },
+    },
+  }
+})
 
 describe('Given the manifold plugin', () => {
   describe('When handling the mint action', () => {
@@ -111,37 +134,28 @@ describe('Given the getMintIntent function', () => {
   })
 })
 
-describe('Given the getProjectFee function', () => {
-  test('should return the correct fee for a 721 mint', async () => {
-    const contractAddress: Address =
-      '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
-    const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
-    const fee = await getProjectFees(mintParams)
-    expect(fee).equals(parseEther('0.0005'))
-  })
-
-  test('should return the correct fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0xe096f28c87f331758af3da402add89b33a2853d8'
-    const mintParams = {
-      contractAddress,
-      tokenId: 1,
-      chainId: Chains.BASE,
-      amount: 1,
-    }
-    const fee = await getProjectFees(mintParams)
-    expect(fee).equals(parseEther('0.00102'))
-  })
-})
-
 describe('Given the getFee function', () => {
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
+
   test('should return the correct project + action fee for a 721 mint', async () => {
     const contractAddress: Address =
       '0x6935cd348193bab133f3081f53eb99ee6f0d685b'
     const mintParams = { contractAddress, chainId: Chains.OPTIMISM }
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+      status: 200,
+      data: {
+        publicData: {
+          merkleTreeId: undefined,
+        },
+        mintPrice: 0,
+      },
+    })
+
     const fee = await getFees(mintParams)
-    expect(fee.projectFee).equals(parseEther('0.0005'))
-    expect(fee.actionFee).equals(0n)
+    expect(fee.projectFee).toEqual(parseEther('0.0005'))
+    expect(fee.actionFee).toEqual(0n)
   })
 
   test('should return the correct project + action fee for an 1155 mint', async () => {
@@ -154,9 +168,19 @@ describe('Given the getFee function', () => {
       chainId: Chains.BASE,
       amount: 1,
     }
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+      status: 200,
+      data: {
+        publicData: {
+          merkleTreeId: undefined,
+        },
+        mintPrice: 0.00052,
+      },
+    })
+
     const fee = await getFees(mintParams)
-    expect(fee.projectFee).equals(parseEther('0.0005'))
-    expect(fee.actionFee).equals(parseEther('0.00052'))
+    expect(fee.projectFee).toEqual(parseEther('0.0005'))
+    expect(fee.actionFee).toEqual(parseEther('0.00052'))
   })
 })
 

@@ -8,6 +8,7 @@ import {
   chainIdToViemChain,
   DEFAULT_ACCOUNT,
   Chains,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -30,6 +31,7 @@ import {
   getInstanceId,
   type ManifoldInput,
 } from './utils'
+import axios from 'axios'
 
 export const mint = async (
   mint: MintActionParams,
@@ -63,9 +65,7 @@ export const mint = async (
 
   return compressJson({
     chainId,
-    to: {
-      $or: [ERC721_CONTRACT.toLowerCase(), ERC1155_CONTRACT.toLowerCase()],
-    },
+    to: getExitAddresses(chainId, [ERC1155_CONTRACT, ERC721_CONTRACT]),
     input: {
       $or: inputConditions,
     },
@@ -192,10 +192,10 @@ export const getFees = async (
       typeof amount === 'number' ? BigInt(amount) : BigInt(1)
 
     if (instanceId) {
-      const reponse = await fetch(
+      const response = await axios.get(
         `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
       )
-      const data = await reponse.json()
+      const data = response.data
       // determine project fee based on whether the project is exclusive or not
       const isExclusive = data.publicData.merkleTreeId !== undefined
       const projectFee =

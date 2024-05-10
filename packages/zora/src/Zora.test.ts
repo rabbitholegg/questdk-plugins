@@ -19,6 +19,7 @@ import {
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk/filter'
 import { type Address, getAddress, parseEther } from 'viem'
@@ -41,7 +42,7 @@ describe('Given the zora plugin', () => {
         $or: [
           {
             chainId: params.chainId,
-            to: params.contractAddress,
+            to: getExitAddresses(10, params.contractAddress),
             input: {
               $or: [
                 {
@@ -82,14 +83,12 @@ describe('Given the zora plugin', () => {
           },
           {
             chainId: params.chainId,
-            to: {
-              $or: [
-                params.contractAddress.toLowerCase(),
-                zoraUniversalMinterAddress[
-                  params.chainId as keyof typeof zoraUniversalMinterAddress
-                ].toLowerCase(),
-              ],
-            },
+            to: getExitAddresses(10, [
+              params.contractAddress.toLowerCase(),
+              zoraUniversalMinterAddress[
+                params.chainId as keyof typeof zoraUniversalMinterAddress
+              ].toLowerCase(),
+            ] as Address[]),
             input: {
               $abiAbstract: UNIVERSAL_MINTER_ABI,
               _targets: { $some: getAddress(params.contractAddress) },

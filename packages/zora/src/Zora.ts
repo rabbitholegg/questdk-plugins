@@ -21,6 +21,7 @@ import {
   type DisctriminatedActionParams,
   type MintIntentParams,
   chainIdToViemChain,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { MintAPIClient, getMintCosts } from '@zoralabs/protocol-sdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
@@ -51,8 +52,11 @@ export const mint = async (
       chainId as keyof typeof zoraUniversalMinterAddress
     ]
 
-  const mintContract = universalMinter
-    ? { $or: [contractAddress.toLowerCase(), universalMinter.toLowerCase()] }
+  const mintContracts = universalMinter
+    ? ([
+        contractAddress.toLowerCase(),
+        universalMinter.toLowerCase(),
+      ] as Address[])
     : contractAddress
 
   const andArray721 = []
@@ -97,7 +101,7 @@ export const mint = async (
 
   const UNIVERSAL_MINT_FILTER = {
     chainId,
-    to: mintContract,
+    to: getExitAddresses(chainId, mintContracts),
     input: {
       // batchmint function
       $abiAbstract: UNIVERSAL_MINTER_ABI,
@@ -112,7 +116,7 @@ export const mint = async (
 
   const DIRECT_MINT_FILTER = {
     chainId,
-    to: contractAddress,
+    to: getExitAddresses(chainId, contractAddress),
     input: {
       $or: [ERC721_FILTER_ABSTRACT, ERC1155_FILTER_ABSTRACT],
     },

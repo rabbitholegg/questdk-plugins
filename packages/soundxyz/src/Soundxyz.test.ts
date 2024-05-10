@@ -17,6 +17,7 @@ import {
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
+  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
@@ -29,9 +30,7 @@ describe('Given the soundxyz plugin', () => {
         const filter = await mint(params)
         expect(filter).to.deep.equal({
           chainId: Chains.OPTIMISM,
-          to: {
-            $or: [SUPERMINTER.toLowerCase(), SUPERMINTER_V2.toLowerCase()],
-          },
+          to: getExitAddresses(Chains.OPTIMISM, [SUPERMINTER, SUPERMINTER_V2]),
           input: {
             $abiAbstract: SUPERMINTER_V2_ABI,
             p: {
