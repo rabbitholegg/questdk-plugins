@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-zora",
-  "version": "1.0.0-alpha.45",
+  "version": "1.0.0-alpha.46",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
