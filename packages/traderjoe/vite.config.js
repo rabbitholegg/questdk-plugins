@@ -2,9 +2,7 @@
 export default {
   build: {
     rollupOptions: {
-      external: [
-        '@traderjoe-xyz/sdk-v2',
-      ],
+      external: ['@traderjoe-xyz/sdk-v2'],
     },
     lib: {
       entry: 'src/index.ts',

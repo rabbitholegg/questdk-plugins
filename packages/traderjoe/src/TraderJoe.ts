@@ -16,7 +16,13 @@ import {
   TOKENS_FOR_EXACT_NATIVE_ABI,
   TOKENS_FOR_EXACT_TOKENS_ABI,
 } from './abi'
-import { arbitrum, arbitrumGoerli, avalanche, avalancheFuji, mantle } from 'viem/chains'
+import {
+  arbitrum,
+  arbitrumGoerli,
+  avalanche,
+  avalancheFuji,
+  mantle,
+} from 'viem/chains'
 
 // https://github.com/traderjoe-xyz/joe-sdks/blob/458e39748c8ebc6abd1703d6f6f98372cc3c51c5/packages/v2/src/constants/v2Addrs.ts#L51
 export const LB_ROUTER_V21_ADDRESS: Record<number, Hex> = {
