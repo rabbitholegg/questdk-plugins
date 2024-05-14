@@ -26,9 +26,7 @@ export const passingTestCases = [
     tokenId: undefined,
     amount: undefined,
   }),
-  createTestCase(LAYER_ZERO_MINT, 'using "any amount" on single mint', {
-    amount: undefined,
-  }),
+  createTestCase(LAYER_ZERO_MINT, 'using layer zero mint'),
 ]
 
 export const failingTestCases = [
