@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.23
+
+### Patch Changes
+
+- [#384](https://github.com/rabbitholegg/questdk-plugins/pull/384) [`9a87e168`](https://github.com/rabbitholegg/questdk-plugins/commit/9a87e168a866a79af5ce3bb0a5a8afabf4921611) Thanks [@Quazia](https://github.com/Quazia)! - fix(utils): change zora relayer address
+
 ## 1.0.0-alpha.22
 
 ### Patch Changes
