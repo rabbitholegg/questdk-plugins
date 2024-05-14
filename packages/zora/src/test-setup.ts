@@ -1,6 +1,7 @@
 import {
   BASIC_PURCHASE,
   BATCH_MINT_ARB,
+  LAYER_ZERO_MINT,
   MINT_BATCH_WITHOUT_FEES,
   MINT_WITH_REWARDS,
   MINT_WITH_REWARDS_1155,
@@ -25,6 +26,7 @@ export const passingTestCases = [
     tokenId: undefined,
     amount: undefined,
   }),
+  createTestCase(LAYER_ZERO_MINT, 'using layer zero mint'),
 ]
 
 export const failingTestCases = [

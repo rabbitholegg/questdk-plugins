@@ -1,14 +1,6 @@
-import { compressJson } from '@rabbitholegg/questdk'
 import { getDynamicNameParams, getMintIntent, mint, simulateMint } from './Zora'
-import {
-  UNIVERSAL_MINTER_ABI,
-  ZORA_MINTER_ABI_721,
-  ZORA_MINTER_ABI_1155,
-  ZORA_MINTER_ABI_1155_LEGACY,
-} from './abi'
 import { failingTestCases, passingTestCases } from './test-setup'
 import {
-  BASIC_PURCHASE,
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
 } from './test-transactions'
