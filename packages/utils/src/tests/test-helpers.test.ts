@@ -44,7 +44,7 @@ describe('getExitAddresses', () => {
     const expectedAddresses = [
       RELAYER_ADDRESSES[chainId],
       ...additionalAddresses,
-    ].map((address) => address ? address.toLowerCase() : '')
+    ].map((address) => (address ? address.toLowerCase() : ''))
     console.log(result)
     expect(result).toEqual({ $or: expectedAddresses })
   })
@@ -58,7 +58,7 @@ describe('getExitAddresses', () => {
     const expectedAddresses = [
       RELAYER_ADDRESSES[chainId],
       additionalAddress,
-    ].map((address) => address ? address.toLowerCase() : '')
+    ].map((address) => (address ? address.toLowerCase() : ''))
 
     expect(result).toEqual({ $or: expectedAddresses })
   })
@@ -68,9 +68,9 @@ describe('getExitAddresses', () => {
 
     const result = getExitAddresses(chainId)
 
-    const expectedAddresses = [RELAYER_ADDRESSES[chainId as keyof typeof RELAYER_ADDRESSES]].map((address) =>
-      address ? address.toLowerCase() : '',
-    )
+    const expectedAddresses = [
+      RELAYER_ADDRESSES[chainId as keyof typeof RELAYER_ADDRESSES],
+    ].map((address) => (address ? address.toLowerCase() : ''))
 
     expect(result).toEqual({ $or: expectedAddresses })
   })
