@@ -114,7 +114,6 @@ export const SWAP_V3_NEW_ROUTER: TestParams<SwapActionParams> = {
   },
 }
 
-
 export const passingTestCases = [
   createTestCase(ETH_FOR_TOKENS, 'when using swapExactETHForTokens'),
   createTestCase(TOKENS_FOR_ETH, 'when using swapExactTokensForETH'),
