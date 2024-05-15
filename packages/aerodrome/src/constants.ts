@@ -1,5 +1,8 @@
 export const AERODROME_ROUTER = '0xcf77a3ba9a5ca399b7c97c74d54e5b1beb874e43'
-export const UNIVERSAL_ROUTER = '0xf07835bbf6eea0d05392fb4d3b9e5a333ca4da2a'
+export const UNIVERSAL_ROUTERS = [
+  '0xf07835bbf6eea0d05392fb4d3b9e5a333ca4da2a',
+  '0x6cb442acf35158d5eda88fe602221b67b400be3e',
+]
 export const WETH_ADDRESS = '0x4200000000000000000000000000000000000006'
 
 const ROUTER_ABI = [

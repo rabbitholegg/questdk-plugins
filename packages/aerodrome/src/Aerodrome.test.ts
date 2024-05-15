@@ -1,6 +1,6 @@
 import { swap } from './Aerodrome'
 import { failingTestCases, passingTestCases } from './test-transactions'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the aerodrome plugin', () => {
