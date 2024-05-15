@@ -401,6 +401,43 @@ export const UNIVERSAL_MINTER_ABI = [
   },
 ] // universal batch mint
 
+export const CREATE_CONTRACT_ABI = [
+  {
+    inputs: [
+      { internalType: 'string', name: 'newContractURI', type: 'string' },
+      { internalType: 'string', name: 'name', type: 'string' },
+      {
+        components: [
+          {
+            internalType: 'uint32',
+            name: 'royaltyMintSchedule',
+            type: 'uint32',
+          },
+          { internalType: 'uint32', name: 'royaltyBPS', type: 'uint32' },
+          {
+            internalType: 'address',
+            name: 'royaltyRecipient',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct ICreatorRoyaltiesControl.RoyaltyConfiguration',
+        name: 'defaultRoyaltyConfiguration',
+        type: 'tuple',
+      },
+      {
+        internalType: 'address payable',
+        name: 'defaultAdmin',
+        type: 'address',
+      },
+      { internalType: 'bytes[]', name: 'setupActions', type: 'bytes[]' },
+    ],
+    name: 'createContract',
+    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
 export const FUNCTION_SELECTORS = [
   '359f1302', // mint (1155)
   '731133e9', // mint (Legacy 1155)
