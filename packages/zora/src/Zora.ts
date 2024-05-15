@@ -1,4 +1,5 @@
 import {
+  CREATE_CONTRACT_ABI,
   FUNCTION_SELECTORS,
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
@@ -8,10 +9,12 @@ import {
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
   FIXED_PRICE_SALE_STRATS,
+  ZORA_1155_FACTORY,
   ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
 import {
   type MintActionParams,
+  type CreateActionParams,
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
@@ -41,6 +44,20 @@ import {
   stringToBytes,
   toHex,
 } from 'viem'
+
+export const create = async (
+  create: CreateActionParams,
+): Promise<TransactionFilter> => {
+  const { chainId, contractAddress } = create
+
+  return compressJson({
+    chainId,
+    to: contractAddress ?? ZORA_1155_FACTORY,
+    input: {
+      $abi: CREATE_CONTRACT_ABI,
+    },
+  })
+}
 
 export const mint = async (
   mint: MintActionParams,
