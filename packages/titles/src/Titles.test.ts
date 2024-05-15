@@ -1,7 +1,7 @@
+import { create } from './Titles'
+import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { create } from './Titles'
 
 describe('Given the titles plugin', () => {
   describe('When handling the create action', () => {
