@@ -1,6 +1,8 @@
 import {
   BASIC_PURCHASE,
   BATCH_MINT_ARB,
+  CREATE_COLLECTION_BASE,
+  CREATE_COLLECTION_ZORA,
   LAYER_ZERO_MINT,
   MINT_BATCH_WITHOUT_FEES,
   MINT_WITH_REWARDS,
@@ -9,7 +11,7 @@ import {
 import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import { getAddress } from 'viem'
 
-export const passingTestCases = [
+export const passingTestCasesMint = [
   createTestCase(BASIC_PURCHASE, 'when doing a basic purchase'),
   createTestCase(MINT_WITH_REWARDS, 'Minting with rewards'),
   createTestCase(MINT_WITH_REWARDS_1155, 'Minting with rewards 1155'),
@@ -29,7 +31,7 @@ export const passingTestCases = [
   createTestCase(LAYER_ZERO_MINT, 'using layer zero mint'),
 ]
 
-export const failingTestCases = [
+export const failingTestCasesMint = [
   createTestCase(BASIC_PURCHASE, 'when chainId is incorrect', {
     chainId: 1,
   }),
@@ -60,3 +62,18 @@ export const failingTestCases = [
     },
   ),
 ]
+
+export const passingTestCasesCreate = [
+  createTestCase(CREATE_COLLECTION_BASE, 'when creating a collection on BASE'),
+  createTestCase(CREATE_COLLECTION_ZORA, 'when creating a collection on Zora'),
+]
+
+export const failingTestCasesCreate = [
+  createTestCase(CREATE_COLLECTION_BASE, 'when chainId is incorrect', {
+    chainId: 1,
+  }),
+  createTestCase(CREATE_COLLECTION_ZORA, 'when contractAddress is incorrect', {
+    contractAddress: '0x4f330940159fB3368F5b06b34212C0cDB4e2C032',
+  }),
+]
+

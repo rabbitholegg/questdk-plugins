@@ -1,5 +1,5 @@
-import { getDynamicNameParams, getMintIntent, mint, simulateMint } from './Zora'
-import { failingTestCases, passingTestCases } from './test-setup'
+import { create, getDynamicNameParams, getMintIntent, mint, simulateMint } from './Zora'
+import { failingTestCasesCreate, failingTestCasesMint, passingTestCasesCreate, passingTestCasesMint } from './test-setup'
 import {
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
@@ -16,7 +16,7 @@ import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the zora plugin', () => {
-  describe('When handling the mint', () => {
+  describe('When handling the mint action', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid mint action', async () => {
         const filter = await mint({
@@ -44,7 +44,7 @@ describe('Given the zora plugin', () => {
     })
 
     describe('should pass filter with valid transactions', () => {
-      passingTestCases.forEach((testCase) => {
+      passingTestCasesMint.forEach((testCase) => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await mint(params)
@@ -54,10 +54,57 @@ describe('Given the zora plugin', () => {
     })
 
     describe('should not pass filter with invalid transactions', () => {
-      failingTestCases.forEach((testCase) => {
+      failingTestCasesMint.forEach((testCase) => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await mint(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+  })
+
+  describe('When handling the create action', () => {
+    describe('should return a valid action filter', () => {
+      test('when making a valid create action', async () => {
+        const filter = await create({
+          chainId: 1,
+        })
+        expect(filter).toBeTypeOf('object')
+        expect(Number(filter.chainId)).toBe(1)
+        if (typeof filter.to === 'string') {
+          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+        } else {
+          // if to is an object, it should have a logical operator as the only key
+          expect(filter.to).toBeTypeOf('object')
+          expect(Object.keys(filter.to)).toHaveLength(1)
+          expect(
+            ['$or', '$and'].some((prop) =>
+              Object.hasOwnProperty.call(filter.to, prop),
+            ),
+          ).to.be.true
+          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+            arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+          )
+        }
+      })
+    })
+
+    describe('should pass filter with valid transactions', () => {
+      passingTestCasesCreate.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await create(params)
+          expect(apply(transaction, filter)).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingTestCasesCreate.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await create(params)
           expect(apply(transaction, filter)).to.be.false
         })
       })
