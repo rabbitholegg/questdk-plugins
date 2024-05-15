@@ -1,5 +1,16 @@
-import { create, getDynamicNameParams, getMintIntent, mint, simulateMint } from './Zora'
-import { failingTestCasesCreate, failingTestCasesMint, passingTestCasesCreate, passingTestCasesMint } from './test-setup'
+import {
+  create,
+  getDynamicNameParams,
+  getMintIntent,
+  mint,
+  simulateMint,
+} from './Zora'
+import {
+  failingTestCasesCreate,
+  failingTestCasesMint,
+  passingTestCasesCreate,
+  passingTestCasesMint,
+} from './test-setup'
 import {
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,

@@ -76,4 +76,3 @@ export const failingTestCasesCreate = [
     contractAddress: '0x4f330940159fB3368F5b06b34212C0cDB4e2C032',
   }),
 ]
-
