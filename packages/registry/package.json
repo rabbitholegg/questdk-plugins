@@ -81,6 +81,7 @@
     "@rabbitholegg/questdk-plugin-thruster": "workspace:*",
     "@rabbitholegg/questdk-plugin-orbit": "workspace:*",
     "@rabbitholegg/questdk-plugin-superbridge": "workspace:*",
-    "@rabbitholegg/questdk-plugin-neynar": "workspace:*"
+    "@rabbitholegg/questdk-plugin-neynar": "workspace:*",
+    "@rabbitholegg/questdk-plugin-hai": "workspace:*"
   }
 }
