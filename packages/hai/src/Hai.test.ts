@@ -1,7 +1,7 @@
+import { getSupportedChainIds, getSupportedTokenAddresses, stake } from './Hai'
+import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { stake } from './Hai'
 
 describe('Given the hai plugin', () => {
   describe('When handling the stake action', () => {
@@ -40,6 +40,24 @@ describe('Given the hai plugin', () => {
         test(description, async () => {
           const filter = await stake(params)
           expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+
+    describe('should return a valid list of tokens for each supported chain', async () => {
+      const chainIds = await getSupportedChainIds()
+      chainIds.forEach((chainId) => {
+        test(`for chainId: ${chainId}`, async () => {
+          const tokens = await getSupportedTokenAddresses(chainId)
+          const addressRegex = /^0x[a-fA-F0-9]{40}$/
+          expect(tokens).to.be.an('array')
+          expect(tokens).to.have.length.lessThan(100)
+          tokens.forEach((token) => {
+            expect(token).to.match(
+              addressRegex,
+              `Token address ${token} is not a valid Ethereum address`,
+            )
+          })
         })
       })
     })

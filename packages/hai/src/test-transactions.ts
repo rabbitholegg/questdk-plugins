@@ -1,10 +1,10 @@
 import {
-  type StakeActionParams,
   GreaterThanOrEqual,
+  type StakeActionParams,
 } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
   type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 export const GEN_DEBT: TestParams<StakeActionParams> = {

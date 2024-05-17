@@ -1,17 +1,18 @@
 import {
-  LOCK_AND_GENERATE_DEBT_FRAGMENT,
-  EXECUTE_ABI,
   BASIC_ACTIONS_CONTRACT,
-  TOKEN_TO_COLLATERAL_JOIN_CONTRACT,
+  EXECUTE_ABI,
   GENERATE_DEBT_FRAGMENT,
+  LOCK_AND_GENERATE_DEBT_FRAGMENT,
+  SUPPORTED_TOKEN_ARRAY,
+  TOKEN_TO_COLLATERAL_JOIN_CONTRACT,
 } from './constants'
 import {
-  type TransactionFilter,
   type StakeActionParams,
+  type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address } from 'viem'
 
 export const stake = async (
   stake: StakeActionParams,
@@ -44,11 +45,9 @@ export const stake = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  // Given a specific chain we would expect this function to return a list of supported token addresses
-  return []
+  return SUPPORTED_TOKEN_ARRAY
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // This should return all of the ChainIds that are supported by the Project we're integrating
   return [Chains.OPTIMISM]
 }

@@ -1,6 +1,6 @@
 import { type IActionPlugin } from '@rabbitholegg/questdk'
 
-import { stake, getSupportedChainIds, getSupportedTokenAddresses } from './Hai'
+import { getSupportedChainIds, getSupportedTokenAddresses, stake } from './Hai'
 
 export const Hai: IActionPlugin = {
   pluginId: 'hai',

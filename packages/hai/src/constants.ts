@@ -1,4 +1,4 @@
-import { type AbiFunction, getAbiItem, Address } from 'viem'
+import { type AbiFunction, Address, getAbiItem } from 'viem'
 
 export const BASIC_ACTIONS_CONTRACT =
   '0xd36b1bd5445374ceb7fe4148a719584234da7bb0'
@@ -7,6 +7,12 @@ const OP_TOKEN = '0x4200000000000000000000000000000000000042'
 const STETH_TOKEN = '0x1f32b1c2345538c0c6f582fcb022739c4a194ebb'
 const WETH_TOKEN = '0x4200000000000000000000000000000000000006'
 const SNX_TOKEN = '0x8700dAec35aF8Ff88c16BdF0418774CB3D7599B4'
+export const SUPPORTED_TOKEN_ARRAY: Address[] = [
+  OP_TOKEN,
+  STETH_TOKEN,
+  WETH_TOKEN,
+  SNX_TOKEN,
+]
 
 export const TOKEN_TO_COLLATERAL_JOIN_CONTRACT: Record<Address, Address> = {
   [OP_TOKEN]: '0x994fa61f9305bdd6e5e6ba84015ee28b109c827a',
