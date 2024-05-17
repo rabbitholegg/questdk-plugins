@@ -35,7 +35,7 @@ export const LOCK_AND_GEN_DEBT: TestParams<StakeActionParams> = {
   params: {
     chainId: 10,
     tokenOne: '0x4200000000000000000000000000000000000042',
-    amountOne: GreaterThanOrEqual(145000000000000000000),
+    amountOne: GreaterThanOrEqual(145000000000000000000n),
   },
 }
 
