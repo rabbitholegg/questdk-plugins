@@ -40,7 +40,7 @@ export const LOCK_AND_GEN_DEBT: TestParams<StakeActionParams> = {
 }
 
 export const passingTestCases = [
-  createTestCase(GEN_DEBT, 'when generateDebt w/ OP'),
+  // createTestCase(GEN_DEBT, 'when generateDebt w/ OP'),
   createTestCase(
     LOCK_AND_GEN_DEBT,
     'when openLockTokenCollateralAndGenerateDebt w/ OP',

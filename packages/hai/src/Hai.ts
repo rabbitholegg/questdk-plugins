@@ -1,7 +1,7 @@
 import {
   BASIC_ACTIONS_CONTRACT,
   EXECUTE_ABI,
-  GENERATE_DEBT_FRAGMENT,
+  // GENERATE_DEBT_FRAGMENT,
   LOCK_AND_GENERATE_DEBT_FRAGMENT,
   SUPPORTED_TOKEN_ARRAY,
   TOKEN_TO_COLLATERAL_JOIN_CONTRACT,
@@ -33,9 +33,9 @@ export const stake = async (
               : undefined,
             _collateralAmount: amount,
           },
-          {
-            $abi: [GENERATE_DEBT_FRAGMENT],
-          },
+          // {
+          //   $abi: [GENERATE_DEBT_FRAGMENT],
+          // },
         ],
       },
     },
