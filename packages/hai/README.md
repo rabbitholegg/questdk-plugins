@@ -3,6 +3,8 @@
 ## Overview
 Hai is a decentralized platform that operates similarly to DAI, utilizing a Collateralized Debt Position (CDP) system. Users can deposit various types of collateral to mint the stablecoin called HAI.
 
+- Documentation: https://docs.letsgethai.com/detailed/intro/hai.html
+
 ## Implementation 
 The HAI plugin utilizes the Stake Action Type and looks for deposits of colleteral made using the `openLockTokenCollateralAndGenerateDebt` function. There is a 150 HAI minimum that needs to be minted, but the amount of collateral deposited will exceed this.
 
