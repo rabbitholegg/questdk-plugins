@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.25
+
+### Minor Changes
+
+- [#396](https://github.com/rabbitholegg/questdk-plugins/pull/396) [`3ef16d6c`](https://github.com/rabbitholegg/questdk-plugins/commit/3ef16d6c176e99ca44851d987659b69a78005758) Thanks [@sammccord](https://github.com/sammccord)! - Add recast validation params to validation params schema
+
 ## 1.0.0-alpha.24
 
 ### Minor Changes

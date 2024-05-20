@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-kote
 
+## 1.0.0-alpha.29
+
+### Patch Changes
+
+- Updated dependencies [[`3ef16d6c`](https://github.com/rabbitholegg/questdk-plugins/commit/3ef16d6c176e99ca44851d987659b69a78005758)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.25
+  - @rabbitholegg/questdk@2.0.0-alpha.50
+
 ## 1.0.0-alpha.28
 
 ### Patch Changes
