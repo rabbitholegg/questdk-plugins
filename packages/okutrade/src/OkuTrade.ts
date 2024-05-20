@@ -77,7 +77,7 @@ export const stake = async (stake: StakeActionParams) => {
   const { chainId, tokenOne, amountOne, tokenTwo, amountTwo } = stake
   return compressJson({
     chainId: chainId,
-    to: CHAIN_MAP_ID[chainId].contracts.nftManager,
+    to: CHAIN_MAP_ID[chainId].contracts.nftManager.address,
     input: {
       $abi: NFT_POSITION_MANAGER_ABI,
       inputs: {
