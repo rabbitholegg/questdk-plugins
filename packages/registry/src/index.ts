@@ -201,6 +201,8 @@ export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
   switch (actionType) {
     case ActionType.Follow:
       return plugin.validateFollow !== undefined
+    case ActionType.Recast:
+      return plugin.validateRecast !== undefined
     default:
       return false
   }
@@ -212,10 +214,11 @@ export const executeValidation = (
   validationPayload: PluginActionValidation,
 ) => {
   const actionType = validationPayload.payload.validationParams.type
-  // We might not even neese a switch statement here since we narrow in the actual plugin
+  // We might not even need a switch statement here since we narrow in the actual plugin
   switch (actionType) {
+    case ActionType.Recast:
     case ActionType.Follow:
-      if (plugin.validate && plugin.validateFollow) {
+      if (plugin.validate) {
         return plugin.validate(validationPayload)
       } else {
         throw new PluginActionNotImplementedError()

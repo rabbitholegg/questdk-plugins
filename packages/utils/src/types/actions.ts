@@ -97,6 +97,7 @@ export type ActionParams =
   | OptionsActionParams
   | VoteActionParams
   | FollowActionParams
+  | RecastActionParams
   | CreateActionParams
 
 export type DisctriminatedActionParams =
