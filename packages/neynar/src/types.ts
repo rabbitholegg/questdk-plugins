@@ -18,3 +18,25 @@ export const FollowersResponseSchema = z.object({
 
 export type FollowersResponse = z.infer<typeof FollowersResponseSchema>
 export type Follower = z.infer<typeof FollowerSchema>
+
+// this is a partial schema solely to support recasts
+export const ConversationSchema = z.object({
+  cast: z.object({
+    reactions: z.object({
+      recasts: z.array(
+        z.object({
+          fid: z.number(),
+          fname: z.string(),
+        }),
+      ),
+    }),
+  }),
+})
+
+// see https://github.com/neynarxyz/OAS/blob/4012289342260697c85dd373b7e459e76626b151/src/v2/spec.yaml#L714
+export const ConversationResponseSchema = z.object({
+  conversation: ConversationSchema,
+})
+
+export type ConversationResponse = z.infer<typeof ConversationResponseSchema>
+export type Conversation = z.infer<typeof ConversationSchema>
