@@ -470,7 +470,7 @@ export enum ActionType {
   Options = 'options',
   Vote = 'vote',
   Follow = 'follow',
-  Recast = 'recast'
+  Recast = 'recast',
 }
 
 export enum OrderType {

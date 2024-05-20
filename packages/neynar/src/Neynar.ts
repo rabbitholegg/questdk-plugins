@@ -9,7 +9,12 @@ import {
   type QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
-import { ConversationResponse, ConversationResponseSchema, FollowersResponse, FollowersResponseSchema } from './types'
+import {
+  ConversationResponse,
+  ConversationResponseSchema,
+  FollowersResponse,
+  FollowersResponseSchema,
+} from './types'
 import { isAddress } from 'viem'
 import assert from 'node:assert'
 
@@ -68,7 +73,6 @@ export const validate = async (
   }
 }
 
-
 export const validateFollow = async (
   actionP: FollowActionParams,
   validateP: FollowValidationParams,
@@ -96,8 +100,9 @@ export const validateRecast = async (
       (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
 
     const response = await fetchConversation(actionP.identifier, actorFid)
-    return response.conversation.cast.reactions.recasts.some(recast => recast.fid === actorFid)
-
+    return response.conversation.cast.reactions.recasts.some(
+      (recast) => recast.fid === actorFid,
+    )
   } catch (error) {
     return false
   }
@@ -125,12 +130,14 @@ const fetchConversation = async (
   identifier: string,
   actorFid: number,
 ): Promise<ConversationResponse> => {
-  // fallback if on old node version < 18.17.0 
-  const isUrl = URL.canParse ? URL.canParse(identifier) : identifier.startsWith('http')
+  // fallback if on old node version < 18.17.0
+  const isUrl = URL.canParse
+    ? URL.canParse(identifier)
+    : identifier.startsWith('http')
   const response = await axiosInstance.get('/cast/conversation', {
     params: {
       identifier,
-      type: isUrl? 'url' : 'hash',
+      type: isUrl ? 'url' : 'hash',
       reply_depth: 0,
       include_chronological_parent_casts: false,
       viewer_fid: actorFid,
@@ -143,7 +150,6 @@ const fetchConversation = async (
   )
   return parsedResponse
 }
-
 
 export const translateAddressToFID = async (
   address: string,

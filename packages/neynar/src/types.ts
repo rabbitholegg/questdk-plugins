@@ -23,10 +23,12 @@ export type Follower = z.infer<typeof FollowerSchema>
 export const ConversationSchema = z.object({
   cast: z.object({
     reactions: z.object({
-      recasts: z.array(z.object({
-        fid: z.number(),
-        fname: z.string(),
-      })),
+      recasts: z.array(
+        z.object({
+          fid: z.number(),
+          fname: z.string(),
+        }),
+      ),
     }),
   }),
 })
