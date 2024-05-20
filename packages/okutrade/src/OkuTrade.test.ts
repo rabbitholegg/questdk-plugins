@@ -1,4 +1,9 @@
-import { getSupportedTokenAddresses, options, swap } from './OkuTrade'
+import { ActionType } from '@rabbitholegg/questdk-plugin-utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
+import { zeroAddress } from 'viem'
+import { describe, expect, test } from 'vitest'
+import { getSupportedTokenAddresses, options, stake, swap } from './OkuTrade'
+import { NFT_POSITION_MANAGER_ABI } from './abi'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
@@ -12,10 +17,6 @@ import {
   passingTestCasesSwap,
 } from './test-transactions'
 import { getPools } from './utils'
-import { ActionType } from '@rabbitholegg/questdk-plugin-utils'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
-import { zeroAddress } from 'viem'
-import { describe, expect, test } from 'vitest'
 
 describe('Given the uniswap plugin', () => {
   describe('When handling the options action', () => {
@@ -51,6 +52,39 @@ describe('Given the uniswap plugin', () => {
         test(description, async () => {
           const filter = await options(params)
           expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+  })
+
+  describe('When handling the stake action', () => {
+    describe('should return a valid action filter', () => {
+      test('with a valid stake action', async () => {
+        const filter = await stake({
+          chainId: 10,
+          tokenOne: '0x4200000000000000000000000000000000000006',
+          tokenTwo: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
+          amountOne: GreaterThanOrEqual(100000n),
+          amountTwo: GreaterThanOrEqual(100000n),
+        })
+        expect(filter).to.deep.equal({
+          chainId: 10,
+          to: '0xC36442b4a4522E871399CD717aBDD847Ab11FE88',
+          input: {
+            $abi: NFT_POSITION_MANAGER_ABI,
+            inputs: {
+              token0: '0x4200000000000000000000000000000000000006',
+              token1: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
+            },
+            outputs: {
+              amount0: {
+                $gte: '100000',
+              },
+              amount1: {
+                $gte: '100000',
+              },
+            },
+          },
         })
       })
     })
