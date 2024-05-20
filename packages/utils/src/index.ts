@@ -22,6 +22,7 @@ export type {
   DelegateActionParams,
   ActionParams,
   FollowActionParams,
+  CreateActionParams,
   IActionPlugin,
   FilterObject,
   BitmaskFilter,
