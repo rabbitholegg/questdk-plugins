@@ -97,6 +97,7 @@ export type ActionParams =
   | OptionsActionParams
   | VoteActionParams
   | FollowActionParams
+  | RecastActionParams
   | CreateActionParams
 
 export type DisctriminatedActionParams =
@@ -363,6 +364,7 @@ export const QuestActionParamsSchema = ActionParamsSchema
 
 export const ValidationParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('follow'), data: FollowValidationParamsSchema }),
+  z.object({ type: z.literal('recast'), data: RecastValidationParamsSchema }),
 ])
 
 export type ValidationParams = z.infer<typeof ValidationParamsSchema>
