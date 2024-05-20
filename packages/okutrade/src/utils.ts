@@ -1,6 +1,7 @@
+import { MAINNET_CHAINS } from '@gfxlabs/oku-chains'
 import type { FilterOperator } from '@rabbitholegg/questdk'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, getAddress } from 'viem'
+import { getAddress, type Address } from 'viem'
 
 const request = async (chain: string, method: string, data: unknown) => {
   const result = await fetch(`https://omni.icarus.tools/${chain}`, {
@@ -69,6 +70,18 @@ export const buildV2PathQuery = (tokenIn?: string, tokenOut?: string) => {
     $and: conditions,
   }
 }
+
+export const CHAINS_LIST = Object.values(MAINNET_CHAINS)
+
+export const CHAIN_INFO = Object.fromEntries(
+  CHAINS_LIST.map((obj) => [obj.id, obj]),
+)
+
+export const CHAIN_MAP_ID = Object.fromEntries(
+  Object.values(CHAIN_INFO).map((x) => {
+    return [x.id, x]
+  }),
+)
 
 const chainToContract: Record<number, Address> = {
   [Chains.ETHEREUM]: '0xEf1c6E67703c7BD7107eed8303Fbe6EC2554BF6B',

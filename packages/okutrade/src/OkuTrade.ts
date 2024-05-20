@@ -1,4 +1,15 @@
 import {
+  ActionType,
+  compressJson,
+  type OptionsActionParams,
+  type StakeActionParams,
+  type SwapActionParams,
+  type TransactionFilter,
+} from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { zeroAddress as ETH_ADDRESS, zeroAddress } from 'viem'
+import { NFT_POSITION_MANAGER_ABI } from './abi'
+import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   LIMIT_ORDER_REGISTRY_ABI,
@@ -10,19 +21,11 @@ import { CHAIN_TO_TOKENS } from './token-addresses'
 import {
   buildV2PathQuery,
   buildV3PathQuery,
+  CHAIN_MAP_ID,
   getPools,
   getUniversalRouter,
   getWETHAddress,
 } from './utils'
-import {
-  ActionType,
-  type OptionsActionParams,
-  type SwapActionParams,
-  type TransactionFilter,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { zeroAddress as ETH_ADDRESS, zeroAddress } from 'viem'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -65,6 +68,25 @@ export const swap = async (
             },
           ],
         },
+      },
+    },
+  })
+}
+
+export const stake = async (stake: StakeActionParams) => {
+  const { chainId, tokenOne, amountOne, tokenTwo, amountTwo } = stake
+  return compressJson({
+    chainId: chainId,
+    to: CHAIN_MAP_ID[chainId].contracts.nftManager,
+    input: {
+      $abi: NFT_POSITION_MANAGER_ABI,
+      inputs: {
+        token0: tokenOne,
+        token1: tokenTwo,
+      },
+      outputs: {
+        amount0: amountOne,
+        amount1: amountTwo,
       },
     },
   })
