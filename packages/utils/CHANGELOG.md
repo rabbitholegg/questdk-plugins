@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.26
+
+### Minor Changes
+
+- [#398](https://github.com/rabbitholegg/questdk-plugins/pull/398) [`042285ae`](https://github.com/rabbitholegg/questdk-plugins/commit/042285aecc961da9f98af899438f036c9e6763fc) Thanks [@sammccord](https://github.com/sammccord)! - add recast action params to actions, include in validations
+
 ## 1.0.0-alpha.25
 
 ### Minor Changes
