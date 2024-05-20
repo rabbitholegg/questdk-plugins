@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.24
+
+### Minor Changes
+
+- [#394](https://github.com/rabbitholegg/questdk-plugins/pull/394) [`576136ec`](https://github.com/rabbitholegg/questdk-plugins/commit/576136ec2e3328feaebcfbaee681560302b04e36) Thanks [@sammccord](https://github.com/sammccord)! - Implement recast functionality in utils and neynar plugin
+
+- [#390](https://github.com/rabbitholegg/questdk-plugins/pull/390) [`1e2011bf`](https://github.com/rabbitholegg/questdk-plugins/commit/1e2011bffb08a80445e3333272d7a4bac7353cc8) Thanks [@mmackz](https://github.com/mmackz)! - add create action type
+
 ## 1.0.0-alpha.23
 
 ### Patch Changes
