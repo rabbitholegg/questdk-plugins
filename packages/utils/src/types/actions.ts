@@ -245,6 +245,34 @@ export const FollowActionFormSchema = z.object({
 export type FollowActionForm = z.infer<typeof FollowActionFormSchema>
 
 /*
+RECAST
+*/
+export type RecastActionParams = {
+  // Can either be url or hash
+  identifier: Address | string // https://docs.neynar.com/reference/cast-conversation
+  project?: Address | string
+}
+
+export const RecastValidationParamsSchema = z.object({
+  actor: z.string(),
+  project: EthAddressSchema.optional(),
+})
+export type RecastValidationParams = z.infer<
+  typeof RecastValidationParamsSchema
+>
+
+export const RecastActionDetailSchema = z.object({
+  identifier: z.union([z.string().url(), EthAddressSchema]),
+  project: z.union([z.string(), EthAddressSchema]).optional(),
+})
+export type RecastActionDetail = z.infer<typeof RecastActionDetailSchema>
+
+export const RecastActionFormSchema = z.object({
+  identifier: z.union([z.string().url(), EthAddressSchema]),
+})
+export type RecastActionForm = z.infer<typeof RecastActionFormSchema>
+
+/*
 VOTE
 */
 
@@ -307,6 +335,7 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('options'), data: OptionsActionDetailSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
   z.object({ type: z.literal('follow'), data: FollowActionDetailSchema }),
+  z.object({ type: z.literal('recast'), data: RecastActionDetailSchema }),
 ])
 
 export const QuestActionParamsSchema = ActionParamsSchema
@@ -377,6 +406,10 @@ export interface IActionPlugin {
     actionP: FollowActionParams,
     validateP: FollowValidationParams,
   ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  validateRecast?: (
+    actionP: RecastActionParams,
+    validateP: RecastValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
 
@@ -437,6 +470,7 @@ export enum ActionType {
   Options = 'options',
   Vote = 'vote',
   Follow = 'follow',
+  Recast = 'recast'
 }
 
 export enum OrderType {

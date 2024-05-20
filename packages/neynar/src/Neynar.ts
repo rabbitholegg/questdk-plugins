@@ -2,12 +2,14 @@ import axios from 'axios'
 import {
   type FollowActionParams,
   type FollowValidationParams,
+  type RecastActionParams,
+  type RecastValidationParams,
   ActionType,
   type PluginActionValidation,
   type QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
-import { FollowersResponse, FollowersResponseSchema } from './types'
+import { ConversationResponse, ConversationResponseSchema, FollowersResponse, FollowersResponseSchema } from './types'
 import { isAddress } from 'viem'
 import assert from 'node:assert'
 
@@ -46,10 +48,26 @@ export const validate = async (
         return null
       }
     }
+    case ActionType.Recast: {
+      const isRecastValid = await validateRecast(
+        actionParams.data,
+        validationParams.data,
+      )
+      if (isRecastValid) {
+        return {
+          address: actor,
+          questId: questId,
+          taskId: taskId,
+        }
+      } else {
+        return null
+      }
+    }
     default:
       throw new Error('Unsupported action type')
   }
 }
+
 
 export const validateFollow = async (
   actionP: FollowActionParams,
@@ -64,6 +82,22 @@ export const validateFollow = async (
       return response.users[0].viewer_context.following
 
     return false
+  } catch (error) {
+    return false
+  }
+}
+
+export const validateRecast = async (
+  actionP: RecastActionParams,
+  validateP: RecastValidationParams,
+): Promise<boolean> => {
+  try {
+    const actorFid: number | null =
+      (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
+
+    const response = await fetchConversation(actionP.identifier, actorFid)
+    return response.conversation.cast.reactions.recasts.some(recast => recast.fid === actorFid)
+
   } catch (error) {
     return false
   }
@@ -86,6 +120,30 @@ const fetchUser = async (
   )
   return parsedResponse
 }
+
+const fetchConversation = async (
+  identifier: string,
+  actorFid: number,
+): Promise<ConversationResponse> => {
+  // fallback if on old node version < 18.17.0 
+  const isUrl = URL.canParse ? URL.canParse(identifier) : identifier.startsWith('http')
+  const response = await axiosInstance.get('/cast/conversation', {
+    params: {
+      identifier,
+      type: isUrl? 'url' : 'hash',
+      reply_depth: 0,
+      include_chronological_parent_casts: false,
+      viewer_fid: actorFid,
+    },
+  })
+
+  // Validate the response data with the Zod schema
+  const parsedResponse: ConversationResponse = ConversationResponseSchema.parse(
+    response.data,
+  )
+  return parsedResponse
+}
+
 
 export const translateAddressToFID = async (
   address: string,
