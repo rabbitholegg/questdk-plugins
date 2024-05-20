@@ -4,7 +4,7 @@ import {
   EXECUTE_ABI_FRAGMENTS,
   TOKENS_FOR_ETH_FRAGMENTS,
   TOKENS_FOR_TOKENS_FRAGMENTS,
-  UNIVERSAL_ROUTER,
+  UNIVERSAL_ROUTERS,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
   WETH_ADDRESS,
@@ -30,7 +30,10 @@ export const swap = async (
     chainId,
     value: tokenIn === zeroAddress ? amountIn : undefined,
     to: {
-      $or: [AERODROME_ROUTER.toLowerCase(), UNIVERSAL_ROUTER.toLowerCase()],
+      $or: [
+        AERODROME_ROUTER.toLowerCase(),
+        ...UNIVERSAL_ROUTERS.map((r) => r.toLowerCase()),
+      ],
     },
     input: {
       $or: [
