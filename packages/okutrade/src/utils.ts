@@ -1,7 +1,7 @@
 import { MAINNET_CHAINS } from '@gfxlabs/oku-chains'
 import type { FilterOperator } from '@rabbitholegg/questdk'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { getAddress, type Address } from 'viem'
+import { type Address, getAddress } from 'viem'
 
 const request = async (chain: string, method: string, data: unknown) => {
   const result = await fetch(`https://omni.icarus.tools/${chain}`, {
