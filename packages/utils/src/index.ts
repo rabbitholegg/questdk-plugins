@@ -23,6 +23,7 @@ export type {
   ActionParams,
   FollowActionParams,
   RecastActionParams,
+  CreateActionParams,
   IActionPlugin,
   FilterObject,
   BitmaskFilter,
