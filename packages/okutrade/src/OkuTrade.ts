@@ -1,31 +1,31 @@
 import {
-  ActionType,
-  compressJson,
-  type OptionsActionParams,
-  type StakeActionParams,
-  type SwapActionParams,
-  type TransactionFilter,
-} from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { zeroAddress as ETH_ADDRESS, zeroAddress } from 'viem'
-import { NFT_POSITION_MANAGER_ABI } from './abi'
-import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   LIMIT_ORDER_REGISTRY_ABI,
   LIMIT_ORDER_REGISTRY_CONTRACT,
+  NFT_POSITION_MANAGER_ABI,
   V2_SWAP_EXACT_TYPES,
   V3_SWAP_EXACT_TYPES,
 } from './constants'
 import { CHAIN_TO_TOKENS } from './token-addresses'
 import {
+  CHAIN_MAP_ID,
   buildV2PathQuery,
   buildV3PathQuery,
-  CHAIN_MAP_ID,
   getPools,
   getUniversalRouter,
   getWETHAddress,
 } from './utils'
+import {
+  ActionType,
+  type OptionsActionParams,
+  type StakeActionParams,
+  type SwapActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { zeroAddress as ETH_ADDRESS } from 'viem'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -80,13 +80,11 @@ export const stake = async (stake: StakeActionParams) => {
     to: CHAIN_MAP_ID[chainId].contracts.nftManager.address,
     input: {
       $abi: NFT_POSITION_MANAGER_ABI,
-      inputs: {
+      params: {
         token0: tokenOne,
         token1: tokenTwo,
-      },
-      outputs: {
-        amount0: amountOne,
-        amount1: amountTwo,
+        amount0Desired: amountOne,
+        amount1Desired: amountTwo,
       },
     },
   })
@@ -120,9 +118,9 @@ export const getSupportedTokenAddresses = async (
   _chainId: number,
   actionType?: ActionType,
 ) => {
-  if (actionType === 'options') {
+  if (actionType === 'options' || actionType === 'stake') {
     return (
-      CHAIN_TO_TOKENS[_chainId]?.filter((token) => token !== zeroAddress) ?? []
+      CHAIN_TO_TOKENS[_chainId]?.filter((token) => token !== ETH_ADDRESS) ?? []
     )
   }
   return CHAIN_TO_TOKENS[_chainId] ?? []
