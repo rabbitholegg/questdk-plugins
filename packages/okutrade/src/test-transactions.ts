@@ -1,8 +1,9 @@
-import type {
-  OptionsActionParams,
-  SwapActionParams,
+import {
+  GreaterThanOrEqual,
+  type OptionsActionParams,
+  type StakeActionParams,
+  type SwapActionParams,
 } from '@rabbitholegg/questdk'
-import { GreaterThanOrEqual } from '@rabbitholegg/questdk'
 import {
   type TestParams,
   createTestCase,
@@ -226,5 +227,54 @@ export const failingTestCasesOptions = [
   }),
   createTestCase(LIMIT_ORDER_DEGEN, 'when wrong token (usdc.b) is traded', {
     token: '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA', // usdc.b
+  }),
+]
+
+// ----- Stake Action Type ------
+
+const MINT_POSITION_NFT: TestParams<StakeActionParams> = {
+  transaction: {
+    chainId: 10,
+    hash: '0x16b04b4d2a11696b0bdb4af2f1b7a557ed25923783b775c097bdd982d9051958',
+    from: '0xa2068913677cB5800C22573160011D238846414c',
+    to: '0xc36442b4a4522e871399cd717abdd847ab11fe88',
+    input:
+      '0x8831645600000000000000000000000042000000000000000000000000000000000000060000000000000000000000007f5c764cbc14f9669b88837ca1490cca17c3160700000000000000000000000000000000000000000000000000000000000001f4fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd0364fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd06ca00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e4d1cebef00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e4d1cebef000000000000000000000000a2068913677cb5800c22573160011d238846414c00000000000000000000000000000000000000000000000000000000664bae81',
+    value: '0',
+  },
+  params: {
+    chainId: 10,
+    tokenOne: '0x4200000000000000000000000000000000000006', // WETH
+    tokenTwo: '0x7f5c764cbc14f9669b88837ca1490cca17c31607', // USDC
+    amountOne: GreaterThanOrEqual(parseUnits('0', 18)),
+    amountTwo: GreaterThanOrEqual(parseUnits('267500', 6)),
+  },
+}
+
+export const passingTestCasesStake = [
+  createTestCase(MINT_POSITION_NFT, 'when minting position NFT'),
+  createTestCase(MINT_POSITION_NFT, 'when using "any" token', {
+    tokenOne: undefined,
+  }),
+  createTestCase(MINT_POSITION_NFT, 'when amount is "any"', {
+    amountOne: undefined,
+  }),
+  createTestCase(MINT_POSITION_NFT, 'when all parameters are "any"', {
+    tokenOne: undefined,
+    amountOne: undefined,
+    tokenTwo: undefined,
+    amountTwo: undefined,
+  }),
+]
+
+export const failingTestCasesStake = [
+  createTestCase(MINT_POSITION_NFT, 'when chainId is incorrect', {
+    chainId: 1,
+  }),
+  createTestCase(MINT_POSITION_NFT, 'when amount is insufficient', {
+    amountTwo: GreaterThanOrEqual(parseUnits('10000', 18)),
+  }),
+  createTestCase(MINT_POSITION_NFT, 'when wrong token (usdc.b) is traded', {
+    tokenOne: '0xd9aAEc86B65D86f6A7BB1b0c42FFA531710b6CA', // usdc.b
   }),
 ]
