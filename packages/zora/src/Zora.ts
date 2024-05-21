@@ -100,9 +100,9 @@ export const mint = async (
 
   const mintContracts = universalMinter
     ? ([
-      contractAddress.toLowerCase(),
-      universalMinter.toLowerCase(),
-    ] as Address[])
+        contractAddress.toLowerCase(),
+        universalMinter.toLowerCase(),
+      ] as Address[])
     : contractAddress
 
   const andArray721 = []
@@ -294,10 +294,12 @@ export const simulateMint = async (
       functionName: 'mint',
       args: mintArgs,
       account: from,
-      stateOverride: [{
-        address: from,
-        balance: parseEther('100'),
-      }],
+      stateOverride: [
+        {
+          address: from,
+          balance: parseEther('100'),
+        },
+      ],
     })
     return result
   } catch {
@@ -315,10 +317,12 @@ export const simulateMint = async (
         functionName: 'mint',
         args: mintArgs,
         account: from,
-        stateOverride: [{
-          address: from,
-          balance: parseEther('100'),
-        }],
+        stateOverride: [
+          {
+            address: from,
+            balance: parseEther('100'),
+          },
+        ],
       })
       return result
     } catch {
@@ -330,10 +334,12 @@ export const simulateMint = async (
         functionName: 'purchase',
         args: [amount],
         account: from,
-        stateOverride: [{
-          address: from,
-          balance: parseEther('100'),
-        }],
+        stateOverride: [
+          {
+            address: from,
+            balance: parseEther('100'),
+          },
+        ],
       })
       return result
     }
