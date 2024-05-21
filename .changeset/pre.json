@@ -44,6 +44,7 @@
     "early-schools-think",
     "eight-plants-visit",
     "eight-taxis-report",
+    "eleven-dryers-turn",
     "eleven-gorillas-walk",
     "empty-mirrors-act",
     "empty-pans-cheat",
@@ -68,6 +69,7 @@
     "fuzzy-camels-shop",
     "giant-bulldogs-thank",
     "giant-clouds-mix",
+    "giant-lions-search",
     "gold-lizards-leave",
     "gold-socks-dream",
     "good-zebras-jam",
@@ -110,6 +112,7 @@
     "neat-buses-rescue",
     "neat-teachers-chew",
     "neat-teachers-complain",
+    "nervous-keys-design",
     "new-ears-study",
     "new-spiders-invite",
     "nice-apricots-bathe",
@@ -201,6 +204,7 @@
     "spotty-squids-marry",
     "stale-needles-try",
     "stale-rabbits-provide",
+    "stale-seahorses-fetch",
     "stale-singers-worry",
     "strange-hornets-notice",
     "strong-kiwis-crash",
@@ -306,6 +310,7 @@
     "@rabbitholegg/questdk-plugin-base": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-orbit": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-superbridge": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-neynar": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-neynar": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-titles": "1.0.0-alpha.0"
   }
 }
