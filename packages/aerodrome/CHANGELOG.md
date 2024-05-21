@@ -1,5 +1,33 @@
 # @rabbitholegg/questdk-plugin-aerodrome
 
+## 1.0.0-alpha.15
+
+### Patch Changes
+
+- Updated dependencies [[`042285ae`](https://github.com/rabbitholegg/questdk-plugins/commit/042285aecc961da9f98af899438f036c9e6763fc)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.26
+  - @rabbitholegg/questdk@2.0.0-alpha.50
+
+## 1.0.0-alpha.14
+
+### Patch Changes
+
+- Updated dependencies [[`3ef16d6c`](https://github.com/rabbitholegg/questdk-plugins/commit/3ef16d6c176e99ca44851d987659b69a78005758)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.25
+  - @rabbitholegg/questdk@2.0.0-alpha.50
+
+## 1.0.0-alpha.13
+
+### Minor Changes
+
+- [#389](https://github.com/rabbitholegg/questdk-plugins/pull/389) [`b2740235`](https://github.com/rabbitholegg/questdk-plugins/commit/b2740235e475d0922f3bfb1bde218df002453026) Thanks [@mmackz](https://github.com/mmackz)! - add universal router contract
+
+### Patch Changes
+
+- Updated dependencies [[`576136ec`](https://github.com/rabbitholegg/questdk-plugins/commit/576136ec2e3328feaebcfbaee681560302b04e36), [`1e2011bf`](https://github.com/rabbitholegg/questdk-plugins/commit/1e2011bffb08a80445e3333272d7a4bac7353cc8)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.24
+  - @rabbitholegg/questdk@2.0.0-alpha.50
+
 ## 1.0.0-alpha.12
 
 ### Patch Changes

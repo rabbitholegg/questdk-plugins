@@ -1,7 +1,11 @@
 import { describe, it, expect, beforeEach, vi, MockedFunction } from 'vitest'
-import { validateFollow, translateAddressToFID } from './Neynar'
+import { validateFollow, translateAddressToFID, validateRecast } from './Neynar'
 import axios from 'axios'
-import { type FollowersResponse, type Follower } from './types'
+import {
+  type FollowersResponse,
+  type Follower,
+  ConversationResponse,
+} from './types'
 
 const MockedFollowerSchema: Follower = {
   object: 'user',
@@ -14,6 +18,37 @@ const MockedFollowerSchema: Follower = {
 
 const MockedFollowersResponse: FollowersResponse = {
   users: [MockedFollowerSchema],
+}
+
+const MockedConversationResponseSchema: ConversationResponse = {
+  conversation: {
+    cast: {
+      reactions: {
+        recasts: [
+          {
+            fid: 23039,
+            fname: '0mbre',
+          },
+          {
+            fid: 19691,
+            fname: 'rafael12',
+          },
+          {
+            fid: 17848,
+            fname: 'saeid1088',
+          },
+          {
+            fid: 17213,
+            fname: '4337',
+          },
+          {
+            fid: 18136,
+            fname: 'javad126070',
+          },
+        ],
+      },
+    },
+  },
 }
 
 vi.mock('axios', () => {
@@ -76,6 +111,50 @@ describe('validateFollow function', () => {
     const result = await validateFollow(
       { target: 'target_fid' },
       { actor: 'actor_address' },
+    )
+    expect(result).toBe(false)
+  })
+})
+
+describe('validateRecast function', () => {
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
+
+  it('should return true if the actor has recast the target', async () => {
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+      status: 200,
+      data: MockedConversationResponseSchema,
+    })
+
+    const result = await validateRecast(
+      { identifier: '0x9288c1e862aa72bd69d0e383a28b9a76b63cbdb4' },
+      { actor: '17848' },
+    )
+    expect(result).toBe(true)
+  })
+
+  it('should return false if the actor has not recast the target', async () => {
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+      status: 200,
+      data: {},
+    })
+
+    const result = await validateRecast(
+      { identifier: '0x9288c1e862aa72bd69d0e383a28b9a76b63cbdb4' },
+      { actor: '999999999999' },
+    )
+    expect(result).toBe(false)
+  })
+
+  it('should return false on API failure', async () => {
+    ;(axios.get as MockedFunction<typeof axios.get>).mockRejectedValue(
+      new Error('API failure'),
+    )
+
+    const result = await validateRecast(
+      { identifier: '0x9288c1e862aa72bd69d0e383a28b9a76b63cbdb4' },
+      { actor: '999999999999' },
     )
     expect(result).toBe(false)
   })
