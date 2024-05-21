@@ -43,6 +43,7 @@ import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
 import { Superbridge } from '@rabbitholegg/questdk-plugin-superbridge'
 import { Neynar } from '@rabbitholegg/questdk-plugin-neynar'
+import { Titles } from '@rabbitholegg/questdk-plugin-titles'
 // ^^^ New Imports Go Here ^^^
 import {
   type IntentParams,
@@ -111,6 +112,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Orbit.pluginId]: Orbit,
   [Superbridge.pluginId]: Superbridge,
   [Neynar.pluginId]: Neynar,
+  [Titles.pluginId]: Titles,
 }
 
 export const getPlugin = (pluginId: string) => {
