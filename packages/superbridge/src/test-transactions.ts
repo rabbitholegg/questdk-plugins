@@ -310,4 +310,10 @@ export const failingTestCases = [
   createTestCase(WITHDRAW_TO, 'when recipient is not correct', {
     recipient: '0x04d1963c76eb1bec59d0eeb249ed86f736b82993',
   }),
+  createTestCase(BRIDGE_ETH_TO, 'when bridging BLU from ETH -> BASE', {
+    amount: GreaterThanOrEqual(parseUnits('100', 18)),
+    tokenAddress: '0xfe3b138879d6d0555be4132dcfe6e7424e257a2e',
+    sourceChainId: 1,
+    destinationChainId: 8453,
+  }),
 ]
