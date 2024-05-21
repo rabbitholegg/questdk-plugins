@@ -21,11 +21,117 @@ import {
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, zeroAddress } from 'viem'
 
+function getInputsFromEthereum(params: BridgeActionParams) {
+  const { tokenAddress, amount, recipient } = params
+  const ercInputs = [
+    {
+      $abi: [BRIDGE_ERC20_FRAGMENT],
+      _localToken: tokenAddress,
+      _amount: amount,
+    },
+    {
+      $abi: [BRIDGE_ERC20_TO_FRAGMENT],
+      _localToken: tokenAddress,
+      _to: recipient,
+      _amount: amount,
+    },
+    {
+      $abi: [DEPOSIT_ERC20_FRAGMENT],
+      _l1Token: tokenAddress,
+      _amount: amount,
+    },
+    {
+      $abi: [DEPOSIT_ERC20_TO_FRAGMENT],
+      _l1Token: tokenAddress,
+      _amount: amount,
+      _to: recipient,
+    },
+  ]
+  const ethInputs = [
+    {
+      $abi: [BRIDGE_ETH_FRAGMENT, DEPOSIT_ETH_FRAGMENT],
+    },
+    {
+      $abi: [BRIDGE_ETH_TO_FRAGMENT, DEPOSIT_ETH_TO_FRAGMENT],
+      _to: recipient,
+    },
+  ]
+
+  if (!tokenAddress) {
+    return [...ercInputs, ...ethInputs]
+  }
+  if (tokenAddress === zeroAddress) {
+    return ethInputs
+  }
+  return ercInputs
+}
+
+function getInputsToEthereum(params: BridgeActionParams) {
+  const { tokenAddress, amount, recipient } = params
+
+  const l2Token =
+    tokenAddress === zeroAddress
+      ? '0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000'
+      : tokenAddress
+
+  const ercInputs = [
+    {
+      $abi: [WITHDRAW_FRAGMENT],
+      _l2Token: l2Token,
+      _amount: amount,
+    },
+    {
+      $abi: [WITHDRAW_TO_FRAGMENT],
+      _l2Token: l2Token,
+      _amount: amount,
+      _to: recipient,
+    },
+    {
+      $abi: [BRIDGE_ERC20_FRAGMENT],
+      _localToken: tokenAddress,
+      _amount: amount,
+    },
+    {
+      $abi: [BRIDGE_ERC20_TO_FRAGMENT],
+      _localToken: tokenAddress,
+      _amount: amount,
+      _to: recipient,
+    },
+  ]
+  const ethInputs = [
+    {
+      $abi: [WITHDRAW_FRAGMENT],
+      _l2Token: l2Token,
+      _amount: amount,
+    },
+    {
+      $abi: [WITHDRAW_TO_FRAGMENT],
+      _l2Token: l2Token,
+      _amount: amount,
+      _to: recipient,
+    },
+    {
+      $abi: [BRIDGE_ETH_FRAGMENT],
+    },
+    {
+      $abi: [BRIDGE_ETH_TO_FRAGMENT],
+      _to: recipient,
+    },
+  ]
+
+  if (!tokenAddress) {
+    return [...ercInputs, ...ethInputs]
+  }
+  if (tokenAddress === zeroAddress) {
+    return ethInputs
+  }
+  return ercInputs
+}
+
 export const bridge = async (
   bridge: BridgeActionParams,
 ): Promise<TransactionFilter> => {
-  const { sourceChainId, destinationChainId, tokenAddress, amount, recipient } =
-    bridge
+  const { sourceChainId, destinationChainId, tokenAddress, amount } = bridge
 
   if (
     sourceChainId !== Chains.ETHEREUM &&
@@ -41,42 +147,14 @@ export const bridge = async (
       throw new Error('Unsupported chainId')
     }
 
+    const inputs = getInputsFromEthereum(bridge)
+
     return compressJson({
       chainId: sourceChainId,
       value: isETH ? amount : undefined,
       to: mainToL2BridgeContract[destinationChainId],
       input: {
-        $or: [
-          {
-            $abi: [BRIDGE_ERC20_FRAGMENT],
-            _localToken: tokenAddress,
-            _amount: amount,
-          },
-          {
-            $abi: [BRIDGE_ERC20_TO_FRAGMENT],
-            _localToken: tokenAddress,
-            _to: recipient,
-            _amount: amount,
-          },
-          {
-            $abi: [BRIDGE_ETH_FRAGMENT, DEPOSIT_ETH_FRAGMENT],
-          },
-          {
-            $abi: [BRIDGE_ETH_TO_FRAGMENT, DEPOSIT_ETH_TO_FRAGMENT],
-            _to: recipient,
-          },
-          {
-            $abi: [DEPOSIT_ERC20_FRAGMENT],
-            _l1Token: tokenAddress,
-            _amount: amount,
-          },
-          {
-            $abi: [DEPOSIT_ERC20_TO_FRAGMENT],
-            _l1Token: tokenAddress,
-            _amount: amount,
-            _to: recipient,
-          },
-        ],
+        $or: inputs,
       },
     })
   }
@@ -85,48 +163,14 @@ export const bridge = async (
     throw new Error('Unsupported chainId')
   }
 
-  const l2Token = isETH
-    ? '0xdeaddeaddeaddeaddeaddeaddeaddeaddead0000'
-    : tokenAddress
+  const inputs = getInputsToEthereum(bridge)
 
   return compressJson({
     chainId: sourceChainId,
     value: isETH ? amount : undefined,
     to: l2ToMainBridgeContract[sourceChainId],
     input: {
-      $or: [
-        {
-          $abi: [WITHDRAW_FRAGMENT],
-          _l2Token: l2Token,
-          _amount: amount,
-        },
-        {
-          $abi: [WITHDRAW_TO_FRAGMENT],
-          _l2Token: l2Token,
-          _amount: amount,
-          _to: recipient,
-        },
-
-        {
-          $abi: [BRIDGE_ETH_FRAGMENT],
-        },
-        {
-          $abi: [BRIDGE_ETH_TO_FRAGMENT],
-          _to: recipient,
-        },
-
-        {
-          $abi: [BRIDGE_ERC20_FRAGMENT],
-          _localToken: tokenAddress,
-          _amount: amount,
-        },
-        {
-          $abi: [BRIDGE_ERC20_TO_FRAGMENT],
-          _localToken: tokenAddress,
-          _amount: amount,
-          _to: recipient,
-        },
-      ],
+      $or: inputs,
     },
   })
 }
