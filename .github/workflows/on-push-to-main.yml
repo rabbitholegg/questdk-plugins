@@ -48,7 +48,7 @@ jobs:
     name: Release
     needs: verify
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Clone repository
