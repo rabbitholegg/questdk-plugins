@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.51
+
+### Minor Changes
+
+- [#387](https://github.com/rabbitholegg/questdk-plugins/pull/387) [`15e6844b`](https://github.com/rabbitholegg/questdk-plugins/commit/15e6844bff02f559f1874addd69c0d3eefb1fb1c) Thanks [@mmackz](https://github.com/mmackz)! - add `create` action to zora plugin
+
+### Patch Changes
+
+- Updated dependencies [[`b449a0b5`](https://github.com/rabbitholegg/questdk-plugins/commit/b449a0b5c01130759d9f5bead23b9a383c44dd2d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.27
+  - @rabbitholegg/questdk@2.0.0-alpha.50
+
 ## 1.0.0-alpha.50
 
 ### Patch Changes

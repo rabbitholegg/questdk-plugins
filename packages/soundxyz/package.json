@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-soundxyz",
-  "version": "1.0.0-alpha.37",
+  "version": "1.0.0-alpha.38",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
