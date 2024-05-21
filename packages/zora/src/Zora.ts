@@ -294,6 +294,10 @@ export const simulateMint = async (
       functionName: 'mint',
       args: mintArgs,
       account: from,
+      stateOverride: [{
+        address: from,
+        balance: parseEther('100'),
+      }],
     })
     return result
   } catch {
@@ -311,11 +315,10 @@ export const simulateMint = async (
         functionName: 'mint',
         args: mintArgs,
         account: from,
-        // TODO: There's a bug in Viem preventing this behavior; log issue with them
-        // stateOverride: [{
-        //   address: from,
-        //   balance: BigInt("0x56bc75e2d63100000")
-        // }],
+        stateOverride: [{
+          address: from,
+          balance: parseEther('100'),
+        }],
       })
       return result
     } catch {
@@ -327,6 +330,10 @@ export const simulateMint = async (
         functionName: 'purchase',
         args: [amount],
         account: from,
+        stateOverride: [{
+          address: from,
+          balance: parseEther('100'),
+        }],
       })
       return result
     }
