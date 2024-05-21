@@ -62,6 +62,7 @@ import {
   type SwapActionParams,
   type TransactionFilter,
   type VoteActionParams,
+  type CreateActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import type { Address, PublicClient } from 'viem'
 
@@ -202,6 +203,8 @@ export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
   switch (actionType) {
     case ActionType.Follow:
       return plugin.validateFollow !== undefined
+    case ActionType.Recast:
+      return plugin.validateRecast !== undefined
     default:
       return false
   }
@@ -213,10 +216,11 @@ export const executeValidation = (
   validationPayload: PluginActionValidation,
 ) => {
   const actionType = validationPayload.payload.validationParams.type
-  // We might not even neese a switch statement here since we narrow in the actual plugin
+  // We might not even need a switch statement here since we narrow in the actual plugin
   switch (actionType) {
+    case ActionType.Recast:
     case ActionType.Follow:
-      if (plugin.validate && plugin.validateFollow) {
+      if (plugin.validate) {
         return plugin.validate(validationPayload)
       } else {
         throw new PluginActionNotImplementedError()
@@ -268,6 +272,11 @@ export const executePlugin = (
       if (plugin.vote === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.vote(params as unknown as VoteActionParams)
+    }
+    case ActionType.Create: {
+      if (plugin.create === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.create(params as unknown as CreateActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)

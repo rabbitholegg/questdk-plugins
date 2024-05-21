@@ -97,6 +97,8 @@ export type ActionParams =
   | OptionsActionParams
   | VoteActionParams
   | FollowActionParams
+  | RecastActionParams
+  | CreateActionParams
 
 export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
@@ -107,6 +109,7 @@ export type DisctriminatedActionParams =
   | { type: ActionType.Quest; data: QuestActionParams }
   | { type: ActionType.Options; data: OptionsActionParams }
   | { type: ActionType.Vote; data: VoteActionParams }
+  | { type: ActionType.Create; data: CreateActionParams }
 
 export const QuestInputActionParamsAmountOperatorEnum = z.enum([
   'any',
@@ -245,6 +248,51 @@ export const FollowActionFormSchema = z.object({
 export type FollowActionForm = z.infer<typeof FollowActionFormSchema>
 
 /*
+RECAST
+*/
+export type RecastActionParams = {
+  // Can either be url or hash
+  identifier: Address | string // https://docs.neynar.com/reference/cast-conversation
+  project?: Address | string
+}
+
+export const RecastValidationParamsSchema = z.object({
+  actor: z.string(),
+  project: EthAddressSchema.optional(),
+})
+export type RecastValidationParams = z.infer<
+  typeof RecastValidationParamsSchema
+>
+
+export const RecastActionDetailSchema = z.object({
+  identifier: z.union([z.string().url(), EthAddressSchema]),
+  project: z.union([z.string(), EthAddressSchema]).optional(),
+})
+export type RecastActionDetail = z.infer<typeof RecastActionDetailSchema>
+
+export const RecastActionFormSchema = z.object({
+  identifier: z.union([z.string().url(), EthAddressSchema]),
+})
+export type RecastActionForm = z.infer<typeof RecastActionFormSchema>
+
+/*
+CREATE
+*/
+export type CreateActionParams = {
+  chainId: number
+  contractAddress?: Address
+}
+
+export const CreateActionFormSchema = z.object({})
+export const CreateActionDetailSchema = z.object({
+  chainId: z.number(),
+  contractAddress: EthAddressSchema.optional(),
+})
+
+export type CreateActionForm = z.infer<typeof CreateActionFormSchema>
+export type CreateActionDetail = z.infer<typeof CreateActionDetailSchema>
+
+/*
 VOTE
 */
 
@@ -294,6 +342,7 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('delegate'), data: DelegateActionFormSchema }),
   z.object({ type: z.literal('options'), data: OptionsActionFormSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionFormSchema }),
+  z.object({ type: z.literal('create'), data: CreateActionFormSchema }),
 ])
 
 export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
@@ -307,12 +356,15 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('options'), data: OptionsActionDetailSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionDetailSchema }),
   z.object({ type: z.literal('follow'), data: FollowActionDetailSchema }),
+  z.object({ type: z.literal('recast'), data: RecastActionDetailSchema }),
+  z.object({ type: z.literal('create'), data: CreateActionDetailSchema }),
 ])
 
 export const QuestActionParamsSchema = ActionParamsSchema
 
 export const ValidationParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('follow'), data: FollowValidationParamsSchema }),
+  z.object({ type: z.literal('recast'), data: RecastValidationParamsSchema }),
 ])
 
 export type ValidationParams = z.infer<typeof ValidationParamsSchema>
@@ -351,6 +403,9 @@ export interface IActionPlugin {
   vote?: (
     params: VoteActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  create?: (
+    params: CreateActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   getMintIntent?: (
     mint: MintIntentParams,
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
@@ -376,6 +431,10 @@ export interface IActionPlugin {
   validateFollow?: (
     actionP: FollowActionParams,
     validateP: FollowValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  validateRecast?: (
+    actionP: RecastActionParams,
+    validateP: RecastValidationParams,
   ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
@@ -437,6 +496,8 @@ export enum ActionType {
   Options = 'options',
   Vote = 'vote',
   Follow = 'follow',
+  Recast = 'recast',
+  Create = 'create',
 }
 
 export enum OrderType {

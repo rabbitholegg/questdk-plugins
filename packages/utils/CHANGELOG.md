@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.26
+
+### Minor Changes
+
+- [#398](https://github.com/rabbitholegg/questdk-plugins/pull/398) [`042285ae`](https://github.com/rabbitholegg/questdk-plugins/commit/042285aecc961da9f98af899438f036c9e6763fc) Thanks [@sammccord](https://github.com/sammccord)! - add recast action params to actions, include in validations
+
+## 1.0.0-alpha.25
+
+### Minor Changes
+
+- [#396](https://github.com/rabbitholegg/questdk-plugins/pull/396) [`3ef16d6c`](https://github.com/rabbitholegg/questdk-plugins/commit/3ef16d6c176e99ca44851d987659b69a78005758) Thanks [@sammccord](https://github.com/sammccord)! - Add recast validation params to validation params schema
+
+## 1.0.0-alpha.24
+
+### Minor Changes
+
+- [#394](https://github.com/rabbitholegg/questdk-plugins/pull/394) [`576136ec`](https://github.com/rabbitholegg/questdk-plugins/commit/576136ec2e3328feaebcfbaee681560302b04e36) Thanks [@sammccord](https://github.com/sammccord)! - Implement recast functionality in utils and neynar plugin
+
+- [#390](https://github.com/rabbitholegg/questdk-plugins/pull/390) [`1e2011bf`](https://github.com/rabbitholegg/questdk-plugins/commit/1e2011bffb08a80445e3333272d7a4bac7353cc8) Thanks [@mmackz](https://github.com/mmackz)! - add create action type
+
 ## 1.0.0-alpha.23
 
 ### Patch Changes
