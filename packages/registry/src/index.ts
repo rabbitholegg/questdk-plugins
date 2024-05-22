@@ -63,6 +63,7 @@ import {
   type TransactionFilter,
   type VoteActionParams,
   type CreateActionParams,
+  type CompleteActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import type { Address, PublicClient } from 'viem'
 
@@ -277,6 +278,11 @@ export const executePlugin = (
       if (plugin.create === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.create(params as unknown as CreateActionParams)
+    }
+    case ActionType.Complete: {
+      if (plugin.complete === undefined) {
+        return Promise.reject(new PluginActionNotImplementedError())
+      } else return plugin.complete(params as unknown as CompleteActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)

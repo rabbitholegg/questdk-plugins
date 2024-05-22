@@ -9,6 +9,7 @@ export type {
   DelegateActionParams,
   VoteActionParams,
   CreateActionParams,
+  CompleteActionParams,
   ActionParams,
   IActionPlugin,
 } from '@rabbitholegg/questdk-plugin-utils'
