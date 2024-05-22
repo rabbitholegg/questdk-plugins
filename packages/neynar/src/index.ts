@@ -3,6 +3,7 @@ import { type IActionPlugin } from '@rabbitholegg/questdk'
 import {
   validate,
   validateFollow,
+  validateRecast,
   getSupportedChainIds,
   getSupportedTokenAddresses,
 } from './Neynar'
@@ -13,4 +14,5 @@ export const Neynar: IActionPlugin = {
   getSupportedChainIds,
   validate,
   validateFollow,
+  validateRecast,
 }
