@@ -298,21 +298,23 @@ export type CreateActionDetail = z.infer<typeof CreateActionDetailSchema>
 COMPLETE
 */
 export type CompleteActionParams = {
+  chainId?: string
   boostId?: string
   actionType?: string
 }
 
-export const CompleteActionFormSchema = z.object({})
 export const CompleteActionDetailSchema = z
   .object({
+    chainId: z.string().optional(),
     boostId: z.string().optional(),
     actionType: z.string().optional(),
   })
-  .refine((data) => data.boostId != null || data.actionType != null, {
-    message: 'At least one of boostId or actionType must be provided',
+  .refine((data) => data.chainId != null || data.boostId != null || data.actionType != null, {
+    message: 'At least one of chainId, boostId, or actionType must be provided',
   })
-export type CompleteActionForm = z.infer<typeof CompleteActionFormSchema>
+export const CompleteActionFormSchema = CompleteActionDetailSchema
 export type CompleteActionDetail = z.infer<typeof CompleteActionDetailSchema>
+export type CompleteActionForm = z.infer<typeof CompleteActionFormSchema>
 
 /*
 VOTE
