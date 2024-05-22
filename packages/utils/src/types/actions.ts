@@ -99,6 +99,7 @@ export type ActionParams =
   | FollowActionParams
   | RecastActionParams
   | CreateActionParams
+  | CompleteActionParams
 
 export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
@@ -110,6 +111,7 @@ export type DisctriminatedActionParams =
   | { type: ActionType.Options; data: OptionsActionParams }
   | { type: ActionType.Vote; data: VoteActionParams }
   | { type: ActionType.Create; data: CreateActionParams }
+  | { type: ActionType.Complete; data: CompleteActionParams }
 
 export const QuestInputActionParamsAmountOperatorEnum = z.enum([
   'any',
@@ -293,6 +295,33 @@ export type CreateActionForm = z.infer<typeof CreateActionFormSchema>
 export type CreateActionDetail = z.infer<typeof CreateActionDetailSchema>
 
 /*
+COMPLETE
+*/
+export type CompleteActionParams = {
+  chainId?: string
+  boostId?: string
+  actionType?: string
+}
+
+export const CompleteActionDetailSchema = z
+  .object({
+    chainId: z.string().optional(),
+    boostId: z.string().optional(),
+    actionType: z.string().optional(),
+  })
+  .refine(
+    (data) =>
+      data.chainId != null || data.boostId != null || data.actionType != null,
+    {
+      message:
+        'At least one of chainId, boostId, or actionType must be provided',
+    },
+  )
+export const CompleteActionFormSchema = CompleteActionDetailSchema
+export type CompleteActionDetail = z.infer<typeof CompleteActionDetailSchema>
+export type CompleteActionForm = z.infer<typeof CompleteActionFormSchema>
+
+/*
 VOTE
 */
 
@@ -343,6 +372,7 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('options'), data: OptionsActionFormSchema }),
   z.object({ type: z.literal('vote'), data: VoteActionFormSchema }),
   z.object({ type: z.literal('create'), data: CreateActionFormSchema }),
+  z.object({ type: z.literal('complete'), data: CompleteActionFormSchema }),
 ])
 
 export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
@@ -358,6 +388,7 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('follow'), data: FollowActionDetailSchema }),
   z.object({ type: z.literal('recast'), data: RecastActionDetailSchema }),
   z.object({ type: z.literal('create'), data: CreateActionDetailSchema }),
+  z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema }),
 ])
 
 export const QuestActionParamsSchema = ActionParamsSchema
@@ -405,6 +436,9 @@ export interface IActionPlugin {
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   create?: (
     params: CreateActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  complete?: (
+    params: CompleteActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   getMintIntent?: (
     mint: MintIntentParams,
@@ -498,6 +532,7 @@ export enum ActionType {
   Follow = 'follow',
   Recast = 'recast',
   Create = 'create',
+  Complete = 'complete',
 }
 
 export enum OrderType {
