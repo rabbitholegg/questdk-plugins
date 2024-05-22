@@ -309,9 +309,14 @@ export const CompleteActionDetailSchema = z
     boostId: z.string().optional(),
     actionType: z.string().optional(),
   })
-  .refine((data) => data.chainId != null || data.boostId != null || data.actionType != null, {
-    message: 'At least one of chainId, boostId, or actionType must be provided',
-  })
+  .refine(
+    (data) =>
+      data.chainId != null || data.boostId != null || data.actionType != null,
+    {
+      message:
+        'At least one of chainId, boostId, or actionType must be provided',
+    },
+  )
 export const CompleteActionFormSchema = CompleteActionDetailSchema
 export type CompleteActionDetail = z.infer<typeof CompleteActionDetailSchema>
 export type CompleteActionForm = z.infer<typeof CompleteActionFormSchema>
