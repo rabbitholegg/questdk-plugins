@@ -303,12 +303,14 @@ export type CompleteActionParams = {
 }
 
 export const CompleteActionFormSchema = z.object({})
-export const CompleteActionDetailSchema = z.object({
-  boostId: z.string().optional(),
-  actionType: z.string().optional(),
-}).refine(data => data.boostId != null || data.actionType != null, {
-  message: 'At least one of boostId or actionType must be provided',
-})
+export const CompleteActionDetailSchema = z
+  .object({
+    boostId: z.string().optional(),
+    actionType: z.string().optional(),
+  })
+  .refine((data) => data.boostId != null || data.actionType != null, {
+    message: 'At least one of boostId or actionType must be provided',
+  })
 export type CompleteActionForm = z.infer<typeof CompleteActionFormSchema>
 export type CompleteActionDetail = z.infer<typeof CompleteActionDetailSchema>
 
@@ -379,7 +381,7 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('follow'), data: FollowActionDetailSchema }),
   z.object({ type: z.literal('recast'), data: RecastActionDetailSchema }),
   z.object({ type: z.literal('create'), data: CreateActionDetailSchema }),
-  z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema}),
+  z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema }),
 ])
 
 export const QuestActionParamsSchema = ActionParamsSchema
@@ -523,7 +525,7 @@ export enum ActionType {
   Follow = 'follow',
   Recast = 'recast',
   Create = 'create',
-  Complete = 'complete'
+  Complete = 'complete',
 }
 
 export enum OrderType {
