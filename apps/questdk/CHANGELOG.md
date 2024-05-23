@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.51
+
+### Patch Changes
+
+- [#408](https://github.com/rabbitholegg/questdk-plugins/pull/408) [`ddbfdc18`](https://github.com/rabbitholegg/questdk-plugins/commit/ddbfdc181c9de12a7d135b161ad34d6df1ad6366) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Adds the Complete Action Type
+
 ## 2.0.0-alpha.50
 
 ### Minor Changes
