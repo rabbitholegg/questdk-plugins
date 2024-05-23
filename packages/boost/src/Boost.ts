@@ -1,18 +1,18 @@
 import {
-  type TransactionFilter,
-  type MintActionParams,
-  type CompleteActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address } from 'viem'
-import {
-  BOOST_PASS_CONTRACT,
   BOOST_PASS_ABI,
+  BOOST_PASS_CONTRACT,
   COMPLETE_BOOST_ABI,
   DATA_ABI_PARAMS,
   QUEST_FACTORY_CONTRACT,
 } from './constants'
+import {
+  type CompleteActionParams,
+  type MintActionParams,
+  type TransactionFilter,
+  compressJson,
+} from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address } from 'viem'
 
 export const complete = async (
   complete: CompleteActionParams,
@@ -27,8 +27,8 @@ export const complete = async (
       compressedData_: {
         $and: [
           // decompress data and compare to incoming value
-          {$compareCompressed: { value: boostId }},
-          {$compareCompressed: { value: actionType }},
+          { $compareCompressed: { value: boostId } },
+          { $compareCompressed: { value: actionType } },
         ],
       },
     },

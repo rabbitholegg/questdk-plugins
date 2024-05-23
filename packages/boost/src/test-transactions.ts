@@ -3,10 +3,10 @@ import type {
   MintActionParams,
 } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
-  type TestParams,
-  Chains,
   ActionType,
+  Chains,
+  type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 export const BOOST_PASS_MINT: TestParams<MintActionParams> = {

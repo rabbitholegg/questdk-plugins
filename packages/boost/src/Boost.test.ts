@@ -1,14 +1,14 @@
-import { apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
+import { complete, mint } from './Boost'
+import { BOOST_PASS_ABI } from './constants'
 import {
+  BOOST_PASS_MINT,
   failingTestCasesComplete,
   failingTestCasesMint,
   passingTestCasesComplete,
   passingTestCasesMint,
-  BOOST_PASS_MINT,
 } from './test-transactions'
-import { complete, mint } from './Boost'
-import { BOOST_PASS_ABI } from './constants'
+import { apply } from '@rabbitholegg/questdk'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the boost plugin', () => {
   describe('When handling the mint action', () => {
