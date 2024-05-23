@@ -167,8 +167,13 @@ describe('Given the getFee function', () => {
       data: {
         publicData: {
           merkleTreeId: undefined,
+          mintPrice: {
+            value: '520000000000000',
+            decimals: 18,
+            currency: 'ETH',
+            erc20: '0x0000000000000000000000000000000000000000',
+          },
         },
-        mintPrice: 0.00052,
       },
     })
 

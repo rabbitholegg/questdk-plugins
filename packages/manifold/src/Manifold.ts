@@ -202,13 +202,10 @@ export const getFees = async (
         (isExclusive ? parseEther('0.00069') : parseEther('0.0005')) *
         quantityToMint
 
-      // calculate action fee
-      const mintPrice = data.mintPrice
-      let actionFee = 0n
-      if (mintPrice && typeof mintPrice === 'number') {
-        actionFee = parseEther(mintPrice.toString()) * quantityToMint
-      }
-      return { actionFee, projectFee }
+      const { value, currency } = data.publicData.mintPrice
+      const mintPrice = currency === 'ETH' ? BigInt(value) : 0n
+      const actionFee = mintPrice * quantityToMint
+      return { actionFee: BigInt(actionFee), projectFee: projectFee }
     }
     return { actionFee: 0n, projectFee: parseEther('0.0005') * quantityToMint }
   } catch (err) {
