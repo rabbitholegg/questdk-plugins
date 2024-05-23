@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-jojo
 
+## 1.0.0-alpha.24
+
+### Patch Changes
+
+- Updated dependencies [[`ddbfdc18`](https://github.com/rabbitholegg/questdk-plugins/commit/ddbfdc181c9de12a7d135b161ad34d6df1ad6366)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.29
+  - @rabbitholegg/questdk@2.0.0-alpha.51
+
 ## 1.0.0-alpha.23
 
 ### Patch Changes
