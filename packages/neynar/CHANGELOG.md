@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-neynar
 
+## 1.0.0-alpha.13
+
+### Patch Changes
+
+- [#411](https://github.com/rabbitholegg/questdk-plugins/pull/411) [`7562a063`](https://github.com/rabbitholegg/questdk-plugins/commit/7562a0635a6b7ba108280eeab8f593c3d22a159b) Thanks [@sammccord](https://github.com/sammccord)! - pull recast off of viewer context instead of reactions
+
+- Updated dependencies [[`ddbfdc18`](https://github.com/rabbitholegg/questdk-plugins/commit/ddbfdc181c9de12a7d135b161ad34d6df1ad6366)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.29
+  - @rabbitholegg/questdk@2.0.0-alpha.51
+
 ## 1.0.0-alpha.12
 
 ### Minor Changes
