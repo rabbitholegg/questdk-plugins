@@ -30,6 +30,10 @@ export const ConversationSchema = z.object({
         }),
       ),
     }),
+    viewer_context: z.object({
+      liked: z.boolean().optional(),
+      recasted: z.boolean().optional(),
+    }),
   }),
 })
 

@@ -100,9 +100,7 @@ export const validateRecast = async (
       (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
 
     const response = await fetchConversation(actionP.identifier, actorFid)
-    return response.conversation.cast.reactions.recasts.some(
-      (recast) => recast.fid === actorFid,
-    )
+    return response.conversation.cast.viewer_context.recasted === true
   } catch (error) {
     return false
   }
