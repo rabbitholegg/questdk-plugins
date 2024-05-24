@@ -305,6 +305,7 @@ export type CompleteActionParams = {
 
 export const CompleteActionDetailSchema = z
   .object({
+    actor: z.string(),
     chainId: z.string().optional(),
     boostId: z.string().optional(),
     actionType: z.string().optional(),
@@ -396,6 +397,7 @@ export const QuestActionParamsSchema = ActionParamsSchema
 export const ValidationParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('follow'), data: FollowValidationParamsSchema }),
   z.object({ type: z.literal('recast'), data: RecastValidationParamsSchema }),
+  z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema }),
 ])
 
 export type ValidationParams = z.infer<typeof ValidationParamsSchema>
