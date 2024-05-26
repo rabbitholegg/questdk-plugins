@@ -298,6 +298,7 @@ export type CreateActionDetail = z.infer<typeof CreateActionDetailSchema>
 COMPLETE
 */
 export type CompleteActionParams = {
+  completeAfter?: number
   chainId?: string
   boostId?: string
   actionType?: string

@@ -6,11 +6,21 @@ import {
 } from '@rabbitholegg/questdk'
 import { Chains, QuestCompletionPayload, type PluginActionValidation, CompleteActionParams, CompleteValidationParams } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
+import axios from 'axios'
 import {
   BOOST_PASS_CONTRACT,
   BOOST_PASS_ABI,
   DATA_ABI_PARAMS,
 } from './constants'
+import { CompletedBoostResponse, CompletedBoostResponseSchema } from './types'
+
+const API_BASE_URL = 'https://api.boost.xyz'
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
 
 export const validate = async (validationPayload: PluginActionValidation): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
@@ -33,13 +43,25 @@ export const validate = async (validationPayload: PluginActionValidation): Promi
   }
 }
 
+const fetchCompletedBoosts = async (actor: string, actionP: CompleteActionParams): Promise<CompletedBoostResponse> => {
+  const response = await axiosInstance.get('/quests/completed-boosts', {
+    params: {
+      address: actor,
+      completeAfter: actionP.completeAfter,
+      actionType: actionP.actionType,
+    }
+  })
+
+  const parsedResponse: CompletedBoostResponse = CompletedBoostResponseSchema.parse(response.data)
+  return parsedResponse
+}
+
 export const validateComplete = async (
   actionP: CompleteActionParams,
   validateP: CompleteValidationParams,
 ): Promise<boolean> => {
-  console.log({ actionP, validateP })
-  // TODO: Check against API here and only return true if valid
-  return false
+  const response = await fetchCompletedBoosts(validateP.actor, actionP)
+  return response.length > 0
 }
 
 export const mint = async (
