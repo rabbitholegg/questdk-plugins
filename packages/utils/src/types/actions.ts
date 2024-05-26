@@ -305,22 +305,21 @@ export type CompleteActionParams = {
 
 export const CompleteActionDetailSchema = z
   .object({
-    actor: z.string(),
+    completedAfter: z.date().optional(),
     chainId: z.string().optional(),
     boostId: z.string().optional(),
     actionType: z.string().optional(),
   })
-  .refine(
-    (data) =>
-      data.chainId != null || data.boostId != null || data.actionType != null,
-    {
-      message:
-        'At least one of chainId, boostId, or actionType must be provided',
-    },
-  )
 export const CompleteActionFormSchema = CompleteActionDetailSchema
 export type CompleteActionDetail = z.infer<typeof CompleteActionDetailSchema>
 export type CompleteActionForm = z.infer<typeof CompleteActionFormSchema>
+
+export const CompleteValidationParamsSchema = z.object({
+  actor: z.string(),
+})
+export type CompleteValidationParams = z.infer<
+  typeof CompleteValidationParamsSchema
+>
 
 /*
 VOTE
@@ -397,7 +396,7 @@ export const QuestActionParamsSchema = ActionParamsSchema
 export const ValidationParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('follow'), data: FollowValidationParamsSchema }),
   z.object({ type: z.literal('recast'), data: RecastValidationParamsSchema }),
-  z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema }),
+  z.object({ type: z.literal('complete'), data: CompleteValidationParamsSchema }),
 ])
 
 export type ValidationParams = z.infer<typeof ValidationParamsSchema>
@@ -471,6 +470,10 @@ export interface IActionPlugin {
   validateRecast?: (
     actionP: RecastActionParams,
     validateP: RecastValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  validateComplete?: (
+    actionP: CompleteActionParams,
+    validateP: CompleteValidationParams,
   ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
