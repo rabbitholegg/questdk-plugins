@@ -25,6 +25,8 @@ export type {
   RecastActionParams,
   CreateActionParams,
   CompleteActionParams,
+  CompleteValidationParams,
+  CompleteActionForm,
   IActionPlugin,
   FilterObject,
   BitmaskFilter,

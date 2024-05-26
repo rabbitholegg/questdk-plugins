@@ -11,6 +11,8 @@ export type {
   DelegateActionParams,
   CreateActionParams,
   CompleteActionParams,
+  CompleteValidationParams,
+  CompleteActionForm,
   ActionParams,
   IActionPlugin,
   DisctriminatedActionParams,

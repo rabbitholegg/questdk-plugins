@@ -305,7 +305,7 @@ export type CompleteActionParams = {
 
 export const CompleteActionDetailSchema = z
   .object({
-    completedAfter: z.date().optional(),
+    completeAfter: z.number().optional(),
     chainId: z.string().optional(),
     boostId: z.string().optional(),
     actionType: z.string().optional(),

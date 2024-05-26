@@ -4,7 +4,7 @@ import {
   compressJson,
   ActionType
 } from '@rabbitholegg/questdk'
-import { Chains, QuestCompletionPayload, type PluginActionValidation } from '@rabbitholegg/questdk-plugin-utils'
+import { Chains, QuestCompletionPayload, type PluginActionValidation, CompleteActionParams, CompleteValidationParams } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 import {
   BOOST_PASS_CONTRACT,
@@ -15,22 +15,31 @@ import {
 export const validate = async (validationPayload: PluginActionValidation): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
   const { actionParams, validationParams, questId, taskId } = payload
-  console.log({
-    actionParams,
-    validationParams
-  })
   switch (actionParams.type) {
     case ActionType.Complete: {
-      // TODO: Check against API here and only return data if valid
-      return {
-        address: actor,
-        questId,
-        taskId,
+      const isCompleteValid = await validateComplete(actionParams.data, validationParams.data)
+      if (isCompleteValid) {
+        return {
+          address: actor,
+          questId,
+          taskId,
+        }
       }
+
+      return null
     }
     default:
       throw new Error('Unsupported action type')
   }
+}
+
+export const validateComplete = async (
+  actionP: CompleteActionParams,
+  validateP: CompleteValidationParams,
+): Promise<boolean> => {
+  console.log({ actionP, validateP })
+  // TODO: Check against API here and only return true if valid
+  return false
 }
 
 export const mint = async (
