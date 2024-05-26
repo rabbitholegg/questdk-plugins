@@ -205,7 +205,7 @@ export const getFees = async (
       const { value, currency } = data.publicData.mintPrice
       const mintPrice = currency === 'ETH' ? BigInt(value) : 0n
       const actionFee = mintPrice * quantityToMint
-      return { actionFee: BigInt(actionFee), projectFee: projectFee }
+      return { actionFee, projectFee }
     }
     return { actionFee: 0n, projectFee: parseEther('0.0005') * quantityToMint }
   } catch (err) {
