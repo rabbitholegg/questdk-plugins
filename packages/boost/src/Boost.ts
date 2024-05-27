@@ -62,7 +62,9 @@ const fetchCompletedBoosts = async (
     params: {
       address: actor,
       completeAfter: actionP.completeAfter,
-      actionType: actionP.actionType,
+      actionTypes: actionP.actionType,
+      boostId: actionP.boostId,
+      chainId: actionP.chainId,
     },
   })
 
