@@ -97,7 +97,7 @@ describe('Given the boost plugin', () => {
       })
     })
   })
-  
+
   describe('When handling the complete action', () => {
     beforeEach(() => {
       vi.resetAllMocks()
@@ -109,8 +109,12 @@ describe('Given the boost plugin', () => {
         )
         ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
-          data: MockedCompletedBoostsResponse.filter((boost) => new Date(boost.quest_start_time).getTime() / 1000 >= completeAfter),
-        })        
+          data: MockedCompletedBoostsResponse.filter(
+            (boost) =>
+              new Date(boost.quest_start_time).getTime() / 1000 >=
+              completeAfter,
+          ),
+        })
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
         const actionParams: CompleteActionParams = { completeAfter }
         const result = await validateComplete(actionParams, { actor })
@@ -118,52 +122,66 @@ describe('Given the boost plugin', () => {
       })
 
       it('should return true if actor has completed a boost with the specified actiontype', async () => {
-        (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
-          data: MockedCompletedBoostsResponse.filter((boost) => boost.task_type === 'create'),
-        })  
+          data: MockedCompletedBoostsResponse.filter(
+            (boost) => boost.task_type === 'create',
+          ),
+        })
         const completeAfter = Math.floor(
           new Date('2024-04-25T00:00:00.000Z').getTime() / 1000,
         )
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
-        const actionParams: CompleteActionParams = { completeAfter, actionType: 'create' }
+        const actionParams: CompleteActionParams = {
+          completeAfter,
+          actionType: 'create',
+        }
         const result = await validateComplete(actionParams, { actor })
         expect(result).to.be.true
       })
 
       it('should return true if actor has completed a boost with a specific Boost ID', async () => {
-        (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
-          data: MockedCompletedBoostsResponse.filter((boost) => boost.quest_id === '9ec52f66-0ec9-4646-9f4e-cd74c8506a66'),
-        })  
+          data: MockedCompletedBoostsResponse.filter(
+            (boost) =>
+              boost.quest_id === '9ec52f66-0ec9-4646-9f4e-cd74c8506a66',
+          ),
+        })
         const completeAfter = Math.floor(
           new Date('2024-04-15T00:00:00.000Z').getTime() / 1000,
         )
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
-        const actionParams: CompleteActionParams = { completeAfter, boostId: '9ec52f66-0ec9-4646-9f4e-cd74c8506a66' }
+        const actionParams: CompleteActionParams = {
+          completeAfter,
+          boostId: '9ec52f66-0ec9-4646-9f4e-cd74c8506a66',
+        }
         const result = await validateComplete(actionParams, { actor })
         expect(result).to.be.true
       })
 
       it('should return true if actor has completed a boost with the specified ChainId', async () => {
-        (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
           data: MockedCompletedBoostsResponse,
-        })  
+        })
         const completeAfter = Math.floor(
           new Date('2024-04-25T00:00:00.000Z').getTime() / 1000,
         )
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
-        const actionParams: CompleteActionParams = { completeAfter, chainId: '0xaa36a7' }
+        const actionParams: CompleteActionParams = {
+          completeAfter,
+          chainId: '0xaa36a7',
+        }
         const result = await validateComplete(actionParams, { actor })
         expect(result).to.be.true
       })
 
       it('should return false if actor has not completed a boost', async () => {
-        (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
           data: [],
-        }) 
+        })
         const completeAfter = Math.floor(
           new Date('2024-04-25T00:00:00.000Z').getTime() / 1000,
         )
@@ -179,7 +197,11 @@ describe('Given the boost plugin', () => {
         )
         ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
-          data: MockedCompletedBoostsResponse.filter((boost) => new Date(boost.quest_start_time).getTime() / 1000 >= completeAfter),
+          data: MockedCompletedBoostsResponse.filter(
+            (boost) =>
+              new Date(boost.quest_start_time).getTime() / 1000 >=
+              completeAfter,
+          ),
         })
 
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
@@ -189,35 +211,45 @@ describe('Given the boost plugin', () => {
       })
 
       it('should return false if actor has not completed a boost with the specified actiontype', async () => {
-        (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
-          data: MockedCompletedBoostsResponse.filter((boost) => boost.task_type === 'stake'),
+          data: MockedCompletedBoostsResponse.filter(
+            (boost) => boost.task_type === 'stake',
+          ),
         })
         const completeAfter = Math.floor(
           new Date('2024-04-25T00:00:00.000Z').getTime() / 1000,
         )
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
-        const actionParams: CompleteActionParams = { completeAfter, actionType: 'stake' }
+        const actionParams: CompleteActionParams = {
+          completeAfter,
+          actionType: 'stake',
+        }
         const result = await validateComplete(actionParams, { actor })
         expect(result).to.be.false
       })
 
       it('should return false if actor has not completed a boost with the specified Boost ID', async () => {
-        (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
-          data: MockedCompletedBoostsResponse.filter((boost) => boost.task_id === '9ec52f66-0ec9-4646-9f4e-cd74c8506a65'),
+          data: MockedCompletedBoostsResponse.filter(
+            (boost) => boost.task_id === '9ec52f66-0ec9-4646-9f4e-cd74c8506a65',
+          ),
         })
         const completeAfter = Math.floor(
           new Date('2024-04-25T00:00:00.000Z').getTime() / 1000,
         )
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
-        const actionParams: CompleteActionParams = { completeAfter, boostId: '9ec52f66-0ec9-4646-9f4e-cd74c8506a65' }
+        const actionParams: CompleteActionParams = {
+          completeAfter,
+          boostId: '9ec52f66-0ec9-4646-9f4e-cd74c8506a65',
+        }
         const result = await validateComplete(actionParams, { actor })
         expect(result).to.be.false
       })
 
       it('should return false if actor has not completed a boost with the specified ChainId', async () => {
-        (axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
           status: 200,
           data: [],
         })
@@ -225,7 +257,10 @@ describe('Given the boost plugin', () => {
           new Date('2024-04-25T00:00:00.000Z').getTime() / 1000,
         )
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
-        const actionParams: CompleteActionParams = { completeAfter, chainId: '0xa' }
+        const actionParams: CompleteActionParams = {
+          completeAfter,
+          chainId: '0xa',
+        }
         const result = await validateComplete(actionParams, { actor })
         expect(result).to.be.false
       })
