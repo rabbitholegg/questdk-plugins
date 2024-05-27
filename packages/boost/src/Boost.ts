@@ -2,9 +2,15 @@ import {
   type TransactionFilter,
   type MintActionParams,
   compressJson,
-  ActionType
+  ActionType,
 } from '@rabbitholegg/questdk'
-import { Chains, QuestCompletionPayload, type PluginActionValidation, CompleteActionParams, CompleteValidationParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  QuestCompletionPayload,
+  type PluginActionValidation,
+  CompleteActionParams,
+  CompleteValidationParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 import axios from 'axios'
 import {
@@ -22,12 +28,17 @@ const axiosInstance = axios.create({
   },
 })
 
-export const validate = async (validationPayload: PluginActionValidation): Promise<QuestCompletionPayload | null> => {
+export const validate = async (
+  validationPayload: PluginActionValidation,
+): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
   const { actionParams, validationParams, questId, taskId } = payload
   switch (actionParams.type) {
     case ActionType.Complete: {
-      const isCompleteValid = await validateComplete(actionParams.data, validationParams.data)
+      const isCompleteValid = await validateComplete(
+        actionParams.data,
+        validationParams.data,
+      )
       if (isCompleteValid) {
         return {
           address: actor,
@@ -43,16 +54,20 @@ export const validate = async (validationPayload: PluginActionValidation): Promi
   }
 }
 
-const fetchCompletedBoosts = async (actor: string, actionP: CompleteActionParams): Promise<CompletedBoostResponse> => {
+const fetchCompletedBoosts = async (
+  actor: string,
+  actionP: CompleteActionParams,
+): Promise<CompletedBoostResponse> => {
   const response = await axiosInstance.get('/quests/completed-boosts', {
     params: {
       address: actor,
       completeAfter: actionP.completeAfter,
       actionType: actionP.actionType,
-    }
+    },
   })
 
-  const parsedResponse: CompletedBoostResponse = CompletedBoostResponseSchema.parse(response.data)
+  const parsedResponse: CompletedBoostResponse =
+    CompletedBoostResponseSchema.parse(response.data)
   return parsedResponse
 }
 
@@ -88,7 +103,9 @@ export const getSupportedTokenAddresses = async (
   return [] // not required for mint action type
 }
 
-export const getSupportedChainIds = async (actionType?: ActionType): Promise<number[]> => {
+export const getSupportedChainIds = async (
+  actionType?: ActionType,
+): Promise<number[]> => {
   if (actionType === ActionType.Mint) {
     return [Chains.ARBITRUM_ONE]
   }
