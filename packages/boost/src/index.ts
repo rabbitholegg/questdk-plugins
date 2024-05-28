@@ -3,7 +3,13 @@ import {
   PluginActionNotImplementedError,
 } from '@rabbitholegg/questdk'
 
-import { mint, getSupportedChainIds, getSupportedTokenAddresses } from './Boost'
+import {
+  mint,
+  getSupportedChainIds,
+  getSupportedTokenAddresses,
+  validate,
+  validateComplete,
+} from './Boost'
 
 export const Boost: IActionPlugin = {
   pluginId: 'boost',
@@ -12,4 +18,6 @@ export const Boost: IActionPlugin = {
   bridge: async () => new PluginActionNotImplementedError(),
   swap: async () => new PluginActionNotImplementedError(),
   mint,
+  validate,
+  validateComplete,
 }

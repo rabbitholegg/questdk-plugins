@@ -1,69 +1,68 @@
 import { Across } from '@rabbitholegg/questdk-plugin-across'
+import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
 import { Arbitrum } from '@rabbitholegg/questdk-plugin-arbitrum'
+import { ArtBlocks } from '@rabbitholegg/questdk-plugin-artblocks'
 import { Balancer } from '@rabbitholegg/questdk-plugin-balancer'
+import { Base } from '@rabbitholegg/questdk-plugin-base'
 import { BasePaint } from '@rabbitholegg/questdk-plugin-basepaint'
 import { Boost } from '@rabbitholegg/questdk-plugin-boost'
 import { Camelot } from '@rabbitholegg/questdk-plugin-camelot'
 import { Connext } from '@rabbitholegg/questdk-plugin-connext'
+import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
 import { GMX } from '@rabbitholegg/questdk-plugin-gmx'
 import { HandleFi } from '@rabbitholegg/questdk-plugin-handlefi'
 import { Hop } from '@rabbitholegg/questdk-plugin-hop'
 import { Hyphen } from '@rabbitholegg/questdk-plugin-hyphen'
+import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
 import { Kote } from '@rabbitholegg/questdk-plugin-kote'
+import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
 import { Llama } from '@rabbitholegg/questdk-plugin-llama'
+import { Manifold } from '@rabbitholegg/questdk-plugin-manifold'
 import { Mirror } from '@rabbitholegg/questdk-plugin-mirror'
 import { Mux } from '@rabbitholegg/questdk-plugin-mux'
+import { Neynar } from '@rabbitholegg/questdk-plugin-neynar'
 import { OkuTrade } from '@rabbitholegg/questdk-plugin-okutrade'
 import { Optimism } from '@rabbitholegg/questdk-plugin-optimism'
+import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
+import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
 import { Paraswap } from '@rabbitholegg/questdk-plugin-paraswap'
 import { Pendle } from '@rabbitholegg/questdk-plugin-pendle'
+import { Pods } from '@rabbitholegg/questdk-plugin-pods'
 import { Polygon } from '@rabbitholegg/questdk-plugin-polygon'
 import { Rabbithole } from '@rabbitholegg/questdk-plugin-rabbithole'
 import { Soundxyz } from '@rabbitholegg/questdk-plugin-soundxyz'
 import { Stargate } from '@rabbitholegg/questdk-plugin-stargate'
+import { Superbridge } from '@rabbitholegg/questdk-plugin-superbridge'
 import { Sushi } from '@rabbitholegg/questdk-plugin-sushi'
 import { Synapse } from '@rabbitholegg/questdk-plugin-synapse'
 import { Tally } from '@rabbitholegg/questdk-plugin-tally'
+import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
+import { Titles } from '@rabbitholegg/questdk-plugin-titles'
 import { TraderJoe } from '@rabbitholegg/questdk-plugin-traderjoe'
 import { Treasure } from '@rabbitholegg/questdk-plugin-treasure'
 import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
-import { JOJO } from '@rabbitholegg/questdk-plugin-jojo'
-import { ArtBlocks } from '@rabbitholegg/questdk-plugin-artblocks'
-import { Manifold } from '@rabbitholegg/questdk-plugin-manifold'
-import { Fabric } from '@rabbitholegg/questdk-plugin-fabric'
-import { Paragraph } from '@rabbitholegg/questdk-plugin-paragraph'
-import { Aerodrome } from '@rabbitholegg/questdk-plugin-aerodrome'
-import { Pods } from '@rabbitholegg/questdk-plugin-pods'
-import { Kwenta } from '@rabbitholegg/questdk-plugin-kwenta'
-import { Thruster } from '@rabbitholegg/questdk-plugin-thruster'
-import { Base } from '@rabbitholegg/questdk-plugin-base'
-import { Orbit } from '@rabbitholegg/questdk-plugin-orbit'
-import { Superbridge } from '@rabbitholegg/questdk-plugin-superbridge'
-import { Neynar } from '@rabbitholegg/questdk-plugin-neynar'
-import { Titles } from '@rabbitholegg/questdk-plugin-titles'
 // ^^^ New Imports Go Here ^^^
 import {
-  type IntentParams,
-  type MintIntentParams,
-  type IActionPlugin,
-  type ActionParams,
-  type PluginActionValidation,
   ActionType,
-  type BridgeActionParams,
-  type DelegateActionParams,
-  type MintActionParams,
-  type OptionsActionParams,
   PluginActionNotImplementedError,
+  type ActionParams,
+  type BridgeActionParams,
+  type CreateActionParams,
+  type DelegateActionParams,
+  type IActionPlugin,
+  type IntentParams,
+  type MintActionParams,
+  type MintIntentParams,
+  type OptionsActionParams,
+  type PluginActionValidation,
   type QuestActionParams,
   type StakeActionParams,
   type SwapActionParams,
   type TransactionFilter,
   type VoteActionParams,
-  type CreateActionParams,
-  type CompleteActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import type { Address, PublicClient } from 'viem'
 
@@ -206,6 +205,8 @@ export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
       return plugin.validateFollow !== undefined
     case ActionType.Recast:
       return plugin.validateRecast !== undefined
+    case ActionType.Complete:
+      return plugin.validateComplete !== undefined
     default:
       return false
   }
@@ -221,6 +222,7 @@ export const executeValidation = (
   switch (actionType) {
     case ActionType.Recast:
     case ActionType.Follow:
+    case ActionType.Complete:
       if (plugin.validate) {
         return plugin.validate(validationPayload)
       } else {
@@ -278,11 +280,6 @@ export const executePlugin = (
       if (plugin.create === undefined) {
         return Promise.reject(new PluginActionNotImplementedError())
       } else return plugin.create(params as unknown as CreateActionParams)
-    }
-    case ActionType.Complete: {
-      if (plugin.complete === undefined) {
-        return Promise.reject(new PluginActionNotImplementedError())
-      } else return plugin.complete(params as unknown as CompleteActionParams)
     }
     default:
       throw new Error(`Unknown action type "${actionType}"`)
