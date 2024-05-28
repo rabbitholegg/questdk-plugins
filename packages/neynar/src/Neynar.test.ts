@@ -24,28 +24,25 @@ const MockedConversationResponseSchema: ConversationResponse = {
   conversation: {
     cast: {
       reactions: {
-        recasts: [
-          {
-            fid: 23039,
-            fname: '0mbre',
-          },
-          {
-            fid: 19691,
-            fname: 'rafael12',
-          },
-          {
-            fid: 17848,
-            fname: 'saeid1088',
-          },
-          {
-            fid: 17213,
-            fname: '4337',
-          },
-          {
-            fid: 18136,
-            fname: 'javad126070',
-          },
-        ],
+        recasts: [],
+      },
+      viewer_context: {
+        liked: false,
+        recasted: true,
+      },
+    },
+  },
+}
+
+const MockedConversationHasntRecastResponseSchema: ConversationResponse = {
+  conversation: {
+    cast: {
+      reactions: {
+        recasts: [],
+      },
+      viewer_context: {
+        liked: false,
+        recasted: false,
       },
     },
   },
@@ -137,7 +134,7 @@ describe('validateRecast function', () => {
   it('should return false if the actor has not recast the target', async () => {
     ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
       status: 200,
-      data: {},
+      data: MockedConversationHasntRecastResponseSchema,
     })
 
     const result = await validateRecast(

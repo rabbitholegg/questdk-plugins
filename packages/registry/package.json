@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.113",
+  "version": "1.0.0-alpha.117",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
@@ -81,6 +81,7 @@
     "@rabbitholegg/questdk-plugin-thruster": "workspace:*",
     "@rabbitholegg/questdk-plugin-orbit": "workspace:*",
     "@rabbitholegg/questdk-plugin-superbridge": "workspace:*",
-    "@rabbitholegg/questdk-plugin-neynar": "workspace:*"
+    "@rabbitholegg/questdk-plugin-neynar": "workspace:*",
+    "@rabbitholegg/questdk-plugin-titles": "workspace:*"
   }
 }

@@ -1,5 +1,29 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.30
+
+### Patch Changes
+
+- [#414](https://github.com/rabbitholegg/questdk-plugins/pull/414) [`0f3a4f18`](https://github.com/rabbitholegg/questdk-plugins/commit/0f3a4f18d269e209e8f1da4fd40e8809fcf0b532) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Add complete action for Boost plugin
+
+## 1.0.0-alpha.29
+
+### Patch Changes
+
+- [#408](https://github.com/rabbitholegg/questdk-plugins/pull/408) [`ddbfdc18`](https://github.com/rabbitholegg/questdk-plugins/commit/ddbfdc181c9de12a7d135b161ad34d6df1ad6366) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Adds the Complete Action Type
+
+## 1.0.0-alpha.28
+
+### Minor Changes
+
+- [#406](https://github.com/rabbitholegg/questdk-plugins/pull/406) [`d71235b9`](https://github.com/rabbitholegg/questdk-plugins/commit/d71235b9e35a1e03ba77ee68875b019b514e6d48) Thanks [@sammccord](https://github.com/sammccord)! - add validateRecast to neynar plugin
+
+## 1.0.0-alpha.27
+
+### Minor Changes
+
+- [#401](https://github.com/rabbitholegg/questdk-plugins/pull/401) [`b449a0b5`](https://github.com/rabbitholegg/questdk-plugins/commit/b449a0b5c01130759d9f5bead23b9a383c44dd2d) Thanks [@sammccord](https://github.com/sammccord)! - Export recast schemas from util actions, types
+
 ## 1.0.0-alpha.26
 
 ### Minor Changes

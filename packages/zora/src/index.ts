@@ -6,6 +6,7 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
+  create,
   getDynamicNameParams,
   getFees,
   getMintIntent,
@@ -21,6 +22,7 @@ export const Zora: IActionPlugin = {
   getSupportedTokenAddresses,
   getSupportedChainIds,
   bridge: async () => new PluginActionNotImplementedError(),
+  create,
   swap: async () => new PluginActionNotImplementedError(),
   mint,
   getDynamicNameParams,

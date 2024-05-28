@@ -4,8 +4,8 @@ import {
   type MintActionParams,
 } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
   type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 export const ERC1155_MINT: TestParams<MintActionParams> = {

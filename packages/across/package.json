@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-across",
-  "version": "1.0.0-alpha.43",
+  "version": "1.0.0-alpha.47",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
