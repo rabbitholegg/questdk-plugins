@@ -1,16 +1,16 @@
 import type {
-  IActionPlugin,
   ActionParams,
+  IActionPlugin,
   MintActionParams,
 } from '@rabbitholegg/questdk'
 
 import {
+  getFees,
   getMintIntent,
+  getProjectFees,
   getSupportedChainIds,
   getSupportedTokenAddresses,
   mint,
-  getProjectFees,
-  getFees,
   simulateMint,
 } from './Manifold.js'
 
