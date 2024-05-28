@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-manifold
 
+## 1.0.0-alpha.20
+
+### Minor Changes
+
+- [#413](https://github.com/rabbitholegg/questdk-plugins/pull/413) [`708114dc`](https://github.com/rabbitholegg/questdk-plugins/commit/708114dcb49e57d42549c0981c8cbd2838f307bc) Thanks [@mmackz](https://github.com/mmackz)! - update manifold plugin getFees function
+
+### Patch Changes
+
+- Updated dependencies [[`0f3a4f18`](https://github.com/rabbitholegg/questdk-plugins/commit/0f3a4f18d269e209e8f1da4fd40e8809fcf0b532)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.30
+  - @rabbitholegg/questdk@2.0.0-alpha.51
+
 ## 1.0.0-alpha.19
 
 ### Patch Changes
