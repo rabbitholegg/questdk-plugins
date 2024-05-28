@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-artblocks
 
+## 1.0.0-alpha.19
+
+### Patch Changes
+
+- Updated dependencies [[`0f3a4f18`](https://github.com/rabbitholegg/questdk-plugins/commit/0f3a4f18d269e209e8f1da4fd40e8809fcf0b532)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.30
+  - @rabbitholegg/questdk@2.0.0-alpha.51
+
 ## 1.0.0-alpha.18
 
 ### Patch Changes

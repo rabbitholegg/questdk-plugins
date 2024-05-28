@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.30
+
+### Patch Changes
+
+- [#414](https://github.com/rabbitholegg/questdk-plugins/pull/414) [`0f3a4f18`](https://github.com/rabbitholegg/questdk-plugins/commit/0f3a4f18d269e209e8f1da4fd40e8809fcf0b532) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Add complete action for Boost plugin
+
 ## 1.0.0-alpha.29
 
 ### Patch Changes
