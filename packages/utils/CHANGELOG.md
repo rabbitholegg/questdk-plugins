@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.31
+
+### Patch Changes
+
+- [#417](https://github.com/rabbitholegg/questdk-plugins/pull/417) [`0d3c1441`](https://github.com/rabbitholegg/questdk-plugins/commit/0d3c1441f5eff0eaab84b414e26d6dee3ae1b590) Thanks [@jonathandiep](https://github.com/jonathandiep)! - Enforce completeAfter on complete action type
+
 ## 1.0.0-alpha.30
 
 ### Patch Changes
