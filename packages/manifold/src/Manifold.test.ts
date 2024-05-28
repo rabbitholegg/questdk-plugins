@@ -142,8 +142,10 @@ describe('Given the getFee function', () => {
       data: {
         publicData: {
           merkleTreeId: undefined,
+          mintPrice: {
+            value: '0',
+          },
         },
-        mintPrice: 0,
       },
     })
 
