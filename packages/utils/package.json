@@ -22,12 +22,5 @@
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
     "test:ui": "vitest dev --ui"
-  },
-  "dependencies": {
-    "tslib": "2.3.1"
-  },
-  "devDependencies": {
-    "tsconfig": "workspace:*",
-    "vite": "^5.2.11"
   }
 }

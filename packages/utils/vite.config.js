@@ -1,8 +1,11 @@
 /** @type {import('vite').UserConfig} */
 export default {
   build: {
+    rollupOptions: {
+      external: [/@rabbitholegg/],
+    },
     lib: {
-      entry: 'src/index.ts',
+      entry: ['src/index.ts'],
       emptyOutDir: false,
       name: 'QuestdkUtils',
       fileName: (module, name) => {
