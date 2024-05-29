@@ -1,11 +1,11 @@
 import { apply } from '@rabbitholegg/questdk'
-import { LBRouterV21ABI } from '@traderjoe-xyz/sdk-v2'
 import { describe, expect, test } from 'vitest'
 import { getSupportedTokenAddresses, swap } from './TraderJoe'
 import {
   EXACT_NATIVE_FOR_TOKENS_ABI,
   EXACT_TOKENS_FOR_NATIVE_ABI,
   EXACT_TOKENS_FOR_TOKENS_ABI,
+  LBRouterV21ABI,
   NATIVE_FOR_EXACT_TOKENS_ABI,
   TOKENS_FOR_EXACT_NATIVE_ABI,
   TOKENS_FOR_EXACT_TOKENS_ABI,

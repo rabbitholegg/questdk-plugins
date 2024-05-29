@@ -3,8 +3,7 @@ import {
   type SwapActionParams,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address, zeroAddress as NATIVE_TOKEN } from 'viem'
-import { LBRouterV21ABI, LB_ROUTER_V21_ADDRESS } from '@traderjoe-xyz/sdk-v2'
+import { type Address, Hex, zeroAddress as NATIVE_TOKEN } from 'viem'
 import { DEFAULT_SWAP_TOKEN_LIST, Tokens } from './contract-addresses'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { buildPathQuery, Chains } from './utils'
@@ -12,10 +11,24 @@ import {
   EXACT_NATIVE_FOR_TOKENS_ABI,
   EXACT_TOKENS_FOR_NATIVE_ABI,
   EXACT_TOKENS_FOR_TOKENS_ABI,
+  LBRouterV21ABI,
   NATIVE_FOR_EXACT_TOKENS_ABI,
   TOKENS_FOR_EXACT_NATIVE_ABI,
   TOKENS_FOR_EXACT_TOKENS_ABI,
 } from './abi'
+import { arbitrum, arbitrumGoerli, avalanche, avalancheFuji, mantle } from 'viem/chains'
+
+// https://github.com/traderjoe-xyz/joe-sdks/blob/458e39748c8ebc6abd1703d6f6f98372cc3c51c5/packages/v2/src/constants/v2Addrs.ts#L51
+export const LB_ROUTER_V21_ADDRESS: Record<number, Hex> = {
+  [avalancheFuji.id]: '0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30',
+  [avalanche.id]: '0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30',
+  [arbitrum.id]: '0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30',
+  [arbitrumGoerli.id]: '0x095EEe81B0eC73797424d67e24adab20D5A5D307',
+  [56]: '0xb4315e873dBcf96Ffd0acd8EA43f689D8c20fB30',
+  [97]: '0x8FABE13D95F28f7478Dc655d8D4BA99935D50e02',
+  [1]: '0x9A93a421b74F1c5755b83dD2C211614dC419C44b',
+  [mantle.id]: '0xAFb85a12Babfafabfe1a518594492d5a830e782a',
+}
 
 export const swap = async (
   swap: SwapActionParams,

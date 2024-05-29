@@ -1,0 +1,30 @@
+{
+  "include": ["**/*.ts"],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "plugins": [{ "transform": "ts-transform-asset/transform" }],
+    "incremental": true,
+    "strict": true,
+    "useDefineForClassFields": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "useUnknownInCatchVariables": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowJs": false,
+    "checkJs": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "target": "ES2021",
+    "lib": ["ES2022", "DOM"],
+    "skipLibCheck": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "outDir": "dist/types"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/base.json",
+  "extends": "../../tsconfig.json",
   "include": ["src"],
   "exclude": [
     "src/**/*.test.ts",
@@ -9,7 +9,7 @@
   ],
   "compilerOptions": {
     "sourceMap": true,
-    "rootDir": "./src",
+    "rootDir": "./src"
   }
 }
 
