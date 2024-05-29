@@ -2,7 +2,7 @@
 export default {
   build: {
     rollupOptions: {
-      external: [/@rabbitholegg/],
+      external: [/@rabbitholegg/, /@mux-network/],
     },
     lib: {
       entry: 'src/index.ts',

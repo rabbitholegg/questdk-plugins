@@ -2,7 +2,7 @@
 export default {
   build: {
     rollupOptions: {
-      external: [/@rabbitholegg/],
+      external: [/@rabbitholegg/, /@zoralabs/],
     },
     lib: {
       entry: 'src/index.ts',
