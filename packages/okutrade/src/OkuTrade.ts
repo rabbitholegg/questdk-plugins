@@ -1,4 +1,14 @@
 import {
+  ActionType,
+  compressJson,
+  type OptionsActionParams,
+  type StakeActionParams,
+  type SwapActionParams,
+  type TransactionFilter,
+} from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { zeroAddress as ETH_ADDRESS } from 'viem'
+import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
   LIMIT_ORDER_REGISTRY_ABI,
@@ -16,16 +26,6 @@ import {
   getUniversalRouter,
   getWETHAddress,
 } from './utils'
-import {
-  ActionType,
-  type OptionsActionParams,
-  type StakeActionParams,
-  type SwapActionParams,
-  type TransactionFilter,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { zeroAddress as ETH_ADDRESS } from 'viem'
 
 export const swap = async (
   swap: SwapActionParams,
@@ -83,8 +83,8 @@ export const stake = async (stake: StakeActionParams) => {
       params: {
         token0: tokenOne,
         token1: tokenTwo,
-        amount0Desired: amountOne,
-        amount1Desired: amountTwo,
+        amount0Min: amountOne,
+        amount1Min: amountTwo,
       },
     },
   })
