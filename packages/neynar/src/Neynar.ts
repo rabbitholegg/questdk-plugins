@@ -93,8 +93,6 @@ export const validateFollow = async (
       })()],
     )
 
-    console.log(userResponse, channelResponse)
-
     // there is an edge case where a user could have the same username as a channel id, and if they're following that user then this will validate
     if(channelResponse.status === 'fulfilled' && channelResponse.value.channels.at(0)?.viewer_context.following) return true
     if(userResponse.status === 'fulfilled' && userResponse.value?.viewer_context.following) return true
