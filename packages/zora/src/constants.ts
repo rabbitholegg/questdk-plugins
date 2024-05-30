@@ -1,0 +1,1 @@
+export const CREATOR_SUBGRAPH = 'https://api.goldsky.com/api/public/project_clhk16b61ay9t49vm6ntn4mkz/subgraphs/zora-create-zora-mainnet/stable/gn'
