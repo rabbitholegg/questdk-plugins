@@ -130,8 +130,6 @@ const fetchChannel = async (
     },
   })
 
-  console.log('fetchChannel', response.data)
-
   // Validate the response data with the Zod schema
   const parsedResponse: ChannelsResponse = ChannelsResponseSchema.parse(
     response.data,
