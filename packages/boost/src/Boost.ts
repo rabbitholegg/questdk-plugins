@@ -35,15 +35,17 @@ export const validate = async (
   const { actionParams, validationParams, questId, taskId } = payload
   switch (actionParams.type) {
     case ActionType.Complete: {
-      const isCompleteValid = await validateComplete(
+      const { isCompleteValid, transactionHash, chainId } = await validateComplete(
         actionParams.data,
         validationParams.data,
       )
-      if (isCompleteValid) {
+      if (isCompleteValid && transactionHash && chainId) {
         return {
           address: actor,
           questId,
           taskId,
+          transactionHash,
+          chainId,
         }
       }
 
@@ -76,9 +78,15 @@ const fetchCompletedBoosts = async (
 export const validateComplete = async (
   actionP: CompleteActionParams,
   validateP: CompleteValidationParams,
-): Promise<boolean> => {
+): Promise<{ isCompleteValid: boolean, transactionHash: string | null, chainId: number | null }> => {
   const response = await fetchCompletedBoosts(validateP.actor, actionP)
-  return response.length > 0
+  const completedBoost = response[0]
+
+  return {
+    isCompleteValid: response.length > 0,
+    transactionHash: completedBoost?.claim_tx_hash ?? null,
+    chainId: completedBoost?.claim_chain_id ?? null,
+  }
 }
 
 export const mint = async (
