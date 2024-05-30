@@ -8,7 +8,7 @@ import {
   optimismGoerli,
   polygon,
   polygonMumbai,
-  scrollTestnet,
+  scrollSepolia,
   zkSync,
   zora,
 } from 'viem/chains'
@@ -35,5 +35,5 @@ export const SUPPORTED_TASK_CHAINS: ChainMap = {
   [arbitrumGoerli.id]: arbitrumGoerli,
   [zora.id]: zora,
   [zkSync.id]: zkSync,
-  [scrollTestnet.id]: scrollTestnet,
+  [scrollSepolia.id]: scrollSepolia,
 }
