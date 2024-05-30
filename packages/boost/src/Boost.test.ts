@@ -62,7 +62,7 @@ vi.mock('axios', () => {
 })
 
 describe('Given the boost plugin', () => {
-  describe.skip('When handling the mint action', () => {
+  describe('When handling the mint action', () => {
     describe('should return a valid action filter', () => {
       const { params } = BOOST_PASS_MINT
       test('when minting a boostpass', async () => {
