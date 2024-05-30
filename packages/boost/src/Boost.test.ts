@@ -25,6 +25,9 @@ const MockedCompletedBoostsResponse: CompletedBoostResponse = [
     quest_id: '40374898-9b98-4488-af2d-2288e6aef4ae',
     quest_start_time: '2024-05-21T20:12:23.704Z',
     updated_at: '2024-05-21T20:24:24.811Z',
+    claim_tx_hash:
+      '0xd400270e811538cf61d02e1b8001cc888a6ed2792db4ffd3bd193d77d3fcd7db',
+    claim_chain_id: 11155111,
   },
   {
     task_id: '2b517b89-9bc3-40f5-8289-8e562d176dfc',
@@ -32,6 +35,9 @@ const MockedCompletedBoostsResponse: CompletedBoostResponse = [
     quest_id: '9ec52f66-0ec9-4646-9f4e-cd74c8506a66',
     quest_start_time: '2024-05-21T19:32:51.129Z',
     updated_at: '2024-05-21T20:04:26.636Z',
+    claim_tx_hash:
+      '0xd400270e811538cf61d02e1b8001cc888a6ed2792db4ffd3bd193d77d3fcd7db',
+    claim_chain_id: 11155111,
   },
 ]
 
@@ -118,7 +124,7 @@ describe('Given the boost plugin', () => {
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
         const actionParams: CompleteActionParams = { completeAfter }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.true
+        expect(result.isCompleteValid).to.be.true
       })
 
       it('should return true if actor has completed a boost with the specified actiontype', async () => {
@@ -137,7 +143,7 @@ describe('Given the boost plugin', () => {
           actionType: 'create',
         }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.true
+        expect(result.isCompleteValid).to.be.true
       })
 
       it('should return true if actor has completed a boost with a specific Boost ID', async () => {
@@ -157,7 +163,7 @@ describe('Given the boost plugin', () => {
           boostId: '9ec52f66-0ec9-4646-9f4e-cd74c8506a66',
         }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.true
+        expect(result.isCompleteValid).to.be.true
       })
 
       it('should return true if actor has completed a boost with the specified ChainId', async () => {
@@ -174,7 +180,7 @@ describe('Given the boost plugin', () => {
           chainId: '0xaa36a7',
         }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.true
+        expect(result.isCompleteValid).to.be.true
       })
 
       it('should return false if actor has not completed a boost', async () => {
@@ -188,7 +194,7 @@ describe('Given the boost plugin', () => {
         const actor = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' // vitalik.eth
         const actionParams: CompleteActionParams = { completeAfter }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.false
+        expect(result.isCompleteValid).to.be.false
       })
 
       it('should return false if actor has not completed a boost after the specified time', async () => {
@@ -207,7 +213,7 @@ describe('Given the boost plugin', () => {
         const actor = '0x865C301c46d64DE5c9B124Ec1a97eF1EFC1bcbd1'
         const actionParams: CompleteActionParams = { completeAfter }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.false
+        expect(result.isCompleteValid).to.be.false
       })
 
       it('should return false if actor has not completed a boost with the specified actiontype', async () => {
@@ -226,7 +232,7 @@ describe('Given the boost plugin', () => {
           actionType: 'stake',
         }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.false
+        expect(result.isCompleteValid).to.be.false
       })
 
       it('should return false if actor has not completed a boost with the specified Boost ID', async () => {
@@ -245,7 +251,7 @@ describe('Given the boost plugin', () => {
           boostId: '9ec52f66-0ec9-4646-9f4e-cd74c8506a65',
         }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.false
+        expect(result.isCompleteValid).to.be.false
       })
 
       it('should return false if actor has not completed a boost with the specified ChainId', async () => {
@@ -262,7 +268,7 @@ describe('Given the boost plugin', () => {
           chainId: '0xa',
         }
         const result = await validateComplete(actionParams, { actor })
-        expect(result).to.be.false
+        expect(result.isCompleteValid).to.be.false
       })
     })
   })
