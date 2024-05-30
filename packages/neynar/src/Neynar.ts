@@ -86,16 +86,27 @@ export const validateFollow = async (
     const actorFid: number | null =
       (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
 
-    const [userResponse, channelResponse] = await Promise.allSettled(
-      [fetchUser(actionP.target, actorFid), (async () => {
-        if(typeof actionP.target === 'string') return await fetchChannel(actionP.target, actorFid)
+    const [userResponse, channelResponse] = await Promise.allSettled([
+      fetchUser(actionP.target, actorFid),
+      (async () => {
+        if (typeof actionP.target === 'string')
+          return await fetchChannel(actionP.target, actorFid)
+        // return a stubbed empty response for consistent type return
         return { channels: [] } as ChannelsResponse
-      })()],
-    )
+      })(),
+    ])
 
     // there is an edge case where a user could have the same username as a channel id, and if they're following that user then this will validate
-    if(channelResponse.status === 'fulfilled' && channelResponse.value.channels.at(0)?.viewer_context.following) return true
-    if(userResponse.status === 'fulfilled' && userResponse.value?.viewer_context.following) return true
+    if (
+      channelResponse.status === 'fulfilled' &&
+      channelResponse.value.channels.at(0)?.viewer_context.following
+    )
+      return true
+    if (
+      userResponse.status === 'fulfilled' &&
+      userResponse.value?.viewer_context.following
+    )
+      return true
 
     return false
   } catch (error) {
@@ -142,14 +153,14 @@ const fetchUser = async (
   actorFid: number,
 ): Promise<User | undefined> => {
   // if we're searching with an FID, use the bulk endpoint
-  if(typeof target === 'number') {
+  if (typeof target === 'number') {
     const response = await axiosInstance.get('/user/bulk', {
       params: {
         fids: target,
         viewer_fid: actorFid,
       },
     })
-  
+
     // Validate the response data with the Zod schema
     const parsedResponse: UsersResponse = UsersResponseSchema.parse(
       response.data,
@@ -167,9 +178,7 @@ const fetchUser = async (
   })
 
   // Validate the response data with the Zod schema
-  const parsedResponse: UserSearch = UserSearchSchema.parse(
-    response.data,
-  )
+  const parsedResponse: UserSearch = UserSearchSchema.parse(response.data)
   return parsedResponse.result.users.at(0)
 }
 

@@ -227,7 +227,7 @@ FOLLOW
 */
 export type FollowActionParams = {
   // if the target is a string, then assume it's a valid username or channel name
-  // if it's a number, assume it's a fid, but that will rarely be the case 
+  // if it's a number, assume it's a fid, but that will rarely be the case
   target: Address | string | number
   project?: Address | string
 }
@@ -242,7 +242,7 @@ export type FollowValidationParams = z.infer<
 
 export const FollowActionDetailSchema = z.object({
   // if the target is a string, then assume it's a valid username or channel name
-  // if it's a number, assume it's a fid, but that will rarely be the case 
+  // if it's a number, assume it's a fid, but that will rarely be the case
   target: z.union([z.string(), EthAddressSchema, z.number()]),
   project: z.union([z.string(), EthAddressSchema]).optional(),
 })
@@ -250,7 +250,7 @@ export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>
 
 export const FollowActionFormSchema = z.object({
   // if the target is a string, then assume it's a valid username or channel name
-  // if it's a number, assume it's a fid, but that will rarely be the case 
+  // if it's a number, assume it's a fid, but that will rarely be the case
   target: z.union([z.string(), EthAddressSchema, z.number()]),
 })
 export type FollowActionForm = z.infer<typeof FollowActionFormSchema>
