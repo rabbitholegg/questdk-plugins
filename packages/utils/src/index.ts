@@ -13,6 +13,7 @@ export type {
   MintIntentParams,
   SwapActionParams,
   OptionsActionParams,
+  BoostedActionParams,
   StakeActionParams,
   BridgeActionParams,
   VoteActionParams,

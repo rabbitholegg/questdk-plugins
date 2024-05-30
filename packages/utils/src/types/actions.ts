@@ -294,6 +294,37 @@ export const CreateActionDetailSchema = z.object({
 export type CreateActionForm = z.infer<typeof CreateActionFormSchema>
 export type CreateActionDetail = z.infer<typeof CreateActionDetailSchema>
 
+
+/*
+BOOSTED
+*/
+export type BoostedActionParams = {
+  boostConfig: BoostConfig // Should be all of the information needed to create a boost
+  // What else do we need to validate from Zora?
+}
+
+export type BoostedValidationParams = {
+  actor: Address
+  // Maybe potentially the refferall code? Not sure how we scrape that
+  // Do we want information about the collection they created?
+}
+
+export const BoostedActionParamsSchema = z.object({
+  boostConfig: z.object({
+    // What do we need to validate here?
+  }),
+})
+
+export const BoostedValidationParamsSchema = z.object({
+  actor: EthAddressSchema,
+})
+
+// This should contain everything that we need to create a boost
+export type BoostConfig = {
+  // What do we need to validate here?
+}
+
+
 /*
 COMPLETE
 */
