@@ -477,7 +477,13 @@ export interface IActionPlugin {
   validateComplete?: (
     actionP: CompleteActionParams,
     validateP: CompleteValidationParams,
-  ) => Promise<{ isCompleteValid: boolean, transactionHash: string | null, chainId: number | null }> | Promise<PluginActionNotImplementedError>
+  ) =>
+    | Promise<{
+        isCompleteValid: boolean
+        transactionHash: string | null
+        chainId: number | null
+      }>
+    | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
 

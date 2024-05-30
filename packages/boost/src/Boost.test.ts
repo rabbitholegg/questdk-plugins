@@ -25,8 +25,9 @@ const MockedCompletedBoostsResponse: CompletedBoostResponse = [
     quest_id: '40374898-9b98-4488-af2d-2288e6aef4ae',
     quest_start_time: '2024-05-21T20:12:23.704Z',
     updated_at: '2024-05-21T20:24:24.811Z',
-    claim_tx_hash: '0xd400270e811538cf61d02e1b8001cc888a6ed2792db4ffd3bd193d77d3fcd7db',
-    claim_chain_id: 11155111
+    claim_tx_hash:
+      '0xd400270e811538cf61d02e1b8001cc888a6ed2792db4ffd3bd193d77d3fcd7db',
+    claim_chain_id: 11155111,
   },
   {
     task_id: '2b517b89-9bc3-40f5-8289-8e562d176dfc',
@@ -34,8 +35,9 @@ const MockedCompletedBoostsResponse: CompletedBoostResponse = [
     quest_id: '9ec52f66-0ec9-4646-9f4e-cd74c8506a66',
     quest_start_time: '2024-05-21T19:32:51.129Z',
     updated_at: '2024-05-21T20:04:26.636Z',
-    claim_tx_hash: '0xd400270e811538cf61d02e1b8001cc888a6ed2792db4ffd3bd193d77d3fcd7db',
-    claim_chain_id: 11155111
+    claim_tx_hash:
+      '0xd400270e811538cf61d02e1b8001cc888a6ed2792db4ffd3bd193d77d3fcd7db',
+    claim_chain_id: 11155111,
   },
 ]
 
