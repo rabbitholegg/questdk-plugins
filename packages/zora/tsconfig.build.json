@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/base.json",
+  "extends": "../../tsconfig.json",
   "include": ["src"],
   "exclude": [
     "src/**/*.test.ts",
@@ -12,6 +12,6 @@
     "sourceMap": true,
     "rootDir": "./src",
     "moduleResolution": "node",
-    "esModuleInterop": true,
+    "esModuleInterop": true
   }
 }

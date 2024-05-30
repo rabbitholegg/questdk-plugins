@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.52
+
+### Minor Changes
+
+- [#385](https://github.com/rabbitholegg/questdk-plugins/pull/385) [`72a86095`](https://github.com/rabbitholegg/questdk-plugins/commit/72a860954036856b073a2043dfc8614c200585d6) Thanks [@sammccord](https://github.com/sammccord)! - use vite for build tooling, reduce plugin size, improve build speeds
+
 ## 2.0.0-alpha.51
 
 ### Patch Changes

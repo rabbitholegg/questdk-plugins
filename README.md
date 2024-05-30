@@ -202,6 +202,7 @@ Our build process now consists of three discrete steps, designed to ensure both 
 
 ### Additional Updates
 
+- **Third-party SDK's**: If a plugin is dependent on a third party SDK, like `@zoralabs/protocol-sdk`, please ensure that a matching package name regular expression, ie: `/@zoralabs/` is added to the plugin's `vite.config.js` `build.rollupOptions.external` to prevent unnecessary inclusion in compiled output.
 - **Migration Away from Rome**: Recognizing that Rome is no longer maintained, we've started to migrate our tooling away from it to ensure future compatibility and support.
 - **Utility Script for File Management**: To facilitate cleaner updates, a helper script has been added for copying files out to every directory. This approach allows for a more straightforward "delete all and replace" strategy when updating modules.
 

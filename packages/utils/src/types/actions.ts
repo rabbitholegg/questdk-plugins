@@ -298,14 +298,14 @@ export type CreateActionDetail = z.infer<typeof CreateActionDetailSchema>
 COMPLETE
 */
 export type CompleteActionParams = {
-  completeAfter?: number
+  completeAfter: number
   chainId?: string
   boostId?: string
   actionType?: string
 }
 
 export const CompleteActionDetailSchema = z.object({
-  completeAfter: z.number().optional(),
+  completeAfter: z.number(),
   chainId: z.string().optional(),
   boostId: z.string().optional(),
   actionType: z.string().optional(),
@@ -477,7 +477,13 @@ export interface IActionPlugin {
   validateComplete?: (
     actionP: CompleteActionParams,
     validateP: CompleteValidationParams,
-  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  ) =>
+    | Promise<{
+        isCompleteValid: boolean
+        transactionHash: string | null
+        chainId: number | null
+      }>
+    | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-neynar",
   "private": false,
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.16",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
@@ -9,17 +9,13 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "description": "Plugin for neynar",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "scripts": {
+    "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./dist/types",
     "bench": "vitest bench",
     "bench:ci": "CI=true vitest bench",
-    "build": "pnpm build:types && pnpm build:esm && pnpm postbuild:esm && pnpm build:cjs && pnpm postbuild:cjs && BABEL_ENV=esmBundled pnpm rollup -c",
-    "build:esm": "BABEL_ENV=esmUnbundled babel src --extensions '.ts' --out-dir 'dist/esm' --source-maps",
-    "build:cjs": "BABEL_ENV=cjs babel src --extensions '.ts' --out-dir 'dist/cjs' --source-maps",
-    "build:types": "tsc --project tsconfig.build.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
     "clean": "rimraf dist",
-    "postbuild:cjs": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
-    "postbuild:esm": "echo '{\"type\":\"module\"}' > dist/esm/package.json",
     "format": "rome format . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -31,11 +27,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "types": "./dist/types/index.d.ts",
-  "typings": "./dist/types/index.d.ts",
-  "devDependencies": {
-    "tsconfig": "workspace:*"
-  },
+  "devDependencies": {},
   "dependencies": {
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
     "@rabbitholegg/questdk": "workspace:*"
