@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-orbit",
   "private": false,
-  "version": "1.0.0-alpha.17",
+  "version": "1.0.0-alpha.18",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",

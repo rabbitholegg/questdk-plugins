@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.32
+
+### Minor Changes
+
+- [#422](https://github.com/rabbitholegg/questdk-plugins/pull/422) [`19d8db5c`](https://github.com/rabbitholegg/questdk-plugins/commit/19d8db5c5cafb4409dd469d22bdfc709d6d108aa) Thanks [@mmackz](https://github.com/mmackz)! - fix utils exports
+
+- [#385](https://github.com/rabbitholegg/questdk-plugins/pull/385) [`72a86095`](https://github.com/rabbitholegg/questdk-plugins/commit/72a860954036856b073a2043dfc8614c200585d6) Thanks [@sammccord](https://github.com/sammccord)! - use vite for build tooling, reduce plugin size, improve build speeds
+
+### Patch Changes
+
+- [#423](https://github.com/rabbitholegg/questdk-plugins/pull/423) [`1fa4bb52`](https://github.com/rabbitholegg/questdk-plugins/commit/1fa4bb5262cef6a1f434850b097b9aacc0d1e8ba) Thanks [@jonathandiep](https://github.com/jonathandiep)! - include tx hash and chain id
+
 ## 1.0.0-alpha.31
 
 ### Patch Changes
