@@ -86,14 +86,14 @@ export const validateFollow = async (
     const actorFid: number | null =
       (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
 
-    if(typeof actionP.target === 'string' && actionP.type === 'channel') {
+    if (typeof actionP.target === 'string' && actionP.type === 'channel') {
       const channelResponse = await fetchChannel(actionP.target, actorFid)
       const channel = channelResponse.channels.at(0)
-      if(!channel) return false
+      if (!channel) return false
       return channel.viewer_context.following || false
     }
 
-    if(typeof actionP.target === 'string' && actionP.type === 'user') {
+    if (typeof actionP.target === 'string' && actionP.type === 'user') {
       const userResponse = await fetchUser(actionP.target, actorFid)
       return userResponse?.viewer_context.following || false
     }
