@@ -10,10 +10,15 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 import {
+  ChannelsResponse,
+  ChannelsResponseSchema,
   ConversationResponse,
   ConversationResponseSchema,
-  FollowersResponse,
-  FollowersResponseSchema,
+  User,
+  UsersResponse,
+  UsersResponseSchema,
+  UserSearch,
+  UserSearchSchema,
 } from './types'
 import { isAddress } from 'viem'
 import assert from 'node:assert'
@@ -81,9 +86,27 @@ export const validateFollow = async (
     const actorFid: number | null =
       (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
 
-    const response = await fetchUser(actionP.target, actorFid)
-    if (response.users[0].viewer_context.following)
-      return response.users[0].viewer_context.following
+    const [userResponse, channelResponse] = await Promise.allSettled([
+      fetchUser(actionP.target, actorFid),
+      (async () => {
+        if (typeof actionP.target === 'string')
+          return await fetchChannel(actionP.target, actorFid)
+        // return a stubbed empty response for consistent type return
+        return { channels: [] } as ChannelsResponse
+      })(),
+    ])
+
+    // there is an edge case where a user could have the same username as a channel id, and if they're following that user then this will validate
+    if (
+      channelResponse.status === 'fulfilled' &&
+      channelResponse.value.channels.at(0)?.viewer_context.following
+    )
+      return true
+    if (
+      userResponse.status === 'fulfilled' &&
+      userResponse.value?.viewer_context.following
+    )
+      return true
 
     return false
   } catch (error) {
@@ -106,22 +129,57 @@ export const validateRecast = async (
   }
 }
 
-const fetchUser = async (
+const fetchChannel = async (
   target: string,
   actorFid: number,
-): Promise<FollowersResponse> => {
-  const response = await axiosInstance.get('/user/bulk', {
+): Promise<ChannelsResponse> => {
+  const response = await axiosInstance.get('/channel/bulk', {
     params: {
-      fids: target,
+      ids: target,
+      type: 'id',
       viewer_fid: actorFid,
     },
   })
 
   // Validate the response data with the Zod schema
-  const parsedResponse: FollowersResponse = FollowersResponseSchema.parse(
+  const parsedResponse: ChannelsResponse = ChannelsResponseSchema.parse(
     response.data,
   )
   return parsedResponse
+}
+
+const fetchUser = async (
+  target: string | number,
+  actorFid: number,
+): Promise<User | undefined> => {
+  // if we're searching with an FID, use the bulk endpoint
+  if (typeof target === 'number') {
+    const response = await axiosInstance.get('/user/bulk', {
+      params: {
+        fids: target,
+        viewer_fid: actorFid,
+      },
+    })
+
+    // Validate the response data with the Zod schema
+    const parsedResponse: UsersResponse = UsersResponseSchema.parse(
+      response.data,
+    )
+    return parsedResponse?.users?.at(0)
+  }
+
+  // otherwise search by username, there should only be one if the username is correct
+  const response = await axiosInstance.get('/user/search', {
+    params: {
+      q: target,
+      viewer_fid: actorFid,
+      limit: '1',
+    },
+  })
+
+  // Validate the response data with the Zod schema
+  const parsedResponse: UserSearch = UserSearchSchema.parse(response.data)
+  return parsedResponse.result.users.at(0)
 }
 
 const fetchConversation = async (
