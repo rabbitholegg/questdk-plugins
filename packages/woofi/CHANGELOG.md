@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-woofi
 
+## 1.0.0-alpha.47
+
+### Patch Changes
+
+- Updated dependencies [[`495680d0`](https://github.com/rabbitholegg/questdk-plugins/commit/495680d01d42dde9c1301d64b725bb80f8813bf8), [`8556345e`](https://github.com/rabbitholegg/questdk-plugins/commit/8556345ec3df098e9d6f500d1e686ce7a5185f05)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.33
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.46
 
 ### Minor Changes

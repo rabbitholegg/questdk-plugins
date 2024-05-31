@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-sushi",
-  "version": "1.0.0-alpha.38",
+  "version": "1.0.0-alpha.39",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",

@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.53
+
+### Minor Changes
+
+- [#425](https://github.com/rabbitholegg/questdk-plugins/pull/425) [`8556345e`](https://github.com/rabbitholegg/questdk-plugins/commit/8556345ec3df098e9d6f500d1e686ce7a5185f05) Thanks [@sammccord](https://github.com/sammccord)! - upgrade viem to support taiko chain for okutrade plugin
+
 ## 2.0.0-alpha.52
 
 ### Minor Changes

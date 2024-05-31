@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.52
+
+### Patch Changes
+
+- [#419](https://github.com/rabbitholegg/questdk-plugins/pull/419) [`f9447ad9`](https://github.com/rabbitholegg/questdk-plugins/commit/f9447ad9c5a53a4256b6869c6ef9a8a90a53f7ab) Thanks [@mmackz](https://github.com/mmackz)! - add ALFAA token
+
+- Updated dependencies [[`495680d0`](https://github.com/rabbitholegg/questdk-plugins/commit/495680d01d42dde9c1301d64b725bb80f8813bf8), [`8556345e`](https://github.com/rabbitholegg/questdk-plugins/commit/8556345ec3df098e9d6f500d1e686ce7a5185f05)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.33
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.51
 
 ### Minor Changes
