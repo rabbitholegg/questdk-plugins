@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.33
+
+### Minor Changes
+
+- [#424](https://github.com/rabbitholegg/questdk-plugins/pull/424) [`495680d0`](https://github.com/rabbitholegg/questdk-plugins/commit/495680d01d42dde9c1301d64b725bb80f8813bf8) Thanks [@sammccord](https://github.com/sammccord)! - Change validateFollow to accept usernames/channel strings or fid's as numbers, fetchUser to accept numerical fid's
+
 ## 1.0.0-alpha.32
 
 ### Minor Changes
