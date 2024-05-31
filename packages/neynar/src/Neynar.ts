@@ -86,27 +86,17 @@ export const validateFollow = async (
     const actorFid: number | null =
       (await translateAddressToFID(validateP.actor)) || Number(validateP.actor)
 
-    const [userResponse, channelResponse] = await Promise.allSettled([
-      fetchUser(actionP.target, actorFid),
-      (async () => {
-        if (typeof actionP.target === 'string')
-          return await fetchChannel(actionP.target, actorFid)
-        // return a stubbed empty response for consistent type return
-        return { channels: [] } as ChannelsResponse
-      })(),
-    ])
+    if (typeof actionP.target === 'string' && actionP.type === 'channel') {
+      const channelResponse = await fetchChannel(actionP.target, actorFid)
+      const channel = channelResponse.channels.at(0)
+      if (!channel) return false
+      return channel.viewer_context.following || false
+    }
 
-    // there is an edge case where a user could have the same username as a channel id, and if they're following that user then this will validate
-    if (
-      channelResponse.status === 'fulfilled' &&
-      channelResponse.value.channels.at(0)?.viewer_context.following
-    )
-      return true
-    if (
-      userResponse.status === 'fulfilled' &&
-      userResponse.value?.viewer_context.following
-    )
-      return true
+    if (typeof actionP.target === 'string' && actionP.type === 'user') {
+      const userResponse = await fetchUser(actionP.target, actorFid)
+      return userResponse?.viewer_context.following || false
+    }
 
     return false
   } catch (error) {
