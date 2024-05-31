@@ -1,4 +1,4 @@
-import { getSupportedTokenAddresses, options, swap } from './OkuTrade'
+import { getSupportedTokenAddresses, options, stake, swap } from './OkuTrade'
 import {
   CHAIN_ID_ARRAY,
   EXECUTE_ABI_FRAGMENTS,
@@ -7,17 +7,19 @@ import {
 } from './constants'
 import {
   failingTestCasesOptions,
+  failingTestCasesStake,
   failingTestCasesSwap,
   passingTestCasesOptions,
+  passingTestCasesStake,
   passingTestCasesSwap,
 } from './test-transactions'
 import { getPools } from './utils'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
 import { ActionType } from '@rabbitholegg/questdk-plugin-utils'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk/filter'
 import { zeroAddress } from 'viem'
 import { describe, expect, test } from 'vitest'
 
-describe('Given the uniswap plugin', () => {
+describe('Given the okutrade plugin', () => {
   describe('When handling the options action', () => {
     describe('should return a valid list of pools for a given token', () => {
       test('for USDC on Ethereum mainnet', async () => {
@@ -50,6 +52,60 @@ describe('Given the uniswap plugin', () => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await options(params)
+          expect(apply(transaction, filter)).to.be.false
+        })
+      })
+    })
+  })
+
+  describe('When handling the stake action', () => {
+    describe('should return a valid action filter', () => {
+      test('when making a valid stake action', async () => {
+        const filter = await stake({
+          chainId: 1,
+        })
+        expect(filter).toBeTypeOf('object')
+        expect(Number(filter.chainId)).toBe(1)
+        if (typeof filter.to === 'string') {
+          expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
+        } else {
+          // if to is an object, it should have a logical operator as the only key
+          expect(filter.to).toBeTypeOf('object')
+          expect(Object.keys(filter.to)).toHaveLength(1)
+          expect(
+            ['$or', '$and'].some((prop) =>
+              Object.hasOwnProperty.call(filter.to, prop),
+            ),
+          ).to.be.true
+          expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
+            arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
+          )
+        }
+        // Check the input property is the correct type and has a valid filter operator
+        expect(filter.input).toBeTypeOf('object')
+        expect(
+          ['$abi', '$abiParams', '$abiAbstract', '$or', '$and'].some((prop) =>
+            Object.hasOwnProperty.call(filter.input, prop),
+          ),
+        ).to.be.true
+      })
+    })
+
+    describe('should pass filter with valid transactions', () => {
+      passingTestCasesStake.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await stake(params)
+          expect(apply(transaction, filter)).to.be.true
+        })
+      })
+    })
+
+    describe('should not pass filter with invalid transactions', () => {
+      failingTestCasesStake.forEach((testCase) => {
+        const { transaction, params, description } = testCase
+        test(description, async () => {
+          const filter = await stake(params)
           expect(apply(transaction, filter)).to.be.false
         })
       })

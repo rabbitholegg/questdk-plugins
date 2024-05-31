@@ -28,7 +28,8 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
-    "@rabbitholegg/questdk": "workspace:*"
+    "@gfxlabs/oku-chains": "^1.1.30",
+    "@rabbitholegg/questdk": "workspace:*",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
   }
 }
