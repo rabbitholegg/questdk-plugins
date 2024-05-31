@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.34
+
+### Minor Changes
+
+- [#428](https://github.com/rabbitholegg/questdk-plugins/pull/428) [`5a58f709`](https://github.com/rabbitholegg/questdk-plugins/commit/5a58f709a4d60d22c0526c18c177316d0181d10d) Thanks [@sammccord](https://github.com/sammccord)! - add type to follow params to differentiate channel from user
+
 ## 1.0.0-alpha.33
 
 ### Minor Changes
