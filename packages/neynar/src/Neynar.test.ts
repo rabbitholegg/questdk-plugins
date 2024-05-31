@@ -1,13 +1,14 @@
-import { describe, it, expect, beforeEach, vi, MockedFunction } from 'vitest'
-import { validateFollow, translateAddressToFID, validateRecast } from './Neynar'
 import axios from 'axios'
+import { beforeEach, describe, expect, it, MockedFunction, vi } from 'vitest'
+import { translateAddressToFID, validateFollow, validateRecast } from './Neynar'
 import {
-  type FollowersResponse,
-  type Follower,
+  type User,
+  ChannelsResponse,
   ConversationResponse,
+  UserSearch,
 } from './types'
 
-const MockedFollowerSchema: Follower = {
+const MockedUserSchema: User = {
   object: 'user',
   fid: 1,
   username: 'actor',
@@ -16,8 +17,10 @@ const MockedFollowerSchema: Follower = {
   },
 }
 
-const MockedFollowersResponse: FollowersResponse = {
-  users: [MockedFollowerSchema],
+const MockedUserSearchSchema: UserSearch = {
+  result: {
+    users: [MockedUserSchema],
+  },
 }
 
 const MockedConversationResponseSchema: ConversationResponse = {
@@ -74,11 +77,49 @@ describe('validateFollow function', () => {
     vi.resetAllMocks()
   })
 
-  it('should return true if the actor is a follower of the target', async () => {
-    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
-      status: 200,
-      data: MockedFollowersResponse,
-    })
+  it('should return true if the actor is a follower of the target user', async () => {
+    ;(axios.get as MockedFunction<typeof axios.get>)
+      .mockResolvedValueOnce({
+        status: 200,
+        data: MockedUserSearchSchema,
+      })
+      .mockResolvedValueOnce({
+        status: 200,
+        data: { channels: [] },
+      })
+
+    const result = await validateFollow(
+      { target: 'target_fid' },
+      { actor: '1' },
+    )
+    expect(result).toBe(true)
+  })
+
+  it('should return true if the actor is a follower of the target channel', async () => {
+    ;(axios.get as MockedFunction<typeof axios.get>)
+      .mockResolvedValueOnce({
+        status: 200,
+        data: {
+          result: {
+            users: [
+              {
+                object: 'user',
+                fid: 1,
+                username: 'actor',
+                viewer_context: {
+                  following: false,
+                },
+              },
+            ],
+          },
+        },
+      })
+      .mockResolvedValueOnce({
+        status: 200,
+        data: {
+          channels: [{ id: '', name: '', viewer_context: { following: true } }],
+        } as ChannelsResponse,
+      })
 
     const result = await validateFollow(
       { target: 'target_fid' },
