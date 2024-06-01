@@ -1,7 +1,7 @@
 import { type MintActionParams } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
   type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 const MINT_BASE: TestParams<MintActionParams> = {

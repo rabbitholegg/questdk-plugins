@@ -1,7 +1,7 @@
+import { mint } from './Foundation'
+import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint } from './Foundation'
 
 describe('Given the foundation plugin', () => {
   describe('When handling the mint action', () => {

@@ -1,9 +1,9 @@
 import { type IActionPlugin } from '@rabbitholegg/questdk'
 
 import {
-  mint,
   getSupportedChainIds,
   getSupportedTokenAddresses,
+  mint,
 } from './Foundation'
 
 export const Foundation: IActionPlugin = {
