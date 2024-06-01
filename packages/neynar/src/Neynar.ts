@@ -40,7 +40,7 @@ export const validate = async (
 ): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
   const { actionParams, validationParams, questId, taskId } = payload
-  if(!process.env.NEYNAR_API_KEY) throw new Error('Neynar API key not found')
+  if (!process.env.NEYNAR_API_KEY) throw new Error('Neynar API key not found')
   switch (actionParams.type) {
     case ActionType.Follow: {
       const isFollowValid = await validateFollow(
