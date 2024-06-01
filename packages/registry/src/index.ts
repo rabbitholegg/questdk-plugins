@@ -44,6 +44,7 @@ import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { Lens } from '@rabbitholegg/questdk-plugin-lens'
 // ^^^ New Imports Go Here ^^^
 import {
   ActionType,
@@ -113,6 +114,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Superbridge.pluginId]: Superbridge,
   [Neynar.pluginId]: Neynar,
   [Titles.pluginId]: Titles,
+  [Lens.pluginId]: Lens,
 }
 
 export const getPlugin = (pluginId: string) => {
