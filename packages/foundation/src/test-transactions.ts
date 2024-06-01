@@ -61,7 +61,7 @@ export const passingTestCases = [
   createTestCase(MINT_ETHEREUM, 'when when minting a drop on ethereum'),
   createTestCase(
     MINT_DUTCH_AUCTION,
-    'when when minting a drop on dutch auction',
+    'when when minting a drop using dutch auction',
   ),
 ]
 
