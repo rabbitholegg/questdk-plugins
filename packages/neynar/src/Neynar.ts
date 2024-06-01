@@ -21,7 +21,6 @@ import {
   UserSearchSchema,
 } from './types'
 import { isAddress } from 'viem'
-import assert from 'node:assert'
 
 const API_BASE_URL = 'https://api.neynar.com/v2/farcaster'
 const axiosInstance = axios.create({
@@ -41,7 +40,7 @@ export const validate = async (
 ): Promise<QuestCompletionPayload | null> => {
   const { actor, payload } = validationPayload
   const { actionParams, validationParams, questId, taskId } = payload
-  assert.ok(process.env.NEYNAR_API_KEY, 'Neynar API key not found')
+  if(!process.env.NEYNAR_API_KEY) throw new Error('Neynar API key not found')
   switch (actionParams.type) {
     case ActionType.Follow: {
       const isFollowValid = await validateFollow(
