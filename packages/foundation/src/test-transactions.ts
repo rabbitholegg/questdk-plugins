@@ -59,7 +59,10 @@ const MINT_DUTCH_AUCTION: TestParams<MintActionParams> = {
 export const passingTestCases = [
   createTestCase(MINT_BASE, 'when when minting a drop on base'),
   createTestCase(MINT_ETHEREUM, 'when when minting a drop on ethereum'),
-  createTestCase(MINT_DUTCH_AUCTION, 'when when minting a drop on dutch auction'),
+  createTestCase(
+    MINT_DUTCH_AUCTION,
+    'when when minting a drop on dutch auction',
+  ),
 ]
 
 export const failingTestCases = [

@@ -1,4 +1,8 @@
-import { CHAIN_TO_CONTRACT_ADDRESS, DUTCH_AUCTION_FRAGMENT, FIXED_PRICE_FRAGMENTS } from './constants'
+import {
+  CHAIN_TO_CONTRACT_ADDRESS,
+  DUTCH_AUCTION_FRAGMENT,
+  FIXED_PRICE_FRAGMENTS,
+} from './constants'
 import {
   type MintActionParams,
   type TransactionFilter,
