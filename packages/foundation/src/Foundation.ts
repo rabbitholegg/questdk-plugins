@@ -1,22 +1,27 @@
+import { CHAIN_TO_CONTRACT_ADDRESS, DUTCH_AUCTION_FRAGMENT, FIXED_PRICE_FRAGMENTS } from './constants'
 import {
-  type TransactionFilter,
   type MintActionParams,
+  type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { type Address } from 'viem'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address } from 'viem'
 
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount } = mint
+  const { chainId, contractAddress, amount, recipient } = mint
+
+  const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
+
   return compressJson({
     chainId,
-    to: '0x0000000000000000000000000000000000000000',
+    to: dropFactoryAddress,
     input: {
-      $abi: [],
+      $abi: [...FIXED_PRICE_FRAGMENTS, DUTCH_AUCTION_FRAGMENT],
       count: amount ? { $gte: amount } : undefined,
       nftContract: contractAddress,
+      nftRecipient: recipient,
     },
   })
 }
