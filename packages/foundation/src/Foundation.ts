@@ -3,20 +3,13 @@ import {
   DUTCH_AUCTION_FRAGMENT,
   FIXED_PRICE_FRAGMENTS,
 } from './constants'
-import {
-  calculateFees,
-  getDutchAuctionFees,
-  getFixedPriceFees,
-} from './utils'
+import { calculateFees, getDutchAuctionFees, getFixedPriceFees } from './utils'
 import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import {
-  Chains,
-  chainIdToViemChain,
-} from '@rabbitholegg/questdk-plugin-utils'
+import { Chains, chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type PublicClient,
@@ -65,10 +58,18 @@ export const getFees = async (
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
 
   try {
-    const fixedPriceResult = await getFixedPriceFees(client, dropFactoryAddress, contractAddress)
+    const fixedPriceResult = await getFixedPriceFees(
+      client,
+      dropFactoryAddress,
+      contractAddress,
+    )
 
     if (fixedPriceResult.seller === zeroAddress) {
-      const dutchAuctionResult = await getDutchAuctionFees(client, dropFactoryAddress, contractAddress)
+      const dutchAuctionResult = await getDutchAuctionFees(
+        client,
+        dropFactoryAddress,
+        contractAddress,
+      )
       return calculateFees(dutchAuctionResult, quantityToMint)
     }
 
