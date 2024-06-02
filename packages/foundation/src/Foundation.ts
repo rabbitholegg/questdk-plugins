@@ -4,27 +4,26 @@ import {
   FIXED_PRICE_FRAGMENTS,
 } from './constants'
 import {
+  calculateFees,
+  getDutchAuctionFees,
+  getFixedPriceFees,
+} from './utils'
+import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
 import {
   Chains,
-  DEFAULT_ACCOUNT,
-  type MintIntentParams,
   chainIdToViemChain,
-  getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type PublicClient,
-  type SimulateContractReturnType,
-  type TransactionRequest,
   createPublicClient,
-  encodeFunctionData,
   http,
-  pad,
   parseEther,
+  zeroAddress,
 } from 'viem'
 
 export const mint = async (
@@ -56,37 +55,29 @@ export const getProjectFees = async (
 export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
-  const { chainId, contractAddress, tokenId, amount } = mint
+  const { chainId, contractAddress, amount } = mint
   const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+
+  const client = createPublicClient({
+    chain: chainIdToViemChain(chainId),
+    transport: http(),
+  }) as PublicClient
+  const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
+
   try {
-    const client = createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    })
-    const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
-    const _tokenId = tokenId ?? 1
+    const fixedPriceResult = await getFixedPriceFees(client, dropFactoryAddress, contractAddress)
 
-    const { pricePerToken } = (await client.readContract({
-      address: fixedPriceSaleStratAddress,
-      abi: FEES_ABI,
-      functionName: 'sale',
-      args: [contractAddress, _tokenId],
-    })) as { pricePerToken: bigint }
-
-    const mintFee = (await client.readContract({
-      address: contractAddress,
-      abi: FEES_ABI,
-      functionName: 'mintFee',
-    })) as bigint
-
-    return {
-      actionFee: pricePerToken * quantityToMint,
-      projectFee: mintFee * quantityToMint,
+    if (fixedPriceResult.seller === zeroAddress) {
+      const dutchAuctionResult = await getDutchAuctionFees(client, dropFactoryAddress, contractAddress)
+      return calculateFees(dutchAuctionResult, quantityToMint)
     }
-  } catch {
+
+    return calculateFees(fixedPriceResult, quantityToMint)
+  } catch (error) {
+    // return fallback if any error
     return {
       actionFee: parseEther('0'),
-      projectFee: parseEther('0.0007') * quantityToMint,
+      projectFee: parseEther('0.0008') * quantityToMint,
     }
   }
 }

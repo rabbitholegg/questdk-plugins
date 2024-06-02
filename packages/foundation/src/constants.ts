@@ -55,6 +55,56 @@ const DROP_FACTORY_ABI = [
     stateMutability: 'payable',
     type: 'function',
   },
+  {
+    inputs: [{ internalType: 'address', name: 'nftContract', type: 'address' }],
+    name: 'getFixedPriceSaleV2',
+    outputs: [
+      { internalType: 'address payable', name: 'seller', type: 'address' },
+      { internalType: 'uint256', name: 'price', type: 'uint256' },
+      { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'numberOfTokensAvailableToMint',
+        type: 'uint256',
+      },
+      { internalType: 'bool', name: 'marketCanMint', type: 'bool' },
+      {
+        internalType: 'uint256',
+        name: 'generalAvailabilityStartTime',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint256',
+        name: 'earlyAccessStartTime',
+        type: 'uint256',
+      },
+      { internalType: 'uint256', name: 'mintFeePerNftInWei', type: 'uint256' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'address', name: 'nftContract', type: 'address' }],
+    name: 'getDutchAuctionV2',
+    outputs: [
+      { internalType: 'uint256', name: 'maxPrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'minPrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+      { internalType: 'uint256', name: 'startTime', type: 'uint256' },
+      { internalType: 'uint256', name: 'endTime', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'totalAvailableSupply',
+        type: 'uint256',
+      },
+      { internalType: 'uint256', name: 'totalMintedCount', type: 'uint256' },
+      { internalType: 'uint256', name: 'lastSalePrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'currentPrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'mintFeePerNftInWei', type: 'uint256' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
 ]
 
 export const FIXED_PRICE_FRAGMENTS = DROP_FACTORY_ABI.filter(({ name }) =>
@@ -66,4 +116,13 @@ export const FIXED_PRICE_FRAGMENTS = DROP_FACTORY_ABI.filter(({ name }) =>
 export const DUTCH_AUCTION_FRAGMENT = getAbiItem({
   abi: DROP_FACTORY_ABI,
   name: 'mintFromDutchAuctionV2',
+}) as AbiFunction
+
+export const GET_FIXED_PRICE = getAbiItem({
+  abi: DROP_FACTORY_ABI,
+  name: 'getFixedPriceSaleV2',
+}) as AbiFunction
+export const GET_DUTCH_AUCTION_PRICE = getAbiItem({
+  abi: DROP_FACTORY_ABI,
+  name: 'getDutchAuctionV2',
 }) as AbiFunction
