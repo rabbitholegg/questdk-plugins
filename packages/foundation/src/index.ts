@@ -11,6 +11,7 @@ import {
   getSupportedChainIds,
   getSupportedTokenAddresses,
   mint,
+  simulateMint,
 } from './Foundation'
 
 export const Foundation: IActionPlugin = {
@@ -23,4 +24,5 @@ export const Foundation: IActionPlugin = {
   getSupportedTokenAddresses,
   getSupportedChainIds,
   mint,
+  simulateMint,
 }
