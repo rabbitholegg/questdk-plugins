@@ -104,44 +104,34 @@ describe('Given the foundation plugin', () => {
     })
   })
 
-  describe('Given the getMintIntent function for fixed price mint', () => {
-    // Define the constant for the contract address
-    const CONTRACT_ADDRESS = '0x54d8109b459cefa530cdba2c3a2218c14e080907'
-    const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
-
-    test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
+  describe('Given the getMintIntent function', () => {
+    test('returns a TransactionRequest with correct properties for fixed price mint', async () => {
+      const CONTRACT_ADDRESS = '0x54d8109b459cefa530cdba2c3a2218c14e080907'
+      const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
       const mint: MintIntentParams = {
         chainId: 8453,
         contractAddress: CONTRACT_ADDRESS,
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
       }
-
       const result = await getMintIntent(mint)
-
       expect(result).toEqual({
         from: mint.recipient,
         to: mint.contractAddress,
         data: '0x0cafb11300000000000000000000000054d8109b459cefa530cdba2c3a2218c14e08090700000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890000000000000000000000000e3bba2a4f8e0f5c32ef5097f988a4d88075c8b4800000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000',
       })
     })
-  })
 
-  describe('Given the getMintIntent function for dutch auction mint', () => {
-    // Define the constant for the contract address
-    const CONTRACT_ADDRESS = '0x6a41fcce9d075a9f6324b626af56cf632c509ec9'
-    const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
-
-    test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
+    test('returns a TransactionRequest with correct properties for dutch auction mint', async () => {
+      const CONTRACT_ADDRESS = '0x6a41fcce9d075a9f6324b626af56cf632c509ec9'
+      const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
       const mint: MintIntentParams = {
         chainId: 8453,
         contractAddress: CONTRACT_ADDRESS,
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
       }
-
       const result = await getMintIntent(mint)
-
       expect(result).toEqual({
         from: mint.recipient,
         to: mint.contractAddress,
@@ -189,6 +179,19 @@ describe('Given the foundation plugin', () => {
       expect(request.address).toBe('0x62037b26fff91929655aa3a060f327b47d1e2b3e')
       expect(request.functionName).toBe('mintFromDutchAuctionV2')
       expect(request.value).toBe(value)
+    })
+
+    test('should fail to simulate with invalid parameters', async () => {
+      const mint = {
+        chainId: Chains.ETHEREUM,
+        contractAddress: '0x54d8109b459cefa530cdba2c3a2218c14e080907',
+        recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      }
+      const value = parseEther('0.0001')
+      const address = mint.recipient as Address
+      await expect(
+        simulateMint(mint as MintIntentParams, value, address),
+      ).rejects.toThrow()
     })
   })
 })
