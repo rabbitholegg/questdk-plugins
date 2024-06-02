@@ -10,10 +10,15 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { Chains, chainIdToViemChain, type MintIntentParams, type TransactionRequest } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintIntentParams,
+  chainIdToViemChain,
+} from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type PublicClient,
+  type TransactionRequest,
   createPublicClient,
   encodeFunctionData,
   http,
@@ -114,13 +119,13 @@ export const getMintIntent = async (
       ZORA_DEPLOYER_ADDRESS,
       [],
     ]
-  
+
     const data = encodeFunctionData({
       abi: FIXED_PRICE_FRAGMENTS,
       functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
       args: mintArgs,
     })
-  
+
     return {
       from: recipient,
       to: contractAddress,
@@ -134,18 +139,14 @@ export const getMintIntent = async (
     contractAddress,
   )
   if (dutchAuctionResult.seller !== zeroAddress) {
-    const mintArgs = [
-      contractAddress,
-      amount,
-      recipient,
-    ]
-  
+    const mintArgs = [contractAddress, amount, recipient]
+
     const data = encodeFunctionData({
       abi: [DUTCH_AUCTION_FRAGMENT],
       functionName: 'mintFromDutchAuctionV2',
       args: mintArgs,
     })
-  
+
     return {
       from: recipient,
       to: contractAddress,

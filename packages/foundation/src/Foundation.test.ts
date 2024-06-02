@@ -1,7 +1,10 @@
 import { getFees, getMintIntent, mint } from './Foundation'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
-import { Chains, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { Address, parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
 
@@ -105,7 +108,7 @@ describe('Given the foundation plugin', () => {
     // Define the constant for the contract address
     const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
     const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
-  
+
     test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
       const mint: MintIntentParams = {
         chainId: 8453,
@@ -113,9 +116,9 @@ describe('Given the foundation plugin', () => {
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
       }
-  
+
       const result = await getMintIntent(mint)
-  
+
       expect(result).toEqual({
         from: mint.recipient,
         to: mint.contractAddress,
@@ -128,7 +131,7 @@ describe('Given the foundation plugin', () => {
     // Define the constant for the contract address
     const CONTRACT_ADDRESS = '0x6a41fcce9d075a9f6324b626af56cf632c509ec9'
     const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
-  
+
     test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
       const mint: MintIntentParams = {
         chainId: 8453,
@@ -136,9 +139,9 @@ describe('Given the foundation plugin', () => {
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
       }
-  
+
       const result = await getMintIntent(mint)
-  
+
       expect(result).toEqual({
         from: mint.recipient,
         to: mint.contractAddress,
