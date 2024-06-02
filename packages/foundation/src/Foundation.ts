@@ -12,12 +12,14 @@ import {
 } from '@rabbitholegg/questdk'
 import {
   Chains,
+  DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type PublicClient,
+  type SimulateContractReturnType,
   type TransactionRequest,
   createPublicClient,
   encodeFunctionData,
@@ -106,12 +108,12 @@ export const getMintIntent = async (
   }
 
   // check if the mint function is fixed or dutch auction type
-  const fixedPriceResult = await getFixedPriceData(
+  const { seller: fixedPriceSeller } = await getFixedPriceData(
     client,
     dropFactoryAddress,
     contractAddress,
   )
-  if (fixedPriceResult.seller !== zeroAddress) {
+  if (fixedPriceSeller && fixedPriceSeller !== zeroAddress) {
     const mintArgs = [
       contractAddress,
       amount,
@@ -133,12 +135,12 @@ export const getMintIntent = async (
     }
   }
 
-  const dutchAuctionResult = await getDutchAuctionData(
+  const { seller: dutchAuctionSeller } = await getDutchAuctionData(
     client,
     dropFactoryAddress,
     contractAddress,
   )
-  if (dutchAuctionResult.seller !== zeroAddress) {
+  if (dutchAuctionSeller && dutchAuctionSeller !== zeroAddress) {
     const mintArgs = [contractAddress, amount, recipient]
 
     const data = encodeFunctionData({
@@ -155,6 +157,64 @@ export const getMintIntent = async (
   }
 
   // if no results, throw an error
+  throw new Error('Invalid mint arguments')
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+  const _client =
+    client ||
+    (createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    }) as PublicClient)
+  const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
+
+  if (tokenId) {
+    throw new Error('Token ID is not supported for Foundation Mints')
+  }
+
+  // check if the mint function is fixed type
+  const { seller: fixedPriceSeller } = await getFixedPriceData(
+    _client,
+    dropFactoryAddress,
+    contractAddress,
+  )
+  if (fixedPriceSeller && fixedPriceSeller !== zeroAddress) {
+    const result = await _client.simulateContract({
+      address: dropFactoryAddress,
+      value,
+      abi: FIXED_PRICE_FRAGMENTS,
+      functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
+      args: [contractAddress, amount ?? '1', recipient, ZORA_DEPLOYER_ADDRESS, []],
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  }
+
+  // check if the mint function is dutch auction type
+  const { seller: dutchAuctionSeller } = await getDutchAuctionData(
+    _client,
+    dropFactoryAddress,
+    contractAddress,
+  )
+  if (dutchAuctionSeller && dutchAuctionSeller !== zeroAddress) {
+    const result = await _client.simulateContract({
+      address: dropFactoryAddress,
+      value,
+      abi: [DUTCH_AUCTION_FRAGMENT],
+      functionName: 'mintFromDutchAuctionV2',
+      args: [contractAddress, amount ?? '1', recipient],
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  }
+
   throw new Error('Invalid mint arguments')
 }
 
