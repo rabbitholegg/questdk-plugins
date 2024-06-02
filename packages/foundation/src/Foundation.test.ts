@@ -1,6 +1,8 @@
-import { mint } from './Foundation'
+import { getFees, mint } from './Foundation'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { Address, parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the foundation plugin', () => {
@@ -58,6 +60,44 @@ describe('Given the foundation plugin', () => {
           expect(apply(transaction, filter)).to.be.false
         })
       })
+    })
+  })
+
+  describe('Given the getFee function', () => {
+    test('should return the correct fee for fixed fee mint', async () => {
+      const contractAddress: Address =
+        '0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4'
+      const mintParams = {
+        contractAddress,
+        chainId: Chains.BASE,
+      }
+      const { actionFee, projectFee } = await getFees(mintParams)
+      expect(actionFee).equals(parseEther('0.005'))
+      expect(projectFee).equals(parseEther('0.0008'))
+    })
+
+    test('should return the correct fee for dutch auction mint', async () => {
+      const contractAddress: Address =
+        '0x6a41fcce9d075a9f6324b626af56cf632c509ec9'
+      const mintParams = {
+        contractAddress,
+        chainId: Chains.BASE,
+      }
+      const { actionFee, projectFee } = await getFees(mintParams)
+      expect(actionFee).equals(parseEther('0.0008'))
+      expect(projectFee).equals(parseEther('0.0008'))
+    })
+
+    test('should return the fallback fee if contract not found or error occurs', async () => {
+      const contractAddress: Address =
+        '0x68adf0c109e63c6141c509fea0864431ba55bfa5'
+      const mintParams = {
+        contractAddress,
+        chainId: Chains.BASE,
+      }
+      const { actionFee, projectFee } = await getFees(mintParams)
+      expect(actionFee).equals(parseEther('0'))
+      expect(projectFee).equals(parseEther('0.0008'))
     })
   })
 })
