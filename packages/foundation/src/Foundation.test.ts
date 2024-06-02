@@ -1,4 +1,4 @@
-import { getFees, getMintIntent, mint } from './Foundation'
+import { getFees, getMintIntent, mint, simulateMint } from './Foundation'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import {
@@ -147,6 +147,39 @@ describe('Given the foundation plugin', () => {
         to: mint.contractAddress,
         data: '0x16da98640000000000000000000000006a41fcce9d075a9f6324b626af56cf632c509ec900000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890',
       })
+    })
+  })
+
+  describe('simulateMint function', () => {
+    test('should simulate a mint with a fixed price', async () => {
+      const mint = {
+        chainId: Chains.BASE,
+        contractAddress: '0x54d8109b459cefa530cdba2c3a2218c14e080907',
+        recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      }
+      const value = parseEther('0.002')
+      const address = mint.recipient as Address
+      const result = await simulateMint(mint as MintIntentParams, value, address)
+      const request = result.request
+      console.log(request)
+      expect(request.address).toBe('0x62037b26fff91929655aa3a060f327b47d1e2b3e')
+      expect(request.functionName).toBe('mintFromFixedPriceSaleWithEarlyAccessAllowlistV2')
+      expect(request.value).toBe(value)
+    })
+
+    test('should simulate a mint with a dutch auction', async () => {
+      const mint = {
+        chainId: Chains.BASE,
+        contractAddress: '0x6a41fcce9d075a9f6324b626af56cf632c509ec9',
+        recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      }
+      const value = parseEther('0.0016')
+      const address = mint.recipient as Address
+      const result = await simulateMint(mint as MintIntentParams, value, address)
+      const request = result.request
+      expect(request.address).toBe('0x62037b26fff91929655aa3a060f327b47d1e2b3e')
+      expect(request.functionName).toBe('mintFromDutchAuctionV2')
+      expect(request.value).toBe(value)
     })
   })
 })
