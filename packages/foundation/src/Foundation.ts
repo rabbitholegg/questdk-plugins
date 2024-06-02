@@ -2,18 +2,20 @@ import {
   CHAIN_TO_CONTRACT_ADDRESS,
   DUTCH_AUCTION_FRAGMENT,
   FIXED_PRICE_FRAGMENTS,
+  ZORA_DEPLOYER_ADDRESS,
 } from './constants'
-import { calculateFees, getDutchAuctionFees, getFixedPriceFees } from './utils'
+import { calculateFees, getDutchAuctionData, getFixedPriceData } from './utils'
 import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { Chains, chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
+import { Chains, chainIdToViemChain, type MintIntentParams, type TransactionRequest } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
   type PublicClient,
   createPublicClient,
+  encodeFunctionData,
   http,
   parseEther,
   zeroAddress,
@@ -58,14 +60,14 @@ export const getFees = async (
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
 
   try {
-    const fixedPriceResult = await getFixedPriceFees(
+    const fixedPriceResult = await getFixedPriceData(
       client,
       dropFactoryAddress,
       contractAddress,
     )
 
     if (fixedPriceResult.seller === zeroAddress) {
-      const dutchAuctionResult = await getDutchAuctionFees(
+      const dutchAuctionResult = await getDutchAuctionData(
         client,
         dropFactoryAddress,
         contractAddress,
@@ -75,12 +77,84 @@ export const getFees = async (
 
     return calculateFees(fixedPriceResult, quantityToMint)
   } catch (error) {
-    // return fallback if any error
+    // return fallback if any errors occur
     return {
       actionFee: parseEther('0'),
       projectFee: parseEther('0.0008') * quantityToMint,
     }
   }
+}
+
+export const getMintIntent = async (
+  mint: MintIntentParams,
+): Promise<TransactionRequest> => {
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+
+  const client = createPublicClient({
+    chain: chainIdToViemChain(chainId),
+    transport: http(),
+  }) as PublicClient
+  const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
+
+  if (tokenId) {
+    throw new Error('Token ID is not supported for Foundation Mints')
+  }
+
+  // check if the mint function is fixed or dutch auction type
+  const fixedPriceResult = await getFixedPriceData(
+    client,
+    dropFactoryAddress,
+    contractAddress,
+  )
+  if (fixedPriceResult.seller !== zeroAddress) {
+    const mintArgs = [
+      contractAddress,
+      amount,
+      recipient,
+      ZORA_DEPLOYER_ADDRESS,
+      [],
+    ]
+  
+    const data = encodeFunctionData({
+      abi: FIXED_PRICE_FRAGMENTS,
+      functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
+      args: mintArgs,
+    })
+  
+    return {
+      from: recipient,
+      to: contractAddress,
+      data,
+    }
+  }
+
+  const dutchAuctionResult = await getDutchAuctionData(
+    client,
+    dropFactoryAddress,
+    contractAddress,
+  )
+  if (dutchAuctionResult.seller !== zeroAddress) {
+    const mintArgs = [
+      contractAddress,
+      amount,
+      recipient,
+    ]
+  
+    const data = encodeFunctionData({
+      abi: [DUTCH_AUCTION_FRAGMENT],
+      functionName: 'mintFromDutchAuctionV2',
+      args: mintArgs,
+    })
+  
+    return {
+      from: recipient,
+      to: contractAddress,
+      data,
+    }
+  }
+
+  // if no results, throw an error
+  throw new Error('Invalid mint arguments')
 }
 
 export const getSupportedTokenAddresses = async (
