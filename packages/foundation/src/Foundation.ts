@@ -191,7 +191,13 @@ export const simulateMint = async (
       value,
       abi: FIXED_PRICE_FRAGMENTS,
       functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
-      args: [contractAddress, amount ?? '1', recipient, ZORA_DEPLOYER_ADDRESS, []],
+      args: [
+        contractAddress,
+        amount ?? 1n,
+        recipient,
+        ZORA_DEPLOYER_ADDRESS,
+        [],
+      ],
       account: account || DEFAULT_ACCOUNT,
     })
     return result
@@ -209,7 +215,7 @@ export const simulateMint = async (
       value,
       abi: [DUTCH_AUCTION_FRAGMENT],
       functionName: 'mintFromDutchAuctionV2',
-      args: [contractAddress, amount ?? '1', recipient],
+      args: [contractAddress, amount ?? 1n, recipient],
       account: account || DEFAULT_ACCOUNT,
     })
     return result

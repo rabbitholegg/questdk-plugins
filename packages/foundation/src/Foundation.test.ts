@@ -159,11 +159,16 @@ describe('Given the foundation plugin', () => {
       }
       const value = parseEther('0.002')
       const address = mint.recipient as Address
-      const result = await simulateMint(mint as MintIntentParams, value, address)
+      const result = await simulateMint(
+        mint as MintIntentParams,
+        value,
+        address,
+      )
       const request = result.request
-      console.log(request)
       expect(request.address).toBe('0x62037b26fff91929655aa3a060f327b47d1e2b3e')
-      expect(request.functionName).toBe('mintFromFixedPriceSaleWithEarlyAccessAllowlistV2')
+      expect(request.functionName).toBe(
+        'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
+      )
       expect(request.value).toBe(value)
     })
 
@@ -175,7 +180,11 @@ describe('Given the foundation plugin', () => {
       }
       const value = parseEther('0.0016')
       const address = mint.recipient as Address
-      const result = await simulateMint(mint as MintIntentParams, value, address)
+      const result = await simulateMint(
+        mint as MintIntentParams,
+        value,
+        address,
+      )
       const request = result.request
       expect(request.address).toBe('0x62037b26fff91929655aa3a060f327b47d1e2b3e')
       expect(request.functionName).toBe('mintFromDutchAuctionV2')
