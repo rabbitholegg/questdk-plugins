@@ -1,7 +1,7 @@
 import { GET_DUTCH_AUCTION_PRICE, GET_FIXED_PRICE } from './constants'
 import { type Address, type PublicClient } from 'viem'
 
-export async function getFixedPriceFees(
+export async function getFixedPriceData(
   client: PublicClient,
   address: Address,
   contractAddress: Address,
@@ -19,7 +19,7 @@ export async function getFixedPriceFees(
   }
 }
 
-export async function getDutchAuctionFees(
+export async function getDutchAuctionData(
   client: PublicClient,
   address: Address,
   contractAddress: Address,
@@ -31,6 +31,7 @@ export async function getDutchAuctionFees(
     args: [contractAddress],
   })
   return {
+    seller: result[0] as Address,
     actionFee: result[8] as bigint,
     projectFee: result[9] as bigint,
   }
