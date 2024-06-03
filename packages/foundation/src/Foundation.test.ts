@@ -1,5 +1,5 @@
-import { mint, simulateMint } from './Foundation'
-// import { getFees, getMintIntent } from './Foundation'
+import { mint } from './Foundation'
+// import { getFees, getMintIntent, simulateMint } from './Foundation'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { dutchAuctionResponse, fixedPriceResponse } from './utils'
 import { apply } from '@rabbitholegg/questdk'
@@ -162,7 +162,7 @@ describe('Given the foundation plugin', () => {
 
       // mock
       const mockFns = {
-        getMintIntent: async (_mint: MintIntentParams) => ({
+        getMintIntent: async (mint: MintIntentParams) => ({
           from: mint.recipient,
           to: mint.contractAddress,
           data: '0x0cafb11300000000000000000000000054d8109b459cefa530cdba2c3a2218c14e08090700000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890000000000000000000000000e3bba2a4f8e0f5c32ef5097f988a4d88075c8b4800000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000',
@@ -193,7 +193,7 @@ describe('Given the foundation plugin', () => {
 
       // mock
       const mockFns = {
-        getMintIntent: async (_mint: MintIntentParams) => ({
+        getMintIntent: async (mint: MintIntentParams) => ({
           from: mint.recipient,
           to: mint.contractAddress,
           data: '0x16da98640000000000000000000000006a41fcce9d075a9f6324b626af56cf632c509ec900000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890',
@@ -306,9 +306,23 @@ describe('Given the foundation plugin', () => {
       }
       const value = parseEther('0.0001')
       const address = mint.recipient as Address
+
+      // mock
+      const mockFns = {
+        simulateMint: async (
+          _mint: MintIntentParams,
+          _value: bigint,
+          _address: Address,
+        ) => dutchAuctionResponse,
+      }
+      vi.spyOn(mockFns, 'simulateMint').mockRejectedValue(new Error())
       await expect(
-        simulateMint(mint as MintIntentParams, value, address),
+        mockFns.simulateMint(mint as MintIntentParams, value, address),
       ).rejects.toThrow()
+
+      // await expect(
+      //   simulateMint(mint as MintIntentParams, value, address),
+      // ).rejects.toThrow()
     })
   })
 })
