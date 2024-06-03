@@ -75,6 +75,7 @@
     "@rabbitholegg/questdk-plugin-orbit": "workspace:*",
     "@rabbitholegg/questdk-plugin-superbridge": "workspace:*",
     "@rabbitholegg/questdk-plugin-neynar": "workspace:*",
-    "@rabbitholegg/questdk-plugin-titles": "workspace:*"
+    "@rabbitholegg/questdk-plugin-titles": "workspace:*",
+    "@rabbitholegg/questdk-plugin-foundation": "workspace:*"
   }
 }
