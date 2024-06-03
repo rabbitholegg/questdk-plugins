@@ -1,7 +1,7 @@
 import { mint } from './Foundation'
 // import { getFees, getMintIntent, simulateMint } from './Foundation'
+import { dutchAuctionResponse, fixedPriceResponse } from './mockvalues'
 import { failingTestCases, passingTestCases } from './test-transactions'
-import { dutchAuctionResponse, fixedPriceResponse } from './utils'
 import { apply } from '@rabbitholegg/questdk'
 import {
   Chains,
