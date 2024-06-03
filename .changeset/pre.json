@@ -235,6 +235,7 @@
     "tasty-bulldogs-occur",
     "ten-pugs-allow",
     "tender-cars-walk",
+    "tender-chicken-change",
     "tender-garlics-appear",
     "tender-grapes-taste",
     "tender-parents-work",
@@ -328,6 +329,7 @@
     "@rabbitholegg/questdk-plugin-orbit": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-superbridge": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-neynar": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-titles": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-titles": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-foundation": "1.0.0-alpha.0"
   }
 }
