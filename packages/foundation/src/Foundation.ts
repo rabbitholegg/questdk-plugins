@@ -58,7 +58,13 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, amount } = mint
-  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  const quantityToMint =
+    amount &&
+    (typeof amount === 'number' ||
+      typeof amount === 'bigint' ||
+      typeof amount === 'string')
+      ? BigInt(amount)
+      : BigInt(1)
 
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
