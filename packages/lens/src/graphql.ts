@@ -14,10 +14,10 @@ type Profile = {
   }
 }
 
-type QueryResponse = {
+type PaginatedResponse<T> = {
   data: {
-    whoActedOnPublication: {
-      items: Profile[]
+    [key: string]: {
+      items: T[]
       pageInfo: {
         next: string | null
       }
@@ -25,7 +25,7 @@ type QueryResponse = {
   }
 }
 
-export const WHO_ACTED_ON_PUBLICATION = gql`
+const WHO_ACTED_ON_PUBLICATION = gql`
   query WhoActedOnPublication($request: WhoActedOnPublicationRequest!) {
     whoActedOnPublication(request: $request) {
       items {
@@ -60,7 +60,7 @@ export async function hasAddressCollectedPost(postId: string, address: string) {
           cursor: cursor,
         },
       },
-    })) as QueryResponse
+    })) as PaginatedResponse<Profile>
     const { items, pageInfo } = data.whoActedOnPublication
     const collected = items.find(
       (item: Profile) =>
