@@ -44,6 +44,7 @@ import { Uniswap } from '@rabbitholegg/questdk-plugin-uniswap'
 import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
+import { Foundation } from '@rabbitholegg/questdk-plugin-foundation'
 // ^^^ New Imports Go Here ^^^
 import {
   ActionType,
@@ -113,6 +114,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Superbridge.pluginId]: Superbridge,
   [Neynar.pluginId]: Neynar,
   [Titles.pluginId]: Titles,
+  [Foundation.pluginId]: Foundation,
 }
 
 export const getPlugin = (pluginId: string) => {
@@ -147,6 +149,7 @@ export const getTxSimulation = (
   value: bigint,
   client?: PublicClient,
   account?: Address,
+  creatorAddress?: Address,
 ) => {
   switch (actionType) {
     case ActionType.Mint:
@@ -156,6 +159,7 @@ export const getTxSimulation = (
           value,
           account,
           client,
+          creatorAddress,
         )
       } else {
         throw new PluginActionNotImplementedError()

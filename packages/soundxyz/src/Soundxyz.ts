@@ -7,6 +7,7 @@ import {
   SUPERMINTER_V2_ABI,
   TOTAL_PRICE_AND_FEES_V1_ABI,
   TOTAL_PRICE_AND_FEES_V2_ABI,
+  ZORA_DEPLOYER_ADDRESS,
 } from './constants'
 import type { TotalPriceAndFees } from './types'
 import { Chains } from './utils'
@@ -99,6 +100,7 @@ export const simulateMint = async (
   value: bigint,
   account?: Address,
   client?: PublicClient,
+  creatorAddress?: Address,
 ): Promise<SimulateContractReturnType> => {
   const { contractAddress, recipient, tokenId, amount } = mint
   const _client = (client ??
@@ -128,7 +130,7 @@ export const simulateMint = async (
     signedClaimTicket: 0,
     signedDeadline: 0,
     signature: zeroHash,
-    affiliate: zeroAddress,
+    affiliate: creatorAddress ?? ZORA_DEPLOYER_ADDRESS,
     affiliateProof: [zeroHash],
     attributionId: 0,
   }

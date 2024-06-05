@@ -231,6 +231,7 @@ export type FollowActionParams = {
   // if the target is a string, then assume it's a valid username or channel name
   // if it's a number, assume it's a fid, but that will rarely be the case
   target: Address | string | number
+  type: 'user' | 'channel'
   project?: Address | string
 }
 
@@ -246,6 +247,7 @@ export const FollowActionDetailSchema = z.object({
   // if the target is a string, then assume it's a valid username or channel name
   // if it's a number, assume it's a fid, but that will rarely be the case
   target: z.union([z.string(), EthAddressSchema, z.number()]),
+  type: z.union([z.literal('user'), z.literal('channel')]),
   project: z.union([z.string(), EthAddressSchema]).optional(),
 })
 export type FollowActionDetail = z.infer<typeof FollowActionDetailSchema>
@@ -254,6 +256,7 @@ export const FollowActionFormSchema = z.object({
   // if the target is a string, then assume it's a valid username or channel name
   // if it's a number, assume it's a fid, but that will rarely be the case
   target: z.union([z.string(), EthAddressSchema, z.number()]),
+  type: z.union([z.literal('user'), z.literal('channel')]),
 })
 export type FollowActionForm = z.infer<typeof FollowActionFormSchema>
 
@@ -496,6 +499,7 @@ export interface IActionPlugin {
     value: bigint,
     account?: Address,
     client?: PublicClient,
+    creatorAddress?: Address,
   ) => Promise<SimulateContractReturnType>
   getProjectFees?: (params: ActionParams) => Promise<bigint>
   getFees?: (

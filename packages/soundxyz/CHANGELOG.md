@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.46
+
+### Minor Changes
+
+- [#436](https://github.com/rabbitholegg/questdk-plugins/pull/436) [`138a22d6`](https://github.com/rabbitholegg/questdk-plugins/commit/138a22d65045f7ad90ea76c55478c11e4ce5bed8) Thanks [@mmackz](https://github.com/mmackz)! - use boost creator as referral
+
+### Patch Changes
+
+- Updated dependencies [[`73c936ea`](https://github.com/rabbitholegg/questdk-plugins/commit/73c936ea7a382030351bb3d6aacc63df0e1c658e)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.35
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
+## 1.0.0-alpha.45
+
+### Patch Changes
+
+- Updated dependencies [[`5a58f709`](https://github.com/rabbitholegg/questdk-plugins/commit/5a58f709a4d60d22c0526c18c177316d0181d10d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.34
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.44
 
 ### Patch Changes

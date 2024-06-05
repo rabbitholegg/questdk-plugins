@@ -1,5 +1,25 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.58
+
+### Patch Changes
+
+- Updated dependencies [[`73c936ea`](https://github.com/rabbitholegg/questdk-plugins/commit/73c936ea7a382030351bb3d6aacc63df0e1c658e)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.35
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
+## 1.0.0-alpha.57
+
+### Minor Changes
+
+- [#395](https://github.com/rabbitholegg/questdk-plugins/pull/395) [`31c84d83`](https://github.com/rabbitholegg/questdk-plugins/commit/31c84d839181cd751f85240b0ba274851ffaaac3) Thanks [@abs3ntdev](https://github.com/abs3ntdev)! - add stake action
+
+### Patch Changes
+
+- Updated dependencies [[`5a58f709`](https://github.com/rabbitholegg/questdk-plugins/commit/5a58f709a4d60d22c0526c18c177316d0181d10d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.34
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.56
 
 ### Patch Changes
