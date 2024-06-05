@@ -1,5 +1,43 @@
+import { describe, expect, test, vi } from 'vitest'
 import { validateCollect } from './Lens'
-import { describe, expect, test } from 'vitest'
+
+vi.mock('@apollo/client', async () => {
+  const actualApollo = await vi.importActual('@apollo/client')
+  return {
+    ...(actualApollo as object),
+    ApolloClient: vi.fn(() => ({
+      query: vi.fn().mockImplementation(({ variables }) => {
+        if (variables.request.on === '0x5dbb-0xd5') {
+          return Promise.resolve({
+            data: {
+              whoActedOnPublication: {
+                items: [
+                  {
+                    ownedBy: {
+                      address:
+                        '0xA99F898530dF1514A566f1a6562D62809e99557D'.toLowerCase(),
+                    },
+                  },
+                ],
+                pageInfo: { next: null },
+              },
+            },
+          })
+        } else {
+          return Promise.resolve({
+            data: {
+              whoActedOnPublication: {
+                items: [],
+                pageInfo: { next: null },
+              },
+            },
+          })
+        }
+      }),
+      InMemoryCache: vi.fn(),
+    })),
+  }
+})
 
 describe('Given the lens plugin', () => {
   describe('When handling the collect action', () => {
