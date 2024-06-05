@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.35
+
+### Minor Changes
+
+- [#435](https://github.com/rabbitholegg/questdk-plugins/pull/435) [`73c936ea`](https://github.com/rabbitholegg/questdk-plugins/commit/73c936ea7a382030351bb3d6aacc63df0e1c658e) Thanks [@mmackz](https://github.com/mmackz)! - pass in creator address to simulateMint
+
 ## 1.0.0-alpha.34
 
 ### Minor Changes
