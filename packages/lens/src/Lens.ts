@@ -1,18 +1,12 @@
+import { hasAddressCollectedPost } from './graphql'
 import {
   ActionType,
   type CollectActionParams,
   type CollectValidationParams,
   type PluginActionValidation,
   type QuestCompletionPayload,
-} from '@rabbitholegg/questdk'
+} from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
-import { apolloClient } from './apollo-client'
-import { gql } from '@apollo/client'
-// import assert from 'node:assert'
-
-export const canValidate = (actionType: ActionType): boolean => {
-  return actionType === ActionType.Collect
-}
 
 export const validate = async (
   validationPayload: PluginActionValidation,
@@ -28,8 +22,8 @@ export const validate = async (
       if (isCollectValid) {
         return {
           address: actor,
-          questId: questId,
-          taskId: taskId,
+          questId,
+          taskId,
         }
       } else {
         return null
@@ -44,27 +38,14 @@ export const validateCollect = async (
   actionP: CollectActionParams,
   validateP: CollectValidationParams,
 ): Promise<boolean> => {
-
-  const query = `query($request: ChallengeRequest!) {
-    challenge(request: $request) {
-          text
-      }
-    }
-  `
   try {
-    // call lens api or graphql endpoint to verify if actor has collected the publication
-    const response = await apolloClient.query({
-      query: gql(query),
-      variables: {
-        request: {
-          for: "",
-          signedBy: ""
-        },
-      },
-    })
-    
-    return false
-  } catch (error) {
+    // call lens graphql endpoint to verify if actor has collected the publication
+    const hasCollected = await hasAddressCollectedPost(
+      actionP.postId,
+      validateP.actor,
+    )
+    return hasCollected
+  } catch {
     return false
   }
 }
@@ -72,11 +53,9 @@ export const validateCollect = async (
 export const getSupportedTokenAddresses = async (
   _chainId: number,
 ): Promise<Address[]> => {
-  // Implementation for fetching supported token addresses - not used for this plugin
   return []
 }
 
 export const getSupportedChainIds = async (): Promise<number[]> => {
-  // Implementation for fetching supported chain IDs - not used for this plugin
   return []
 }
