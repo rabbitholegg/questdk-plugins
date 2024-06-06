@@ -46,7 +46,7 @@ describe('Given the lens plugin', () => {
         networkStatus: 7,
       })
       const hasCollected = await validateCollect(
-        { postId: '0x5dbb-0xd5' },
+        { identifier: '0x5dbb-0xd5' },
         { actor: '0xA99F898530dF1514A566f1a6562D62809e99557D' },
       )
       expect(hasCollected).toBe(true)
@@ -72,7 +72,7 @@ describe('Given the lens plugin', () => {
         networkStatus: 7,
       })
       const hasCollected = await validateCollect(
-        { postId: '0x2fb0-0x69-DA-3096022f' },
+        { identifier: '0x2fb0-0x69-DA-3096022f' },
         { actor: '0xA99F898530dF1514A566f1a6562D62809e99557D' },
       )
       expect(hasCollected).toBe(false)
