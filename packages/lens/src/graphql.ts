@@ -1,5 +1,5 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
-import { Address } from 'viem'
+import { ActionVariables, PaginatedResponse, Profile } from './types'
+import { ApolloClient, DocumentNode, InMemoryCache, gql } from '@apollo/client'
 
 const APIURL = 'https://api-v2.lens.dev/'
 
@@ -7,23 +7,6 @@ export const client = new ApolloClient({
   uri: APIURL,
   cache: new InMemoryCache(),
 })
-
-type Profile = {
-  ownedBy: {
-    address: Address
-  }
-}
-
-type PaginatedResponse<T> = {
-  data: {
-    [key: string]: {
-      items: T[]
-      pageInfo: {
-        next: string | null
-      }
-    }
-  }
-}
 
 const WHO_ACTED_ON_PUBLICATION = gql`
   query WhoActedOnPublication($request: WhoActedOnPublicationRequest!) {
@@ -40,37 +23,90 @@ const WHO_ACTED_ON_PUBLICATION = gql`
   }
 `
 
-export async function hasAddressCollectedPost(postId: string, address: string) {
+const WHO_REPOSTED_PUBLICATION = gql`
+  query WhoRepostedPublication($request: ProfilesRequest!) {
+    profiles(request: $request) {
+      items {
+        ownedBy {
+          address
+        }
+      }
+      pageInfo {
+        next
+      }
+    }
+  }
+`
+
+export async function hasAddressPerformedAction(
+  address: string,
+  actionQuery: DocumentNode,
+  actionDataKey: string,
+  actionVariables: ActionVariables,
+) {
   let cursor = null
   let hasNextPage = true
-
   while (hasNextPage) {
     const { data } = (await client.query({
-      query: WHO_ACTED_ON_PUBLICATION,
+      query: actionQuery,
       variables: {
         request: {
-          on: postId,
-          where: {
-            anyOf: [
-              {
-                category: 'COLLECT',
-              },
-            ],
-          },
+          ...actionVariables,
           cursor: cursor,
         },
       },
     })) as PaginatedResponse<Profile>
-    const { items, pageInfo } = data.whoActedOnPublication
-    const collected = items.find(
+
+    const { items, pageInfo } = data[actionDataKey]
+    const found = items.find(
       (item: Profile) =>
         item.ownedBy.address.toLowerCase() === address.toLowerCase(),
     )
-    if (collected) {
+    if (found) {
       return true
     }
     cursor = pageInfo.next
     hasNextPage = cursor !== null
   }
   return false
+}
+
+export async function hasAddressCollectedPost(postId: string, address: string) {
+  return hasAddressPerformedAction(
+    address,
+    WHO_ACTED_ON_PUBLICATION,
+    'whoActedOnPublication',
+    {
+      on: postId,
+      where: {
+        anyOf: [{ category: 'COLLECT' }],
+      },
+    },
+  )
+}
+
+export async function hasAddressReposted(postId: string, address: string) {
+  return hasAddressPerformedAction(
+    address,
+    WHO_REPOSTED_PUBLICATION,
+    'profiles',
+    {
+      where: {
+        whoMirroredPublication: postId,
+      },
+    },
+  )
+}
+
+export async function hasAddressQuoted(postId: string, address: string) {
+  return hasAddressPerformedAction(
+    address,
+    WHO_REPOSTED_PUBLICATION,
+    'profiles',
+    {
+      where: {
+        whoQuotedPublication: postId,
+      },
+    },
+  )
 }

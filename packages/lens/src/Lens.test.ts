@@ -1,6 +1,6 @@
+import { validateCollect, validateRecast } from './Lens'
 import { client } from './graphql'
-import { beforeEach, describe, expect, MockedFunction, test, vi } from 'vitest'
-import { validateCollect } from './Lens'
+import { MockedFunction, beforeEach, describe, expect, test, vi } from 'vitest'
 
 vi.mock('@apollo/client', async () => {
   const actualApollo = await vi.importActual('@apollo/client')
@@ -27,13 +27,6 @@ describe('Given the lens plugin', () => {
           whoActedOnPublication: {
             __typename: 'PaginatedProfileResult',
             items: [
-              {
-                __typename: 'Profile',
-                ownedBy: {
-                  __typename: 'NetworkAddress',
-                  address: '0x53c64e9D4fCCaf0CF539ECFDa391c4783b5Ae335',
-                },
-              },
               {
                 __typename: 'Profile',
                 ownedBy: {
@@ -81,6 +74,102 @@ describe('Given the lens plugin', () => {
         { actor: '0xA99F898530dF1514A566f1a6562D62809e99557D' },
       )
       expect(hasCollected).toBe(false)
+    })
+  })
+
+  describe('When handling the repost action', () => {
+    beforeEach(() => {
+      vi.resetAllMocks()
+    })
+    test('return true if actor has reposted a specific post', async () => {
+      // use mock
+      ;(
+        client.query as MockedFunction<typeof client.query>
+      ).mockResolvedValueOnce({
+        data: {
+          profiles: {
+            __typename: 'PaginatedProfileResult',
+            items: [
+              {
+                __typename: 'Profile',
+                ownedBy: {
+                  __typename: 'NetworkAddress',
+                  address: '0xA99F898530dF1514A566f1a6562D62809e99557D',
+                },
+              },
+            ],
+            pageInfo: {
+              __typename: 'PaginatedResultInfo',
+              next: null,
+            },
+          },
+        },
+        loading: false,
+        networkStatus: 7,
+      })
+      const hasRepost = await validateRecast(
+        { identifier: '0x015f34-0x1ce3' },
+        { actor: '0xA99F898530dF1514A566f1a6562D62809e99557D' },
+      )
+      expect(hasRepost).toBe(true)
+    })
+
+    test('return true if actor has quote reposted a specific post', async () => {
+      // use mock
+      ;(
+        client.query as MockedFunction<typeof client.query>
+      ).mockResolvedValueOnce({
+        data: {
+          profiles: {
+            __typename: 'PaginatedProfileResult',
+            items: [
+              {
+                __typename: 'Profile',
+                ownedBy: {
+                  __typename: 'NetworkAddress',
+                  address: '0xA99F898530dF1514A566f1a6562D62809e99557D',
+                },
+              },
+            ],
+            pageInfo: {
+              __typename: 'PaginatedResultInfo',
+              next: null,
+            },
+          },
+        },
+        loading: false,
+        networkStatus: 7,
+      })
+      const hasRepost = await validateRecast(
+        { identifier: '0xa68c-0x0712' },
+        { actor: '0xA99F898530dF1514A566f1a6562D62809e99557D' },
+      )
+      expect(hasRepost).toBe(true)
+    })
+
+    test('return false if actor has not reposted a specific post', async () => {
+      // use mock
+      ;(
+        client.query as MockedFunction<typeof client.query>
+      ).mockResolvedValueOnce({
+        data: {
+          profiles: {
+            __typename: 'PaginatedProfileResult',
+            items: [],
+            pageInfo: {
+              __typename: 'PaginatedResultInfo',
+              next: null,
+            },
+          },
+        },
+        loading: false,
+        networkStatus: 7,
+      })
+      const hasRepost = await validateRecast(
+        { identifier: '0x01bc6f-0x04b7' },
+        { actor: '0xA99F898530dF1514A566f1a6562D62809e99557D' },
+      )
+      expect(hasRepost).toBe(false)
     })
   })
 })

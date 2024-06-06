@@ -1,10 +1,16 @@
-import { hasAddressCollectedPost } from './graphql'
+import {
+  hasAddressCollectedPost,
+  hasAddressReposted,
+  hasAddressQuoted,
+} from './graphql'
 import {
   ActionType,
   type CollectActionParams,
   type CollectValidationParams,
   type PluginActionValidation,
   type QuestCompletionPayload,
+  type RecastActionParams,
+  type RecastValidationParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 
@@ -20,6 +26,21 @@ export const validate = async (
         validationParams.data,
       )
       if (isCollectValid) {
+        return {
+          address: actor,
+          questId,
+          taskId,
+        }
+      } else {
+        return null
+      }
+    }
+    case ActionType.Recast: {
+      const isRecastValid = await validateRecast(
+        actionParams.data,
+        validationParams.data,
+      )
+      if (isRecastValid) {
         return {
           address: actor,
           questId,
@@ -45,6 +66,29 @@ export const validateCollect = async (
       validateP.actor,
     )
     return hasCollected
+  } catch {
+    return false
+  }
+}
+
+export const validateRecast = async (
+  actionP: RecastActionParams,
+  validateP: RecastValidationParams,
+): Promise<boolean> => {
+  try {
+    // call lens graphql endpoint to verify if actor has reposted the publication
+    const hasRepost = await hasAddressReposted(
+      actionP.identifier,
+      validateP.actor,
+    )
+    if (hasRepost) {
+      return true
+    }
+    const hasQuoted = await hasAddressQuoted(
+      actionP.identifier,
+      validateP.actor,
+    )
+    return hasQuoted
   } catch {
     return false
   }
