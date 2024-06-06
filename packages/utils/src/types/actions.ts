@@ -336,7 +336,7 @@ export type CompleteValidationParams = z.infer<
 COLLECT
 */
 export type CollectActionParams = {
-  postId: Address | string
+  identifier: Address | string
   project?: Address | string
 }
 
@@ -349,13 +349,13 @@ export type CollectValidationParams = z.infer<
 >
 
 export const CollectActionDetailSchema = z.object({
-  postId: z.string(),
+  identifier: z.string(),
   project: z.union([z.string(), EthAddressSchema]).optional(),
 })
 export type CollectActionDetail = z.infer<typeof CollectActionDetailSchema>
 
 export const CollectActionFormSchema = z.object({
-  postId: z.string(),
+  identifier: z.string(),
 })
 export type CollectActionForm = z.infer<typeof CollectActionFormSchema>
 /*
