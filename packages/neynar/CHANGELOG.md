@@ -1,5 +1,31 @@
 # @rabbitholegg/questdk-plugin-neynar
 
+## 1.0.0-alpha.20
+
+### Patch Changes
+
+- Updated dependencies [[`73c936ea`](https://github.com/rabbitholegg/questdk-plugins/commit/73c936ea7a382030351bb3d6aacc63df0e1c658e)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.35
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
+## 1.0.0-alpha.19
+
+### Patch Changes
+
+- [#431](https://github.com/rabbitholegg/questdk-plugins/pull/431) [`d153398d`](https://github.com/rabbitholegg/questdk-plugins/commit/d153398dd88da2cfe630fc0fe00e0bf0290cb6d2) Thanks [@sammccord](https://github.com/sammccord)! - remove null pointer error on assert.ok preventing neynar validation
+
+## 1.0.0-alpha.18
+
+### Minor Changes
+
+- [#428](https://github.com/rabbitholegg/questdk-plugins/pull/428) [`5a58f709`](https://github.com/rabbitholegg/questdk-plugins/commit/5a58f709a4d60d22c0526c18c177316d0181d10d) Thanks [@sammccord](https://github.com/sammccord)! - add type to follow params to differentiate channel from user
+
+### Patch Changes
+
+- Updated dependencies [[`5a58f709`](https://github.com/rabbitholegg/questdk-plugins/commit/5a58f709a4d60d22c0526c18c177316d0181d10d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.34
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.17
 
 ### Minor Changes

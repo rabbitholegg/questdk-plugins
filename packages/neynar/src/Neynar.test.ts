@@ -89,40 +89,22 @@ describe('validateFollow function', () => {
       })
 
     const result = await validateFollow(
-      { target: 'target_fid' },
+      { target: 'target_fid', type: 'user' },
       { actor: '1' },
     )
     expect(result).toBe(true)
   })
 
   it('should return true if the actor is a follower of the target channel', async () => {
-    ;(axios.get as MockedFunction<typeof axios.get>)
-      .mockResolvedValueOnce({
-        status: 200,
-        data: {
-          result: {
-            users: [
-              {
-                object: 'user',
-                fid: 1,
-                username: 'actor',
-                viewer_context: {
-                  following: false,
-                },
-              },
-            ],
-          },
-        },
-      })
-      .mockResolvedValueOnce({
-        status: 200,
-        data: {
-          channels: [{ id: '', name: '', viewer_context: { following: true } }],
-        } as ChannelsResponse,
-      })
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValueOnce({
+      status: 200,
+      data: {
+        channels: [{ id: '', name: '', viewer_context: { following: true } }],
+      } as ChannelsResponse,
+    })
 
     const result = await validateFollow(
-      { target: 'target_fid' },
+      { target: 'target_fid', type: 'channel' },
       { actor: '1' },
     )
     expect(result).toBe(true)
@@ -135,7 +117,7 @@ describe('validateFollow function', () => {
     })
 
     const result = await validateFollow(
-      { target: '3' },
+      { target: '3', type: 'user' },
       { actor: '0xd7053a3e7f8c02a6939377e2ca32bcc2a23023a1' },
     )
     expect(result).toBe(false)
@@ -147,7 +129,7 @@ describe('validateFollow function', () => {
     )
 
     const result = await validateFollow(
-      { target: 'target_fid' },
+      { target: 'target_fid', type: 'user' },
       { actor: 'actor_address' },
     )
     expect(result).toBe(false)

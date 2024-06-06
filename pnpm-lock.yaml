@@ -261,6 +261,15 @@ importers:
         specifier: workspace:*
         version: link:../utils
 
+  packages/foundation:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+
   packages/gmx:
     dependencies:
       '@rabbitholegg/questdk':
@@ -524,6 +533,9 @@ importers:
       '@rabbitholegg/questdk-plugin-fabric':
         specifier: workspace:*
         version: link:../fabric
+      '@rabbitholegg/questdk-plugin-foundation':
+        specifier: workspace:*
+        version: link:../foundation
       '@rabbitholegg/questdk-plugin-gmx':
         specifier: workspace:*
         version: link:../gmx
