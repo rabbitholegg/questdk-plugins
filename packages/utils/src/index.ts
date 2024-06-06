@@ -30,6 +30,7 @@ export type {
   CollectActionParams,
   CollectValidationParams,
   CollectActionForm,
+  CollectActionDetail,
   IActionPlugin,
   FilterObject,
   BitmaskFilter,
