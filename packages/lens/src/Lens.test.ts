@@ -20,6 +20,7 @@ describe('Given the lens plugin', () => {
     })
     test('return true if actor has collected a specific post', async () => {
       // use mock
+      // eslint-disable-next-line
       ;(
         client.query as MockedFunction<typeof client.query>
       ).mockResolvedValueOnce({
@@ -53,6 +54,7 @@ describe('Given the lens plugin', () => {
 
     test('return false if actor has not collected a specific post', async () => {
       // use mock
+      // eslint-disable-next-line
       ;(
         client.query as MockedFunction<typeof client.query>
       ).mockResolvedValueOnce({
@@ -83,6 +85,7 @@ describe('Given the lens plugin', () => {
     })
     test('return true if actor has reposted a specific post', async () => {
       // use mock
+      // eslint-disable-next-line
       ;(
         client.query as MockedFunction<typeof client.query>
       ).mockResolvedValueOnce({
@@ -116,6 +119,7 @@ describe('Given the lens plugin', () => {
 
     test('return true if actor has quote reposted a specific post', async () => {
       // use mock
+      // eslint-disable-next-line
       ;(
         client.query as MockedFunction<typeof client.query>
       ).mockResolvedValueOnce({
@@ -149,6 +153,7 @@ describe('Given the lens plugin', () => {
 
     test('return false if actor has not reposted a specific post', async () => {
       // use mock
+      // eslint-disable-next-line
       ;(
         client.query as MockedFunction<typeof client.query>
       ).mockResolvedValueOnce({
