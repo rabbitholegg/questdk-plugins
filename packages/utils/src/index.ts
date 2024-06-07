@@ -54,6 +54,7 @@ export type {
   QuestDetails,
   RewardWithClaim,
   QuestInputActionParamsAmountOperator,
+  BoostedValidationParams,
   BridgeActionDetail,
   SwapActionDetail,
   DelegateActionDetail,

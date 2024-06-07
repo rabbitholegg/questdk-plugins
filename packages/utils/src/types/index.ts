@@ -6,6 +6,7 @@ export type {
   BridgeActionParams,
   MintActionParams,
   BoostedActionParams,
+  BoostedValidationParams,
   VoteActionParams,
   BurnActionParams,
   QuestActionParams,

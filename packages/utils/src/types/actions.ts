@@ -303,11 +303,9 @@ export type BoostedActionParams = {
   // What else do we need to validate from Zora?
 }
 
-export type BoostedValidationParams = {
-  actor: Address
-  // Maybe potentially the refferall code? Not sure how we scrape that
-  // Do we want information about the collection they created?
-}
+export type BoostedValidationParams = z.infer<
+typeof BoostedValidationParamsSchema
+>
 
 export const BoostedActionParamsSchema = z.object({
   boostConfig: z.object({
@@ -420,6 +418,7 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('recast'), data: RecastActionDetailSchema }),
   z.object({ type: z.literal('create'), data: CreateActionDetailSchema }),
   z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema }),
+  z.object({ type: z.literal('boosted'), data: BoostedActionParamsSchema }),
 ])
 
 export const QuestActionParamsSchema = ActionParamsSchema
@@ -431,6 +430,7 @@ export const ValidationParamsSchema = z.discriminatedUnion('type', [
     type: z.literal('complete'),
     data: CompleteValidationParamsSchema,
   }),
+  z.object({ type: z.literal('boosted'), data: BoostedValidationParamsSchema }),
 ])
 
 export type ValidationParams = z.infer<typeof ValidationParamsSchema>
@@ -571,6 +571,7 @@ export enum ActionType {
   Follow = 'follow',
   Recast = 'recast',
   Create = 'create',
+  Boosted = 'boosted',
   Complete = 'complete',
 }
 

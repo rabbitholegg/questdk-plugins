@@ -15,6 +15,7 @@ import {
   getSupportedTokenAddresses,
   mint,
   simulateMint,
+  validate,
 } from './Zora'
 
 export const Zora: IActionPlugin = {
@@ -32,4 +33,5 @@ export const Zora: IActionPlugin = {
     getFees(params as unknown as MintActionParams),
   getMintIntent,
   simulateMint,
+  validate,
 }
