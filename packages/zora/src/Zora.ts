@@ -28,6 +28,7 @@ import {
   PluginActionValidation,
   chainIdToViemChain,
   getExitAddresses,
+  QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { MintAPIClient, getMintCosts } from '@zoralabs/protocol-sdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
@@ -43,14 +44,25 @@ import {
   http,
   keccak256,
   pad,
+  parseAbiItem,
   parseEther,
   stringToBytes,
   toHex,
 } from 'viem'
 import { z } from 'zod'
+import { zora } from 'viem/chains'
 // eslint-disable-next-line import/no-internal-modules
 import { Address as AddressSchema} from 'abitype/zod'
 import axios from 'axios'
+import { CREATOR_SUBGRAPH } from './constants'
+
+const API_BASE_URL = CREATOR_SUBGRAPH
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
 
 export const create = async (
   create: CreateActionParams,
@@ -333,8 +345,11 @@ export const validateBoosted = async (
   actionP: BoostedActionParams,
   validateP: BoostedValidationParams,
 ): Promise<boolean> => {
-  const hasCreated = await hasCreatedCollection(validateP.address)
-  const isSCW = await isSmartWallet(validateP.address)
+  const hasCreated = await hasCreatedCollection(validateP.actor)
+  const isSCW = await isSmartWallet(validateP.actor)
+  console.log('hasCreated', hasCreated)
+  console.log('isSCW', isSCW)
+  console.log('actionP', actionP)
   return hasCreated && isSCW
 }
 
@@ -345,25 +360,25 @@ export const hasCreatedCollection = async (
   return collections.length > 1
 }
 
-export const isSmartWallet = async (address: Address): Promise<boolean> => {
-  
-  /*
-  In that case this is the address of the factory: https://explorer.zora.energy/address/0x777777b12602d65a2b4441EA2D17FdC1d039dD79
-  There is no subgraph but the event looks like:
-  ZoraSmartWalletCreated(address indexed smartWallet, address indexed baseOwner, address[] owners, uint256 nonce)
-*/
-  // Get all smart wallet created events from the factory contract
-  // Check if the actors address is in the owners array
-  return typeof address === 'string'
-}
+export const isSmartWallet = async (address: Address, _client?: PublicClient): Promise<boolean> => {
+  const client =
+  _client ??
+  createPublicClient({
+    chain: zora,
+    transport: http(),
+  })
+  const logs = await client.getLogs({  
+    address: '0x777777b12602d65a2b4441EA2D17FdC1d039dD79', // Factory contract address
+    event: parseAbiItem('event ZoraSmartWalletCreated(address indexed smartWallet, address indexed baseOwner, address[] owners, uint256 nonce)'),
+    fromBlock: 14296947n, // From the initialization of the SCW contract
+    toBlock: 'latest',
+    args: {
+      smartWallet: address,
+    },
+  })
 
-const API_BASE_URL = `https://api.goldsky.com/api/public/${process.env.GOLDSKY_API_KEY}/subgraphs/zora-create-zora-mainnet/stable/gn`
-const axiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
+  return logs.length > 0
+}
 
 interface ZoraCreateToken {
   tokenId: string;
@@ -388,9 +403,6 @@ const fetchCollections = async (address: Address): Promise<ZoraCreateToken[]> =>
   })
   const parsedResponse: ZoraCreateToken[] = CollectionResponseSchema.parse(response.data).zoraCreateTokens
   return parsedResponse
-
-  // If you don't have a Zod schema, you can return the data directly
-  return response.data.zoraCreateTokens
 }
 
 export const validate = async (
@@ -402,7 +414,7 @@ export const validate = async (
     case ActionType.Boosted: {
       const isBoostedValid = await validateBoosted(
         actionParams.data,
-        validationParams.data,
+        validationParams.data as BoostedValidationParams,
       )
       if (isBoostedValid) {
         return {
