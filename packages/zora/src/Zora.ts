@@ -345,8 +345,11 @@ export const validateBoosted = async (
   actionP: BoostedActionParams,
   validateP: BoostedValidationParams,
 ): Promise<boolean> => {
-  const hasCreated = await hasCreatedCollection(validateP.actor)
-  const isSCW = await isSmartWallet(validateP.actor)
+  console.log('actionP', actionP)
+  console.log('validateP', validateP)
+  const actor = '0x0' as Address
+  const hasCreated = await hasCreatedCollection(actor)
+  const isSCW = await isSmartWallet(actor)
   console.log('hasCreated', hasCreated)
   console.log('isSCW', isSCW)
   console.log('actionP', actionP)

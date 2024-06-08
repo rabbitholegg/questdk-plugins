@@ -37,7 +37,7 @@ export const validate = async (
     case ActionType.Complete: {
       const isCompleteValid = await validateComplete(
         actionParams.data,
-        validationParams.data,
+        validationParams.data as CompleteValidationParams,
       )
       if (isCompleteValid) {
         return {

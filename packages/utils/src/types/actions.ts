@@ -3,6 +3,7 @@ import {
   type Address,
   type SimulateContractReturnType,
   type TransactionRequest,
+  Log,
 } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
@@ -303,9 +304,9 @@ export type BoostedActionParams = {
   // What else do we need to validate from Zora?
 }
 
-export type BoostedValidationParams = z.infer<
-typeof BoostedValidationParamsSchema
->
+export type BoostedValidationParams = {
+  event: Log 
+}
 
 export const BoostedActionParamsSchema = z.object({
   boostConfig: z.object({
@@ -314,7 +315,7 @@ export const BoostedActionParamsSchema = z.object({
 })
 
 export const BoostedValidationParamsSchema = z.object({
-  actor: EthAddressSchema,
+  event: z.any(),
 })
 
 // This should contain everything that we need to create a boost

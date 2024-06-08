@@ -41,7 +41,7 @@ export const validate = async (
     case ActionType.Follow: {
       const isFollowValid = await validateFollow(
         actionParams.data,
-        validationParams.data,
+        validationParams.data as FollowValidationParams,
       )
       if (isFollowValid) {
         return {
@@ -56,7 +56,7 @@ export const validate = async (
     case ActionType.Recast: {
       const isRecastValid = await validateRecast(
         actionParams.data,
-        validationParams.data,
+        validationParams.data as RecastValidationParams,
       )
       if (isRecastValid) {
         return {
