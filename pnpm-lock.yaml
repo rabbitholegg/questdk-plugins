@@ -602,6 +602,9 @@ importers:
       '@rabbitholegg/questdk-plugin-tally':
         specifier: workspace:*
         version: link:../tally
+      '@rabbitholegg/questdk-plugin-thirdweb':
+        specifier: workspace:*
+        version: link:../thirdweb
       '@rabbitholegg/questdk-plugin-thruster':
         specifier: workspace:*
         version: link:../thruster
@@ -689,6 +692,15 @@ importers:
         version: link:../utils
 
   packages/tally:
+    dependencies:
+      '@rabbitholegg/questdk':
+        specifier: workspace:*
+        version: link:../../apps/questdk
+      '@rabbitholegg/questdk-plugin-utils':
+        specifier: workspace:*
+        version: link:../utils
+
+  packages/thirdweb:
     dependencies:
       '@rabbitholegg/questdk':
         specifier: workspace:*
