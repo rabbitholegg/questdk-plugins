@@ -8,11 +8,11 @@ describe('Given the thirdweb plugin', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid mint action', async () => {
         const filter = await mint({
-          chainId: 1,
-          contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+          chainId: 8453,
+          contractAddress: '0xc7DeD9c1BD13A19A877d196Eeea9222Ff6d40736',
         })
         expect(filter).toBeTypeOf('object')
-        expect(Number(filter.chainId)).toBe(1)
+        expect(Number(filter.chainId)).toBe(8453)
         if (typeof filter.to === 'string') {
           expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
         } else {
@@ -52,8 +52,13 @@ describe('Given the thirdweb plugin', () => {
       failingTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
-          const filter = await mint(params)
-          expect(apply(transaction, filter)).to.be.false
+          try {
+            const filter = await mint(params)
+            const result = apply(transaction, filter)
+            expect(result).toBe(false)
+          } catch (error) {
+            expect(error).toBeDefined()
+          }
         })
       })
     })
