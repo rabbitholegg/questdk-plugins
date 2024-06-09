@@ -269,6 +269,23 @@ describe('simulateMint function', () => {
     expect(request.value).toBe(value)
   })
 
+  test('should simulate a 1155 mint on blast', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.BLAST,
+      contractAddress: '0x8704c8b68e577d54be3c16341fbd31bac47c7471',
+      tokenId: 1,
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.000777')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(mint.contractAddress)
+    expect(request.value).toBe(value)
+  })
+
   test('should return an error object if address is not a contract', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.ARBITRUM_ONE,
