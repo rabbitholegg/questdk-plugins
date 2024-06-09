@@ -253,7 +253,11 @@ describe('Given the getFee function', () => {
 
 describe('simulateMint function', () => {
   const mockFn = {
-    simulateMint: async (_mint: MintIntentParams, _value: bigint, _account: Address) => ({
+    simulateMint: async (
+      _mint: MintIntentParams,
+      _value: bigint,
+      _account: Address,
+    ) => ({
       request: {
         address: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
         value: parseEther('0.000777'),
@@ -281,7 +285,11 @@ describe('simulateMint function', () => {
 
   test('should simulate a 1155 mint on blast', async () => {
     const mockFn = {
-      simulateMint: async (_mint: MintIntentParams, _value: bigint, _account: Address) => ({
+      simulateMint: async (
+        _mint: MintIntentParams,
+        _value: bigint,
+        _account: Address,
+      ) => ({
         request: {
           address: '0x8704c8b68e577d54be3c16341fbd31bac47c7471',
           value: parseEther('0.000777'),
