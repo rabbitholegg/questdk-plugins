@@ -10,6 +10,7 @@ import {
   getSupportedChainIds,
   getSupportedTokenAddresses,
   mint,
+  simulateMint,
 } from './ThirdWeb'
 
 export const ThirdWeb: IActionPlugin = {
@@ -21,4 +22,5 @@ export const ThirdWeb: IActionPlugin = {
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
   mint,
+  simulateMint,
 }

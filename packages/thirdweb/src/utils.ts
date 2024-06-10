@@ -22,8 +22,9 @@ export async function getClaimConditionId(
 export async function getContractType(
   chainId: number,
   contractAddress: Address,
+  _client?: PublicClient,
 ): Promise<'1155' | '721'> {
-  const client = getClient(chainId)
+  const client = _client || getClient(chainId)
 
   const abi = [SUPPORTS_INTERFACE_FRAGMENT]
   const interfaceIds = {
@@ -83,13 +84,13 @@ export function getMintAmount(amount: FilterOperator | undefined) {
   return 1n
 }
 
-export async function getMintFee(
+export async function getClaimCondition(
   client: PublicClient,
   contractAddress: Address,
   abi: Abi,
   claimConditionId: bigint,
   _tokenId?: number | string | bigint,
-): Promise<bigint> {
+): Promise<ClaimCondition> {
   const claimCondition = (await client.readContract({
     address: contractAddress,
     abi,
@@ -97,5 +98,5 @@ export async function getMintFee(
     args: _tokenId != null ? [_tokenId, claimConditionId] : [claimConditionId],
   })) as ClaimCondition
 
-  return claimCondition.pricePerToken
+  return claimCondition
 }

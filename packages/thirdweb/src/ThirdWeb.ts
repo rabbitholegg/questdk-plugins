@@ -11,16 +11,22 @@ import {
   getContractType,
   getMintAmount,
   formatAmount,
+  getClaimCondition,
   getClaimConditionId,
-  getMintFee,
 } from './utils'
-import { type Address } from 'viem'
+import { type TransactionFilter, compressJson } from '@rabbitholegg/questdk'
 import {
-  type TransactionFilter,
+  Chains,
+  DEFAULT_ACCOUNT,
   type MintActionParams,
-  compressJson,
-} from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
+import {
+  type Address,
+  type PublicClient,
+  type SimulateContractReturnType,
+  zeroHash,
+} from 'viem'
 
 export const mint = async (
   mint: MintActionParams,
@@ -81,7 +87,7 @@ export const getFees = async (
       contractType === '1155' ? tokenId : undefined,
     )
 
-    const mintFee = await getMintFee(
+    const { pricePerToken } = await getClaimCondition(
       client,
       contractAddress,
       [claimConditionFragment],
@@ -90,7 +96,7 @@ export const getFees = async (
     )
 
     return {
-      actionFee: mintFee * quantityToMint,
+      actionFee: pricePerToken * quantityToMint,
       projectFee: 0n,
     }
   } catch (error) {
@@ -100,6 +106,100 @@ export const getFees = async (
       projectFee: 0n,
     }
   }
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  _client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+
+  const client = _client || getClient(chainId)
+
+  const contractType = await getContractType(chainId, contractAddress, client)
+
+  if (contractType === '1155') {
+    const claimConditionId = await getClaimConditionId(
+      client,
+      contractAddress,
+      [GET_CLAIM_ID_1155_FRAGMENT],
+      tokenId ?? 0n,
+    )
+    const claimCondition = await getClaimCondition(
+      client,
+      contractAddress,
+      [GET_CLAIM_CONDITION_1155_FRAGMENT],
+      claimConditionId,
+      tokenId ?? 0n,
+    )
+
+    const mintArgs = [
+      recipient,
+      tokenId ?? 0n,
+      getMintAmount(amount),
+      claimCondition.currency,
+      value,
+      [
+        [zeroHash],
+        claimCondition.quantityLimitPerWallet,
+        claimCondition.pricePerToken,
+        claimCondition.currency,
+      ],
+      '0x',
+    ]
+
+    const result = await client.simulateContract({
+      address: contractAddress,
+      value,
+      abi: [CLAIM_1155_FRAGMENT],
+      functionName: 'claim',
+      args: mintArgs,
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  }
+  else if (contractType === '721') {
+    console.log(mint)
+    const claimConditionId = await getClaimConditionId(
+      client,
+      contractAddress,
+      [GET_CLAIM_ID_721_FRAGMENT],
+    )
+    const claimCondition = await getClaimCondition(
+      client,
+      contractAddress,
+      [GET_CLAIM_CONDITION_721_FRAGMENT],
+      claimConditionId,
+    )
+
+    const mintArgs = [
+      recipient,
+      getMintAmount(amount),
+      claimCondition.currency,
+      value,
+      [
+        [zeroHash],
+        claimCondition.quantityLimitPerWallet,
+        claimCondition.pricePerToken,
+        claimCondition.currency,
+      ],
+      '0x',
+    ]
+
+    const result = await client.simulateContract({
+      address: contractAddress,
+      value,
+      abi: [CLAIM_721_FRAGMENT],
+      functionName: 'claim',
+      args: mintArgs,
+      account: account || DEFAULT_ACCOUNT,
+    })
+    return result
+  }
+
+  throw new Error('Invalid mint arguments')
 }
 
 export const getSupportedTokenAddresses = async (
