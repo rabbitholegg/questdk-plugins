@@ -3,7 +3,6 @@ import {
   type Address,
   type SimulateContractReturnType,
   type TransactionRequest,
-  Log,
 } from 'viem'
 import type { FilterOperator, TransactionFilter } from './filters'
 import { PluginActionNotImplementedError } from '../errors'
@@ -304,9 +303,9 @@ export type BoostedActionParams = {
   // What else do we need to validate from Zora?
 }
 
-export type BoostedValidationParams = {
-  event: Log 
-}
+export type BoostedValidationParams = z.infer<
+typeof BoostedValidationParamsSchema
+>
 
 export const BoostedActionParamsSchema = z.object({
   boostConfig: z.object({
