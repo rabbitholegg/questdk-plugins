@@ -1,6 +1,7 @@
 import { Address } from 'viem'
 import { Chains } from './chain-ids'
 
+// to find relayer address, check a tx on https://layerzeroscan.com/
 export const RELAYER_ADDRESSES: { [chain in Chains]?: Address } = {
   [Chains.ETHEREUM]: '0x902F09715B6303d4173037652FA7377e5b98089E',
   [Chains.OPTIMISM]: '0x81E792e5a9003CC1C8BF5569A00f34b65d75b017',
