@@ -1,7 +1,9 @@
 import { apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
+import { Chains, type MintActionParams } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address, parseEther } from 'viem'
+import { describe, expect, test, vi } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
-import { mint } from './ThirdWeb'
+import { getFees, mint } from './ThirdWeb'
 
 describe('Given the thirdweb plugin', () => {
   describe('When handling the mint action', () => {
@@ -63,4 +65,87 @@ describe('Given the thirdweb plugin', () => {
       })
     })
   })
+
+  describe('Given the getFee function', () => {
+    test('should return the correct fee for OpenEditionERC721 mint', async () => {
+      const contractAddress: Address =
+        '0xc7DeD9c1BD13A19A877d196Eeea9222Ff6d40736'
+      const mintParams = {
+        contractAddress,
+        chainId: Chains.BASE,
+      }
+
+      // // mock
+      // const mockFns = {
+      //   getFees: async (_mint: MintActionParams) => ({
+      //     projectFee: parseEther('0'),
+      //     actionFee: parseEther('0.000777'),
+      //   }),
+      // }
+      // const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
+      // const fee = await mockFns.getFees(mintParams)
+      // expect(getProjectsFeeSpy).toHaveBeenCalledWith(mintParams)
+      // expect(fee.projectFee).toEqual(parseEther('0'))
+      // expect(fee.actionFee).toEqual(parseEther('0.000777'))
+
+      const { actionFee, projectFee } = await getFees(mintParams)
+      expect(actionFee).equals(parseEther('0.000777'))
+      expect(projectFee).equals(parseEther('0'))
+    })
+
+    test('should return the correct fee for DropERC1155 mint', async () => {
+      const contractAddress: Address =
+        '0x5625e0ae98C035407258D6752703fed917417Add'
+      const mintParams = {
+        contractAddress,
+        chainId: Chains.BASE,
+        tokenId: 0,
+      }
+
+      // // mock
+      // const mockFns = {
+      //   getFees: async (_mint: MintActionParams) => ({
+      //     projectFee: parseEther('0'),
+      //     actionFee: parseEther('0.000777'),
+      //   }),
+      // }
+      // const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
+      // const fee = await mockFns.getFees(mintParams)
+      // expect(getProjectsFeeSpy).toHaveBeenCalledWith(mintParams)
+      // expect(fee.projectFee).toEqual(parseEther('0'))
+      // expect(fee.actionFee).toEqual(parseEther('0.000777'))
+
+      const { actionFee, projectFee } = await getFees(mintParams)
+      expect(actionFee).equals(parseEther('0.000777'))
+      expect(projectFee).equals(parseEther('0'))
+    })
+
+    test('should return the fallback fee if contract not found or error occurs', async () => {
+      const contractAddress: Address =
+        '0x68adf0c109e63c6141c509fea0864431ba55bfa5'
+      const mintParams = {
+        contractAddress,
+        chainId: Chains.BASE,
+      }
+
+      // // mock
+      // const mockFns = {
+      //   getFees: async (_mint: MintActionParams) => ({
+      //     projectFee: parseEther('0'),
+      //     actionFee: parseEther('0'),
+      //   }),
+      // }
+      // const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+      // const fee = await mockFns.getFees(mintParams)
+      // expect(getFeesSpy).toHaveBeenCalledWith(mintParams)
+      // expect(fee.projectFee).toEqual(parseEther('0'))
+      // expect(fee.actionFee).toEqual(parseEther('0'))
+
+      const { actionFee, projectFee } = await getFees(mintParams)
+      expect(actionFee).equals(parseEther('0'))
+      expect(projectFee).equals(parseEther('0'))
+    })
+  })
 })
+
+
