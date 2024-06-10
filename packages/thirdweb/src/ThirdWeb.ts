@@ -1,18 +1,18 @@
 import { getClient } from './client'
 import {
-  CLAIM_1155_FRAGMENT,
   CLAIM_721_FRAGMENT,
-  GET_CLAIM_ID_1155_FRAGMENT,
-  GET_CLAIM_CONDITION_1155_FRAGMENT,
+  CLAIM_1155_FRAGMENT,
   GET_CLAIM_CONDITION_721_FRAGMENT,
+  GET_CLAIM_CONDITION_1155_FRAGMENT,
   GET_CLAIM_ID_721_FRAGMENT,
+  GET_CLAIM_ID_1155_FRAGMENT,
 } from './constants'
 import {
-  getContractType,
-  getMintAmount,
   formatAmount,
   getClaimCondition,
   getClaimConditionId,
+  getContractType,
+  getMintAmount,
 } from './utils'
 import { type TransactionFilter, compressJson } from '@rabbitholegg/questdk'
 import {
@@ -160,7 +160,6 @@ export const simulateMint = async (
     })
     return result
   } else if (contractType === '721') {
-    console.log(mint)
     const claimConditionId = await getClaimConditionId(
       client,
       contractAddress,

@@ -1,3 +1,7 @@
+import { mint } from './ThirdWeb'
+// import { getFees, mint, simulateMint } from './ThirdWeb'
+import { failingTestCases, passingTestCases } from './test-transactions'
+import { Mint721Response, Mint1155Response } from './types'
 import { apply } from '@rabbitholegg/questdk'
 import {
   Chains,
@@ -6,10 +10,6 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
-import { Mint1155Response, Mint721Response } from './types'
-import { mint } from './ThirdWeb'
-// import { getFees, mint, simulateMint } from './ThirdWeb'
 
 describe('Given the thirdweb plugin', () => {
   describe('When handling the mint action', () => {
