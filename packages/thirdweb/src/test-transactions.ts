@@ -23,9 +23,7 @@ export const MINT_721: TestParams<MintActionParams> = {
 
 // TODO: Add ERC1155 test cases. Cannot find live example
 
-export const passingTestCases = [
-  createTestCase(MINT_721, 'when mint ERC721'),
-]
+export const passingTestCases = [createTestCase(MINT_721, 'when mint ERC721')]
 
 export const failingTestCases = [
   createTestCase(MINT_721, 'when chainId is not correct', { chainId: 10 }),

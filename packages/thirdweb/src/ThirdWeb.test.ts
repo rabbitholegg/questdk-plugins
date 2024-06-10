@@ -1,5 +1,8 @@
 import { apply } from '@rabbitholegg/questdk'
-import { Chains, type MintActionParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintActionParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 import { passingTestCases, failingTestCases } from './test-transactions'
@@ -147,5 +150,3 @@ describe('Given the thirdweb plugin', () => {
     })
   })
 })
-
-
