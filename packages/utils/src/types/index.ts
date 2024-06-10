@@ -45,6 +45,10 @@ export type {
   ActionValidation,
   PluginActionPayload,
   PluginActionValidation,
+  PremintActionParams,
+  PremintValidationParams,
+  PremintActionDetail,
+  PremintActionForm,
 } from './actions'
 
 export {
@@ -84,6 +88,9 @@ export {
   ValidationParamsSchema,
   ActionValidationSchema,
   PluginActionValidationSchema,
+  PremintActionFormSchema,
+  PremintActionDetailSchema,
+  PremintValidationParamsSchema,
 } from './actions'
 
 export {
