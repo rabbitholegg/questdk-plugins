@@ -152,98 +152,88 @@ describe('Given the thirdweb plugin', () => {
   })
 
   describe('simulateMint function', () => {
-    test(
-      'should simulate an 1155 mint',
-      async () => {
-        const mint = {
-          chainId: Chains.BASE,
-          contractAddress: '0x5625e0ae98C035407258D6752703fed917417Add',
-          recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-          tokenId: 0,
-        }
-        const value = parseEther('0.000777')
-        const address = mint.recipient as Address
+    test('should simulate an 1155 mint', async () => {
+      const mint = {
+        chainId: Chains.BASE,
+        contractAddress: '0x5625e0ae98C035407258D6752703fed917417Add',
+        recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+        tokenId: 0,
+      }
+      const value = parseEther('0.000777')
+      const address = mint.recipient as Address
 
-        // // mock
-        // const mockFns = {
-        //   simulateMint: async (
-        //     _mint: MintIntentParams,
-        //     _value: bigint,
-        //     _address: Address,
-        //   ) => fixedPriceResponse,
-        // }
-        // const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
-        // const result = await mockFns.simulateMint(
-        //   mint as MintIntentParams,
-        //   value,
-        //   address,
-        // )
-        // expect(simulateMintSpy).toHaveBeenCalledWith(
-        //   mint as MintIntentParams,
-        //   value,
-        //   address,
-        // )
+      // // mock
+      // const mockFns = {
+      //   simulateMint: async (
+      //     _mint: MintIntentParams,
+      //     _value: bigint,
+      //     _address: Address,
+      //   ) => fixedPriceResponse,
+      // }
+      // const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
+      // const result = await mockFns.simulateMint(
+      //   mint as MintIntentParams,
+      //   value,
+      //   address,
+      // )
+      // expect(simulateMintSpy).toHaveBeenCalledWith(
+      //   mint as MintIntentParams,
+      //   value,
+      //   address,
+      // )
 
-        const result = await simulateMint(
-          mint as MintIntentParams,
-          value,
-          address,
-        )
+      const result = await simulateMint(
+        mint as MintIntentParams,
+        value,
+        address,
+      )
 
-        const request = result.request
-        expect(request.address).toBe(
-          '0x5625e0ae98C035407258D6752703fed917417Add',
-        )
-        expect(request.functionName).toBe('claim')
-        expect(request.value).toBe(value)
-      },
-    )
+      const request = result.request
+      expect(request.address).toBe('0x5625e0ae98C035407258D6752703fed917417Add')
+      expect(request.functionName).toBe('claim')
+      expect(request.value).toBe(value)
+    })
 
-    test(
-      'should simulate a 721 mint',
-      async () => {
-        const mint = {
-          chainId: Chains.BASE,
-          contractAddress: '0xc7ded9c1bd13a19a877d196eeea9222ff6d40736',
-          recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-        }
-        const value = parseEther('0.000777')
-        const address = mint.recipient as Address
+    test('should simulate a 721 mint', async () => {
+      const mint = {
+        chainId: Chains.BASE,
+        contractAddress: '0xc7ded9c1bd13a19a877d196eeea9222ff6d40736',
+        recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      }
+      const value = parseEther('0.000777')
+      const address = mint.recipient as Address
 
-        // // mock
-        // const mockFns = {
-        //   simulateMint: async (
-        //     _mint: MintIntentParams,
-        //     _value: bigint,
-        //     _address: Address,
-        //   ) => fixedPriceResponse,
-        // }
-        // const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
-        // const result = await mockFns.simulateMint(
-        //   mint as MintIntentParams,
-        //   value,
-        //   address,
-        // )
-        // expect(simulateMintSpy).toHaveBeenCalledWith(
-        //   mint as MintIntentParams,
-        //   value,
-        //   address,
-        // )
+      // // mock
+      // const mockFns = {
+      //   simulateMint: async (
+      //     _mint: MintIntentParams,
+      //     _value: bigint,
+      //     _address: Address,
+      //   ) => fixedPriceResponse,
+      // }
+      // const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
+      // const result = await mockFns.simulateMint(
+      //   mint as MintIntentParams,
+      //   value,
+      //   address,
+      // )
+      // expect(simulateMintSpy).toHaveBeenCalledWith(
+      //   mint as MintIntentParams,
+      //   value,
+      //   address,
+      // )
 
-        const result = await simulateMint(
-          mint as MintIntentParams,
-          value,
-          address,
-        )
+      const result = await simulateMint(
+        mint as MintIntentParams,
+        value,
+        address,
+      )
 
-        const request = result.request
-        expect(request.address).toBe(
-          '0xc7ded9c1bd13a19a877d196eeea9222ff6d40736',
-        )
-        expect(request.functionName).toBe('claim')
-        expect(request.value).toBe(value)
-      },
-    )
+      const request = result.request
+      expect(request.address).toBe('0xc7ded9c1bd13a19a877d196eeea9222ff6d40736')
+      expect(request.functionName).toBe('claim')
+      expect(request.value).toBe(value)
+    })
 
     test('should fail to simulate with invalid parameters', async () => {
       const mint = {

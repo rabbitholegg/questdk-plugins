@@ -159,8 +159,7 @@ export const simulateMint = async (
       account: account || DEFAULT_ACCOUNT,
     })
     return result
-  }
-  else if (contractType === '721') {
+  } else if (contractType === '721') {
     console.log(mint)
     const claimConditionId = await getClaimConditionId(
       client,
