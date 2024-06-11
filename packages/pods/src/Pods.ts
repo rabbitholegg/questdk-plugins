@@ -104,22 +104,12 @@ export const simulateMint = async (
       transport: http(),
     })
   const from = account ?? DEFAULT_ACCOUNT
-  let _tokenId = tokenId
-  if (tokenId === null || tokenId === undefined) {
-    const nextTokenId = (await _client.readContract({
-      address: contractAddress,
-      abi: ZORA_MINTER_ABI_1155,
-      functionName: 'nextTokenId',
-    })) as bigint
-
-    _tokenId = Number(nextTokenId) - 1
-  }
 
   const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
-    _tokenId,
+    tokenId ?? 1,
     amount,
     [ZORA_DEPLOYER_ADDRESS],
     pad(recipient),
