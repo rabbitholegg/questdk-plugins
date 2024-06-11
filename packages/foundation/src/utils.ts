@@ -8,9 +8,9 @@ import {
 } from './constants'
 import { type SaleTerms } from './types'
 import {
-  chainIdToViemChain,
   type FilterOperator,
   type MintActionParams,
+  chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, type PublicClient, createPublicClient, http } from 'viem'
 
@@ -120,6 +120,7 @@ export async function getContractType(
       if (supportsInterface) {
         return type as '1155' | '721'
       }
+      // eslint-disable-next-line no-empty
     } catch {}
   }
   throw new Error('Invalid contract type')
@@ -137,9 +138,6 @@ export function formatAmount(amount: FilterOperator | undefined) {
 }
 
 export function getMintAmount(amount: FilterOperator | undefined) {
-  if (!amount) {
-    return 1n
-  }
   // If the amount is a primitive, pass that value through
   if (['number', 'bigint'].includes(typeof amount)) {
     return BigInt(amount as number | bigint)
@@ -156,6 +154,6 @@ export function getMintAmount(amount: FilterOperator | undefined) {
   if (typeof amount === 'object' && '$gt' in amount && amount.$gt) {
     return BigInt(amount.$gt) + 1n
   }
-  // For $lt or $lte, the minimum amount required to pass is 1
+  // For all other conditions, the minimum amount required to pass is 1
   return 1n
 }
