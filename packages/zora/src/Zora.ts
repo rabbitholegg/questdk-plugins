@@ -55,7 +55,10 @@ export const validate = async (
   const { actionParams, validationParams, questId, taskId } = payload
   switch (actionParams.type) {
     case ActionType.Premint: {
-      const isPremintValid = await validatePremint(actionParams.data, validationParams.data)
+      const isPremintValid = await validatePremint(
+        actionParams.data,
+        validationParams.data,
+      )
       if (isPremintValid) {
         return {
           address: actor,
@@ -97,9 +100,9 @@ export const mint = async (
 
   const mintContracts = universalMinter
     ? ([
-      contractAddress.toLowerCase(),
-      universalMinter.toLowerCase(),
-    ] as Address[])
+        contractAddress.toLowerCase(),
+        universalMinter.toLowerCase(),
+      ] as Address[])
     : contractAddress
 
   const andArray721 = []

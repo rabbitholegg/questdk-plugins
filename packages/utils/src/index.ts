@@ -132,7 +132,7 @@ export {
   PluginActionValidationSchema,
   PremintValidationParamsSchema,
   PremintActionDetailSchema,
-  PremintActionFormSchema, 
+  PremintActionFormSchema,
 } from './types'
 
 export { PluginActionNotImplementedError } from './errors'

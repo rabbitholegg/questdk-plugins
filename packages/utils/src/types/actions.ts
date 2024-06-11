@@ -293,14 +293,16 @@ export type RecastActionForm = z.infer<typeof RecastActionFormSchema>
 PREMINT
 */
 export type PremintActionParams = {
-  chainId: number;
-  createdAfter: string;
+  chainId: number
+  createdAfter: string
 }
 
 export const PremintValidationParamsSchema = z.object({
   actor: z.string(),
 })
-export type PremintValidationParams = z.infer<typeof PremintValidationParamsSchema>
+export type PremintValidationParams = z.infer<
+  typeof PremintValidationParamsSchema
+>
 
 export const PremintActionDetailSchema = z.object({
   chainId: z.number(),
@@ -563,7 +565,10 @@ export interface IActionPlugin {
     actionP: CollectActionParams,
     validateP: CollectValidationParams,
   ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
-  validatePremint?: (actionP: PremintActionParams, validateP: PremintValidationParams) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  validatePremint?: (
+    actionP: PremintActionParams,
+    validateP: PremintValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
 

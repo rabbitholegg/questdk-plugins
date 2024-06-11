@@ -1,4 +1,7 @@
-import { PremintActionParams, PremintValidationParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  PremintActionParams,
+  PremintValidationParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import axios from 'axios'
 import { PremintResponse, PremintResponseSchema } from './types'
 
@@ -10,10 +13,7 @@ const axiosInstance = axios.create({
   },
 })
 
-const fetchPremint = async (
-  actor: string,
-  actionP: PremintActionParams,
-) => {
+const fetchPremint = async (actor: string, actionP: PremintActionParams) => {
   const { chainId, createdAfter } = actionP
   const response = await axiosInstance.get('/list-all', {
     params: {
@@ -23,7 +23,9 @@ const fetchPremint = async (
     },
   })
 
-  const parsedResponse: PremintResponse = PremintResponseSchema.parse(response.data)
+  const parsedResponse: PremintResponse = PremintResponseSchema.parse(
+    response.data,
+  )
   return parsedResponse
 }
 
@@ -34,4 +36,3 @@ export const validatePremint = async (
   const response = await fetchPremint(validateP.actor, actionP)
   return response.length > 0
 }
-  
