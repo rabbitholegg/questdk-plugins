@@ -101,7 +101,7 @@ export async function getFixedPriceSaleTerms(
 export async function getContractType(
   client: PublicClient,
   contractAddress: Address,
-): Promise<'1155' | '721'> {
+): Promise<'1155' | '721' | null> {
   const abi = SUPPORTS_INTERFACE_ABI
   const interfaceIds = {
     '1155': '0xd9b67a26', // ERC-1155
@@ -123,7 +123,7 @@ export async function getContractType(
       // eslint-disable-next-line no-empty
     } catch {}
   }
-  throw new Error('Invalid contract type')
+  return null
 }
 
 export function formatAmount(amount: FilterOperator | undefined) {
