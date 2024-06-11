@@ -99,10 +99,10 @@ export const simulateMint = async (
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
   const _client =
     client ??
-    createPublicClient({
+    (createPublicClient({
       chain: chainIdToViemChain(chainId),
       transport: http(),
-    }) as PublicClient
+    }) as PublicClient)
   const from = account ?? DEFAULT_ACCOUNT
   let _tokenId = tokenId
   if (tokenId === null || tokenId === undefined) {
@@ -147,7 +147,8 @@ export const getFees = async (
       transport: http(),
     }) as PublicClient
     const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
-    const _tokenId = tokenId ?? (await getLatestTokenId(contractAddress, chainId, client))
+    const _tokenId =
+      tokenId ?? (await getLatestTokenId(contractAddress, chainId, client))
 
     const { pricePerToken } = (await client.readContract({
       address: fixedPriceSaleStratAddress,
