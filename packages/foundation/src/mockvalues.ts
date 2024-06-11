@@ -107,3 +107,51 @@ export const dutchAuctionResponse = {
     },
   },
 }
+
+export const mint1155Response = {
+  request: {
+    abi: [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'saleTermsId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'tokenQuantity',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'tokenRecipient',
+            type: 'address',
+          },
+          {
+            internalType: 'address payable',
+            name: 'referrer',
+            type: 'address',
+          },
+        ],
+        name: 'mintFromFixedPriceSale',
+        outputs: [],
+        stateMutability: 'payable',
+        type: 'function',
+      },
+    ],
+    address: '0x132363a3bbf47e06cf642dd18e9173e364546c99',
+    args: [
+      '366',
+      '1',
+      '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      '0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48',
+    ],
+    functionName: 'mintFromFixedPriceSale',
+    value: 800000000000000n,
+    account: {
+      address: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      type: 'json-rpc',
+    },
+  },
+}

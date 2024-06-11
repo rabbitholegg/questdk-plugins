@@ -45,7 +45,7 @@ const MINT_DUTCH_AUCTION: TestParams<MintActionParams> = {
     hash: '0xde69746ceb05818f7394aaeeb33abea5a5710417b4d700c2c4ef6506c96c904f',
     input:
       '0x16da9864000000000000000000000000ed3b072d1f2f8fbd42a13fdc02c6e9f7fab29d7100000000000000000000000000000000000000000000000000000000000000030000000000000000000000002a44195b273da05b0071d801c996b83e7fb460ca',
-    to: '0x53F451165Ba6fdbe39A134673d13948261B2334A',
+    to: '0x53f451165ba6fdbe39a134673d13948261b2334a',
     value: '2400000000000001',
   },
   params: {
@@ -56,6 +56,25 @@ const MINT_DUTCH_AUCTION: TestParams<MintActionParams> = {
   },
 }
 
+const MINT_OE_1155: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 8453,
+    from: '0x0f9b1b68f848Cb65F532BC12825357201726d3d2',
+    hash: '0xeb0f6621f186b4bee412230ba53957a7a2c6fa03995085cbb37943b218cc00c9',
+    input:
+      '0x337fae59000000000000000000000000000000000000000000000000000000000000016e00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000f9b1b68f848cb65f532bc12825357201726d3d200000000000000000000000048ce37136c6050b39efac72725089a32cc3ad053',
+    to: '0x132363a3bbf47e06cf642dd18e9173e364546c99',
+    value: '800000000000001',
+  },
+  params: {
+    chainId: 8453,
+    contractAddress: '0xddcbe62d10dbee8492610fd1b4964403a0e087aa',
+    recipient: '0x0f9b1b68f848Cb65F532BC12825357201726d3d2',
+    tokenId: 28885,
+    amount: '1',
+  },
+}
+
 export const passingTestCases = [
   createTestCase(MINT_BASE, 'when when minting a drop on base'),
   createTestCase(MINT_ETHEREUM, 'when when minting a drop on ethereum'),
@@ -63,6 +82,7 @@ export const passingTestCases = [
     MINT_DUTCH_AUCTION,
     'when when minting a drop using dutch auction',
   ),
+  createTestCase(MINT_OE_1155, 'when when minting an 1155'),
 ]
 
 export const failingTestCases = [
