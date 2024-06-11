@@ -183,6 +183,33 @@ describe('Given the foundation plugin', () => {
       // expect(actionFee).equals(parseEther('0'))
       // expect(projectFee).equals(parseEther('0.0008'))
     })
+
+    test('should return the correct fee for erc1155 OE mint', async () => {
+      const contractAddress: Address =
+        '0x1d2550d198197df1a10af515cf2ea0d790889b93'
+      const mintParams = {
+        contractAddress,
+        chainId: Chains.BASE,
+        tokenId: 213,
+      }
+
+      // mock
+      const mockFns = {
+        getFees: async (_mint: MintActionParams) => ({
+          projectFee: parseEther('0'),
+          actionFee: parseEther('0.0008'),
+        }),
+      }
+      const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+      const fee = await mockFns.getFees(mintParams)
+      expect(getFeesSpy).toHaveBeenCalledWith(mintParams)
+      expect(fee.projectFee).toEqual(parseEther('0'))
+      expect(fee.actionFee).toEqual(parseEther('0.0008'))
+
+      // const { actionFee, projectFee } = await getFees(mintParams)
+      // expect(actionFee).equals(parseEther('0'))
+      // expect(projectFee).equals(parseEther('0.0008'))
+    })
   })
 
   describe('Given the getMintIntent function', () => {
