@@ -65,7 +65,7 @@ export async function getSaleTermsId(
   multiTokenAddress: Address,
 ) {
   const { chainId, contractAddress, tokenId } = mint
-  if (tokenId === undefined) return undefined
+  if (tokenId == null) return null
 
   try {
     const client = createPublicClient({
