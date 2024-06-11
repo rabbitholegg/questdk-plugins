@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-foundation
 
+## 1.0.0-alpha.3
+
+### Minor Changes
+
+- [#445](https://github.com/rabbitholegg/questdk-plugins/pull/445) [`0756c341`](https://github.com/rabbitholegg/questdk-plugins/commit/0756c3413e3a0cf849779ba87da92b62ae34db1e) Thanks [@mmackz](https://github.com/mmackz)! - add support for ERC1155 mints
+
+### Patch Changes
+
+- Updated dependencies [[`0e3dd08f`](https://github.com/rabbitholegg/questdk-plugins/commit/0e3dd08ff581044de3f2c2802fd0a3b7b8de44e6)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.36
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.2
 
 ### Patch Changes

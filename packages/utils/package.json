@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-utils",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.36",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
