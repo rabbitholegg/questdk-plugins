@@ -1,4 +1,4 @@
-import { DROP_FACTORY_ABI, MULTI_TOKEN_ABI } from './abi'
+import { DROP_FACTORY_ABI, MARKET_ROUTER_ABI, MULTI_TOKEN_ABI } from './abi'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { type AbiFunction, type Address, getAbiItem } from 'viem'
 
@@ -56,6 +56,14 @@ export const GET_SALE_TERMS_1155 = getAbiItem({
   abi: MULTI_TOKEN_ABI,
   name: 'getSaleTermsForToken',
 }) as AbiFunction
+
+export const NFT_MARKET_BASE = '0xfee588791cda1d01ccfc80b51efa00c0be5b129e'
+
+export const MINT_MULTI_TOKEN = getAbiItem({
+  abi: MARKET_ROUTER_ABI,
+  name: 'mintMultiTokensFromFreeFixedPriceSale',
+}) as AbiFunction
+
 //-------------------------------------------------//
 // for referrals (zora deployer wallet)
 export const REFERRAL_ADDRESS = '0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48'

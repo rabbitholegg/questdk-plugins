@@ -547,6 +547,585 @@ export const MULTI_TOKEN_ABI = [
   { stateMutability: 'payable', type: 'receive' },
 ]
 
+export const MARKET_ROUTER_ABI = [
+  {
+    inputs: [
+      { internalType: 'address', name: '_nftMarket', type: 'address' },
+      { internalType: 'address', name: '_nftDropMarket', type: 'address' },
+      {
+        internalType: 'address',
+        name: '_nftCollectionFactory',
+        type: 'address',
+      },
+      { internalType: 'address', name: '_worlds', type: 'address' },
+      {
+        internalType: 'address',
+        name: '_multiTokenDropMarket',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+  {
+    inputs: [
+      { internalType: 'uint256', name: 'valueRemaining', type: 'uint256' },
+    ],
+    name: 'MultiTokenDropMarketFixedPriceSale_Too_Much_Value_Provided',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'MultiTokenDropMarketNode_Market_Is_Not_A_Contract',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTCollectionFactoryNode_Address_Is_Not_A_Contract',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTCreateAndListTimedEditionCollection_Sale_Duration_Cannot_Be_Zero',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTDropMarketNode_Address_Is_Not_A_Contract',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTMarketNode_Address_Is_Not_A_Contract',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTMarketRouterList_Buy_Price_Set_But_Should_Set_Buy_Price_Is_False',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTMarketRouterList_Duration_Set_Without_Reserve_Price',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTMarketRouterList_Missing_World_Associations',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTMarketRouterList_Must_Set_Reserve_Buy_Price_Or_World',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTMarketRouterList_Must_Set_Reserve_Or_Buy_Price',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'NFTMarketRouterList_Schedule_Set_Without_Prices',
+    type: 'error',
+  },
+  { inputs: [], name: 'NFTMarketRouterList_Token_Ids_Not_Set', type: 'error' },
+  {
+    inputs: [],
+    name: 'NFTMarketRouterList_World_Id_Set_Without_Prices',
+    type: 'error',
+  },
+  {
+    inputs: [],
+    name: 'RouteCallLibrary_Call_Failed_Without_Revert_Reason',
+    type: 'error',
+  },
+  { inputs: [], name: 'TxDeadline_Tx_Deadline_Expired', type: 'error' },
+  {
+    inputs: [],
+    name: 'WorldsNftNode_Worlds_NFT_Is_Not_A_Contract',
+    type: 'error',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'multiTokenCollection',
+        type: 'address',
+      },
+    ],
+    name: 'MintMultiTokensFromFreeFixedPriceSaleInBlock',
+    type: 'event',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'nftContract', type: 'address' },
+      { internalType: 'uint256[]', name: 'tokenIds', type: 'uint256[]' },
+      { internalType: 'uint256', name: 'reservePrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'auctionDuration', type: 'uint256' },
+      { internalType: 'bool', name: 'shouldSetBuyPrice', type: 'bool' },
+      { internalType: 'uint256', name: 'buyPrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'saleStartsAt', type: 'uint256' },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation[]',
+        name: 'worldAssociations',
+        type: 'tuple[]',
+      },
+    ],
+    name: 'batchListFromCollection',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'firstAuctionIdOfSequence',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'nftContract', type: 'address' },
+      {
+        components: [
+          { internalType: 'uint256', name: 'price', type: 'uint256' },
+          { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'generalAvailabilityStartTime',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct FixedPriceSaleParams',
+        name: 'fixedPriceSaleParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: 'txDeadlineTime', type: 'uint256' },
+    ],
+    name: 'createFixedPriceSaleV2',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'nftContract', type: 'address' },
+      {
+        components: [
+          { internalType: 'uint256', name: 'price', type: 'uint256' },
+          { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'generalAvailabilityStartTime',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct FixedPriceSaleParams',
+        name: 'fixedPriceSaleParams',
+        type: 'tuple',
+      },
+      {
+        internalType: 'uint256',
+        name: 'earlyAccessStartTime',
+        type: 'uint256',
+      },
+      { internalType: 'bytes32', name: 'merkleRoot', type: 'bytes32' },
+      { internalType: 'string', name: 'merkleTreeUri', type: 'string' },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: 'txDeadlineTime', type: 'uint256' },
+    ],
+    name: 'createFixedPriceSaleWithEarlyAccessAllowlistV2',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'string', name: 'name', type: 'string' },
+          { internalType: 'string', name: 'symbol', type: 'string' },
+          { internalType: 'string', name: 'tokenURI', type: 'string' },
+          { internalType: 'uint32', name: 'maxTokenId', type: 'uint32' },
+          {
+            internalType: 'uint96',
+            name: 'contractCreationNonce',
+            type: 'uint96',
+          },
+        ],
+        internalType: 'struct LimitedEditionCollectionCreationParams',
+        name: 'collectionParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'price', type: 'uint256' },
+          { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'generalAvailabilityStartTime',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct FixedPriceSaleParams',
+        name: 'fixedPriceSaleParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: 'txDeadlineTime', type: 'uint256' },
+    ],
+    name: 'createLimitedEditionCollectionAndFixedPriceSaleV2',
+    outputs: [{ internalType: 'address', name: 'collection', type: 'address' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'string', name: 'name', type: 'string' },
+          { internalType: 'string', name: 'symbol', type: 'string' },
+          { internalType: 'string', name: 'tokenURI', type: 'string' },
+          { internalType: 'uint32', name: 'maxTokenId', type: 'uint32' },
+          {
+            internalType: 'uint96',
+            name: 'contractCreationNonce',
+            type: 'uint96',
+          },
+        ],
+        internalType: 'struct LimitedEditionCollectionCreationParams',
+        name: 'collectionParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'address', name: 'target', type: 'address' },
+          { internalType: 'bytes', name: 'callData', type: 'bytes' },
+        ],
+        internalType: 'struct CallWithoutValue',
+        name: 'paymentAddressFactoryCall',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'price', type: 'uint256' },
+          { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'generalAvailabilityStartTime',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct FixedPriceSaleParams',
+        name: 'fixedPriceSaleParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: 'txDeadlineTime', type: 'uint256' },
+    ],
+    name: 'createLimitedEditionCollectionAndFixedPriceSaleWithPaymentFactoryV2',
+    outputs: [{ internalType: 'address', name: 'collection', type: 'address' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'nftContract', type: 'address' },
+      { internalType: 'uint256', name: 'maxPrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'minPrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+      { internalType: 'uint256', name: 'startTime', type: 'uint256' },
+      { internalType: 'uint256', name: 'saleDuration', type: 'uint256' },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+    ],
+    name: 'createLinearDutchAuctionV2',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'string', name: 'name', type: 'string' },
+          { internalType: 'string', name: 'symbol', type: 'string' },
+          { internalType: 'string', name: 'tokenURI', type: 'string' },
+          {
+            internalType: 'uint96',
+            name: 'contractCreationNonce',
+            type: 'uint96',
+          },
+        ],
+        internalType: 'struct TimedEditionCollectionCreationParams',
+        name: 'collectionParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'price', type: 'uint256' },
+          { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'generalAvailabilityStartTime',
+            type: 'uint256',
+          },
+          { internalType: 'uint256', name: 'saleDuration', type: 'uint256' },
+        ],
+        internalType: 'struct FixedPriceSaleParamsAndDuration',
+        name: 'fixedPriceSaleParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: 'txDeadlineTime', type: 'uint256' },
+    ],
+    name: 'createTimedEditionCollectionAndFixedPriceSale',
+    outputs: [{ internalType: 'address', name: 'collection', type: 'address' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        components: [
+          { internalType: 'string', name: 'name', type: 'string' },
+          { internalType: 'string', name: 'symbol', type: 'string' },
+          { internalType: 'string', name: 'tokenURI', type: 'string' },
+          {
+            internalType: 'uint96',
+            name: 'contractCreationNonce',
+            type: 'uint96',
+          },
+        ],
+        internalType: 'struct TimedEditionCollectionCreationParams',
+        name: 'collectionParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'address', name: 'target', type: 'address' },
+          { internalType: 'bytes', name: 'callData', type: 'bytes' },
+        ],
+        internalType: 'struct CallWithoutValue',
+        name: 'paymentAddressFactoryCall',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'price', type: 'uint256' },
+          { internalType: 'uint256', name: 'limitPerAccount', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'generalAvailabilityStartTime',
+            type: 'uint256',
+          },
+          { internalType: 'uint256', name: 'saleDuration', type: 'uint256' },
+        ],
+        internalType: 'struct FixedPriceSaleParamsAndDuration',
+        name: 'fixedPriceSaleParams',
+        type: 'tuple',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+      { internalType: 'uint256', name: 'txDeadlineTime', type: 'uint256' },
+    ],
+    name: 'createTimedEditionCollectionAndFixedPriceSaleWithPaymentFactory',
+    outputs: [{ internalType: 'address', name: 'collection', type: 'address' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getMultiTokenDropMarketAddress',
+    outputs: [{ internalType: 'address', name: 'market', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getNftCollectionFactoryAddress',
+    outputs: [{ internalType: 'address', name: 'factory', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getNftDropMarketAddress',
+    outputs: [{ internalType: 'address', name: 'market', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getNftMarketAddress',
+    outputs: [{ internalType: 'address', name: 'market', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getWorldsNftAddress',
+    outputs: [{ internalType: 'address', name: 'worldsNft', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'multiTokenCollection',
+        type: 'address',
+      },
+      {
+        components: [
+          { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+          { internalType: 'uint256', name: 'quantity', type: 'uint256' },
+        ],
+        internalType:
+          'struct NFTMarketRouterMultiTokenDropMarketFixedPriceSale.TokenQuantity[]',
+        name: 'tokenQuantities',
+        type: 'tuple[]',
+      },
+      { internalType: 'address', name: 'tokenRecipient', type: 'address' },
+      { internalType: 'address', name: 'referrer', type: 'address' },
+    ],
+    name: 'mintMultiTokensFromFreeFixedPriceSale',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'nftContract', type: 'address' },
+      { internalType: 'uint256', name: 'tokenId', type: 'uint256' },
+      { internalType: 'uint256', name: 'reservePrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'auctionDuration', type: 'uint256' },
+      { internalType: 'bool', name: 'shouldSetBuyPrice', type: 'bool' },
+      { internalType: 'uint256', name: 'buyPrice', type: 'uint256' },
+      { internalType: 'uint256', name: 'saleStartsAt', type: 'uint256' },
+      {
+        components: [
+          { internalType: 'uint256', name: 'worldId', type: 'uint256' },
+          {
+            internalType: 'uint16',
+            name: 'takeRateInBasisPoints',
+            type: 'uint16',
+          },
+          { internalType: 'bytes', name: 'worldsApprovalData', type: 'bytes' },
+        ],
+        internalType: 'struct WorldAssociation',
+        name: 'worldAssociation',
+        type: 'tuple',
+      },
+    ],
+    name: 'upsertListing',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+
 export const SUPPORTS_INTERFACE_ABI = [
   {
     inputs: [{ internalType: 'bytes4', name: 'interfaceId', type: 'bytes4' }],

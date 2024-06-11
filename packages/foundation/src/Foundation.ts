@@ -4,6 +4,8 @@ import {
   DUTCH_AUCTION_FRAGMENT,
   FIXED_PRICE_FRAGMENTS,
   MINT_FROM_1155,
+  MINT_MULTI_TOKEN,
+  NFT_MARKET_BASE,
   REFERRAL_ADDRESS,
 } from './constants'
 import {
@@ -42,7 +44,7 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
 
   // 721
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -55,10 +57,16 @@ export const mint = async (
     throw new Error('Invalid chainId')
   }
 
+  const contracts = [dropFactoryAddress.toLowerCase(), multiTokenAddress.toLowerCase()]
+
+  if (chainId === Chains.BASE) {
+    contracts.push(NFT_MARKET_BASE.toLowerCase())
+  }
+
   return compressJson({
     chainId,
     to: {
-      $or: [dropFactoryAddress.toLowerCase(), multiTokenAddress.toLowerCase()],
+      $or: contracts,
     },
     input: {
       $or: [
@@ -75,6 +83,15 @@ export const mint = async (
           tokenRecipient: recipient,
           tokenQuantity: formatAmount(amount),
           saleTermsId,
+        },
+        {
+          // 1155 NFTMarketRouter
+          $abi: [MINT_MULTI_TOKEN],
+          multiTokenCollection: contractAddress,
+          tokenRecipient: recipient,
+          tokenQuantities: {
+            $some: { tokenId, quantity: formatAmount(amount) },
+          },
         },
       ],
     },
