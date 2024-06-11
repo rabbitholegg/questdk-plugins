@@ -154,7 +154,7 @@ describe('simulateMint function', () => {
       address,
     )
 
-    // const result = await simulateMint(mint, value, account)
+    // const result = await simulateMint(mint, value, address)
 
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)

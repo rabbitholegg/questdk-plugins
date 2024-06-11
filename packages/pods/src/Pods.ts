@@ -1,9 +1,15 @@
+import { FEES_ABI, ZORA_MINTER_ABI_1155 } from './abi'
+import { CHAIN_ID_ARRAY } from './chain-ids'
+import {
+  FIXED_PRICE_SALE_STRATS,
+  ZORA_DEPLOYER_ADDRESS,
+} from './contract-addresses'
+import { getLatestTokenId } from './utils'
 import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-
 import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
@@ -21,12 +27,6 @@ import {
   pad,
   parseEther,
 } from 'viem'
-import { FEES_ABI, ZORA_MINTER_ABI_1155 } from './abi'
-import { CHAIN_ID_ARRAY } from './chain-ids'
-import {
-  FIXED_PRICE_SALE_STRATS,
-  ZORA_DEPLOYER_ADDRESS,
-} from './contract-addresses'
 
 export const mint = async (
   mint: MintActionParams,
@@ -67,7 +67,7 @@ export const getMintIntent = async (
 
   const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
-  const _tokenId = tokenId ?? 1
+  const _tokenId = tokenId ?? (await getLatestTokenId(contractAddress, chainId))
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
@@ -102,14 +102,18 @@ export const simulateMint = async (
     createPublicClient({
       chain: chainIdToViemChain(chainId),
       transport: http(),
-    })
+    }) as PublicClient
   const from = account ?? DEFAULT_ACCOUNT
+  let _tokenId = tokenId
+  if (tokenId === null || tokenId === undefined) {
+    _tokenId = await getLatestTokenId(contractAddress, chainId, _client)
+  }
 
   const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
-    tokenId ?? 1,
+    _tokenId,
     amount,
     [ZORA_DEPLOYER_ADDRESS],
     pad(recipient),
@@ -141,9 +145,9 @@ export const getFees = async (
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
       transport: http(),
-    })
+    }) as PublicClient
     const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
-    const _tokenId = tokenId ?? 1
+    const _tokenId = tokenId ?? (await getLatestTokenId(contractAddress, chainId, client))
 
     const { pricePerToken } = (await client.readContract({
       address: fixedPriceSaleStratAddress,
