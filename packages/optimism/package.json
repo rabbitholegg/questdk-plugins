@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-optimism",
-  "version": "1.0.0-alpha.51",
+  "version": "1.0.0-alpha.52",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",

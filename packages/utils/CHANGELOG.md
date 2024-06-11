@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.36
+
+### Minor Changes
+
+- [#443](https://github.com/rabbitholegg/questdk-plugins/pull/443) [`0e3dd08f`](https://github.com/rabbitholegg/questdk-plugins/commit/0e3dd08ff581044de3f2c2802fd0a3b7b8de44e6) Thanks [@mmackz](https://github.com/mmackz)! - add support for blast
+
 ## 1.0.0-alpha.35
 
 ### Minor Changes

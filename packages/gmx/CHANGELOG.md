@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-gmx
 
+## 1.0.0-alpha.60
+
+### Patch Changes
+
+- Updated dependencies [[`0e3dd08f`](https://github.com/rabbitholegg/questdk-plugins/commit/0e3dd08ff581044de3f2c2802fd0a3b7b8de44e6)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.36
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.59
 
 ### Patch Changes

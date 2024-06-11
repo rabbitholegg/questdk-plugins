@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-balancer",
-  "version": "1.0.0-alpha.50",
+  "version": "1.0.0-alpha.51",
   "description": "",
   "exports": {
     "require": "./dist/cjs/index.js",
