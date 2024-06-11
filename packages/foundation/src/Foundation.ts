@@ -57,7 +57,10 @@ export const mint = async (
     throw new Error('Invalid chainId')
   }
 
-  const contracts = [dropFactoryAddress.toLowerCase(), multiTokenAddress.toLowerCase()]
+  const contracts = [
+    dropFactoryAddress.toLowerCase(),
+    multiTokenAddress.toLowerCase(),
+  ]
 
   if (chainId === Chains.BASE) {
     contracts.push(NFT_MARKET_BASE.toLowerCase())
