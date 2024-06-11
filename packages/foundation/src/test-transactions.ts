@@ -56,25 +56,6 @@ const MINT_DUTCH_AUCTION: TestParams<MintActionParams> = {
   },
 }
 
-const MINT_1155: TestParams<MintActionParams> = {
-  transaction: {
-    chainId: 8453,
-    from: '0x0f9b1b68f848Cb65F532BC12825357201726d3d2',
-    hash: '0xeb0f6621f186b4bee412230ba53957a7a2c6fa03995085cbb37943b218cc00c9',
-    input:
-      '0x337fae59000000000000000000000000000000000000000000000000000000000000016e00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000f9b1b68f848cb65f532bc12825357201726d3d200000000000000000000000048ce37136c6050b39efac72725089a32cc3ad053',
-    to: '0x132363a3bbf47e06cf642dd18e9173e364546c99',
-    value: '800000000000001',
-  },
-  params: {
-    chainId: 8453,
-    contractAddress: '0xddcbe62d10dbee8492610fd1b4964403a0e087aa',
-    recipient: '0x0f9b1b68f848Cb65F532BC12825357201726d3d2',
-    tokenId: 28885,
-    amount: '1',
-  },
-}
-
 const MINT_OE_1155: TestParams<MintActionParams> = {
   transaction: {
     chainId: 8453,
@@ -101,7 +82,6 @@ export const passingTestCases = [
     MINT_DUTCH_AUCTION,
     'when when minting a drop using dutch auction',
   ),
-  createTestCase(MINT_1155, 'when when minting an 1155'),
   createTestCase(MINT_OE_1155, 'when when minting an 1155 open edition'),
 ]
 

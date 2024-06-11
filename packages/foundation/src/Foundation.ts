@@ -3,7 +3,6 @@ import {
   CHAIN_TO_CONTRACT_ADDRESS,
   DUTCH_AUCTION_FRAGMENT,
   FIXED_PRICE_FRAGMENTS,
-  MINT_FROM_1155,
   MINT_MULTI_TOKEN,
   NFT_MARKET_BASE,
   REFERRAL_ADDRESS,
@@ -49,18 +48,11 @@ export const mint = async (
   // 721
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
 
-  // 1155
-  const multiTokenAddress = CHAIN_TO_CONTRACT_1155[chainId]
-  const saleTermsId = await getSaleTermsId(mint, multiTokenAddress)
-
-  if (!dropFactoryAddress || !multiTokenAddress) {
+  if (!dropFactoryAddress) {
     throw new Error('Invalid chainId')
   }
 
-  const contracts = [
-    dropFactoryAddress.toLowerCase(),
-    multiTokenAddress.toLowerCase(),
-  ]
+  const contracts = [dropFactoryAddress.toLowerCase()]
 
   if (chainId === Chains.BASE) {
     contracts.push(NFT_MARKET_BASE.toLowerCase())
@@ -79,13 +71,6 @@ export const mint = async (
           count: formatAmount(amount),
           nftContract: contractAddress,
           nftRecipient: recipient,
-        },
-        {
-          // 1155
-          $abi: [MINT_FROM_1155],
-          tokenRecipient: recipient,
-          tokenQuantity: formatAmount(amount),
-          saleTermsId,
         },
         {
           // 1155 NFTMarketRouter
@@ -167,9 +152,7 @@ export const getFees = async (
           saleTerms.protocolFeePerQuantity) *
         quantityToMint
       return { actionFee, projectFee }
-    } catch (err) {
-      console.error(err)
-    }
+    } catch {}
   }
   // return fallback if any errors occur
   return {
@@ -256,12 +239,16 @@ export const getMintIntent = async (
     if (salesTermId == null) {
       throw new Error('Sale terms ID not found')
     }
-
-    const mintArgs = [salesTermId, mintAmount, recipient, REFERRAL_ADDRESS]
+    const mintArgs = [
+      contractAddress,
+      [{ tokenId, quantity: 1n }],
+      recipient,
+      REFERRAL_ADDRESS,
+    ]
 
     const data = encodeFunctionData({
-      abi: [MINT_FROM_1155],
-      functionName: 'mintFromFixedPriceSale',
+      abi: [MINT_MULTI_TOKEN],
+      functionName: 'mintMultiTokensFromFreeFixedPriceSale',
       args: mintArgs,
     })
 
@@ -341,27 +328,22 @@ export const simulateMint = async (
   }
 
   if (contractType === '1155') {
-    if (tokenId == null) {
-      throw new Error('Token ID is required for 1155 Mints')
-    }
-    const multiTokenAddress = CHAIN_TO_CONTRACT_1155[chainId]
-    const salesTermId = await getSaleTermsId(mint, multiTokenAddress)
-
-    if (salesTermId == null) {
-      throw new Error('Sale terms ID not found')
-    }
-
+    // try NFTMarket contract first
     const result = await _client.simulateContract({
-      address: multiTokenAddress,
+      address: NFT_MARKET_BASE,
       value,
-      abi: [MINT_FROM_1155],
-      functionName: 'mintFromFixedPriceSale',
-      args: [salesTermId, mintAmount, recipient, REFERRAL_ADDRESS],
+      abi: [MINT_MULTI_TOKEN],
+      functionName: 'mintMultiTokensFromFreeFixedPriceSale',
+      args: [
+        contractAddress,
+        [[tokenId ?? 1, mintAmount]],
+        recipient,
+        REFERRAL_ADDRESS,
+      ],
       account: account || DEFAULT_ACCOUNT,
     })
     return result
   }
-
   throw new Error('Invalid contract type')
 }
 
