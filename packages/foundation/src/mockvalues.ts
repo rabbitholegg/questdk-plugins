@@ -123,7 +123,7 @@ export const mint1155Response = {
     value: 800000000000000n,
     account: {
       address: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      type: 'json-rpc'
-    }
-  }
+      type: 'json-rpc',
+    },
+  },
 }
