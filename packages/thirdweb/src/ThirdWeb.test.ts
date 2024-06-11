@@ -1,7 +1,6 @@
 import { mint } from './ThirdWeb'
 // import { getFees, mint, simulateMint } from './ThirdWeb'
 import { failingTestCases, passingTestCases } from './test-transactions'
-import { Mint721Response, Mint1155Response } from './types'
 import { apply } from '@rabbitholegg/questdk'
 import {
   Chains,
@@ -170,7 +169,13 @@ describe('Given the thirdweb plugin', () => {
           _mint: MintIntentParams,
           _value: bigint,
           _address: Address,
-        ) => Mint1155Response,
+        ) => ({
+          request: {
+            address: '0x5625e0ae98C035407258D6752703fed917417Add',
+            functionName: 'claim',
+            value: 777000000000000n,
+          },
+        }),
       }
       const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
       const result = await mockFns.simulateMint(
@@ -211,7 +216,13 @@ describe('Given the thirdweb plugin', () => {
           _mint: MintIntentParams,
           _value: bigint,
           _address: Address,
-        ) => Mint721Response,
+        ) => ({
+          request: {
+            address: '0xc7ded9c1bd13a19a877d196eeea9222ff6d40736',
+            functionName: 'claim',
+            value: 777000000000000n,
+          },
+        }),
       }
       const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
       const result = await mockFns.simulateMint(
