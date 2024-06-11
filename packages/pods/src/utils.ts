@@ -7,17 +7,23 @@ export async function getLatestTokenId(
   chainId: number,
   _client?: PublicClient,
 ): Promise<number> {
-  const client =
-    _client ??
-    createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    })
+  try {
+    const client =
+      _client ??
+      createPublicClient({
+        chain: chainIdToViemChain(chainId),
+        transport: http(),
+      })
 
-  const result = (await client.readContract({
-    address: contractAddress,
-    abi: ZORA_MINTER_ABI_1155,
-    functionName: 'nextTokenId',
-  })) as bigint
-  return Number(result) - 1
+    const result = (await client.readContract({
+      address: contractAddress,
+      abi: ZORA_MINTER_ABI_1155,
+      functionName: 'nextTokenId',
+    })) as bigint
+
+    return Number(result) - 1
+  } catch {
+    // fallback in case of error
+    return 1
+  }
 }
