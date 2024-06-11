@@ -120,7 +120,6 @@ describe('Given the getFee function', () => {
     // expect(actionFee).equals(parseEther('0'))
     // expect(projectFee).equals(parseEther('0.0007'))
   })
-
 })
 
 describe('simulateMint function', () => {
