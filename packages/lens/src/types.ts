@@ -22,7 +22,6 @@ export interface ActionVariables {
   where: {
     anyOf?: Array<{ category: string }>
     whoMirroredPublication?: string
-    whoQuotedPublication?: string
   }
   cursor?: string | null
 }

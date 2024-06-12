@@ -5,7 +5,6 @@ import {
   getSupportedTokenAddresses,
   validate,
   validateCollect,
-  validateRecast,
 } from './Lens'
 
 export const Lens: IActionPlugin = {
@@ -14,5 +13,4 @@ export const Lens: IActionPlugin = {
   getSupportedChainIds,
   validate,
   validateCollect,
-  validateRecast,
 }

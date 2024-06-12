@@ -23,21 +23,6 @@ const WHO_ACTED_ON_PUBLICATION = gql`
   }
 `
 
-const WHO_REPOSTED_PUBLICATION = gql`
-  query WhoRepostedPublication($request: ProfilesRequest!) {
-    profiles(request: $request) {
-      items {
-        ownedBy {
-          address
-        }
-      }
-      pageInfo {
-        next
-      }
-    }
-  }
-`
-
 export async function hasAddressPerformedAction(
   address: string,
   actionQuery: DocumentNode,
@@ -80,32 +65,6 @@ export async function hasAddressCollectedPost(postId: string, address: string) {
       on: postId,
       where: {
         anyOf: [{ category: 'COLLECT' }],
-      },
-    },
-  )
-}
-
-export async function hasAddressReposted(postId: string, address: string) {
-  return hasAddressPerformedAction(
-    address,
-    WHO_REPOSTED_PUBLICATION,
-    'profiles',
-    {
-      where: {
-        whoMirroredPublication: postId,
-      },
-    },
-  )
-}
-
-export async function hasAddressQuoted(postId: string, address: string) {
-  return hasAddressPerformedAction(
-    address,
-    WHO_REPOSTED_PUBLICATION,
-    'profiles',
-    {
-      where: {
-        whoQuotedPublication: postId,
       },
     },
   )
