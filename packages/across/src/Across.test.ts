@@ -7,8 +7,8 @@ import {
   failingTestCases,
   passingTestCases,
 } from './test-transactions'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
 

@@ -45,7 +45,7 @@ const MINT_DUTCH_AUCTION: TestParams<MintActionParams> = {
     hash: '0xde69746ceb05818f7394aaeeb33abea5a5710417b4d700c2c4ef6506c96c904f',
     input:
       '0x16da9864000000000000000000000000ed3b072d1f2f8fbd42a13fdc02c6e9f7fab29d7100000000000000000000000000000000000000000000000000000000000000030000000000000000000000002a44195b273da05b0071d801c996b83e7fb460ca',
-    to: '0x53F451165Ba6fdbe39A134673d13948261B2334A',
+    to: '0x53f451165ba6fdbe39a134673d13948261b2334a',
     value: '2400000000000001',
   },
   params: {
@@ -56,6 +56,25 @@ const MINT_DUTCH_AUCTION: TestParams<MintActionParams> = {
   },
 }
 
+const MINT_OE_1155: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 8453,
+    from: '0xd3432463Cf264F4DEf759ca6F8843d47Dd00b2FD',
+    hash: '0xb465a9fba5db4bd4098c803d6d1c4e1aa32baa699a18a3344def312f886c5ada',
+    input:
+      '0x5df78fa50000000000000000000000001d2550d198197df1a10af515cf2ea0d790889b930000000000000000000000000000000000000000000000000000000000000080000000000000000000000000d3432463cf264f4def759ca6f8843d47dd00b2fd0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000d50000000000000000000000000000000000000000000000000000000000000001',
+    to: '0xfee588791cda1d01ccfc80b51efa00c0be5b129e',
+    value: '800000000000000',
+  },
+  params: {
+    chainId: 8453,
+    contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
+    recipient: '0xd3432463Cf264F4DEf759ca6F8843d47Dd00b2FD',
+    tokenId: 213,
+    amount: '1',
+  },
+}
+
 export const passingTestCases = [
   createTestCase(MINT_BASE, 'when when minting a drop on base'),
   createTestCase(MINT_ETHEREUM, 'when when minting a drop on ethereum'),
@@ -63,6 +82,7 @@ export const passingTestCases = [
     MINT_DUTCH_AUCTION,
     'when when minting a drop using dutch auction',
   ),
+  createTestCase(MINT_OE_1155, 'when when minting an 1155 open edition'),
 ]
 
 export const failingTestCases = [

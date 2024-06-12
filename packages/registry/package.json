@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-registry",
-  "version": "1.0.0-alpha.124",
+  "version": "1.0.0-alpha.125",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
@@ -77,6 +77,7 @@
     "@rabbitholegg/questdk-plugin-neynar": "workspace:*",
     "@rabbitholegg/questdk-plugin-titles": "workspace:*",
     "@rabbitholegg/questdk-plugin-foundation": "workspace:*",
+    "@rabbitholegg/questdk-plugin-thirdweb": "workspace:*",
     "@rabbitholegg/questdk-plugin-lens": "workspace:*"
   }
 }

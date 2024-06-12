@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.60
+
+### Minor Changes
+
+- [#442](https://github.com/rabbitholegg/questdk-plugins/pull/442) [`cd2b736f`](https://github.com/rabbitholegg/questdk-plugins/commit/cd2b736f75fa8a1d2d38e968fe926537b07cba76) Thanks [@mmackz](https://github.com/mmackz)! - add support for blast mints
+
+### Patch Changes
+
+- Updated dependencies [[`0e3dd08f`](https://github.com/rabbitholegg/questdk-plugins/commit/0e3dd08ff581044de3f2c2802fd0a3b7b8de44e6)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.36
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.59
 
 ### Patch Changes

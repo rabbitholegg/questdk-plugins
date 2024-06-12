@@ -1,4 +1,4 @@
-import { ACROSS_BRIDGE_ABI } from './abi'
+import { ACROSS_BRIDGE_ABI, DEPOSIT_V3_ABI } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import {
   CHAIN_TO_SPOKEPOOL,
@@ -26,11 +26,23 @@ export const bridge = async (bridge: BridgeActionParams) => {
     chainId: sourceChainId,
     to: bridgeContract,
     input: {
-      $abi: ACROSS_BRIDGE_ABI,
-      recipient: recipient,
-      destinationChainId: destinationChainId,
-      amount: amount,
-      originToken: tokenIn,
+      $or: [
+        {
+          $abi: ACROSS_BRIDGE_ABI,
+          recipient: recipient,
+          destinationChainId: destinationChainId,
+          amount: amount,
+          originToken: tokenIn,
+        },
+        {
+          $abi: DEPOSIT_V3_ABI,
+          depositor: recipient,
+          recipient: recipient,
+          inputToken: tokenIn,
+          inputAmount: amount,
+          destinationChainId: destinationChainId,
+        },
+      ],
     },
   })
 }

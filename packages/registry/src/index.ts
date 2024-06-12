@@ -45,6 +45,7 @@ import { Vela } from '@rabbitholegg/questdk-plugin-vela'
 import { WooFi } from '@rabbitholegg/questdk-plugin-woofi'
 import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { Foundation } from '@rabbitholegg/questdk-plugin-foundation'
+import { ThirdWeb } from '@rabbitholegg/questdk-plugin-thirdweb'
 import { Lens } from '@rabbitholegg/questdk-plugin-lens'
 // ^^^ New Imports Go Here ^^^
 import {
@@ -116,6 +117,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Neynar.pluginId]: Neynar,
   [Titles.pluginId]: Titles,
   [Foundation.pluginId]: Foundation,
+  [ThirdWeb.pluginId]: ThirdWeb,
   [Lens.pluginId]: Lens,
 }
 

@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-across
 
+## 1.0.0-alpha.53
+
+### Minor Changes
+
+- [#440](https://github.com/rabbitholegg/questdk-plugins/pull/440) [`ca796400`](https://github.com/rabbitholegg/questdk-plugins/commit/ca796400f7760df9a900766e6336844fa38adf3d) Thanks [@mmackz](https://github.com/mmackz)! - add support for depositV3
+
+### Patch Changes
+
+- Updated dependencies [[`0e3dd08f`](https://github.com/rabbitholegg/questdk-plugins/commit/0e3dd08ff581044de3f2c2802fd0a3b7b8de44e6)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.36
+  - @rabbitholegg/questdk@2.0.0-alpha.53
+
 ## 1.0.0-alpha.52
 
 ### Patch Changes
