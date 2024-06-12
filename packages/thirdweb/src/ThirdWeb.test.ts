@@ -1,5 +1,4 @@
 import { mint } from './ThirdWeb'
-// import { getFees, mint, simulateMint } from './ThirdWeb'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import {
@@ -92,10 +91,6 @@ describe('Given the thirdweb plugin', () => {
       expect(getProjectsFeeSpy).toHaveBeenCalledWith(mintParams)
       expect(fee.projectFee).toEqual(parseEther('0'))
       expect(fee.actionFee).toEqual(parseEther('0.000777'))
-
-      // const { actionFee, projectFee } = await getFees(mintParams)
-      // expect(actionFee).equals(parseEther('0.000777'))
-      // expect(projectFee).equals(parseEther('0'))
     })
 
     test('should return the correct fee for DropERC1155 mint', async () => {
@@ -119,10 +114,6 @@ describe('Given the thirdweb plugin', () => {
       expect(getProjectsFeeSpy).toHaveBeenCalledWith(mintParams)
       expect(fee.projectFee).toEqual(parseEther('0'))
       expect(fee.actionFee).toEqual(parseEther('0.000777'))
-
-      // const { actionFee, projectFee } = await getFees(mintParams)
-      // expect(actionFee).equals(parseEther('0.000777'))
-      // expect(projectFee).equals(parseEther('0'))
     })
 
     test('should return the fallback fee if contract not found or error occurs', async () => {
@@ -145,10 +136,6 @@ describe('Given the thirdweb plugin', () => {
       expect(getFeesSpy).toHaveBeenCalledWith(mintParams)
       expect(fee.projectFee).toEqual(parseEther('0'))
       expect(fee.actionFee).toEqual(parseEther('0'))
-
-      // const { actionFee, projectFee } = await getFees(mintParams)
-      // expect(actionFee).equals(parseEther('0'))
-      // expect(projectFee).equals(parseEther('0'))
     })
   })
 
@@ -188,12 +175,6 @@ describe('Given the thirdweb plugin', () => {
         value,
         address,
       )
-
-      // const result = await simulateMint(
-      //   mint as MintIntentParams,
-      //   value,
-      //   address,
-      // )
 
       const request = result.request
       expect(request.address).toBe('0x5625e0ae98C035407258D6752703fed917417Add')
@@ -236,12 +217,6 @@ describe('Given the thirdweb plugin', () => {
         address,
       )
 
-      // const result = await simulateMint(
-      //   mint as MintIntentParams,
-      //   value,
-      //   address,
-      // )
-
       const request = result.request
       expect(request.address).toBe('0xc7ded9c1bd13a19a877d196eeea9222ff6d40736')
       expect(request.functionName).toBe('claim')
@@ -269,10 +244,6 @@ describe('Given the thirdweb plugin', () => {
       await expect(
         mockFns.simulateMint(mint as MintIntentParams, value, address),
       ).rejects.toThrow()
-
-      // await expect(
-      //   simulateMint(mint as MintIntentParams, value, address),
-      // ).rejects.toThrow()
     })
   })
 })
