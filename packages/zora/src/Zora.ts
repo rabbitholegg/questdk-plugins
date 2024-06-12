@@ -404,8 +404,7 @@ const fetchCollections = async (address: Address): Promise<ZoraCreateToken[]> =>
   const response = await axiosInstance.post('/', {
     query,
   })
-  const parsedResponse: ZoraCreateToken[] = CollectionResponseSchema.parse(response.data).zoraCreateTokens
-  return parsedResponse
+  return CollectionResponseSchema.parse(response.data).zoraCreateTokens
 }
 
 export const validate = async (
