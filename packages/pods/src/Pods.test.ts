@@ -3,12 +3,10 @@ import {
   type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
-import { mintResponseTokenId, mintResponseUndefined } from './mockedValues'
+import { apply } from '@rabbitholegg/questdk'
 import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 import { getMintIntent, mint } from './Pods'
-// import { getFees, simulateMint } from './Pods'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
 
@@ -115,10 +113,6 @@ describe('Given the getFee function', () => {
     expect(getFeesSpy).toHaveBeenCalledWith(mintParams)
     expect(fee.projectFee).toEqual(parseEther('0'))
     expect(fee.actionFee).toEqual(parseEther('0.0007'))
-
-    // const { actionFee, projectFee } = await getFees(mintParams)
-    // expect(actionFee).equals(parseEther('0'))
-    // expect(projectFee).equals(parseEther('0.0007'))
   })
 })
 
@@ -140,7 +134,13 @@ describe('simulateMint function', () => {
         _mint: MintIntentParams,
         _value: bigint,
         _address: Address,
-      ) => mintResponseTokenId,
+      ) => ({
+        request: {
+          address: '0x36cb061f9655368ebae79127c0e8bd34fd5a89c2',
+          functionName: 'mint',
+          value: 700000000000000n,
+        },
+      }),
     }
     const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
     const result = await mockFns.simulateMint(
@@ -153,8 +153,6 @@ describe('simulateMint function', () => {
       value,
       address,
     )
-
-    // const result = await simulateMint(mint, value, address)
 
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
@@ -177,7 +175,13 @@ describe('simulateMint function', () => {
         _mint: MintIntentParams,
         _value: bigint,
         _address: Address,
-      ) => mintResponseUndefined,
+      ) => ({
+        request: {
+          address: '0x7e0b40af1d6f26f2141b90170c513e57b5edd74e',
+          functionName: 'mint',
+          value: 700000000000000n,
+        },
+      }),
     }
     const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
     const result = await mockFns.simulateMint(
@@ -190,8 +194,6 @@ describe('simulateMint function', () => {
       value,
       address,
     )
-
-    // const result = await simulateMint(mint as MintIntentParams, value, address)
 
     const request = result.request
     expect(request.address).toBe('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e')
