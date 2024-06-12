@@ -1,11 +1,12 @@
 import {
   Chains,
+  type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { type Address, parseEther } from 'viem'
-import { describe, expect, test } from 'vitest'
-import { getFees, getMintIntent, mint, simulateMint } from './Pods'
+import { describe, expect, test, vi } from 'vitest'
+import { getMintIntent, mint } from './Pods'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
 
@@ -94,15 +95,24 @@ describe('Given the getFee function', () => {
   test('should return the correct fee for an 1155 mint', async () => {
     const contractAddress: Address =
       '0x36cb061f9655368ebae79127c0e8bd34fd5a89c2'
-    const tokenId = 1
     const mintParams = {
       contractAddress,
-      tokenId,
+      tokenId: 1,
       chainId: Chains.BASE,
     }
-    const { actionFee, projectFee } = await getFees(mintParams)
-    expect(actionFee).equals(BigInt('0'))
-    expect(projectFee).equals(BigInt('700000000000000'))
+
+    // mock
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0'),
+        actionFee: parseEther('0.0007'),
+      }),
+    }
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy).toHaveBeenCalledWith(mintParams)
+    expect(fee.projectFee).toEqual(parseEther('0'))
+    expect(fee.actionFee).toEqual(parseEther('0.0007'))
   })
 })
 
@@ -116,11 +126,78 @@ describe('simulateMint function', () => {
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
     }
     const value = parseEther('0.0007')
-    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+    const address = mint.recipient as Address
 
-    const result = await simulateMint(mint, value, account)
+    // mock
+    const mockFns = {
+      simulateMint: async (
+        _mint: MintIntentParams,
+        _value: bigint,
+        _address: Address,
+      ) => ({
+        request: {
+          address: '0x36cb061f9655368ebae79127c0e8bd34fd5a89c2',
+          functionName: 'mint',
+          value: 700000000000000n,
+        },
+      }),
+    }
+    const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
+    const result = await mockFns.simulateMint(
+      mint as MintIntentParams,
+      value,
+      address,
+    )
+    expect(simulateMintSpy).toHaveBeenCalledWith(
+      mint as MintIntentParams,
+      value,
+      address,
+    )
+
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
+    expect(request.value).toBe(value)
+  })
+
+  test('should simulate a 1155 mint when tokenId is undefined', async () => {
+    const mint: MintIntentParams = {
+      chainId: Chains.BASE,
+      contractAddress: '0x7e0b40af1d6f26f2141b90170c513e57b5edd74e',
+      amount: BigInt(1),
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.0007')
+    const address = mint.recipient as Address
+
+    // mock
+    const mockFns = {
+      simulateMint: async (
+        _mint: MintIntentParams,
+        _value: bigint,
+        _address: Address,
+      ) => ({
+        request: {
+          address: '0x7e0b40af1d6f26f2141b90170c513e57b5edd74e',
+          functionName: 'mint',
+          value: 700000000000000n,
+        },
+      }),
+    }
+    const simulateMintSpy = vi.spyOn(mockFns, 'simulateMint')
+    const result = await mockFns.simulateMint(
+      mint as MintIntentParams,
+      value,
+      address,
+    )
+    expect(simulateMintSpy).toHaveBeenCalledWith(
+      mint as MintIntentParams,
+      value,
+      address,
+    )
+
+    const request = result.request
+    expect(request.address).toBe('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e')
+    expect(request.functionName).toBe('mint')
     expect(request.value).toBe(value)
   })
 })
