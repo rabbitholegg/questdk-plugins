@@ -341,6 +341,10 @@ const getSalesConfigAndTokenInfo = async (
   return salesConfigAndTokenInfo
 }
 
+export const canValidate = (actionType: ActionType): boolean => {
+  return actionType === ActionType.Boosted
+}
+
 export const validateBoosted = async (
   actionP: BoostedActionParams,
   validateP: BoostedValidationParams,

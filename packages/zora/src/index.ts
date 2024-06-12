@@ -16,6 +16,7 @@ import {
   mint,
   simulateMint,
   validate,
+  validateBoosted,
 } from './Zora'
 
 export const Zora: IActionPlugin = {
@@ -34,4 +35,5 @@ export const Zora: IActionPlugin = {
   getMintIntent,
   simulateMint,
   validate,
+  validateBoosted,
 }

@@ -207,6 +207,8 @@ export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
       return plugin.validateRecast !== undefined
     case ActionType.Complete:
       return plugin.validateComplete !== undefined
+    case ActionType.Boosted:
+      return plugin.validateBoosted !== undefined
     default:
       return false
   }

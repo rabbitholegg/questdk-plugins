@@ -509,7 +509,12 @@ export interface IActionPlugin {
     actionP: CompleteActionParams,
     validateP: CompleteValidationParams,
   ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  validateBoosted?: (
+    actionP: BoostedActionParams,
+    validateP: BoostedValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
+
 }
 
 /*
