@@ -1,6 +1,4 @@
-import {
-  hasAddressCollectedPost,
-} from './graphql'
+import { hasAddressCollectedPost } from './graphql'
 import {
   ActionType,
   type CollectActionParams,
