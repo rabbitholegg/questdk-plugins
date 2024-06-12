@@ -20,26 +20,19 @@ describe('Given the lens plugin', () => {
     })
     test('return true if actor has collected a specific post', async () => {
       // use mock
-      // eslint-disable-next-line
+      //eslint-disable-next-line
       ;(
         client.query as MockedFunction<typeof client.query>
       ).mockResolvedValueOnce({
         data: {
           whoActedOnPublication: {
-            __typename: 'PaginatedProfileResult',
             items: [
               {
-                __typename: 'Profile',
                 ownedBy: {
-                  __typename: 'NetworkAddress',
                   address: '0xA99F898530dF1514A566f1a6562D62809e99557D',
                 },
               },
             ],
-            pageInfo: {
-              __typename: 'PaginatedResultInfo',
-              next: null,
-            },
           },
         },
         loading: false,
@@ -60,12 +53,7 @@ describe('Given the lens plugin', () => {
       ).mockResolvedValueOnce({
         data: {
           whoActedOnPublication: {
-            __typename: 'PaginatedProfileResult',
             items: [],
-            pageInfo: {
-              __typename: 'PaginatedResultInfo',
-              next: null,
-            },
           },
         },
         loading: false,
