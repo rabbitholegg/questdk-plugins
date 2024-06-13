@@ -18,6 +18,7 @@ export type {
   VoteActionParams,
   CreateActionParams,
   CompleteActionParams,
+  CollectActionParams,
   ActionParams,
   IActionPlugin,
 } from './actions'

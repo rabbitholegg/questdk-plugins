@@ -100,6 +100,7 @@ export type ActionParams =
   | RecastActionParams
   | CreateActionParams
   | CompleteActionParams
+  | CollectActionParams
 
 export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
@@ -112,6 +113,7 @@ export type DisctriminatedActionParams =
   | { type: ActionType.Vote; data: VoteActionParams }
   | { type: ActionType.Create; data: CreateActionParams }
   | { type: ActionType.Complete; data: CompleteActionParams }
+  | { type: ActionType.Collect; data: CollectActionParams }
 
 export const QuestInputActionParamsAmountOperatorEnum = z.enum([
   'any',
@@ -331,6 +333,32 @@ export type CompleteValidationParams = z.infer<
 >
 
 /*
+COLLECT
+*/
+export type CollectActionParams = {
+  identifier: Address | string
+  project?: Address | string
+}
+
+export const CollectValidationParamsSchema = z.object({
+  actor: z.string(),
+  project: EthAddressSchema.optional(),
+})
+export type CollectValidationParams = z.infer<
+  typeof CollectValidationParamsSchema
+>
+
+export const CollectActionDetailSchema = z.object({
+  identifier: z.string(),
+  project: z.union([z.string(), EthAddressSchema]).optional(),
+})
+export type CollectActionDetail = z.infer<typeof CollectActionDetailSchema>
+
+export const CollectActionFormSchema = z.object({
+  identifier: z.string(),
+})
+export type CollectActionForm = z.infer<typeof CollectActionFormSchema>
+/*
 VOTE
 */
 
@@ -382,6 +410,7 @@ export const ActionParamsFormSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('vote'), data: VoteActionFormSchema }),
   z.object({ type: z.literal('create'), data: CreateActionFormSchema }),
   z.object({ type: z.literal('complete'), data: CompleteActionFormSchema }),
+  z.object({ type: z.literal('collect'), data: CollectActionFormSchema }),
 ])
 
 export type ActionParamsForm = z.infer<typeof ActionParamsFormSchema>
@@ -398,6 +427,7 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('recast'), data: RecastActionDetailSchema }),
   z.object({ type: z.literal('create'), data: CreateActionDetailSchema }),
   z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema }),
+  z.object({ type: z.literal('collect'), data: CollectActionDetailSchema }),
 ])
 
 export const QuestActionParamsSchema = ActionParamsSchema
@@ -409,6 +439,7 @@ export const ValidationParamsSchema = z.discriminatedUnion('type', [
     type: z.literal('complete'),
     data: CompleteValidationParamsSchema,
   }),
+  z.object({ type: z.literal('collect'), data: CollectValidationParamsSchema }),
 ])
 
 export type ValidationParams = z.infer<typeof ValidationParamsSchema>
@@ -453,6 +484,9 @@ export interface IActionPlugin {
   complete?: (
     params: CompleteActionParams,
   ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
+  collect?: (
+    params: CollectActionParams,
+  ) => Promise<TransactionFilter> | Promise<PluginActionNotImplementedError>
   getMintIntent?: (
     mint: MintIntentParams,
   ) => Promise<TransactionRequest> | Promise<PluginActionNotImplementedError>
@@ -494,6 +528,10 @@ export interface IActionPlugin {
         chainId: number | null
       }>
     | Promise<PluginActionNotImplementedError>
+  validateCollect?: (
+    actionP: CollectActionParams,
+    validateP: CollectValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
 
@@ -557,6 +595,7 @@ export enum ActionType {
   Recast = 'recast',
   Create = 'create',
   Complete = 'complete',
+  Collect = 'collect',
 }
 
 export enum OrderType {
