@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-polygon
 
+## 1.0.0-alpha.53
+
+### Patch Changes
+
+- Updated dependencies [[`8012478a`](https://github.com/rabbitholegg/questdk-plugins/commit/8012478a46565ccad499f26742ea847a9931ce1c)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.37
+  - @rabbitholegg/questdk@2.0.0-alpha.54
+
 ## 1.0.0-alpha.52
 
 ### Patch Changes

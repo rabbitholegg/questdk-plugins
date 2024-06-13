@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.54
+
+### Minor Changes
+
+- [#439](https://github.com/rabbitholegg/questdk-plugins/pull/439) [`8012478a`](https://github.com/rabbitholegg/questdk-plugins/commit/8012478a46565ccad499f26742ea847a9931ce1c) Thanks [@mmackz](https://github.com/mmackz)! - add collect actiontype
+
 ## 2.0.0-alpha.53
 
 ### Minor Changes
