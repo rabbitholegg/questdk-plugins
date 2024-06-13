@@ -58,9 +58,7 @@ describe('fetchQuestActionParams', () => {
   })
 
   test('should throw an error when the request fails', async () => {
-    mock
-      .onGet(`https://api.boost.xyz/boosts/${TEST_UUID}`)
-      .reply(500)
+    mock.onGet(`https://api.boost.xyz/boosts/${TEST_UUID}`).reply(500)
     await expect(fetchQuestByUUID(TEST_UUID)).rejects.toThrow(
       'Failed to fetch quest data',
     )
