@@ -124,6 +124,7 @@
     "moody-students-flash",
     "moody-yaks-rest",
     "neat-buses-rescue",
+    "neat-maps-confess",
     "neat-teachers-chew",
     "neat-teachers-complain",
     "nervous-keys-design",
@@ -183,6 +184,7 @@
     "shaggy-donuts-act",
     "shaggy-lamps-leave",
     "sharp-candles-live",
+    "sharp-gifts-look",
     "shiny-mirrors-sparkle",
     "shiny-pets-brush",
     "shiny-toes-nail",
@@ -264,6 +266,7 @@
     "unlucky-impalas-shake",
     "unlucky-pumpkins-taste",
     "unlucky-tigers-deny",
+    "violet-papayas-promise",
     "weak-fishes-unite",
     "weak-monkeys-dance",
     "weak-trains-boil",
@@ -336,6 +339,7 @@
     "@rabbitholegg/questdk-plugin-superbridge": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-neynar": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-titles": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-foundation": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-foundation": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-thirdweb": "1.0.0-alpha.2"
   }
 }
