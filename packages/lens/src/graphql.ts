@@ -1,10 +1,10 @@
 import { ActionVariables, PaginatedResponse, Profile } from './types'
 import { ApolloClient, DocumentNode, InMemoryCache, gql } from '@apollo/client'
 
-const APIURL = 'https://api-v2.lens.dev/'
+const API_URL = 'https://api-v2.lens.dev/'
 
 export const client = new ApolloClient({
-  uri: APIURL,
+  uri: API_URL,
   cache: new InMemoryCache(),
 })
 
