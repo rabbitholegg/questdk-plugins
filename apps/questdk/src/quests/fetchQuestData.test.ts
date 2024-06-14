@@ -49,7 +49,7 @@ describe('fetchQuestActionParams', () => {
       actionParams: {} as any, // Fill with correct test data
     }
     mock
-      .onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`)
+      .onGet(`https://api.rabbithole.gg/quests/${TEST_UUID}?isPublic=true`)
       .reply(200, mockResponse)
 
     const result = await fetchQuestByUUID(TEST_UUID)
@@ -59,7 +59,7 @@ describe('fetchQuestActionParams', () => {
 
   test('should throw an error when the request fails', async () => {
     mock
-      .onGet(`https://api.rabbithole.gg/v1.2/quest/public/${TEST_UUID}`)
+      .onGet(`https://api.rabbithole.gg/quests/${TEST_UUID}?isPublic=true`)
       .reply(500)
     await expect(fetchQuestByUUID(TEST_UUID)).rejects.toThrow(
       'Failed to fetch quest data',
