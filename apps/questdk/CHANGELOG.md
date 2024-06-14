@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk
 
+## 2.0.0-alpha.55
+
+### Minor Changes
+
+- [#450](https://github.com/rabbitholegg/questdk-plugins/pull/450) [`0970162f`](https://github.com/rabbitholegg/questdk-plugins/commit/0970162fab36ed7fec172622c797db41fa050105) Thanks [@mmackz](https://github.com/mmackz)! - update endpoint for fetching boosts
+
 ## 2.0.0-alpha.54
 
 ### Minor Changes

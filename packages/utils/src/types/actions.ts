@@ -101,6 +101,7 @@ export type ActionParams =
   | CreateActionParams
   | CompleteActionParams
   | CollectActionParams
+  | PremintActionParams
 
 export type DisctriminatedActionParams =
   | { type: ActionType.Swap; data: SwapActionParams }
@@ -289,6 +290,33 @@ export const RecastActionFormSchema = z.object({
 export type RecastActionForm = z.infer<typeof RecastActionFormSchema>
 
 /*
+PREMINT
+*/
+export type PremintActionParams = {
+  chainId: number
+  createdAfter: string
+}
+
+export const PremintValidationParamsSchema = z.object({
+  actor: z.string(),
+})
+export type PremintValidationParams = z.infer<
+  typeof PremintValidationParamsSchema
+>
+
+export const PremintActionDetailSchema = z.object({
+  chainId: z.number(),
+  createdAfter: z.string().datetime(),
+})
+export type PremintActionDetail = z.infer<typeof PremintActionDetailSchema>
+
+export const PremintActionFormSchema = z.object({
+  chainId: z.number(),
+  createdAfter: z.string().datetime(),
+})
+export type PremintActionForm = z.infer<typeof PremintActionFormSchema>
+
+/*
 CREATE
 */
 export type CreateActionParams = {
@@ -428,6 +456,7 @@ export const ActionParamsSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('create'), data: CreateActionDetailSchema }),
   z.object({ type: z.literal('complete'), data: CompleteActionDetailSchema }),
   z.object({ type: z.literal('collect'), data: CollectActionDetailSchema }),
+  z.object({ type: z.literal('premint'), data: PremintActionDetailSchema }),
 ])
 
 export const QuestActionParamsSchema = ActionParamsSchema
@@ -440,6 +469,10 @@ export const ValidationParamsSchema = z.discriminatedUnion('type', [
     data: CompleteValidationParamsSchema,
   }),
   z.object({ type: z.literal('collect'), data: CollectValidationParamsSchema }),
+  z.object({
+    type: z.literal('premint'),
+    data: PremintValidationParamsSchema,
+  }),
 ])
 
 export type ValidationParams = z.infer<typeof ValidationParamsSchema>
@@ -532,6 +565,10 @@ export interface IActionPlugin {
     actionP: CollectActionParams,
     validateP: CollectValidationParams,
   ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
+  validatePremint?: (
+    actionP: PremintActionParams,
+    validateP: PremintValidationParams,
+  ) => Promise<boolean> | Promise<PluginActionNotImplementedError>
   canValidate?: (actionType: ActionType) => boolean
 }
 
@@ -596,6 +633,7 @@ export enum ActionType {
   Create = 'create',
   Complete = 'complete',
   Collect = 'collect',
+  Premint = 'premint',
 }
 
 export enum OrderType {

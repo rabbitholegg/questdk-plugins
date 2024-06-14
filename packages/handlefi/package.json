@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-handlefi",
-  "version": "1.0.0-alpha.44",
+  "version": "1.0.0-alpha.45",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",

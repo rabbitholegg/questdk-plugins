@@ -21,10 +21,71 @@ import {
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
+  type PremintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { type Address, parseEther } from 'viem'
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, test, vi, beforeEach, MockedFunction } from 'vitest'
+import { PremintResponse } from './types'
+import axios from 'axios'
+import { validatePremint } from './validate'
+
+const MockedPremintResponse: PremintResponse = [
+  {
+    zoraV2: {
+      collection: {
+        contractAdmin: '0xd272a3cb66bea1fa7547dad5b420d5ebe14222e5',
+        contractURI:
+          'ipfs://bafkreicuxlqqgoo6fxlmijqvilckvwj6ey26yvzpwg73ybcltvvek2og6i',
+        contractName: 'Fancy title',
+      },
+      premint: {
+        tokenConfig: {
+          tokenURI:
+            'ipfs://bafkreia474gkk2ak5eeqstp43nqeiunqkkfeblctna3y54av7bt6uwehmq',
+          maxSupply: '0xffffffffffffffff',
+          maxTokensPerAddress: 0,
+          pricePerToken: 0,
+          mintStart: 1708100240,
+          mintDuration: 2592000,
+          royaltyBPS: 500,
+          payoutRecipient: '0xd272a3cb66bea1fa7547dad5b420d5ebe14222e5',
+          fixedPriceMinter: '0x04e2516a2c207e84a1839755675dfd8ef6302f0a',
+          createReferral: '0x0000000000000000000000000000000000000000',
+        },
+        uid: 1,
+        version: 1,
+        deleted: false,
+      },
+      collectionAddress: '0x0cfbce0e2ea475d6413e2f038b2b62e64106ad1f',
+      chainId: 7777777,
+      signature:
+        '0x2eb4d27a5b04fd41bdd33f66a18a4993c0116724c5fe5b8dc20bf22f45455c621139eabdbd27434e240938a60b1952979c9dc9c8a141cc71764786fe4d3f909f1c',
+    },
+  },
+]
+
+vi.mock('axios', () => {
+  return {
+    default: {
+      post: vi.fn(),
+      get: vi.fn(),
+      delete: vi.fn(),
+      put: vi.fn(),
+      create: vi.fn().mockReturnThis(),
+      interceptors: {
+        request: {
+          use: vi.fn(),
+          eject: vi.fn(),
+        },
+        response: {
+          use: vi.fn(),
+          eject: vi.fn(),
+        },
+      },
+    },
+  }
+})
 
 describe('Given the zora plugin', () => {
   describe('When handling the mint action', () => {
@@ -118,6 +179,72 @@ describe('Given the zora plugin', () => {
           const filter = await create(params)
           expect(apply(transaction, filter)).to.be.false
         })
+      })
+    })
+  })
+
+  describe('when handling the premint action', () => {
+    beforeEach(() => {
+      vi.resetAllMocks()
+    })
+
+    describe('validatePremint function', () => {
+      test('should return true if actor has preminted after the specified time', async () => {
+        const createdAfter = new Date('2024-06-10T12:00:00.000Z')
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+          status: 200,
+          data: MockedPremintResponse,
+        })
+        const actor = '0xd272a3cb66bea1fa7547dad5b420d5ebe14222e5'
+        const actionParams: PremintActionParams = {
+          chainId: 7777777,
+          createdAfter: createdAfter.toISOString(),
+        }
+        const result = await validatePremint(actionParams, { actor })
+
+        expect(result).to.be.true
+      })
+
+      test('should return true if actor has preminted with a specified chain id', async () => {
+        const createdAfter = new Date('2024-06-10T12:00:00.000Z').toISOString()
+        const chainId = 7777777
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+          status: 200,
+          data: MockedPremintResponse,
+        })
+        const actor = '0xd272a3cb66bea1fa7547dad5b420d5ebe14222e5'
+        const actionParams: PremintActionParams = { chainId, createdAfter }
+        const result = await validatePremint(actionParams, { actor })
+
+        expect(result).to.be.true
+      })
+
+      test('should return false if actor has not preminted', async () => {
+        const createdAfter = new Date('2024-06-10T12:00:00.000Z').toISOString()
+        const chainId = 7777777
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+          status: 200,
+          data: [],
+        })
+        const actor = '0x000000000000000000000000000000000000dead'
+        const actionParams: PremintActionParams = { createdAfter, chainId }
+        const result = await validatePremint(actionParams, { actor })
+
+        expect(result).to.be.false
+      })
+
+      test('should return false if actor has not preminted after the specified time', async () => {
+        const createdAfter = new Date('2024-06-10T12:00:00.000Z').toISOString()
+        const chainId = 7777777
+        ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+          status: 200,
+          data: [],
+        })
+        const actor = '0xd272a3cb66bea1fa7547dad5b420d5ebe14222e5'
+        const actionParams: PremintActionParams = { createdAfter, chainId }
+        const result = await validatePremint(actionParams, { actor })
+
+        expect(result).to.be.false
       })
     })
   })
@@ -252,21 +379,25 @@ describe('Given the getFee function', () => {
 })
 
 describe('simulateMint function', () => {
-  const mockFn = {
-    simulateMint: async (
-      _mint: MintIntentParams,
-      _value: bigint,
-      _account: Address,
-    ) => ({
-      request: {
-        address: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
-        value: parseEther('0.000777'),
-      },
-    }),
-  }
-  vi.spyOn(mockFn, 'simulateMint')
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
 
   test('should simulate a 1155 mint when tokenId is not 0', async () => {
+    const mockFn = {
+      simulateMint: async (
+        _mint: MintIntentParams,
+        _value: bigint,
+        _account: Address,
+      ) => ({
+        request: {
+          address: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
+          value: parseEther('0.000777'),
+        },
+      }),
+    }
+    vi.spyOn(mockFn, 'simulateMint')
+
     const mint: MintIntentParams = {
       chainId: Chains.BASE,
       contractAddress: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',

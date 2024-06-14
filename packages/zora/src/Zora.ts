@@ -12,6 +12,7 @@ import {
   ZORA_1155_FACTORY,
   ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
+import { validatePremint } from './validate'
 import {
   type MintActionParams,
   type CreateActionParams,
@@ -25,6 +26,8 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
+  PluginActionValidation,
+  QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { MintAPIClient, getMintCosts } from '@zoralabs/protocol-sdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
@@ -44,6 +47,32 @@ import {
   stringToBytes,
   toHex,
 } from 'viem'
+
+export const validate = async (
+  validationPayload: PluginActionValidation,
+): Promise<QuestCompletionPayload | null> => {
+  const { actor, payload } = validationPayload
+  const { actionParams, validationParams, questId, taskId } = payload
+  switch (actionParams.type) {
+    case ActionType.Premint: {
+      const isPremintValid = await validatePremint(
+        actionParams.data,
+        validationParams.data,
+      )
+      if (isPremintValid) {
+        return {
+          address: actor,
+          questId,
+          taskId,
+        }
+      }
+
+      return null
+    }
+    default:
+      throw new Error('Unsupported action type')
+  }
+}
 
 export const create = async (
   create: CreateActionParams,

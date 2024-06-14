@@ -82,6 +82,10 @@ export type {
   PluginActionPayload,
   PluginActionValidation,
   QuestCompletionPayload,
+  PremintActionParams,
+  PremintValidationParams,
+  PremintActionDetail,
+  PremintActionForm,
 } from './types'
 
 export {
@@ -126,6 +130,9 @@ export {
   ValidationParamsSchema,
   ActionValidationSchema,
   PluginActionValidationSchema,
+  PremintValidationParamsSchema,
+  PremintActionDetailSchema,
+  PremintActionFormSchema,
 } from './types'
 
 export { PluginActionNotImplementedError } from './errors'
