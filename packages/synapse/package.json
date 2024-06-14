@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-synapse",
   "private": false,
-  "version": "1.0.0-alpha.49",
+  "version": "1.0.0-alpha.50",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",

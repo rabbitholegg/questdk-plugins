@@ -106,6 +106,7 @@
     "light-flies-fix",
     "little-llamas-rescue",
     "long-terms-sleep",
+    "loud-books-prove",
     "loud-readers-compete",
     "lovely-buses-tan",
     "lovely-llamas-float",
@@ -116,6 +117,7 @@
     "metal-panthers-nail",
     "metal-singers-swim",
     "mighty-pianos-exercise",
+    "mighty-waves-stare",
     "modern-days-change",
     "modern-experts-pump",
     "modern-pumpkins-kiss",
@@ -341,6 +343,7 @@
     "@rabbitholegg/questdk-plugin-neynar": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-titles": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-foundation": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-thirdweb": "1.0.0-alpha.2"
+    "@rabbitholegg/questdk-plugin-thirdweb": "1.0.0-alpha.2",
+    "@rabbitholegg/questdk-plugin-lens": "1.0.0-alpha.0"
   }
 }
