@@ -18,8 +18,7 @@ export async function fetchQuestActionParams(
 }
 
 export async function fetchQuestByUUID(uuid: string): Promise<QuestDetails> {
-  const endpoint = `https://api.rabbithole.gg/v1.2/quest/public/${uuid}`
-  console.log('Fetching quest data from:', endpoint)
+  const endpoint = `https://api.rabbithole.gg/quests/${uuid}?isPublic=true`
   try {
     const response = await axios.get(endpoint, {
       headers: {
