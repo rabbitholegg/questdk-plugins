@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.63
+
+### Patch Changes
+
+- [#446](https://github.com/rabbitholegg/questdk-plugins/pull/446) [`4112c0ba`](https://github.com/rabbitholegg/questdk-plugins/commit/4112c0ba11e14e320179eff2eb394a3d91a6ec62) Thanks [@jonathandiep](https://github.com/jonathandiep)! - add zora premint
+
+- Updated dependencies [[`4112c0ba`](https://github.com/rabbitholegg/questdk-plugins/commit/4112c0ba11e14e320179eff2eb394a3d91a6ec62)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.38
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.62
 
 ### Patch Changes

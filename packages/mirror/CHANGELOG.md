@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-mirror
 
+## 1.0.0-alpha.47
+
+### Patch Changes
+
+- Updated dependencies [[`4112c0ba`](https://github.com/rabbitholegg/questdk-plugins/commit/4112c0ba11e14e320179eff2eb394a3d91a6ec62)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.38
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.46
 
 ### Patch Changes
