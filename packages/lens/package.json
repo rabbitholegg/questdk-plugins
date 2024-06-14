@@ -1,0 +1,36 @@
+{
+  "name": "@rabbitholegg/questdk-plugin-lens",
+  "private": false,
+  "version": "1.0.0-alpha.0",
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/esm/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
+  "scripts": {
+    "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./dist/types",
+    "bench": "vitest bench",
+    "bench:ci": "CI=true vitest bench",
+    "clean": "rimraf dist",
+    "format": "rome format . --write",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest dev",
+    "test:cov": "vitest dev --coverage",
+    "test:ci": "CI=true vitest --coverage",
+    "test:ui": "vitest dev --ui"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.10.4",
+    "@rabbitholegg/questdk": "workspace:*",
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "graphql": "^16.8.1"
+  }
+}
