@@ -379,21 +379,25 @@ describe('Given the getFee function', () => {
 })
 
 describe('simulateMint function', () => {
-  const mockFn = {
-    simulateMint: async (
-      _mint: MintIntentParams,
-      _value: bigint,
-      _account: Address,
-    ) => ({
-      request: {
-        address: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
-        value: parseEther('0.000777'),
-      },
-    }),
-  }
-  vi.spyOn(mockFn, 'simulateMint')
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
 
   test('should simulate a 1155 mint when tokenId is not 0', async () => {
+    const mockFn = {
+      simulateMint: async (
+        _mint: MintIntentParams,
+        _value: bigint,
+        _account: Address,
+      ) => ({
+        request: {
+          address: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
+          value: parseEther('0.000777'),
+        },
+      }),
+    }
+    vi.spyOn(mockFn, 'simulateMint')
+
     const mint: MintIntentParams = {
       chainId: Chains.BASE,
       contractAddress: '0x5F69dA5Da41E5472AfB88fc291e7a92b7F15FbC5',
