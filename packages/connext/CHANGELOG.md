@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-connext
 
+## 1.0.0-alpha.55
+
+### Patch Changes
+
+- Updated dependencies [[`0970162f`](https://github.com/rabbitholegg/questdk-plugins/commit/0970162fab36ed7fec172622c797db41fa050105)]:
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.54
 
 ### Patch Changes
