@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-pods
 
+## 1.0.0-alpha.24
+
+### Minor Changes
+
+- [#448](https://github.com/rabbitholegg/questdk-plugins/pull/448) [`fb901982`](https://github.com/rabbitholegg/questdk-plugins/commit/fb9019822b7c33601c960d61a4deef3e9d4137f8) Thanks [@mmackz](https://github.com/mmackz)! - fix pods simulation failure when no token id is provided
+
+### Patch Changes
+
+- Updated dependencies [[`8012478a`](https://github.com/rabbitholegg/questdk-plugins/commit/8012478a46565ccad499f26742ea847a9931ce1c)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.37
+  - @rabbitholegg/questdk@2.0.0-alpha.54
+
 ## 1.0.0-alpha.23
 
 ### Patch Changes

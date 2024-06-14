@@ -215,6 +215,8 @@ export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
       return plugin.validateRecast !== undefined
     case ActionType.Complete:
       return plugin.validateComplete !== undefined
+    case ActionType.Collect:
+      return plugin.validateCollect !== undefined
     default:
       return false
   }
@@ -231,6 +233,7 @@ export const executeValidation = (
     case ActionType.Recast:
     case ActionType.Follow:
     case ActionType.Complete:
+    case ActionType.Collect:
       if (plugin.validate) {
         return plugin.validate(validationPayload)
       } else {
