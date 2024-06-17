@@ -8,7 +8,6 @@ import {
 } from './constants'
 import { type SaleTerms } from './types'
 import {
-  type FilterOperator,
   type MintActionParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -124,36 +123,4 @@ export async function getContractType(
     } catch {}
   }
   return null
-}
-
-export function formatAmount(amount: FilterOperator | undefined) {
-  if (amount === undefined) {
-    return undefined
-  }
-  if (amount && ['string', 'number', 'bigint'].includes(typeof amount)) {
-    return { $gte: amount }
-  }
-
-  return amount
-}
-
-export function getMintAmount(amount: FilterOperator | undefined) {
-  // If the amount is a primitive, pass that value through
-  if (['number', 'bigint'].includes(typeof amount)) {
-    return BigInt(amount as number | bigint)
-  }
-  if (typeof amount === 'string' && !isNaN(Number(amount))) {
-    return BigInt(amount)
-  }
-
-  // For $gte, the minimum amount required to pass is the value of $gte
-  if (typeof amount === 'object' && '$gte' in amount && amount.$gte) {
-    return BigInt(amount.$gte)
-  }
-  // For $gt, the minimum amount required to pass is the value of $gt + 1
-  if (typeof amount === 'object' && '$gt' in amount && amount.$gt) {
-    return BigInt(amount.$gt) + 1n
-  }
-  // For all other conditions, the minimum amount required to pass is 1
-  return 1n
 }
