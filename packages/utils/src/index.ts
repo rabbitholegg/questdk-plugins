@@ -7,7 +7,13 @@ export {
 
 export type { TestParams, TestCase } from './helpers/index'
 
-export { chainIdToViemChain, createTestCase, getExitAddresses } from './helpers'
+export {
+  chainIdToViemChain,
+  createTestCase,
+  getExitAddresses,
+  formatAmount,
+  getMintAmount,
+} from './helpers'
 export type {
   IntentParams,
   MintIntentParams,
