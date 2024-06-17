@@ -1,7 +1,6 @@
 import { getClient } from './client'
 import { SUPPORTS_INTERFACE_FRAGMENT } from './constants'
 import { ClaimCondition } from './types'
-import { type FilterOperator } from '@rabbitholegg/questdk-plugin-utils'
 import { type Abi, type Address, type PublicClient } from 'viem'
 
 export async function getClaimConditionId(
@@ -47,41 +46,6 @@ export async function getContractType(
     } catch {}
   }
   throw new Error('Invalid contract type')
-}
-
-export function formatAmount(amount: FilterOperator | undefined) {
-  if (amount === undefined) {
-    return undefined
-  }
-  if (amount && ['string', 'number', 'bigint'].includes(typeof amount)) {
-    return { $gte: amount }
-  }
-
-  return amount
-}
-
-export function getMintAmount(amount: FilterOperator | undefined) {
-  if (!amount) {
-    return 1n
-  }
-  // If the amount is a primitive, pass that value through
-  if (['number', 'bigint'].includes(typeof amount)) {
-    return BigInt(amount as number | bigint)
-  }
-  if (typeof amount === 'string' && !isNaN(Number(amount))) {
-    return BigInt(amount)
-  }
-
-  // For $gte, the minimum amount required to pass is the value of $gte
-  if (typeof amount === 'object' && '$gte' in amount && amount.$gte) {
-    return BigInt(amount.$gte)
-  }
-  // For $gt, the minimum amount required to pass is the value of $gt + 1
-  if (typeof amount === 'object' && '$gt' in amount && amount.$gt) {
-    return BigInt(amount.$gt) + 1n
-  }
-  // For $lt or $lte, the minimum amount required to pass is 1
-  return 1n
 }
 
 export async function getClaimCondition(
