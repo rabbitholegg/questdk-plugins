@@ -1,7 +1,7 @@
 # Moshicam Plugin
 
 ## Overview
-[Moshicam](https://moshi.cam) is a photo-sharing app where users can create pictures with a customizable borders from well-known artists and web3 brands. The proceeds of each mint are sent directly doing to the creator of the border and the creator of the pic.
+[Moshicam](https://moshi.cam) is a photo-sharing app where users can mint their photos with a customizable borders from well-known artists and web3 brands. The proceeds of each mint are sent directly to the creator of the border and to the creator of the pic.
 
 ## Implementation Details
 User contracts are deployed as a proxy to a central beacon ERC1155 contract. Other users can collect existing NFTs from each of these contracts.
