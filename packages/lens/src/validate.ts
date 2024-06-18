@@ -12,7 +12,10 @@ const lensClient = new LensClient({
   environment: production,
 })
 
-export async function hasAddressCollectedPost(postId: string, address: Address) {
+export async function hasAddressCollectedPost(
+  postId: string,
+  address: Address,
+) {
   const collectAddress = await getCollectAddress(postId)
   if (collectAddress === null) {
     return false
@@ -43,7 +46,7 @@ export async function getCollectAddress(postId: string) {
 
   const collectNft = collectActions.find((action) => action.collectNft)
   const collectAddress = collectNft?.collectNft?.toLowerCase()
-  return collectAddress as Address ?? null
+  return (collectAddress as Address) ?? null
 }
 
 export async function checkAddressOwnsCollect(

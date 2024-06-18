@@ -12,7 +12,9 @@ describe('Given the lens plugin', () => {
     })
 
     test('return true if actor has collected a specific post', async () => {
-      (validateCollect as MockedFunction<typeof validateCollect>).mockResolvedValueOnce(true)
+      ;(
+        validateCollect as MockedFunction<typeof validateCollect>
+      ).mockResolvedValueOnce(true)
 
       const hasCollected = await validateCollect(
         { identifier: '0x020b69-0x01' },
@@ -22,7 +24,9 @@ describe('Given the lens plugin', () => {
     })
 
     test('return false if actor has not collected a specific post', async () => {
-      (validateCollect as MockedFunction<typeof validateCollect>).mockResolvedValueOnce(false)
+      ;(
+        validateCollect as MockedFunction<typeof validateCollect>
+      ).mockResolvedValueOnce(false)
 
       const hasCollected = await validateCollect(
         { identifier: '0x2fb0-0x69-DA-3096022f' },
