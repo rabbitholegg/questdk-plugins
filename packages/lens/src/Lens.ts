@@ -45,8 +45,15 @@ export const validateCollect = async (
       validateP.actor as Address,
     )
     return hasCollected
-  } catch {
-    return false
+  } catch (err) {
+    if (err instanceof Error) {
+      const error = new Error(err.message)
+      error.name = 'ValidationNotValid'
+      throw error
+    } else {
+      console.error(err)
+      throw new Error('Unknown error')
+    }
   }
 }
 
