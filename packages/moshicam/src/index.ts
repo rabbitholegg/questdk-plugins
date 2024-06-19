@@ -1,4 +1,8 @@
-import { type IActionPlugin } from '@rabbitholegg/questdk'
+import { 
+  type IActionPlugin ,
+  type ActionParams,
+  type MintActionParams,
+} from '@rabbitholegg/questdk'
 
 import {
   getMintIntent,
@@ -12,11 +16,13 @@ import {
 
 export const Moshicam: IActionPlugin = {
   pluginId: 'moshicam',
-  getFees,
-  getMintIntent,
-  getProjectFees
   getSupportedChainIds,
   getSupportedTokenAddresses,
   mint,
+  getProjectFees: async (params: ActionParams) =>
+    getProjectFees(params as unknown as MintActionParams),
+  getFees: async (params: ActionParams) =>
+    getFees(params as unknown as MintActionParams),
+  getMintIntent,
   simulateMint,
 }

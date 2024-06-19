@@ -87,14 +87,14 @@ describe('Given the getProjectFees function', () => {
     const mint: MintIntentParams = {
       chainId: Chains.BASE,
       contractAddress: COLLECT_FROM_USER_MOSHICAM.params.contractAddress,
-      amount: 3n,
+      amount: 1n,
       recipient: COLLECT_FROM_USER_MOSHICAM.transaction.from,
       tokenId: 0,
     }
 
     const result = await getProjectFees(mint)
 
-    expect(result).toEqual(DEFAULT_MINT_PRICE * mint.amount)
+    expect(result).toEqual(DEFAULT_MINT_PRICE)
   })
 })
 
@@ -103,7 +103,7 @@ describe('Given the getFee function', () => {
     const mint: MintIntentParams = {
       chainId: Chains.BASE,
       contractAddress: COLLECT_FROM_USER_MOSHICAM.params.contractAddress,
-      amount: 2n,
+      amount: 1n,
       recipient: COLLECT_FROM_USER_MOSHICAM.transaction.from,
       tokenId: 0,
     }

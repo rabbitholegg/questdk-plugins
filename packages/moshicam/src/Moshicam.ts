@@ -1,7 +1,6 @@
 import {
   type TransactionFilter,
   type MintActionParams,
-  GreaterThanOrEqual,
   compressJson,
 } from '@rabbitholegg/questdk'
 import {
@@ -12,6 +11,7 @@ import {
   createPublicClient,
   http,
   parseEther,
+  type PublicClient,
 } from 'viem'
 import {
   DEFAULT_MINT_PRICE,
@@ -43,14 +43,17 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { contractAddress, tokenId, amount, recipient } = mint
 
-  const amountToMint = amount ? amount : 1n
+  const tokenIdToMint = tokenId ? tokenId : 0
+
+  const quantityToMint =
+      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
 
   const data = encodeFunctionData({
     abi: IMOSHI_PIC1155_ABI,
     functionName: 'collect',
-    args: [recipient, tokenId, amountToMint],
+    args: [recipient, BigInt(tokenIdToMint), quantityToMint],
   })
 
   return {
@@ -70,23 +73,24 @@ export const getProjectFees = async (
 export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, amount } = mint
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
     transport: http(),
   })
-  const amountToMint = amount ? amount : 1n
+  const quantityToMint =
+      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
   try {
     const data = await client.readContract({
       address: contractAddress,
       abi: IMOSHI_PIC1155_ABI,
       functionName: 'mintPrice',
     })
-    return { actionFee: data * amountToMint, projectFee: parseEther('0') }
+    return { actionFee: data * quantityToMint, projectFee: parseEther('0') }
   } catch (error) {
     console.error(`failed to get fees: ${error}`)
     return {
-      actionFee: DEFAULT_MINT_PRICE * amountToMint,
+      actionFee: DEFAULT_MINT_PRICE * quantityToMint,
       projectFee: parseEther('0'),
     }
   }
@@ -109,7 +113,7 @@ export const simulateMint = async (
 
   const amountToMint = amount ? amount : 1n
 
-  client =
+  const _client =
     client ??
     createPublicClient({
       chain: chainIdToViemChain(chainId),
@@ -117,14 +121,15 @@ export const simulateMint = async (
     })
 
   try {
-    return await client.simulateContract({
+    const result = await _client.simulateContract({
       address: contractAddress,
       value: value,
       abi: IMOSHI_PIC1155_ABI,
       functionName: 'collect',
-      args: [recipient, tokenId, amountToMint],
+      args: [recipient, BigInt(tokenId), amountToMint],
       account: account || DEFAULT_ACCOUNT,
     })
+    return result
   } catch (error) {
     throw new Error(`failed to simulate mint: ${error}`)
   }

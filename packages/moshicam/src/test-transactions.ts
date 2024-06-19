@@ -45,6 +45,6 @@ export const failingTestCases = [
     },
   ),
   createTestCase(COLLECT_FROM_USER_MOSHICAM, 'when tokenId does not match', {
-    tokenId: '1337',
+    tokenId: 1337,
   }),
 ]
