@@ -1,5 +1,12 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.129
+
+### Patch Changes
+
+- Updated dependencies [[`7f9566b8`](https://github.com/rabbitholegg/questdk-plugins/commit/7f9566b8c2830b76e0808f71283f58d08c081033)]:
+  - @rabbitholegg/questdk-plugin-lens@1.0.0-alpha.2
+
 ## 1.0.0-alpha.128
 
 ### Minor Changes
