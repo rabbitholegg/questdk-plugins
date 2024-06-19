@@ -1,8 +1,8 @@
 import {
   LensClient,
   production,
-  SimpleCollectOpenActionSettingsFragment,
-  MultirecipientFeeCollectOpenActionSettingsFragment,
+  type SimpleCollectOpenActionSettingsFragment,
+  type MultirecipientFeeCollectOpenActionSettingsFragment,
 } from '@lens-protocol/client'
 import { getClient } from './client'
 import { Chains } from '@rabbitholegg/questdk-plugin-utils'
