@@ -10,4 +10,11 @@ export const IMOSHI_PIC1155_ABI = [
     outputs: [],
     stateMutability: 'payable',
   },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'mintPrice',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
 ] as const
