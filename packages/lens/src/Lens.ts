@@ -1,4 +1,4 @@
-import { hasAddressCollectedPost } from './graphql'
+import { hasAddressCollectedPost } from './validate'
 import {
   ActionType,
   type CollectActionParams,
@@ -39,14 +39,20 @@ export const validateCollect = async (
   validateP: CollectValidationParams,
 ): Promise<boolean> => {
   try {
-    // call lens graphql endpoint to verify if actor has collected the publication
     const hasCollected = await hasAddressCollectedPost(
       actionP.identifier,
-      validateP.actor,
+      validateP.actor as Address,
     )
     return hasCollected
-  } catch {
-    return false
+  } catch (err) {
+    if (err instanceof Error) {
+      const error = new Error(err.message)
+      error.name = 'ValidationNotValid'
+      throw error
+    } else {
+      console.error(err)
+      throw new Error('Unknown error')
+    }
   }
 }
 
