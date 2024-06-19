@@ -39,7 +39,6 @@ export const validateCollect = async (
   validateP: CollectValidationParams,
 ): Promise<boolean> => {
   try {
-    // call lens graphql endpoint to verify if actor has collected the publication
     const hasCollected = await hasAddressCollectedPost(
       actionP.identifier,
       validateP.actor as Address,
