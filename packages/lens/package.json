@@ -28,9 +28,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.10.4",
     "@rabbitholegg/questdk": "workspace:*",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
-    "graphql": "^16.8.1"
+    "@lens-protocol/client": "2.3.0"
   }
 }
