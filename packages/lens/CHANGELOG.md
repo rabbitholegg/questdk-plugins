@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-lens
 
+## 1.0.0-alpha.2
+
+### Minor Changes
+
+- [#455](https://github.com/rabbitholegg/questdk-plugins/pull/455) [`7f9566b8`](https://github.com/rabbitholegg/questdk-plugins/commit/7f9566b8c2830b76e0808f71283f58d08c081033) Thanks [@mmackz](https://github.com/mmackz)! - change validation method
+
 ## 1.0.0-alpha.1
 
 ### Minor Changes
