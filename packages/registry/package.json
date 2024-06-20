@@ -78,6 +78,7 @@
     "@rabbitholegg/questdk-plugin-titles": "workspace:*",
     "@rabbitholegg/questdk-plugin-foundation": "workspace:*",
     "@rabbitholegg/questdk-plugin-thirdweb": "workspace:*",
-    "@rabbitholegg/questdk-plugin-lens": "workspace:*"
+    "@rabbitholegg/questdk-plugin-lens": "workspace:*",
+    "@rabbitholegg/questdk-plugin-moshicam": "workspace:*"
   }
 }

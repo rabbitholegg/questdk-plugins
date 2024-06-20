@@ -47,6 +47,7 @@ import { Zora } from '@rabbitholegg/questdk-plugin-zora'
 import { Foundation } from '@rabbitholegg/questdk-plugin-foundation'
 import { ThirdWeb } from '@rabbitholegg/questdk-plugin-thirdweb'
 import { Lens } from '@rabbitholegg/questdk-plugin-lens'
+import { Moshicam } from '@rabbitholegg/questdk-plugin-moshicam'
 // ^^^ New Imports Go Here ^^^
 import {
   ActionType,
@@ -119,6 +120,7 @@ export const plugins: Record<string, IActionPlugin> = {
   [Foundation.pluginId]: Foundation,
   [ThirdWeb.pluginId]: ThirdWeb,
   [Lens.pluginId]: Lens,
+  [Moshicam.pluginId]: Moshicam,
 }
 
 export const getPlugin = (pluginId: string) => {
