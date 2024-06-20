@@ -6,7 +6,7 @@ settings:
 
 overrides:
   jsbi@>3.2.5: 3.2.5
-  viem@<2.13.1: 2.13.1
+  viem@<2.15.1: 2.15.1
 
 importers:
 
@@ -22,8 +22,8 @@ importers:
         specifier: 5.0.1
         version: 5.0.1
       viem:
-        specifier: 2.13.1
-        version: 2.13.1(typescript@5.3.2)(zod@3.21.4)
+        specifier: 2.15.1
+        version: 2.15.1(typescript@5.3.2)(zod@3.21.4)
       zod:
         specifier: 3.21.4
         version: 3.21.4
@@ -405,8 +405,8 @@ importers:
   packages/okutrade:
     dependencies:
       '@gfxlabs/oku-chains':
-        specifier: ^1.1.30
-        version: 1.1.44(viem@2.13.1)
+        specifier: 1.1.30
+        version: 1.1.30(viem@2.15.1)
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -805,7 +805,7 @@ importers:
         version: link:../utils
       '@zoralabs/protocol-sdk':
         specifier: 0.5.6-exports.0
-        version: 0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.13.1)(zod@3.21.4)
+        version: 0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
         version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4)
@@ -1809,7 +1809,7 @@ packages:
       '@testing-library/react': 14.2.2(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      viem: 2.13.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -2396,12 +2396,12 @@ packages:
       typescript: 5.3.2
     dev: false
 
-  /@gfxlabs/oku-chains@1.1.44(viem@2.13.1):
-    resolution: {integrity: sha512-gEtXsCwuI2w3fJsSp/tP8fl9JkLxOr+XeEabZ1sm6hUkSq8p3iESIJBsM8/zXP12gr97VDCRFX6nXRIIuL6cXw==}
+  /@gfxlabs/oku-chains@1.1.30(viem@2.15.1):
+    resolution: {integrity: sha512-cPXyV0f34nIbMdCfKkwAxL4jWUTmYG11TWwar+qTntauTPnzMCDuc36WN+Ikv/o/JOEVR5jnm3HfkYsryIMRkg==}
     peerDependencies:
-      viem: 2.13.1
+      viem: 2.15.1
     dependencies:
-      viem: 2.13.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
     dev: false
 
   /@graphql-typed-document-node/core@3.2.0(graphql@16.8.1):
@@ -5031,7 +5031,7 @@ packages:
       picocolors: 1.0.0
       prettier: 2.8.8
       typescript: 5.3.2
-      viem: 2.13.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
       zod: 3.21.4
     transitivePeerDependencies:
       - bufferutil
@@ -5600,14 +5600,14 @@ packages:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/protocol-sdk@0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.13.1)(zod@3.21.4):
+  /@zoralabs/protocol-sdk@0.5.6-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4):
     resolution: {integrity: sha512-YbQ4/a1vM0JN9Dz/qGkMqfOM6xI1Zi6/52KEQAmYY/kzSqBE8jkusN76Av/MYwKqnMIQ90kFAMebSPgyhWvUKA==}
     peerDependencies:
-      viem: 2.13.1
+      viem: 2.15.1
     dependencies:
       '@zoralabs/protocol-deployments': 0.1.2-exports.0(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.21.4)
       abitype: 0.10.3(typescript@5.3.2)(zod@3.21.4)
-      viem: 2.13.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
       vite: 4.5.0(@types/node@20.4.5)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -5690,7 +5690,7 @@ packages:
       tsup: 7.2.0(ts-node@10.9.1)(typescript@5.3.2)
       tsx: 3.14.0
       typescript: 5.3.2
-      viem: 2.13.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
       vite: 4.5.3(@types/node@20.4.5)
       vitest: 0.30.1
     transitivePeerDependencies:
@@ -9983,12 +9983,12 @@ packages:
       - encoding
     dev: false
 
-  /isows@1.0.4(ws@8.13.0):
+  /isows@1.0.4(ws@8.17.1):
     resolution: {integrity: sha512-hEzjY+x9u9hPmBom9IIAqdJCwNLax+xrPb51vEPpERoFlIxgmZcHzsT5jKG06nvInKOBGvReAVz80Umed5CczQ==}
     peerDependencies:
       ws: '*'
     dependencies:
-      ws: 8.13.0
+      ws: 8.17.1
     dev: false
 
   /isstream@0.1.2:
@@ -14231,8 +14231,8 @@ packages:
       extsprintf: 1.3.0
     dev: false
 
-  /viem@2.13.1(typescript@5.3.2)(zod@3.21.4):
-    resolution: {integrity: sha512-QaSCtPXb9uVaba+vOsyCFX21BDWNbjBOuXIWWlQXLmECtr/mbJ64XUHyFz6KLvUwAsQ+vxUQVwgmXc3jVMxwYw==}
+  /viem@2.15.1(typescript@5.3.2)(zod@3.21.4):
+    resolution: {integrity: sha512-Vrveen3vDOJyPf8Q8TDyWePG2pTdK6IpSi4P6qlvAP+rXkAeqRvwYBy9AmGm+BeYpCETAyTT0SrCP6458XSt+w==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -14245,9 +14245,9 @@ packages:
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
       abitype: 1.0.0(typescript@5.3.2)(zod@3.21.4)
-      isows: 1.0.4(ws@8.13.0)
+      isows: 1.0.4(ws@8.17.1)
       typescript: 5.3.2
-      ws: 8.13.0
+      ws: 8.17.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -15361,8 +15361,8 @@ packages:
         optional: true
     dev: false
 
-  /ws@8.13.0:
-    resolution: {integrity: sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==}
+  /ws@8.17.1:
+    resolution: {integrity: sha512-6XQFvXTkbfUOZOKKILFG1PDK2NDQs4azKQl26T0YS5CxqWLgXajbPZ+h4gZekJyRqFU8pvnbAbbs/3TgRPy+GQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
