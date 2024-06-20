@@ -1,5 +1,5 @@
-import { 
-  type IActionPlugin ,
+import {
+  type IActionPlugin,
   type ActionParams,
   type MintActionParams,
 } from '@rabbitholegg/questdk'

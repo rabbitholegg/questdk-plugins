@@ -13,9 +13,7 @@ import {
   parseEther,
   type PublicClient,
 } from 'viem'
-import {
-  DEFAULT_MINT_PRICE,
-} from "./constants"
+import { DEFAULT_MINT_PRICE } from './constants'
 import {
   Chains,
   DEFAULT_ACCOUNT,
@@ -47,8 +45,7 @@ export const getMintIntent = async (
 
   const tokenIdToMint = tokenId ? tokenId : 0
 
-  const quantityToMint =
-      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
 
   const data = encodeFunctionData({
     abi: IMOSHI_PIC1155_ABI,
@@ -78,8 +75,7 @@ export const getFees = async (
     chain: chainIdToViemChain(chainId),
     transport: http(),
   })
-  const quantityToMint =
-      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
   try {
     const data = await client.readContract({
       address: contractAddress,
@@ -113,26 +109,21 @@ export const simulateMint = async (
 
   const amountToMint = amount ? amount : 1n
 
-  const _client =
-    client ??
+  const _client = (client ??
     createPublicClient({
       chain: chainIdToViemChain(chainId),
       transport: http(),
-    })
+    })) as PublicClient
 
-  try {
-    const result = await _client.simulateContract({
-      address: contractAddress,
-      value: value,
-      abi: IMOSHI_PIC1155_ABI,
-      functionName: 'collect',
-      args: [recipient, BigInt(tokenId), amountToMint],
-      account: account || DEFAULT_ACCOUNT,
-    })
-    return result
-  } catch (error) {
-    throw new Error(`failed to simulate mint: ${error}`)
-  }
+  const result = await _client.simulateContract({
+    address: contractAddress,
+    value: value,
+    abi: IMOSHI_PIC1155_ABI,
+    functionName: 'collect',
+    args: [recipient, BigInt(tokenId), amountToMint],
+    account: account || DEFAULT_ACCOUNT,
+  })
+  return result as unknown as Promise<SimulateContractReturnType>
 }
 
 export const getSupportedTokenAddresses = async (
