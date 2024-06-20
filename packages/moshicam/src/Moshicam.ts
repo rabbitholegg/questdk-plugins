@@ -1,26 +1,26 @@
+import { IMOSHI_PIC1155_ABI } from './abi'
+import { DEFAULT_MINT_PRICE } from './constants'
 import {
-  type TransactionFilter,
   type MintActionParams,
+  type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import {
-  type Address,
-  type TransactionRequest,
-  encodeFunctionData,
-  type SimulateContractReturnType,
-  createPublicClient,
-  http,
-  parseEther,
-  type PublicClient,
-} from 'viem'
-import { DEFAULT_MINT_PRICE } from './constants'
 import {
   Chains,
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { IMOSHI_PIC1155_ABI } from './abi'
+import {
+  type Address,
+  type PublicClient,
+  type SimulateContractReturnType,
+  type TransactionRequest,
+  createPublicClient,
+  encodeFunctionData,
+  http,
+  parseEther,
+} from 'viem'
 
 export const mint = async (
   mint: MintActionParams,
@@ -77,11 +77,11 @@ export const getFees = async (
   })
   const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
   try {
-    const data = await client.readContract({
+    const data = (await client.readContract({
       address: contractAddress,
       abi: IMOSHI_PIC1155_ABI,
       functionName: 'mintPrice',
-    })
+    })) as bigint
     return { actionFee: data * quantityToMint, projectFee: parseEther('0') }
   } catch (error) {
     console.error(`failed to get fees: ${error}`)
@@ -123,7 +123,7 @@ export const simulateMint = async (
     args: [recipient, BigInt(tokenId), amountToMint],
     account: account || DEFAULT_ACCOUNT,
   })
-  return result as unknown as Promise<SimulateContractReturnType>
+  return result
 }
 
 export const getSupportedTokenAddresses = async (

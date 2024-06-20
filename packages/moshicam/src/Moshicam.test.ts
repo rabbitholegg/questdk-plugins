@@ -1,18 +1,18 @@
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
-import { describe, expect, test } from 'vitest'
-import { passingTestCases, failingTestCases } from './test-transactions'
 import {
-  mint,
-  getMintIntent,
-  simulateMint,
   getFees,
+  getMintIntent,
   getProjectFees,
+  mint,
+  simulateMint,
 } from './Moshicam'
-import { COLLECT_FROM_USER_MOSHICAM } from './test-transactions'
-import { Chains, MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 import { IMOSHI_PIC1155_ABI } from './abi.ts'
+import { DEFAULT_MINT_PRICE, MOSHIMINTER_ADMIN } from './constants.ts'
+import { failingTestCases, passingTestCases } from './test-transactions'
+import { COLLECT_FROM_USER_MOSHICAM } from './test-transactions'
+import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
+import { Chains, MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 import { encodeFunctionData, parseEther } from 'viem'
-import { MOSHIMINTER_ADMIN, DEFAULT_MINT_PRICE } from './constants.ts'
+import { describe, expect, test } from 'vitest'
 
 describe('Given the moshicam plugin', () => {
   describe('When handling the mint action', () => {
@@ -57,8 +57,6 @@ describe('Given the moshicam plugin', () => {
 })
 
 describe('Given the getMintIntent function', () => {
-  const { transaction } = COLLECT_FROM_USER_MOSHICAM
-
   test('it returns the expected transaction request', async () => {
     const params: MintIntentParams = {
       chainId: Chains.BASE,
@@ -159,7 +157,7 @@ describe('Given the simulateMint function', () => {
       MOSHIMINTER_ADMIN,
     )
 
-    expect(result.request.account.address).toEqual(MOSHIMINTER_ADMIN)
+    expect(result.request.account?.address).toEqual(MOSHIMINTER_ADMIN)
     expect(result.request.address).toEqual(
       COLLECT_FROM_USER_MOSHICAM.params.contractAddress,
     )

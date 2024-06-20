@@ -3,9 +3,9 @@ import {
   type MintActionParams,
 } from '@rabbitholegg/questdk'
 import {
-  createTestCase,
-  type TestParams,
   Chains,
+  type TestParams,
+  createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 export const COLLECT_FROM_USER_MOSHICAM: TestParams<MintActionParams> = {
@@ -16,7 +16,7 @@ export const COLLECT_FROM_USER_MOSHICAM: TestParams<MintActionParams> = {
     input:
       '0xacc10f11000000000000000000000000c46dd4c165d174ab5ca96026f3fa59855e73bcca00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001',
     to: '0x704b204B48011b4B4554bf5659eFfeD1414CDa83',
-    value: '0.0001 ether',
+    value: '100000000000000',
   },
   params: {
     chainId: Chains.BASE,

@@ -1,12 +1,12 @@
 import {
-  type IActionPlugin,
   type ActionParams,
+  type IActionPlugin,
   type MintActionParams,
 } from '@rabbitholegg/questdk'
 
 import {
-  getMintIntent,
   getFees,
+  getMintIntent,
   getProjectFees,
   getSupportedChainIds,
   getSupportedTokenAddresses,
