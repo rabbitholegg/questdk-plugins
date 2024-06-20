@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-fabric
 
+## 1.0.0-alpha.30
+
+### Patch Changes
+
+- [#460](https://github.com/rabbitholegg/questdk-plugins/pull/460) [`388ad5ef`](https://github.com/rabbitholegg/questdk-plugins/commit/388ad5efdf682fa7d7b890a4af1cea89df7e88dd) Thanks [@mmackz](https://github.com/mmackz)! - export functions required for inbox integration
+
 ## 1.0.0-alpha.29
 
 ### Patch Changes
