@@ -9,6 +9,8 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "description": "Plugin for moshicam",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "scripts": {
     "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declaration --declarationMap --declarationDir ./dist/types",
     "bench": "vitest bench",
