@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.63
+
+### Patch Changes
+
+- [#458](https://github.com/rabbitholegg/questdk-plugins/pull/458) [`f993bf1d`](https://github.com/rabbitholegg/questdk-plugins/commit/f993bf1de0d6837575f064ce20f3c7d3d54cff3e) Thanks [@mmackz](https://github.com/mmackz)! - pin okutrade sdk
+
 ## 1.0.0-alpha.62
 
 ### Patch Changes
