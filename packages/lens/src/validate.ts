@@ -1,8 +1,8 @@
 import {
   LensClient,
-  production,
-  type SimpleCollectOpenActionSettingsFragment,
   type MultirecipientFeeCollectOpenActionSettingsFragment,
+  type SimpleCollectOpenActionSettingsFragment,
+  production,
 } from '@lens-protocol/client'
 import axios from 'axios'
 import dotenv from 'dotenv'
