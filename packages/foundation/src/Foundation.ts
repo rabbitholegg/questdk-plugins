@@ -9,12 +9,10 @@ import {
 } from './constants'
 import {
   calculateFees,
-  formatAmount,
   getContractType,
   getDutchAuctionData,
   getFixedPriceData,
   getFixedPriceSaleTerms,
-  getMintAmount,
   getSaleTermsId,
 } from './utils'
 import {
@@ -25,6 +23,8 @@ import {
 import {
   Chains,
   DEFAULT_ACCOUNT,
+  formatAmount,
+  getMintAmount,
   type MintIntentParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
