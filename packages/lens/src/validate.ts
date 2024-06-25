@@ -4,9 +4,11 @@ import {
   type SimpleCollectOpenActionSettingsFragment,
   type MultirecipientFeeCollectOpenActionSettingsFragment,
 } from '@lens-protocol/client'
-import { getClient } from './client'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import axios from 'axios'
+import dotenv from 'dotenv'
 import { Address } from 'viem'
+
+dotenv.config()
 
 const lensClient = new LensClient({
   environment: production,
@@ -20,8 +22,7 @@ export async function hasAddressCollectedPost(
   if (collectAddress === null) {
     return false
   }
-  const amountOwned = await checkAddressOwnsCollect(address, collectAddress)
-  return amountOwned > 0n
+  return await checkAddressMintedCollect(address, collectAddress)
 }
 
 export async function getCollectAddress(postId: string) {
@@ -49,24 +50,63 @@ export async function getCollectAddress(postId: string) {
   return (collectAddress as Address) ?? null
 }
 
-export async function checkAddressOwnsCollect(
+export async function checkAddressMintedCollect(
   actor: Address,
   collectAddress: Address,
 ) {
-  const client = getClient(Chains.POLYGON_POS)
-  const result = await client.readContract({
-    address: collectAddress as Address,
-    abi: [
-      {
-        inputs: [{ internalType: 'address', name: 'owner', type: 'address' }],
-        name: 'balanceOf',
-        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ],
-    functionName: 'balanceOf',
-    args: [actor],
+  try {
+    return await checkMintedUsingBlockspan(actor, collectAddress)
+  } catch {
+    return await checkMintedUsingReservoir(actor, collectAddress)
+  }
+}
+
+async function checkMintedUsingBlockspan(
+  actor: Address,
+  collectAddress: Address,
+) {
+  const baseUrl = 'https://api.blockspan.com/v1/transfers/contract'
+  const params = new URLSearchParams({
+    chain: 'poly-main',
+    transfer_type: 'mint',
+    from_address: '0x0000000000000000000000000000000000000000',
+    to_address: actor,
+    page_size: '1',
   })
-  return result
+
+  const options = {
+    method: 'GET',
+    url: `${baseUrl}/${collectAddress}?${params.toString()}`,
+    headers: {
+      accept: 'application/json',
+      'X-API-KEY': process.env.BLOCKSPAN_API_KEY,
+    },
+  }
+
+  const response = await axios.request(options)
+  return Boolean(response.data?.results?.length > 0)
+}
+
+async function checkMintedUsingReservoir(
+  actor: Address,
+  collectAddress: Address,
+) {
+  const baseUrl = 'https://api-polygon.reservoir.tools/users/activity/v6'
+  const params = new URLSearchParams({
+    users: actor,
+    collection: collectAddress,
+    limit: '1',
+    types: 'mint',
+  })
+
+  const options = {
+    method: 'GET',
+    url: `${baseUrl}?${params.toString()}`,
+    headers: {
+      accept: '*/*',
+    },
+  }
+
+  const response = await axios.request(options)
+  return Boolean(response.data?.activities?.length > 0)
 }
