@@ -30,6 +30,7 @@
   "dependencies": {
     "@rabbitholegg/questdk": "workspace:*",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
-    "@lens-protocol/client": "2.3.0"
+    "@lens-protocol/client": "2.3.0",
+    "dotenv": "^16.4.5"
   }
 }

@@ -350,6 +350,9 @@ importers:
       '@rabbitholegg/questdk-plugin-utils':
         specifier: workspace:*
         version: link:../utils
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
 
   packages/llama:
     dependencies:
