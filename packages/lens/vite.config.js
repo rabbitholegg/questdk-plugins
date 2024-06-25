@@ -2,7 +2,7 @@
 export default {
   build: {
     rollupOptions: {
-      external: [/@rabbitholegg/, /@lens-protocol/],
+      external: [/@rabbitholegg/, /@lens-protocol/, 'dotenv'],
     },
     lib: {
       entry: 'src/index.ts',
