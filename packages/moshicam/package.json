@@ -1,6 +1,6 @@
 {
-  "name": "@rabbitholegg/questdk-plugin-okutrade",
-  "version": "1.0.0-alpha.63",
+  "name": "@rabbitholegg/questdk-plugin-moshicam",
+  "version": "1.0.0-alpha.1",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
@@ -8,6 +8,7 @@
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "description": "Plugin for moshicam",
   "types": "./dist/types/index.d.ts",
   "typings": "./dist/types/index.d.ts",
   "scripts": {
@@ -28,8 +29,7 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "@gfxlabs/oku-chains": "1.1.30",
-    "@rabbitholegg/questdk": "workspace:*",
-    "@rabbitholegg/questdk-plugin-utils": "workspace:*"
+    "@rabbitholegg/questdk-plugin-utils": "workspace:*",
+    "@rabbitholegg/questdk": "workspace:*"
   }
 }

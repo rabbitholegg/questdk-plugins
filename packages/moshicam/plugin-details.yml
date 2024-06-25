@@ -1,0 +1,10 @@
+project:
+  name: Moshicam
+  iconOption: 
+  appLink: https://moshi.cam/metadata/favicon-64x64.png
+
+tasks:
+  - name: Mint on Moshicam
+    link: https://moshi.cam/
+    iconOption: https://moshi.cam/metadata/favicon-64x64.png
+    actionPluginId: mint

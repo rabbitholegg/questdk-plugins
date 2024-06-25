@@ -1,23 +1,23 @@
-import type {
-  ActionParams,
-  IActionPlugin,
-  MintActionParams,
-} from '@rabbitholegg/questdk-plugin-utils'
+import {
+  type ActionParams,
+  type IActionPlugin,
+  type MintActionParams,
+} from '@rabbitholegg/questdk'
 
 import {
   getFees,
-  getProjectFees,
   getMintIntent,
+  getProjectFees,
   getSupportedChainIds,
   getSupportedTokenAddresses,
   mint,
   simulateMint,
-} from './Fabric.js'
+} from './Moshicam'
 
-export const Fabric: IActionPlugin = {
-  pluginId: 'fabric',
-  getSupportedTokenAddresses,
+export const Moshicam: IActionPlugin = {
+  pluginId: 'moshicam',
   getSupportedChainIds,
+  getSupportedTokenAddresses,
   mint,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),

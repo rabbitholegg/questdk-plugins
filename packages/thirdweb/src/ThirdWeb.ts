@@ -8,11 +8,9 @@ import {
   GET_CLAIM_ID_1155_FRAGMENT,
 } from './constants'
 import {
-  formatAmount,
   getClaimCondition,
   getClaimConditionId,
   getContractType,
-  getMintAmount,
 } from './utils'
 import { type TransactionFilter, compressJson } from '@rabbitholegg/questdk'
 import {
@@ -20,6 +18,8 @@ import {
   DEFAULT_ACCOUNT,
   type MintActionParams,
   type MintIntentParams,
+  formatAmount,
+  getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,

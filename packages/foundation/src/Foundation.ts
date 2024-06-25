@@ -9,12 +9,10 @@ import {
 } from './constants'
 import {
   calculateFees,
-  formatAmount,
   getContractType,
   getDutchAuctionData,
   getFixedPriceData,
   getFixedPriceSaleTerms,
-  getMintAmount,
   getSaleTermsId,
 } from './utils'
 import {
@@ -25,6 +23,8 @@ import {
 import {
   Chains,
   DEFAULT_ACCOUNT,
+  formatAmount,
+  getMintAmount,
   type MintIntentParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -313,15 +313,9 @@ export const simulateMint = async (
       contractAddress,
     )
     if (dutchAuctionSeller && dutchAuctionSeller !== zeroAddress) {
-      const result = await _client.simulateContract({
-        address: dropFactoryAddress,
-        value,
-        abi: [DUTCH_AUCTION_FRAGMENT],
-        functionName: 'mintFromDutchAuctionV2',
-        args: [contractAddress, mintAmount, recipient],
-        account: account || DEFAULT_ACCOUNT,
-      })
-      return result
+      // Not supported due to the way we calculate fees.
+      // https://github.com/rabbitholegg/questdk-plugins/pull/445#pullrequestreview-2111167218
+      throw new Error('Dutch auction is not supported')
     }
 
     throw new Error('Invalid mint arguments')

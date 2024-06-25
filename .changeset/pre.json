@@ -12,6 +12,7 @@
     "big-pants-own",
     "big-rice-fly",
     "blue-bikes-sip",
+    "blue-falcons-camp",
     "blue-kangaroos-kiss",
     "breezy-trees-carry",
     "bright-turtles-divide",
@@ -163,6 +164,7 @@
     "purple-trainers-occur",
     "quick-eyes-retire",
     "quick-otters-deliver",
+    "quiet-cougars-occur",
     "quiet-mails-sneeze",
     "quiet-numbers-change",
     "quiet-spies-drum",
@@ -270,10 +272,12 @@
     "unlucky-pumpkins-taste",
     "unlucky-tigers-deny",
     "violet-papayas-promise",
+    "violet-starfishes-think",
     "weak-fishes-unite",
     "weak-monkeys-dance",
     "weak-trains-boil",
     "wet-crabs-switch",
+    "wet-insects-cough",
     "wet-toes-prove",
     "wet-zoos-compare",
     "wicked-deers-marry",
@@ -344,6 +348,7 @@
     "@rabbitholegg/questdk-plugin-titles": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-foundation": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-thirdweb": "1.0.0-alpha.2",
-    "@rabbitholegg/questdk-plugin-lens": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-lens": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-moshicam": "1.0.0-alpha.0"
   }
 }

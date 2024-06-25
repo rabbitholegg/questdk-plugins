@@ -1,5 +1,23 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.130
+
+### Patch Changes
+
+- [#454](https://github.com/rabbitholegg/questdk-plugins/pull/454) [`27af0264`](https://github.com/rabbitholegg/questdk-plugins/commit/27af02649d8338a25f4ce1b76786d4b487094f60) Thanks [@jarrel-b](https://github.com/jarrel-b)! - Add moshicam plugin
+
+- Updated dependencies [[`388ad5ef`](https://github.com/rabbitholegg/questdk-plugins/commit/388ad5efdf682fa7d7b890a4af1cea89df7e88dd), [`f993bf1d`](https://github.com/rabbitholegg/questdk-plugins/commit/f993bf1de0d6837575f064ce20f3c7d3d54cff3e), [`27af0264`](https://github.com/rabbitholegg/questdk-plugins/commit/27af02649d8338a25f4ce1b76786d4b487094f60)]:
+  - @rabbitholegg/questdk-plugin-fabric@1.0.0-alpha.30
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.63
+  - @rabbitholegg/questdk-plugin-moshicam@1.0.0-alpha.1
+
+## 1.0.0-alpha.129
+
+### Patch Changes
+
+- Updated dependencies [[`7f9566b8`](https://github.com/rabbitholegg/questdk-plugins/commit/7f9566b8c2830b76e0808f71283f58d08c081033)]:
+  - @rabbitholegg/questdk-plugin-lens@1.0.0-alpha.2
+
 ## 1.0.0-alpha.128
 
 ### Minor Changes
