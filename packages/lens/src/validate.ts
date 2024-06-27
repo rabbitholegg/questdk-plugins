@@ -5,10 +5,7 @@ import {
   production,
 } from '@lens-protocol/client'
 import axios from 'axios'
-import dotenv from 'dotenv'
 import { Address } from 'viem'
-
-dotenv.config()
 
 const lensClient = new LensClient({
   environment: production,
@@ -56,7 +53,10 @@ export async function checkAddressMintedCollect(
 ) {
   try {
     return await checkMintedUsingBlockspan(actor, collectAddress)
-  } catch {
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(err.message)
+    }
     return await checkMintedUsingReservoir(actor, collectAddress)
   }
 }
@@ -65,6 +65,11 @@ async function checkMintedUsingBlockspan(
   actor: Address,
   collectAddress: Address,
 ) {
+
+  if (!process.env.BLOCKSPAN_API_KEY) {
+    throw new Error('Blockspan API key not found')
+  }
+
   const baseUrl = 'https://api.blockspan.com/v1/transfers/contract'
   const params = new URLSearchParams({
     chain: 'poly-main',
