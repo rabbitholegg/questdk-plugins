@@ -1,4 +1,3 @@
-import { ValidationNotValid } from './errors'
 import { hasAddressCollectedPost } from './validate'
 import {
   ActionType,
@@ -6,6 +5,7 @@ import {
   type CollectValidationParams,
   type PluginActionValidation,
   type QuestCompletionPayload,
+  ValidationNotValid,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 
