@@ -27,9 +27,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "dotenv": "16.4.5"
-  },
   "dependencies": {
     "@rabbitholegg/questdk": "workspace:*",
     "@rabbitholegg/questdk-plugin-utils": "workspace:*",
