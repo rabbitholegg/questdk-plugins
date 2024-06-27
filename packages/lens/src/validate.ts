@@ -73,7 +73,7 @@ async function checkMintedUsingAlchemy(
   const options = {
     contractAddresses: [collectAddress],
   }
-  
+
   const transfers = await alchemy.nft.getTransfersForOwner(
     actor,
     GetTransfersForOwnerTransferType.TO,
