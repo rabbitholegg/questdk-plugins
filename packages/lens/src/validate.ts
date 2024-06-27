@@ -23,7 +23,6 @@ export async function hasAddressCollectedPost(
 }
 
 export async function getCollectAddress(postId: string) {
-
   try {
     const result = await lensClient.publication.fetch({
       forId: postId,
@@ -43,7 +42,7 @@ export async function getCollectAddress(postId: string) {
       | MultirecipientFeeCollectOpenActionSettingsFragment
       | SimpleCollectOpenActionSettingsFragment
     >
-  
+
     const collectNft = collectActions.find((action) => action.collectNft)
     const collectAddress = collectNft?.collectNft?.toLowerCase()
     return (collectAddress as Address) ?? null
