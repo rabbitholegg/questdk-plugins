@@ -45,6 +45,7 @@ export const validateCollect = async (
     )
     return hasCollected
   } catch (err) {
+    console.error('[lens-plugin] Error while validating collect action')
     if (err instanceof Error) {
       const error = new Error(err.message)
       error.name = 'ValidationNotValid'

@@ -23,28 +23,34 @@ export async function hasAddressCollectedPost(
 }
 
 export async function getCollectAddress(postId: string) {
-  const result = await lensClient.publication.fetch({
-    forId: postId,
-  })
-  if (!result || result?.__typename === 'Mirror') {
-    return null
-  }
-  const openActions = result.openActionModules
-  if (!openActions || openActions.length === 0) {
-    return null
-  }
-  const collectActions = openActions.filter(
-    (action) =>
-      action.__typename === 'SimpleCollectOpenActionSettings' ||
-      action.__typename === 'MultirecipientFeeCollectOpenActionSettings',
-  ) as Array<
-    | MultirecipientFeeCollectOpenActionSettingsFragment
-    | SimpleCollectOpenActionSettingsFragment
-  >
 
-  const collectNft = collectActions.find((action) => action.collectNft)
-  const collectAddress = collectNft?.collectNft?.toLowerCase()
-  return (collectAddress as Address) ?? null
+  try {
+    const result = await lensClient.publication.fetch({
+      forId: postId,
+    })
+    if (!result || result?.__typename === 'Mirror') {
+      return null
+    }
+    const openActions = result.openActionModules
+    if (!openActions || openActions.length === 0) {
+      return null
+    }
+    const collectActions = openActions.filter(
+      (action) =>
+        action.__typename === 'SimpleCollectOpenActionSettings' ||
+        action.__typename === 'MultirecipientFeeCollectOpenActionSettings',
+    ) as Array<
+      | MultirecipientFeeCollectOpenActionSettingsFragment
+      | SimpleCollectOpenActionSettingsFragment
+    >
+  
+    const collectNft = collectActions.find((action) => action.collectNft)
+    const collectAddress = collectNft?.collectNft?.toLowerCase()
+    return (collectAddress as Address) ?? null
+  } catch (error) {
+    console.error('Error fetching collect contract address', error)
+    return null
+  }
 }
 
 export async function checkAddressMintedCollect(
@@ -54,6 +60,7 @@ export async function checkAddressMintedCollect(
   try {
     return await checkMintedUsingBlockspan(actor, collectAddress)
   } catch (err) {
+    console.error('Error while using blockspan api')
     if (err instanceof Error) {
       console.error(err.message)
     }
