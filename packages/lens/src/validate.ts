@@ -65,7 +65,6 @@ async function checkMintedUsingBlockspan(
   actor: Address,
   collectAddress: Address,
 ) {
-
   if (!process.env.BLOCKSPAN_API_KEY) {
     throw new Error('Blockspan API key not found')
   }
