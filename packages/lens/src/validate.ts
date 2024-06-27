@@ -70,6 +70,11 @@ async function checkMintedUsingAlchemy(
   actor: Address,
   collectAddress: Address,
 ) {
+  // alchemy will work without an api key, but we risk being rate-limited
+  if (!process.env.ALCHEMY_API_KEY) {
+    console.error('Alchemy API key not found')
+  }
+
   const options = {
     contractAddresses: [collectAddress],
   }
