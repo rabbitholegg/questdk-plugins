@@ -1,3 +1,4 @@
+import { ValidationNotValid } from './errors'
 import { hasAddressCollectedPost } from './validate'
 import {
   ActionType,
@@ -46,14 +47,7 @@ export const validateCollect = async (
     return hasCollected
   } catch (err) {
     console.error('[lens-plugin] Error while validating collect action')
-    if (err instanceof Error) {
-      const error = new Error(err.message)
-      error.name = 'ValidationNotValid'
-      throw error
-    } else {
-      console.error(err)
-      throw new Error('Unknown error')
-    }
+    throw new ValidationNotValid(err instanceof Error ? err : String(err))
   }
 }
 
