@@ -88,7 +88,7 @@ async function checkMintedUsingAlchemy(
   // only count nfts that originate from zeroAddress
   const mintedNfts = transfers.nfts.filter((nft) => nft.from === zeroAddress)
 
-  return Boolean(mintedNfts.length > 0)
+  return mintedNfts.length > 0
 }
 
 async function checkMintedUsingReservoir(
@@ -112,5 +112,5 @@ async function checkMintedUsingReservoir(
   }
 
   const response = await axios.request(options)
-  return Boolean(response.data?.activities?.length > 0)
+  return response.data?.activities?.length > 0
 }
