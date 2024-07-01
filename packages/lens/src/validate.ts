@@ -1,12 +1,13 @@
+import { alchemy } from './alchemy'
 import {
   LensClient,
-  production,
-  type SimpleCollectOpenActionSettingsFragment,
   type MultirecipientFeeCollectOpenActionSettingsFragment,
+  type SimpleCollectOpenActionSettingsFragment,
+  production,
 } from '@lens-protocol/client'
-import { getClient } from './client'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
-import { Address } from 'viem'
+import { GetTransfersForOwnerTransferType } from 'alchemy-sdk'
+import axios from 'axios'
+import { Address, zeroAddress } from 'viem'
 
 const lensClient = new LensClient({
   environment: production,
@@ -20,53 +21,96 @@ export async function hasAddressCollectedPost(
   if (collectAddress === null) {
     return false
   }
-  const amountOwned = await checkAddressOwnsCollect(address, collectAddress)
-  return amountOwned > 0n
+  return await checkAddressMintedCollect(address, collectAddress)
 }
 
 export async function getCollectAddress(postId: string) {
-  const result = await lensClient.publication.fetch({
-    forId: postId,
-  })
-  if (!result || result?.__typename === 'Mirror') {
-    return null
-  }
-  const openActions = result.openActionModules
-  if (!openActions || openActions.length === 0) {
-    return null
-  }
-  const collectActions = openActions.filter(
-    (action) =>
-      action.__typename === 'SimpleCollectOpenActionSettings' ||
-      action.__typename === 'MultirecipientFeeCollectOpenActionSettings',
-  ) as Array<
-    | MultirecipientFeeCollectOpenActionSettingsFragment
-    | SimpleCollectOpenActionSettingsFragment
-  >
+  try {
+    const result = await lensClient.publication.fetch({
+      forId: postId,
+    })
+    if (!result || result?.__typename === 'Mirror') {
+      return null
+    }
+    const openActions = result.openActionModules
+    if (!openActions || openActions.length === 0) {
+      return null
+    }
+    const collectActions = openActions.filter(
+      (action) =>
+        action.__typename === 'SimpleCollectOpenActionSettings' ||
+        action.__typename === 'MultirecipientFeeCollectOpenActionSettings',
+    ) as Array<
+      | MultirecipientFeeCollectOpenActionSettingsFragment
+      | SimpleCollectOpenActionSettingsFragment
+    >
 
-  const collectNft = collectActions.find((action) => action.collectNft)
-  const collectAddress = collectNft?.collectNft?.toLowerCase()
-  return (collectAddress as Address) ?? null
+    const collectNft = collectActions.find((action) => action.collectNft)
+    const collectAddress = collectNft?.collectNft?.toLowerCase()
+    return (collectAddress as Address) ?? null
+  } catch (error) {
+    console.error('Error fetching collect contract address', error)
+    return null
+  }
 }
 
-export async function checkAddressOwnsCollect(
+export async function checkAddressMintedCollect(
   actor: Address,
   collectAddress: Address,
 ) {
-  const client = getClient(Chains.POLYGON_POS)
-  const result = await client.readContract({
-    address: collectAddress as Address,
-    abi: [
-      {
-        inputs: [{ internalType: 'address', name: 'owner', type: 'address' }],
-        name: 'balanceOf',
-        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-        stateMutability: 'view',
-        type: 'function',
-      },
-    ],
-    functionName: 'balanceOf',
-    args: [actor],
+  try {
+    return await checkMintedUsingAlchemy(actor, collectAddress)
+  } catch (err) {
+    console.error('Error while using alchemy api', err)
+    return await checkMintedUsingReservoir(actor, collectAddress)
+  }
+}
+
+async function checkMintedUsingAlchemy(
+  actor: Address,
+  collectAddress: Address,
+) {
+  // alchemy will work without an api key, but we risk being rate-limited
+  if (!process.env.ALCHEMY_API_KEY) {
+    console.error('Alchemy API key not found')
+  }
+
+  const options = {
+    contractAddresses: [collectAddress],
+  }
+
+  const transfers = await alchemy.nft.getTransfersForOwner(
+    actor,
+    GetTransfersForOwnerTransferType.TO,
+    options,
+  )
+
+  // only count nfts that originate from zeroAddress
+  const mintedNfts = transfers.nfts.filter((nft) => nft.from === zeroAddress)
+
+  return mintedNfts.length > 0
+}
+
+async function checkMintedUsingReservoir(
+  actor: Address,
+  collectAddress: Address,
+) {
+  const baseUrl = 'https://api-polygon.reservoir.tools/users/activity/v6'
+  const params = new URLSearchParams({
+    users: actor,
+    collection: collectAddress,
+    limit: '1',
+    types: 'mint',
   })
-  return result
+
+  const options = {
+    method: 'GET',
+    url: `${baseUrl}?${params.toString()}`,
+    headers: {
+      accept: '*/*',
+    },
+  }
+
+  const response = await axios.request(options)
+  return response.data?.activities?.length > 0
 }

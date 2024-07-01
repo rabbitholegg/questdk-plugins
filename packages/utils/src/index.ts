@@ -141,4 +141,7 @@ export {
   PremintActionFormSchema,
 } from './types'
 
-export { PluginActionNotImplementedError } from './errors'
+export {
+  PluginActionNotImplementedError,
+  ValidationNotValid,
+} from './errors'

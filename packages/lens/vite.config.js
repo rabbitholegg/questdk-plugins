@@ -2,7 +2,7 @@
 export default {
   build: {
     rollupOptions: {
-      external: [/@rabbitholegg/, /@lens-protocol/],
+      external: [/@rabbitholegg/, /@lens-protocol/, 'alchemy-sdk'],
     },
     lib: {
       entry: 'src/index.ts',

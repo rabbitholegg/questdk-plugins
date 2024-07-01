@@ -1,5 +1,5 @@
 import { validateCollect } from './Lens'
-import { beforeEach, describe, expect, test, vi, MockedFunction } from 'vitest'
+import { MockedFunction, beforeEach, describe, expect, test, vi } from 'vitest'
 
 vi.mock('./Lens', () => ({
   validateCollect: vi.fn(),

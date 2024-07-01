@@ -5,6 +5,7 @@ import {
   type CollectValidationParams,
   type PluginActionValidation,
   type QuestCompletionPayload,
+  ValidationNotValid,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 
@@ -45,14 +46,8 @@ export const validateCollect = async (
     )
     return hasCollected
   } catch (err) {
-    if (err instanceof Error) {
-      const error = new Error(err.message)
-      error.name = 'ValidationNotValid'
-      throw error
-    } else {
-      console.error(err)
-      throw new Error('Unknown error')
-    }
+    console.error('[lens-plugin] Error while validating collect action')
+    throw new ValidationNotValid(err instanceof Error ? err : String(err))
   }
 }
 
