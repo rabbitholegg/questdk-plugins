@@ -175,6 +175,13 @@ async function replaceProjectName(params: BuilderParams) {
   const indexTemplate = Handlebars.compile(index)
   await fs.writeFile(indexPath, indexTemplate(params))
   console.log(`\t ${arrow} Updated file ${cyan('index.ts')}!`)
+
+  //replace the project name in the vite config
+  const vitePath = path.join(dest, 'vite.config.js')
+  const vite = await fs.readFile(vitePath, 'utf8')
+  const viteTemplate = Handlebars.compile(vite)
+  await fs.writeFile(vitePath, viteTemplate(params))
+  console.log(`\t ${arrow} Updated file ${cyan('vite.config.js')}!`)
 }
 
 /**
