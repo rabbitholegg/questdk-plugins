@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-artblocks",
-  "version": "1.0.0-alpha.28",
+  "version": "1.0.0-alpha.29",
   "description": "",
   "exports": {
     "require": "./dist/cjs/index.js",
