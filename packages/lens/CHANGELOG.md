@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-lens
 
+## 1.0.0-alpha.3
+
+### Minor Changes
+
+- [#463](https://github.com/rabbitholegg/questdk-plugins/pull/463) [`e19b9bce`](https://github.com/rabbitholegg/questdk-plugins/commit/e19b9bce9dfbe7fa8bb24ac849cbf8811ce4c900) Thanks [@mmackz](https://github.com/mmackz)! - update validation method for lens
+
+### Patch Changes
+
+- Updated dependencies [[`e19b9bce`](https://github.com/rabbitholegg/questdk-plugins/commit/e19b9bce9dfbe7fa8bb24ac849cbf8811ce4c900), [`ea606497`](https://github.com/rabbitholegg/questdk-plugins/commit/ea60649703d8d35f6d140b31e7aa7c8d23a59017)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.39
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.2
 
 ### Minor Changes

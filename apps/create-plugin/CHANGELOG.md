@@ -1,5 +1,11 @@
 # @rabbitholegg/create-plugin
 
+## 2.0.0-alpha.11
+
+### Minor Changes
+
+- [#429](https://github.com/rabbitholegg/questdk-plugins/pull/429) [`6e6b325a`](https://github.com/rabbitholegg/questdk-plugins/commit/6e6b325abe8dc7263859fc929d7e5319c7d169ac) Thanks [@mmackz](https://github.com/mmackz)! - update template for new build process
+
 ## 2.0.0-alpha.10
 
 ### Minor Changes

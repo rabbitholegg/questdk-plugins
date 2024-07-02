@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.64
+
+### Patch Changes
+
+- [#405](https://github.com/rabbitholegg/questdk-plugins/pull/405) [`01901e3f`](https://github.com/rabbitholegg/questdk-plugins/commit/01901e3ffd3ee88fc4faedf5255aeae5cd34083f) Thanks [@jonathandiep](https://github.com/jonathandiep)! - enable state override for balance
+
+- Updated dependencies [[`e19b9bce`](https://github.com/rabbitholegg/questdk-plugins/commit/e19b9bce9dfbe7fa8bb24ac849cbf8811ce4c900), [`ea606497`](https://github.com/rabbitholegg/questdk-plugins/commit/ea60649703d8d35f6d140b31e7aa7c8d23a59017)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.39
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.63
 
 ### Patch Changes
