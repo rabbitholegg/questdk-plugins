@@ -5,6 +5,7 @@ import {
 } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { BASE_CHAIN_ID, CONTRACT_ADDRESS, MINT_ABI } from './constants'
+import { formatAmount } from '@rabbitholegg/questdk-plugin-utils'
 
 export const mint = async (
   mint: MintActionParams,
@@ -17,7 +18,7 @@ export const mint = async (
     input: {
       $abi: MINT_ABI,
       day: tokenId,
-      count: amount,
+      count: formatAmount(amount),
     },
   })
 }
