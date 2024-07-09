@@ -10,6 +10,7 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
+  formatAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -33,7 +34,7 @@ export const mint = async (
       $abi: IMOSHI_PIC1155_ABI,
       to: recipient,
       id: tokenId,
-      quantity: amount,
+      quantity: formatAmount(amount),
     },
   })
 }
