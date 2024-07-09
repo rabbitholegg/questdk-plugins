@@ -1,8 +1,8 @@
 import { FilterOperator } from '../types'
 
 export function formatAmount(amount: FilterOperator | undefined) {
-  if (amount === undefined) {
-    return undefined
+  if (!amount) {
+    return { $gte: '1' }
   }
   if (amount && ['string', 'number', 'bigint'].includes(typeof amount)) {
     return { $gte: amount }
