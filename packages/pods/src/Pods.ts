@@ -43,8 +43,12 @@ export const mint = async (
   }
   if (tokenId || amount) {
     andArray1155.push({
-      quantity: amount,
+      quantity: amount ?? { $gte: 1 },
       tokenId,
+    })
+  } else {
+    andArray1155.push({
+      quantity: { $gte: 1 },
     })
   }
 
