@@ -15,6 +15,7 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
+  formatAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   http,
@@ -43,12 +44,12 @@ export const mint = async (
   }
   if (tokenId || amount) {
     andArray1155.push({
-      quantity: amount ?? { $gte: 1 },
+      quantity: formatAmount(amount),
       tokenId,
     })
   } else {
     andArray1155.push({
-      quantity: { $gte: 1 },
+      quantity: formatAmount(amount),
     })
   }
 
