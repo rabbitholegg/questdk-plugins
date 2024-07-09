@@ -19,6 +19,7 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
+import { formatAmount } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
   DEFAULT_ACCOUNT,
@@ -115,22 +116,17 @@ export const mint = async (
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
     })
   }
-  if (tokenId || amount) {
-    andArray721.push({
-      quantity: amount ?? { $gte: 1 },
-    })
+  if (tokenId) {
     andArray1155.push({
-      quantity: amount ?? { $gte: 1 },
       tokenId,
     })
-  } else {
-    andArray721.push({
-      quantity: { $gte: 1 },
-    })
-    andArray1155.push({
-      quantity: { $gte: 1 },
-    })
-  }
+  } 
+  andArray721.push({
+    quantity: formatAmount(amount),
+  })
+  andArray1155.push({
+    quantity: formatAmount(amount),
+  })
 
   const ERC721_FILTER_ABSTRACT = {
     $abiAbstract: ZORA_MINTER_ABI_721,
