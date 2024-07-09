@@ -19,6 +19,7 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
+  formatAmount,
   getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
 import axios from 'axios'
@@ -49,7 +50,7 @@ export const mint = async (
       $abiAbstract: ABI_MULTI,
       creatorContractAddress: contractAddress,
       instanceId,
-      mintCount: amount,
+      mintCount: formatAmount(amount),
       mintFor: recipient,
     },
   ]
