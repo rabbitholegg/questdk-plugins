@@ -12,6 +12,7 @@ import {
   ZORA_1155_FACTORY,
   ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
+import { AndArrayItem } from './types'
 import { validatePremint } from './validate'
 import {
   type MintActionParams,
@@ -19,6 +20,7 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
+import { formatAmount } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
   DEFAULT_ACCOUNT,
@@ -105,8 +107,14 @@ export const mint = async (
       ] as Address[])
     : contractAddress
 
-  const andArray721 = []
-  const andArray1155 = []
+  const initialArray = [
+    {
+      quantity: formatAmount(amount),
+    },
+  ]
+  const andArray721: AndArrayItem[] = [...initialArray]
+  const andArray1155: AndArrayItem[] = [...initialArray]
+
   if (recipient) {
     andArray721.push({
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
@@ -115,34 +123,30 @@ export const mint = async (
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
     })
   }
-  if (tokenId || amount) {
-    andArray721.push({
-      quantity: amount,
-    })
+  if (tokenId) {
     andArray1155.push({
-      quantity: amount,
       tokenId,
     })
   }
 
   const ERC721_FILTER_ABSTRACT = {
     $abiAbstract: ZORA_MINTER_ABI_721,
-    $and: andArray721.length !== 0 ? andArray721 : undefined,
+    $and: andArray721,
   }
 
   const ERC1155_FILTER_ABSTRACT = {
     $abiAbstract: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
-    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+    $and: andArray1155,
   }
 
   const ERC721_FILTER = {
     $abi: ZORA_MINTER_ABI_721,
-    $and: andArray721.length !== 0 ? andArray721 : undefined,
+    $and: andArray721,
   }
 
   const ERC1155_FILTER = {
     $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
-    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+    $and: andArray1155,
   }
 
   const UNIVERSAL_MINT_FILTER = {
