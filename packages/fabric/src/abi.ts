@@ -1,4 +1,4 @@
-export const FABRIC_ABI = [
+export const FABRIC_MINT_ABI = [
   {
     inputs: [
       {
@@ -8,24 +8,6 @@ export const FABRIC_ABI = [
       },
     ],
     name: 'mint',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'numTokens',
-        type: 'uint256',
-      },
-    ],
-    name: 'mintFor',
     outputs: [],
     stateMutability: 'payable',
     type: 'function',
@@ -49,6 +31,27 @@ export const FABRIC_ABI = [
       },
     ],
     name: 'mintWithReferral',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
+
+export const FABRIC_MINTFOR_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'account',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'numTokens',
+        type: 'uint256',
+      },
+    ],
+    name: 'mintFor',
     outputs: [],
     stateMutability: 'payable',
     type: 'function',

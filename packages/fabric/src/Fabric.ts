@@ -1,13 +1,16 @@
-import { FABRIC_ABI } from './abi'
+import { FABRIC_MINT_ABI, FABRIC_MINTFOR_ABI } from './abi'
 import { getContractData } from './utils'
 import {
   type MintActionParams,
   type TransactionFilter,
   compressJson,
+  GreaterThanOrEqual,
 } from '@rabbitholegg/questdk'
 import {
   Chains,
   DEFAULT_ACCOUNT,
+  chainIdToViemChain,
+  getMintAmount,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
@@ -15,20 +18,43 @@ import {
   type PublicClient,
   type SimulateContractReturnType,
   type TransactionRequest,
+  createPublicClient,
   encodeFunctionData,
+  http,
   zeroAddress,
 } from 'viem'
 
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, recipient } = mint
+  const { chainId, contractAddress, amount, recipient } = mint
+
+  const { minPurchaseSeconds, tps } = await getContractData(
+    chainId,
+    contractAddress,
+  )
+
+  if (minPurchaseSeconds == null || tps == null) {
+    throw new Error('Contract data not found')
+  }
+
+  const numTokens = minPurchaseSeconds * tps * getMintAmount(amount)
+
   return compressJson({
     chainId,
     to: contractAddress,
     input: {
-      $abi: FABRIC_ABI,
-      account: recipient,
+      $or: [
+        {
+          $abi: FABRIC_MINT_ABI,
+          numTokens: GreaterThanOrEqual(numTokens),
+        },
+        {
+          $abi: FABRIC_MINTFOR_ABI,
+          numTokens: GreaterThanOrEqual(numTokens),
+          account: recipient,
+        },
+      ],
     },
   })
 }
@@ -54,9 +80,13 @@ export const getFees = async (
     throw new Error('ERC20 not supported')
   }
 
-  const mintUnits = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  if (!minPurchaseSeconds || !tps) {
+    throw new Error('Contract data not found')
+  }
 
-  const mintCost = (minPurchaseSeconds as bigint) * (tps as bigint) * mintUnits
+  const mintUnits = getMintAmount(amount)
+
+  const mintCost = minPurchaseSeconds * tps * mintUnits
 
   return { actionFee: mintCost, projectFee: BigInt(0) }
 }
@@ -75,10 +105,14 @@ export const getMintIntent = async (
     throw new Error('ERC20 not supported')
   }
 
-  const mintArgs = [(minPurchaseSeconds as bigint) * (tps as bigint) * amount]
+  if (!minPurchaseSeconds || !tps) {
+    throw new Error('Contract data not found')
+  }
+
+  const mintArgs = [minPurchaseSeconds * tps * getMintAmount(amount)]
 
   const data = encodeFunctionData({
-    abi: FABRIC_ABI,
+    abi: FABRIC_MINT_ABI,
     functionName: 'mint',
     args: mintArgs,
   })
@@ -98,12 +132,18 @@ export const simulateMint = async (
 ): Promise<SimulateContractReturnType> => {
   const { chainId, contractAddress, amount } = mint
 
+  const _client =
+  client ??
+  createPublicClient({
+    chain: chainIdToViemChain(chainId),
+    transport: http(),
+  })
+
   const from = account ?? DEFAULT_ACCOUNT
   const {
     erc20Address,
     minPurchaseSeconds,
     tps,
-    client: _client,
   } = await getContractData(chainId, contractAddress, client)
 
   // fail simulation if erc20 is used
@@ -111,12 +151,16 @@ export const simulateMint = async (
     throw new Error('ERC20 not supported')
   }
 
-  const mintArgs = [(minPurchaseSeconds as bigint) * (tps as bigint) * amount]
+  if (!minPurchaseSeconds || !tps) {
+    throw new Error('Contract data not found')
+  }
+
+  const mintArgs = [minPurchaseSeconds * tps * getMintAmount(amount)]
 
   const result = await _client.simulateContract({
     address: contractAddress,
     value,
-    abi: FABRIC_ABI,
+    abi: FABRIC_MINT_ABI,
     functionName: 'mint',
     args: mintArgs,
     account: from,

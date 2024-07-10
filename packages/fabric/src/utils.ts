@@ -4,9 +4,8 @@ import { type Address, type PublicClient, createPublicClient, http } from 'viem'
 
 interface ContractData {
   erc20Address: Address
-  minPurchaseSeconds: bigint
-  tps: bigint
-  client: PublicClient
+  minPurchaseSeconds: bigint | undefined
+  tps: bigint | undefined
 }
 
 export async function getContractData(
@@ -38,8 +37,7 @@ export async function getContractData(
 
   return {
     erc20Address: erc20Address as Address,
-    minPurchaseSeconds: minPurchaseSeconds as bigint,
-    tps: tps as bigint,
-    client: client as PublicClient,
+    minPurchaseSeconds: minPurchaseSeconds as bigint | undefined,
+    tps: tps as bigint | undefined,
   }
 }
