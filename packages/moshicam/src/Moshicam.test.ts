@@ -5,11 +5,11 @@ import {
   mint,
   simulateMint,
 } from './Moshicam'
-import { IMOSHI_PIC1155_ABI } from './abi.ts'
-import { DEFAULT_MINT_PRICE, MOSHIMINTER_ADMIN } from './constants.ts'
+import { IMOSHI_PIC1155_ABI } from './abi'
+import { DEFAULT_MINT_PRICE, MOSHIMINTER_ADMIN } from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { COLLECT_FROM_USER_MOSHICAM } from './test-transactions'
-import { GreaterThanOrEqual, apply } from '@rabbitholegg/questdk'
+import { apply } from '@rabbitholegg/questdk'
 import { Chains, MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 import { encodeFunctionData, parseEther } from 'viem'
 import { describe, expect, test } from 'vitest'
@@ -62,6 +62,7 @@ describe('Given the getMintIntent function', () => {
       chainId: Chains.BASE,
       contractAddress: COLLECT_FROM_USER_MOSHICAM.params.contractAddress,
       recipient: COLLECT_FROM_USER_MOSHICAM.transaction.from,
+      amount: 1n,
       tokenId: 1,
     }
     const data = encodeFunctionData({
@@ -113,7 +114,7 @@ describe('Given the getFee function', () => {
   })
 
   test('it should return the expected fee if amount is not provided', async () => {
-    const mint: MintIntentParams = {
+    const mint = {
       chainId: Chains.BASE,
       contractAddress: COLLECT_FROM_USER_MOSHICAM.params.contractAddress,
       recipient: COLLECT_FROM_USER_MOSHICAM.transaction.from,
@@ -127,7 +128,7 @@ describe('Given the getFee function', () => {
   })
 
   test('it should return the expected fee if failed to fetch', async () => {
-    const mint: MintIntentParams = {
+    const mint = {
       chainId: Chains.BLAST, // unsupported chain
       contractAddress: COLLECT_FROM_USER_MOSHICAM.params.contractAddress,
       recipient: COLLECT_FROM_USER_MOSHICAM.transaction.from,
@@ -146,7 +147,7 @@ describe('Given the simulateMint function', () => {
     const mint: MintIntentParams = {
       chainId: Chains.BASE,
       contractAddress: COLLECT_FROM_USER_MOSHICAM.params.contractAddress,
-      amount: 1,
+      amount: 1n,
       recipient: COLLECT_FROM_USER_MOSHICAM.transaction.from,
       tokenId: 0,
     }
@@ -173,12 +174,8 @@ describe('Given the simulateMint function', () => {
 
     expect(
       async () =>
-        await simulateMint(
-          mint,
-          DEFAULT_MINT_PRICE,
-          MOSHIMINTER_ADMIN,
-        ).toThrowError(),
-    )
+        await simulateMint(mint, DEFAULT_MINT_PRICE, MOSHIMINTER_ADMIN),
+    ).rejects.toThrowError()
   })
 
   test('it should throw error if chain is not supported', async () => {
@@ -191,11 +188,7 @@ describe('Given the simulateMint function', () => {
 
     expect(
       async () =>
-        await simulateMint(
-          mint,
-          DEFAULT_MINT_PRICE,
-          MOSHIMINTER_ADMIN,
-        ).toThrowError(),
-    )
+        await simulateMint(mint, DEFAULT_MINT_PRICE, MOSHIMINTER_ADMIN),
+    ).rejects.toThrowError()
   })
 })
