@@ -4,8 +4,9 @@ import {
   FIXED_PRICE_SALE_STRATS,
   ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
-import { getLatestTokenId } from './utils'
+import { type AndArrayItem, getLatestTokenId } from './utils'
 import {
+  type FilterOperator,
   type MintActionParams,
   type TransactionFilter,
   compressJson,
@@ -15,6 +16,8 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
+  formatAmount,
+  getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   http,
@@ -33,7 +36,11 @@ export const mint = async (
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
-  const andArray1155 = []
+  const andArray1155: AndArrayItem[] = [
+    {
+      quantity: formatAmount(amount) as FilterOperator,
+    },
+  ]
   if (recipient) {
     andArray1155.push({
       minterArguments: {
@@ -41,16 +48,15 @@ export const mint = async (
       },
     })
   }
-  if (tokenId || amount) {
+  if (tokenId) {
     andArray1155.push({
-      quantity: amount,
       tokenId,
     })
   }
 
   const ERC1155_FILTER = {
     $abiAbstract: ZORA_MINTER_ABI_1155,
-    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+    $and: andArray1155,
   }
 
   return compressJson({
@@ -140,7 +146,7 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, tokenId, amount } = mint
-  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  const quantityToMint = getMintAmount(amount)
   try {
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
