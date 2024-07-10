@@ -3,7 +3,7 @@ import { FilterOperator } from '../types'
 export function formatAmount(
   amount: FilterOperator | undefined,
 ): FilterOperator {
-  if (!amount) {
+  if (!amount || (typeof amount === 'string' && isNaN(Number(amount)))) {
     return { $gte: 1n }
   }
   if (
