@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-pods
 
+## 1.0.0-alpha.28
+
+### Minor Changes
+
+- [#469](https://github.com/rabbitholegg/questdk-plugins/pull/469) [`dc6a34d7`](https://github.com/rabbitholegg/questdk-plugins/commit/dc6a34d787890b69263fd48e16f17e6c1b97406a) Thanks [@mmackz](https://github.com/mmackz)! - fix for quantity zero mints
+
+### Patch Changes
+
+- Updated dependencies [[`0f1bcea6`](https://github.com/rabbitholegg/questdk-plugins/commit/0f1bcea608e9ecc9de9f6f1920e7962264a2ebf7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.40
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.27
 
 ### Patch Changes

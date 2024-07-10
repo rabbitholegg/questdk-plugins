@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.40
+
+### Minor Changes
+
+- [#466](https://github.com/rabbitholegg/questdk-plugins/pull/466) [`0f1bcea6`](https://github.com/rabbitholegg/questdk-plugins/commit/0f1bcea608e9ecc9de9f6f1920e7962264a2ebf7) Thanks [@mmackz](https://github.com/mmackz)! - update for token zero fix
+
 ## 1.0.0-alpha.39
 
 ### Minor Changes
