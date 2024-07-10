@@ -125,7 +125,14 @@ export const simulateMint = async (
   const mintAmount = getMintAmount(amount)
 
   if (mintAmount > 1n) {
-    const mintArgs = [contractAddress, instanceId, mintAmount, [], [], recipient]
+    const mintArgs = [
+      contractAddress,
+      instanceId,
+      mintAmount,
+      [],
+      [],
+      recipient,
+    ]
     try {
       const result = await _client.simulateContract({
         address: ERC1155_CONTRACT,

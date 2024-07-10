@@ -133,18 +133,18 @@ export const simulateMint = async (
   const { chainId, contractAddress, amount } = mint
 
   const _client =
-  client ??
-  createPublicClient({
-    chain: chainIdToViemChain(chainId),
-    transport: http(),
-  })
+    client ??
+    createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    })
 
   const from = account ?? DEFAULT_ACCOUNT
-  const {
-    erc20Address,
-    minPurchaseSeconds,
-    tps,
-  } = await getContractData(chainId, contractAddress, client)
+  const { erc20Address, minPurchaseSeconds, tps } = await getContractData(
+    chainId,
+    contractAddress,
+    client,
+  )
 
   // fail simulation if erc20 is used
   if (erc20Address !== zeroAddress) {

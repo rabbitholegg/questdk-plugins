@@ -120,7 +120,7 @@ export const mint = async (
     andArray1155.push({
       tokenId,
     })
-  } 
+  }
   andArray721.push({
     quantity: formatAmount(amount),
   })

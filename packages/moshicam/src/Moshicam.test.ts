@@ -174,11 +174,7 @@ describe('Given the simulateMint function', () => {
 
     expect(
       async () =>
-        await simulateMint(
-          mint,
-          DEFAULT_MINT_PRICE,
-          MOSHIMINTER_ADMIN,
-        ),
+        await simulateMint(mint, DEFAULT_MINT_PRICE, MOSHIMINTER_ADMIN),
     ).rejects.toThrowError()
   })
 
@@ -192,11 +188,7 @@ describe('Given the simulateMint function', () => {
 
     expect(
       async () =>
-        await simulateMint(
-          mint,
-          DEFAULT_MINT_PRICE,
-          MOSHIMINTER_ADMIN,
-        ),
+        await simulateMint(mint, DEFAULT_MINT_PRICE, MOSHIMINTER_ADMIN),
     ).rejects.toThrowError()
   })
 })
