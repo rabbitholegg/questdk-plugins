@@ -1,6 +1,11 @@
 import { ZORA_MINTER_ABI_1155 } from './abi'
 import { type Address, type PublicClient, createPublicClient, http } from 'viem'
-import { chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
+import { FilterOperator, chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
+
+export type AndArrayItem = 
+  | { quantity: string | number | bigint | FilterOperator }
+  | { minterArguments: { $regex: string } }
+  | { tokenId: number | string }
 
 export async function getLatestTokenId(
   contractAddress: Address,
