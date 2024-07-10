@@ -36,9 +36,11 @@ export const mint = async (
 ): Promise<TransactionFilter> => {
   const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
-  const andArray1155: AndArrayItem[] = [{
-    quantity: formatAmount(amount) as FilterOperator,
-  }]
+  const andArray1155: AndArrayItem[] = [
+    {
+      quantity: formatAmount(amount) as FilterOperator,
+    },
+  ]
   if (recipient) {
     andArray1155.push({
       minterArguments: {

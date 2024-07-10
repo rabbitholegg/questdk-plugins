@@ -108,9 +108,11 @@ export const mint = async (
       ] as Address[])
     : contractAddress
 
-  const initialArray = [{
-    quantity: formatAmount(amount) as FilterOperator,
-  }]
+  const initialArray = [
+    {
+      quantity: formatAmount(amount) as FilterOperator,
+    },
+  ]
   const andArray721: AndArrayItem[] = [...initialArray]
   const andArray1155: AndArrayItem[] = [...initialArray]
 
