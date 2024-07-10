@@ -6,7 +6,6 @@ import {
 } from './contract-addresses'
 import { type AndArrayItem, getLatestTokenId } from './utils'
 import {
-  type FilterOperator,
   type MintActionParams,
   type TransactionFilter,
   compressJson,
@@ -38,7 +37,7 @@ export const mint = async (
 
   const andArray1155: AndArrayItem[] = [
     {
-      quantity: formatAmount(amount) as FilterOperator,
+      quantity: formatAmount(amount),
     },
   ]
   if (recipient) {
