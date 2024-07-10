@@ -1,11 +1,17 @@
 import { FilterOperator } from '../types'
 
-export function formatAmount(amount: FilterOperator | undefined) {
-  if (amount === undefined) {
-    return undefined
+export function formatAmount(
+  amount: FilterOperator | undefined,
+): FilterOperator {
+  if (!amount || (typeof amount === 'string' && isNaN(Number(amount)))) {
+    return { $gte: 1n }
   }
-  if (amount && ['string', 'number', 'bigint'].includes(typeof amount)) {
-    return { $gte: amount }
+  if (
+    typeof amount === 'string' ||
+    typeof amount === 'number' ||
+    typeof amount === 'bigint'
+  ) {
+    return { $gte: BigInt(amount) }
   }
 
   return amount
