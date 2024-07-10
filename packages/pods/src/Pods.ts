@@ -16,6 +16,7 @@ import {
   chainIdToViemChain,
   getExitAddresses,
   formatAmount,
+  getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   http,
@@ -145,7 +146,7 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, tokenId, amount } = mint
-  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  const quantityToMint = getMintAmount(amount)
   try {
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
