@@ -107,13 +107,11 @@ export const mint = async (
       ] as Address[])
     : contractAddress
 
-  const initialArray = [
-    {
-      quantity: formatAmount(amount),
-    },
-  ]
-  const andArray721: AndArrayItem[] = [...initialArray]
-  const andArray1155: AndArrayItem[] = [...initialArray]
+  const quantityCheck = {
+    quantity: formatAmount(amount),
+  }
+  const andArray721: AndArrayItem[] = [quantityCheck]
+  const andArray1155: AndArrayItem[] = [quantityCheck]
 
   if (recipient) {
     andArray721.push({
