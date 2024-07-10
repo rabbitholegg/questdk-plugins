@@ -4,7 +4,7 @@ import {
   Chains,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
 
