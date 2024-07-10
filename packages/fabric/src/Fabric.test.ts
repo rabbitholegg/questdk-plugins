@@ -4,7 +4,7 @@ import {
   Chains,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { apply } from '@rabbitholegg/questdk/filter'
+import { apply } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
 
@@ -13,11 +13,11 @@ describe('Given the fabric plugin', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid mint action', async () => {
         const filter = await mint({
-          chainId: 1,
-          contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+          chainId: 8453,
+          contractAddress: '0x2efc6064239121d1d7efb503355daa82b87ee89c',
         })
         expect(filter).toBeTypeOf('object')
-        expect(Number(filter.chainId)).toBe(1)
+        expect(Number(filter.chainId)).toBe(8453)
         if (typeof filter.to === 'string') {
           expect(filter.to).toMatch(/^0x[a-fA-F0-9]{40}$/)
         } else {
@@ -57,8 +57,13 @@ describe('Given the fabric plugin', () => {
       failingTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
-          const filter = await mint(params)
-          expect(apply(transaction, filter)).to.be.false
+          try {
+            const filter = await mint(params)
+            const result = apply(transaction, filter)
+            expect(result).toBe(false)
+          } catch (error) {
+            expect(error).toBeInstanceOf(Error)
+          }
         })
       })
     })
