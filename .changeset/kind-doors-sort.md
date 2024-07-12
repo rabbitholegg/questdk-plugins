@@ -3,4 +3,4 @@
 "@rabbitholegg/questdk-plugin-utils": minor
 ---
 
-add `getExternalUrl` funciton to IActionPlugin
+add `getExternalUrl` function to IActionPlugin
