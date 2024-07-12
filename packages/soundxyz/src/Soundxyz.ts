@@ -41,7 +41,7 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
 
   return compressJson({
     chainId,
@@ -53,6 +53,7 @@ export const mint = async (
         quantity: formatAmount(amount),
         tier: tokenId,
         to: recipient, // Can be given as gift, so recipient will not always match sender
+        affiliate: referral,
       },
     },
   })
