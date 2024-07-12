@@ -57,6 +57,7 @@ export type MintActionParams = {
   tokenId?: number
   amount?: number | FilterOperator
   recipient?: Address
+  referral?: Address
 }
 
 export type BurnActionParams = MintActionParams
