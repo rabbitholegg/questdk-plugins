@@ -209,10 +209,7 @@ export const getFees = (
   }
 }
 
-export const getExternalUrl = (
-  plugin: IActionPlugin,
-  params: ActionParams,
-) => {
+export const getExternalUrl = (plugin: IActionPlugin, params: ActionParams) => {
   if (typeof plugin.getExternalUrl === 'function') {
     return plugin.getExternalUrl(params)
   } else {
