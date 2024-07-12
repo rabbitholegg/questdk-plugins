@@ -103,9 +103,8 @@ export const simulateMint = async (
   value: bigint,
   account?: Address,
   client?: PublicClient,
-  creatorAddress?: Address,
 ): Promise<SimulateContractReturnType> => {
-  const { contractAddress, recipient, tokenId, amount } = mint
+  const { contractAddress, recipient, tokenId, amount, referral } = mint
   const _client = (client ??
     createPublicClient({
       chain: chainIdToViemChain(mint.chainId),
@@ -133,7 +132,7 @@ export const simulateMint = async (
     signedClaimTicket: 0,
     signedDeadline: 0,
     signature: zeroHash,
-    affiliate: creatorAddress ?? ZORA_DEPLOYER_ADDRESS,
+    affiliate: referral ?? ZORA_DEPLOYER_ADDRESS,
     affiliateProof: [zeroHash],
     attributionId: 0,
   }
