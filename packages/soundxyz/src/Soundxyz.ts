@@ -41,7 +41,8 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
+    mint
 
   return compressJson({
     chainId,
