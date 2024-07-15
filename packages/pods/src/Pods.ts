@@ -193,7 +193,6 @@ export const getExternalUrl = async (
     }) as PublicClient
 
     const uri = await getUri(client, contractAddress, tokenId)
-    console.log('uri', uri)
     const cid = uri.split('/').slice(2).join('/')
 
     const { data } = await axios.get(`https://arweave.net/${cid}`)
