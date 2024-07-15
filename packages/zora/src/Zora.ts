@@ -435,5 +435,7 @@ export const getExternalUrl = async (
   const referralParams = referral ? `?referrer=${referral}` : ''
   const baseUrl = `https://zora.co/collect/${chainSlug}:${contractAddress}`
 
-  return tokenId != null ? `${baseUrl}/${tokenId}${referralParams}` : `${baseUrl}${referralParams}`
+  return tokenId != null
+    ? `${baseUrl}/${tokenId}${referralParams}`
+    : `${baseUrl}${referralParams}`
 }
