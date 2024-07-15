@@ -93,7 +93,8 @@ export const create = async (
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const universalMinter =
     zoraUniversalMinterAddress[
@@ -190,7 +191,8 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   let data
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
@@ -241,7 +243,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   const _client =
     client ??
     createPublicClient({
