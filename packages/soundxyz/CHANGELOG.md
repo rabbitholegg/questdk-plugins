@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.52
+
+### Patch Changes
+
+- [#468](https://github.com/rabbitholegg/questdk-plugins/pull/468) [`e3dea9a9`](https://github.com/rabbitholegg/questdk-plugins/commit/e3dea9a90114892aee4fe874ce9a67b03a5d6faf) Thanks [@mmackz](https://github.com/mmackz)! - fix for quantity zero
+
+- Updated dependencies [[`0f1bcea6`](https://github.com/rabbitholegg/questdk-plugins/commit/0f1bcea608e9ecc9de9f6f1920e7962264a2ebf7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.40
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.51
 
 ### Patch Changes

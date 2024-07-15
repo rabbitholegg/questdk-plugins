@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.65
+
+### Minor Changes
+
+- [#467](https://github.com/rabbitholegg/questdk-plugins/pull/467) [`261e6db6`](https://github.com/rabbitholegg/questdk-plugins/commit/261e6db63aefd56779ad1073046fd39f55ec2544) Thanks [@mmackz](https://github.com/mmackz)! - amount zero fix
+
+### Patch Changes
+
+- Updated dependencies [[`0f1bcea6`](https://github.com/rabbitholegg/questdk-plugins/commit/0f1bcea608e9ecc9de9f6f1920e7962264a2ebf7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.40
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.64
 
 ### Patch Changes

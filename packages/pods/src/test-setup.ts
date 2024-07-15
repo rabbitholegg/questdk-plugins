@@ -1,4 +1,4 @@
-import { POD_MINT } from './test-transactions'
+import { POD_MINT, ZERO_QUANTITY } from './test-transactions'
 import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import { getAddress } from 'viem'
 
@@ -29,4 +29,5 @@ export const failingTestCases = [
   createTestCase(POD_MINT, 'when amount is incorrect', {
     amount: '72',
   }),
+  createTestCase(ZERO_QUANTITY, 'when quantity minted is 0'),
 ]
