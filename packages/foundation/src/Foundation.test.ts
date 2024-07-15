@@ -12,7 +12,7 @@ import {
   type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { Address, parseEther } from 'viem'
+import { Address, parseEther, zeroAddress } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the foundation plugin', () => {
@@ -62,19 +62,22 @@ describe('Given the foundation plugin', () => {
     })
 
     describe('should not pass filter with invalid transactions', () => {
-      failingTestCases.forEach((testCase) => {
+      for (const testCase of failingTestCases) {
         const { transaction, description, params } = testCase
         test(description, async () => {
+          let result: boolean | undefined
           try {
             const filter = await mint(params)
-            const result = apply(transaction, filter)
-            expect(result).toBe(false)
+            result = apply(transaction, filter)
           } catch (error) {
             expect(error).toBeDefined()
             expect(error).toBeInstanceOf(Error)
           }
+          if (result) { 
+            expect(result).toBe(false)
+          }
         })
-      })
+      }
     })
   })
 
@@ -194,6 +197,7 @@ describe('Given the foundation plugin', () => {
         contractAddress: CONTRACT_ADDRESS,
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
+        referral: zeroAddress,
       }
 
       // mock
@@ -225,6 +229,7 @@ describe('Given the foundation plugin', () => {
         contractAddress: CONTRACT_ADDRESS,
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
+        referral: zeroAddress,
       }
 
       // mock
