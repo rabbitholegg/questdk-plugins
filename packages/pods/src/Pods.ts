@@ -198,7 +198,7 @@ export const getExternalUrl = async (
 
     const { data } = await axios.get(`https://arweave.net/${cid}`)
 
-    // different properties depending on uri function. At least one of these will be defined
+    // different properties depending on uri function. One of these will be defined
     const baseUrl = data.external_link ?? data.external_url
 
     return referral ? `${baseUrl}?referrer=${referral}` : baseUrl
