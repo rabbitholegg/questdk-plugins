@@ -3,6 +3,7 @@ import {
   CREATE_COLLECTION_BASE,
   CREATE_COLLECTION_ZORA,
   LAYER_ZERO_MINT,
+  MINT,
   MINT_BATCH_WITHOUT_FEES,
   MINT_WITH_REWARDS,
   MINT_WITH_REWARDS_1155,
@@ -15,7 +16,8 @@ export const passingTestCasesMint = [
   createTestCase(MINT_WITH_REWARDS, 'Minting with rewards'),
   createTestCase(MINT_WITH_REWARDS_1155, 'Minting with rewards 1155'),
   createTestCase(MINT_BATCH_WITHOUT_FEES, 'When using the batch mint function'),
-  createTestCase(BATCH_MINT_ARB, 'when using batch mint function on arbitrum'),
+  createTestCase(BATCH_MINT_ARB, 'when using batch mint function on optimism'),
+  createTestCase(MINT, 'when using mint function'),
   createTestCase(MINT_WITH_REWARDS, 'when contractAddress is checksummed', {
     contractAddress: getAddress(MINT_WITH_REWARDS.params.contractAddress),
   }),
@@ -61,6 +63,12 @@ export const failingTestCasesMint = [
     },
   ),
   createTestCase(ZERO_QUANTITY, 'when quantity minted is 0'),
+  createTestCase(MINT_WITH_REWARDS, 'when referral is incorrect', {
+    referral: '0xDEAD0940159fB3368F5b06b34212C0cDF4e2C032',
+  }),
+  createTestCase(MINT, 'when referral is incorrect', {
+    referral: '0xDEAD0940159fB3368F5b06b34212C0cDF4e2C032',
+  }),
 ]
 
 export const passingTestCasesCreate = [
