@@ -299,6 +299,7 @@ describe('Given the foundation plugin', () => {
     })
 
     test('should simulate a mint with a dutch auction', async () => {
+      // ! fails when using live data (dutch auction not supported)
       const mint = {
         chainId: Chains.BASE,
         contractAddress: '0x6a41fcce9d075a9f6324b626af56cf632c509ec9',
@@ -367,6 +368,7 @@ describe('Given the foundation plugin', () => {
     })
 
     test('should simulate a mint with an 1155 OE mint', async () => {
+      // ! fails when using live data (mint expired)
       const mint = {
         chainId: Chains.BASE,
         contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
