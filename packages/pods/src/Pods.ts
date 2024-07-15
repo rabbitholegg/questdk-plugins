@@ -48,7 +48,9 @@ export const mint = async (
       $or: [
         { mintReferral: checksumAddress },
         {
-          rewardsRecipients: { $and: [{ $first: checksumAddress }, { $last: checksumAddress }] },
+          rewardsRecipients: {
+            $and: [{ $first: checksumAddress }, { $last: checksumAddress }],
+          },
         },
       ],
     })
