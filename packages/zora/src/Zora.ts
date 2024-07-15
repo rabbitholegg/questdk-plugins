@@ -93,7 +93,7 @@ export const create = async (
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } = mint
 
   const universalMinter =
     zoraUniversalMinterAddress[
@@ -124,6 +124,19 @@ export const mint = async (
   if (tokenId) {
     andArray1155.push({
       tokenId,
+    })
+  }
+  if (referral) {
+    const checksumAddress = getAddress(referral)
+    andArray1155.push({
+      $or: [
+        { mintReferral: checksumAddress },
+        {
+          rewardsRecipients: {
+            $and: [{ $first: checksumAddress }, { $last: checksumAddress }],
+          },
+        },
+      ],
     })
   }
 
