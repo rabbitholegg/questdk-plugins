@@ -116,7 +116,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   const _client =
     client ??
     (createPublicClient({
