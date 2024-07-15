@@ -1,5 +1,6 @@
 import {
   POD_MINT,
+  MINT_REFERRAL,
   MINT_WITH_REWARDS_REFERRAL,
   ZERO_QUANTITY,
 } from './test-transactions'
@@ -12,6 +13,7 @@ export const passingTestCases = [
     contractAddress: getAddress(POD_MINT.params.contractAddress),
   }),
   createTestCase(MINT_WITH_REWARDS_REFERRAL, 'when referral is correct'),
+  createTestCase(MINT_REFERRAL, 'when referral is correct'),
   createTestCase(POD_MINT, 'using "any tokenId"', {
     tokenId: undefined,
     amount: undefined,
@@ -36,6 +38,9 @@ export const failingTestCases = [
   }),
   createTestCase(ZERO_QUANTITY, 'when quantity minted is 0'),
   createTestCase(MINT_WITH_REWARDS_REFERRAL, 'when referral is incorrect', {
+    referral: zeroAddress,
+  }),
+  createTestCase(MINT_REFERRAL, 'when referral is incorrect', {
     referral: zeroAddress,
   }),
 ]
