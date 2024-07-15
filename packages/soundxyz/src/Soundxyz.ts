@@ -297,18 +297,18 @@ export const getExternalUrl = async (
       chain: chainIdToViemChain(chainId),
       transport: http(),
     }) as PublicClient
-  
-    const contractUri = await client.readContract({
+
+    const contractUri = (await client.readContract({
       address: contractAddress,
       abi: CONTRACT_URI_ABI,
       functionName: 'contractURI',
-    }) as string
-  
+    })) as string
+
     const cid = contractUri.split('/').slice(2).join('/')
-  
+
     const { data } = await axios.get(`https://arweave.net/${cid}`)
     const { external_link } = data
-  
+
     return external_link
   } catch (error) {
     console.error('an error occurred fetching the contract uri')
