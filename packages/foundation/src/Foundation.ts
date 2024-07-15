@@ -43,7 +43,8 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
+    mint
 
   // 721
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -167,7 +168,8 @@ export const getFees = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
@@ -271,7 +273,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
+    mint
 
   const _client =
     client ||
@@ -302,7 +305,13 @@ export const simulateMint = async (
         value,
         abi: FIXED_PRICE_FRAGMENTS,
         functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
-        args: [contractAddress, mintAmount, recipient, referral ?? REFERRAL_ADDRESS, []],
+        args: [
+          contractAddress,
+          mintAmount,
+          recipient,
+          referral ?? REFERRAL_ADDRESS,
+          [],
+        ],
         account: account || DEFAULT_ACCOUNT,
       })
       return result

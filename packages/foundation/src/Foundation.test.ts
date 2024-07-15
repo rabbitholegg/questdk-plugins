@@ -73,7 +73,7 @@ describe('Given the foundation plugin', () => {
             expect(error).toBeDefined()
             expect(error).toBeInstanceOf(Error)
           }
-          if (result) { 
+          if (result) {
             expect(result).toBe(false)
           }
         })
