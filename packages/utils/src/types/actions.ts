@@ -539,6 +539,7 @@ export interface IActionPlugin {
   getFees?: (
     params: ActionParams,
   ) => Promise<{ actionFee: bigint; projectFee: bigint }>
+  getExternalUrl?: (params: ActionParams) => Promise<string>
   validate?: (
     validationPayload: PluginActionValidation,
   ) =>
