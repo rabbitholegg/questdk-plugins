@@ -1,8 +1,9 @@
-import { z } from 'zod'
 import {
   type FilterOperator,
   EthAddressSchema,
 } from '@rabbitholegg/questdk-plugin-utils'
+import { type Address } from 'viem'
+import { z } from 'zod'
 
 export const PremintResponseSchema = z.array(
   z.object({
@@ -49,3 +50,6 @@ export type AndArrayItem =
   | { quantity: string | number | bigint | FilterOperator }
   | RecipientCondition
   | { tokenId: string | number }
+  | { mintReferral: Address }
+  | { rewardsRecipients: { $and: [{ $first: Address }, { $last: Address }] } }
+  | { $or: AndArrayItem[] }
