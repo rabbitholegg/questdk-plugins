@@ -269,7 +269,7 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
 
   const _client =
     client ||
@@ -300,7 +300,7 @@ export const simulateMint = async (
         value,
         abi: FIXED_PRICE_FRAGMENTS,
         functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
-        args: [contractAddress, mintAmount, recipient, REFERRAL_ADDRESS, []],
+        args: [contractAddress, mintAmount, recipient, referral ?? REFERRAL_ADDRESS, []],
         account: account || DEFAULT_ACCOUNT,
       })
       return result
@@ -332,7 +332,7 @@ export const simulateMint = async (
         contractAddress,
         [[tokenId ?? 1, mintAmount]],
         recipient,
-        REFERRAL_ADDRESS,
+        referral ?? REFERRAL_ADDRESS,
       ],
       account: account || DEFAULT_ACCOUNT,
     })
