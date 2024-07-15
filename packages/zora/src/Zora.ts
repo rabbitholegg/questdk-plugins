@@ -273,7 +273,7 @@ export const simulateMint = async (
   )}`
 
   // Check if the implementation contracts bytecode contains valid function selectors
-  const bytecode = await _client.getBytecode({ address: implementationAddress })
+  const bytecode = await _client.getCode({ address: implementationAddress })
   const containsSelector = FUNCTION_SELECTORS.some((selector) =>
     bytecode?.includes(selector),
   )
