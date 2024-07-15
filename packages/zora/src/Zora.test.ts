@@ -29,6 +29,7 @@ import { describe, expect, test, vi, beforeEach, MockedFunction } from 'vitest'
 import { PremintResponse } from './types'
 import axios from 'axios'
 import { validatePremint } from './validate'
+import { ZORA_DEPLOYER_ADDRESS } from './contract-addresses'
 
 const MockedPremintResponse: PremintResponse = [
   {
@@ -262,6 +263,7 @@ describe('Given the getMintIntent function', () => {
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
+      referral: ZORA_DEPLOYER_ADDRESS,
     }
 
     const result = await getMintIntent(mint)
@@ -276,10 +278,10 @@ describe('Given the getMintIntent function', () => {
   test('returns a TransactionRequest with correct properties when tokenId is null', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
-
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
+      referral: ZORA_DEPLOYER_ADDRESS,
     }
 
     const result = await getMintIntent(mint)
@@ -404,11 +406,12 @@ describe('simulateMint function', () => {
       tokenId: 10,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
 
-    const result = await mockFn.simulateMint(mint, value, account)
+    const result = await simulateMint(mint, value, account)
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
@@ -431,15 +434,16 @@ describe('simulateMint function', () => {
 
     const mint: MintIntentParams = {
       chainId: Chains.BLAST,
-      contractAddress: '0x8704c8b68e577d54be3c16341fbd31bac47c7471',
+      contractAddress: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
       tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
 
-    const result = await mockFn.simulateMint(mint, value, account)
+    const result = await simulateMint(mint, value, account)
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
@@ -452,6 +456,7 @@ describe('simulateMint function', () => {
       tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
