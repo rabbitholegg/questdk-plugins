@@ -425,7 +425,7 @@ describe('simulateMint function', () => {
         _account: Address,
       ) => ({
         request: {
-          address: '0x8704c8b68e577d54be3c16341fbd31bac47c7471',
+          address: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
           value: parseEther('0.000777'),
         },
       }),
@@ -434,7 +434,7 @@ describe('simulateMint function', () => {
 
     const mint: MintIntentParams = {
       chainId: Chains.BLAST,
-      contractAddress: '0x8704c8b68e577d54be3c16341fbd31bac47c7471',
+      contractAddress: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
       tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
