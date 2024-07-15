@@ -211,7 +211,9 @@ describe('getExternalUrl function', () => {
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
     const result = await getExternalUrl(params)
-    expect(result).toBe('https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=0x1234567890123456789012345678901234567890')
+    expect(result).toBe(
+      'https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=0x1234567890123456789012345678901234567890',
+    )
   })
 
   test('should return correct url for mint w/out tokenId', async () => {
@@ -221,7 +223,9 @@ describe('getExternalUrl function', () => {
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
     const result = await getExternalUrl(params)
-    expect(result).toBe('https://pods.media/mint-podcast?referrer=0x1234567890123456789012345678901234567890')
+    expect(result).toBe(
+      'https://pods.media/mint-podcast?referrer=0x1234567890123456789012345678901234567890',
+    )
   })
 
   test('should return fallback url if error occurs', async () => {
