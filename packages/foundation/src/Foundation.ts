@@ -43,7 +43,7 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
 
   // 721
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -71,6 +71,7 @@ export const mint = async (
           count: formatAmount(amount),
           nftContract: contractAddress,
           nftRecipient: recipient,
+          buyReferrer: referral,
         },
         {
           // 1155 NFTMarketRouter
@@ -80,6 +81,7 @@ export const mint = async (
           tokenQuantities: {
             $some: { tokenId, quantity: formatAmount(amount) },
           },
+          referrer: referral,
         },
       ],
     },
