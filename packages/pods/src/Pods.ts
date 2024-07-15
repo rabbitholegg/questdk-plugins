@@ -26,6 +26,7 @@ import {
   type TransactionRequest,
   createPublicClient,
   encodeFunctionData,
+  getAddress,
   pad,
   parseEther,
 } from 'viem'
@@ -42,14 +43,12 @@ export const mint = async (
     },
   ]
   if (referral) {
-    const referralLower = referral.toLowerCase() as Address
+    const checksumAddress = getAddress(referral)
     andArray1155.push({
       $or: [
-        { mintReferral: referralLower },
+        { mintReferral: checksumAddress },
         {
-          rewardsRecipients: {
-            $and: [{ $first: referralLower }, { $last: referralLower }],
-          },
+          rewardsRecipients: { $and: [{ $first: checksumAddress }, { $last: checksumAddress }] },
         },
       ],
     })
