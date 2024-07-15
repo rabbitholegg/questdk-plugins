@@ -33,13 +33,27 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const andArray1155: AndArrayItem[] = [
     {
       quantity: formatAmount(amount),
     },
   ]
+  if (referral) {
+    const referralLower = referral.toLowerCase() as Address
+    andArray1155.push({
+      $or: [
+        { mintReferral: referralLower },
+        {
+          rewardsRecipients: {
+            $and: [{ $first: referralLower }, { $last: referralLower }],
+          },
+        },
+      ],
+    })
+  }
   if (recipient) {
     andArray1155.push({
       minterArguments: {

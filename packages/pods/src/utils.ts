@@ -9,6 +9,9 @@ export type AndArrayItem =
   | { quantity: string | number | bigint | FilterOperator }
   | { minterArguments: { $regex: string } }
   | { tokenId: number | string }
+  | { mintReferral: Address }
+  | { rewardsRecipients: { $and: [{ $first: Address }, { $last: Address }] } }
+  | { $or: AndArrayItem[] }
 
 export async function getLatestTokenId(
   contractAddress: Address,
