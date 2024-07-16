@@ -80,6 +80,7 @@ describe('Given the getMintIntent function', () => {
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
+      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
     }
 
     const result = await getMintIntent(mint)
@@ -125,6 +126,7 @@ describe('simulateMint function', () => {
       tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
     }
     const value = parseEther('0.0007')
     const address = mint.recipient as Address
@@ -166,6 +168,7 @@ describe('simulateMint function', () => {
       contractAddress: '0x7e0b40af1d6f26f2141b90170c513e57b5edd74e',
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
     }
     const value = parseEther('0.0007')
     const address = mint.recipient as Address
