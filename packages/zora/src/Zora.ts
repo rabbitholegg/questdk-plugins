@@ -6,7 +6,7 @@ import {
   ZORA_MINTER_ABI_1155,
   ZORA_MINTER_ABI_1155_LEGACY,
 } from './abi'
-import { CHAIN_ID_ARRAY } from './chain-ids'
+import { CHAIN_ID_ARRAY, CHAIN_ID_TO_ZORA_SLUG } from './chain-ids'
 import {
   FIXED_PRICE_SALE_STRATS,
   ZORA_1155_FACTORY,
@@ -425,4 +425,17 @@ export const getDynamicNameParams = async (
     project: 'Zora',
   }
   return values
+}
+
+export const getExternalUrl = async (
+  params: MintActionParams,
+): Promise<string> => {
+  const { chainId, contractAddress, tokenId, referral } = params
+  const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
+  const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+  const baseUrl = `https://zora.co/collect/${chainSlug}:${contractAddress}`
+
+  return tokenId != null
+    ? `${baseUrl}/${tokenId}${referralParams}`
+    : `${baseUrl}${referralParams}`
 }
