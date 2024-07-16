@@ -200,7 +200,7 @@ export const getExternalUrl = async (
     // different properties depending on uri function. One of these will be defined
     const baseUrl = data.external_link ?? data.external_url
 
-    return referral ? `${baseUrl}?referrer=${referral}` : baseUrl
+    return `${baseUrl}?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
   } catch (error) {
     console.error('an error occurred fetching data from the contract')
     if (error instanceof Error) {

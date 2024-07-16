@@ -9,6 +9,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { getExternalUrl, getMintIntent, mint } from './Pods'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
+import { ZORA_DEPLOYER_ADDRESS } from './contract-addresses'
 
 describe('Given the pods plugin', () => {
   describe('When handling the mint', () => {
@@ -203,7 +204,7 @@ describe('simulateMint function', () => {
 })
 
 describe('getExternalUrl function', () => {
-  test('should return correct url for mint w/tokenId', async () => {
+  test('should return correct url for mint w/tokenId and referral', async () => {
     const params = {
       chainId: Chains.BASE,
       contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
@@ -213,6 +214,18 @@ describe('getExternalUrl function', () => {
     const result = await getExternalUrl(params)
     expect(result).toBe(
       'https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=0x1234567890123456789012345678901234567890',
+    )
+  })
+
+  test('should return correct url for mint w/tokenId and w/o referral', async () => {
+    const params = {
+      chainId: Chains.BASE,
+      contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
+      tokenId: 21,
+    }
+    const result = await getExternalUrl(params)
+    expect(result).toBe(
+      `https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=${ZORA_DEPLOYER_ADDRESS}`,
     )
   })
 
