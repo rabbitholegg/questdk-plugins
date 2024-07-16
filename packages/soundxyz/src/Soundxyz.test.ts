@@ -181,7 +181,7 @@ describe('simulateMint function', () => {
       contractAddress: '0xdf71F2F15bCcDC7c7A89F01dd45cDE5A43F7e79f',
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
+      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
@@ -198,7 +198,7 @@ describe('simulateMint function', () => {
       contractAddress: '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE',
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
+      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
