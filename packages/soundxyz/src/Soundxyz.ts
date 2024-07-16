@@ -1,4 +1,6 @@
+import axios from 'axios'
 import {
+  CONTRACT_URI_ABI,
   MINT_INFO_LIST_ABI,
   NEXT_SCHEDULE_NUM_ABI,
   SUPERMINTER,
@@ -286,4 +288,39 @@ export const getDynamicNameParams = async (
     project: 'Sound.XYZ',
   }
   return values
+}
+
+export const getExternalUrl = async (
+  params: MintActionParams,
+): Promise<string> => {
+  const { chainId, contractAddress, referral } = params
+
+  try {
+    const client = createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    }) as PublicClient
+
+    const contractUri = (await client.readContract({
+      address: contractAddress,
+      abi: CONTRACT_URI_ABI,
+      functionName: 'contractURI',
+    })) as string
+
+    const cid = contractUri.split('/').slice(2).join('/')
+
+    const { data } = await axios.get(`https://arweave.net/${cid}`)
+    const { external_link } = data
+
+    return `${external_link}?referral=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+  } catch (error) {
+    console.error('an error occurred fetching the contract uri')
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error(error)
+    }
+    // fallback to default sound.xyz url
+    return 'https://sound.xyz'
+  }
 }
