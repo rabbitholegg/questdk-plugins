@@ -432,7 +432,7 @@ export const getExternalUrl = async (
 ): Promise<string> => {
   const { chainId, contractAddress, tokenId, referral } = params
   const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
-  const referralParams = referral ? `?referrer=${referral}` : ''
+  const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
   const baseUrl = `https://zora.co/collect/${chainSlug}:${contractAddress}`
 
   return tokenId != null
