@@ -5,7 +5,7 @@ import {
   mint,
   simulateMint,
 } from './Soundxyz'
-import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI } from './constants'
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI, ZORA_DEPLOYER_ADDRESS } from './constants'
 import {
   OP_SUPERMINTER_V2,
   failingTestCases,
@@ -20,7 +20,7 @@ import {
   type MintIntentParams,
   getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, parseEther } from 'viem'
+import { type Address, parseEther, getAddress } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the soundxyz plugin', () => {
@@ -176,7 +176,7 @@ describe('simulateMint function', () => {
       contractAddress: '0xdf71F2F15bCcDC7c7A89F01dd45cDE5A43F7e79f',
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referralAddress: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
+      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
@@ -205,13 +205,33 @@ describe('simulateMint function', () => {
   })
 })
 
-describe('getExternalLink', () => {
-  test('should return the correct link', async () => {
+describe('getExternalUrl', () => {
+  test('should return the correct link with referral', async () => {
     const contractAddress: Address =
       '0xE39Df1AD806e84de47D0F6ddf56a0007C678597c'
-    const mintParams = { contractAddress, chainId: Chains.BASE }
+    const mintParams = {
+      contractAddress,
+      chainId: Chains.BASE,
+      referral: getAddress('0x1234567890123456789012345678901234567890'),
+    }
 
     const link = await getExternalUrl(mintParams)
-    expect(link).equals('https://www.sound.xyz/33below/midnight-diner-ii')
+    expect(link).equals(
+      'https://www.sound.xyz/33below/midnight-diner-ii?referral=0x1234567890123456789012345678901234567890',
+    )
+  })
+
+  test('should return the correct link with our own referral if no referral is provided', async () => {
+    const contractAddress: Address =
+      '0xE39Df1AD806e84de47D0F6ddf56a0007C678597c'
+    const mintParams = {
+      contractAddress,
+      chainId: Chains.BASE,
+    }
+
+    const link = await getExternalUrl(mintParams)
+    expect(link).equals(
+      `https://www.sound.xyz/33below/midnight-diner-ii?referral=${ZORA_DEPLOYER_ADDRESS}`,
+    )
   })
 })
