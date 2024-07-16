@@ -5,7 +5,12 @@ import {
   mint,
   simulateMint,
 } from './Soundxyz'
-import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI, ZORA_DEPLOYER_ADDRESS } from './constants'
+import {
+  SUPERMINTER,
+  SUPERMINTER_V2,
+  SUPERMINTER_V2_ABI,
+  ZORA_DEPLOYER_ADDRESS,
+} from './constants'
 import {
   OP_SUPERMINTER_V2,
   failingTestCases,
