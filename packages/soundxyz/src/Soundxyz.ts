@@ -292,7 +292,7 @@ export const getDynamicNameParams = async (
 export const getExternalUrl = async (
   params: MintActionParams,
 ): Promise<string> => {
-  const { chainId, contractAddress } = params
+  const { chainId, contractAddress, referral } = params
 
   try {
     const client = createPublicClient({
@@ -311,7 +311,7 @@ export const getExternalUrl = async (
     const { data } = await axios.get(`https://arweave.net/${cid}`)
     const { external_link } = data
 
-    return external_link
+    return `${external_link}?referral=${referral ?? ZORA_DEPLOYER_ADDRESS}`
   } catch (error) {
     console.error('an error occurred fetching the contract uri')
     if (error instanceof Error) {
