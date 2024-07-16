@@ -411,7 +411,9 @@ describe('Given the foundation plugin', () => {
         contractAddress: '0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
       }
       const result = await getExternalUrl(mint)
-      expect(result).toBe('https://foundation.app/mint/base/0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4')
+      expect(result).toBe(
+        'https://foundation.app/mint/base/0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
+      )
     })
 
     test('should return the base url for 1155 mint', async () => {
