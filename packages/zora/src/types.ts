@@ -51,5 +51,5 @@ export type AndArrayItem =
   | RecipientCondition
   | { tokenId: string | number }
   | { mintReferral: Address }
-  | { rewardsRecipients: { $and: [{ $first: Address }, { $last: Address }] } }
+  | { rewardsRecipients: Address[] }
   | { $or: AndArrayItem[] }
