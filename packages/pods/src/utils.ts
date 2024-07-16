@@ -35,3 +35,40 @@ export async function getLatestTokenId(
     return 1
   }
 }
+
+export async function getUri(
+  client: PublicClient,
+  contractAddress: Address,
+  tokenId?: number,
+): Promise<string> {
+  if (tokenId == null) {
+    return (await client.readContract({
+      address: contractAddress,
+      abi: [
+        {
+          inputs: [],
+          name: 'contractURI',
+          outputs: [{ internalType: 'string', name: '', type: 'string' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+      ],
+      functionName: 'contractURI',
+    })) as string
+  }
+
+  return (await client.readContract({
+    address: contractAddress,
+    abi: [
+      {
+        inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
+        name: 'uri',
+        outputs: [{ internalType: 'string', name: '', type: 'string' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+    ],
+    functionName: 'uri',
+    args: [BigInt(tokenId)],
+  })) as string
+}
