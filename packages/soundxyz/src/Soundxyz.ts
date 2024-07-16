@@ -41,7 +41,8 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
+    mint
 
   return compressJson({
     chainId,
@@ -53,6 +54,7 @@ export const mint = async (
         quantity: formatAmount(amount),
         tier: tokenId,
         to: recipient, // Can be given as gift, so recipient will not always match sender
+        affiliate: referral,
       },
     },
   })
@@ -102,9 +104,8 @@ export const simulateMint = async (
   value: bigint,
   account?: Address,
   client?: PublicClient,
-  creatorAddress?: Address,
 ): Promise<SimulateContractReturnType> => {
-  const { contractAddress, recipient, tokenId, amount } = mint
+  const { contractAddress, recipient, tokenId, amount, referral } = mint
   const _client = (client ??
     createPublicClient({
       chain: chainIdToViemChain(mint.chainId),
@@ -132,7 +133,7 @@ export const simulateMint = async (
     signedClaimTicket: 0,
     signedDeadline: 0,
     signature: zeroHash,
-    affiliate: creatorAddress ?? ZORA_DEPLOYER_ADDRESS,
+    affiliate: referral ?? ZORA_DEPLOYER_ADDRESS,
     affiliateProof: [zeroHash],
     attributionId: 0,
   }
