@@ -10,7 +10,7 @@ export type AndArrayItem =
   | { minterArguments: { $regex: string } }
   | { tokenId: number | string }
   | { mintReferral: Address }
-  | { rewardsRecipients: { $and: [{ $first: Address }, { $last: Address }] } }
+  | { rewardsRecipients: Address[] }
   | { $or: AndArrayItem[] }
 
 export async function getLatestTokenId(
