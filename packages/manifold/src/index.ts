@@ -5,6 +5,7 @@ import type {
 } from '@rabbitholegg/questdk'
 
 import {
+  getExternalUrl,
   getFees,
   getMintIntent,
   getProjectFees,
@@ -23,6 +24,8 @@ export const Manifold: IActionPlugin = {
     getProjectFees(params as unknown as MintActionParams),
   getFees: async (params: ActionParams) =>
     getFees(params as unknown as MintActionParams),
+  getExternalUrl: async (params: ActionParams) =>
+    getExternalUrl(params as unknown as MintActionParams),
   getMintIntent,
   simulateMint,
 }
