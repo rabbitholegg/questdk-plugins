@@ -30,6 +30,7 @@ import { describe, expect, test, vi, beforeEach, MockedFunction } from 'vitest'
 import { PremintResponse } from './types'
 import axios from 'axios'
 import { validatePremint } from './validate'
+import { ZORA_DEPLOYER_ADDRESS } from './contract-addresses'
 
 const MockedPremintResponse: PremintResponse = [
   {
@@ -516,7 +517,7 @@ describe('getDynamicNameParams function', () => {
 })
 
 describe('getExternalUrl function', () => {
-  test('should return correct url for 1155 mint with token id', async () => {
+  test('should return correct url for 1155 mint with token id w/referral', async () => {
     const params = {
       chainId: Chains.ZORA,
       contractAddress: getAddress('0x393c46fe7887697124a73f6028f39751aa1961a3'),
@@ -526,6 +527,18 @@ describe('getExternalUrl function', () => {
     const result = await getExternalUrl(params)
     expect(result).toBe(
       'https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3/1?referrer=0x1234567890123456789012345678901234567890',
+    )
+  })
+
+  test('should return correct url for 1155 mint with token id w/o referral', async () => {
+    const params = {
+      chainId: Chains.ZORA,
+      contractAddress: getAddress('0x393c46fe7887697124a73f6028f39751aa1961a3'),
+      tokenId: 1,
+    }
+    const result = await getExternalUrl(params)
+    expect(result).toBe(
+      `https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3/1?referrer=${ZORA_DEPLOYER_ADDRESS}`,
     )
   })
 
