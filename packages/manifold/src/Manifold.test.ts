@@ -1,4 +1,4 @@
-import { getFees, getMintIntent, mint, simulateMint } from './Manifold'
+import { getExternalUrl, getFees, getMintIntent, mint, simulateMint } from './Manifold'
 import { ERC721_CONTRACT, ERC1155_CONTRACT } from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
@@ -8,7 +8,7 @@ import {
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import axios from 'axios'
-import { type Address, parseEther } from 'viem'
+import { type Address, parseEther, getAddress } from 'viem'
 import { MockedFunction, beforeEach, describe, expect, test, vi } from 'vitest'
 
 vi.mock('axios', () => {
@@ -216,5 +216,35 @@ describe('simulateMint function', () => {
     const request = result.request
     expect(request.address).toBe(ERC721_CONTRACT)
     expect(request.value).toBe(value)
+  })
+})
+
+describe('getExternalUrl function', () => {
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
+  test('should return the correct url for a 721 mint', async () => {
+    const mint = {
+      chainId: Chains.OPTIMISM,
+      contractAddress: getAddress('0x6935cd348193bab133f3081f53eb99ee6f0d685b'),
+    }
+    ;(axios.get as MockedFunction<typeof axios.get>).mockResolvedValue({
+      status: 200,
+      data: {
+        slug: 'girls-man',
+      },
+    })
+
+    const result = await getExternalUrl(mint)
+    expect(result).toBe('https://app.manifold.xyz/c/girls-man')
+  })
+
+  test('should return the fallback url for an unknown contract', async () => {
+    const mint = {
+      chainId: Chains.OPTIMISM,
+      contractAddress: getAddress('0x7935cd348193bab133f3081f53eb99ee6f0d685b'),
+    }
+    const result = await getExternalUrl(mint)
+    expect(result).toBe('https://app.manifold.xyz/')
   })
 })
