@@ -89,12 +89,13 @@ export const getMintIntent = async (
   const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
   const _tokenId = tokenId ?? (await getLatestTokenId(contractAddress, chainId))
+  const referralAddress = referral ? getAddress(referral) : ZORA_DEPLOYER_ADDRESS
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
     _tokenId,
     amount,
-    [getAddress(referral) ?? ZORA_DEPLOYER_ADDRESS],
+    [referralAddress],
     pad(recipient),
   ]
 
@@ -132,12 +133,13 @@ export const simulateMint = async (
   }
 
   const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+  const referralAddress = referral ? getAddress(referral) : ZORA_DEPLOYER_ADDRESS
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
     _tokenId,
     amount,
-    [getAddress(referral) ?? ZORA_DEPLOYER_ADDRESS],
+    [referralAddress],
     pad(recipient),
   ]
   const result = await _client.simulateContract({
