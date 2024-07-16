@@ -93,7 +93,8 @@ export const create = async (
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const universalMinter =
     zoraUniversalMinterAddress[
@@ -124,6 +125,16 @@ export const mint = async (
   if (tokenId) {
     andArray1155.push({
       tokenId,
+    })
+  }
+  if (referral) {
+    andArray1155.push({
+      $or: [
+        { mintReferral: referral },
+        {
+          rewardsRecipients: [referral],
+        },
+      ],
     })
   }
 
@@ -177,7 +188,8 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   let data
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
@@ -197,7 +209,7 @@ export const getMintIntent = async (
       fixedPriceSaleStratAddress,
       tokenId,
       amount,
-      [ZORA_DEPLOYER_ADDRESS],
+      [referral ?? ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     // Assume it's an 1155 mint
@@ -228,7 +240,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   const _client =
     client ??
     createPublicClient({
@@ -260,7 +273,7 @@ export const simulateMint = async (
   )}`
 
   // Check if the implementation contracts bytecode contains valid function selectors
-  const bytecode = await _client.getBytecode({ address: implementationAddress })
+  const bytecode = await _client.getCode({ address: implementationAddress })
   const containsSelector = FUNCTION_SELECTORS.some((selector) =>
     bytecode?.includes(selector),
   )
@@ -286,7 +299,7 @@ export const simulateMint = async (
       fixedPriceSaleStratAddress,
       _tokenId,
       amount,
-      [ZORA_DEPLOYER_ADDRESS],
+      [referral ?? ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     const result = await _client.simulateContract({
