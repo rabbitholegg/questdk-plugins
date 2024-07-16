@@ -128,12 +128,11 @@ export const mint = async (
     })
   }
   if (referral) {
-    const referralAddress = getAddress(referral)
     andArray1155.push({
       $or: [
-        { mintReferral: referralAddress },
+        { mintReferral: referral },
         {
-          rewardsRecipients: [referralAddress],
+          rewardsRecipients: [referral],
         },
       ],
     })
