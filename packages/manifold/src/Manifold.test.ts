@@ -1,4 +1,10 @@
-import { getExternalUrl, getFees, getMintIntent, mint, simulateMint } from './Manifold'
+import {
+  getExternalUrl,
+  getFees,
+  getMintIntent,
+  mint,
+  simulateMint,
+} from './Manifold'
 import { ERC721_CONTRACT, ERC1155_CONTRACT } from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'

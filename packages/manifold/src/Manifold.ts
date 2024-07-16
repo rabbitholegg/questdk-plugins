@@ -214,7 +214,9 @@ export const getFees = async (
   }
 }
 
-export const getExternalUrl = async (mint: MintActionParams): Promise<string> => {
+export const getExternalUrl = async (
+  mint: MintActionParams,
+): Promise<string> => {
   const { chainId, contractAddress, tokenId } = mint
 
   const baseUrl = 'https://app.manifold.xyz/'
@@ -225,10 +227,12 @@ export const getExternalUrl = async (mint: MintActionParams): Promise<string> =>
       contractAddress,
       tokenId ?? 1,
     )
-  
-    const { data } = await axios.get<{ slug?: string }>(`https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`)
+
+    const { data } = await axios.get<{ slug?: string }>(
+      `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
+    )
     const slug = data.slug
-    
+
     if (!slug) {
       throw new Error('Slug not found in response')
     }
