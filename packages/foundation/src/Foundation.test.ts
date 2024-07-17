@@ -1,4 +1,4 @@
-import { mint } from './Foundation'
+import { getExternalUrl, mint } from './Foundation'
 // import { getFees, getMintIntent, simulateMint } from './Foundation'
 import {
   dutchAuctionResponse,
@@ -401,6 +401,39 @@ describe('Given the foundation plugin', () => {
       expect(request.address).toBe('0xfee588791cda1d01ccfc80b51efa00c0be5b129e')
       expect(request.functionName).toBe('mintMultiTokensFromFreeFixedPriceSale')
       expect(request.value).toBe(value)
+    })
+  })
+
+  describe('getExternalUrl function', () => {
+    test('should return the correct url for a 721 mint', async () => {
+      const mint: MintActionParams = {
+        chainId: Chains.BASE,
+        contractAddress: '0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
+      }
+      const result = await getExternalUrl(mint)
+      expect(result).toBe(
+        'https://foundation.app/mint/base/0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
+      )
+    })
+
+    test('should return the base url for 1155 mint', async () => {
+      const mint: MintActionParams = {
+        chainId: Chains.BASE,
+        contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
+        tokenId: 213,
+      }
+      const result = await getExternalUrl(mint)
+      expect(result).toBe('https://foundation.app/')
+    })
+
+    test('should return the base url for unsupported chain', async () => {
+      const mint: MintActionParams = {
+        chainId: Chains.OPTIMISM,
+        contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
+        tokenId: 213,
+      }
+      const result = await getExternalUrl(mint)
+      expect(result).toBe('https://foundation.app/')
     })
   })
 })
