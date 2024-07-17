@@ -9,7 +9,6 @@ import {
   SUPERMINTER_V2_ABI,
   TOTAL_PRICE_AND_FEES_V1_ABI,
   TOTAL_PRICE_AND_FEES_V2_ABI,
-  ZORA_DEPLOYER_ADDRESS,
 } from './constants'
 import type { TotalPriceAndFees } from './types'
 import { Chains } from './utils'
@@ -21,6 +20,7 @@ import {
 import {
   ActionType,
   DEFAULT_ACCOUNT,
+  DEFAULT_REFERRAL,
   type DisctriminatedActionParams,
   type MintIntentParams,
   chainIdToViemChain,
@@ -135,7 +135,7 @@ export const simulateMint = async (
     signedClaimTicket: 0,
     signedDeadline: 0,
     signature: zeroHash,
-    affiliate: referral ?? ZORA_DEPLOYER_ADDRESS,
+    affiliate: referral ?? DEFAULT_REFERRAL,
     affiliateProof: [zeroHash],
     attributionId: 0,
   }
@@ -312,7 +312,7 @@ export const getExternalUrl = async (
     const { data } = await axios.get(`https://arweave.net/${cid}`)
     const { external_link } = data
 
-    return `${external_link}?referral=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+    return `${external_link}?referral=${referral ?? DEFAULT_REFERRAL}`
   } catch (error) {
     console.error('an error occurred fetching the contract uri')
     if (error instanceof Error) {
