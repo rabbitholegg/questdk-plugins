@@ -5,11 +5,7 @@ import {
   mint,
   simulateMint,
 } from './Soundxyz'
-import {
-  SUPERMINTER,
-  SUPERMINTER_V2,
-  SUPERMINTER_V2_ABI,
-} from './constants'
+import { SUPERMINTER, SUPERMINTER_V2, SUPERMINTER_V2_ABI } from './constants'
 import {
   OP_SUPERMINTER_V2,
   failingTestCases,
