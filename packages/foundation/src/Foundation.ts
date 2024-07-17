@@ -44,7 +44,8 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
+    mint
 
   // 721
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -72,6 +73,7 @@ export const mint = async (
           count: formatAmount(amount),
           nftContract: contractAddress,
           nftRecipient: recipient,
+          buyReferrer: referral,
         },
         {
           // 1155 NFTMarketRouter
@@ -81,6 +83,7 @@ export const mint = async (
           tokenQuantities: {
             $some: { tokenId, quantity: formatAmount(amount) },
           },
+          referrer: referral,
         },
       ],
     },
@@ -166,7 +169,8 @@ export const getFees = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
@@ -194,7 +198,7 @@ export const getMintIntent = async (
         contractAddress,
         mintAmount,
         recipient,
-        REFERRAL_ADDRESS,
+        referral ?? REFERRAL_ADDRESS,
         [],
       ]
 
@@ -244,7 +248,7 @@ export const getMintIntent = async (
       contractAddress,
       [{ tokenId, quantity: 1n }],
       recipient,
-      REFERRAL_ADDRESS,
+      referral ?? REFERRAL_ADDRESS,
     ]
 
     const data = encodeFunctionData({
@@ -270,7 +274,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, amount, recipient, tokenId } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
+    mint
 
   const _client =
     client ||
@@ -301,7 +306,13 @@ export const simulateMint = async (
         value,
         abi: FIXED_PRICE_FRAGMENTS,
         functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
-        args: [contractAddress, mintAmount, recipient, REFERRAL_ADDRESS, []],
+        args: [
+          contractAddress,
+          mintAmount,
+          recipient,
+          referral ?? REFERRAL_ADDRESS,
+          [],
+        ],
         account: account || DEFAULT_ACCOUNT,
       })
       return result
@@ -333,7 +344,7 @@ export const simulateMint = async (
         contractAddress,
         [[tokenId ?? 1, mintAmount]],
         recipient,
-        REFERRAL_ADDRESS,
+        referral ?? REFERRAL_ADDRESS,
       ],
       account: account || DEFAULT_ACCOUNT,
     })
