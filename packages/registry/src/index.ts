@@ -207,6 +207,14 @@ export const getFees = (
   }
 }
 
+export const getExternalUrl = (plugin: IActionPlugin, params: ActionParams) => {
+  if (typeof plugin.getExternalUrl === 'function') {
+    return plugin.getExternalUrl(params)
+  } else {
+    throw new PluginActionNotImplementedError()
+  }
+}
+
 export const canValidate = (plugin: IActionPlugin, actionType: ActionType) => {
   switch (actionType) {
     case ActionType.Follow:
