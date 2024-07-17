@@ -1,5 +1,6 @@
 import {
   Chains,
+  DEFAULT_REFERRAL,
   type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -9,7 +10,6 @@ import { describe, expect, test, vi } from 'vitest'
 import { getExternalUrl, getMintIntent, mint } from './Pods'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
-import { ZORA_DEPLOYER_ADDRESS } from './contract-addresses'
 
 describe('Given the pods plugin', () => {
   describe('When handling the mint', () => {
@@ -228,7 +228,7 @@ describe('getExternalUrl function', () => {
     }
     const result = await getExternalUrl(params)
     expect(result).toBe(
-      `https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=${ZORA_DEPLOYER_ADDRESS}`,
+      `https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=${DEFAULT_REFERRAL}`,
     )
   })
 
