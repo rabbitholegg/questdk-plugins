@@ -10,7 +10,6 @@ import { CHAIN_ID_ARRAY, CHAIN_ID_TO_ZORA_SLUG } from './chain-ids'
 import {
   FIXED_PRICE_SALE_STRATS,
   ZORA_1155_FACTORY,
-  ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
 import { AndArrayItem } from './types'
 import { validatePremint } from './validate'
@@ -24,6 +23,7 @@ import { formatAmount } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
   DEFAULT_ACCOUNT,
+  DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
   type MintIntentParams,
   chainIdToViemChain,

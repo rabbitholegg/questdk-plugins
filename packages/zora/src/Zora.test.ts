@@ -19,6 +19,7 @@ import {
 import {
   ActionType,
   Chains,
+  DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
@@ -30,7 +31,6 @@ import { describe, expect, test, vi, beforeEach, MockedFunction } from 'vitest'
 import { PremintResponse } from './types'
 import axios from 'axios'
 import { validatePremint } from './validate'
-import { ZORA_DEPLOYER_ADDRESS } from './contract-addresses'
 
 const MockedPremintResponse: PremintResponse = [
   {
