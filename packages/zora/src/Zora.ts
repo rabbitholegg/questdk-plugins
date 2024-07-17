@@ -6,11 +6,10 @@ import {
   ZORA_MINTER_ABI_1155,
   ZORA_MINTER_ABI_1155_LEGACY,
 } from './abi'
-import { CHAIN_ID_ARRAY } from './chain-ids'
+import { CHAIN_ID_ARRAY, CHAIN_ID_TO_ZORA_SLUG } from './chain-ids'
 import {
   FIXED_PRICE_SALE_STRATS,
   ZORA_1155_FACTORY,
-  ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
 import { AndArrayItem } from './types'
 import { validatePremint } from './validate'
@@ -24,6 +23,7 @@ import { formatAmount } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
   DEFAULT_ACCOUNT,
+  DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
   type MintIntentParams,
   chainIdToViemChain,
@@ -93,7 +93,8 @@ export const create = async (
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const universalMinter =
     zoraUniversalMinterAddress[
@@ -124,6 +125,16 @@ export const mint = async (
   if (tokenId) {
     andArray1155.push({
       tokenId,
+    })
+  }
+  if (referral) {
+    andArray1155.push({
+      $or: [
+        { mintReferral: referral },
+        {
+          rewardsRecipients: [referral],
+        },
+      ],
     })
   }
 
@@ -177,7 +188,8 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   let data
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
@@ -197,7 +209,7 @@ export const getMintIntent = async (
       fixedPriceSaleStratAddress,
       tokenId,
       amount,
-      [ZORA_DEPLOYER_ADDRESS],
+      [referral ?? ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     // Assume it's an 1155 mint
@@ -228,7 +240,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   const _client =
     client ??
     createPublicClient({
@@ -260,7 +273,7 @@ export const simulateMint = async (
   )}`
 
   // Check if the implementation contracts bytecode contains valid function selectors
-  const bytecode = await _client.getBytecode({ address: implementationAddress })
+  const bytecode = await _client.getCode({ address: implementationAddress })
   const containsSelector = FUNCTION_SELECTORS.some((selector) =>
     bytecode?.includes(selector),
   )
@@ -286,7 +299,7 @@ export const simulateMint = async (
       fixedPriceSaleStratAddress,
       _tokenId,
       amount,
-      [ZORA_DEPLOYER_ADDRESS],
+      [referral ?? ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     const result = await _client.simulateContract({
@@ -425,4 +438,17 @@ export const getDynamicNameParams = async (
     project: 'Zora',
   }
   return values
+}
+
+export const getExternalUrl = async (
+  params: MintActionParams,
+): Promise<string> => {
+  const { chainId, contractAddress, tokenId, referral } = params
+  const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
+  const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+  const baseUrl = `https://zora.co/collect/${chainSlug}:${contractAddress}`
+
+  return tokenId != null
+    ? `${baseUrl}/${tokenId}${referralParams}`
+    : `${baseUrl}${referralParams}`
 }

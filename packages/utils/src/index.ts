@@ -3,6 +3,7 @@ export {
   Chains,
   DEFAULT_ACCOUNT,
   BOOST_TREASURY_ADDRESS,
+  DEFAULT_REFERRAL,
 } from './constants/index'
 
 export type { TestParams, TestCase } from './helpers/index'

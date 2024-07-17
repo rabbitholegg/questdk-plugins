@@ -1,5 +1,6 @@
 import {
   getDynamicNameParams,
+  getExternalUrl,
   getProjectFees,
   mint,
   simulateMint,
@@ -14,12 +15,13 @@ import { Chains } from './utils'
 import { apply } from '@rabbitholegg/questdk'
 import {
   ActionType,
+  DEFAULT_REFERRAL,
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
   getExitAddresses,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address, parseEther } from 'viem'
+import { type Address, parseEther, getAddress } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the soundxyz plugin', () => {
@@ -175,6 +177,7 @@ describe('simulateMint function', () => {
       contractAddress: '0xdf71F2F15bCcDC7c7A89F01dd45cDE5A43F7e79f',
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      referral: DEFAULT_REFERRAL,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
@@ -191,6 +194,7 @@ describe('simulateMint function', () => {
       contractAddress: '0x0c418874315698096ecA7ce0e1Dccf0A517DC9DE',
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      referral: DEFAULT_REFERRAL,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
@@ -199,5 +203,36 @@ describe('simulateMint function', () => {
     const request = result.request
     expect(request.address).toBe(SUPERMINTER)
     expect(request.value).toBe(value)
+  })
+})
+
+describe('getExternalUrl', () => {
+  test('should return the correct link with referral', async () => {
+    const contractAddress: Address =
+      '0xE39Df1AD806e84de47D0F6ddf56a0007C678597c'
+    const mintParams = {
+      contractAddress,
+      chainId: Chains.BASE,
+      referral: getAddress('0x1234567890123456789012345678901234567890'),
+    }
+
+    const link = await getExternalUrl(mintParams)
+    expect(link).equals(
+      'https://www.sound.xyz/33below/midnight-diner-ii?referral=0x1234567890123456789012345678901234567890',
+    )
+  })
+
+  test('should return the correct link with our own referral if no referral is provided', async () => {
+    const contractAddress: Address =
+      '0xE39Df1AD806e84de47D0F6ddf56a0007C678597c'
+    const mintParams = {
+      contractAddress,
+      chainId: Chains.BASE,
+    }
+
+    const link = await getExternalUrl(mintParams)
+    expect(link).equals(
+      `https://www.sound.xyz/33below/midnight-diner-ii?referral=${DEFAULT_REFERRAL}`,
+    )
   })
 })

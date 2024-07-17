@@ -8,10 +8,16 @@ import {
 } from './constants'
 import { type SaleTerms } from './types'
 import {
+  Chains,
   type MintActionParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { type Address, type PublicClient, createPublicClient, http } from 'viem'
+
+export const CHAIN_TO_NETWORK_SLUG: Record<number, string | undefined> = {
+  [Chains.ETHEREUM]: 'eth',
+  [Chains.BASE]: 'base',
+}
 
 export async function getFixedPriceData(
   client: PublicClient,

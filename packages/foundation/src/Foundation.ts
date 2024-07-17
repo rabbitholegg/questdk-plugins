@@ -8,6 +8,7 @@ import {
   REFERRAL_ADDRESS,
 } from './constants'
 import {
+  CHAIN_TO_NETWORK_SLUG,
   calculateFees,
   getContractType,
   getDutchAuctionData,
@@ -350,6 +351,18 @@ export const simulateMint = async (
     return result
   }
   throw new Error('Invalid contract type')
+}
+
+export const getExternalUrl = async (
+  params: MintActionParams,
+): Promise<string> => {
+  const { chainId, contractAddress, tokenId } = params
+  const baseUrl = 'https://foundation.app/'
+  const networkSlug = CHAIN_TO_NETWORK_SLUG[chainId]
+  if (tokenId != null || !networkSlug) {
+    return baseUrl
+  }
+  return `${baseUrl}mint/${networkSlug}/${contractAddress}`
 }
 
 export const getSupportedTokenAddresses = async (
