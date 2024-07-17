@@ -1,5 +1,21 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.66
+
+### Minor Changes
+
+- [#482](https://github.com/rabbitholegg/questdk-plugins/pull/482) [`379f7fc0`](https://github.com/rabbitholegg/questdk-plugins/commit/379f7fc05703a705b23ec89e8b25cdd5ba2eb35c) Thanks [@mmackz](https://github.com/mmackz)! - implement getExternalUrl function
+
+- [#481](https://github.com/rabbitholegg/questdk-plugins/pull/481) [`a58a6f62`](https://github.com/rabbitholegg/questdk-plugins/commit/a58a6f626e5446eaf207a39fbab0bfc54d1cb542) Thanks [@mmackz](https://github.com/mmackz)! - use referral param in validation and simulations
+
+### Patch Changes
+
+- [#488](https://github.com/rabbitholegg/questdk-plugins/pull/488) [`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819) Thanks [@mmackz](https://github.com/mmackz)! - add default ref address to utils package
+
+- Updated dependencies [[`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819), [`9cf1b431`](https://github.com/rabbitholegg/questdk-plugins/commit/9cf1b43150129452af1550cd4875bac8abc67c31), [`4f9c41b1`](https://github.com/rabbitholegg/questdk-plugins/commit/4f9c41b13dacd3e3d96343877481cec237b9ba6e), [`26077ed4`](https://github.com/rabbitholegg/questdk-plugins/commit/26077ed48a227e8e1b5222761f7ce7335508beb7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.41
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.65
 
 ### Minor Changes

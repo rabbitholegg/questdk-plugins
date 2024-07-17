@@ -1,5 +1,21 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.53
+
+### Minor Changes
+
+- [#480](https://github.com/rabbitholegg/questdk-plugins/pull/480) [`fb5202a8`](https://github.com/rabbitholegg/questdk-plugins/commit/fb5202a8f92fbc40ad97a8a18d3a849544278a67) Thanks [@mmackz](https://github.com/mmackz)! - add getExternalUrl function to sound plugin
+
+- [#476](https://github.com/rabbitholegg/questdk-plugins/pull/476) [`e8e13cbd`](https://github.com/rabbitholegg/questdk-plugins/commit/e8e13cbd23b1eb076d93d27e41562361b1a925cd) Thanks [@mmackz](https://github.com/mmackz)! - use referral param in validation and mint simulation
+
+### Patch Changes
+
+- [#488](https://github.com/rabbitholegg/questdk-plugins/pull/488) [`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819) Thanks [@mmackz](https://github.com/mmackz)! - add default ref address to utils package
+
+- Updated dependencies [[`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819), [`9cf1b431`](https://github.com/rabbitholegg/questdk-plugins/commit/9cf1b43150129452af1550cd4875bac8abc67c31), [`4f9c41b1`](https://github.com/rabbitholegg/questdk-plugins/commit/4f9c41b13dacd3e3d96343877481cec237b9ba6e), [`26077ed4`](https://github.com/rabbitholegg/questdk-plugins/commit/26077ed48a227e8e1b5222761f7ce7335508beb7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.41
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.52
 
 ### Patch Changes

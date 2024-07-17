@@ -1,5 +1,21 @@
 # @rabbitholegg/questdk-plugin-pods
 
+## 1.0.0-alpha.29
+
+### Minor Changes
+
+- [#483](https://github.com/rabbitholegg/questdk-plugins/pull/483) [`6a692b75`](https://github.com/rabbitholegg/questdk-plugins/commit/6a692b75ad1fb0d4eab3fdb80a3bb54abd08f09e) Thanks [@mmackz](https://github.com/mmackz)! - implement getExternalUrl for pods
+
+- [#479](https://github.com/rabbitholegg/questdk-plugins/pull/479) [`c394b198`](https://github.com/rabbitholegg/questdk-plugins/commit/c394b198778cbe959ce706d173def78c2d26df38) Thanks [@mmackz](https://github.com/mmackz)! - use referral param in validation
+
+### Patch Changes
+
+- [#488](https://github.com/rabbitholegg/questdk-plugins/pull/488) [`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819) Thanks [@mmackz](https://github.com/mmackz)! - add default ref address to utils package
+
+- Updated dependencies [[`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819), [`9cf1b431`](https://github.com/rabbitholegg/questdk-plugins/commit/9cf1b43150129452af1550cd4875bac8abc67c31), [`4f9c41b1`](https://github.com/rabbitholegg/questdk-plugins/commit/4f9c41b13dacd3e3d96343877481cec237b9ba6e), [`26077ed4`](https://github.com/rabbitholegg/questdk-plugins/commit/26077ed48a227e8e1b5222761f7ce7335508beb7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.41
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.28
 
 ### Minor Changes
