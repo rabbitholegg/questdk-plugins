@@ -451,9 +451,8 @@ export const getExternalUrl = async (
 
   if (chainSlug) {
     const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
-    const baseUrl = `https://${
-      isTestnet ? 'testnet.' : ''
-    }zora.co/collect/${chainSlug}:${contractAddress}`
+    const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
+    const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
 
     return tokenId != null
       ? `${baseUrl}/${tokenId}${referralParams}`
