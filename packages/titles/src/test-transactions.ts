@@ -26,6 +26,25 @@ const MINT_EDITION_V2: TestParams<MintActionParams> = {
   },
 }
 
+export const passingTestCasesMint = [
+  createTestCase(MINT_EDITION_V2, 'when minting a V2 collection'),
+]
+
+export const failingTestCasesMint = [
+  createTestCase(MINT_EDITION_V2, 'when chainId is not correct', {
+    chainId: 1,
+  }),
+  createTestCase(MINT_EDITION_V2, 'when contractAddress is not correct', {
+    contractAddress: '0x777777C338d93e2C7adf08D102d45CA7CC4Ed021',
+  }),
+  createTestCase(MINT_EDITION_V2, 'when tokenId is not correct', {
+    tokenId: 100,
+  }),
+  createTestCase(MINT_EDITION_V2, 'when referral is not correct', {
+    referral: '0x777777C338d93e2C7adf08D102d45CA7CC4Ed021',
+  }),
+]
+
 //  create action type //
 
 const PUBLISH_EDITION: TestParams<CreateActionParams> = {
