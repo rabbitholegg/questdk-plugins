@@ -1,4 +1,4 @@
-import { create, mint } from './Titles'
+import { create, getFees, mint } from './Titles'
 import {
   failingTestCasesCreate,
   failingTestCasesMint,
@@ -6,6 +6,8 @@ import {
   passingTestCasesMint,
 } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { parseEther, type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
 
 describe('Given the titles plugin', () => {
@@ -102,5 +104,21 @@ describe('Given the titles plugin', () => {
         })
       })
     })
+  })
+})
+
+describe('Given the getFee function', () => {
+  test('should return the correct fee for V2 mint', async () => {
+    const contractAddress: Address =
+      '0xc7DeD9c1BD13A19A877d196Eeea9222Ff6d40736'
+    const mintParams = {
+      contractAddress,
+      chainId: Chains.BASE,
+      tokenId: 1,
+    }
+
+    const fee = await getFees(mintParams)
+    expect(fee.projectFee).toEqual(parseEther('0.0005'))
+    expect(fee.actionFee).toEqual(parseEther('0'))
   })
 })
