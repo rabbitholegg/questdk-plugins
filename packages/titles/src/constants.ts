@@ -39,7 +39,7 @@ export const TITLES_ABI_V1 = [
   },
 ]
 
-const TITLES_COLLECTION_ABI_V2 = [
+export const TITLES_COLLECTION_ABI_V2 = [
   {
     inputs: [
       { internalType: 'address', name: 'to_', type: 'address' },
