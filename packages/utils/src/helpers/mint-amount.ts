@@ -18,7 +18,7 @@ export function amountToFilterOperator(
 }
 
 export function amountToInteger(amount: FilterOperator | undefined) {
-  if (!amount) {
+  if (!amount || amount === '0') {
     return 1n
   }
   // If the amount is a primitive, pass that value through
