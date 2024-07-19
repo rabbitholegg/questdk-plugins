@@ -557,4 +557,17 @@ describe('getExternalUrl function', () => {
       'https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3?referrer=0x1234567890123456789012345678901234567890',
     )
   })
+
+  test('should return correct url for testnet mint', async () => {
+    const params = {
+      chainId: Chains.BASE_SEPOLIA,
+      contractAddress: getAddress('0x627a509d76498ddd7d80a28ef4cd887b5b6df2cd'),
+      tokenId: 39,
+      referral: getAddress('0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48'),
+    }
+    const result = await getExternalUrl(params)
+    expect(result).toBe(
+      'https://testnet.zora.co/collect/bsep:0x627a509D76498DDD7D80a28eF4cD887B5b6df2Cd/39?referrer=0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48',
+    )
+  })
 })
