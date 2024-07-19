@@ -68,3 +68,13 @@ export const TITLES_COLLECTION_ABI_V2 = [
     type: 'function',
   },
 ]
+
+export const MINT_FEE_ABI = [
+  {
+    inputs: [{ internalType: 'uint256', name: 'tokenId_', type: 'uint256' }],
+    name: 'mintFee',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+]
