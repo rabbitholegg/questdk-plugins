@@ -1,7 +1,7 @@
 import { FilterOperator } from '../types'
 
-export function amountToFilterOperator(
-  amount: number | bigint | undefined,
+export function formatAmountToFilterOperator(
+  amount: FilterOperator | undefined,
 ): FilterOperator {
   if (!amount || (typeof amount === 'string' && isNaN(Number(amount)))) {
     return { $gte: 1n }
@@ -17,7 +17,7 @@ export function amountToFilterOperator(
   return amount
 }
 
-export function amountToInteger(amount: FilterOperator | undefined) {
+export function formatAmountToInteger(amount: FilterOperator | undefined) {
   if (!amount || amount === '0') {
     return 1n
   }
