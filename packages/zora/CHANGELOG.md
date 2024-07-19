@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.67
+
+### Minor Changes
+
+- [#490](https://github.com/rabbitholegg/questdk-plugins/pull/490) [`a5e3c75c`](https://github.com/rabbitholegg/questdk-plugins/commit/a5e3c75c461180ba1339ece4b73aab38f0ea6d59) Thanks [@mmackz](https://github.com/mmackz)! - update zora protocol sdk and add base sepolia to viem chains
+
+### Patch Changes
+
+- Updated dependencies [[`a5e3c75c`](https://github.com/rabbitholegg/questdk-plugins/commit/a5e3c75c461180ba1339ece4b73aab38f0ea6d59)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.42
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.66
 
 ### Minor Changes

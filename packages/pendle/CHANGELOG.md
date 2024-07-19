@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-pendle
 
+## 1.0.0-alpha.54
+
+### Patch Changes
+
+- Updated dependencies [[`a5e3c75c`](https://github.com/rabbitholegg/questdk-plugins/commit/a5e3c75c461180ba1339ece4b73aab38f0ea6d59)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.42
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.53
 
 ### Patch Changes
