@@ -19,7 +19,7 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { formatAmount } from '@rabbitholegg/questdk-plugin-utils'
+import { formatAmountToFilterOperator } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
   DEFAULT_ACCOUNT,
@@ -109,7 +109,7 @@ export const mint = async (
     : contractAddress
 
   const quantityCheck = {
-    quantity: formatAmount(amount),
+    quantity: formatAmountToFilterOperator(amount),
   }
   const andArray721: AndArrayItem[] = [quantityCheck]
   const andArray1155: AndArrayItem[] = [quantityCheck]
