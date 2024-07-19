@@ -1,4 +1,4 @@
-import { type CreateActionParams } from '@rabbitholegg/questdk'
+import { GreaterThanOrEqual, type CreateActionParams } from '@rabbitholegg/questdk'
 import {
   Chains,
   type TestParams,
@@ -21,6 +21,7 @@ const MINT_EDITION_V2: TestParams<MintActionParams> = {
     chainId: Chains.BASE,
     contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
     tokenId: 1,
+    amount: GreaterThanOrEqual(1),
     recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
     referral: '0x0000000000000000000000000000000000000000',
   },
@@ -39,6 +40,9 @@ export const failingTestCasesMint = [
   }),
   createTestCase(MINT_EDITION_V2, 'when tokenId is not correct', {
     tokenId: 100,
+  }),
+  createTestCase(MINT_EDITION_V2, 'when amount is not sufficient', {
+    amount: GreaterThanOrEqual(10),
   }),
   createTestCase(MINT_EDITION_V2, 'when referral is not correct', {
     referral: '0x777777C338d93e2C7adf08D102d45CA7CC4Ed021',
