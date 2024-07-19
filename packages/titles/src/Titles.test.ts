@@ -1,4 +1,4 @@
-import { create, getFees, mint } from './Titles'
+import { create, getFees, mint, simulateMint } from './Titles'
 import {
   failingTestCasesCreate,
   failingTestCasesMint,
@@ -6,7 +6,7 @@ import {
   passingTestCasesMint,
 } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
-import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+import { Chains, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
 
@@ -110,15 +110,65 @@ describe('Given the titles plugin', () => {
 describe('Given the getFee function', () => {
   test('should return the correct fee for V2 mint', async () => {
     const contractAddress: Address =
-      '0xc7DeD9c1BD13A19A877d196Eeea9222Ff6d40736'
+      '0x06d7D870a41a44B5b7eBF46019bD5f8487362de3'
     const mintParams = {
       contractAddress,
       chainId: Chains.BASE,
-      tokenId: 1,
+      tokenId: 5,
     }
 
     const fee = await getFees(mintParams)
     expect(fee.projectFee).toEqual(parseEther('0.0005'))
     expect(fee.actionFee).toEqual(parseEther('0'))
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a V2 mint', async () => {
+    const contractAddress: Address =
+      '0x432f4Ccc39AB8DD8015F590a56244bECb8D16933'
+    const mintParams = {
+      contractAddress,
+      chainId: Chains.BASE,
+      tokenId: 4,
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.0005')
+    const address = mintParams.recipient as Address
+
+    const result = await simulateMint(
+      mintParams as MintIntentParams,
+      value,
+      address,
+    )
+
+    const request = result.request
+    expect(request.address).toBe('0x432f4Ccc39AB8DD8015F590a56244bECb8D16933')
+    expect(request.functionName).toBe('mint')
+    expect(request.value).toBe(value)
+  })
+
+  test('should simulate a V2 mint', async () => {
+    const contractAddress: Address =
+      '0x06d7D870a41a44B5b7eBF46019bD5f8487362de3'
+    const mintParams = {
+      contractAddress,
+      chainId: Chains.BASE,
+      tokenId: 5,
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+    }
+    const value = parseEther('0.0005')
+    const address = mintParams.recipient as Address
+
+    const result = await simulateMint(
+      mintParams as MintIntentParams,
+      value,
+      address,
+    )
+
+    const request = result.request
+    expect(request.address).toBe('0x06d7D870a41a44B5b7eBF46019bD5f8487362de3')
+    expect(request.functionName).toBe('mint')
+    expect(request.value).toBe(value)
   })
 })
