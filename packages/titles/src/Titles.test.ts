@@ -1,5 +1,5 @@
 import { create } from './Titles'
-import { failingTestCases, passingTestCases } from './test-transactions'
+import { failingTestCasesCreate, passingTestCasesCreate } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 
@@ -31,7 +31,7 @@ describe('Given the titles plugin', () => {
     })
 
     describe('should pass filter with valid transactions', () => {
-      passingTestCases.forEach((testCase) => {
+      passingTestCasesCreate.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await create(params)
@@ -41,7 +41,7 @@ describe('Given the titles plugin', () => {
     })
 
     describe('should not pass filter with invalid transactions', () => {
-      failingTestCases.forEach((testCase) => {
+      failingTestCasesCreate.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await create(params)

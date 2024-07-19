@@ -3,9 +3,32 @@ import {
   Chains,
   type TestParams,
   createTestCase,
+  MintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 
-export const PUBLISH_EDITION: TestParams<CreateActionParams> = {
+// mint action type //
+
+const MINT_EDITION_V2: TestParams<MintActionParams> = {
+  transaction: {
+    chainId: 8453,
+    from: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    to: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
+    hash: '0xe12969d93f9a8241e031246f295ac69c304e1968b2ea568680cbaf93683030dd',
+    input: '0x972f9e94000000000000000000000000865c301c46d64de5c9b124ec1a97ef1efc1bcbd100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000205f35dce98ba4fba25530a026ed80b2cecdaa31091ba4958b99b52ea1d068adad',
+    value: '500000000000000',
+  },
+  params: {
+    chainId: Chains.BASE,
+    contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
+    tokenId: 1,
+    recipient: '0x865c301c46d64de5c9b124ec1a97ef1efc1bcbd1',
+    referral: '0x0000000000000000000000000000000000000000',
+  },
+}
+
+//  create action type //
+
+const PUBLISH_EDITION: TestParams<CreateActionParams> = {
   transaction: {
     chainId: 8453,
     from: '0x624310638b9901933fab5f5b0deb2b33e13c87cc',
@@ -20,11 +43,11 @@ export const PUBLISH_EDITION: TestParams<CreateActionParams> = {
   },
 }
 
-export const passingTestCases = [
+export const passingTestCasesCreate = [
   createTestCase(PUBLISH_EDITION, 'when creating a new collection'),
 ]
 
-export const failingTestCases = [
+export const failingTestCasesCreate = [
   createTestCase(PUBLISH_EDITION, 'when chainId is not correct', {
     chainId: 1,
   }),
