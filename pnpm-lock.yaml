@@ -819,8 +819,8 @@ importers:
         specifier: workspace:*
         version: link:../utils
       '@zoralabs/protocol-sdk':
-        specifier: 0.5.6-exports.0
-        version: 0.5.6-exports.0(@types/node@20.4.5)(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4)
+        specifier: 0.5.17
+        version: 0.5.17(viem@2.15.1)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
         version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4)
@@ -5488,57 +5488,26 @@ packages:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
     dev: true
 
-  /@zoralabs/1155-deployments@0.0.13:
-    resolution: {integrity: sha512-jC8nx3qQGbCGuE4ynBlYYV/VfyhrIAG+k3x0l2yCtEXIiW6oAECM6iZzzPLRcmIiIO3xoC4y70iwVddqzLR3QQ==}
-    dependencies:
-      '@zoralabs/zora-1155-contracts': 2.10.1
-      ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
-      forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
-      solmate: 6.1.0
-    dev: false
-
   /@zoralabs/openzeppelin-contracts-upgradeable@4.8.4:
     resolution: {integrity: sha512-5vhL88tz00Gv2+NUhLdYBRqb9RRekfyQAodXTQxJU2LYxxy6jr1mPycTZempQ1kmw5wIwFbSIoYzpaxOx6UK6Q==}
     hasBin: true
     dev: false
 
-  /@zoralabs/protocol-deployments@0.1.2-exports.0:
-    resolution: {integrity: sha512-p/NJovirBamdeFQ2DHHci4huKsJo0iwhA2arfnXV3jOWHTPGDIje0Df7dWIW3iBeqwaSZCMun0BfCCJCWXAD6Q==}
-    dependencies:
-      '@zoralabs/1155-deployments': 0.0.13
-      '@zoralabs/zora-1155-contracts': 2.7.3-exports.0
+  /@zoralabs/protocol-deployments@0.1.13:
+    resolution: {integrity: sha512-pAJ+rr7Q6RsulTl2EB+osUJMldGx+Sj/XfrkfOQsScL/RQlu+H6sL0sRVdaG3VLWVd9ua8szIRSeJ+RqwEZNyg==}
     dev: false
 
   /@zoralabs/protocol-rewards@1.2.1:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/protocol-rewards@1.2.3:
-    resolution: {integrity: sha512-pfoF4DTLQeR9S9JXk6Eue5bj+4UEhsvb5Kg4Zg3CuuVdaASH4sI442XPej6v3JDLYJrdiVCoCFcqxDOb1VE+bA==}
-    dependencies:
-      ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
-      forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
-    dev: false
-
-  /@zoralabs/protocol-sdk@0.5.6-exports.0(@types/node@20.4.5)(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4):
-    resolution: {integrity: sha512-YbQ4/a1vM0JN9Dz/qGkMqfOM6xI1Zi6/52KEQAmYY/kzSqBE8jkusN76Av/MYwKqnMIQ90kFAMebSPgyhWvUKA==}
+  /@zoralabs/protocol-sdk@0.5.17(viem@2.15.1):
+    resolution: {integrity: sha512-8N/g5+kg2R0zS6ecdkzwVgyKO4aV6jYUbBeuUy6D74lcQdK75pgq5VW3eIjqc80CBvR0DCq7uAzHdUCzX0mGsA==}
     peerDependencies:
       viem: 2.15.1
     dependencies:
-      '@zoralabs/protocol-deployments': 0.1.2-exports.0
-      abitype: 0.10.3(typescript@5.3.2)(zod@3.21.4)
+      '@zoralabs/protocol-deployments': 0.1.13
       viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
-      vite: 4.5.0(@types/node@20.4.5)
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - terser
-      - typescript
-      - zod
     dev: false
 
   /@zoralabs/universal-minter@0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4):
@@ -5624,41 +5593,11 @@ packages:
       - zod
     dev: false
 
-  /@zoralabs/zora-1155-contracts@2.10.1:
-    resolution: {integrity: sha512-/BzMWjqbEpdraIy3YXKKAy+HDbNF9zzOyTgpulQ7GeCPiv/zU7NxRBKiGY6Mq1kH1qkzEO6GQp6JqG5mzuGrzg==}
-    dev: false
-
-  /@zoralabs/zora-1155-contracts@2.7.3-exports.0:
-    resolution: {integrity: sha512-9HSOmTws0ojtrjo+NLjL87xEdjtnyWqinbtvj0gYwpME0ZlZ5RxgBlZDDPr7eKi3TTgKvrX0mF8mJOvoc9jMDA==}
-    dependencies:
-      '@openzeppelin/contracts': 4.9.2
-      '@zoralabs/openzeppelin-contracts-upgradeable': 4.8.4
-      '@zoralabs/protocol-rewards': 1.2.3
-      ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
-      forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
-      solmate: 6.1.0
-    dev: false
-
   /@zxing/text-encoding@0.9.0:
     resolution: {integrity: sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==}
     requiresBuild: true
     dev: true
     optional: true
-
-  /abitype@0.10.3(typescript@5.3.2)(zod@3.21.4):
-    resolution: {integrity: sha512-tRN+7XIa7J9xugdbRzFv/95ka5ivR/sRe01eiWvM0HWWjHuigSZEACgKa0sj4wGuekTDtghCx+5Izk/cOi78pQ==}
-    peerDependencies:
-      typescript: '>=5.0.4'
-      zod: ^3 >=3.22.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-      zod:
-        optional: true
-    dependencies:
-      typescript: 5.3.2
-      zod: 3.21.4
-    dev: false
 
   /abitype@0.8.11(typescript@5.3.2)(zod@3.21.4):
     resolution: {integrity: sha512-bM4v2dKvX08sZ9IU38IN5BKmN+ZkOSd2oI4a9f0ejHYZQYV6cDr7j+d95ga0z2XHG36Y4jzoG5Z7qDqxp7fi/A==}
@@ -12922,10 +12861,6 @@ packages:
     resolution: {integrity: sha512-htM7Vn6LhHreR+EglVMd2s+sZhcXAirB1Zlyrv5zBuTxieCvjfnRpd7iZk75m/u6NOlEyQ94C6TWbBn2cY7w8g==}
     dev: false
 
-  /solmate@6.1.0:
-    resolution: {integrity: sha512-gxG4YU5nnAQ+Ac23R44GS3Xo3+X0+8XCe4/P1KvVobL5ERBzQBG/xMv7NSvVo/pkHSYGufgUAPjiueYxujKJAA==}
-    dev: false
-
   /solmate@6.2.0:
     resolution: {integrity: sha512-AM38ioQ2P8zRsA42zenb9or6OybRjOLXIu3lhIT8rhddUuduCt76pUEuLxOIg9GByGojGz+EbpFdCB6B+QZVVA==}
     dev: false
@@ -14270,42 +14205,6 @@ packages:
       - supports-color
       - terser
     dev: true
-
-  /vite@4.5.0(@types/node@20.4.5):
-    resolution: {integrity: sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 20.4.5
-      esbuild: 0.18.20
-      postcss: 8.4.38
-      rollup: 3.29.4
-    optionalDependencies:
-      fsevents: 2.3.3
-    dev: false
 
   /vite@4.5.3(@types/node@20.4.5):
     resolution: {integrity: sha512-kQL23kMeX92v3ph7IauVkXkikdDRsYMGTVl5KY2E9OY4ONLvkHf04MDTbnfo6NKxZiDLWzVpP5oTa8hQD8U3dg==}

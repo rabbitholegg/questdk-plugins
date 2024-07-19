@@ -197,7 +197,7 @@ export const getMintIntent = async (
   try {
     fixedPriceSaleStratAddress = (
       await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
-    ).fixedPrice.address
+    ).salesConfig.address
   } catch {
     console.error(
       `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
@@ -289,7 +289,7 @@ export const simulateMint = async (
   try {
     fixedPriceSaleStratAddress = (
       await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
-    ).fixedPrice.address
+    ).salesConfig.address
   } catch {
     console.error('Unable to fetch salesConfigAndTokenInfo')
   }
