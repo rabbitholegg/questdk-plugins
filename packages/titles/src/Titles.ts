@@ -12,11 +12,14 @@ import {
 } from '@rabbitholegg/questdk'
 import {
   Chains,
+  DEFAULT_ACCOUNT,
+  DEFAULT_REFERRAL,
   MintActionParams,
+  MintIntentParams,
   formatAmount,
   getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { parseEther, type Address } from 'viem'
+import { parseEther, type Address, type PublicClient, type SimulateContractReturnType, zeroHash } from 'viem'
 
 export const create = async (
   create: CreateActionParams,
@@ -89,6 +92,39 @@ export const getFees = async (
       projectFee: parseEther('0.0005') * quantityToMint,
     }
   }
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  _client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
+
+  const client = _client || getClient(chainId)
+
+  if (tokenId == null) {
+    throw new Error('Token ID is required')
+  }
+
+  const mintArgs = [
+    recipient,
+    tokenId,
+    getMintAmount(amount),
+    referral ?? DEFAULT_REFERRAL,
+    zeroHash,
+  ]
+
+  const result = await client.simulateContract({
+    address: contractAddress,
+    value,
+    abi: TITLES_COLLECTION_ABI_V2,
+    functionName: 'mint',
+    args: mintArgs,
+    account: account ?? DEFAULT_ACCOUNT,
+  })
+  return result
 }
 
 export const getSupportedTokenAddresses = async (
