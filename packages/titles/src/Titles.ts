@@ -1,4 +1,6 @@
+import { getClient } from './client'
 import {
+  MINT_FEE_ABI,
   TITLES_ABI_V1,
   TITLES_PUBLISHER_V1,
   TITLES_COLLECTION_ABI_V2,
@@ -12,8 +14,9 @@ import {
   Chains,
   MintActionParams,
   formatAmount,
+  getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { type Address } from 'viem'
+import { parseEther, type Address } from 'viem'
 
 export const create = async (
   create: CreateActionParams,
@@ -45,6 +48,47 @@ export const mint = async (
       referrer_: referral,
     },
   })
+}
+
+export const getProjectFees = async (
+  mint: MintActionParams,
+): Promise<bigint> => {
+  const fees = await getFees(mint)
+  return fees.projectFee + fees.actionFee
+}
+
+export const getFees = async (
+  mint: MintActionParams,
+): Promise<{ actionFee: bigint; projectFee: bigint }> => {
+  const { chainId, contractAddress, amount, tokenId } = mint
+  const quantityToMint = getMintAmount(amount)
+  
+  if (tokenId == null) {
+    throw new Error('Token ID is required')
+  }
+
+  try {
+    const client = getClient(chainId)
+    const mintFee = await client.readContract({
+      address: contractAddress,
+      abi: MINT_FEE_ABI,
+      functionName: 'mintFee',
+      args: [tokenId],
+    }) as bigint
+
+    return {
+      actionFee: 0n,
+      projectFee: mintFee * quantityToMint,
+    }
+  } catch (error) {
+    // return fallback if any errors occur
+    // default mint fee is 0.0005 ETH
+    console.error(error)
+    return {
+      actionFee: 0n,
+      projectFee: parseEther('0.0005') * quantityToMint,
+    }
+  }
 }
 
 export const getSupportedTokenAddresses = async (
