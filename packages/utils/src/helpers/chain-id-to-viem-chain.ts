@@ -1,6 +1,7 @@
 import {
   arbitrum,
   base,
+  baseSepolia,
   blast,
   mainnet,
   optimism,
@@ -15,6 +16,8 @@ export const chainIdToViemChain = (chainId: number) => {
       return arbitrum
     case base.id:
       return base
+    case baseSepolia.id:
+      return baseSepolia
     case blast.id:
       return blast
     case mainnet.id:
