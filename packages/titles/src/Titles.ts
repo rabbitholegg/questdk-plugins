@@ -1,10 +1,18 @@
-import { TITLES_ABI_V1, TITLES_PUBLISHER_V1, TITLES_COLLECTION_ABI_V2 } from './constants'
+import {
+  TITLES_ABI_V1,
+  TITLES_PUBLISHER_V1,
+  TITLES_COLLECTION_ABI_V2,
+} from './constants'
 import {
   type CreateActionParams,
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { Chains, MintActionParams, formatAmount } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  MintActionParams,
+  formatAmount,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { type Address } from 'viem'
 
 export const create = async (
@@ -23,7 +31,8 @@ export const create = async (
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, tokenId, recipient, referral } = mint
+  const { chainId, contractAddress, amount, tokenId, recipient, referral } =
+    mint
 
   return compressJson({
     chainId,

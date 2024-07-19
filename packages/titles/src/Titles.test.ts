@@ -1,5 +1,10 @@
 import { create, mint } from './Titles'
-import { failingTestCasesCreate, failingTestCasesMint, passingTestCasesCreate, passingTestCasesMint } from './test-transactions'
+import {
+  failingTestCasesCreate,
+  failingTestCasesMint,
+  passingTestCasesCreate,
+  passingTestCasesMint,
+} from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import { describe, expect, test } from 'vitest'
 
