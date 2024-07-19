@@ -62,19 +62,19 @@ export const getFees = async (
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, amount, tokenId } = mint
   const quantityToMint = getMintAmount(amount)
-  
+
   if (tokenId == null) {
     throw new Error('Token ID is required')
   }
 
   try {
     const client = getClient(chainId)
-    const mintFee = await client.readContract({
+    const mintFee = (await client.readContract({
       address: contractAddress,
       abi: MINT_FEE_ABI,
       functionName: 'mintFee',
       args: [tokenId],
-    }) as bigint
+    })) as bigint
 
     return {
       actionFee: 0n,
