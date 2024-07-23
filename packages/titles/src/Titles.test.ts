@@ -1,4 +1,4 @@
-import { create, getFees, mint, simulateMint } from './Titles'
+import { create, getExternalUrl, getFees, mint, simulateMint } from './Titles'
 import {
   failingTestCasesCreate,
   failingTestCasesMint,
@@ -170,5 +170,12 @@ describe('simulateMint function', () => {
     expect(request.address).toBe('0x06d7D870a41a44B5b7eBF46019bD5f8487362de3')
     expect(request.functionName).toBe('mint')
     expect(request.value).toBe(value)
+  })
+})
+
+describe('getExternalUrl function', () => {
+  test('should return the correct URL for a V2 mint', () => {
+    const url = getExternalUrl({ chainId: Chains.BASE, contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933', tokenId: 1 })
+    expect(url).toEqual('https://titles.xyz/collect/base/0x432f4ccc39ab8dd8015f590a56244becb8d16933/1')
   })
 })
