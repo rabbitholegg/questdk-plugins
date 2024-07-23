@@ -6,12 +6,12 @@ import {
   ZORA_MINTER_ABI_1155,
   ZORA_MINTER_ABI_1155_LEGACY,
 } from './abi'
-import { CHAIN_ID_ARRAY } from './chain-ids'
+import { CHAIN_ID_ARRAY, CHAIN_ID_TO_ZORA_SLUG } from './chain-ids'
 import {
   FIXED_PRICE_SALE_STRATS,
   ZORA_1155_FACTORY,
-  ZORA_DEPLOYER_ADDRESS,
 } from './contract-addresses'
+import { AndArrayItem } from './types'
 import { validatePremint } from './validate'
 import {
   type MintActionParams,
@@ -19,9 +19,12 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
+import { formatAmountToFilterOperator } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
+  Chains,
   DEFAULT_ACCOUNT,
+  DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
   type MintIntentParams,
   chainIdToViemChain,
@@ -91,7 +94,8 @@ export const create = async (
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const universalMinter =
     zoraUniversalMinterAddress[
@@ -105,8 +109,12 @@ export const mint = async (
       ] as Address[])
     : contractAddress
 
-  const andArray721 = []
-  const andArray1155 = []
+  const quantityCheck = {
+    quantity: formatAmountToFilterOperator(amount),
+  }
+  const andArray721: AndArrayItem[] = [quantityCheck]
+  const andArray1155: AndArrayItem[] = [quantityCheck]
+
   if (recipient) {
     andArray721.push({
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
@@ -115,34 +123,40 @@ export const mint = async (
       $or: [{ recipient }, { tokenRecipient: recipient }, { to: recipient }],
     })
   }
-  if (tokenId || amount) {
-    andArray721.push({
-      quantity: amount,
-    })
+  if (tokenId) {
     andArray1155.push({
-      quantity: amount,
       tokenId,
+    })
+  }
+  if (referral) {
+    andArray1155.push({
+      $or: [
+        { mintReferral: referral },
+        {
+          rewardsRecipients: [referral],
+        },
+      ],
     })
   }
 
   const ERC721_FILTER_ABSTRACT = {
     $abiAbstract: ZORA_MINTER_ABI_721,
-    $and: andArray721.length !== 0 ? andArray721 : undefined,
+    $and: andArray721,
   }
 
   const ERC1155_FILTER_ABSTRACT = {
     $abiAbstract: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
-    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+    $and: andArray1155,
   }
 
   const ERC721_FILTER = {
     $abi: ZORA_MINTER_ABI_721,
-    $and: andArray721.length !== 0 ? andArray721 : undefined,
+    $and: andArray721,
   }
 
   const ERC1155_FILTER = {
     $abi: ZORA_MINTER_ABI_1155.concat(ZORA_MINTER_ABI_1155_LEGACY),
-    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+    $and: andArray1155,
   }
 
   const UNIVERSAL_MINT_FILTER = {
@@ -175,7 +189,8 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   let data
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
@@ -183,7 +198,7 @@ export const getMintIntent = async (
   try {
     fixedPriceSaleStratAddress = (
       await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
-    ).fixedPrice.address
+    ).salesConfig.address
   } catch {
     console.error(
       `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
@@ -195,7 +210,7 @@ export const getMintIntent = async (
       fixedPriceSaleStratAddress,
       tokenId,
       amount,
-      [ZORA_DEPLOYER_ADDRESS],
+      [referral ?? ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     // Assume it's an 1155 mint
@@ -226,7 +241,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   const _client =
     client ??
     createPublicClient({
@@ -258,7 +274,7 @@ export const simulateMint = async (
   )}`
 
   // Check if the implementation contracts bytecode contains valid function selectors
-  const bytecode = await _client.getBytecode({ address: implementationAddress })
+  const bytecode = await _client.getCode({ address: implementationAddress })
   const containsSelector = FUNCTION_SELECTORS.some((selector) =>
     bytecode?.includes(selector),
   )
@@ -274,7 +290,7 @@ export const simulateMint = async (
   try {
     fixedPriceSaleStratAddress = (
       await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
-    ).fixedPrice.address
+    ).salesConfig.address
   } catch {
     console.error('Unable to fetch salesConfigAndTokenInfo')
   }
@@ -284,7 +300,7 @@ export const simulateMint = async (
       fixedPriceSaleStratAddress,
       _tokenId,
       amount,
-      [ZORA_DEPLOYER_ADDRESS],
+      [referral ?? ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
     const result = await _client.simulateContract({
@@ -423,4 +439,26 @@ export const getDynamicNameParams = async (
     project: 'Zora',
   }
   return values
+}
+
+export const getExternalUrl = async (
+  params: MintActionParams,
+): Promise<string> => {
+  const { chainId, contractAddress, tokenId, referral } = params
+  const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
+  const isTestnet =
+    chainId === Chains.BASE_SEPOLIA || chainId === Chains.SEPOLIA
+
+  if (chainSlug) {
+    const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+    const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
+    const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
+
+    return tokenId != null
+      ? `${baseUrl}/${tokenId}${referralParams}`
+      : `${baseUrl}${referralParams}`
+  }
+
+  // fallback to default zora url
+  return 'https://zora.co'
 }

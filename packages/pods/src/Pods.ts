@@ -1,10 +1,8 @@
+import axios from 'axios'
 import { FEES_ABI, ZORA_MINTER_ABI_1155 } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import {
-  FIXED_PRICE_SALE_STRATS,
-  ZORA_DEPLOYER_ADDRESS,
-} from './contract-addresses'
-import { getLatestTokenId } from './utils'
+import { FIXED_PRICE_SALE_STRATS } from './contract-addresses'
+import { type AndArrayItem, getLatestTokenId, getUri } from './utils'
 import {
   type MintActionParams,
   type TransactionFilter,
@@ -12,9 +10,12 @@ import {
 } from '@rabbitholegg/questdk'
 import {
   DEFAULT_ACCOUNT,
+  DEFAULT_REFERRAL,
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   http,
@@ -24,6 +25,7 @@ import {
   type TransactionRequest,
   createPublicClient,
   encodeFunctionData,
+  getAddress,
   pad,
   parseEther,
 } from 'viem'
@@ -31,9 +33,25 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
-  const andArray1155 = []
+  const andArray1155: AndArrayItem[] = [
+    {
+      quantity: formatAmountToFilterOperator(amount),
+    },
+  ]
+  if (referral) {
+    const referralAddress = getAddress(referral)
+    andArray1155.push({
+      $or: [
+        { mintReferral: referralAddress },
+        {
+          rewardsRecipients: [referralAddress],
+        },
+      ],
+    })
+  }
   if (recipient) {
     andArray1155.push({
       minterArguments: {
@@ -41,16 +59,15 @@ export const mint = async (
       },
     })
   }
-  if (tokenId || amount) {
+  if (tokenId) {
     andArray1155.push({
-      quantity: amount,
       tokenId,
     })
   }
 
   const ERC1155_FILTER = {
     $abiAbstract: ZORA_MINTER_ABI_1155,
-    $and: andArray1155.length !== 0 ? andArray1155 : undefined,
+    $and: andArray1155,
   }
 
   return compressJson({
@@ -63,17 +80,19 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
 
   const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
   const _tokenId = tokenId ?? (await getLatestTokenId(contractAddress, chainId))
+  const referralAddress = referral ? getAddress(referral) : DEFAULT_REFERRAL
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
     _tokenId,
     amount,
-    [ZORA_DEPLOYER_ADDRESS],
+    [referralAddress],
     pad(recipient),
   ]
 
@@ -96,7 +115,8 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } = mint
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
   const _client =
     client ??
     (createPublicClient({
@@ -110,12 +130,13 @@ export const simulateMint = async (
   }
 
   const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+  const referralAddress = referral ? getAddress(referral) : DEFAULT_REFERRAL
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
     _tokenId,
     amount,
-    [ZORA_DEPLOYER_ADDRESS],
+    [referralAddress],
     pad(recipient),
   ]
   const result = await _client.simulateContract({
@@ -140,7 +161,7 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, tokenId, amount } = mint
-  const quantityToMint = typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+  const quantityToMint = formatAmountToInteger(amount)
   try {
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
@@ -172,6 +193,38 @@ export const getFees = async (
       actionFee: parseEther('0'),
       projectFee: parseEther('0.0007') * quantityToMint,
     }
+  }
+}
+
+export const getExternalUrl = async (
+  params: MintActionParams,
+): Promise<string> => {
+  const { chainId, contractAddress, tokenId, referral } = params
+
+  try {
+    const client = createPublicClient({
+      chain: chainIdToViemChain(chainId),
+      transport: http(),
+    }) as PublicClient
+
+    const uri = await getUri(client, contractAddress, tokenId)
+    const cid = uri.split('/').slice(2).join('/')
+
+    const { data } = await axios.get(`https://arweave.net/${cid}`)
+
+    // different properties depending on uri function. One of these will be defined
+    const baseUrl = data.external_link ?? data.external_url
+
+    return `${baseUrl}?referrer=${referral ?? DEFAULT_REFERRAL}`
+  } catch (error) {
+    console.error('an error occurred fetching data from the contract')
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else {
+      console.error(error)
+    }
+    // fallback to default pods url
+    return 'https://pods.media'
   }
 }
 

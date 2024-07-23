@@ -57,6 +57,7 @@ export type MintActionParams = {
   tokenId?: number
   amount?: number | FilterOperator
   recipient?: Address
+  referral?: Address
 }
 
 export type BurnActionParams = MintActionParams
@@ -538,6 +539,7 @@ export interface IActionPlugin {
   getFees?: (
     params: ActionParams,
   ) => Promise<{ actionFee: bigint; projectFee: bigint }>
+  getExternalUrl?: (params: ActionParams) => Promise<string>
   validate?: (
     validationPayload: PluginActionValidation,
   ) =>

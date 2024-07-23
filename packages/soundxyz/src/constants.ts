@@ -317,6 +317,12 @@ export const MINT_INFO_LIST_ABI = [
   },
 ]
 
-// for referrals
-export const ZORA_DEPLOYER_ADDRESS =
-  '0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48'
+export const CONTRACT_URI_ABI = [
+  {
+    inputs: [],
+    name: 'contractURI',
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+]
