@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.44
+
+### Patch Changes
+
+- [#491](https://github.com/rabbitholegg/questdk-plugins/pull/491) [`7b93d2c2`](https://github.com/rabbitholegg/questdk-plugins/commit/7b93d2c297c897d72669ea9346e4a851c940da69) Thanks [@mmackz](https://github.com/mmackz)! - change name of amount utils to be more descriptive
+
 ## 1.0.0-alpha.43
 
 ### Minor Changes

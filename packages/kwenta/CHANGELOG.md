@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-kwenta
 
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- Updated dependencies [[`7b93d2c2`](https://github.com/rabbitholegg/questdk-plugins/commit/7b93d2c297c897d72669ea9346e4a851c940da69)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.44
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.32
 
 ### Patch Changes
