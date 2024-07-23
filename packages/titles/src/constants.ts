@@ -1,3 +1,5 @@
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+
 export const TITLES_PUBLISHER_V1 = '0x04e4d53374a5e6259ce06cfc6850a839bd960d01'
 
 export const TITLES_ABI_V1 = [
@@ -78,3 +80,7 @@ export const MINT_FEE_ABI = [
     type: 'function',
   },
 ]
+
+export const CHAIN_ID_TO_SLUG: Record<number, string> = {
+  [Chains.BASE]: 'base',
+}
