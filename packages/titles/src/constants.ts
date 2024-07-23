@@ -1,3 +1,5 @@
+import { Chains } from '@rabbitholegg/questdk-plugin-utils'
+
 export const TITLES_PUBLISHER_V1 = '0x04e4d53374a5e6259ce06cfc6850a839bd960d01'
 
 export const TITLES_ABI_V1 = [
@@ -38,3 +40,47 @@ export const TITLES_ABI_V1 = [
     type: 'function',
   },
 ]
+
+export const TITLES_COLLECTION_ABI_V2 = [
+  {
+    inputs: [
+      { internalType: 'address', name: 'to_', type: 'address' },
+      { internalType: 'uint256', name: 'tokenId_', type: 'uint256' },
+      { internalType: 'uint256', name: 'amount_', type: 'uint256' },
+      { internalType: 'address', name: 'referrer_', type: 'address' },
+      { internalType: 'bytes', name: 'data_', type: 'bytes' },
+    ],
+    name: 'mint',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'to_', type: 'address' },
+      { internalType: 'uint256', name: 'tokenId_', type: 'uint256' },
+      { internalType: 'uint256', name: 'amount_', type: 'uint256' },
+      { internalType: 'address', name: 'referrer_', type: 'address' },
+      { internalType: 'bytes', name: 'data_', type: 'bytes' },
+      { internalType: 'string', name: 'comment_', type: 'string' },
+    ],
+    name: 'mintWithComment',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
+
+export const MINT_FEE_ABI = [
+  {
+    inputs: [{ internalType: 'uint256', name: 'tokenId_', type: 'uint256' }],
+    name: 'mintFee',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+]
+
+export const CHAIN_ID_TO_SLUG: Record<number, string> = {
+  [Chains.BASE]: 'base',
+}
