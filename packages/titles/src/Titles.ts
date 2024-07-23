@@ -16,8 +16,8 @@ import {
   DEFAULT_REFERRAL,
   MintActionParams,
   MintIntentParams,
-  formatAmount,
-  getMintAmount,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, type Address, type PublicClient, type SimulateContractReturnType, zeroHash } from 'viem'
 
@@ -47,7 +47,7 @@ export const mint = async (
       $abi: TITLES_COLLECTION_ABI_V2,
       to_: recipient,
       tokenId_: tokenId,
-      amount_: formatAmount(amount),
+      amount_: formatAmountToFilterOperator(amount),
       referrer_: referral,
     },
   })
@@ -64,7 +64,7 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, amount, tokenId } = mint
-  const quantityToMint = getMintAmount(amount)
+  const quantityToMint = formatAmountToInteger(amount)
 
   if (tokenId == null) {
     throw new Error('Token ID is required')
@@ -111,7 +111,7 @@ export const simulateMint = async (
   const mintArgs = [
     recipient,
     tokenId,
-    getMintAmount(amount),
+    formatAmountToInteger(amount),
     referral ?? DEFAULT_REFERRAL,
     zeroHash,
   ]
