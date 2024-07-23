@@ -4,6 +4,7 @@ import {
   TITLES_ABI_V1,
   TITLES_PUBLISHER_V1,
   TITLES_COLLECTION_ABI_V2,
+  CHAIN_ID_TO_SLUG,
 } from './constants'
 import {
   type CreateActionParams,
@@ -125,6 +126,16 @@ export const simulateMint = async (
     account: account ?? DEFAULT_ACCOUNT,
   })
   return result
+}
+
+export function getExternalUrl(params: MintActionParams): string {
+  const { chainId, contractAddress, tokenId } = params
+  const slug = CHAIN_ID_TO_SLUG[chainId]
+
+  if (!slug || !contractAddress || !tokenId) {
+    return 'https://titles.xyz'
+  }
+  return `https://titles.xyz/collect/${slug}/${contractAddress}/${tokenId}`
 }
 
 export const getSupportedTokenAddresses = async (
