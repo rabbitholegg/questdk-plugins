@@ -24,8 +24,8 @@ import {
 import {
   Chains,
   DEFAULT_ACCOUNT,
-  formatAmount,
-  getMintAmount,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
   type MintIntentParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -70,7 +70,7 @@ export const mint = async (
         {
           // 721
           $abi: [...FIXED_PRICE_FRAGMENTS, DUTCH_AUCTION_FRAGMENT],
-          count: formatAmount(amount),
+          count: formatAmountToFilterOperator(amount),
           nftContract: contractAddress,
           nftRecipient: recipient,
           buyReferrer: referral,
@@ -81,7 +81,7 @@ export const mint = async (
           multiTokenCollection: contractAddress,
           tokenRecipient: recipient,
           tokenQuantities: {
-            $some: { tokenId, quantity: formatAmount(amount) },
+            $some: { tokenId, quantity: formatAmountToFilterOperator(amount) },
           },
           referrer: referral,
         },
@@ -108,7 +108,7 @@ export const getFees = async (
   }) as PublicClient
 
   const contractType = await getContractType(client, contractAddress)
-  const quantityToMint = getMintAmount(amount)
+  const quantityToMint = formatAmountToInteger(amount)
 
   if (contractType === '721') {
     const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -178,7 +178,7 @@ export const getMintIntent = async (
   }) as PublicClient
 
   const contractType = await getContractType(client, contractAddress)
-  const mintAmount = getMintAmount(amount)
+  const mintAmount = formatAmountToInteger(amount)
 
   if (contractType === '721') {
     const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -286,7 +286,7 @@ export const simulateMint = async (
 
   const contractType = await getContractType(_client, contractAddress)
 
-  const mintAmount = getMintAmount(amount)
+  const mintAmount = formatAmountToInteger(amount)
 
   if (contractType === '721') {
     if (tokenId) {

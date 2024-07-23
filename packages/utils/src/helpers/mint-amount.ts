@@ -1,6 +1,6 @@
 import { FilterOperator } from '../types'
 
-export function formatAmount(
+export function formatAmountToFilterOperator(
   amount: FilterOperator | undefined,
 ): FilterOperator {
   if (!amount || (typeof amount === 'string' && isNaN(Number(amount)))) {
@@ -17,8 +17,8 @@ export function formatAmount(
   return amount
 }
 
-export function getMintAmount(amount: FilterOperator | undefined) {
-  if (!amount) {
+export function formatAmountToInteger(amount: FilterOperator | undefined) {
+  if (!amount || amount === '0') {
     return 1n
   }
   // If the amount is a primitive, pass that value through

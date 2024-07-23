@@ -12,8 +12,8 @@ export {
   chainIdToViemChain,
   createTestCase,
   getExitAddresses,
-  formatAmount,
-  getMintAmount,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
 } from './helpers'
 export type {
   IntentParams,

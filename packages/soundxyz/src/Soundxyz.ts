@@ -25,8 +25,8 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
-  formatAmount,
-  getMintAmount,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -53,7 +53,7 @@ export const mint = async (
       $abiAbstract: SUPERMINTER_V2_ABI,
       p: {
         edition: contractAddress,
-        quantity: formatAmount(amount),
+        quantity: formatAmountToFilterOperator(amount),
         tier: tokenId,
         to: recipient, // Can be given as gift, so recipient will not always match sender
         affiliate: referral,
@@ -67,7 +67,7 @@ export const getMintIntent = async (
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient, tokenId, amount } = mint
   const tier = await getDefaultMintTier(mint.chainId, contractAddress, tokenId)
-  const quantity = getMintAmount(amount)
+  const quantity = formatAmountToInteger(amount)
 
   const mintTo = {
     edition: contractAddress,
@@ -119,7 +119,7 @@ export const simulateMint = async (
     tokenId,
     _client,
   )
-  const quantity = getMintAmount(amount)
+  const quantity = formatAmountToInteger(amount)
 
   const mintTo = {
     edition: contractAddress,
@@ -186,7 +186,7 @@ export const getFees = async (
     tokenId,
     client,
   )
-  const quantity = getMintAmount(amount)
+  const quantity = formatAmountToInteger(amount)
 
   try {
     const totalPriceAndFees = (await client.readContract({

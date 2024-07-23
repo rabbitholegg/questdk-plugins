@@ -14,8 +14,8 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
-  formatAmount,
-  getMintAmount,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   http,
@@ -38,7 +38,7 @@ export const mint = async (
 
   const andArray1155: AndArrayItem[] = [
     {
-      quantity: formatAmount(amount),
+      quantity: formatAmountToFilterOperator(amount),
     },
   ]
   if (referral) {
@@ -161,7 +161,7 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, tokenId, amount } = mint
-  const quantityToMint = getMintAmount(amount)
+  const quantityToMint = formatAmountToInteger(amount)
   try {
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
