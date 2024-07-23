@@ -1,37 +1,5 @@
 # @rabbitholegg/questdk-plugin-connext
 
-## 1.0.0-alpha.61
-
-### Patch Changes
-
-- Updated dependencies [[`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.43
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
-## 1.0.0-alpha.60
-
-### Patch Changes
-
-- Updated dependencies [[`a5e3c75c`](https://github.com/rabbitholegg/questdk-plugins/commit/a5e3c75c461180ba1339ece4b73aab38f0ea6d59)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.42
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
-## 1.0.0-alpha.59
-
-### Patch Changes
-
-- Updated dependencies [[`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819), [`9cf1b431`](https://github.com/rabbitholegg/questdk-plugins/commit/9cf1b43150129452af1550cd4875bac8abc67c31), [`4f9c41b1`](https://github.com/rabbitholegg/questdk-plugins/commit/4f9c41b13dacd3e3d96343877481cec237b9ba6e), [`26077ed4`](https://github.com/rabbitholegg/questdk-plugins/commit/26077ed48a227e8e1b5222761f7ce7335508beb7)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.41
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
-## 1.0.0-alpha.58
-
-### Patch Changes
-
-- Updated dependencies [[`0f1bcea6`](https://github.com/rabbitholegg/questdk-plugins/commit/0f1bcea608e9ecc9de9f6f1920e7962264a2ebf7)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.40
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
 ## 1.0.0-alpha.57
 
 ### Patch Changes

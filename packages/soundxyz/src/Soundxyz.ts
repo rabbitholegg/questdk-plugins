@@ -1,6 +1,4 @@
-import axios from 'axios'
 import {
-  CONTRACT_URI_ABI,
   MINT_INFO_LIST_ABI,
   NEXT_SCHEDULE_NUM_ABI,
   SUPERMINTER,
@@ -9,6 +7,7 @@ import {
   SUPERMINTER_V2_ABI,
   TOTAL_PRICE_AND_FEES_V1_ABI,
   TOTAL_PRICE_AND_FEES_V2_ABI,
+  ZORA_DEPLOYER_ADDRESS,
 } from './constants'
 import type { TotalPriceAndFees } from './types'
 import { Chains } from './utils'
@@ -20,13 +19,10 @@ import {
 import {
   ActionType,
   DEFAULT_ACCOUNT,
-  DEFAULT_REFERRAL,
   type DisctriminatedActionParams,
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
-  formatAmountToFilterOperator,
-  formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -43,8 +39,7 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
-    mint
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
 
   return compressJson({
     chainId,
@@ -53,10 +48,9 @@ export const mint = async (
       $abiAbstract: SUPERMINTER_V2_ABI,
       p: {
         edition: contractAddress,
-        quantity: formatAmountToFilterOperator(amount),
+        quantity: amount,
         tier: tokenId,
         to: recipient, // Can be given as gift, so recipient will not always match sender
-        affiliate: referral,
       },
     },
   })
@@ -67,7 +61,7 @@ export const getMintIntent = async (
 ): Promise<TransactionRequest> => {
   const { contractAddress, recipient, tokenId, amount } = mint
   const tier = await getDefaultMintTier(mint.chainId, contractAddress, tokenId)
-  const quantity = formatAmountToInteger(amount)
+  const quantity = amount ?? 1
 
   const mintTo = {
     edition: contractAddress,
@@ -106,8 +100,9 @@ export const simulateMint = async (
   value: bigint,
   account?: Address,
   client?: PublicClient,
+  creatorAddress?: Address,
 ): Promise<SimulateContractReturnType> => {
-  const { contractAddress, recipient, tokenId, amount, referral } = mint
+  const { contractAddress, recipient, tokenId, amount } = mint
   const _client = (client ??
     createPublicClient({
       chain: chainIdToViemChain(mint.chainId),
@@ -119,7 +114,7 @@ export const simulateMint = async (
     tokenId,
     _client,
   )
-  const quantity = formatAmountToInteger(amount)
+  const quantity = amount ?? 1
 
   const mintTo = {
     edition: contractAddress,
@@ -135,7 +130,7 @@ export const simulateMint = async (
     signedClaimTicket: 0,
     signedDeadline: 0,
     signature: zeroHash,
-    affiliate: referral ?? DEFAULT_REFERRAL,
+    affiliate: creatorAddress ?? ZORA_DEPLOYER_ADDRESS,
     affiliateProof: [zeroHash],
     attributionId: 0,
   }
@@ -186,7 +181,7 @@ export const getFees = async (
     tokenId,
     client,
   )
-  const quantity = formatAmountToInteger(amount)
+  const quantity = amount ?? 1
 
   try {
     const totalPriceAndFees = (await client.readContract({
@@ -288,39 +283,4 @@ export const getDynamicNameParams = async (
     project: 'Sound.XYZ',
   }
   return values
-}
-
-export const getExternalUrl = async (
-  params: MintActionParams,
-): Promise<string> => {
-  const { chainId, contractAddress, referral } = params
-
-  try {
-    const client = createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    }) as PublicClient
-
-    const contractUri = (await client.readContract({
-      address: contractAddress,
-      abi: CONTRACT_URI_ABI,
-      functionName: 'contractURI',
-    })) as string
-
-    const cid = contractUri.split('/').slice(2).join('/')
-
-    const { data } = await axios.get(`https://arweave.net/${cid}`)
-    const { external_link } = data
-
-    return `${external_link}?referral=${referral ?? DEFAULT_REFERRAL}`
-  } catch (error) {
-    console.error('an error occurred fetching the contract uri')
-    if (error instanceof Error) {
-      console.error(error.message)
-    } else {
-      console.error(error)
-    }
-    // fallback to default sound.xyz url
-    return 'https://sound.xyz'
-  }
 }

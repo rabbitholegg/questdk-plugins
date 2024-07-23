@@ -4,4 +4,3 @@ export {
   BOOST_TREASURY_ADDRESS,
 } from './contract-addresses'
 export { Chains } from './chain-ids'
-export { DEFAULT_REFERRAL } from './referral'

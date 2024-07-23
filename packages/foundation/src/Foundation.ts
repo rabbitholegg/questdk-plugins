@@ -8,7 +8,6 @@ import {
   REFERRAL_ADDRESS,
 } from './constants'
 import {
-  CHAIN_TO_NETWORK_SLUG,
   calculateFees,
   getContractType,
   getDutchAuctionData,
@@ -24,8 +23,8 @@ import {
 import {
   Chains,
   DEFAULT_ACCOUNT,
-  formatAmountToFilterOperator,
-  formatAmountToInteger,
+  formatAmount,
+  getMintAmount,
   type MintIntentParams,
   chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -44,8 +43,7 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
-    mint
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
 
   // 721
   const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -70,10 +68,9 @@ export const mint = async (
         {
           // 721
           $abi: [...FIXED_PRICE_FRAGMENTS, DUTCH_AUCTION_FRAGMENT],
-          count: formatAmountToFilterOperator(amount),
+          count: formatAmount(amount),
           nftContract: contractAddress,
           nftRecipient: recipient,
-          buyReferrer: referral,
         },
         {
           // 1155 NFTMarketRouter
@@ -81,9 +78,8 @@ export const mint = async (
           multiTokenCollection: contractAddress,
           tokenRecipient: recipient,
           tokenQuantities: {
-            $some: { tokenId, quantity: formatAmountToFilterOperator(amount) },
+            $some: { tokenId, quantity: formatAmount(amount) },
           },
-          referrer: referral,
         },
       ],
     },
@@ -108,7 +104,7 @@ export const getFees = async (
   }) as PublicClient
 
   const contractType = await getContractType(client, contractAddress)
-  const quantityToMint = formatAmountToInteger(amount)
+  const quantityToMint = getMintAmount(amount)
 
   if (contractType === '721') {
     const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -169,8 +165,7 @@ export const getFees = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
-    mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
   const client = createPublicClient({
     chain: chainIdToViemChain(chainId),
@@ -178,7 +173,7 @@ export const getMintIntent = async (
   }) as PublicClient
 
   const contractType = await getContractType(client, contractAddress)
-  const mintAmount = formatAmountToInteger(amount)
+  const mintAmount = getMintAmount(amount)
 
   if (contractType === '721') {
     const dropFactoryAddress = CHAIN_TO_CONTRACT_ADDRESS[chainId]
@@ -198,7 +193,7 @@ export const getMintIntent = async (
         contractAddress,
         mintAmount,
         recipient,
-        referral ?? REFERRAL_ADDRESS,
+        REFERRAL_ADDRESS,
         [],
       ]
 
@@ -248,7 +243,7 @@ export const getMintIntent = async (
       contractAddress,
       [{ tokenId, quantity: 1n }],
       recipient,
-      referral ?? REFERRAL_ADDRESS,
+      REFERRAL_ADDRESS,
     ]
 
     const data = encodeFunctionData({
@@ -274,8 +269,7 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
-    mint
+  const { chainId, contractAddress, amount, recipient, tokenId } = mint
 
   const _client =
     client ||
@@ -286,7 +280,7 @@ export const simulateMint = async (
 
   const contractType = await getContractType(_client, contractAddress)
 
-  const mintAmount = formatAmountToInteger(amount)
+  const mintAmount = getMintAmount(amount)
 
   if (contractType === '721') {
     if (tokenId) {
@@ -306,13 +300,7 @@ export const simulateMint = async (
         value,
         abi: FIXED_PRICE_FRAGMENTS,
         functionName: 'mintFromFixedPriceSaleWithEarlyAccessAllowlistV2',
-        args: [
-          contractAddress,
-          mintAmount,
-          recipient,
-          referral ?? REFERRAL_ADDRESS,
-          [],
-        ],
+        args: [contractAddress, mintAmount, recipient, REFERRAL_ADDRESS, []],
         account: account || DEFAULT_ACCOUNT,
       })
       return result
@@ -344,25 +332,13 @@ export const simulateMint = async (
         contractAddress,
         [[tokenId ?? 1, mintAmount]],
         recipient,
-        referral ?? REFERRAL_ADDRESS,
+        REFERRAL_ADDRESS,
       ],
       account: account || DEFAULT_ACCOUNT,
     })
     return result
   }
   throw new Error('Invalid contract type')
-}
-
-export const getExternalUrl = async (
-  params: MintActionParams,
-): Promise<string> => {
-  const { chainId, contractAddress, tokenId } = params
-  const baseUrl = 'https://foundation.app/'
-  const networkSlug = CHAIN_TO_NETWORK_SLUG[chainId]
-  if (tokenId != null || !networkSlug) {
-    return baseUrl
-  }
-  return `${baseUrl}mint/${networkSlug}/${contractAddress}`
 }
 
 export const getSupportedTokenAddresses = async (

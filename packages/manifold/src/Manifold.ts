@@ -19,7 +19,9 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
+  formatAmount,
   getExitAddresses,
+  getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import axios from 'axios'
 import {
@@ -49,7 +51,7 @@ export const mint = async (
       $abiAbstract: ABI_MULTI,
       creatorContractAddress: contractAddress,
       instanceId,
-      mintCount: amount,
+      mintCount: formatAmount(amount),
       mintFor: recipient,
     },
   ]
@@ -119,9 +121,17 @@ export const simulateMint = async (
   const from = account ?? DEFAULT_ACCOUNT
 
   const instanceId = await getInstanceId(chainId, contractAddress, tokenId ?? 1)
+  const mintAmount = getMintAmount(amount)
 
-  if (amount > 1) {
-    const mintArgs = [contractAddress, instanceId, amount, [], [], recipient]
+  if (mintAmount > 1n) {
+    const mintArgs = [
+      contractAddress,
+      instanceId,
+      mintAmount,
+      [],
+      [],
+      recipient,
+    ]
     try {
       const result = await _client.simulateContract({
         address: ERC1155_CONTRACT,
@@ -188,8 +198,7 @@ export const getFees = async (
       tokenId ?? 1,
     )
 
-    const quantityToMint =
-      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
+    const quantityToMint = getMintAmount(amount)
 
     if (instanceId) {
       const response = await axios.get(
@@ -211,41 +220,6 @@ export const getFees = async (
   } catch (err) {
     // https://github.com/manifoldxyz/creator-core-extensions-solidity/blob/66b794ec164d7e81022d97287c8e8591777a6590/packages/manifold/contracts/lazyclaim/LazyPayableClaim.sol#L42
     return { actionFee: 0n, projectFee: parseEther('0.0005') }
-  }
-}
-
-export const getExternalUrl = async (
-  mint: MintActionParams,
-): Promise<string> => {
-  const { chainId, contractAddress, tokenId } = mint
-
-  const baseUrl = 'https://app.manifold.xyz/'
-
-  try {
-    const instanceId = await getInstanceId(
-      chainId,
-      contractAddress,
-      tokenId ?? 1,
-    )
-
-    const { data } = await axios.get<{ slug?: string }>(
-      `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
-    )
-    const slug = data.slug
-
-    if (!slug) {
-      throw new Error('Slug not found in response')
-    }
-
-    return `${baseUrl}c/${slug}`
-  } catch (err) {
-    if (err instanceof Error) {
-      console.error(err.message)
-    } else {
-      console.error(err)
-    }
-    // fallback to default manifold url
-    return baseUrl
   }
 }
 

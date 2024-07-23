@@ -8,7 +8,6 @@ import {
 import {
   create,
   getDynamicNameParams,
-  getExternalUrl,
   getFees,
   getMintIntent,
   getProjectFees,
@@ -29,8 +28,6 @@ export const Zora: IActionPlugin = {
   swap: async () => new PluginActionNotImplementedError(),
   mint,
   getDynamicNameParams,
-  getExternalUrl: async (params: ActionParams) =>
-    getExternalUrl(params as unknown as MintActionParams),
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
   getFees: async (params: ActionParams) =>

@@ -1,7 +1,6 @@
 import {
   create,
   getDynamicNameParams,
-  getExternalUrl,
   getMintIntent,
   mint,
   simulateMint,
@@ -19,14 +18,13 @@ import {
 import {
   ActionType,
   Chains,
-  DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
   type MintActionParams,
   type MintIntentParams,
   type PremintActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk'
-import { type Address, getAddress, parseEther } from 'viem'
+import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi, beforeEach, MockedFunction } from 'vitest'
 import { PremintResponse } from './types'
 import axios from 'axios'
@@ -264,7 +262,6 @@ describe('Given the getMintIntent function', () => {
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
-      referral: ZORA_DEPLOYER_ADDRESS,
     }
 
     const result = await getMintIntent(mint)
@@ -279,10 +276,10 @@ describe('Given the getMintIntent function', () => {
   test('returns a TransactionRequest with correct properties when tokenId is null', async () => {
     const mint: MintIntentParams = {
       chainId: 1,
+
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
-      referral: ZORA_DEPLOYER_ADDRESS,
     }
 
     const result = await getMintIntent(mint)
@@ -407,7 +404,6 @@ describe('simulateMint function', () => {
       tokenId: 10,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
@@ -426,7 +422,7 @@ describe('simulateMint function', () => {
         _account: Address,
       ) => ({
         request: {
-          address: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
+          address: '0x8704c8b68e577d54be3c16341fbd31bac47c7471',
           value: parseEther('0.000777'),
         },
       }),
@@ -435,11 +431,10 @@ describe('simulateMint function', () => {
 
     const mint: MintIntentParams = {
       chainId: Chains.BLAST,
-      contractAddress: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
+      contractAddress: '0x8704c8b68e577d54be3c16341fbd31bac47c7471',
       tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
@@ -457,7 +452,6 @@ describe('simulateMint function', () => {
       tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: ZORA_DEPLOYER_ADDRESS,
     }
     const value = parseEther('0.000777')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
@@ -517,57 +511,5 @@ describe('getDynamicNameParams function', () => {
     await expect(
       getDynamicNameParams(params as DisctriminatedActionParams, metadata),
     ).rejects.toThrow(`Invalid action type "${params.type}"`)
-  })
-})
-
-describe('getExternalUrl function', () => {
-  test('should return correct url for 1155 mint with token id w/referral', async () => {
-    const params = {
-      chainId: Chains.ZORA,
-      contractAddress: getAddress('0x393c46fe7887697124a73f6028f39751aa1961a3'),
-      tokenId: 1,
-      referral: getAddress('0x1234567890123456789012345678901234567890'),
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe(
-      'https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3/1?referrer=0x1234567890123456789012345678901234567890',
-    )
-  })
-
-  test('should return correct url for 1155 mint with token id w/o referral', async () => {
-    const params = {
-      chainId: Chains.ZORA,
-      contractAddress: getAddress('0x393c46fe7887697124a73f6028f39751aa1961a3'),
-      tokenId: 1,
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe(
-      `https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3/1?referrer=${ZORA_DEPLOYER_ADDRESS}`,
-    )
-  })
-
-  test('should return correct url for 1155 mint without token id', async () => {
-    const params = {
-      chainId: Chains.ZORA,
-      contractAddress: getAddress('0x393c46fe7887697124a73f6028f39751aa1961a3'),
-      referral: getAddress('0x1234567890123456789012345678901234567890'),
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe(
-      'https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3?referrer=0x1234567890123456789012345678901234567890',
-    )
-  })
-
-  test('should return correct url for testnet mint', async () => {
-    const params = {
-      chainId: Chains.BASE_SEPOLIA,
-      contractAddress: getAddress('0x627a509d76498ddd7d80a28ef4cd887b5b6df2cd'),
-      tokenId: 39,
-      referral: getAddress('0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48'),
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe(
-      'https://testnet.zora.co/collect/bsep:0x627a509D76498DDD7D80a28eF4cD887B5b6df2Cd/39?referrer=0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48',
-    )
   })
 })

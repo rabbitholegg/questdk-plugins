@@ -5,7 +5,6 @@ import {
 } from '@rabbitholegg/questdk'
 
 import {
-  getExternalUrl,
   getFees,
   getMintIntent,
   getProjectFees,
@@ -17,8 +16,6 @@ import {
 
 export const Foundation: IActionPlugin = {
   pluginId: 'foundation',
-  getExternalUrl: async (params: ActionParams) =>
-    getExternalUrl(params as unknown as MintActionParams),
   getFees: async (params: ActionParams) =>
     getFees(params as unknown as MintActionParams),
   getMintIntent,

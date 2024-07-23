@@ -1,57 +1,5 @@
 # @rabbitholegg/questdk-plugin-zora
 
-## 1.0.0-alpha.68
-
-### Minor Changes
-
-- [#493](https://github.com/rabbitholegg/questdk-plugins/pull/493) [`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7) Thanks [@mmackz](https://github.com/mmackz)! - add support for testnet url generation
-
-### Patch Changes
-
-- Updated dependencies [[`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.43
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
-## 1.0.0-alpha.67
-
-### Minor Changes
-
-- [#490](https://github.com/rabbitholegg/questdk-plugins/pull/490) [`a5e3c75c`](https://github.com/rabbitholegg/questdk-plugins/commit/a5e3c75c461180ba1339ece4b73aab38f0ea6d59) Thanks [@mmackz](https://github.com/mmackz)! - update zora protocol sdk and add base sepolia to viem chains
-
-### Patch Changes
-
-- Updated dependencies [[`a5e3c75c`](https://github.com/rabbitholegg/questdk-plugins/commit/a5e3c75c461180ba1339ece4b73aab38f0ea6d59)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.42
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
-## 1.0.0-alpha.66
-
-### Minor Changes
-
-- [#482](https://github.com/rabbitholegg/questdk-plugins/pull/482) [`379f7fc0`](https://github.com/rabbitholegg/questdk-plugins/commit/379f7fc05703a705b23ec89e8b25cdd5ba2eb35c) Thanks [@mmackz](https://github.com/mmackz)! - implement getExternalUrl function
-
-- [#481](https://github.com/rabbitholegg/questdk-plugins/pull/481) [`a58a6f62`](https://github.com/rabbitholegg/questdk-plugins/commit/a58a6f626e5446eaf207a39fbab0bfc54d1cb542) Thanks [@mmackz](https://github.com/mmackz)! - use referral param in validation and simulations
-
-### Patch Changes
-
-- [#488](https://github.com/rabbitholegg/questdk-plugins/pull/488) [`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819) Thanks [@mmackz](https://github.com/mmackz)! - add default ref address to utils package
-
-- Updated dependencies [[`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819), [`9cf1b431`](https://github.com/rabbitholegg/questdk-plugins/commit/9cf1b43150129452af1550cd4875bac8abc67c31), [`4f9c41b1`](https://github.com/rabbitholegg/questdk-plugins/commit/4f9c41b13dacd3e3d96343877481cec237b9ba6e), [`26077ed4`](https://github.com/rabbitholegg/questdk-plugins/commit/26077ed48a227e8e1b5222761f7ce7335508beb7)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.41
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
-## 1.0.0-alpha.65
-
-### Minor Changes
-
-- [#467](https://github.com/rabbitholegg/questdk-plugins/pull/467) [`261e6db6`](https://github.com/rabbitholegg/questdk-plugins/commit/261e6db63aefd56779ad1073046fd39f55ec2544) Thanks [@mmackz](https://github.com/mmackz)! - amount zero fix
-
-### Patch Changes
-
-- Updated dependencies [[`0f1bcea6`](https://github.com/rabbitholegg/questdk-plugins/commit/0f1bcea608e9ecc9de9f6f1920e7962264a2ebf7)]:
-  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.40
-  - @rabbitholegg/questdk@2.0.0-alpha.55
-
 ## 1.0.0-alpha.64
 
 ### Patch Changes

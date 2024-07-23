@@ -1,4 +1,4 @@
-import { getExternalUrl, mint } from './Foundation'
+import { mint } from './Foundation'
 // import { getFees, getMintIntent, simulateMint } from './Foundation'
 import {
   dutchAuctionResponse,
@@ -12,7 +12,7 @@ import {
   type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { Address, parseEther, zeroAddress } from 'viem'
+import { Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
 
 describe('Given the foundation plugin', () => {
@@ -62,22 +62,19 @@ describe('Given the foundation plugin', () => {
     })
 
     describe('should not pass filter with invalid transactions', () => {
-      for (const testCase of failingTestCases) {
+      failingTestCases.forEach((testCase) => {
         const { transaction, description, params } = testCase
         test(description, async () => {
-          let result: boolean | undefined
           try {
             const filter = await mint(params)
-            result = apply(transaction, filter)
+            const result = apply(transaction, filter)
+            expect(result).toBe(false)
           } catch (error) {
             expect(error).toBeDefined()
             expect(error).toBeInstanceOf(Error)
           }
-          if (result) {
-            expect(result).toBe(false)
-          }
         })
-      }
+      })
     })
   })
 
@@ -197,7 +194,6 @@ describe('Given the foundation plugin', () => {
         contractAddress: CONTRACT_ADDRESS,
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
-        referral: zeroAddress,
       }
 
       // mock
@@ -205,7 +201,7 @@ describe('Given the foundation plugin', () => {
         getMintIntent: async (mint: MintIntentParams) => ({
           from: mint.recipient,
           to: mint.contractAddress,
-          data: '0x0cafb11300000000000000000000000054d8109b459cefa530cdba2c3a2218c14e08090700000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000',
+          data: '0x0cafb11300000000000000000000000054d8109b459cefa530cdba2c3a2218c14e08090700000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890000000000000000000000000e3bba2a4f8e0f5c32ef5097f988a4d88075c8b4800000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000',
         }),
       }
       const getMintIntentSpy = vi.spyOn(mockFns, 'getMintIntent')
@@ -217,7 +213,7 @@ describe('Given the foundation plugin', () => {
       expect(result).toEqual({
         from: mint.recipient,
         to: mint.contractAddress,
-        data: '0x0cafb11300000000000000000000000054d8109b459cefa530cdba2c3a2218c14e08090700000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000',
+        data: '0x0cafb11300000000000000000000000054d8109b459cefa530cdba2c3a2218c14e08090700000000000000000000000000000000000000000000000000000000000000010000000000000000000000001234567890123456789012345678901234567890000000000000000000000000e3bba2a4f8e0f5c32ef5097f988a4d88075c8b4800000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000000',
       })
     })
 
@@ -229,7 +225,6 @@ describe('Given the foundation plugin', () => {
         contractAddress: CONTRACT_ADDRESS,
         amount: 1n,
         recipient: RECIPIENT_ADDRESS,
-        referral: zeroAddress,
       }
 
       // mock
@@ -299,7 +294,6 @@ describe('Given the foundation plugin', () => {
     })
 
     test('should simulate a mint with a dutch auction', async () => {
-      // ! fails when using live data (dutch auction not supported)
       const mint = {
         chainId: Chains.BASE,
         contractAddress: '0x6a41fcce9d075a9f6324b626af56cf632c509ec9',
@@ -368,7 +362,6 @@ describe('Given the foundation plugin', () => {
     })
 
     test('should simulate a mint with an 1155 OE mint', async () => {
-      // ! fails when using live data (mint expired)
       const mint = {
         chainId: Chains.BASE,
         contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
@@ -408,39 +401,6 @@ describe('Given the foundation plugin', () => {
       expect(request.address).toBe('0xfee588791cda1d01ccfc80b51efa00c0be5b129e')
       expect(request.functionName).toBe('mintMultiTokensFromFreeFixedPriceSale')
       expect(request.value).toBe(value)
-    })
-  })
-
-  describe('getExternalUrl function', () => {
-    test('should return the correct url for a 721 mint', async () => {
-      const mint: MintActionParams = {
-        chainId: Chains.BASE,
-        contractAddress: '0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
-      }
-      const result = await getExternalUrl(mint)
-      expect(result).toBe(
-        'https://foundation.app/mint/base/0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
-      )
-    })
-
-    test('should return the base url for 1155 mint', async () => {
-      const mint: MintActionParams = {
-        chainId: Chains.BASE,
-        contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
-        tokenId: 213,
-      }
-      const result = await getExternalUrl(mint)
-      expect(result).toBe('https://foundation.app/')
-    })
-
-    test('should return the base url for unsupported chain', async () => {
-      const mint: MintActionParams = {
-        chainId: Chains.OPTIMISM,
-        contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
-        tokenId: 213,
-      }
-      const result = await getExternalUrl(mint)
-      expect(result).toBe('https://foundation.app/')
     })
   })
 })

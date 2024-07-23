@@ -18,8 +18,8 @@ import {
   DEFAULT_ACCOUNT,
   type MintActionParams,
   type MintIntentParams,
-  formatAmountToFilterOperator,
-  formatAmountToInteger,
+  formatAmount,
+  getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -38,13 +38,13 @@ export const mint = async (
   const Erc721Filter = {
     $abi: [CLAIM_721_FRAGMENT],
     _receiver: recipient,
-    _quantity: formatAmountToFilterOperator(amount),
+    _quantity: formatAmount(amount),
   }
 
   const Erc1155Filter = {
     $abi: [CLAIM_1155_FRAGMENT],
     _receiver: recipient,
-    _quantity: formatAmountToFilterOperator(amount),
+    _quantity: formatAmount(amount),
     _tokenId: tokenId,
   }
 
@@ -66,7 +66,7 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, amount, tokenId } = mint
-  const quantityToMint = formatAmountToInteger(amount)
+  const quantityToMint = getMintAmount(amount)
   const client = getClient(chainId)
 
   try {
@@ -138,7 +138,7 @@ export const simulateMint = async (
     const mintArgs = [
       recipient,
       tokenId ?? 0n,
-      formatAmountToInteger(amount),
+      getMintAmount(amount),
       claimCondition.currency,
       value,
       [
@@ -174,7 +174,7 @@ export const simulateMint = async (
 
     const mintArgs = [
       recipient,
-      formatAmountToInteger(amount),
+      getMintAmount(amount),
       claimCondition.currency,
       value,
       [

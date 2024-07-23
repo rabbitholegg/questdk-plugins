@@ -323,6 +323,30 @@ export const ZORA_MINTER_ABI_1155 = [
     stateMutability: 'payable',
     type: 'function',
   }, // ZoraCreator1155Impl,
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'tokenRecipient',
+        type: 'address',
+      },
+      {
+        internalType: 'string',
+        name: 'message',
+        type: 'string',
+      },
+    ],
+    name: 'purchase',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'payable',
+    type: 'function',
+  }, // Legacy WritingEditions
   // https://github.com/soundxyz/sound-protocol/blob/0c29ae2f5ce2f27f3823cacf66b5180906070805/contracts/core/SoundEditionV1_2.sol#L274
   {
     inputs: [

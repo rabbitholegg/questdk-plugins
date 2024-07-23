@@ -6,7 +6,6 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 
 import {
-  getExternalUrl,
   getFees,
   getMintIntent,
   getProjectFees,
@@ -14,7 +13,7 @@ import {
   getSupportedTokenAddresses,
   mint,
   simulateMint,
-} from './Pods'
+} from './Pods.js'
 
 export const Pods: IActionPlugin = {
   pluginId: 'pods',
@@ -25,8 +24,6 @@ export const Pods: IActionPlugin = {
   mint,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
-  getExternalUrl: async (params: ActionParams) =>
-    getExternalUrl(params as unknown as MintActionParams),
   getFees: async (params: ActionParams) =>
     getFees(params as unknown as MintActionParams),
   getMintIntent,

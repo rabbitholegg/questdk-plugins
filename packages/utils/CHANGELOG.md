@@ -1,37 +1,5 @@
 # @rabbitholegg/questdk-plugin-utils
 
-## 1.0.0-alpha.43
-
-### Minor Changes
-
-- [#493](https://github.com/rabbitholegg/questdk-plugins/pull/493) [`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7) Thanks [@mmackz](https://github.com/mmackz)! - add support for testnet url generation
-
-## 1.0.0-alpha.42
-
-### Minor Changes
-
-- [#490](https://github.com/rabbitholegg/questdk-plugins/pull/490) [`a5e3c75c`](https://github.com/rabbitholegg/questdk-plugins/commit/a5e3c75c461180ba1339ece4b73aab38f0ea6d59) Thanks [@mmackz](https://github.com/mmackz)! - update zora protocol sdk and add base sepolia to viem chains
-
-## 1.0.0-alpha.41
-
-### Minor Changes
-
-- [#478](https://github.com/rabbitholegg/questdk-plugins/pull/478) [`9cf1b431`](https://github.com/rabbitholegg/questdk-plugins/commit/9cf1b43150129452af1550cd4875bac8abc67c31) Thanks [@mmackz](https://github.com/mmackz)! - add `getExternalUrl` function to IActionPlugin
-
-- [#487](https://github.com/rabbitholegg/questdk-plugins/pull/487) [`4f9c41b1`](https://github.com/rabbitholegg/questdk-plugins/commit/4f9c41b13dacd3e3d96343877481cec237b9ba6e) Thanks [@mmackz](https://github.com/mmackz)! - allow referral to be optional in MintIntentParams
-
-- [#475](https://github.com/rabbitholegg/questdk-plugins/pull/475) [`26077ed4`](https://github.com/rabbitholegg/questdk-plugins/commit/26077ed48a227e8e1b5222761f7ce7335508beb7) Thanks [@mmackz](https://github.com/mmackz)! - add referral to MintActionParams
-
-### Patch Changes
-
-- [#488](https://github.com/rabbitholegg/questdk-plugins/pull/488) [`48570843`](https://github.com/rabbitholegg/questdk-plugins/commit/485708435bcf129d381e54b1faf0024cbae42819) Thanks [@mmackz](https://github.com/mmackz)! - add default ref address to utils package
-
-## 1.0.0-alpha.40
-
-### Minor Changes
-
-- [#466](https://github.com/rabbitholegg/questdk-plugins/pull/466) [`0f1bcea6`](https://github.com/rabbitholegg/questdk-plugins/commit/0f1bcea608e9ecc9de9f6f1920e7962264a2ebf7) Thanks [@mmackz](https://github.com/mmackz)! - update for token zero fix
-
 ## 1.0.0-alpha.39
 
 ### Minor Changes

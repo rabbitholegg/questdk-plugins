@@ -3,7 +3,6 @@ import {
   type TestParams,
   createTestCase,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { zeroAddress } from 'viem'
 
 const MINT_BASE: TestParams<MintActionParams> = {
   transaction: {
@@ -19,7 +18,6 @@ const MINT_BASE: TestParams<MintActionParams> = {
     chainId: 8453,
     contractAddress: '0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
     recipient: '0x22cf7cb48c74b07e1c0dcab5c047c5ed73292805',
-    referral: zeroAddress,
   },
 }
 
@@ -37,7 +35,6 @@ const MINT_ETHEREUM: TestParams<MintActionParams> = {
     chainId: 1,
     contractAddress: '0x42cfdea063311dfe9bbb3d7b598fea24067909b4',
     recipient: '0xd76dfe29f0371fb0640906c699165b6bab33c522',
-    referral: zeroAddress,
   },
 }
 
@@ -75,7 +72,6 @@ const MINT_OE_1155: TestParams<MintActionParams> = {
     recipient: '0xd3432463Cf264F4DEf759ca6F8843d47Dd00b2FD',
     tokenId: 213,
     amount: '1',
-    referral: zeroAddress,
   },
 }
 
@@ -95,10 +91,4 @@ export const failingTestCases = [
     contractAddress: '0x62037b26fff91929655aa3a060f327b47d1e2b3e',
   }),
   createTestCase(MINT_BASE, 'when amount is not sufficient', { amount: '99' }),
-  createTestCase(MINT_BASE, 'when when minting with wrong referral (721)', {
-    referral: '0x62037b26fff91929655aa3a060f327b47d1e2b3e',
-  }),
-  createTestCase(MINT_OE_1155, 'when when minting with wrong referral (1155)', {
-    referral: '0x62037b26fff91929655aa3a060f327b47d1e2b3e',
-  }),
 ]

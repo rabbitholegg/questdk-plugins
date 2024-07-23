@@ -16,5 +16,4 @@ export enum Chains {
   SCROLL = 534352,
   ZORA = 7777777,
   SEPOLIA = 11155111,
-  BASE_SEPOLIA = 84532,
 }

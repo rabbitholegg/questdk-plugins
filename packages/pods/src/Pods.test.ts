@@ -1,13 +1,12 @@
 import {
   Chains,
-  DEFAULT_REFERRAL,
   type MintActionParams,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk'
-import { type Address, parseEther, getAddress, zeroAddress } from 'viem'
+import { type Address, parseEther } from 'viem'
 import { describe, expect, test, vi } from 'vitest'
-import { getExternalUrl, getMintIntent, mint } from './Pods'
+import { getMintIntent, mint } from './Pods'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
 
@@ -80,7 +79,6 @@ describe('Given the getMintIntent function', () => {
       contractAddress: CONTRACT_ADDRESS,
       amount: BigInt('10'),
       recipient: RECIPIENT_ADDRESS,
-      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
     }
 
     const result = await getMintIntent(mint)
@@ -126,7 +124,6 @@ describe('simulateMint function', () => {
       tokenId: 1,
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
     }
     const value = parseEther('0.0007')
     const address = mint.recipient as Address
@@ -168,7 +165,6 @@ describe('simulateMint function', () => {
       contractAddress: '0x7e0b40af1d6f26f2141b90170c513e57b5edd74e',
       amount: BigInt(1),
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
     }
     const value = parseEther('0.0007')
     const address = mint.recipient as Address
@@ -203,54 +199,5 @@ describe('simulateMint function', () => {
     expect(request.address).toBe('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e')
     expect(request.functionName).toBe('mint')
     expect(request.value).toBe(value)
-  })
-})
-
-describe('getExternalUrl function', () => {
-  test('should return correct url for mint w/tokenId and referral', async () => {
-    const params = {
-      chainId: Chains.BASE,
-      contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
-      tokenId: 21,
-      referral: getAddress('0x1234567890123456789012345678901234567890'),
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe(
-      'https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=0x1234567890123456789012345678901234567890',
-    )
-  })
-
-  test('should return correct url for mint w/tokenId and w/o referral', async () => {
-    const params = {
-      chainId: Chains.BASE,
-      contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
-      tokenId: 21,
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe(
-      `https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=${DEFAULT_REFERRAL}`,
-    )
-  })
-
-  test('should return correct url for mint w/out tokenId', async () => {
-    const params = {
-      chainId: Chains.BASE,
-      contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
-      referral: getAddress('0x1234567890123456789012345678901234567890'),
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe(
-      'https://pods.media/mint-podcast?referrer=0x1234567890123456789012345678901234567890',
-    )
-  })
-
-  test('should return fallback url if error occurs', async () => {
-    const params = {
-      chainId: Chains.BASE,
-      contractAddress: zeroAddress,
-      referral: getAddress('0x1234567890123456789012345678901234567890'),
-    }
-    const result = await getExternalUrl(params)
-    expect(result).toBe('https://pods.media')
   })
 })
