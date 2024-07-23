@@ -22,6 +22,7 @@ import {
 import { formatAmount } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
+  Chains,
   DEFAULT_ACCOUNT,
   DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
@@ -445,10 +446,19 @@ export const getExternalUrl = async (
 ): Promise<string> => {
   const { chainId, contractAddress, tokenId, referral } = params
   const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
-  const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
-  const baseUrl = `https://zora.co/collect/${chainSlug}:${contractAddress}`
+  const isTestnet =
+    chainId === Chains.BASE_SEPOLIA || chainId === Chains.SEPOLIA
 
-  return tokenId != null
-    ? `${baseUrl}/${tokenId}${referralParams}`
-    : `${baseUrl}${referralParams}`
+  if (chainSlug) {
+    const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+    const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
+    const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
+
+    return tokenId != null
+      ? `${baseUrl}/${tokenId}${referralParams}`
+      : `${baseUrl}${referralParams}`
+  }
+
+  // fallback to default zora url
+  return 'https://zora.co'
 }
