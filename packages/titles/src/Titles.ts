@@ -20,7 +20,15 @@ import {
   formatAmountToFilterOperator,
   formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { parseEther, type Address, type PublicClient, type SimulateContractReturnType, zeroHash } from 'viem'
+import {
+  type Address,
+  type PublicClient,
+  type TransactionRequest,
+  type SimulateContractReturnType,
+  encodeFunctionData,
+  parseEther,
+  zeroHash,
+} from 'viem'
 
 export const create = async (
   create: CreateActionParams,
@@ -95,13 +103,41 @@ export const getFees = async (
   }
 }
 
+export const getMintIntent = async (
+  mint: MintIntentParams,
+): Promise<TransactionRequest> => {
+  const { contractAddress, recipient, tokenId, amount, referral } = mint
+  const quantity = formatAmountToInteger(amount)
+
+  const mintArgs = [
+    recipient,
+    tokenId,
+    quantity,
+    referral ?? DEFAULT_REFERRAL,
+    zeroHash,
+  ]
+
+  const data = encodeFunctionData({
+    abi: TITLES_COLLECTION_ABI_V2,
+    functionName: 'mint',
+    args: mintArgs,
+  })
+
+  return {
+    from: recipient,
+    to: contractAddress,
+    data,
+  }
+}
+
 export const simulateMint = async (
   mint: MintIntentParams,
   value: bigint,
   account?: Address,
   _client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, amount, recipient, tokenId, referral } = mint
+  const { chainId, contractAddress, amount, recipient, tokenId, referral } =
+    mint
 
   const client = _client || getClient(chainId)
 

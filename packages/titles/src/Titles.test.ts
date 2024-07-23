@@ -1,4 +1,11 @@
-import { create, getExternalUrl, getFees, mint, simulateMint } from './Titles'
+import {
+  create,
+  getExternalUrl,
+  getFees,
+  getMintIntent,
+  mint,
+  simulateMint,
+} from './Titles'
 import {
   failingTestCasesCreate,
   failingTestCasesMint,
@@ -6,7 +13,10 @@ import {
   passingTestCasesMint,
 } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
-import { Chains, type MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  Chains,
+  type MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { parseEther, type Address } from 'viem'
 import { describe, expect, test } from 'vitest'
 
@@ -175,7 +185,28 @@ describe('simulateMint function', () => {
 
 describe('getExternalUrl function', () => {
   test('should return the correct URL for a V2 mint', () => {
-    const url = getExternalUrl({ chainId: Chains.BASE, contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933', tokenId: 1 })
-    expect(url).toEqual('https://titles.xyz/collect/base/0x432f4ccc39ab8dd8015f590a56244becb8d16933/1')
+    const url = getExternalUrl({
+      chainId: Chains.BASE,
+      contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
+      tokenId: 1,
+    })
+    expect(url).toEqual(
+      'https://titles.xyz/collect/base/0x432f4ccc39ab8dd8015f590a56244becb8d16933/1',
+    )
+  })
+})
+
+describe('getMintIntent function', () => {
+  test('should return the correct mint intent for a V2 mint', async () => {
+    const mintIntent = await getMintIntent({
+      chainId: Chains.BASE,
+      contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
+      tokenId: 1,
+      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+      amount: BigInt(1),
+    })
+    expect(mintIntent.data).toEqual(
+      '0x972f9e94000000000000000000000000f70da97812cb96acdf810712aa562db8dfa3dbef00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000e3bba2a4f8e0f5c32ef5097f988a4d88075c8b4800000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000',
+    )
   })
 })
