@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-titles
 
+## 1.0.0-alpha.19
+
+### Minor Changes
+
+- [#497](https://github.com/rabbitholegg/questdk-plugins/pull/497) [`f4a71365`](https://github.com/rabbitholegg/questdk-plugins/commit/f4a71365c6b141f7c823957c2ddbb024a2bf0c8a) Thanks [@mmackz](https://github.com/mmackz)! - add mint action for titles plugin
+
+### Patch Changes
+
+- Updated dependencies [[`7b93d2c2`](https://github.com/rabbitholegg/questdk-plugins/commit/7b93d2c297c897d72669ea9346e4a851c940da69)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.44
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.18
 
 ### Patch Changes
