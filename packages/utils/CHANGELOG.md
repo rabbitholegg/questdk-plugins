@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.43
+
+### Minor Changes
+
+- [#493](https://github.com/rabbitholegg/questdk-plugins/pull/493) [`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7) Thanks [@mmackz](https://github.com/mmackz)! - add support for testnet url generation
+
 ## 1.0.0-alpha.42
 
 ### Minor Changes
