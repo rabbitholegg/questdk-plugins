@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-symbiosis
 
+## 1.0.0-alpha.61
+
+### Patch Changes
+
+- Updated dependencies [[`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.43
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.60
 
 ### Patch Changes

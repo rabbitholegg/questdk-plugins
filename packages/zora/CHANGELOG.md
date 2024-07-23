@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.68
+
+### Minor Changes
+
+- [#493](https://github.com/rabbitholegg/questdk-plugins/pull/493) [`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7) Thanks [@mmackz](https://github.com/mmackz)! - add support for testnet url generation
+
+### Patch Changes
+
+- Updated dependencies [[`1240bf6b`](https://github.com/rabbitholegg/questdk-plugins/commit/1240bf6b414202f7cfececff5e3cd9bb98cbaed7)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.43
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.67
 
 ### Minor Changes
