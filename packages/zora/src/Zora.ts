@@ -14,6 +14,7 @@ import {
 import { AndArrayItem } from './types'
 import { validatePremint } from './validate'
 import {
+  type ActionParams,
   type MintActionParams,
   type CreateActionParams,
   type TransactionFilter,
@@ -443,21 +444,29 @@ export const getDynamicNameParams = async (
 }
 
 export const getExternalUrl = async (
-  params: MintActionParams,
+  params: ActionParams,
+  actionType: ActionType,
 ): Promise<string> => {
-  const { chainId, contractAddress, tokenId, referral } = params
-  const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
-  const isTestnet =
-    chainId === Chains.BASE_SEPOLIA || chainId === Chains.SEPOLIA
+  if (actionType === ActionType.Mint) {
+    const { chainId, contractAddress, tokenId, referral } =
+      params as MintActionParams
+    const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
+    const isTestnet =
+      chainId === Chains.BASE_SEPOLIA || chainId === Chains.SEPOLIA
 
-  if (chainSlug) {
-    const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
-    const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
-    const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
+    if (chainSlug) {
+      const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+      const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
+      const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
 
-    return tokenId != null
-      ? `${baseUrl}/${tokenId}${referralParams}`
-      : `${baseUrl}${referralParams}`
+      return tokenId != null
+        ? `${baseUrl}/${tokenId}${referralParams}`
+        : `${baseUrl}${referralParams}`
+    }
+  }
+
+  if (actionType === ActionType.Create) {
+    return 'https://zora.co/create'
   }
 
   // fallback to default zora url
