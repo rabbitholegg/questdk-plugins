@@ -231,16 +231,16 @@ export const getExternalUrl = async (
         contractAddress,
         tokenId ?? 1,
       )
-  
+
       const { data } = await axios.get<{ slug?: string }>(
         `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
       )
       const slug = data.slug
-  
+
       if (!slug) {
         throw new Error('Slug not found in response')
       }
-  
+
       return `${baseUrl}c/${slug}`
     } catch (err) {
       if (err instanceof Error) {

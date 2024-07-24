@@ -202,24 +202,24 @@ export const getExternalUrl = async (
   params: ActionParams,
   actionType: ActionType,
 ): Promise<string> => {
-
   if (actionType === ActionType.Mint) {
-    const { chainId, contractAddress, tokenId, referral } = params as MintActionParams
+    const { chainId, contractAddress, tokenId, referral } =
+      params as MintActionParams
 
     try {
       const client = createPublicClient({
         chain: chainIdToViemChain(chainId),
         transport: http(),
       }) as PublicClient
-  
+
       const uri = await getUri(client, contractAddress, tokenId)
       const cid = uri.split('/').slice(2).join('/')
-  
+
       const { data } = await axios.get(`https://arweave.net/${cid}`)
-  
+
       // different properties depending on uri function. One of these will be defined
       const baseUrl = data.external_link ?? data.external_url
-  
+
       return `${baseUrl}?referrer=${referral ?? DEFAULT_REFERRAL}`
     } catch (error) {
       console.error('an error occurred fetching data from the contract')
