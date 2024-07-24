@@ -533,7 +533,6 @@ export interface IActionPlugin {
     value: bigint,
     account?: Address,
     client?: PublicClient,
-    creatorAddress?: Address,
   ) => Promise<SimulateContractReturnType>
   getProjectFees?: (params: ActionParams) => Promise<bigint>
   getFees?: (
