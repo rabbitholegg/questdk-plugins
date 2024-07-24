@@ -1,4 +1,5 @@
 import {
+  ActionType,
   Chains,
   DEFAULT_REFERRAL,
   type MintActionParams,
@@ -214,7 +215,7 @@ describe('getExternalUrl function', () => {
       tokenId: 21,
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe(
       'https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=0x1234567890123456789012345678901234567890',
     )
@@ -226,7 +227,7 @@ describe('getExternalUrl function', () => {
       contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
       tokenId: 21,
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe(
       `https://pods.media/mint-podcast/why-social-needs-a-layer-2-ft-ryan-li-of-cyber?referrer=${DEFAULT_REFERRAL}`,
     )
@@ -238,7 +239,7 @@ describe('getExternalUrl function', () => {
       contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe(
       'https://pods.media/mint-podcast?referrer=0x1234567890123456789012345678901234567890',
     )
@@ -250,7 +251,7 @@ describe('getExternalUrl function', () => {
       contractAddress: zeroAddress,
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe('https://pods.media')
   })
 })

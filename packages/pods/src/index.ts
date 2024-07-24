@@ -25,8 +25,7 @@ export const Pods: IActionPlugin = {
   mint,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
-  getExternalUrl: async (params: ActionParams) =>
-    getExternalUrl(params as unknown as MintActionParams),
+  getExternalUrl,
   getFees: async (params: ActionParams) =>
     getFees(params as unknown as MintActionParams),
   getMintIntent,

@@ -16,6 +16,8 @@ import {
   getExitAddresses,
   formatAmountToFilterOperator,
   formatAmountToInteger,
+  ActionParams,
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   http,
@@ -197,35 +199,39 @@ export const getFees = async (
 }
 
 export const getExternalUrl = async (
-  params: MintActionParams,
+  params: ActionParams,
+  actionType: ActionType,
 ): Promise<string> => {
-  const { chainId, contractAddress, tokenId, referral } = params
 
-  try {
-    const client = createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    }) as PublicClient
+  if (actionType === ActionType.Mint) {
+    const { chainId, contractAddress, tokenId, referral } = params as MintActionParams
 
-    const uri = await getUri(client, contractAddress, tokenId)
-    const cid = uri.split('/').slice(2).join('/')
-
-    const { data } = await axios.get(`https://arweave.net/${cid}`)
-
-    // different properties depending on uri function. One of these will be defined
-    const baseUrl = data.external_link ?? data.external_url
-
-    return `${baseUrl}?referrer=${referral ?? DEFAULT_REFERRAL}`
-  } catch (error) {
-    console.error('an error occurred fetching data from the contract')
-    if (error instanceof Error) {
-      console.error(error.message)
-    } else {
-      console.error(error)
+    try {
+      const client = createPublicClient({
+        chain: chainIdToViemChain(chainId),
+        transport: http(),
+      }) as PublicClient
+  
+      const uri = await getUri(client, contractAddress, tokenId)
+      const cid = uri.split('/').slice(2).join('/')
+  
+      const { data } = await axios.get(`https://arweave.net/${cid}`)
+  
+      // different properties depending on uri function. One of these will be defined
+      const baseUrl = data.external_link ?? data.external_url
+  
+      return `${baseUrl}?referrer=${referral ?? DEFAULT_REFERRAL}`
+    } catch (error) {
+      console.error('an error occurred fetching data from the contract')
+      if (error instanceof Error) {
+        console.error(error.message)
+      } else {
+        console.error(error)
+      }
     }
-    // fallback to default pods url
-    return 'https://pods.media'
   }
+  // fallback to default pods url
+  return 'https://pods.media'
 }
 
 export const getSupportedTokenAddresses = async (
