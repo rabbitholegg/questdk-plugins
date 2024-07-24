@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.70
+
+### Patch Changes
+
+- [#498](https://github.com/rabbitholegg/questdk-plugins/pull/498) [`9a0262bb`](https://github.com/rabbitholegg/questdk-plugins/commit/9a0262bb8ec53f1b30049bbfee40c1d4b358f175) Thanks [@mmackz](https://github.com/mmackz)! - change bytecode retrieval method (zora)
+
 ## 1.0.0-alpha.69
 
 ### Patch Changes
