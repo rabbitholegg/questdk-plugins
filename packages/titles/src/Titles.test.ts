@@ -14,6 +14,7 @@ import {
 } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import {
+  ActionType,
   Chains,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
@@ -184,12 +185,13 @@ describe('simulateMint function', () => {
 })
 
 describe('getExternalUrl function', () => {
-  test('should return the correct URL for a V2 mint', () => {
-    const url = getExternalUrl({
+  test('should return the correct URL for a V2 mint', async () => {
+    const mintParams = {
       chainId: Chains.BASE,
       contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
       tokenId: 1,
-    })
+    }
+    const url = await getExternalUrl(mintParams, ActionType.Mint)
     expect(url).toEqual(
       'https://titles.xyz/collect/base/0x432f4ccc39ab8dd8015f590a56244becb8d16933/1',
     )

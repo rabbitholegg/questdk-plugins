@@ -12,6 +12,8 @@ import {
   compressJson,
 } from '@rabbitholegg/questdk'
 import {
+  ActionParams,
+  ActionType,
   Chains,
   DEFAULT_ACCOUNT,
   DEFAULT_REFERRAL,
@@ -164,14 +166,20 @@ export const simulateMint = async (
   return result
 }
 
-export function getExternalUrl(params: MintActionParams): string {
-  const { chainId, contractAddress, tokenId } = params
-  const slug = CHAIN_ID_TO_SLUG[chainId]
+export async function getExternalUrl(params: ActionParams, actionType: ActionType): Promise<string> {
+  const baseUrl = 'https://titles.xyz'
 
-  if (!slug || !contractAddress || !tokenId) {
-    return 'https://titles.xyz'
+  if (actionType === ActionType.Mint) {
+    const { chainId, contractAddress, tokenId } = params as MintActionParams
+    const slug = CHAIN_ID_TO_SLUG[chainId]
+  
+    if (!slug || !contractAddress || !tokenId) {
+      return baseUrl
+    }
+    return `${baseUrl}/collect/${slug}/${contractAddress}/${tokenId}`
   }
-  return `https://titles.xyz/collect/${slug}/${contractAddress}/${tokenId}`
+
+  return baseUrl
 }
 
 export const getSupportedTokenAddresses = async (
