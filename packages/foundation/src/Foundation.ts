@@ -28,6 +28,8 @@ import {
   formatAmountToInteger,
   type MintIntentParams,
   chainIdToViemChain,
+  ActionParams,
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -354,15 +356,22 @@ export const simulateMint = async (
 }
 
 export const getExternalUrl = async (
-  params: MintActionParams,
+  params: ActionParams,
+  actionType: ActionType,
 ): Promise<string> => {
-  const { chainId, contractAddress, tokenId } = params
   const baseUrl = 'https://foundation.app/'
-  const networkSlug = CHAIN_TO_NETWORK_SLUG[chainId]
-  if (tokenId != null || !networkSlug) {
-    return baseUrl
+
+  if (actionType === ActionType.Mint) {
+    const { chainId, contractAddress, tokenId } = params as MintActionParams
+
+    const networkSlug = CHAIN_TO_NETWORK_SLUG[chainId]
+    if (tokenId != null || !networkSlug) {
+      return baseUrl
+    }
+    return `${baseUrl}mint/${networkSlug}/${contractAddress}`
   }
-  return `${baseUrl}mint/${networkSlug}/${contractAddress}`
+
+  return baseUrl
 }
 
 export const getSupportedTokenAddresses = async (
