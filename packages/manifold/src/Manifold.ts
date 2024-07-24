@@ -20,6 +20,8 @@ import {
   type MintIntentParams,
   chainIdToViemChain,
   getExitAddresses,
+  ActionParams,
+  ActionType,
 } from '@rabbitholegg/questdk-plugin-utils'
 import axios from 'axios'
 import {
@@ -215,38 +217,41 @@ export const getFees = async (
 }
 
 export const getExternalUrl = async (
-  mint: MintActionParams,
+  mint: ActionParams,
+  actionType: ActionType,
 ): Promise<string> => {
-  const { chainId, contractAddress, tokenId } = mint
-
   const baseUrl = 'https://app.manifold.xyz/'
 
-  try {
-    const instanceId = await getInstanceId(
-      chainId,
-      contractAddress,
-      tokenId ?? 1,
-    )
+  if (actionType === ActionType.Mint) {
+    const { chainId, contractAddress, tokenId } = mint as MintActionParams
 
-    const { data } = await axios.get<{ slug?: string }>(
-      `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
-    )
-    const slug = data.slug
-
-    if (!slug) {
-      throw new Error('Slug not found in response')
+    try {
+      const instanceId = await getInstanceId(
+        chainId,
+        contractAddress,
+        tokenId ?? 1,
+      )
+  
+      const { data } = await axios.get<{ slug?: string }>(
+        `https://apps.api.manifoldxyz.dev/public/instance/data?id=${instanceId}`,
+      )
+      const slug = data.slug
+  
+      if (!slug) {
+        throw new Error('Slug not found in response')
+      }
+  
+      return `${baseUrl}c/${slug}`
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message)
+      } else {
+        console.error(err)
+      }
     }
-
-    return `${baseUrl}c/${slug}`
-  } catch (err) {
-    if (err instanceof Error) {
-      console.error(err.message)
-    } else {
-      console.error(err)
-    }
-    // fallback to default manifold url
-    return baseUrl
   }
+
+  return baseUrl
 }
 
 export const getSupportedTokenAddresses = async (

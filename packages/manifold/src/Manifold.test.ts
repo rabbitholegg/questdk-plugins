@@ -9,6 +9,7 @@ import { ERC721_CONTRACT, ERC1155_CONTRACT } from './constants'
 import { failingTestCases, passingTestCases } from './test-transactions'
 import { apply } from '@rabbitholegg/questdk'
 import {
+  ActionType,
   Chains,
   DEFAULT_ACCOUNT,
   type MintIntentParams,
@@ -241,7 +242,7 @@ describe('getExternalUrl function', () => {
       },
     })
 
-    const result = await getExternalUrl(mint)
+    const result = await getExternalUrl(mint, ActionType.Mint)
     expect(result).toBe('https://app.manifold.xyz/c/girls-man')
   })
 
@@ -250,7 +251,7 @@ describe('getExternalUrl function', () => {
       chainId: Chains.OPTIMISM,
       contractAddress: getAddress('0x7935cd348193bab133f3081f53eb99ee6f0d685b'),
     }
-    const result = await getExternalUrl(mint)
+    const result = await getExternalUrl(mint, ActionType.Mint)
     expect(result).toBe('https://app.manifold.xyz/')
   })
 })
