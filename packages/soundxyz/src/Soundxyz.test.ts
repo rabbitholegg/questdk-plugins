@@ -216,7 +216,7 @@ describe('getExternalUrl', () => {
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
 
-    const link = await getExternalUrl(mintParams)
+    const link = await getExternalUrl(mintParams, ActionType.Mint)
     expect(link).equals(
       'https://www.sound.xyz/33below/midnight-diner-ii?referral=0x1234567890123456789012345678901234567890',
     )
@@ -230,7 +230,7 @@ describe('getExternalUrl', () => {
       chainId: Chains.BASE,
     }
 
-    const link = await getExternalUrl(mintParams)
+    const link = await getExternalUrl(mintParams, ActionType.Mint)
     expect(link).equals(
       `https://www.sound.xyz/33below/midnight-diner-ii?referral=${DEFAULT_REFERRAL}`,
     )

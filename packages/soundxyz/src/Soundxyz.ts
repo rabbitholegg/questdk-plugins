@@ -27,6 +27,7 @@ import {
   getExitAddresses,
   formatAmountToFilterOperator,
   formatAmountToInteger,
+  ActionParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -291,36 +292,39 @@ export const getDynamicNameParams = async (
 }
 
 export const getExternalUrl = async (
-  params: MintActionParams,
+  params: ActionParams,
+  actionType: ActionType,
 ): Promise<string> => {
-  const { chainId, contractAddress, referral } = params
+  if (actionType === ActionType.Mint) {
+    const { chainId, contractAddress, referral } = params as MintActionParams
 
-  try {
-    const client = createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    }) as PublicClient
-
-    const contractUri = (await client.readContract({
-      address: contractAddress,
-      abi: CONTRACT_URI_ABI,
-      functionName: 'contractURI',
-    })) as string
-
-    const cid = contractUri.split('/').slice(2).join('/')
-
-    const { data } = await axios.get(`https://arweave.net/${cid}`)
-    const { external_link } = data
-
-    return `${external_link}?referral=${referral ?? DEFAULT_REFERRAL}`
-  } catch (error) {
-    console.error('an error occurred fetching the contract uri')
-    if (error instanceof Error) {
-      console.error(error.message)
-    } else {
-      console.error(error)
+    try {
+      const client = createPublicClient({
+        chain: chainIdToViemChain(chainId),
+        transport: http(),
+      }) as PublicClient
+  
+      const contractUri = (await client.readContract({
+        address: contractAddress,
+        abi: CONTRACT_URI_ABI,
+        functionName: 'contractURI',
+      })) as string
+  
+      const cid = contractUri.split('/').slice(2).join('/')
+  
+      const { data } = await axios.get(`https://arweave.net/${cid}`)
+      const { external_link } = data
+  
+      return `${external_link}?referral=${referral ?? DEFAULT_REFERRAL}`
+    } catch (error) {
+      console.error('an error occurred fetching the contract uri')
+      if (error instanceof Error) {
+        console.error(error.message)
+      } else {
+        console.error(error)
+      }
     }
-    // fallback to default sound.xyz url
-    return 'https://sound.xyz'
   }
+  // fallback to default sound.xyz url
+  return 'https://sound.xyz'
 }
