@@ -166,12 +166,14 @@ export const simulateMint = async (
   return result
 }
 
-export async function getExternalUrl(params: ActionParams, actionType?: ActionType) {
-
+export async function getExternalUrl(
+  params: ActionParams,
+  actionType?: ActionType,
+) {
   if (actionType === ActionType.Mint) {
     const { chainId, contractAddress, tokenId } = params as MintActionParams
     const slug = CHAIN_ID_TO_SLUG[chainId]
-  
+
     if (!slug || !contractAddress || !tokenId) {
       return 'https://titles.xyz'
     }

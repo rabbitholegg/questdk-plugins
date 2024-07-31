@@ -186,23 +186,27 @@ describe('simulateMint function', () => {
 
 describe('getExternalUrl function', () => {
   test('should return the correct URL for a V2 mint', async () => {
-    const url = await getExternalUrl({
-      chainId: Chains.BASE,
-      contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
-      tokenId: 1,
-    }, ActionType.Mint)
+    const url = await getExternalUrl(
+      {
+        chainId: Chains.BASE,
+        contractAddress: '0x432f4ccc39ab8dd8015f590a56244becb8d16933',
+        tokenId: 1,
+      },
+      ActionType.Mint,
+    )
     expect(url).toEqual(
       'https://titles.xyz/collect/base/0x432f4ccc39ab8dd8015f590a56244becb8d16933/1',
     )
   })
 
   test('should return the correct URL for a create action', async () => {
-    const url = await getExternalUrl({
-      chainId: Chains.BASE,
-    }, ActionType.Create)
-    expect(url).toEqual(
-      'https://titles.xyz/create',
+    const url = await getExternalUrl(
+      {
+        chainId: Chains.BASE,
+      },
+      ActionType.Create,
     )
+    expect(url).toEqual('https://titles.xyz/create')
   })
 })
 

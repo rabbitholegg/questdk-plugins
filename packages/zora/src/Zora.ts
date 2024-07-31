@@ -19,7 +19,10 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { ActionParams, formatAmountToFilterOperator } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  ActionParams,
+  formatAmountToFilterOperator,
+} from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
   Chains,
@@ -446,18 +449,18 @@ export const getExternalUrl = async (
   params: ActionParams,
   actionType?: ActionType,
 ): Promise<string> => {
-
   if (actionType === ActionType.Mint) {
-    const { chainId, contractAddress, tokenId, referral } = params as MintActionParams
+    const { chainId, contractAddress, tokenId, referral } =
+      params as MintActionParams
     const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
     const isTestnet =
       chainId === Chains.BASE_SEPOLIA || chainId === Chains.SEPOLIA
-  
+
     if (chainSlug) {
       const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
       const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
       const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
-  
+
       return tokenId != null
         ? `${baseUrl}/${tokenId}${referralParams}`
         : `${baseUrl}${referralParams}`
