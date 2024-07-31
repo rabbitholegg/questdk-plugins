@@ -356,22 +356,15 @@ export const simulateMint = async (
 }
 
 export const getExternalUrl = async (
-  params: ActionParams,
-  actionType: ActionType,
+  params: MintActionParams,
 ): Promise<string> => {
+  const { chainId, contractAddress, tokenId } = params
   const baseUrl = 'https://foundation.app/'
-
-  if (actionType === ActionType.Mint) {
-    const { chainId, contractAddress, tokenId } = params as MintActionParams
-
-    const networkSlug = CHAIN_TO_NETWORK_SLUG[chainId]
-    if (tokenId != null || !networkSlug) {
-      return baseUrl
-    }
-    return `${baseUrl}mint/${networkSlug}/${contractAddress}`
+  const networkSlug = CHAIN_TO_NETWORK_SLUG[chainId]
+  if (tokenId != null || !networkSlug) {
+    return baseUrl
   }
-
-  return baseUrl
+  return `${baseUrl}mint/${networkSlug}/${contractAddress}`
 }
 
 export const getSupportedTokenAddresses = async (

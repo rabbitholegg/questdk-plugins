@@ -418,7 +418,7 @@ describe('Given the foundation plugin', () => {
         chainId: Chains.BASE,
         contractAddress: '0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
       }
-      const result = await getExternalUrl(mint, ActionType.Mint)
+      const result = await getExternalUrl(mint)
       expect(result).toBe(
         'https://foundation.app/mint/base/0xead6dca70b0465725a57eb81f7d3ab8b5e0b81b4',
       )
@@ -430,7 +430,7 @@ describe('Given the foundation plugin', () => {
         contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
         tokenId: 213,
       }
-      const result = await getExternalUrl(mint, ActionType.Mint)
+      const result = await getExternalUrl(mint)
       expect(result).toBe('https://foundation.app/')
     })
 
@@ -440,7 +440,7 @@ describe('Given the foundation plugin', () => {
         contractAddress: '0x1d2550d198197df1a10af515cf2ea0d790889b93',
         tokenId: 213,
       }
-      const result = await getExternalUrl(mint, ActionType.Mint)
+      const result = await getExternalUrl(mint)
       expect(result).toBe('https://foundation.app/')
     })
   })
