@@ -528,7 +528,7 @@ describe('getExternalUrl function', () => {
       tokenId: 1,
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe(
       'https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3/1?referrer=0x1234567890123456789012345678901234567890',
     )
@@ -540,7 +540,7 @@ describe('getExternalUrl function', () => {
       contractAddress: getAddress('0x393c46fe7887697124a73f6028f39751aa1961a3'),
       tokenId: 1,
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe(
       `https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3/1?referrer=${ZORA_DEPLOYER_ADDRESS}`,
     )
@@ -552,7 +552,7 @@ describe('getExternalUrl function', () => {
       contractAddress: getAddress('0x393c46fe7887697124a73f6028f39751aa1961a3'),
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe(
       'https://zora.co/collect/zora:0x393c46fe7887697124A73f6028f39751aA1961a3?referrer=0x1234567890123456789012345678901234567890',
     )
@@ -565,9 +565,17 @@ describe('getExternalUrl function', () => {
       tokenId: 39,
       referral: getAddress('0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48'),
     }
-    const result = await getExternalUrl(params)
+    const result = await getExternalUrl(params, ActionType.Mint)
     expect(result).toBe(
       'https://testnet.zora.co/collect/bsep:0x627a509D76498DDD7D80a28eF4cD887B5b6df2Cd/39?referrer=0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48',
     )
+  })
+
+  test('should return correct url for create', async () => {
+    const params = {
+      chainId: Chains.ZORA,
+    }
+    const result = await getExternalUrl(params, ActionType.Create)
+    expect(result).toBe('https://zora.co/create')
   })
 })

@@ -19,7 +19,7 @@ import {
   type TransactionFilter,
   compressJson,
 } from '@rabbitholegg/questdk'
-import { formatAmountToFilterOperator } from '@rabbitholegg/questdk-plugin-utils'
+import { ActionParams, formatAmountToFilterOperator } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
   Chains,
@@ -443,21 +443,29 @@ export const getDynamicNameParams = async (
 }
 
 export const getExternalUrl = async (
-  params: MintActionParams,
+  params: ActionParams,
+  actionType?: ActionType,
 ): Promise<string> => {
-  const { chainId, contractAddress, tokenId, referral } = params
-  const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
-  const isTestnet =
-    chainId === Chains.BASE_SEPOLIA || chainId === Chains.SEPOLIA
 
-  if (chainSlug) {
-    const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
-    const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
-    const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
+  if (actionType === ActionType.Mint) {
+    const { chainId, contractAddress, tokenId, referral } = params as MintActionParams
+    const chainSlug = CHAIN_ID_TO_ZORA_SLUG[chainId]
+    const isTestnet =
+      chainId === Chains.BASE_SEPOLIA || chainId === Chains.SEPOLIA
+  
+    if (chainSlug) {
+      const referralParams = `?referrer=${referral ?? ZORA_DEPLOYER_ADDRESS}`
+      const domain = isTestnet ? 'testnet.zora.co' : 'zora.co'
+      const baseUrl = `https://${domain}/collect/${chainSlug}:${contractAddress}`
+  
+      return tokenId != null
+        ? `${baseUrl}/${tokenId}${referralParams}`
+        : `${baseUrl}${referralParams}`
+    }
+  }
 
-    return tokenId != null
-      ? `${baseUrl}/${tokenId}${referralParams}`
-      : `${baseUrl}${referralParams}`
+  if (actionType === ActionType.Create) {
+    return 'https://zora.co/create'
   }
 
   // fallback to default zora url
