@@ -451,6 +451,7 @@ export const getFees = async (
     return { actionFee: fee.tokenPurchaseCost, projectFee: fee.mintFee }
   } catch (err) {
     console.error(err)
+    // ! temp change to base fee of 0.000111 until we update for fee calulation
     return { actionFee: parseEther('0'), projectFee: parseEther('0.000111') } // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
   }
 }
