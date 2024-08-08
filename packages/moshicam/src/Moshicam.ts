@@ -10,8 +10,8 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
-  formatAmount,
-  getMintAmount,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   type Address,
@@ -35,7 +35,7 @@ export const mint = async (
       $abi: IMOSHI_PIC1155_ABI,
       to: recipient,
       id: tokenId,
-      quantity: formatAmount(amount),
+      quantity: formatAmountToFilterOperator(amount),
     },
   })
 }
@@ -47,7 +47,7 @@ export const getMintIntent = async (
 
   const tokenIdToMint = tokenId ? tokenId : 0
 
-  const quantityToMint = getMintAmount(amount)
+  const quantityToMint = formatAmountToInteger(amount)
 
   const data = encodeFunctionData({
     abi: IMOSHI_PIC1155_ABI,
@@ -77,7 +77,7 @@ export const getFees = async (
     chain: chainIdToViemChain(chainId),
     transport: http(),
   })
-  const quantityToMint = getMintAmount(amount)
+  const quantityToMint = formatAmountToInteger(amount)
   try {
     const data = (await client.readContract({
       address: contractAddress,
@@ -109,7 +109,7 @@ export const simulateMint = async (
     throw new Error(`${chainId} is not supported`)
   }
 
-  const amountToMint = getMintAmount(amount)
+  const amountToMint = formatAmountToInteger(amount)
 
   const _client = (client ??
     createPublicClient({

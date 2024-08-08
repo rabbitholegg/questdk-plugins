@@ -10,7 +10,7 @@ import {
   Chains,
   DEFAULT_ACCOUNT,
   chainIdToViemChain,
-  getMintAmount,
+  formatAmountToInteger,
   type MintIntentParams,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
@@ -38,7 +38,7 @@ export const mint = async (
     throw new Error('Contract data not found')
   }
 
-  const numTokens = minPurchaseSeconds * tps * getMintAmount(amount)
+  const numTokens = minPurchaseSeconds * tps * formatAmountToInteger(amount)
 
   return compressJson({
     chainId,
@@ -84,7 +84,7 @@ export const getFees = async (
     throw new Error('Contract data not found')
   }
 
-  const mintUnits = getMintAmount(amount)
+  const mintUnits = formatAmountToInteger(amount)
 
   const mintCost = minPurchaseSeconds * tps * mintUnits
 
@@ -109,7 +109,7 @@ export const getMintIntent = async (
     throw new Error('Contract data not found')
   }
 
-  const mintArgs = [minPurchaseSeconds * tps * getMintAmount(amount)]
+  const mintArgs = [minPurchaseSeconds * tps * formatAmountToInteger(amount)]
 
   const data = encodeFunctionData({
     abi: FABRIC_MINT_ABI,
@@ -155,7 +155,7 @@ export const simulateMint = async (
     throw new Error('Contract data not found')
   }
 
-  const mintArgs = [minPurchaseSeconds * tps * getMintAmount(amount)]
+  const mintArgs = [minPurchaseSeconds * tps * formatAmountToInteger(amount)]
 
   const result = await _client.simulateContract({
     address: contractAddress,

@@ -19,9 +19,9 @@ import {
   DEFAULT_ACCOUNT,
   type MintIntentParams,
   chainIdToViemChain,
-  formatAmount,
+  formatAmountToFilterOperator,
+  formatAmountToInteger,
   getExitAddresses,
-  getMintAmount,
 } from '@rabbitholegg/questdk-plugin-utils'
 import axios from 'axios'
 import {
@@ -51,7 +51,7 @@ export const mint = async (
       $abiAbstract: ABI_MULTI,
       creatorContractAddress: contractAddress,
       instanceId,
-      mintCount: formatAmount(amount),
+      mintCount: formatAmountToFilterOperator(amount),
       mintFor: recipient,
     },
   ]
@@ -121,7 +121,7 @@ export const simulateMint = async (
   const from = account ?? DEFAULT_ACCOUNT
 
   const instanceId = await getInstanceId(chainId, contractAddress, tokenId ?? 1)
-  const mintAmount = getMintAmount(amount)
+  const mintAmount = formatAmountToInteger(amount)
 
   if (mintAmount > 1n) {
     const mintArgs = [
@@ -198,7 +198,7 @@ export const getFees = async (
       tokenId ?? 1,
     )
 
-    const quantityToMint = getMintAmount(amount)
+    const quantityToMint = formatAmountToInteger(amount)
 
     if (instanceId) {
       const response = await axios.get(
