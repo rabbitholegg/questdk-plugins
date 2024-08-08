@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-moshicam
 
+## 1.0.0-alpha.9
+
+### Patch Changes
+
+- [#505](https://github.com/rabbitholegg/questdk-plugins/pull/505) [`b38b9f49`](https://github.com/rabbitholegg/questdk-plugins/commit/b38b9f49616c18b48480e12d6d5a9570e95bc83b) Thanks [@mmackz](https://github.com/mmackz)! - update mint util functions
+
 ## 1.0.0-alpha.8
 
 ### Patch Changes
