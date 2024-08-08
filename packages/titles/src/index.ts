@@ -24,8 +24,7 @@ export const Titles: IActionPlugin = {
   getMintIntent,
   mint,
   simulateMint,
-  getExternalUrl: async (params: ActionParams) =>
-    getExternalUrl(params as unknown as MintActionParams),
+  getExternalUrl,
   getProjectFees: async (params: ActionParams) =>
     getProjectFees(params as unknown as MintActionParams),
   getFees: async (params: ActionParams) =>
