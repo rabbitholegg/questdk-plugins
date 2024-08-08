@@ -5,6 +5,8 @@ import {
   LAYER_ZERO_MINT,
   MINT,
   MINT_BATCH_WITHOUT_FEES,
+  MINT_V2_BASE,
+  MINT_V2_ZORA,
   MINT_WITH_REWARDS,
   MINT_WITH_REWARDS_1155,
   ZERO_QUANTITY,
@@ -18,6 +20,8 @@ export const passingTestCasesMint = [
   createTestCase(MINT_BATCH_WITHOUT_FEES, 'When using the batch mint function'),
   createTestCase(BATCH_MINT_ARB, 'when using batch mint function on arbitrum'),
   createTestCase(MINT, 'when using mint function'),
+  createTestCase(MINT_V2_BASE, 'when using mint function on base'),
+  createTestCase(MINT_V2_ZORA, 'when using mint function on zora'),
   createTestCase(MINT_WITH_REWARDS, 'when contractAddress is checksummed', {
     contractAddress: getAddress(MINT_WITH_REWARDS.params.contractAddress),
   }),

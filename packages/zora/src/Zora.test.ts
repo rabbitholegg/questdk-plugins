@@ -15,6 +15,7 @@ import {
 import {
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
+  MINT_V2_ZORA,
 } from './test-transactions'
 import {
   ActionType,
@@ -31,6 +32,7 @@ import { describe, expect, test, vi, beforeEach, MockedFunction } from 'vitest'
 import { PremintResponse } from './types'
 import axios from 'axios'
 import { validatePremint } from './validate'
+import { ZORA_TIMED_SALE_STRATEGY } from './contract-addresses'
 
 const MockedPremintResponse: PremintResponse = [
   {
@@ -93,10 +95,12 @@ describe('Given the zora plugin', () => {
   describe('When handling the mint action', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid mint action', async () => {
-        const filter = await mint({
+        const mintFilter = await mint({
           chainId: 1,
           contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
         })
+        /// @ts-expect-error ///
+        const filter = mintFilter.$or.at(0)
         expect(filter).toBeTypeOf('object')
         expect(Number(filter.chainId)).toBe(1)
         if (typeof filter.to === 'string') {
@@ -577,5 +581,18 @@ describe('getExternalUrl function', () => {
     }
     const result = await getExternalUrl(params, ActionType.Create)
     expect(result).toBe('https://zora.co/create')
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a 1155 mint when tokenId is not 0', async () => {
+    const mint = MINT_V2_ZORA.params as MintIntentParams
+    const value = parseEther('0.000111')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(ZORA_TIMED_SALE_STRATEGY)
+    expect(request.value).toBe(value)
   })
 })
