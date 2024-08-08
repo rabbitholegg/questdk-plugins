@@ -12,4 +12,5 @@ export const FIXED_PRICE_SALE_STRATS: { [chainId: number]: Address } = {
 }
 
 export const ZORA_1155_FACTORY = '0x777777c338d93e2c7adf08d102d45ca7cc4ed021'
-export const ZORA_TIMED_SALE_STRATEGY = '0x777777722d078c97c6ad07d9f36801e653e356ae'
+export const ZORA_TIMED_SALE_STRATEGY =
+  '0x777777722d078c97c6ad07d9f36801e653e356ae'

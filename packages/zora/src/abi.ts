@@ -377,6 +377,47 @@ export const UNIVERSAL_MINTER_ABI = [
   },
 ] // universal batch mint
 
+export const V2_MINT_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'mintTo',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'quantity',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: 'collection',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'tokenId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: 'mintReferral',
+        type: 'address',
+      },
+      {
+        internalType: 'string',
+        name: 'comment',
+        type: 'string',
+      },
+    ],
+    name: 'mint',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+]
+
 export const CREATE_CONTRACT_ABI = [
   {
     inputs: [
