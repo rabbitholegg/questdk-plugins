@@ -5,11 +5,13 @@ import {
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
   ZORA_MINTER_ABI_1155_LEGACY,
+  V2_MINT_ABI,
 } from './abi'
 import { CHAIN_ID_ARRAY, CHAIN_ID_TO_ZORA_SLUG } from './chain-ids'
 import {
   FIXED_PRICE_SALE_STRATS,
   ZORA_1155_FACTORY,
+  ZORA_TIMED_SALE_STRATEGY,
 } from './contract-addresses'
 import { AndArrayItem } from './types'
 import { validatePremint } from './validate'
@@ -94,7 +96,7 @@ export const create = async (
 const v1MintFilter = (mint: MintActionParams) => {
   const { chainId, contractAddress, tokenId, amount, recipient, referral } =
     mint
-    const universalMinter =
+  const universalMinter =
     zoraUniversalMinterAddress[
       chainId as keyof typeof zoraUniversalMinterAddress
     ]
@@ -183,12 +185,32 @@ const v1MintFilter = (mint: MintActionParams) => {
   }
 }
 
+const v2MintFilter = (mint: MintActionParams) => {
+  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+    mint
+
+  return {
+    chainId,
+    to: getExitAddresses(chainId, ZORA_TIMED_SALE_STRATEGY),
+    input: {
+      $abi: V2_MINT_ABI,
+      mintTo: recipient,
+      quantity: formatAmountToFilterOperator(amount),
+      collection: contractAddress,
+      tokenId,
+      mintReferral: referral,
+    },
+  }
+}
+
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
   const v1Filter = v1MintFilter(mint)
+  const v2Filter = v2MintFilter(mint)
+  
   return compressJson({
-    $or: [v1Filter],
+    $or: [v1Filter, v2Filter],
   })
 }
 
