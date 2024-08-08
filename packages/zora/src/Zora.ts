@@ -91,13 +91,10 @@ export const create = async (
   })
 }
 
-export const mint = async (
-  mint: MintActionParams,
-): Promise<TransactionFilter> => {
+const v1MintFilter = (mint: MintActionParams) => {
   const { chainId, contractAddress, tokenId, amount, recipient, referral } =
     mint
-
-  const universalMinter =
+    const universalMinter =
     zoraUniversalMinterAddress[
       chainId as keyof typeof zoraUniversalMinterAddress
     ]
@@ -179,10 +176,19 @@ export const mint = async (
       $or: [ERC721_FILTER_ABSTRACT, ERC1155_FILTER_ABSTRACT],
     },
   }
-  return compressJson({
+  return {
     chainId,
     to: getExitAddresses(chainId, mintContracts), // We need this top level so the backend knows what contracts this applies to
     $or: [DIRECT_MINT_FILTER, UNIVERSAL_MINT_FILTER],
+  }
+}
+
+export const mint = async (
+  mint: MintActionParams,
+): Promise<TransactionFilter> => {
+  const v1Filter = v1MintFilter(mint)
+  return compressJson({
+    $or: [v1Filter],
   })
 }
 
