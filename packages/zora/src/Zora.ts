@@ -402,11 +402,9 @@ export const simulateMint = async (
     }) as PublicClient)
 
   try {
-    const result = await simulateV2Mint(mint, value, _client, account)
-    return result
+    return await simulateV2Mint(mint, value, _client, account)
   } catch {
-    const result = await simulateV1Mint(mint, value, _client, account)
-    return result
+    return await simulateV1Mint(mint, value, _client, account)
   }
 }
 
