@@ -394,7 +394,6 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-
   const _client =
     client ??
     (createPublicClient({
