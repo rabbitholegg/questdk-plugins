@@ -54,6 +54,7 @@ export const MINT_V2_ZORA: TestParams<MintActionParams> = {
   params: {
     chainId: Chains.ZORA,
     contractAddress: '0xdcfb4693d609ee4482c448a84623892a85888e90',
+    recipient: '0x71716a077ac6fd8b2298ad7349e92aaf917c7225',
     amount: '1',
     tokenId: 1,
     referral: '0xc474a9a00e56c3bf947c71edd1515dad5706d3d5',
