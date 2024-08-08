@@ -34,8 +34,8 @@ export const failingTestCases = [
   createTestCase(COLLECT_FROM_USER_MOSHICAM, 'when chainId is not correct', {
     chainId: 99,
   }),
-  createTestCase(COLLECT_FROM_USER_MOSHICAM, 'when amount is less than one', {
-    amount: 0,
+  createTestCase(COLLECT_FROM_USER_MOSHICAM, 'when amount is not sufficient', {
+    amount: GreaterThanOrEqual(11),
   }),
   createTestCase(
     COLLECT_FROM_USER_MOSHICAM,
