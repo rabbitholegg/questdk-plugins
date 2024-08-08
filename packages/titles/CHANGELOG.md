@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-titles
 
+## 1.0.0-alpha.20
+
+### Minor Changes
+
+- [#501](https://github.com/rabbitholegg/questdk-plugins/pull/501) [`7284c9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/7284c9f7aee7ed78463be945610a7d2cfb27d82d) Thanks [@mmackz](https://github.com/mmackz)! - add optional actionType to getExternalUrl
+
+### Patch Changes
+
+- Updated dependencies [[`7284c9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/7284c9f7aee7ed78463be945610a7d2cfb27d82d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.45
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.19
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-soundxyz
 
+## 1.0.0-alpha.57
+
+### Patch Changes
+
+- Updated dependencies [[`7284c9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/7284c9f7aee7ed78463be945610a7d2cfb27d82d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.45
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.56
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-basepaint
 
+## 1.0.0-alpha.64
+
+### Patch Changes
+
+- [#472](https://github.com/rabbitholegg/questdk-plugins/pull/472) [`da067c5a`](https://github.com/rabbitholegg/questdk-plugins/commit/da067c5a0f2d001fa72e72b0d3bd28d88985a685) Thanks [@mmackz](https://github.com/mmackz)! - fix for amount zero
+
+- Updated dependencies [[`7284c9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/7284c9f7aee7ed78463be945610a7d2cfb27d82d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.45
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.63
 
 ### Patch Changes

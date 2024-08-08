@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-manifold
 
+## 1.0.0-alpha.36
+
+### Patch Changes
+
+- [#471](https://github.com/rabbitholegg/questdk-plugins/pull/471) [`cfa6a9d7`](https://github.com/rabbitholegg/questdk-plugins/commit/cfa6a9d70d3a447ab4f98cb3154c7c7b472e4dcb) Thanks [@mmackz](https://github.com/mmackz)! - fix amount zero issue
+
+- Updated dependencies [[`7284c9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/7284c9f7aee7ed78463be945610a7d2cfb27d82d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.45
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.35
 
 ### Patch Changes
