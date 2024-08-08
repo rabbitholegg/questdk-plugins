@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.140
+
+### Patch Changes
+
+- Updated dependencies [[`b38b9f49`](https://github.com/rabbitholegg/questdk-plugins/commit/b38b9f49616c18b48480e12d6d5a9570e95bc83b)]:
+  - @rabbitholegg/questdk-plugin-basepaint@1.0.0-alpha.65
+  - @rabbitholegg/questdk-plugin-manifold@1.0.0-alpha.37
+  - @rabbitholegg/questdk-plugin-moshicam@1.0.0-alpha.9
+  - @rabbitholegg/questdk-plugin-fabric@1.0.0-alpha.38
+
 ## 1.0.0-alpha.139
 
 ### Patch Changes
