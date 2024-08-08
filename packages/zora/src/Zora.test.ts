@@ -93,10 +93,12 @@ describe('Given the zora plugin', () => {
   describe('When handling the mint action', () => {
     describe('should return a valid action filter', () => {
       test('when making a valid mint action', async () => {
-        const filter = await mint({
+        const mintFilter = await mint({
           chainId: 1,
           contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
         })
+        /// @ts-expect-error ///
+        const filter = mintFilter.$or.at(0)
         expect(filter).toBeTypeOf('object')
         expect(Number(filter.chainId)).toBe(1)
         if (typeof filter.to === 'string') {
