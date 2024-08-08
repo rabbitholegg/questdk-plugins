@@ -403,7 +403,8 @@ export const simulateMint = async (
 
   try {
     return await simulateV2Mint(mint, value, _client, account)
-  } catch {
+  } catch (error) {
+    console.error('simulateV2Mint failed:', error)
     return await simulateV1Mint(mint, value, _client, account)
   }
 }
