@@ -340,6 +340,82 @@ describe('Given the getProjectFee function', () => {
 })
 
 describe('Given the getFee function', () => {
+
+  test('should return the correct project + action fee for an V2 1155 mint', async () => {
+    const contractAddress: Address =
+      '0xd900147e2d9dd35089cd80fb77fd3de0a08d3288'
+    const tokenId = 2
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000111'),
+        actionFee: parseEther('0'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000111'))
+    expect(fee.actionFee).equals(parseEther('0'))
+  })
+
+  test('should return the correct project + action fee for an V1 1155 mint', async () => {
+    const contractAddress: Address =
+      '0x2cf3b6dc0588b313fdc0605b4282ef26a247d173'
+    const tokenId = 87
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000777'),
+        actionFee: parseEther('0'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000777'))
+    expect(fee.actionFee).equals(parseEther('0'))
+  })
+
+  test('should return the correct project + action fee for (non-free) V1 1155 mint', async () => {
+    const contractAddress: Address =
+      '0x34ce43d58d0d4ecf2581f4eb6238178c77fb32d9'
+    const tokenId = 1
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.OPTIMISM,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000777'),
+        actionFee: parseEther('0.29'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000777'))
+    expect(fee.actionFee).equals(parseEther('0.29'))
+  })
+
   test('should return the correct project + action fee for a 721 mint', async () => {
     const contractAddress: Address =
       '0x4f86113fc3e9783cf3ec9a552cbb566716a57628'
@@ -352,35 +428,10 @@ describe('Given the getFee function', () => {
       }),
     }
 
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
     const fee = await mockFns.getFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
     expect(fee.projectFee).equals(BigInt('777000000000000'))
-    expect(fee.actionFee).equals(BigInt('0'))
-  })
-
-  test('should return the correct project + action fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0x393c46fe7887697124a73f6028f39751aa1961a3'
-    const tokenId = 1
-    const mintParams = {
-      contractAddress,
-      tokenId,
-      chainId: Chains.ZORA,
-      amount: 2,
-    }
-
-    const mockFns = {
-      getFees: async (_mint: MintActionParams) => ({
-        projectFee: BigInt('1554000000000000'),
-        actionFee: BigInt('0'),
-      }),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
-    const fee = await mockFns.getFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee.projectFee).equals(BigInt('1554000000000000'))
     expect(fee.actionFee).equals(BigInt('0'))
   })
 })
@@ -468,6 +519,17 @@ describe('simulateMint function', () => {
     await expect(simulateMint(mint, value, account)).rejects.toThrow(
       'None of the specified function selectors are present in the contract bytecode.',
     )
+  })
+
+  test('should simulate a 1155 mint when tokenId using timed sale strategy', async () => {
+    const mint = MINT_V2_ZORA.params as MintIntentParams
+    const value = parseEther('0.000111')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(ZORA_TIMED_SALE_STRATEGY)
+    expect(request.value).toBe(value)
   })
 })
 
@@ -581,18 +643,5 @@ describe('getExternalUrl function', () => {
     }
     const result = await getExternalUrl(params, ActionType.Create)
     expect(result).toBe('https://zora.co/create')
-  })
-})
-
-describe('simulateMint function', () => {
-  test('should simulate a 1155 mint when tokenId is not 0', async () => {
-    const mint = MINT_V2_ZORA.params as MintIntentParams
-    const value = parseEther('0.000111')
-    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
-
-    const result = await simulateMint(mint, value, account)
-    const request = result.request
-    expect(request.address).toBe(ZORA_TIMED_SALE_STRATEGY)
-    expect(request.value).toBe(value)
   })
 })
