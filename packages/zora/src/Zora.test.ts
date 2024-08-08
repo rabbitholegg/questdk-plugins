@@ -15,6 +15,7 @@ import {
 import {
   EXPECTED_ENCODED_DATA_721,
   EXPECTED_ENCODED_DATA_1155,
+  MINT_V2_ZORA,
 } from './test-transactions'
 import {
   ActionType,
@@ -31,6 +32,7 @@ import { describe, expect, test, vi, beforeEach, MockedFunction } from 'vitest'
 import { PremintResponse } from './types'
 import axios from 'axios'
 import { validatePremint } from './validate'
+import { ZORA_TIMED_SALE_STRATEGY } from './contract-addresses'
 
 const MockedPremintResponse: PremintResponse = [
   {
@@ -571,5 +573,18 @@ describe('getExternalUrl function', () => {
     expect(result).toBe(
       'https://testnet.zora.co/collect/bsep:0x627a509D76498DDD7D80a28eF4cD887B5b6df2Cd/39?referrer=0xe3bBA2A4F8E0F5C32EF5097F988a4d88075C8B48',
     )
+  })
+})
+
+describe('simulateMint function', () => {
+  test('should simulate a 1155 mint when tokenId is not 0', async () => {
+    const mint = MINT_V2_ZORA.params as MintIntentParams
+    const value = parseEther('0.000111')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(ZORA_TIMED_SALE_STRATEGY)
+    expect(request.value).toBe(value)
   })
 })
