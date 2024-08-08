@@ -1,6 +1,5 @@
 import {
   CREATE_CONTRACT_ABI,
-  FUNCTION_SELECTORS,
   UNIVERSAL_MINTER_ABI,
   ZORA_MINTER_ABI_721,
   ZORA_MINTER_ABI_1155,
@@ -14,6 +13,7 @@ import {
   ZORA_TIMED_SALE_STRATEGY,
 } from './contract-addresses'
 import { AndArrayItem } from './types'
+import { checkBytecode, getNextTokenId } from './utils'
 import { validatePremint } from './validate'
 import {
   type MintActionParams,
@@ -43,14 +43,10 @@ import {
   type TransactionRequest,
   createPublicClient,
   encodeFunctionData,
-  fromHex,
   getAddress,
   http,
-  keccak256,
   pad,
   parseEther,
-  stringToBytes,
-  toHex,
 } from 'viem'
 
 export const validate = async (
@@ -208,7 +204,7 @@ export const mint = async (
 ): Promise<TransactionFilter> => {
   const v1Filter = v1MintFilter(mint)
   const v2Filter = v2MintFilter(mint)
-  
+
   return compressJson({
     $or: [v1Filter, v2Filter],
   })
@@ -263,56 +259,17 @@ export const getMintIntent = async (
   }
 }
 
-export const simulateMint = async (
+export const simulateV1Mint = async (
   mint: MintIntentParams,
   value: bigint,
+  client: PublicClient,
   account?: Address,
-  client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
   const { chainId, contractAddress, tokenId, amount, recipient, referral } =
     mint
-  const _client =
-    client ??
-    createPublicClient({
-      chain: chainIdToViemChain(chainId),
-      transport: http(),
-    })
   const from = account ?? DEFAULT_ACCOUNT
-  let _tokenId = tokenId
-  if (tokenId === null || tokenId === undefined) {
-    const nextTokenId = (await _client.readContract({
-      address: contractAddress,
-      abi: ZORA_MINTER_ABI_1155,
-      functionName: 'nextTokenId',
-    })) as bigint
-
-    _tokenId = Number(nextTokenId) - 1
-  }
-
-  // find implementation address for EIP-1967 proxy
-  const slot = keccak256(stringToBytes('eip1967.proxy.implementation'))
-  const slotValue = toHex(fromHex(slot, 'bigint') - 1n)
-  const slotForImplementation = pad(slotValue, { size: 32 })
-  const implementationAddressRaw = await _client.getStorageAt({
-    address: contractAddress,
-    slot: slotForImplementation,
-  })
-  const implementationAddress: Address = `0x${implementationAddressRaw?.slice(
-    -40,
-  )}`
-
-  // Check if the implementation contracts bytecode contains valid function selectors
-  const bytecode = await _client.getBytecode({ address: implementationAddress })
-
-  const containsSelector = FUNCTION_SELECTORS.some((selector) =>
-    bytecode?.includes(selector),
-  )
-
-  if (!containsSelector) {
-    throw new Error(
-      'None of the specified function selectors are present in the contract bytecode.',
-    )
-  }
+  const _tokenId = await getNextTokenId(client, contractAddress, tokenId)
+  await checkBytecode(client, contractAddress)
 
   let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
 
@@ -332,7 +289,7 @@ export const simulateMint = async (
       [referral ?? ZORA_DEPLOYER_ADDRESS],
       pad(recipient),
     ]
-    const result = await _client.simulateContract({
+    const result = await client.simulateContract({
       address: contractAddress,
       value,
       abi: ZORA_MINTER_ABI_1155,
@@ -355,7 +312,7 @@ export const simulateMint = async (
       pad(recipient),
     ]
     try {
-      const result = await _client.simulateContract({
+      const result = await client.simulateContract({
         address: contractAddress,
         value,
         abi: ZORA_MINTER_ABI_1155_LEGACY,
@@ -372,7 +329,7 @@ export const simulateMint = async (
       return result
     } catch {
       // Assume it's a 721 mint
-      const result = await _client.simulateContract({
+      const result = await client.simulateContract({
         address: contractAddress,
         value,
         abi: ZORA_MINTER_ABI_721,
@@ -388,6 +345,69 @@ export const simulateMint = async (
       })
       return result
     }
+  }
+}
+
+export const simulateV2Mint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  client: PublicClient,
+  account?: Address,
+): Promise<SimulateContractReturnType> => {
+  const { contractAddress, tokenId, amount, recipient, referral } = mint
+
+  const from = account ?? DEFAULT_ACCOUNT
+
+  const _tokenId = await getNextTokenId(client, contractAddress, tokenId)
+
+  await checkBytecode(client, contractAddress)
+
+  const mintArgs = [
+    recipient ?? from,
+    amount,
+    contractAddress,
+    _tokenId,
+    referral ?? ZORA_DEPLOYER_ADDRESS,
+    '',
+  ]
+
+  const result = await client.simulateContract({
+    address: ZORA_TIMED_SALE_STRATEGY,
+    value,
+    abi: V2_MINT_ABI,
+    functionName: 'mint',
+    args: mintArgs,
+    account: from,
+    stateOverride: [
+      {
+        address: from,
+        balance: parseEther('100'),
+      },
+    ],
+  })
+  return result
+}
+
+export const simulateMint = async (
+  mint: MintIntentParams,
+  value: bigint,
+  account?: Address,
+  client?: PublicClient,
+): Promise<SimulateContractReturnType> => {
+
+  const _client =
+    client ??
+    (createPublicClient({
+      chain: chainIdToViemChain(mint.chainId),
+      transport: http(),
+    }) as PublicClient)
+
+  try {
+    const result = await simulateV2Mint(mint, value, _client, account)
+    return result
+  } catch {
+    const result = await simulateV1Mint(mint, value, _client, account)
+    return result
   }
 }
 
@@ -434,7 +454,7 @@ export const getFees = async (
     return { actionFee: fee.tokenPurchaseCost, projectFee: fee.mintFee }
   } catch (err) {
     console.error(err)
-    return { actionFee: parseEther('0'), projectFee: parseEther('0.000777') } // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
+    return { actionFee: parseEther('0'), projectFee: parseEther('0.000111') } // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
   }
 }
 
