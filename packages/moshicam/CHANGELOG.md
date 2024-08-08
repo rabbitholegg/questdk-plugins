@@ -1,5 +1,15 @@
 # @rabbitholegg/questdk-plugin-moshicam
 
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- [#470](https://github.com/rabbitholegg/questdk-plugins/pull/470) [`0938da94`](https://github.com/rabbitholegg/questdk-plugins/commit/0938da94e67ee024d43448682f8c7c1a21db669d) Thanks [@mmackz](https://github.com/mmackz)! - fix amount zero issue
+
+- Updated dependencies [[`7284c9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/7284c9f7aee7ed78463be945610a7d2cfb27d82d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.45
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.7
 
 ### Patch Changes

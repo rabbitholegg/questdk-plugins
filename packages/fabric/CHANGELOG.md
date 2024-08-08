@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-fabric
 
+## 1.0.0-alpha.37
+
+### Minor Changes
+
+- [#473](https://github.com/rabbitholegg/questdk-plugins/pull/473) [`a373fdec`](https://github.com/rabbitholegg/questdk-plugins/commit/a373fdecb7e7f1ca91e79b95f8b40d82306bfe35) Thanks [@mmackz](https://github.com/mmackz)! - fix amount zero issue
+
+### Patch Changes
+
+- Updated dependencies [[`7284c9f7`](https://github.com/rabbitholegg/questdk-plugins/commit/7284c9f7aee7ed78463be945610a7d2cfb27d82d)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.45
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.36
 
 ### Patch Changes
