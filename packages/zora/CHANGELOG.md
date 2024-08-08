@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.72
+
+### Minor Changes
+
+- [#502](https://github.com/rabbitholegg/questdk-plugins/pull/502) [`c00cd618`](https://github.com/rabbitholegg/questdk-plugins/commit/c00cd6188409af9bd149ee3d2c9d5d7fca8106c9) Thanks [@mmackz](https://github.com/mmackz)! - update for zora protocol upgrade
+
 ## 1.0.0-alpha.71
 
 ### Minor Changes
