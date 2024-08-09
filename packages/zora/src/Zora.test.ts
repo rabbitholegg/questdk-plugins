@@ -11,9 +11,7 @@ import {
   passingTestCasesCreate,
   passingTestCasesMint,
 } from './test-setup'
-import {
-  MINT_V2_ZORA,
-} from './test-transactions'
+import { MINT_V2_ZORA } from './test-transactions'
 import {
   ActionType,
   Chains,

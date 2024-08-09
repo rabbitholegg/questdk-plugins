@@ -243,7 +243,9 @@ export const getMintIntent = async (
     fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
   }
 
-  const isV2Mint = fixedPriceSaleStratAddress.toLowerCase() === ZORA_TIMED_SALE_STRATEGY.toLowerCase()
+  const isV2Mint =
+    fixedPriceSaleStratAddress.toLowerCase() ===
+    ZORA_TIMED_SALE_STRATEGY.toLowerCase()
 
   if (isV2Mint) {
     const mintArgs = [

@@ -1,4 +1,7 @@
-import { chainIdToViemChain, MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
+import {
+  chainIdToViemChain,
+  MintIntentParams,
+} from '@rabbitholegg/questdk-plugin-utils'
 import { FUNCTION_SELECTORS, ZORA_MINTER_ABI_1155 } from './abi'
 import {
   type Address,
@@ -12,7 +15,10 @@ import {
   pad,
 } from 'viem'
 import { createCollectorClient } from '@zoralabs/protocol-sdk'
-import type { GetMintParameters, OnchainSalesConfigAndTokenInfo } from '@zoralabs/protocol-sdk/dist/mint/types'
+import type {
+  GetMintParameters,
+  OnchainSalesConfigAndTokenInfo,
+} from '@zoralabs/protocol-sdk/dist/mint/types'
 
 /**
  * Checks if the bytecode of the implementation contract contains the correct function selectors.
