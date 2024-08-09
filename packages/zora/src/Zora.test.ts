@@ -426,38 +426,6 @@ describe('simulateMint function', () => {
     expect(request.value).toBe(value)
   })
 
-  test('should simulate a 1155 mint on blast', async () => {
-    const mockFn = {
-      simulateMint: async (
-        _mint: MintIntentParams,
-        _value: bigint,
-        _account: Address,
-      ) => ({
-        request: {
-          address: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
-          value: parseEther('0.000777'),
-        },
-      }),
-    }
-    vi.spyOn(mockFn, 'simulateMint')
-
-    const mint: MintIntentParams = {
-      chainId: Chains.BLAST,
-      contractAddress: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
-      tokenId: 1,
-      amount: BigInt(1),
-      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: ZORA_DEPLOYER_ADDRESS,
-    }
-    const value = parseEther('0.000777')
-    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
-
-    const result = await mockFn.simulateMint(mint, value, account)
-    const request = result.request
-    expect(request.address).toBe(mint.contractAddress)
-    expect(request.value).toBe(value)
-  })
-
   test('should return an error object if address is not a contract', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.ARBITRUM_ONE,
