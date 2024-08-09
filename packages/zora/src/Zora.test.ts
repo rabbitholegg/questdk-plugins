@@ -2,7 +2,6 @@ import {
   create,
   getDynamicNameParams,
   getExternalUrl,
-  getMintIntent,
   mint,
   simulateMint,
 } from './Zora'
@@ -13,14 +12,11 @@ import {
   passingTestCasesMint,
 } from './test-setup'
 import {
-  EXPECTED_ENCODED_DATA_721,
-  EXPECTED_ENCODED_DATA_1155,
   MINT_V2_ZORA,
 } from './test-transactions'
 import {
   ActionType,
   Chains,
-  DEFAULT_ACCOUNT,
   DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
   type MintActionParams,
@@ -253,51 +249,6 @@ describe('Given the zora plugin', () => {
 
         expect(result).to.be.false
       })
-    })
-  })
-})
-
-describe('Given the getMintIntent function', () => {
-  //Define the constant for the contract address
-  const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
-  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
-
-  test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
-    const mint: MintIntentParams = {
-      chainId: 1,
-      tokenId: 1, // not 0
-      contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt('10'),
-      recipient: RECIPIENT_ADDRESS,
-      referral: ZORA_DEPLOYER_ADDRESS,
-    }
-
-    const result = await getMintIntent(mint)
-
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_1155,
-    })
-  })
-
-  test('returns a TransactionRequest with correct properties', async () => {
-    const CONTRACT_ADDRESS = '0x7f50e913c80b221d317029a7d4c608b4e0fb6185'
-    const mint: MintIntentParams = {
-      chainId: Chains.ZORA,
-      contractAddress: CONTRACT_ADDRESS,
-      tokenId: 6,
-      amount: BigInt('1'),
-      recipient: DEFAULT_ACCOUNT,
-      referral: ZORA_DEPLOYER_ADDRESS,
-    }
-
-    const result = await getMintIntent(mint)
-
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_721,
     })
   })
 })

@@ -1,4 +1,3 @@
-import { GetMintParameters, MintableReturn, OnchainSalesConfigAndTokenInfo } from '@zoralabs/protocol-sdk/dist/mint/types'
 import {
   CREATE_CONTRACT_ABI,
   UNIVERSAL_MINTER_ABI,
@@ -44,7 +43,7 @@ import {
   PluginActionValidation,
   QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { createCollectorClient, type CollectorClient } from '@zoralabs/protocol-sdk'
+import { createCollectorClient } from '@zoralabs/protocol-sdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
 import {
   type Address,
@@ -304,14 +303,21 @@ export const simulateV1Mint = async (
   const _tokenId = await getNextTokenId(client, contractAddress, tokenId)
   await checkBytecode(client, contractAddress)
 
-  let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+  const mintType = await getContractType(client, contractAddress)
 
-  try {
-    fixedPriceSaleStratAddress = (
-      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
-    ).salesConfig.address
-  } catch {
-    console.error('Unable to fetch salesConfigAndTokenInfo')
+  if (!mintType) {
+    throw new Error('Invalid contract type')
+  }
+
+  const tokenInfo = await getTokenInfo(client, mint, mintType)
+
+  let fixedPriceSaleStratAddress = tokenInfo.salesConfig?.address
+
+  if (!fixedPriceSaleStratAddress) {
+    console.error(
+      `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
+    )
+    fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
   }
 
   try {
@@ -435,32 +441,6 @@ export const simulateMint = async (
     console.error('simulateV2Mint failed:', error)
     return await simulateV1Mint(mint, value, _client, account)
   }
-}
-
-const getSalesConfigAndTokenInfo = async (
-  chainId: number,
-  tokenAddress: Address,
-  mintClient: CollectorClient,
-  tokenId?: number,
-) => {
-
-  const args: GetMintParameters = {
-    tokenContract: tokenAddress,
-    tokenId: tokenId ?? 1,
-    mintType: '1155',
-  }
-  console.log('args', args)
-
-  const tokenInfo = await mintClient.getToken(args)
-
-
-  console.log('tokenInfo', tokenInfo)
-
-  args.tokenId = tokenId ?? 1
-
-  const salesConfigAndTokenInfo = await client.getSalesConfigAndTokenInfo(args)
-
-  return salesConfigAndTokenInfo
 }
 
 export const getProjectFees = async (
