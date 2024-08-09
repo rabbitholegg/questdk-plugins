@@ -1,4 +1,4 @@
-import { chainIdToViemChain } from '@rabbitholegg/questdk-plugin-utils'
+import { chainIdToViemChain, MintIntentParams } from '@rabbitholegg/questdk-plugin-utils'
 import { FUNCTION_SELECTORS, ZORA_MINTER_ABI_1155 } from './abi'
 import {
   type Address,
@@ -11,6 +11,8 @@ import {
   fromHex,
   pad,
 } from 'viem'
+import { createCollectorClient } from '@zoralabs/protocol-sdk'
+import type { GetMintParameters, OnchainSalesConfigAndTokenInfo } from '@zoralabs/protocol-sdk/dist/mint/types'
 
 /**
  * Checks if the bytecode of the implementation contract contains the correct function selectors.
@@ -78,7 +80,7 @@ export const getPublicClient = (chainId: number) => {
 
 /**
  * Determines the type of a contract (ERC-1155 or ERC-721) based on the supported interfaces.
- * 
+ *
  * @param client - The PublicClient used to interact with the blockchain.
  * @param contractAddress - The address of the contract to check.
  * @returns A promise that resolves to '1155' if the contract is ERC-1155, '721' if it is ERC-721, or null if neither.
@@ -117,4 +119,30 @@ export async function getContractType(
     } catch {}
   }
   return null
+}
+
+export const getTokenInfo = async (
+  client: PublicClient,
+  mint: MintIntentParams,
+  mintType: '1155' | '721',
+) => {
+  const { chainId, contractAddress, tokenId } = mint
+  const mintClient = createCollectorClient({
+    chainId,
+    publicClient: client,
+  })
+
+  const args: GetMintParameters = {
+    tokenContract: contractAddress,
+    tokenId: tokenId ?? 1,
+    mintType: mintType,
+  }
+  const tokenInfo = await mintClient.getToken(args)
+  const token = tokenInfo.token as OnchainSalesConfigAndTokenInfo
+
+  if (!token.salesConfig) {
+    throw new Error('No sales config found')
+  }
+
+  return token
 }

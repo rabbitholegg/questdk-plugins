@@ -1,3 +1,4 @@
+import { GetMintParameters, MintableReturn, OnchainSalesConfigAndTokenInfo } from '@zoralabs/protocol-sdk/dist/mint/types'
 import {
   CREATE_CONTRACT_ABI,
   UNIVERSAL_MINTER_ABI,
@@ -13,7 +14,13 @@ import {
   ZORA_TIMED_SALE_STRATEGY,
 } from './contract-addresses'
 import { AndArrayItem } from './types'
-import { checkBytecode, getNextTokenId } from './utils'
+import {
+  checkBytecode,
+  getContractType,
+  getNextTokenId,
+  getPublicClient,
+  getTokenInfo,
+} from './utils'
 import { validatePremint } from './validate'
 import {
   type MintActionParams,
@@ -24,6 +31,7 @@ import {
 import {
   ActionParams,
   formatAmountToFilterOperator,
+  formatAmountToInteger,
 } from '@rabbitholegg/questdk-plugin-utils'
 import {
   ActionType,
@@ -32,22 +40,19 @@ import {
   DEFAULT_REFERRAL as ZORA_DEPLOYER_ADDRESS,
   type DisctriminatedActionParams,
   type MintIntentParams,
-  chainIdToViemChain,
   getExitAddresses,
   PluginActionValidation,
   QuestCompletionPayload,
 } from '@rabbitholegg/questdk-plugin-utils'
-import { MintAPIClient, getMintCosts } from '@zoralabs/protocol-sdk'
+import { createCollectorClient, type CollectorClient } from '@zoralabs/protocol-sdk'
 import { zoraUniversalMinterAddress } from '@zoralabs/universal-minter'
 import {
   type Address,
   type PublicClient,
   type SimulateContractReturnType,
   type TransactionRequest,
-  createPublicClient,
   encodeFunctionData,
   getAddress,
-  http,
   pad,
   parseEther,
 } from 'viem'
@@ -220,41 +225,66 @@ export const getMintIntent = async (
     mint
   let data
 
-  let fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
+  const client = getPublicClient(chainId)
 
-  try {
-    fixedPriceSaleStratAddress = (
-      await getSalesConfigAndTokenInfo(chainId, contractAddress, tokenId)
-    ).salesConfig.address
-  } catch {
+  const mintType = await getContractType(client, contractAddress)
+
+  if (!mintType) {
+    throw new Error('Invalid contract type')
+  }
+
+  const tokenInfo = await getTokenInfo(client, mint, mintType)
+
+  let fixedPriceSaleStratAddress = tokenInfo.salesConfig?.address
+
+  if (!fixedPriceSaleStratAddress) {
     console.error(
       `Unable to fetch salesConfigAndTokenInfo, defaulting price sale strategy address to ${fixedPriceSaleStratAddress}`,
     )
+    fixedPriceSaleStratAddress = FIXED_PRICE_SALE_STRATS[chainId]
   }
 
-  if (tokenId !== null && tokenId !== undefined) {
+  const isV2Mint = fixedPriceSaleStratAddress.toLowerCase() === ZORA_TIMED_SALE_STRATEGY.toLowerCase()
+
+  if (isV2Mint) {
     const mintArgs = [
-      fixedPriceSaleStratAddress,
-      tokenId,
+      recipient ?? DEFAULT_ACCOUNT,
       amount,
-      [referral ?? ZORA_DEPLOYER_ADDRESS],
-      pad(recipient),
+      contractAddress,
+      tokenId,
+      referral ?? ZORA_DEPLOYER_ADDRESS,
+      '',
     ]
-    // Assume it's an 1155 mint
+
     data = encodeFunctionData({
-      abi: ZORA_MINTER_ABI_1155,
+      abi: V2_MINT_ABI,
       functionName: 'mint',
       args: mintArgs,
     })
   } else {
-    // Assume it's a 721 mint
-    data = encodeFunctionData({
-      abi: ZORA_MINTER_ABI_721,
-      functionName: 'purchase',
-      args: [amount],
-    })
+    if (tokenId !== null && tokenId !== undefined) {
+      const mintArgs = [
+        fixedPriceSaleStratAddress,
+        tokenId,
+        amount,
+        [referral ?? ZORA_DEPLOYER_ADDRESS],
+        pad(recipient),
+      ]
+      // Assume it's an 1155 mint
+      data = encodeFunctionData({
+        abi: ZORA_MINTER_ABI_1155,
+        functionName: 'mint',
+        args: mintArgs,
+      })
+    } else {
+      // Assume it's a 721 mint
+      data = encodeFunctionData({
+        abi: ZORA_MINTER_ABI_721,
+        functionName: 'purchase',
+        args: [amount],
+      })
+    }
   }
-
   return {
     from: recipient,
     to: contractAddress,
@@ -397,12 +427,7 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const _client =
-    client ??
-    (createPublicClient({
-      chain: chainIdToViemChain(mint.chainId),
-      transport: http(),
-    }) as PublicClient)
+  const _client = client ?? getPublicClient(mint.chainId)
 
   try {
     return await simulateV2Mint(mint, value, _client, account)
@@ -415,13 +440,21 @@ export const simulateMint = async (
 const getSalesConfigAndTokenInfo = async (
   chainId: number,
   tokenAddress: Address,
+  mintClient: CollectorClient,
   tokenId?: number,
 ) => {
-  const client = new MintAPIClient(chainId)
 
-  const args: { tokenAddress: Address; tokenId?: number } = {
-    tokenAddress,
+  const args: GetMintParameters = {
+    tokenContract: tokenAddress,
+    tokenId: tokenId ?? 1,
+    mintType: '1155',
   }
+  console.log('args', args)
+
+  const tokenInfo = await mintClient.getToken(args)
+
+
+  console.log('tokenInfo', tokenInfo)
 
   args.tokenId = tokenId ?? 1
 
@@ -443,20 +476,38 @@ export const getFees = async (
   try {
     const { chainId, contractAddress, tokenId, amount } = mint
 
-    const salesConfigAndTokenInfo = await getSalesConfigAndTokenInfo(
-      chainId,
-      contractAddress,
-      tokenId,
-    )
-    const quantityToMint =
-      typeof amount === 'number' ? BigInt(amount) : BigInt(1)
-    const fee = await getMintCosts({ salesConfigAndTokenInfo, quantityToMint })
+    const client = getPublicClient(chainId)
 
-    return { actionFee: fee.tokenPurchaseCost, projectFee: fee.mintFee }
+    const contractType = await getContractType(client, contractAddress)
+
+    if (!contractType) {
+      throw new Error('Invalid contract type')
+    }
+
+    const collectorClient = createCollectorClient({
+      chainId,
+      publicClient: client,
+    })
+
+    const quantityToMint = formatAmountToInteger(amount)
+    const { prepareMint } = await collectorClient.getToken({
+      tokenContract: contractAddress,
+      tokenId,
+      mintType: contractType,
+    })
+
+    const { costs } = prepareMint({
+      minterAccount: DEFAULT_ACCOUNT,
+      quantityToMint,
+    })
+
+    console.log('costs', costs)
+
+    return { actionFee: costs.totalPurchaseCost, projectFee: costs.mintFee }
   } catch (err) {
     console.error(err)
-    // ! temp change to base fee of 0.000111 until we update for fee calulation
-    return { actionFee: parseEther('0'), projectFee: parseEther('0.000111') } // https://github.com/ourzora/zora-protocol/blob/e9fb5072112b4434cc649c95729f4bd8c6d5e0d0/packages/protocol-sdk/src/apis/chain-constants.ts#L27
+    // base fee of 0.000111 is the default for all new mints
+    return { actionFee: parseEther('0'), projectFee: parseEther('0.000111') }
   }
 }
 
