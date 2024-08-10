@@ -27,16 +27,16 @@ export type NumericOperator =
   | number
   | string
   | {
-      $gt?: bigint | string | number;
+      $gt?: bigint | string | number
     }
   | {
-      $gte?: bigint | string | number;
+      $gte?: bigint | string | number
     }
   | {
-      $lt?: bigint | string | number;
+      $lt?: bigint | string | number
     }
   | {
-      $lte?: bigint | string | number;
+      $lte?: bigint | string | number
     }
 
 export type StringOperator = {
