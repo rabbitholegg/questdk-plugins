@@ -55,7 +55,7 @@ export type MintActionParams = {
   chainId: number
   contractAddress: Address
   tokenId?: number
-  amount?: number | FilterOperator
+  amount?: number | string | bigint | FilterOperator
   recipient?: Address
   referral?: Address
 }
@@ -215,11 +215,30 @@ export const MintActionFormSchema = z.object({
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
+export const NumericSchema = z.union([z.bigint(), z.string(), z.number()])
+export const AmountSchema = z.union([
+  z.bigint(),
+  z.number(),
+  z.string(),
+  z.object({
+    $gt: NumericSchema.optional(),
+  }),
+  z.object({
+    $gte: NumericSchema.optional(),
+  }),
+  z.object({
+    $lt: NumericSchema.optional(),
+  }),
+  z.object({
+    $lte: NumericSchema.optional(),
+  }),
+])
+
 export const MintActionDetailSchema = z.object({
   chainId: z.number(),
   contractAddress: EthAddressSchema,
   tokenId: z.number().optional(),
-  amount: z.string().optional(),
+  amount: AmountSchema,
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
