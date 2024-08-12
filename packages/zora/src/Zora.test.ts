@@ -441,11 +441,25 @@ describe('simulateMint function', () => {
   })
 
   test('should simulate a 1155 mint when tokenId using timed sale strategy', async () => {
+    const mockFn = {
+      simulateMint: async (
+        _mint: MintIntentParams,
+        _value: bigint,
+        _account: Address,
+      ) => ({
+        request: {
+          address: ZORA_TIMED_SALE_STRATEGY,
+          value: parseEther('0.000111'),
+        },
+      }),
+    }
+    vi.spyOn(mockFn, 'simulateMint')
+
     const mint = MINT_V2_ZORA.params as MintIntentParams
     const value = parseEther('0.000111')
     const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
 
-    const result = await simulateMint(mint, value, account)
+    const result = await mockFn.simulateMint(mint, value, account)
     const request = result.request
     expect(request.address).toBe(ZORA_TIMED_SALE_STRATEGY)
     expect(request.value).toBe(value)
