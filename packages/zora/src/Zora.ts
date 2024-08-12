@@ -483,8 +483,6 @@ export const getFees = async (
       quantityToMint,
     })
 
-    console.log('costs', costs)
-
     return { actionFee: costs.totalPurchaseCost, projectFee: costs.mintFee }
   } catch (err) {
     console.error(err)
