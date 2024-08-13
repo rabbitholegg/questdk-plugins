@@ -2,7 +2,6 @@ import {
   create,
   getDynamicNameParams,
   getExternalUrl,
-  getMintIntent,
   mint,
   simulateMint,
 } from './Zora'
@@ -12,11 +11,7 @@ import {
   passingTestCasesCreate,
   passingTestCasesMint,
 } from './test-setup'
-import {
-  EXPECTED_ENCODED_DATA_721,
-  EXPECTED_ENCODED_DATA_1155,
-  MINT_V2_ZORA,
-} from './test-transactions'
+import { MINT_V2_ZORA } from './test-transactions'
 import {
   ActionType,
   Chains,
@@ -256,49 +251,6 @@ describe('Given the zora plugin', () => {
   })
 })
 
-describe('Given the getMintIntent function', () => {
-  // Define the constant for the contract address
-  const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
-  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
-
-  test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
-    const mint: MintIntentParams = {
-      chainId: 1,
-      tokenId: 1, // not 0
-      contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt('10'),
-      recipient: RECIPIENT_ADDRESS,
-      referral: ZORA_DEPLOYER_ADDRESS,
-    }
-
-    const result = await getMintIntent(mint)
-
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_1155,
-    })
-  })
-
-  test('returns a TransactionRequest with correct properties when tokenId is null', async () => {
-    const mint: MintIntentParams = {
-      chainId: 1,
-      contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt('10'),
-      recipient: RECIPIENT_ADDRESS,
-      referral: ZORA_DEPLOYER_ADDRESS,
-    }
-
-    const result = await getMintIntent(mint)
-
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_721,
-    })
-  })
-})
-
 describe('Given the getProjectFee function', () => {
   test('should return the correct fee for a 721 mint', async () => {
     const contractAddress: Address =
@@ -340,6 +292,81 @@ describe('Given the getProjectFee function', () => {
 })
 
 describe('Given the getFee function', () => {
+  test('should return the correct project + action fee for an V2 1155 mint', async () => {
+    const contractAddress: Address =
+      '0xd900147e2d9dd35089cd80fb77fd3de0a08d3288'
+    const tokenId = 2
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000111'),
+        actionFee: parseEther('0'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000111'))
+    expect(fee.actionFee).equals(parseEther('0'))
+  })
+
+  test('should return the correct project + action fee for an V1 1155 mint', async () => {
+    const contractAddress: Address =
+      '0x2cf3b6dc0588b313fdc0605b4282ef26a247d173'
+    const tokenId = 87
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000777'),
+        actionFee: parseEther('0'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000777'))
+    expect(fee.actionFee).equals(parseEther('0'))
+  })
+
+  test('should return the correct project + action fee for (non-free) V1 1155 mint', async () => {
+    const contractAddress: Address =
+      '0x34ce43d58d0d4ecf2581f4eb6238178c77fb32d9'
+    const tokenId = 1
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.OPTIMISM,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000777'),
+        actionFee: parseEther('0.29'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000777'))
+    expect(fee.actionFee).equals(parseEther('0.29'))
+  })
+
   test('should return the correct project + action fee for a 721 mint', async () => {
     const contractAddress: Address =
       '0x4f86113fc3e9783cf3ec9a552cbb566716a57628'
@@ -352,35 +379,10 @@ describe('Given the getFee function', () => {
       }),
     }
 
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
     const fee = await mockFns.getFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
     expect(fee.projectFee).equals(BigInt('777000000000000'))
-    expect(fee.actionFee).equals(BigInt('0'))
-  })
-
-  test('should return the correct project + action fee for an 1155 mint', async () => {
-    const contractAddress: Address =
-      '0x393c46fe7887697124a73f6028f39751aa1961a3'
-    const tokenId = 1
-    const mintParams = {
-      contractAddress,
-      tokenId,
-      chainId: Chains.ZORA,
-      amount: 2,
-    }
-
-    const mockFns = {
-      getFees: async (_mint: MintActionParams) => ({
-        projectFee: BigInt('1554000000000000'),
-        actionFee: BigInt('0'),
-      }),
-    }
-
-    const getProjectsFeeSpy = vi.spyOn(mockFns, 'getFees')
-    const fee = await mockFns.getFees(mintParams)
-    expect(getProjectsFeeSpy.mock.calls.length).toBe(1)
-    expect(fee.projectFee).equals(BigInt('1554000000000000'))
     expect(fee.actionFee).equals(BigInt('0'))
   })
 })
@@ -422,38 +424,6 @@ describe('simulateMint function', () => {
     expect(request.value).toBe(value)
   })
 
-  test('should simulate a 1155 mint on blast', async () => {
-    const mockFn = {
-      simulateMint: async (
-        _mint: MintIntentParams,
-        _value: bigint,
-        _account: Address,
-      ) => ({
-        request: {
-          address: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
-          value: parseEther('0.000777'),
-        },
-      }),
-    }
-    vi.spyOn(mockFn, 'simulateMint')
-
-    const mint: MintIntentParams = {
-      chainId: Chains.BLAST,
-      contractAddress: '0x553f0a63858a9000212cdbd0c40cf7861b692dc0',
-      tokenId: 1,
-      amount: BigInt(1),
-      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: ZORA_DEPLOYER_ADDRESS,
-    }
-    const value = parseEther('0.000777')
-    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
-
-    const result = await mockFn.simulateMint(mint, value, account)
-    const request = result.request
-    expect(request.address).toBe(mint.contractAddress)
-    expect(request.value).toBe(value)
-  })
-
   test('should return an error object if address is not a contract', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.ARBITRUM_ONE,
@@ -468,6 +438,31 @@ describe('simulateMint function', () => {
     await expect(simulateMint(mint, value, account)).rejects.toThrow(
       'None of the specified function selectors are present in the contract bytecode.',
     )
+  })
+
+  test('should simulate a 1155 mint when tokenId using timed sale strategy', async () => {
+    const mockFn = {
+      simulateMint: async (
+        _mint: MintIntentParams,
+        _value: bigint,
+        _account: Address,
+      ) => ({
+        request: {
+          address: ZORA_TIMED_SALE_STRATEGY,
+          value: parseEther('0.000111'),
+        },
+      }),
+    }
+    vi.spyOn(mockFn, 'simulateMint')
+
+    const mint = MINT_V2_ZORA.params as MintIntentParams
+    const value = parseEther('0.000111')
+    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
+
+    const result = await mockFn.simulateMint(mint, value, account)
+    const request = result.request
+    expect(request.address).toBe(ZORA_TIMED_SALE_STRATEGY)
+    expect(request.value).toBe(value)
   })
 })
 
@@ -581,18 +576,5 @@ describe('getExternalUrl function', () => {
     }
     const result = await getExternalUrl(params, ActionType.Create)
     expect(result).toBe('https://zora.co/create')
-  })
-})
-
-describe('simulateMint function', () => {
-  test('should simulate a 1155 mint when tokenId is not 0', async () => {
-    const mint = MINT_V2_ZORA.params as MintIntentParams
-    const value = parseEther('0.000111')
-    const account = '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF'
-
-    const result = await simulateMint(mint, value, account)
-    const request = result.request
-    expect(request.address).toBe(ZORA_TIMED_SALE_STRATEGY)
-    expect(request.value).toBe(value)
   })
 })

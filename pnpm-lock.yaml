@@ -819,8 +819,8 @@ importers:
         specifier: workspace:*
         version: link:../utils
       '@zoralabs/protocol-sdk':
-        specifier: 0.5.17
-        version: 0.5.17(viem@2.15.1)
+        specifier: 0.9.0
+        version: 0.9.0(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
         version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4)
@@ -5493,21 +5493,25 @@ packages:
     hasBin: true
     dev: false
 
-  /@zoralabs/protocol-deployments@0.1.13:
-    resolution: {integrity: sha512-pAJ+rr7Q6RsulTl2EB+osUJMldGx+Sj/XfrkfOQsScL/RQlu+H6sL0sRVdaG3VLWVd9ua8szIRSeJ+RqwEZNyg==}
+  /@zoralabs/protocol-deployments@0.3.0:
+    resolution: {integrity: sha512-T8fVXQ3KC3qXcHfTG14Z6/vnY/2ImIhAjkFNhD3kWKtd8TaXVlLQ1Rqu13XCDP9HxvbmuaaXO/QUx8MHeQ+61g==}
     dev: false
 
   /@zoralabs/protocol-rewards@1.2.1:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/protocol-sdk@0.5.17(viem@2.15.1):
-    resolution: {integrity: sha512-8N/g5+kg2R0zS6ecdkzwVgyKO4aV6jYUbBeuUy6D74lcQdK75pgq5VW3eIjqc80CBvR0DCq7uAzHdUCzX0mGsA==}
+  /@zoralabs/protocol-sdk@0.9.0(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4):
+    resolution: {integrity: sha512-g5Eoy9TFcUOLvOfNxRs/QT2noigTAbyVLN+siM5m7JroXB5gmwz8Ca7wE/XGffBiylgJLm9GEX0djod9AHDHhw==}
     peerDependencies:
       viem: 2.15.1
     dependencies:
-      '@zoralabs/protocol-deployments': 0.1.13
+      '@zoralabs/protocol-deployments': 0.3.0
+      abitype: 1.0.6(typescript@5.3.2)(zod@3.21.4)
       viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
+    transitivePeerDependencies:
+      - typescript
+      - zod
     dev: false
 
   /@zoralabs/universal-minter@0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4):
@@ -5642,6 +5646,21 @@ packages:
 
   /abitype@1.0.0(typescript@5.3.2)(zod@3.21.4):
     resolution: {integrity: sha512-NMeMah//6bJ56H5XRj8QCV4AwuW6hB6zqz2LnhhLdcWVQOsXki6/Pn3APeqxCma62nXIcmZWdu1DlHWS74umVQ==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+      zod: ^3 >=3.22.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      zod:
+        optional: true
+    dependencies:
+      typescript: 5.3.2
+      zod: 3.21.4
+    dev: false
+
+  /abitype@1.0.6(typescript@5.3.2)(zod@3.21.4):
+    resolution: {integrity: sha512-MMSqYh4+C/aVqI2RQaWqbvI4Kxo5cQV40WQ4QFtDnNzCkqChm8MuENhElmynZlO0qUy/ObkEUaXtKqYnx1Kp3A==}
     peerDependencies:
       typescript: '>=5.0.4'
       zod: ^3 >=3.22.0
