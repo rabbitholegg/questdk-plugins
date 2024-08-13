@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.46
+
+### Minor Changes
+
+- [#508](https://github.com/rabbitholegg/questdk-plugins/pull/508) [`db90b700`](https://github.com/rabbitholegg/questdk-plugins/commit/db90b70005b9010e85759be200e19b34b783d9f8) Thanks [@sammccord](https://github.com/sammccord)! - Upgrade Mint action schema to support numeric operator types
+
 ## 1.0.0-alpha.45
 
 ### Minor Changes
