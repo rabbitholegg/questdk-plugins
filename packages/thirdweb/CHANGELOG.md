@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-thirdweb
 
+## 1.0.0-alpha.13
+
+### Patch Changes
+
+- Updated dependencies [[`db90b700`](https://github.com/rabbitholegg/questdk-plugins/commit/db90b70005b9010e85759be200e19b34b783d9f8)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.46
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.12
 
 ### Patch Changes

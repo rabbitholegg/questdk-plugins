@@ -1,7 +1,7 @@
 {
   "name": "@rabbitholegg/questdk-plugin-basepaint",
   "private": false,
-  "version": "1.0.0-alpha.65",
+  "version": "1.0.0-alpha.66",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",

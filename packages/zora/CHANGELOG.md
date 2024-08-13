@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.73
+
+### Minor Changes
+
+- [#507](https://github.com/rabbitholegg/questdk-plugins/pull/507) [`584ab186`](https://github.com/rabbitholegg/questdk-plugins/commit/584ab186abf43b8d97d7cba25a38466d2c56e970) Thanks [@mmackz](https://github.com/mmackz)! - update SDK and implement V2 getFees
+
+### Patch Changes
+
+- Updated dependencies [[`db90b700`](https://github.com/rabbitholegg/questdk-plugins/commit/db90b70005b9010e85759be200e19b34b783d9f8)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.46
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.72
 
 ### Minor Changes
