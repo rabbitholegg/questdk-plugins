@@ -23,10 +23,10 @@ importers:
         version: 5.0.1
       viem:
         specifier: 2.15.1
-        version: 2.15.1(typescript@5.3.2)(zod@3.21.4)
+        version: 2.15.1(typescript@5.3.2)(zod@3.23.8)
       zod:
-        specifier: 3.21.4
-        version: 3.21.4
+        specifier: 3.23.8
+        version: 3.23.8
     devDependencies:
       '@changesets/changelog-github':
         specifier: 0.4.8
@@ -430,7 +430,7 @@ importers:
     dependencies:
       '@eth-optimism/contracts-ts':
         specifier: 0.15.0
-        version: 0.15.0(typescript@5.3.2)(zod@3.21.4)
+        version: 0.15.0(typescript@5.3.2)(zod@3.23.8)
       '@rabbitholegg/questdk':
         specifier: workspace:*
         version: link:../../apps/questdk
@@ -790,7 +790,11 @@ importers:
         specifier: 1.9.0
         version: 1.9.0(hardhat@2.22.5)
 
-  packages/utils: {}
+  packages/utils:
+    dependencies:
+      abitype:
+        specifier: ^1.0.6
+        version: 1.0.6(typescript@5.3.2)(zod@3.23.8)
 
   packages/vela:
     dependencies:
@@ -820,10 +824,10 @@ importers:
         version: link:../utils
       '@zoralabs/protocol-sdk':
         specifier: 0.9.0
-        version: 0.9.0(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4)
+        version: 0.9.0(typescript@5.3.2)(viem@2.15.1)(zod@3.23.8)
       '@zoralabs/universal-minter':
         specifier: 0.2.15
-        version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4)
+        version: 0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.23.8)
 
 packages:
 
@@ -1809,7 +1813,7 @@ packages:
     requiresBuild: true
     dev: false
 
-  /@eth-optimism/contracts-ts@0.15.0(typescript@5.3.2)(zod@3.21.4):
+  /@eth-optimism/contracts-ts@0.15.0(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-qga3xsj+NhnxjY96TWktKAmc2DSYrdy0E+lVkS3NZ/b5w898IisoMj/Xvv3KoovBJmnk+/ENNnMX7kk+fwQdtA==}
     peerDependencies:
       '@wagmi/core': '>1.0.0'
@@ -1823,7 +1827,7 @@ packages:
       '@testing-library/react': 14.3.1(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.23.8)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -2415,7 +2419,7 @@ packages:
     peerDependencies:
       viem: 2.15.1
     dependencies:
-      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.23.8)
     dev: false
 
   /@graphql-typed-document-node/core@3.2.0(graphql@16.8.2):
@@ -2595,7 +2599,7 @@ packages:
       '@ledgerhq/hw-transport-node-hid-noevents': 5.51.1
       '@ledgerhq/logs': 5.50.0
       lodash: 4.17.21
-      node-hid: 1.3.0
+      node-hid: 2.1.1
       usb: 1.9.2
     dev: false
     optional: true
@@ -4973,7 +4977,7 @@ packages:
       wagmi:
         optional: true
     dependencies:
-      abitype: 0.8.7(typescript@5.3.2)(zod@3.21.4)
+      abitype: 0.8.7(typescript@5.3.2)(zod@3.23.8)
       abort-controller: 3.0.0
       bundle-require: 3.1.2(esbuild@0.16.17)
       cac: 6.7.14
@@ -4994,8 +4998,8 @@ packages:
       picocolors: 1.0.0
       prettier: 2.8.8
       typescript: 5.3.2
-      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
-      zod: 3.21.4
+      viem: 2.15.1(typescript@5.3.2)(zod@3.23.8)
+      zod: 3.23.8
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -5501,24 +5505,24 @@ packages:
     resolution: {integrity: sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==}
     dev: false
 
-  /@zoralabs/protocol-sdk@0.9.0(typescript@5.3.2)(viem@2.15.1)(zod@3.21.4):
+  /@zoralabs/protocol-sdk@0.9.0(typescript@5.3.2)(viem@2.15.1)(zod@3.23.8):
     resolution: {integrity: sha512-g5Eoy9TFcUOLvOfNxRs/QT2noigTAbyVLN+siM5m7JroXB5gmwz8Ca7wE/XGffBiylgJLm9GEX0djod9AHDHhw==}
     peerDependencies:
       viem: 2.15.1
     dependencies:
       '@zoralabs/protocol-deployments': 0.3.0
-      abitype: 1.0.6(typescript@5.3.2)(zod@3.21.4)
-      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
+      abitype: 1.0.6(typescript@5.3.2)(zod@3.23.8)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.23.8)
     transitivePeerDependencies:
       - typescript
       - zod
     dev: false
 
-  /@zoralabs/universal-minter@0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.21.4):
+  /@zoralabs/universal-minter@0.2.15(@types/node@20.4.5)(ts-node@10.9.1)(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-4ck2Rur7ltoBTV5EdQ0TtJtSyRTnNZtZyZSWhnrglfZ7574KOOAu0E/DJCgRXhNTo4RSNCbTXQh6+7WzjehagA==}
     dependencies:
-      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.21.4)
-      abitype: 0.9.10(typescript@5.3.2)(zod@3.21.4)
+      '@zoralabs/zora-1155-contracts': 1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.23.8)
+      abitype: 0.9.10(typescript@5.3.2)(zod@3.23.8)
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@swc/core'
@@ -5547,7 +5551,7 @@ packages:
       - zod
     dev: false
 
-  /@zoralabs/zora-1155-contracts@1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.21.4):
+  /@zoralabs/zora-1155-contracts@1.6.1(@types/node@20.4.5)(ts-node@10.9.1)(zod@3.23.8):
     resolution: {integrity: sha512-8b872/BOfaW5D8UhFOW2NIrCIXsPvTVoxPZGRs8BNXLEhgQD5nWGoWq11+9fVYxpAMAEtr6/OyvYbT4XtNHTfQ==}
     dependencies:
       '@changesets/cli': 2.26.2
@@ -5555,7 +5559,7 @@ packages:
       '@wagmi/cli': 1.5.2(typescript@5.3.2)
       '@zoralabs/openzeppelin-contracts-upgradeable': 4.8.4
       '@zoralabs/protocol-rewards': 1.2.1
-      abitype: 0.8.11(typescript@5.3.2)(zod@3.21.4)
+      abitype: 0.8.11(typescript@5.3.2)(zod@3.23.8)
       ds-test: github.com/dapphub/ds-test/cd98eff28324bfac652e63a239a60632a761790b
       es-main: 1.3.0
       forge-std: github.com/foundry-rs/forge-std/705263c95892a906d7af65f0f73ce8a4a0c80b80
@@ -5567,7 +5571,7 @@ packages:
       tsup: 7.2.0(ts-node@10.9.1)(typescript@5.3.2)
       tsx: 3.14.0
       typescript: 5.3.2
-      viem: 2.15.1(typescript@5.3.2)(zod@3.21.4)
+      viem: 2.15.1(typescript@5.3.2)(zod@3.23.8)
       vite: 4.5.3(@types/node@20.4.5)
       vitest: 0.30.1
     transitivePeerDependencies:
@@ -5603,7 +5607,7 @@ packages:
     dev: true
     optional: true
 
-  /abitype@0.8.11(typescript@5.3.2)(zod@3.21.4):
+  /abitype@0.8.11(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-bM4v2dKvX08sZ9IU38IN5BKmN+ZkOSd2oI4a9f0ejHYZQYV6cDr7j+d95ga0z2XHG36Y4jzoG5Z7qDqxp7fi/A==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -5613,10 +5617,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
-      zod: 3.21.4
+      zod: 3.23.8
     dev: false
 
-  /abitype@0.8.7(typescript@5.3.2)(zod@3.21.4):
+  /abitype@0.8.7(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-wQ7hV8Yg/yKmGyFpqrNZufCxbszDe5es4AZGYPBitocfSqXtjrTG9JMWFcc4N30ukl2ve48aBTwt7NJxVQdU3w==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -5626,10 +5630,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
-      zod: 3.21.4
+      zod: 3.23.8
     dev: false
 
-  /abitype@0.9.10(typescript@5.3.2)(zod@3.21.4):
+  /abitype@0.9.10(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-FIS7U4n7qwAT58KibwYig5iFG4K61rbhAqaQh/UWj8v1Y8mjX3F8TC9gd8cz9yT1TYel9f8nS5NO5kZp2RW0jQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -5641,10 +5645,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
-      zod: 3.21.4
+      zod: 3.23.8
     dev: false
 
-  /abitype@1.0.0(typescript@5.3.2)(zod@3.21.4):
+  /abitype@1.0.0(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-NMeMah//6bJ56H5XRj8QCV4AwuW6hB6zqz2LnhhLdcWVQOsXki6/Pn3APeqxCma62nXIcmZWdu1DlHWS74umVQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -5656,10 +5660,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
-      zod: 3.21.4
+      zod: 3.23.8
     dev: false
 
-  /abitype@1.0.6(typescript@5.3.2)(zod@3.21.4):
+  /abitype@1.0.6(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-MMSqYh4+C/aVqI2RQaWqbvI4Kxo5cQV40WQ4QFtDnNzCkqChm8MuENhElmynZlO0qUy/ObkEUaXtKqYnx1Kp3A==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -5671,7 +5675,7 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.2
-      zod: 3.21.4
+      zod: 3.23.8
     dev: false
 
   /abort-controller@3.0.0:
@@ -10920,12 +10924,6 @@ packages:
       thenify-all: 1.6.0
     dev: false
 
-  /nan@2.20.0:
-    resolution: {integrity: sha512-bk3gXBZDGILuuo/6sKtr0DQmSThYHLtNCdSdXk9YkxD/jK6X2vmCyyXBBxyqZ4XcnzTyYEAThfX3DCEnLf6igw==}
-    requiresBuild: true
-    dev: false
-    optional: true
-
   /nano-json-stream-parser@0.1.2:
     resolution: {integrity: sha512-9MqxMH/BSJC7dnLsEMPyfN5Dvoo49IsPFYMcHw3Bcfc2kN0lpHRBSzlMSVx4HGyJ7s9B31CyBTVehWJoQ8Ctew==}
     dev: false
@@ -11072,19 +11070,6 @@ packages:
     hasBin: true
     dev: false
 
-  /node-hid@1.3.0:
-    resolution: {integrity: sha512-BA6G4V84kiNd1uAChub/Z/5s/xS3EHBCxotQ0nyYrUG65mXewUDHE1tWOSqA2dp3N+mV0Ffq9wo2AW9t4p/G7g==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      bindings: 1.5.0
-      nan: 2.20.0
-      node-abi: 2.30.1
-      prebuild-install: 5.3.6
-    dev: false
-    optional: true
-
   /node-hid@2.1.1:
     resolution: {integrity: sha512-Skzhqow7hyLZU93eIPthM9yjot9lszg9xrKxESleEs05V2NcbUptZc5HFqzjOkSmL0sFlZFr3kmvaYebx06wrw==}
     engines: {node: '>=10'}
@@ -11117,12 +11102,6 @@ packages:
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
     dev: true
-
-  /noop-logger@0.1.1:
-    resolution: {integrity: sha512-6kM8CLXvuW5crTxsAtva2YLrRrDaiTIkIePWs9moLHqbFWT94WpNFjwS/5dfLfECg5i/lkmw3aoqVidxt23TEQ==}
-    requiresBuild: true
-    dev: false
-    optional: true
 
   /normalize-package-data@2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
@@ -11778,30 +11757,6 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.2.0
-
-  /prebuild-install@5.3.6:
-    resolution: {integrity: sha512-s8Aai8++QQGi4sSbs/M1Qku62PFK49Jm1CbgXklGz4nmHveDq0wzJkg7Na5QbnO1uNH8K7iqx2EQ/mV0MZEmOg==}
-    engines: {node: '>=6'}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      detect-libc: 1.0.3
-      expand-template: 2.0.3
-      github-from-package: 0.0.0
-      minimist: 1.2.8
-      mkdirp-classic: 0.5.3
-      napi-build-utils: 1.0.2
-      node-abi: 2.30.1
-      noop-logger: 0.1.1
-      npmlog: 4.1.2
-      pump: 3.0.0
-      rc: 1.2.8
-      simple-get: 3.1.1
-      tar-fs: 2.1.1
-      tunnel-agent: 0.6.0
-      which-pm-runs: 1.1.0
-    dev: false
-    optional: true
 
   /prebuild-install@6.1.4:
     resolution: {integrity: sha512-Z4vpywnK1lBg+zdPCVCsKq0xO66eEV9rWo2zrROGGiRS4JtueBOdlB1FnY8lcy7JsUud/Q3ijUxyWN26Ika0vQ==}
@@ -14158,7 +14113,7 @@ packages:
       extsprintf: 1.3.0
     dev: false
 
-  /viem@2.15.1(typescript@5.3.2)(zod@3.21.4):
+  /viem@2.15.1(typescript@5.3.2)(zod@3.23.8):
     resolution: {integrity: sha512-Vrveen3vDOJyPf8Q8TDyWePG2pTdK6IpSi4P6qlvAP+rXkAeqRvwYBy9AmGm+BeYpCETAyTT0SrCP6458XSt+w==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -14171,7 +14126,7 @@ packages:
       '@noble/hashes': 1.3.2
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
-      abitype: 1.0.0(typescript@5.3.2)(zod@3.21.4)
+      abitype: 1.0.0(typescript@5.3.2)(zod@3.23.8)
       isows: 1.0.4(ws@8.17.1)
       typescript: 5.3.2
       ws: 8.17.1
@@ -15115,13 +15070,6 @@ packages:
   /which-module@2.0.1:
     resolution: {integrity: sha512-iBdZ57RDvnOR9AGBhML2vFZf7h8vmBjhoaZqODJBFWHVtKkDmKuHai3cx5PgVMrX5YDNp27AofYbAwctSS+vhQ==}
 
-  /which-pm-runs@1.1.0:
-    resolution: {integrity: sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA==}
-    engines: {node: '>=4'}
-    requiresBuild: true
-    dev: false
-    optional: true
-
   /which-pm@2.0.0:
     resolution: {integrity: sha512-Lhs9Pmyph0p5n5Z3mVnN0yWcbQYUAD7rbQUiMsQxOJ3T57k7RFe35SUwWMf7dsbDZks1uOmw4AecB/JMDj3v/w==}
     engines: {node: '>=8.15'}
@@ -15429,10 +15377,6 @@ packages:
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
-
-  /zod@3.21.4:
-    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
-    dev: false
 
   /zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}

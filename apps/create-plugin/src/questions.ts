@@ -55,7 +55,7 @@ export const mainQuestions: PromptObject[] = [
     name: 'action',
     message: 'How would you describe the action you want the user to take?',
     initial: '',
-    choices: _actionArray,
+    choices: _actionArray as Choice[],
   },
   {
     type: 'confirm',

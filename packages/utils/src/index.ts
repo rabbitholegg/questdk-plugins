@@ -140,6 +140,23 @@ export {
   PremintValidationParamsSchema,
   PremintActionDetailSchema,
   PremintActionFormSchema,
+  // Filter Schemas
+  NumericSchema,
+  NumericOperatorSchema,
+  BitmaskFilterSchema,
+  StringOperatorSchema,
+  ArrayOperatorSchema,
+  LogicalOperatorSchema,
+  FilterOperatorSchema,
+  TransactionFilterSchema,
+  PrimitiveSchema,
+  FilterObjectSchema,
+  AbiFilterSchema,
+  AbstractAbiFilterSchema,
+  AbiParamFilterSchema,
+  FilterSchema,
+  FilterArraySchema,
+  NthFilterSchema,
 } from './types'
 
 export {

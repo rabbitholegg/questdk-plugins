@@ -18,3 +18,22 @@ export type {
   Filter,
   FilterObject,
 } from '@rabbitholegg/questdk-plugin-utils'
+
+export {
+  NumericSchema,
+  NumericOperatorSchema,
+  BitmaskFilterSchema,
+  StringOperatorSchema,
+  ArrayOperatorSchema,
+  LogicalOperatorSchema,
+  FilterOperatorSchema,
+  TransactionFilterSchema,
+  PrimitiveSchema,
+  FilterObjectSchema,
+  AbiFilterSchema,
+  AbstractAbiFilterSchema,
+  AbiParamFilterSchema,
+  FilterSchema,
+  FilterArraySchema,
+  NthFilterSchema,
+} from '@rabbitholegg/questdk-plugin-utils'

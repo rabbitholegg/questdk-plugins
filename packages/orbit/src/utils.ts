@@ -9,7 +9,7 @@ export function getUnlockTime(
   const now = Math.floor(new Date().getTime() / 1000)
 
   if (typeof duration === 'object') {
-    const [operator, value] = Object.entries(duration)[0]
+    const [operator, value] = Object.entries(duration)[0] as [string, (string | number | bigint | boolean)]
     return { [operator]: BigInt(value) + BigInt(now) }
   }
   return { $gte: BigInt(duration) + BigInt(now) }

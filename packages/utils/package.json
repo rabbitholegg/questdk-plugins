@@ -22,5 +22,8 @@
     "test:cov": "vitest dev --coverage",
     "test:ci": "CI=true vitest --coverage",
     "test:ui": "vitest dev --ui"
+  },
+  "dependencies": {
+    "abitype": "^1.0.6"
   }
 }

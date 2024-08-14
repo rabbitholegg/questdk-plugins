@@ -20,6 +20,8 @@ import {
   parseAbiParameters,
   slice,
   AbiParameter,
+  ByteArray,
+  Hex,
 } from 'viem'
 type OperatorKey = keyof typeof operators
 
@@ -29,7 +31,7 @@ type OperatorKey = keyof typeof operators
  * @param filter - The set of filters to apply.
  * @returns True if all filters pass, false otherwise.
  */
-export const handleAnd = (context: any, filter: Filter[]): boolean => {
+export const handleAnd = (context: TransactionEIP1559 | Record<string, unknown>, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
     if (!apply(context, filter[i] as FilterObject)) {
       return false
@@ -44,7 +46,7 @@ export const handleAnd = (context: any, filter: Filter[]): boolean => {
  * @param filter - The set of filters to apply.
  * @returns True if any filter passes, false otherwise.
  */
-export const handleOr = (context: any, filter: Filter[]): boolean => {
+export const handleOr = (context: TransactionEIP1559 | Record<string, unknown>, filter: Filter[]): boolean => {
   for (let i = 0; i < filter.length; i++) {
     if (apply(context, filter[i] as FilterObject)) {
       return true
@@ -60,7 +62,7 @@ export const handleOr = (context: any, filter: Filter[]): boolean => {
  * @returns True if any filter passes, false otherwise.
  */
 export const handleSome = (
-  context: any,
+  context: Array<TransactionEIP1559 | Record<string, unknown>>,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
   for (let i = 0; i < context.length; i++) {
@@ -77,7 +79,7 @@ export const handleSome = (
  * @returns True if context is less than filter, false otherwise.
  */
 export const handleLessThan = (
-  context: any,
+  context: bigint | boolean | number | string,
   filter: bigint | number | string,
 ): boolean => {
   return BigInt(context) < BigInt(filter)
@@ -90,7 +92,7 @@ export const handleLessThan = (
  * @returns True if context is less than or equal to filter, false otherwise.
  */
 export const handleLessThanOrEqual = (
-  context: any,
+  context: bigint | boolean | number | string,
   filter: bigint | number | string,
 ): boolean => {
   return BigInt(context) <= BigInt(filter)
@@ -103,7 +105,7 @@ export const handleLessThanOrEqual = (
  * @returns True if context is equal to filter, false otherwise.
  */
 export const handleEqual = (
-  context: any,
+  context: bigint | boolean | number | string,
   filter: bigint | number | string,
 ): boolean => {
   return BigInt(context) === BigInt(filter)
@@ -116,7 +118,7 @@ export const handleEqual = (
  * @returns True if context is greater than filter, false otherwise.
  */
 export const handleGreaterThan = (
-  context: any,
+  context: bigint | boolean | number | string,
   filter: bigint | number | string,
 ): boolean => {
   return BigInt(context) > BigInt(filter)
@@ -129,7 +131,7 @@ export const handleGreaterThan = (
  * @returns True if context is greater than or equal to filter, false otherwise.
  */
 export const handleGreaterThanOrEqual = (
-  context: any,
+  context: bigint | boolean | number | string,
   filter: bigint | number | string,
 ): boolean => {
   return BigInt(context) >= BigInt(filter)
@@ -142,7 +144,7 @@ export const handleGreaterThanOrEqual = (
  * @returns The result of applying the filter.
  */
 export const handleFirst = (
-  context: any,
+  context: Array<TransactionEIP1559 | Record<string, unknown>>,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
   return apply(context[0], filter)
@@ -155,7 +157,7 @@ export const handleFirst = (
  * @returns The result of applying the filter.
  */
 export const handleLast = (
-  context: any,
+  context: Array<TransactionEIP1559 | Record<string, unknown>>,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
   return apply(context[context.length - 1], filter)
@@ -167,10 +169,10 @@ export const handleLast = (
  * @param filter - An object containing the index and the condition to check.
  * @returns True if the value at the nth index meets the condition, false otherwise.
  */
-export const handleNth = (context: any, filter: NthFilter): boolean => {
+export const handleNth = (context: Array<TransactionEIP1559 | Record<string, unknown>>, filter: NthFilter): boolean => {
   const { index, value } = filter
 
-  if (Number(index) < 0 || index >= context.length) {
+  if (Number(index) < 0 || Number(index) >= context.length) {
     return false // index out of bounds
   }
   return apply(context[Number(index)], value as FilterObject)
@@ -182,7 +184,7 @@ export const handleNth = (context: any, filter: NthFilter): boolean => {
  * @param filter - The regular expression to match against.
  * @returns True if the context matches the filter, false otherwise.
  */
-export const handleRegex = (context: any, filter: string): boolean => {
+export const handleRegex = (context: string, filter: string): boolean => {
   const re = new RegExp(filter)
   return re.test(context)
 }
@@ -193,9 +195,10 @@ export const handleRegex = (context: any, filter: string): boolean => {
  * @param filter - An object containing the bitmask and the value to compare against.
  * @returns True if the masked context is equal to the value, false otherwise.
  */
-export const handleBitmask = (context: any, filter: BitmaskFilter): boolean => {
+export const handleBitmask = (context: bigint | boolean | number | string, filter: BitmaskFilter): boolean => {
   const maskedContext = BigInt(context) & BigInt(filter.bitmask)
   if (typeof filter.value === 'object') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return apply(maskedContext as any, filter.value as FilterObject)
   }
   return maskedContext === BigInt(filter.value)
@@ -207,6 +210,7 @@ export const handleBitmask = (context: any, filter: BitmaskFilter): boolean => {
  * @param filter - The filter containing the ABI.
  * @returns The decoded ABI.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleAbiDecode = (context: any, filter: AbiFilter) => {
   try {
     const sighash = slice(context, 0, 4)
@@ -222,12 +226,14 @@ export const handleAbiDecode = (context: any, filter: AbiFilter) => {
     }) as AbiFunction
 
     const namedArgs = [...abiItem.inputs].reduce(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (acc: Record<string, any>, input, index) => {
         acc[`${input.name || index}`] = args[index]
         return acc
       },
       {},
     )
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { $abi: _, ...newFilter } = filter
     if (apply({ ...namedArgs, sighash, functionName }, newFilter)) {
       return true
@@ -239,12 +245,14 @@ export const handleAbiDecode = (context: any, filter: AbiFilter) => {
 }
 
 export const handleAbstractAbiDecode = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   context: any,
   filter: AbstractAbiFilter,
 ) => {
   const decodedReturn: Array<ReturnType<typeof handleAbiDecode>> = []
   const elementCount = filter.$abiAbstract!.length
   const $abiAbstract = filter.$abiAbstract
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { $abiAbstract: _, ...newFilter } = filter
 
   const contextMap = new Map<string, number>()
@@ -284,18 +292,19 @@ export const handleAbstractAbiDecode = (
  * @param filter - The filter containing the ABI parameters.
  * @returns The decoded ABI parameters.
  */
-export const handleAbiParamDecode = (context: any, filter: AbiParamFilter) => {
+export const handleAbiParamDecode = (context: ByteArray | Hex, filter: AbiParamFilter) => {
   try {
-    const params = parseAbiParameters(filter.$abiParams.join(', '))
+    const params = parseAbiParameters(filter.$abiParams.join(', ')) as AbiParameter[]
     const args = decodeAbiParameters(params, context)
     const namedArgs = params.reduce(
-      (acc: Record<string, any>, param: AbiParameter, index) => {
+      (acc: Record<string, unknown>, param: AbiParameter, index) => {
         acc[`${param.name || index}`] = args[index]
         return acc
       },
       {},
     )
-    const { $abiParams: _, ...newFilter } = filter
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { $abiParams: _unused, ...newFilter } = filter
     if (apply(namedArgs, newFilter)) {
       return true
     }
@@ -335,10 +344,10 @@ const operators = {
  * @returns True if all filters pass, false otherwise.
  */
 export function apply(
-  originalContext: TransactionEIP1559 | Record<string, any>,
+  originalContext: TransactionEIP1559 | Record<string, unknown>,
   filters: TransactionFilter | FilterObject,
 ): boolean {
-  let context: TransactionEIP1559 | Record<string, any> = originalContext
+  let context: TransactionEIP1559 | Record<string, unknown> = originalContext
   if (typeof filters === 'object') {
     if ('$abi' in filters) {
       const processedContext = handleAbiDecode(context, filters as AbiFilter)
@@ -367,7 +376,8 @@ export function apply(
 
     if ('$abiParams' in filters) {
       const processedContext = handleAbiParamDecode(
-        context,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        context as any,
         filters as AbiParamFilter,
       )
       if (processedContext === true) {
@@ -394,7 +404,8 @@ export function apply(
 
       if (
         !operator(
-          context,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          context as any,
           filter as Filter[] &
             string &
             TransactionFilter &
@@ -410,7 +421,8 @@ export function apply(
       if (!(key in context)) {
         return false
       }
-      if (!apply(_context, filter as FilterObject | TransactionFilter)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!apply(_context as any, filter as FilterObject | TransactionFilter)) {
         return false
       }
     } else if (isAddress(_context as string)) {
@@ -428,7 +440,8 @@ export function apply(
     ) {
       if (
         _context === undefined ||
-        BigInt(_context) !== BigInt(filter as bigint | number | string)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        BigInt(_context as any) !== BigInt(filter as bigint | number | string)
       ) {
         return false
       }

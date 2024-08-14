@@ -35,7 +35,7 @@ export const buildAmountQuery = (
   if (amountOut) {
     let condition: FilterOperator | undefined
     if (typeof amountOut === 'object') {
-      const [operator, value] = Object.entries(amountOut)[0]
+      const [operator, value] = Object.entries(amountOut)[0] as [string, (bigint | boolean | number | string)]
       switch (operator) {
         case '$gte':
           condition = { $lte: BigInt(-value) }
