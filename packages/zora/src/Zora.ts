@@ -472,6 +472,7 @@ export const getFees = async (
       publicClient: client,
     })
 
+    // if no tokenId is provided for 1155, we need to get the latest tokenId
     if (contractType === '1155' && tokenId == null) {
       const nextTokenId = await getNextTokenId(client, contractAddress)
       tokenId = Number(nextTokenId)
