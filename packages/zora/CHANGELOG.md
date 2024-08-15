@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.74
+
+### Patch Changes
+
+- [#511](https://github.com/rabbitholegg/questdk-plugins/pull/511) [`36f7d215`](https://github.com/rabbitholegg/questdk-plugins/commit/36f7d215a81a9f77d916b4f1f9a21dc71ca15760) Thanks [@mmackz](https://github.com/mmackz)! - add tokenId to zora SDK call for 1155s
+
 ## 1.0.0-alpha.73
 
 ### Minor Changes
