@@ -2,6 +2,7 @@ import {
   create,
   getDynamicNameParams,
   getExternalUrl,
+  getFees,
   mint,
   simulateMint,
 } from './Zora'
@@ -384,6 +385,32 @@ describe('Given the getFee function', () => {
     expect(getFeesSpy.mock.calls.length).toBe(1)
     expect(fee.projectFee).equals(BigInt('777000000000000'))
     expect(fee.actionFee).equals(BigInt('0'))
+  })
+
+  test('should return the correct project + action fee for V1 1155 mint w/o tokenId', async () => {
+    const contractAddress: Address =
+      '0x34ce43d58d0d4ecf2581f4eb6238178c77fb32d9'
+    const tokenId = undefined
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.OPTIMISM,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000777'),
+        actionFee: parseEther('0.29'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    console.log('fee', fee)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000777'))
+    expect(fee.actionFee).equals(parseEther('0.29'))
   })
 })
 
