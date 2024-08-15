@@ -407,7 +407,6 @@ describe('Given the getFee function', () => {
 
     const getFeesSpy = vi.spyOn(mockFns, 'getFees')
     const fee = await mockFns.getFees(mintParams)
-    console.log('fee', fee)
     expect(getFeesSpy.mock.calls.length).toBe(1)
     expect(fee.projectFee).equals(parseEther('0.000777'))
     expect(fee.actionFee).equals(parseEther('0.29'))
