@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-titles
 
+## 1.0.0-alpha.22
+
+### Patch Changes
+
+- [#512](https://github.com/rabbitholegg/questdk-plugins/pull/512) [`931c9c03`](https://github.com/rabbitholegg/questdk-plugins/commit/931c9c035e1a32cd2c7f4ab7866556d222099afa) Thanks [@mmackz](https://github.com/mmackz)! - fix failing tests for titles simulateMint
+
 ## 1.0.0-alpha.21
 
 ### Patch Changes
