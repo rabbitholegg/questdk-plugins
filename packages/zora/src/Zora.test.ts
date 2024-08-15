@@ -2,7 +2,6 @@ import {
   create,
   getDynamicNameParams,
   getExternalUrl,
-  getFees,
   mint,
   simulateMint,
 } from './Zora'
