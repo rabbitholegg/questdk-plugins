@@ -154,7 +154,7 @@ describe('simulateMint function', () => {
     )
 
     const request = result.request
-    expect(request.address).toBe('0x432f4Ccc39AB8DD8015F590a56244bECb8D16933')
+    expect(request.address).toBe('0xc1eee0e85cf2356357ccad2cd1a60a5935538e4d')
     expect(request.functionName).toBe('mint')
     expect(request.value).toBe(value)
   })
