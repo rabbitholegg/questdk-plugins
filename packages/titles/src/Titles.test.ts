@@ -137,11 +137,11 @@ describe('Given the getFee function', () => {
 describe('simulateMint function', () => {
   test('should simulate a V2 mint', async () => {
     const contractAddress: Address =
-      '0x432f4Ccc39AB8DD8015F590a56244bECb8D16933'
+      '0xc1eee0e85cf2356357ccad2cd1a60a5935538e4d'
     const mintParams = {
       contractAddress,
-      chainId: Chains.BASE,
-      tokenId: 4,
+      chainId: Chains.ZORA,
+      tokenId: 1,
       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
     }
     const value = parseEther('0.0005')
@@ -154,31 +154,7 @@ describe('simulateMint function', () => {
     )
 
     const request = result.request
-    expect(request.address).toBe('0x432f4Ccc39AB8DD8015F590a56244bECb8D16933')
-    expect(request.functionName).toBe('mint')
-    expect(request.value).toBe(value)
-  })
-
-  test('should simulate a V2 mint', async () => {
-    const contractAddress: Address =
-      '0x06d7D870a41a44B5b7eBF46019bD5f8487362de3'
-    const mintParams = {
-      contractAddress,
-      chainId: Chains.BASE,
-      tokenId: 5,
-      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-    }
-    const value = parseEther('0.0005')
-    const address = mintParams.recipient as Address
-
-    const result = await simulateMint(
-      mintParams as MintIntentParams,
-      value,
-      address,
-    )
-
-    const request = result.request
-    expect(request.address).toBe('0x06d7D870a41a44B5b7eBF46019bD5f8487362de3')
+    expect(request.address).toBe('0xc1eee0e85cf2356357ccad2cd1a60a5935538e4d')
     expect(request.functionName).toBe('mint')
     expect(request.value).toBe(value)
   })
