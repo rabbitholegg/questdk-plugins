@@ -4,7 +4,12 @@ import {
   type SimulateContractReturnType,
   type TransactionRequest,
 } from 'viem'
-import { FilterOperatorSchema, NumericSchema, type FilterOperator, type TransactionFilter } from './filters'
+import {
+  FilterOperatorSchema,
+  NumericSchema,
+  type FilterOperator,
+  type TransactionFilter,
+} from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import type { MintIntentParams } from './intents'
 import { ZodSchema, z } from 'zod'

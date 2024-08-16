@@ -31,7 +31,10 @@ type OperatorKey = keyof typeof operators
  * @param filter - The set of filters to apply.
  * @returns True if all filters pass, false otherwise.
  */
-export const handleAnd = (context: TransactionEIP1559 | Record<string, unknown>, filter: Filter[]): boolean => {
+export const handleAnd = (
+  context: TransactionEIP1559 | Record<string, unknown>,
+  filter: Filter[],
+): boolean => {
   for (let i = 0; i < filter.length; i++) {
     if (!apply(context, filter[i] as FilterObject)) {
       return false
@@ -46,7 +49,10 @@ export const handleAnd = (context: TransactionEIP1559 | Record<string, unknown>,
  * @param filter - The set of filters to apply.
  * @returns True if any filter passes, false otherwise.
  */
-export const handleOr = (context: TransactionEIP1559 | Record<string, unknown>, filter: Filter[]): boolean => {
+export const handleOr = (
+  context: TransactionEIP1559 | Record<string, unknown>,
+  filter: Filter[],
+): boolean => {
   for (let i = 0; i < filter.length; i++) {
     if (apply(context, filter[i] as FilterObject)) {
       return true
@@ -169,7 +175,10 @@ export const handleLast = (
  * @param filter - An object containing the index and the condition to check.
  * @returns True if the value at the nth index meets the condition, false otherwise.
  */
-export const handleNth = (context: Array<TransactionEIP1559 | Record<string, unknown>>, filter: NthFilter): boolean => {
+export const handleNth = (
+  context: Array<TransactionEIP1559 | Record<string, unknown>>,
+  filter: NthFilter,
+): boolean => {
   const { index, value } = filter
 
   if (Number(index) < 0 || Number(index) >= context.length) {
@@ -195,7 +204,10 @@ export const handleRegex = (context: string, filter: string): boolean => {
  * @param filter - An object containing the bitmask and the value to compare against.
  * @returns True if the masked context is equal to the value, false otherwise.
  */
-export const handleBitmask = (context: bigint | boolean | number | string, filter: BitmaskFilter): boolean => {
+export const handleBitmask = (
+  context: bigint | boolean | number | string,
+  filter: BitmaskFilter,
+): boolean => {
   const maskedContext = BigInt(context) & BigInt(filter.bitmask)
   if (typeof filter.value === 'object') {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -292,9 +304,14 @@ export const handleAbstractAbiDecode = (
  * @param filter - The filter containing the ABI parameters.
  * @returns The decoded ABI parameters.
  */
-export const handleAbiParamDecode = (context: ByteArray | Hex, filter: AbiParamFilter) => {
+export const handleAbiParamDecode = (
+  context: ByteArray | Hex,
+  filter: AbiParamFilter,
+) => {
   try {
-    const params = parseAbiParameters(filter.$abiParams.join(', ')) as AbiParameter[]
+    const params = parseAbiParameters(
+      filter.$abiParams.join(', '),
+    ) as AbiParameter[]
     const args = decodeAbiParameters(params, context)
     const namedArgs = params.reduce(
       (acc: Record<string, unknown>, param: AbiParameter, index) => {
