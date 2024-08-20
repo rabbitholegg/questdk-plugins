@@ -117,6 +117,25 @@ export type {
   TransactionFilter,
 } from './filters'
 
+export {
+  NumericSchema,
+  NumericOperatorSchema,
+  BitmaskFilterSchema,
+  StringOperatorSchema,
+  ArrayOperatorSchema,
+  LogicalOperatorSchema,
+  FilterOperatorSchema,
+  TransactionFilterSchema,
+  PrimitiveSchema,
+  FilterObjectSchema,
+  AbiFilterSchema,
+  AbstractAbiFilterSchema,
+  AbiParamFilterSchema,
+  FilterSchema,
+  FilterArraySchema,
+  NthFilterSchema,
+} from './filters'
+
 export type {
   Quest,
   QuestReward,

@@ -36,7 +36,10 @@ export function getAmountPacked(
   if (amount === undefined) return undefined
   const multiplier = BigInt(2 ** 128) * BigInt(10 ** 12)
   if (typeof amount === 'object') {
-    const [operator, value] = Object.entries(amount)[0]
+    const [operator, value] = Object.entries(amount)[0] as [
+      string,
+      string | number | bigint | boolean,
+    ]
     if (operator === '$lte' || operator === '$lt') {
       return { [operator]: (BigInt(value) + 1n) * multiplier }
     }
@@ -95,7 +98,10 @@ export function getAmount(amount: Amount): FilterOperator | undefined {
   if (amount === undefined) return undefined
   const multiplier = BigInt(10 ** 12)
   if (typeof amount === 'object') {
-    const [operator, value] = Object.entries(amount)[0]
+    const [operator, value] = Object.entries(amount)[0] as [
+      string,
+      string | number | bigint | boolean,
+    ]
     if (operator === '$lte' || operator === '$lt') {
       return { [operator]: (BigInt(value) + 1n) * multiplier }
     }

@@ -4,7 +4,12 @@ import {
   type SimulateContractReturnType,
   type TransactionRequest,
 } from 'viem'
-import type { FilterOperator, TransactionFilter } from './filters'
+import {
+  FilterOperatorSchema,
+  NumericSchema,
+  type FilterOperator,
+  type TransactionFilter,
+} from './filters'
 import { PluginActionNotImplementedError } from '../errors'
 import type { MintIntentParams } from './intents'
 import { ZodSchema, z } from 'zod'
@@ -211,34 +216,15 @@ export const StakeActionFormSchema = BaseStakeActionFormaSchema
 export const MintActionFormSchema = z.object({
   contractAddress: EthAddressSchema,
   tokenId: z.number().optional(),
-  amount: z.string().optional(),
+  amount: z.union([NumericSchema, FilterOperatorSchema]),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
-
-export const NumericSchema = z.union([z.bigint(), z.string(), z.number()])
-export const AmountSchema = z.union([
-  z.bigint(),
-  z.number(),
-  z.string(),
-  z.object({
-    $gt: NumericSchema.optional(),
-  }),
-  z.object({
-    $gte: NumericSchema.optional(),
-  }),
-  z.object({
-    $lt: NumericSchema.optional(),
-  }),
-  z.object({
-    $lte: NumericSchema.optional(),
-  }),
-])
 
 export const MintActionDetailSchema = z.object({
   chainId: z.number(),
   contractAddress: EthAddressSchema,
   tokenId: z.number().optional(),
-  amount: AmountSchema,
+  amount: z.union([NumericSchema, FilterOperatorSchema]),
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 

@@ -8,7 +8,8 @@ export const vote = async (voteParams: VoteActionParams) => {
 
   const supportIsBoolean = support !== undefined && typeof support === 'boolean'
 
-  let abi = []
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let abi: any[] = []
   if (supportIsBoolean) {
     // if the support param is a boolean, we only want to use the abi that matches the boolean
     if (support) {
