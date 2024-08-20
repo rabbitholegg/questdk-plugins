@@ -11,7 +11,6 @@ import type {
 import {
   type AbiFunction,
   type Address,
-  type TransactionEIP1559,
   decodeAbiParameters,
   decodeFunctionData,
   getAbiItem,
@@ -22,6 +21,7 @@ import {
   AbiParameter,
   ByteArray,
   Hex,
+  Transaction,
 } from 'viem'
 type OperatorKey = keyof typeof operators
 
@@ -32,7 +32,7 @@ type OperatorKey = keyof typeof operators
  * @returns True if all filters pass, false otherwise.
  */
 export const handleAnd = (
-  context: TransactionEIP1559 | Record<string, unknown>,
+  context: Transaction | Record<string, unknown>,
   filter: Filter[],
 ): boolean => {
   for (let i = 0; i < filter.length; i++) {
@@ -50,7 +50,7 @@ export const handleAnd = (
  * @returns True if any filter passes, false otherwise.
  */
 export const handleOr = (
-  context: TransactionEIP1559 | Record<string, unknown>,
+  context: Transaction | Record<string, unknown>,
   filter: Filter[],
 ): boolean => {
   for (let i = 0; i < filter.length; i++) {
@@ -68,7 +68,7 @@ export const handleOr = (
  * @returns True if any filter passes, false otherwise.
  */
 export const handleSome = (
-  context: Array<TransactionEIP1559 | Record<string, unknown>>,
+  context: Array<Transaction | Record<string, unknown>>,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
   for (let i = 0; i < context.length; i++) {
@@ -150,7 +150,7 @@ export const handleGreaterThanOrEqual = (
  * @returns The result of applying the filter.
  */
 export const handleFirst = (
-  context: Array<TransactionEIP1559 | Record<string, unknown>>,
+  context: Array<Transaction | Record<string, unknown>>,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
   return apply(context[0], filter)
@@ -163,7 +163,7 @@ export const handleFirst = (
  * @returns The result of applying the filter.
  */
 export const handleLast = (
-  context: Array<TransactionEIP1559 | Record<string, unknown>>,
+  context: Array<Transaction | Record<string, unknown>>,
   filter: TransactionFilter | FilterObject,
 ): boolean => {
   return apply(context[context.length - 1], filter)
@@ -176,7 +176,7 @@ export const handleLast = (
  * @returns True if the value at the nth index meets the condition, false otherwise.
  */
 export const handleNth = (
-  context: Array<TransactionEIP1559 | Record<string, unknown>>,
+  context: Array<Transaction | Record<string, unknown>>,
   filter: NthFilter,
 ): boolean => {
   const { index, value } = filter
@@ -361,10 +361,10 @@ const operators = {
  * @returns True if all filters pass, false otherwise.
  */
 export function apply(
-  originalContext: TransactionEIP1559 | Record<string, unknown>,
+  originalContext: Transaction | Record<any, unknown>,
   filters: TransactionFilter | FilterObject,
 ): boolean {
-  let context: TransactionEIP1559 | Record<string, unknown> = originalContext
+  let context: Transaction | Record<string, unknown> = originalContext
   if (typeof filters === 'object') {
     if ('$abi' in filters) {
       const processedContext = handleAbiDecode(context, filters as AbiFilter)

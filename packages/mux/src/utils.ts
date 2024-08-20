@@ -1,5 +1,5 @@
 import type { ActionParams } from '@rabbitholegg/questdk'
-import { type Address, type Hash } from 'viem'
+import { TransactionEIP1559, type Address } from 'viem'
 
 export enum Chains {
   ETHEREUM = 1,
@@ -17,23 +17,14 @@ export enum Chains {
   SCROLL = 534352,
 }
 
-interface Transaction {
-  chainId: number
-  from: Address
-  hash?: Hash
-  input: string
-  to: Address
-  value: string
-}
-
 export interface TestCase<T extends ActionParams> {
-  transaction: Transaction
+  transaction: Partial<TransactionEIP1559>
   params: T
   description: string
 }
 
 export type TestParams<T extends ActionParams> = {
-  transaction: Transaction
+  transaction: Partial<TransactionEIP1559>
   params: T
 }
 
