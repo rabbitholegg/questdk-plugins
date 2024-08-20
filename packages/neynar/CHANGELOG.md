@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-neynar
 
+## 1.0.0-alpha.33
+
+### Patch Changes
+
+- Updated dependencies [[`49f27acf`](https://github.com/rabbitholegg/questdk-plugins/commit/49f27acf371a88cb5aae6d442758da8322816e4b)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.47
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.32
 
 ### Patch Changes
