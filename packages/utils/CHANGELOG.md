@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.47
+
+### Minor Changes
+
+- [#514](https://github.com/rabbitholegg/questdk-plugins/pull/514) [`49f27acf`](https://github.com/rabbitholegg/questdk-plugins/commit/49f27acf371a88cb5aae6d442758da8322816e4b) Thanks [@sammccord](https://github.com/sammccord)! - implement filter types as zod schemas
+
 ## 1.0.0-alpha.46
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-hop",
-  "version": "1.0.0-alpha.63",
+  "version": "1.0.0-alpha.64",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
