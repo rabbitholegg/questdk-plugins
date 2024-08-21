@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-utils
 
+## 1.0.0-alpha.48
+
+### Minor Changes
+
+- [#517](https://github.com/rabbitholegg/questdk-plugins/pull/517) [`ab67847e`](https://github.com/rabbitholegg/questdk-plugins/commit/ab67847e37e4cb67011f5723c665c345fd8b81ea) Thanks [@sammccord](https://github.com/sammccord)! - allow any combination of filters in mint params
+
 ## 1.0.0-alpha.47
 
 ### Minor Changes

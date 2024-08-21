@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-llama
 
+## 1.0.0-alpha.60
+
+### Patch Changes
+
+- Updated dependencies [[`ab67847e`](https://github.com/rabbitholegg/questdk-plugins/commit/ab67847e37e4cb67011f5723c665c345fd8b81ea)]:
+  - @rabbitholegg/questdk-plugin-utils@1.0.0-alpha.48
+  - @rabbitholegg/questdk@2.0.0-alpha.55
+
 ## 1.0.0-alpha.59
 
 ### Patch Changes
