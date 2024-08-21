@@ -66,13 +66,13 @@ export type FilterOperator =
 
 export type ArrayOperator =
   | {
-      $some?: FilterOperator[]
+      $some?: Filter[]
     }
   | {
-      $first?: FilterOperator
+      $first?: Filter
     }
   | {
-      $last?: FilterOperator
+      $last?: Filter
     }
   | {
       $nth?: NthFilter
@@ -81,33 +81,33 @@ export type ArrayOperator =
 export const ArrayOperatorSchema: z.ZodType<ArrayOperator> = z.union([
   z.object({
     $some: z
-      .lazy(() => FilterOperatorSchema)
+      .lazy(() => FilterSchema)
       .array()
       .optional(),
   }),
-  z.object({ $first: z.lazy(() => FilterOperatorSchema).optional() }),
-  z.object({ $last: z.lazy(() => FilterOperatorSchema).optional() }),
-  z.object({ $nth: z.lazy(() => NthFilterSchema).optional() }),
+  z.object({ $first: z.lazy(() => FilterSchema).optional() }),
+  z.object({ $last: z.lazy(() => FilterSchema).optional() }),
+  z.object({ $nth: z.lazy(() => FilterSchema).optional() }),
 ])
 
 export type LogicalOperator =
   | {
-      $and?: FilterOperator[]
+      $and?: Filter[]
     }
   | {
-      $or?: FilterOperator[]
+      $or?: Filter[]
     }
 
 export const LogicalOperatorSchema: z.ZodType<LogicalOperator> = z.union([
   z.object({
     $and: z
-      .lazy(() => FilterOperatorSchema)
+      .lazy(() => FilterSchema)
       .array()
       .optional(),
   }),
   z.object({
     $or: z
-      .lazy(() => FilterOperatorSchema)
+      .lazy(() => FilterSchema)
       .array()
       .optional(),
   }),
@@ -121,16 +121,16 @@ export const FilterOperatorSchema = z.union([
 ])
 
 export type TransactionFilter = {
-  [K in keyof Transaction]: FilterOperator
+  [K in keyof Partial<Transaction>]: Filter
 }
 
-export const TransactionFilterSchema = z.record(
+export const TransactionFilterSchema: z.ZodType<TransactionFilter> = z.record(
   z.string(),
-  FilterOperatorSchema,
+  z.lazy(() => FilterSchema),
 )
 
-type Primitive = string | number | boolean
-export const PrimitiveSchema = z.union([z.string(), z.number(), z.boolean()])
+type Primitive = string | number | boolean | bigint
+export const PrimitiveSchema = z.union([z.string(), z.number(), z.boolean(), z.bigint()])
 
 export type FilterObject = {
   [key: string]: Filter
@@ -171,12 +171,14 @@ export const AbiParamFilterSchema = z
 
 export type Filter =
   | Primitive
+  | Array<Primitive>
   | FilterObject
   | FilterArray
   | FilterOperator
   | Abi
 export const FilterSchema = z.union([
   PrimitiveSchema,
+  PrimitiveSchema.array(),
   FilterObjectSchema,
   FilterOperatorSchema,
   z.lazy(() => FilterSchema.array()),
@@ -188,7 +190,7 @@ export const FilterArraySchema = FilterSchema.array()
 
 export type NthFilter = {
   index: bigint | number | string
-  value: TransactionFilter | FilterObject
+  value: TransactionFilter | Filter
 }
 export const NthFilterSchema = z.object({
   index: z.union([z.bigint(), z.number(), z.string()]),

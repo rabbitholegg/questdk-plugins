@@ -1,20 +1,19 @@
+import { UUID } from 'crypto'
 import {
-  type PublicClient,
   type Address,
+  type PublicClient,
   type SimulateContractReturnType,
   type TransactionRequest,
 } from 'viem'
-import {
-  FilterOperatorSchema,
-  NumericSchema,
-  type FilterOperator,
-  type TransactionFilter,
-} from './filters'
-import { PluginActionNotImplementedError } from '../errors'
-import type { MintIntentParams } from './intents'
 import { ZodSchema, z } from 'zod'
+import { PluginActionNotImplementedError } from '../errors'
 import { EthAddressSchema } from './common'
-import { UUID } from 'crypto'
+import {
+  FilterSchema,
+  type FilterOperator,
+  type TransactionFilter
+} from './filters'
+import type { MintIntentParams } from './intents'
 import { QuestCompletionPayload } from './quests'
 
 export type SwapActionParams = {
@@ -216,7 +215,7 @@ export const StakeActionFormSchema = BaseStakeActionFormaSchema
 export const MintActionFormSchema = z.object({
   contractAddress: EthAddressSchema,
   tokenId: z.number().optional(),
-  amount: z.union([NumericSchema, FilterOperatorSchema]),
+  amount: FilterSchema,
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
@@ -224,7 +223,7 @@ export const MintActionDetailSchema = z.object({
   chainId: z.number(),
   contractAddress: EthAddressSchema,
   tokenId: z.number().optional(),
-  amount: z.union([NumericSchema, FilterOperatorSchema]),
+  amount: FilterSchema,
   amountOperator: QuestInputActionParamsAmountOperatorEnum.optional(),
 })
 
