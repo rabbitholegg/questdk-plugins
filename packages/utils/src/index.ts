@@ -143,7 +143,6 @@ export {
   PremintActionDetailSchema,
   PremintActionFormSchema,
   // Filter Schemas
-  // Primitive,
   NumericSchema,
   NumericOperatorSchema,
   BitmaskFilterSchema,
