@@ -11,7 +11,7 @@ import { EthAddressSchema } from './common'
 import {
   FilterSchema,
   type FilterOperator,
-  type TransactionFilter
+  type TransactionFilter,
 } from './filters'
 import type { MintIntentParams } from './intents'
 import { QuestCompletionPayload } from './quests'
