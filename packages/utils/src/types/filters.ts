@@ -129,7 +129,7 @@ export const TransactionFilterSchema: z.ZodType<TransactionFilter> = z.record(
   z.lazy(() => FilterSchema),
 )
 
-type Primitive = string | number | boolean | bigint
+export type Primitive = string | number | boolean | bigint
 export const PrimitiveSchema = z.union([z.string(), z.number(), z.boolean(), z.bigint()])
 
 export type FilterObject = {
