@@ -101,6 +101,7 @@ export {
 export { ActionType, OrderType } from './actions'
 
 export type {
+  Primitive,
   FilterObject,
   BitmaskFilter,
   NthFilter,

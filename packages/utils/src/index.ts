@@ -93,6 +93,7 @@ export type {
   PremintValidationParams,
   PremintActionDetail,
   PremintActionForm,
+  Primitive,
 } from './types'
 
 export {
