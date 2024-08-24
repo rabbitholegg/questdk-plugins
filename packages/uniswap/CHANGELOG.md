@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-uniswap
 
+## 1.0.0-alpha.69
+
+### Patch Changes
+
+- [#519](https://github.com/rabbitholegg/questdk-plugins/pull/519) [`155b3328`](https://github.com/rabbitholegg/questdk-plugins/commit/155b332869f48474e47fec9b604cea40aaac8ded) Thanks [@mmackz](https://github.com/mmackz)! - add LOUDER to swappable tokens list
+
 ## 1.0.0-alpha.68
 
 ### Patch Changes
