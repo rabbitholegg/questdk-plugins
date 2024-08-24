@@ -71,6 +71,7 @@ const baseTokenAddresses: Address[] = [
   '0x7D12aEb5d96d221071d176980D23c213d88d9998', // FCKN
   '0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed', // DEGEN
   '0x6Ed58e745B41665EA889698de7b2becC9a4A83d7', // ALFAA
+  '0x120edC8E391ba4c94Cb98bb65d8856Ae6eC1525F', // LOUDER
 ]
 
 const arbitrumTokenAddresses: Address[] = [
