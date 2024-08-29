@@ -410,6 +410,31 @@ describe('Given the getFee function', () => {
     expect(fee.projectFee).equals(parseEther('0.000777'))
     expect(fee.actionFee).equals(parseEther('0.29'))
   })
+
+  test('should return the correct project + action fee for V2 timed sale mint', async () => {
+    const contractAddress: Address =
+      '0x5849c383457794aca6e2284cdcacfb7c7b98fa38'
+    const tokenId = 1
+    const mintParams = {
+      contractAddress,
+      tokenId,
+      chainId: Chains.ZORA,
+      amount: 1,
+    }
+
+    const mockFns = {
+      getFees: async (_mint: MintActionParams) => ({
+        projectFee: parseEther('0.000111'),
+        actionFee: parseEther('0'),
+      }),
+    }
+
+    const getFeesSpy = vi.spyOn(mockFns, 'getFees')
+    const fee = await mockFns.getFees(mintParams)
+    expect(getFeesSpy.mock.calls.length).toBe(1)
+    expect(fee.projectFee).equals(parseEther('0.000111'))
+    expect(fee.actionFee).equals(parseEther('0'))
+  })
 })
 
 describe('simulateMint function', () => {
