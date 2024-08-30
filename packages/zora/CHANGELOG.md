@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-zora
 
+## 1.0.0-alpha.77
+
+### Minor Changes
+
+- [#521](https://github.com/rabbitholegg/questdk-plugins/pull/521) [`d0f7d5eb`](https://github.com/rabbitholegg/questdk-plugins/commit/d0f7d5eba7b0b83321d435d47659ba316f849905) Thanks [@mmackz](https://github.com/mmackz)! - update zora SDK version to 0.9.5
+
 ## 1.0.0-alpha.76
 
 ### Patch Changes
