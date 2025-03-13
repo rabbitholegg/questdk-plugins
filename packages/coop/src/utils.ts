@@ -1,8 +1,6 @@
-import { ZORA_MINTER_ABI_1155 } from './abi'
-import { type Address, type PublicClient, createPublicClient, http } from 'viem'
+import { type Address, type PublicClient } from 'viem'
 import {
   FilterOperator,
-  chainIdToViemChain,
 } from '@rabbitholegg/questdk-plugin-utils'
 
 export type AndArrayItem =

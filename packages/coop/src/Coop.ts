@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { } from './abi'
+import { COOP_CREATOR_ABI_1155, FEES_ABI } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
 import { FIXED_PRICE_SALE_CONTRACT } from './contract-addresses'
-import { type AndArrayItem, getLatestTokenId, getUri } from './utils'
+import { type AndArrayItem, getUri } from './utils'
 import {
   type MintActionParams,
   type TransactionFilter,
@@ -66,7 +66,7 @@ export const mint = async (
   }
 
   const ERC1155_FILTER = {
-    $abiAbstract: ZORA_MINTER_ABI_1155,
+    $abiAbstract: COOP_CREATOR_ABI_1155,
     $and: andArray1155,
   }
 
@@ -96,7 +96,7 @@ export const getMintIntent = async (
   ]
 
   const data = encodeFunctionData({
-    abi: ZORA_MINTER_ABI_1155,
+    abi: COOP_CREATOR_ABI_1155,
     functionName: 'mint',
     args: mintArgs,
   })
@@ -137,7 +137,7 @@ export const simulateMint = async (
   const result = await _client.simulateContract({
     address: contractAddress,
     value,
-    abi: ZORA_MINTER_ABI_1155,
+    abi: COOP_CREATOR_ABI_1155,
     functionName: 'mint',
     args: mintArgs,
     account: from,
@@ -195,6 +195,8 @@ export const getExternalUrl = async (
   const { chainId, contractAddress, tokenId, referral } = params
 
   try {
+    if (!tokenId) throw new Error('Token ID is required')
+      
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
       transport: http(),

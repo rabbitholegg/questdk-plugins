@@ -5,7 +5,13 @@ import {
 import { apply } from '@rabbitholegg/questdk'
 import { type Address, parseEther, getAddress, zeroAddress } from 'viem'
 import { describe, expect, test } from 'vitest'
-import { getExternalUrl, getFees, getMintIntent, mint, simulateMint } from './Coop'
+import {
+  getExternalUrl,
+  getFees,
+  getMintIntent,
+  mint,
+  simulateMint,
+} from './Coop'
 import { failingTestCases, passingTestCases } from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
 
@@ -124,11 +130,7 @@ describe('simulateMint function', () => {
     const value = parseEther('0.0004')
     const address = mint.recipient as Address
 
-    const result = await simulateMint(
-      mint as MintIntentParams,
-      value,
-      address,
-    )
+    const result = await simulateMint(mint as MintIntentParams, value, address)
 
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
@@ -145,9 +147,7 @@ describe('getExternalUrl function', () => {
       referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
     const result = await getExternalUrl(params)
-    expect(result).toBe(
-      'https://cooprecords.xyz',
-    )
+    expect(result).toBe('https://cooprecords.xyz')
   })
 
   test('should return fallback url if error occurs', async () => {

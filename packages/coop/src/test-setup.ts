@@ -1,7 +1,6 @@
 import {
   COOP_MINT,
   MINT_REFERRAL,
-  MINT_WITH_REWARDS_REFERRAL,
   ZERO_QUANTITY,
 } from './test-transactions'
 import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
@@ -12,7 +11,6 @@ export const passingTestCases = [
   createTestCase(COOP_MINT, 'when contractAddress is checksummed', {
     contractAddress: getAddress(COOP_MINT.params.contractAddress),
   }),
-  createTestCase(MINT_WITH_REWARDS_REFERRAL, 'when referral is correct'),
   createTestCase(MINT_REFERRAL, 'when referral is correct'),
 ]
 
@@ -33,9 +31,6 @@ export const failingTestCases = [
     amount: '72',
   }),
   createTestCase(ZERO_QUANTITY, 'when quantity minted is 0'),
-  createTestCase(MINT_WITH_REWARDS_REFERRAL, 'when referral is incorrect', {
-    referral: zeroAddress,
-  }),
   createTestCase(MINT_REFERRAL, 'when referral is incorrect', {
     referral: zeroAddress,
   }),

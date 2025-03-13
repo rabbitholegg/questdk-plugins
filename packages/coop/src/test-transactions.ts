@@ -36,25 +36,6 @@ export const ZERO_QUANTITY: TestParams<MintActionParams> = {
   },
 }
 
-export const MINT_WITH_REWARDS_REFERRAL: TestParams<MintActionParams> = {
-  transaction: {
-    chainId: 8453,
-    from: '',
-    to: '',
-    hash: '',
-    input:
-      '',
-    value: '4000000000000000',
-  },
-  params: {
-    chainId: Chains.BASE,
-    contractAddress: '',
-    tokenId: ,
-    recipient: '',
-    referral: '',
-  },
-}
-
 export const MINT_REFERRAL: TestParams<MintActionParams> = {
   transaction: {
     chainId: 8453,
