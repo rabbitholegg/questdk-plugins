@@ -32,7 +32,7 @@ export const COOP_CREATOR_ABI_1155 = [
     stateMutability: 'payable',
     type: 'function',
   },
-] as const
+]
 
 export const FEES_ABI = [
   {
