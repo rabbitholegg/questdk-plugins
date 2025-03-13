@@ -36,6 +36,7 @@
     "@rabbitholegg/questdk-plugin-basepaint": "workspace:*",
     "@rabbitholegg/questdk-plugin-camelot": "workspace:*",
     "@rabbitholegg/questdk-plugin-connext": "workspace:*",
+    "@rabbitholegg/questdk-plugin-coop": "workspace:*",
     "@rabbitholegg/questdk-plugin-gmx": "workspace:*",
     "@rabbitholegg/questdk-plugin-hop": "workspace:*",
     "@rabbitholegg/questdk-plugin-hyphen": "workspace:*",
