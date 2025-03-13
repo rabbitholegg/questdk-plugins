@@ -42,7 +42,7 @@ describe('Given the aerodrome plugin', () => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await swap(params)
-          expect(apply(transaction, filter)).to.be.true
+          expect(apply(transaction as unknown as Record<string, unknown>, filter)).to.be.true
         })
       })
     })
@@ -52,7 +52,7 @@ describe('Given the aerodrome plugin', () => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await swap(params)
-          expect(apply(transaction, filter)).to.be.false
+          expect(apply(transaction as unknown as Record<string, unknown>, filter)).to.be.false
         })
       })
     })
