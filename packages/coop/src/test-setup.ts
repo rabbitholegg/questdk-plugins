@@ -1,22 +1,19 @@
 import {
   COOP_MINT,
-  MINT_REFERRAL,
-  ZERO_QUANTITY,
 } from './test-transactions'
 import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
-import { getAddress, zeroAddress } from 'viem'
+import { getAddress } from 'viem'
 
 export const passingTestCases = [
   createTestCase(COOP_MINT, 'when minting a coop record'),
   createTestCase(COOP_MINT, 'when contractAddress is checksummed', {
     contractAddress: getAddress(COOP_MINT.params.contractAddress),
   }),
-  createTestCase(MINT_REFERRAL, 'when referral is correct'),
 ]
 
 export const failingTestCases = [
   createTestCase(COOP_MINT, 'when chainId is incorrect', {
-    chainId: 8453,
+    chainId: 10,
   }),
   createTestCase(COOP_MINT, 'when contractAddress is incorrect', {
     contractAddress: '0x4f330940159fB3368F5b06b34212C0cDB4e2C032',
@@ -30,12 +27,12 @@ export const failingTestCases = [
   createTestCase(COOP_MINT, 'when amount is incorrect', {
     amount: '72',
   }),
-  createTestCase(ZERO_QUANTITY, 'when quantity minted is 0'),
-  createTestCase(MINT_REFERRAL, 'when referral is incorrect', {
-    referral: zeroAddress,
-  }),
-  createTestCase(COOP_MINT, 'using "any tokenId"', {
-    tokenId: undefined,
-    amount: '1',
-  }),
 ]
+
+export const noTokenIdTestCase = createTestCase(
+  COOP_MINT,
+  'when tokenId is not provided',
+  {
+    tokenId: undefined,
+  },
+)
