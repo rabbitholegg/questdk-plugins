@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { COOP_CREATOR_ABI_1155, FEES_ABI } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { COOP_FIXED_PRICE_SALE_CONTRACT, ZORA_FIXED_PRICE_SALE_CONTRACT } from './contract-addresses'
+import {
+  COOP_FIXED_PRICE_SALE_CONTRACT,
+  ZORA_FIXED_PRICE_SALE_CONTRACT,
+} from './contract-addresses'
 import { type AndArrayItem, getUri } from './utils'
 import {
   type MintActionParams,
@@ -33,8 +36,7 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } =
-    mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
   if (!tokenId) throw new Error('tokenId is required')
 
@@ -71,8 +73,7 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { contractAddress, tokenId, amount, recipient, referral } =
-    mint
+  const { contractAddress, tokenId, amount, recipient, referral } = mint
 
   if (!tokenId) throw new Error('tokenId is required')
 
@@ -107,8 +108,7 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient } =
-    mint
+  const { chainId, contractAddress, tokenId, amount, recipient } = mint
 
   if (!tokenId) throw new Error('tokenId is required')
 
@@ -121,7 +121,8 @@ export const simulateMint = async (
   const from = account ?? DEFAULT_ACCOUNT
 
   const fixedPriceSaleStratAddress = ZORA_FIXED_PRICE_SALE_CONTRACT
-  const referralAddress = '0x512b55b00d744fC2eDB8474f223a7498c3e5a7ce' as Address
+  const referralAddress =
+    '0x512b55b00d744fC2eDB8474f223a7498c3e5a7ce' as Address
 
   const mintArgs = [
     fixedPriceSaleStratAddress,

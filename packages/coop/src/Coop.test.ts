@@ -12,7 +12,11 @@ import {
   mint,
   simulateMint,
 } from './Coop'
-import { failingTestCases, noTokenIdTestCase, passingTestCases } from './test-setup'
+import {
+  failingTestCases,
+  noTokenIdTestCase,
+  passingTestCases,
+} from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
 
 describe('Given the coop plugin', () => {

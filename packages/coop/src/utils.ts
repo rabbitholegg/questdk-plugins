@@ -1,7 +1,5 @@
 import { type Address, type PublicClient } from 'viem'
-import {
-  FilterOperator,
-} from '@rabbitholegg/questdk-plugin-utils'
+import { FilterOperator } from '@rabbitholegg/questdk-plugin-utils'
 
 export type AndArrayItem =
   | { quantity: string | number | bigint | FilterOperator }

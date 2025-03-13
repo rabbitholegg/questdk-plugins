@@ -1,6 +1,4 @@
-import {
-  COOP_MINT,
-} from './test-transactions'
+import { COOP_MINT } from './test-transactions'
 import { createTestCase } from '@rabbitholegg/questdk-plugin-utils'
 import { getAddress } from 'viem'
 
