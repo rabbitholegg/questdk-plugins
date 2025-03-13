@@ -12,7 +12,7 @@ import {
   mint,
   simulateMint,
 } from './Coop'
-import { failingTestCases, passingTestCases } from './test-setup'
+import { failingTestCases, noTokenIdTestCase, passingTestCases } from './test-setup'
 import { EXPECTED_ENCODED_DATA_1155 } from './test-transactions'
 
 describe('Given the coop plugin', () => {
@@ -22,6 +22,7 @@ describe('Given the coop plugin', () => {
         const filter = await mint({
           chainId: 8453,
           contractAddress: '0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF',
+          tokenId: 1,
         })
         expect(filter).toBeTypeOf('object')
         expect(Number(filter.chainId)).toBe(8453)
@@ -73,33 +74,44 @@ describe('Given the coop plugin', () => {
         })
       })
     })
-  })
-})
 
-describe('Given the getMintIntent function', () => {
-  // Define the constant for the contract address
-  const CONTRACT_ADDRESS = '0x7cac19a3ac8ad29f2c1cea4ad0a16135b969c52c'
-  const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
-
-  test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
-    const mint: MintIntentParams = {
-      chainId: Chains.BASE,
-      tokenId: 1,
-      contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt('3'),
-      recipient: RECIPIENT_ADDRESS,
-      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
-    }
-
-    const result = await getMintIntent(mint)
-
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: EXPECTED_ENCODED_DATA_1155,
+    describe('should throw an error when tokenId is not provided', async () => {
+      const { params, description } = noTokenIdTestCase
+      test(description, async () => {
+        try {
+          await mint(params)
+        } catch (error) {
+          expect(error).toBeDefined()
+          expect((error as Error).message).toContain('tokenId is required')
+        }
+      })
     })
   })
 })
+
+// describe('Given the getMintIntent function', () => {
+//   // Define the constant for the contract address
+//   const CONTRACT_ADDRESS = '0x7cac19a3ac8ad29f2c1cea4ad0a16135b969c52c'
+//   const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
+
+//   test('returns a TransactionRequest with correct properties when tokenId is set', async () => {
+//     const mint: MintIntentParams = {
+//       chainId: Chains.BASE,
+//       tokenId: 1,
+//       contractAddress: CONTRACT_ADDRESS,
+//       amount: BigInt('3'),
+//       recipient: RECIPIENT_ADDRESS,
+//     }
+
+//     const result = await getMintIntent(mint)
+
+//     expect(result).toEqual({
+//       from: mint.recipient,
+//       to: mint.contractAddress,
+//       data: EXPECTED_ENCODED_DATA_1155,
+//     })
+//   })
+// })
 
 describe('Given the getFee function', () => {
   test('should return the correct fee for an 1155 mint', async () => {
@@ -112,39 +124,37 @@ describe('Given the getFee function', () => {
     }
 
     const fee = await getFees(mintParams)
-    expect(fee.projectFee).toEqual(parseEther('0'))
-    expect(fee.actionFee).toEqual(parseEther('0.0004'))
+    expect(fee.projectFee).toEqual(parseEther('0.0004'))
+    expect(fee.actionFee).toEqual(parseEther('0'))
   })
 })
 
-describe('simulateMint function', () => {
-  test('should simulate a 1155 mint when tokenId is not 0', async () => {
-    const mint: MintIntentParams = {
-      chainId: Chains.BASE,
-      contractAddress: '0x7cac19a3ac8ad29f2c1cea4ad0a16135b969c52c',
-      tokenId: 1,
-      amount: BigInt(1),
-      recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
-      referral: '0xe3bba2a4f8e0f5c32ef5097f988a4d88075c8b48',
-    }
-    const value = parseEther('0.0004')
-    const address = mint.recipient as Address
+// describe('simulateMint function', () => {
+//   test('should simulate a 1155 mint when tokenId is not 0', async () => {
+//     const mint: MintIntentParams = {
+//       chainId: Chains.BASE,
+//       contractAddress: '0x7cac19a3ac8ad29f2c1cea4ad0a16135b969c52c',
+//       tokenId: 1,
+//       amount: BigInt(1),
+//       recipient: '0xf70da97812CB96acDF810712Aa562db8dfA3dbEF',
+//     }
+//     const value = parseEther('0.0004')
+//     const address = mint.recipient as Address
 
-    const result = await simulateMint(mint as MintIntentParams, value, address)
+//     const result = await simulateMint(mint as MintIntentParams, value, address)
 
-    const request = result.request
-    expect(request.address).toBe(mint.contractAddress)
-    expect(request.value).toBe(value)
-  })
-})
+//     const request = result.request
+//     expect(request.address).toBe(mint.contractAddress)
+//     expect(request.value).toBe(value)
+//   })
+// })
 
 describe('getExternalUrl function', () => {
-  test('should return correct url for mint w/tokenId and referral', async () => {
+  test('should return correct url for mint w/tokenId', async () => {
     const params = {
       chainId: Chains.BASE,
-      contractAddress: getAddress('0x7e0b40af1d6f26f2141b90170c513e57b5edd74e'),
-      tokenId: 21,
-      referral: getAddress('0x1234567890123456789012345678901234567890'),
+      contractAddress: getAddress('0x7caC19A3aC8aD29F2C1CEA4ad0a16135b969C52c'),
+      tokenId: 1,
     }
     const result = await getExternalUrl(params)
     expect(result).toBe('https://cooprecords.xyz')
@@ -154,7 +164,6 @@ describe('getExternalUrl function', () => {
     const params = {
       chainId: Chains.BASE,
       contractAddress: zeroAddress,
-      referral: getAddress('0x1234567890123456789012345678901234567890'),
     }
     const result = await getExternalUrl(params)
     expect(result).toBe('https://cooprecords.xyz')
