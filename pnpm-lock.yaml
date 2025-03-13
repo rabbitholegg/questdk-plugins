@@ -548,6 +548,9 @@ importers:
       '@rabbitholegg/questdk-plugin-connext':
         specifier: workspace:*
         version: link:../connext
+      '@rabbitholegg/questdk-plugin-coop':
+        specifier: workspace:*
+        version: link:../coop
       '@rabbitholegg/questdk-plugin-fabric':
         specifier: workspace:*
         version: link:../fabric
