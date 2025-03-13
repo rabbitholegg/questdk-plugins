@@ -35,14 +35,14 @@ describe('Given the coop plugin', () => {
         } else {
           // if to is an object, it should have a logical operator as the only key
           expect(filter.to).toBeTypeOf('object')
-          // @ts-ignore
+          // @ts-expect-error "to exists on filter"
           expect(Object.keys(filter.to)).toHaveLength(1)
           expect(
             ['$or', '$and'].some((prop) =>
               Object.hasOwnProperty.call(filter.to, prop),
             ),
           ).to.be.true
-          // @ts-ignore
+          // @ts-expect-error "to exists on filter"
           expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
             arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
           )
@@ -62,7 +62,7 @@ describe('Given the coop plugin', () => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await mint(params)
-          // @ts-ignore
+          // @ts-expect-error "transaction is a Transaction"
           expect(apply(transaction, filter)).to.be.true
         })
       })
@@ -73,7 +73,7 @@ describe('Given the coop plugin', () => {
         const { transaction, params, description } = testCase
         test(description, async () => {
           const filter = await mint(params)
-          // @ts-ignore
+          // @ts-expect-error "transaction is a Transaction"
           expect(apply(transaction, filter)).to.be.false
         })
       })
