@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { COOP_CREATOR_ABI_1155, FEES_ABI } from './abi'
 import { CHAIN_ID_ARRAY } from './chain-ids'
-import { FIXED_PRICE_SALE_CONTRACT } from './contract-addresses'
+import { COOP_FIXED_PRICE_SALE_CONTRACT, ZORA_FIXED_PRICE_SALE_CONTRACT } from './contract-addresses'
 import { type AndArrayItem, getUri } from './utils'
 import {
   type MintActionParams,
@@ -33,25 +33,16 @@ import {
 export const mint = async (
   mint: MintActionParams,
 ): Promise<TransactionFilter> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+  const { chainId, contractAddress, tokenId, amount, recipient } =
     mint
+
+  if (!tokenId) throw new Error('tokenId is required')
 
   const andArray1155: AndArrayItem[] = [
     {
       quantity: formatAmountToFilterOperator(amount),
     },
   ]
-  if (referral) {
-    const referralAddress = getAddress(referral)
-    andArray1155.push({
-      $or: [
-        { mintReferral: referralAddress },
-        {
-          rewardsRecipients: [referralAddress],
-        },
-      ],
-    })
-  }
   if (recipient) {
     andArray1155.push({
       minterArguments: {
@@ -80,20 +71,22 @@ export const mint = async (
 export const getMintIntent = async (
   mint: MintIntentParams,
 ): Promise<TransactionRequest> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+  const { contractAddress, tokenId, amount, recipient, referral } =
     mint
 
-  const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_CONTRACT
+  if (!tokenId) throw new Error('tokenId is required')
+
+  const fixedPriceSaleStratAddress = ZORA_FIXED_PRICE_SALE_CONTRACT
 
   const referralAddress = referral ? getAddress(referral) : DEFAULT_REFERRAL
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
-    tokenId,
+    BigInt(tokenId),
     amount,
     [referralAddress],
     pad(recipient),
-  ]
+  ] as const
 
   const data = encodeFunctionData({
     abi: COOP_CREATOR_ABI_1155,
@@ -114,8 +107,11 @@ export const simulateMint = async (
   account?: Address,
   client?: PublicClient,
 ): Promise<SimulateContractReturnType> => {
-  const { chainId, contractAddress, tokenId, amount, recipient, referral } =
+  const { chainId, contractAddress, tokenId, amount, recipient } =
     mint
+
+  if (!tokenId) throw new Error('tokenId is required')
+
   const _client =
     client ??
     (createPublicClient({
@@ -124,16 +120,17 @@ export const simulateMint = async (
     }) as PublicClient)
   const from = account ?? DEFAULT_ACCOUNT
 
-  const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_CONTRACT
-  const referralAddress = referral ? getAddress(referral) : DEFAULT_REFERRAL
+  const fixedPriceSaleStratAddress = ZORA_FIXED_PRICE_SALE_CONTRACT
+  const referralAddress = '0x512b55b00d744fC2eDB8474f223a7498c3e5a7ce' as Address
 
   const mintArgs = [
     fixedPriceSaleStratAddress,
-    tokenId,
+    BigInt(tokenId),
     amount,
     [referralAddress],
     pad(recipient),
-  ]
+  ] as const
+
   const result = await _client.simulateContract({
     address: contractAddress,
     value,
@@ -156,19 +153,22 @@ export const getFees = async (
   mint: MintActionParams,
 ): Promise<{ actionFee: bigint; projectFee: bigint }> => {
   const { chainId, contractAddress, tokenId, amount } = mint
+
+  if (!tokenId) throw new Error('tokenId is required')
+
   const quantityToMint = formatAmountToInteger(amount)
   try {
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
       transport: http(),
     }) as PublicClient
-    const fixedPriceSaleStratAddress = FIXED_PRICE_SALE_CONTRACT
+    const fixedPriceSaleStratAddress = COOP_FIXED_PRICE_SALE_CONTRACT
 
     const { pricePerToken } = (await client.readContract({
       address: fixedPriceSaleStratAddress,
       abi: FEES_ABI,
       functionName: 'sale',
-      args: [contractAddress, tokenId],
+      args: [contractAddress, BigInt(tokenId)],
     })) as { pricePerToken: bigint }
 
     const mintFee = (await client.readContract({
@@ -192,11 +192,11 @@ export const getFees = async (
 export const getExternalUrl = async (
   params: MintActionParams,
 ): Promise<string> => {
-  const { chainId, contractAddress, tokenId, referral } = params
+  const { chainId, contractAddress, tokenId } = params
 
   try {
-    if (!tokenId) throw new Error('Token ID is required')
-      
+    if (!tokenId) throw new Error('tokenId is required')
+
     const client = createPublicClient({
       chain: chainIdToViemChain(chainId),
       transport: http(),
@@ -205,12 +205,10 @@ export const getExternalUrl = async (
     const uri = await getUri(client, contractAddress, tokenId)
     const cid = uri.split('/').slice(2).join('/')
 
-    const { data } = await axios.get(`https://arweave.net/${cid}`)
+    const { data } = await axios.get(`https://ipfs.io/ipfs/${cid}`)
 
     // different properties depending on uri function. One of these will be defined
-    const baseUrl = data.external_link ?? data.external_url
-
-    return `${baseUrl}?referrer=${referral ?? DEFAULT_REFERRAL}`
+    return data.external_link ?? data.external_url
   } catch (error) {
     console.error('an error occurred fetching data from the contract')
     if (error instanceof Error) {
