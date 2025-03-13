@@ -208,7 +208,7 @@ export const getExternalUrl = async (
 
     const { data } = await axios.get(`https://dweb.link/ipfs/${cid}`)
 
-    return data.external_url ?? 'https://cooprecords.xyz';
+    return data.external_url ?? 'https://cooprecords.xyz'
   } catch (error) {
     console.error('an error occurred fetching data from the contract')
     if (error instanceof Error) {
