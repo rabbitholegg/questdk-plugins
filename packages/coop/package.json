@@ -1,6 +1,6 @@
 {
   "name": "@rabbitholegg/questdk-plugin-coop",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js",
