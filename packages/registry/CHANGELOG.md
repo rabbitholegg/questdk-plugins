@@ -1,5 +1,17 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.149
+
+### Patch Changes
+
+- [#531](https://github.com/rabbitholegg/questdk-plugins/pull/531) [`447a0ba0`](https://github.com/rabbitholegg/questdk-plugins/commit/447a0ba09e04ec9cca812f0e1eee6d2cfe283e5a) Thanks [@mmackz](https://github.com/mmackz)! - re-release with fixed tests
+
+- Updated dependencies [[`447a0ba0`](https://github.com/rabbitholegg/questdk-plugins/commit/447a0ba09e04ec9cca812f0e1eee6d2cfe283e5a)]:
+  - @rabbitholegg/questdk-plugin-coop@1.0.0-alpha.3
+  - @rabbitholegg/questdk-plugin-fabric@1.0.0-alpha.43
+  - @rabbitholegg/questdk-plugin-manifold@1.0.0-alpha.41
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.75
+
 ## 1.0.0-alpha.148
 
 ### Patch Changes

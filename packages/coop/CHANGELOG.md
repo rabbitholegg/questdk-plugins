@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-coop
 
+## 1.0.0-alpha.3
+
+### Patch Changes
+
+- [#531](https://github.com/rabbitholegg/questdk-plugins/pull/531) [`447a0ba0`](https://github.com/rabbitholegg/questdk-plugins/commit/447a0ba09e04ec9cca812f0e1eee6d2cfe283e5a) Thanks [@mmackz](https://github.com/mmackz)! - re-release with fixed tests
+
 ## 1.0.0-alpha.2
 
 ### Minor Changes
