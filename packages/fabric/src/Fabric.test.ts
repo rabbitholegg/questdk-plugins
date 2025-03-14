@@ -19,33 +19,39 @@ vi.mock('viem', () => {
         args: [2000n],
         account: '0x000000000000000000000000000000000000dEaD',
       },
-      result: undefined
+      result: undefined,
     }),
-    multicall: vi.fn().mockResolvedValue([
-      { result: '0x0000000000000000000000000000000000000000' },
-      { result: 100n },
-      { result: 69n }
-    ])
-  };
+    multicall: vi
+      .fn()
+      .mockResolvedValue([
+        { result: '0x0000000000000000000000000000000000000000' },
+        { result: 100n },
+        { result: 69n },
+      ]),
+  }
 
   return {
     createPublicClient: () => mockClient,
     zeroAddress: '0x0000000000000000000000000000000000000000',
     http: vi.fn(),
-    encodeFunctionData: vi.fn().mockReturnValue('0xa0712d6800000000000000000000000000000000000000000000000000028fbee4d84c00'),
-    chainId: vi.fn().mockReturnValue(1)
-  };
-});
+    encodeFunctionData: vi
+      .fn()
+      .mockReturnValue(
+        '0xa0712d6800000000000000000000000000000000000000000000000000028fbee4d84c00',
+      ),
+    chainId: vi.fn().mockReturnValue(1),
+  }
+})
 
 vi.mock('./utils', () => {
   return {
     getContractData: vi.fn().mockResolvedValue({
       erc20Address: '0x0000000000000000000000000000000000000000' as Address,
       minPurchaseSeconds: 100n,
-      tps: 69n
-    })
-  };
-});
+      tps: 69n,
+    }),
+  }
+})
 
 describe('Given the fabric plugin', () => {
   describe('When handling the mint action', () => {
@@ -115,7 +121,8 @@ describe('Given the fabric plugin', () => {
 
 describe('Given the getFee function', () => {
   test('should return the correct project + action fee for a 721 mint', async () => {
-    const contractAddress: Address = '0x3db5bc85fb89c59d7d03e1dda7ee4563f9c54270'
+    const contractAddress: Address =
+      '0x3db5bc85fb89c59d7d03e1dda7ee4563f9c54270'
     const mintParams = { chainId: Chains.BASE, contractAddress, amount: 1n }
     const fee = await getFees(mintParams)
     expect(fee.projectFee).equals(0n)
@@ -153,21 +160,21 @@ describe('simulateMint function', () => {
         return {
           erc20Address: '0x0000000000000000000000000000000000000000' as Address,
           minPurchaseSeconds: 100n,
-          tps: 10n
-        };
+          tps: 10n,
+        }
       }
       return {
         erc20Address: '0x0000000000000000000000000000000000000000' as Address,
         minPurchaseSeconds: 100n,
-        tps: 10n
-      };
-    });
-  });
-  
+        tps: 10n,
+      }
+    })
+  })
+
   afterEach(() => {
-    vi.restoreAllMocks();
-  });
-  
+    vi.restoreAllMocks()
+  })
+
   test('should simulate a mint', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.SEPOLIA,
@@ -182,11 +189,11 @@ describe('simulateMint function', () => {
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
-    
+
     expect(utils.getContractData).toHaveBeenCalledWith(
       Chains.SEPOLIA,
       mint.contractAddress,
-      undefined
-    );
+      undefined,
+    )
   })
 })
