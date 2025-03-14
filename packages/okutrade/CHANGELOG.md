@@ -1,5 +1,11 @@
 # @rabbitholegg/questdk-plugin-okutrade
 
+## 1.0.0-alpha.74
+
+### Patch Changes
+
+- [#529](https://github.com/rabbitholegg/questdk-plugins/pull/529) [`1d0b05de`](https://github.com/rabbitholegg/questdk-plugins/commit/1d0b05de8f767031c5d5decda1010e375ed60ee7) Thanks [@mmackz](https://github.com/mmackz)! - skip failing tests for okutrade
+
 ## 1.0.0-alpha.73
 
 ### Patch Changes
