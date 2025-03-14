@@ -73,11 +73,11 @@ describe('Given the fabric plugin', () => {
 describe('Given the getFee function', () => {
   test('should return the correct project + action fee for a 721 mint', async () => {
     const contractAddress: Address =
-      '0xd77269c83aab591ca834b3687e1f4164b2ff25f5'
-    const mintParams = { chainId: Chains.SEPOLIA, contractAddress, amount: 1n }
+      '0x3db5bc85fb89c59d7d03e1dda7ee4563f9c54270'
+    const mintParams = { chainId: Chains.BASE, contractAddress, amount: 1n }
     const fee = await getFees(mintParams)
     expect(fee.projectFee).equals(0n)
-    expect(fee.actionFee).equals(499999999997664000n)
+    expect(fee.actionFee).equals(6899999999904000n)
   })
 })
 
