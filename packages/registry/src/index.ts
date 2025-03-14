@@ -157,7 +157,6 @@ export const getTxSimulation = (
   value: bigint,
   client?: PublicClient,
   account?: Address,
-  creatorAddress?: Address,
 ) => {
   switch (actionType) {
     case ActionType.Mint:
@@ -167,7 +166,6 @@ export const getTxSimulation = (
           value,
           account,
           client,
-          creatorAddress,
         )
       } else {
         throw new PluginActionNotImplementedError()
