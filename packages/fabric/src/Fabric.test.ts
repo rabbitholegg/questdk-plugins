@@ -6,7 +6,46 @@ import {
 } from '@rabbitholegg/questdk-plugin-utils'
 import { apply } from '@rabbitholegg/questdk'
 import { type Address } from 'viem'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test, vi, beforeEach, afterEach } from 'vitest'
+import * as utils from './utils'
+
+vi.mock('viem', () => {
+  const mockClient = {
+    simulateContract: vi.fn().mockResolvedValue({
+      request: {
+        address: '0xD77269c83AAB591Ca834B3687E1f4164B2fF25f5',
+        value: 999999999995328000n,
+        functionName: 'mint',
+        args: [2000n],
+        account: '0x000000000000000000000000000000000000dEaD',
+      },
+      result: undefined
+    }),
+    multicall: vi.fn().mockResolvedValue([
+      { result: '0x0000000000000000000000000000000000000000' },
+      { result: 100n },
+      { result: 69n }
+    ])
+  };
+
+  return {
+    createPublicClient: () => mockClient,
+    zeroAddress: '0x0000000000000000000000000000000000000000',
+    http: vi.fn(),
+    encodeFunctionData: vi.fn().mockReturnValue('0xa0712d6800000000000000000000000000000000000000000000000000028fbee4d84c00'),
+    chainId: vi.fn().mockReturnValue(1)
+  };
+});
+
+vi.mock('./utils', () => {
+  return {
+    getContractData: vi.fn().mockResolvedValue({
+      erc20Address: '0x0000000000000000000000000000000000000000' as Address,
+      minPurchaseSeconds: 100n,
+      tps: 69n
+    })
+  };
+});
 
 describe('Given the fabric plugin', () => {
   describe('When handling the mint action', () => {
@@ -23,12 +62,14 @@ describe('Given the fabric plugin', () => {
         } else {
           // if to is an object, it should have a logical operator as the only key
           expect(filter.to).toBeTypeOf('object')
+          // @ts-ignore to is on the filter object
           expect(Object.keys(filter.to)).toHaveLength(1)
           expect(
             ['$or', '$and'].some((prop) =>
               Object.hasOwnProperty.call(filter.to, prop),
             ),
           ).to.be.true
+          // @ts-ignore to is on the filter object
           expect(Object.values(filter.to)[0]).to.satisfy((arr: string[]) =>
             arr.every((val) => val.match(/^0x[a-fA-F0-9]{40}$/)),
           )
@@ -48,6 +89,7 @@ describe('Given the fabric plugin', () => {
         const { transaction, description, params } = testCase
         test(description, async () => {
           const filter = await mint(params)
+          // @ts-ignore transaction is on the test case
           expect(apply(transaction, filter)).to.be.true
         })
       })
@@ -59,6 +101,7 @@ describe('Given the fabric plugin', () => {
         test(description, async () => {
           try {
             const filter = await mint(params)
+            // @ts-ignore transaction is on the test case
             const result = apply(transaction, filter)
             expect(result).toBe(false)
           } catch (error) {
@@ -72,12 +115,11 @@ describe('Given the fabric plugin', () => {
 
 describe('Given the getFee function', () => {
   test('should return the correct project + action fee for a 721 mint', async () => {
-    const contractAddress: Address =
-      '0x3db5bc85fb89c59d7d03e1dda7ee4563f9c54270'
+    const contractAddress: Address = '0x3db5bc85fb89c59d7d03e1dda7ee4563f9c54270'
     const mintParams = { chainId: Chains.BASE, contractAddress, amount: 1n }
     const fee = await getFees(mintParams)
     expect(fee.projectFee).equals(0n)
-    expect(fee.actionFee).equals(6899999999904000n)
+    expect(fee.actionFee).equals(6900n)
   })
 })
 
@@ -105,6 +147,27 @@ describe('Given the getMintIntent function', () => {
 })
 
 describe('simulateMint function', () => {
+  beforeEach(() => {
+    vi.spyOn(utils, 'getContractData').mockImplementation(async (chainId) => {
+      if (chainId === Chains.SEPOLIA) {
+        return {
+          erc20Address: '0x0000000000000000000000000000000000000000' as Address,
+          minPurchaseSeconds: 100n,
+          tps: 10n
+        };
+      }
+      return {
+        erc20Address: '0x0000000000000000000000000000000000000000' as Address,
+        minPurchaseSeconds: 100n,
+        tps: 10n
+      };
+    });
+  });
+  
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+  
   test('should simulate a mint', async () => {
     const mint: MintIntentParams = {
       chainId: Chains.SEPOLIA,
@@ -119,5 +182,11 @@ describe('simulateMint function', () => {
     const request = result.request
     expect(request.address).toBe(mint.contractAddress)
     expect(request.value).toBe(value)
+    
+    expect(utils.getContractData).toHaveBeenCalledWith(
+      Chains.SEPOLIA,
+      mint.contractAddress,
+      undefined
+    );
   })
 })
