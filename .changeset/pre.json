@@ -20,10 +20,12 @@
     "bright-turtles-divide",
     "brown-bats-hope",
     "brown-points-smile",
+    "brown-rabbits-dream",
     "calm-guests-eat",
     "calm-tigers-rescue",
     "chatty-news-boil",
     "chatty-ties-explode",
+    "chilled-mayflies-poke",
     "chilled-shirts-think",
     "chilled-snakes-greet",
     "chilly-flies-cheer",
@@ -391,6 +393,7 @@
     "@rabbitholegg/questdk-plugin-foundation": "1.0.0-alpha.0",
     "@rabbitholegg/questdk-plugin-thirdweb": "1.0.0-alpha.2",
     "@rabbitholegg/questdk-plugin-lens": "1.0.0-alpha.0",
-    "@rabbitholegg/questdk-plugin-moshicam": "1.0.0-alpha.0"
+    "@rabbitholegg/questdk-plugin-moshicam": "1.0.0-alpha.0",
+    "@rabbitholegg/questdk-plugin-coop": "1.0.0-alpha.1"
   }
 }
