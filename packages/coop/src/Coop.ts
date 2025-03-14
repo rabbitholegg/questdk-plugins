@@ -206,7 +206,7 @@ export const getExternalUrl = async (
     const uri = await getUri(client, contractAddress, tokenId)
     const cid = uri.split('/').slice(2).join('/')
 
-    const { data } = await axios.get(`https://dweb.link/ipfs/${cid}`)
+    const { data } = await axios.get(`https://arweave.net/${cid}`)
 
     return data.external_url ?? 'https://cooprecords.xyz'
   } catch (error) {

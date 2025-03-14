@@ -154,15 +154,15 @@ describe('simulateMint function', () => {
 })
 
 describe('getExternalUrl function', () => {
-  // test('should return correct url for mint w/tokenId', async () => {
-  //   const params = {
-  //     chainId: Chains.BASE,
-  //     contractAddress: getAddress('0x7caC19A3aC8aD29F2C1CEA4ad0a16135b969C52c'),
-  //     tokenId: 1,
-  //   }
-  //   const result = await getExternalUrl(params)
-  //   expect(result).toBe('https://cooprecords.xyz')
-  // })
+  test('should return correct url for mint w/tokenId', async () => {
+    const params = {
+      chainId: Chains.BASE,
+      contractAddress: getAddress('0x7caC19A3aC8aD29F2C1CEA4ad0a16135b969C52c'),
+      tokenId: 1,
+    }
+    const result = await getExternalUrl(params)
+    expect(result).toBe('https://cooprecords.xyz/aszewo/messy')
+  })
 
   test('should return fallback url if error occurs', async () => {
     const params = {
