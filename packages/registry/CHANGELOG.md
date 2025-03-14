@@ -1,5 +1,13 @@
 # @rabbitholegg/questdk-plugin-registry
 
+## 1.0.0-alpha.148
+
+### Patch Changes
+
+- Updated dependencies [[`1d0b05de`](https://github.com/rabbitholegg/questdk-plugins/commit/1d0b05de8f767031c5d5decda1010e375ed60ee7)]:
+  - @rabbitholegg/questdk-plugin-okutrade@1.0.0-alpha.74
+  - @rabbitholegg/questdk-plugin-fabric@1.0.0-alpha.42
+
 ## 1.0.0-alpha.147
 
 ### Minor Changes
