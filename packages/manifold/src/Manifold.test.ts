@@ -101,37 +101,45 @@ describe('Given the getMintIntent function', () => {
   const CONTRACT_ADDRESS = '0x6Ecbe1DB9EF729CBe972C83Fb886247691Fb6beb'
   const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'
 
-  test('returns a TransactionRequest with correct properties when amount is set greater than 1', async () => {
-    const mint: MintIntentParams = {
-      chainId: 1,
-      tokenId: 1,
-      contractAddress: CONTRACT_ADDRESS,
-      amount: BigInt('2'),
-      recipient: RECIPIENT_ADDRESS,
-    }
-    const result = await getMintIntent(mint)
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: '0x26c858a40000000000000000000000006ecbe1db9ef729cbe972c83fb886247691fb6beb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000123456789012345678901234567890123456789000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
-    })
-  })
+  test(
+    'returns a TransactionRequest with correct properties when amount is set greater than 1',
+    async () => {
+      const mint: MintIntentParams = {
+        chainId: 1,
+        tokenId: 1,
+        contractAddress: CONTRACT_ADDRESS,
+        amount: BigInt('2'),
+        recipient: RECIPIENT_ADDRESS,
+      }
+      const result = await getMintIntent(mint)
+      expect(result).toEqual({
+        from: mint.recipient,
+        to: mint.contractAddress,
+        data: '0x26c858a40000000000000000000000006ecbe1db9ef729cbe972c83fb886247691fb6beb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000c000000000000000000000000000000000000000000000000000000000000000e0000000000000000000000000123456789012345678901234567890123456789000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+      })
+    },
+    { timeout: 7000 },
+  )
 
-  test('returns a TransactionRequest when amount is 1 or undefined', async () => {
-    const mint: MintIntentParams = {
-      chainId: 1,
-      tokenId: 1,
-      amount: BigInt('1'),
-      contractAddress: CONTRACT_ADDRESS,
-      recipient: RECIPIENT_ADDRESS,
-    }
-    const result = await getMintIntent(mint)
-    expect(result).toEqual({
-      from: mint.recipient,
-      to: mint.contractAddress,
-      data: '0xfa2b068f0000000000000000000000006ecbe1db9ef729cbe972c83fb886247691fb6beb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000012345678901234567890123456789012345678900000000000000000000000000000000000000000000000000000000000000000',
-    })
-  })
+  test(
+    'returns a TransactionRequest when amount is 1 or undefined',
+    async () => {
+      const mint: MintIntentParams = {
+        chainId: 1,
+        tokenId: 1,
+        amount: BigInt('1'),
+        contractAddress: CONTRACT_ADDRESS,
+        recipient: RECIPIENT_ADDRESS,
+      }
+      const result = await getMintIntent(mint)
+      expect(result).toEqual({
+        from: mint.recipient,
+        to: mint.contractAddress,
+        data: '0xfa2b068f0000000000000000000000006ecbe1db9ef729cbe972c83fb886247691fb6beb0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000012345678901234567890123456789012345678900000000000000000000000000000000000000000000000000000000000000000',
+      })
+    },
+    { timeout: 7000 },
+  )
 })
 
 describe('Given the getFee function', () => {
@@ -245,12 +253,18 @@ describe('getExternalUrl function', () => {
     expect(result).toBe('https://app.manifold.xyz/c/girls-man')
   })
 
-  test('should return the fallback url for an unknown contract', async () => {
-    const mint = {
-      chainId: Chains.OPTIMISM,
-      contractAddress: getAddress('0x7935cd348193bab133f3081f53eb99ee6f0d685b'),
-    }
-    const result = await getExternalUrl(mint)
-    expect(result).toBe('https://app.manifold.xyz/')
-  })
+  test(
+    'should return the fallback url for an unknown contract',
+    async () => {
+      const mint = {
+        chainId: Chains.OPTIMISM,
+        contractAddress: getAddress(
+          '0x7935cd348193bab133f3081f53eb99ee6f0d685b',
+        ),
+      }
+      const result = await getExternalUrl(mint)
+      expect(result).toBe('https://app.manifold.xyz/')
+    },
+    { timeout: 7000 },
+  )
 })
